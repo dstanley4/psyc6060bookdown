@@ -1,19 +1,20 @@
 --- 
-title: "Psychology 6060"
-author: "David J. Stanley"
+title: "A Chapman & Hall/CRC Book Example Using bookdown"
+author: "Frida Gomam"
 date: "`r Sys.Date()`"
 documentclass: krantz
-bibliography: [book.bib, packages.bib]
+bibliography:
+- book.bib
+- packages.bib
 biblio-style: apalike
 link-citations: yes
 colorlinks: yes
 lot: yes
 lof: yes
 site: bookdown::bookdown_site
-description: "A book example for a Chapman & Hall book."
+description: A book example for a Chapman & Hall book.
 github-repo: yihui/bookdown-crc
 graphics: yes
-#cover-image: images/cover.jpg
 ---
 
 ```{r setup, include=FALSE}
@@ -38,6 +39,20 @@ It is very important...
 ## Structure of the book {-}
 
 Chapters \@ref(introduction) introduces a new topic, and ...
+
+We have a nice figure in Figure \@ref(fig:hello2), and also a table in Table \@ref(tab:iris2).
+
+```{r hello2, fig.cap='Hello World!', out.width='90%'}
+par(mar = c(4, 4, 1, .1))
+plot(cars, pch = 19)
+```
+
+```{r iris2}
+knitr::kable(
+  head(iris), caption = 'The boring iris data.',
+  booktabs = TRUE
+)
+```
 
 ## Software information and conventions {-}
 

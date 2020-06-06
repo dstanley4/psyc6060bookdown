@@ -1,8 +1,7 @@
 \mainmatter
 
 # Introduction
-
-We will use the statistical analysis software R in this course with the interface provided by R Studio. We can access R Studio using the website [R Studio Cloud](http://www.rstudio.cloud) at <http://www.rstudio.cloud>.
+We will use the statistical analysis software R in this course with the interface provided by R Studio. We can access R Studio using the website [R Studio Cloud](http://www.rstudio.cloud).
 
 ## A focus on workflow
 
@@ -10,11 +9,17 @@ A key focus on this course is training you in a workflow that will avoid a large
 
 ## R works with plug-in / add-ons
 
-R is a statistical language with many plug-ins called **packages** that you will use to do analyses. You can think of R as being like your smartphone. To do things with your phone you need **an App** (R equivalent is a *package*). Before you can use the App you need to **download**  it (R equivalent is to *install.packages*) from the **App Store** (R equivalent is the *CRAN*). To use the app you need **Open** it  (R equivalent is the *library command*). These similarities are illustrated in the table below.
+R is a statistical language with many plug-ins called **packages** that you will use to do analyses. You can think of R as being like your smartphone. To do things with your phone you need **an App** (R equivalent is a *package*). Before you can use the App you need to **download**  it (R equivalent is to *install.packages*) from the **App Store** (R equivalent is the *CRAN*). To use the app you need **Open** it  (R equivalent is the *library command*). These similarities are illustrated in Table \@ref(tab:appstore) below.
 
-```{r, fig.cap = "Packages as smart phone apps", echo = FALSE, out.width = "50%"}
-knitr::include_graphics("first_time/images/smartphone_analogy.png")
+
+```{r appstore, echo = FALSE}
+app_store <- readr::read_csv("data_app_store_analogy.csv", col_type = readr::cols())
+knitr::kable(
+  head(app_store), caption = 'R packages are similar to smart phone apps (Kim, 2018)',
+  booktabs = TRUE
+)
 ```
+
 
 ## Create an account at R Studio Cloud
 
