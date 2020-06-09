@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A More to Say | PSYC6060 Course Notes</title>
+  <title>Chapter 2 Getting data into R Studio | PSYC6060 Course Notes</title>
   <meta name="description" content="Course notes for PSYC 6060" />
   <meta name="generator" content="bookdown 0.19.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A More to Say | PSYC6060 Course Notes" />
+  <meta property="og:title" content="Chapter 2 Getting data into R Studio | PSYC6060 Course Notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="dstanley4/psyc6060bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A More to Say | PSYC6060 Course Notes" />
+  <meta name="twitter:title" content="Chapter 2 Getting data into R Studio | PSYC6060 Course Notes" />
   
   <meta name="twitter:description" content="Course notes for PSYC 6060" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="getting-data-into-r-studio.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="more-to-say.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -226,19 +226,110 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="more-to-say" class="section level1">
-<h1><span class="header-section-number">A</span> More to Say</h1>
-<p>Yeah! I have finished my book, but I have more to say about some topics. Let me explain them in this appendix.</p>
-<p>To know more about <strong>bookdown</strong>, see <a href="https://bookdown.org" class="uri">https://bookdown.org</a>.</p>
+<div id="getting-data-into-r-studio" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Getting data into R Studio</h1>
+<p>A large segment of the R community as moved toward a standardized way of naming your columns as desribed in the <a href="https://style.tidyverse.org">tidyverse style guide</a>. Likewise, in order to use the tidyverse packages effectively it helps to have <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidy data</a>. In animal or human participant research, however, it can be</p>
+<div id="creating-data-files" class="section level2">
+<h2><span class="header-section-number">2.1</span> Creating data files</h2>
+<p>Moving from raw data to analytic data
+The following steps - and more if you have repeated measures data</p>
+<div id="column-name-conventions" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Column name conventions</h3>
+</div>
+<div id="categorical-columns" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Categorical columns</h3>
+</div>
+<div id="missing-data-representation" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Missing data representation</h3>
+<p>Before you start entering data, stop and consider how you want to represent missing data. You may want a single missing data code for all data (e.g., -999) or you might want to have a variety of different missing data codes.</p>
+<p>As you do so, be sure to distinguish between codes for missing data and codes for particpants responses such as “Not applicable”. Missing data is data that is missing - which is very different that a question being not applicable for a person. This distinction is particularly important if you start to use strategies for estimating the values for missing data (see McKnight et al., 2007). Consider the case of a particpant presented with two questions. The first question asks if they have children and the second question asks the age of their first born child. Imagine the participant indicates they have no children on the first question and then on the second question indicates “No applicable” when asked about the age of their first born child. It would not make sense to treat this “Not applicable” as a missing value and try to estimate it with missing data strategies. Consequently, when you enter your data (and conduct your analyses) be sure to distinguish missing data from not applicable and similar responses.</p>
+</div>
+<div id="making-a-data-codebook" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Making a data codebook</h3>
+<p>Data codebooks are useful because they document the nature of the data in your data file. For example, you might have a column named “ac1” that contains the responses to a Likert-type question. The data codebook could clarify that “ac1” refers an affective commitment item and provide the text of the item. Likewise, sometimes people use value to represent categorical responses in data sets (but try to avoid this practice). In older data it’s not uncommon to use 1 to represent male and 2 to represent female (or the other way around). A data codebook clarifies which sex you mean by 1 and which sex you mean by 2. Though as noted previously, you’re better off entering “male” and “female” directly into your data file rather than using numerical proxies like 1 and 2.</p>
+<p>A data code book is often a spreadsheet that where the rows in the data code book</p>
+<p>reverse coded</p>
+<p>Figure showing data and data codebook.</p>
+<p>Figure <a href="getting-data-into-r-studio.html#fig:bfidata">2.1</a>
+Figure <a href="getting-data-into-r-studio.html#fig:bficodebook">2.2</a></p>
+<p>There are a many ways to create data codeboos</p>
+<div class="figure"><span id="fig:bfidata"></span>
+<img src="ch_load_data/images/screenshot_bfi_data.png" alt="Illustrative Data" width="85%" />
+<p class="caption">
+FIGURE 2.1: Illustrative Data
+</p>
+</div>
+<div class="figure"><span id="fig:bficodebook"></span>
+<img src="ch_load_data/images/screenshot_bfi_codebook.png" alt="Illustrative Codebook" width="85%" />
+<p class="caption">
+FIGURE 2.2: Illustrative Codebook
+</p>
+</div>
+</div>
+</div>
+<div id="loading-files" class="section level2">
+<h2><span class="header-section-number">2.2</span> Loading files</h2>
+<div id="loading-csv-files" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Loading CSV files</h3>
+<p><a href="https://readr.tidyverse.org" class="uri">https://readr.tidyverse.org</a></p>
+</div>
+<div id="loading-spss-files" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Loading SPSS files</h3>
+<p><a href="https://haven.tidyverse.org" class="uri">https://haven.tidyverse.org</a></p>
+</div>
+</div>
+<div id="cleaning-column-names" class="section level2">
+<h2><span class="header-section-number">2.3</span> Cleaning column names</h2>
+<p>clean_names()
+remove_empty()
+<a href="http://sfirke.github.io/janitor/articles/janitor.html" class="uri">http://sfirke.github.io/janitor/articles/janitor.html</a></p>
+</div>
+<div id="numerical-variables" class="section level2">
+<h2><span class="header-section-number">2.4</span> Numerical variables</h2>
+<div id="creating-scales-scores" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Creating scales scores</h3>
+</div>
+</div>
+<div id="categorical-varibles" class="section level2">
+<h2><span class="header-section-number">2.5</span> Categorical varibles</h2>
+<div id="identifying-categorical-varibles" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Identifying categorical varibles</h3>
+</div>
+<div id="levels-of-categorical-varibles" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Levels of categorical varibles</h3>
+</div>
+</div>
+<div id="analytic-data" class="section level2">
+<h2><span class="header-section-number">2.6</span> Analytic data</h2>
+<div id="columns-just-what-you-need" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Columns: Just what you need</h3>
+<p><a href="https://dplyr.tidyverse.org" class="uri">https://dplyr.tidyverse.org</a></p>
+</div>
+<div id="rows-just-what-you-need" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Rows: Just what you need</h3>
+</div>
+</div>
+<div id="initial-demographics" class="section level2">
+<h2><span class="header-section-number">2.7</span> Initial demographics</h2>
+<p>summary() review for nonenses</p>
+<p>Getting demographics
+tabyl()
+%&gt;% tabyl(meat_colour)
+tabyl(meat_colour, plant)</p>
+
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="getting-data-into-r-studio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="more-to-say.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -269,7 +360,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yihui/bookdown-crc/edit/master/90-more.Rmd",
+"link": "https://github.com/yihui/bookdown-crc/edit/master/02-loading_data.Rmd",
 "text": "Edit"
 },
 "history": {
