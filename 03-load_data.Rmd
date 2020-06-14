@@ -1,5 +1,7 @@
 # Getting data into R Studio
 
+SOMETHING ABOUT USING HELP IN TIDYVERSE CHAPTER BEFORE THIS ONE
+
 A large segment of the R community as moved toward a standardized way of naming your columns as desribed in the [tidyverse style guide](https://style.tidyverse.org). Likewise, in order to use the tidyverse packages effectively it helps to have [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html). In animal or human participant research, however, it can be 
 
 
@@ -69,6 +71,29 @@ http://sfirke.github.io/janitor/articles/janitor.html
 ## Numerical variables
 
 ### Creating scales scores
+
+A brief explanation of commands:
+
+You can read the "%>%" pipe command as "as then" - it is a way of linking one command to the next within one line.
+
+mean() provides the average the values it is sent. The na.rm = TRUE argument needs explaining though. na stand for "not available". rm stands for "remove". na.rm = TRUE tells the computer to remove missing values prior to calculating the mean.
+Always use mean to create scale scores. 
+
+mutate() creates a new column based on directions in the brackets. Here mutate is creating a new affective_commitment column that this the average (for each person/row) the
+
+
+```{block2, type='rmdcaution'}
+Use mean() to create scale scores. Do not add the items and divide by the number of items - or you will likely not take missing values into accout appropriately. If there is any missing data this process will result in incorrect scale scores for anyone with missing data.
+```
+
+
+```{r, eval = FALSE}
+attitude %>% rowwise() %>% mutate(affective_commitment = mean(rating, complaints, na.rm = TRUE))
+
+attitude %>% select(rating, complaints, learning) %>% psych::alpha()
+```
+
+
 
 ## Categorical varibles
 

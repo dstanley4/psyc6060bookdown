@@ -148,6 +148,39 @@
  \at@end@of@kframe}
 \makeatother
 
+\newenvironment{rmdblock}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{kframe}
+  \item
+  }
+  {
+  \end{kframe}
+  \end{itemize}
+  }
+\newenvironment{rmdnote}
+  {\begin{rmdblock}{note}}
+  {\end{rmdblock}}
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+\newenvironment{rmdimportant}
+  {\begin{rmdblock}{important}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+\newenvironment{rmdwarning}
+  {\begin{rmdblock}{warning}}
+  {\end{rmdblock}}
+
+
 \renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}
 
 \usepackage{makeidx}
@@ -169,7 +202,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-06-07}
+\date{2020-06-14}
 
 \begin{document}
 \maketitle
@@ -248,24 +281,24 @@ Package names are in bold text (e.g., \textbf{rmarkdown}), and inline code and f
 \chapter*{About the Author}\label{about-the-author}}
 
 
-David J. Stanley is an Associate Professor of Industrial and Organizational Psychology at the University of Guelph in Canada. He obtained his PhD from Western University in London, Ontario. David has published articles in Advances in Methods and Practices in Psychological Science, Organizational Research Methods, Journal of Applied Psychology, Perspectives in Psychological Science, Journal of Business and Psychology, Journal of Vocational Behaviour, Journal of Personality and Social Psychology, Behavior Research Methods, Industrial and Organizational Psychology, and Emotion among journals. David also created the apaTables R package.
+David J. Stanley is an Associate Professor of Industrial and Organizational Psychology at the University of Guelph in Canada. He obtained his PhD from Western University in London, Ontario. David has published articles in Advances in Methods and Practices in Psychological Science, Organizational Research Methods, Journal of Applied Psychology, Perspectives in Psychological Science, Journal of Business and Psychology, Journal of Vocational Behaviour, Journal of Personality and Social Psychology, Behavior Research Methods, Industrial and Organizational Psychology, and Emotion among other journals. David also created the apaTables R package.
 
 \mainmatter
 
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-Welcome! In this guide, we will use the statistical software R with the interface provided by R Studio. You can access R Studio using the website \href{http://www.rstudio.cloud}{R Studio Cloud}.
+Welcome! In this guide, we will teach you about statistics using the statistical software R with the interface provided by R Studio. The purpose of this chapter to is provide you with a set of activities that get you up-and-running in R quickly so get a sense of how it works. In later chatpers we will revisit these same topics in more detail.
 
 \hypertarget{a-focus-on-workflow}{%
 \section{A focus on workflow}\label{a-focus-on-workflow}}
 
-An important part of this guide is training you in a workflow that will avoid a large number of problems than can occur when using R.
+An important part of this guide is training you in a workflow that will avoid many problems than can occur when using R.
 
 \hypertarget{r-works-with-plug-ins}{%
 \section{R works with plug-ins}\label{r-works-with-plug-ins}}
 
-R is a statistical language with many plug-ins called \textbf{packages} that you will use for analyses. You can think of R as being like your smartphone. To do things with your phone you need \textbf{an App} (R equivalent: a \emph{package}). Before you can use the App you need to \textbf{download} it (R equivalent: \emph{install.packages}) from the \textbf{App Store} (R equivalent: \emph{CRAN}). To use the app you need \textbf{Open} it (R equivalent: \emph{library command}). These similarities are illustrated in Table \ref{tab:appstore} below.
+R is a statistical language with many plug-ins called \textbf{packages} that you will use for analyses. You can think of R as being like your smartphone. To do things with your phone you need \textbf{an App} (R equivalent: a \emph{package}) from the App Store (R equivalent: \emph{CRAN}). Apps need to be \textbf{downloaded} (R equivalent: \emph{install.packages}) before you can use them. To use the app you need \textbf{Open} it (R equivalent: \emph{library command}). These similarities are illustrated in Table \ref{tab:appstore} below.
 
 \begin{table}
 
@@ -273,12 +306,12 @@ R is a statistical language with many plug-ins called \textbf{packages} that you
 \centering
 \begin{tabular}[t]{ll}
 \toprule
-R Terminology & Smart Phone Terminology\\
+Smart Phone Terminology & R Terminology\\
 \midrule
-CRAN & App Store\\
-package & App\\
-install.packages("apaTables", dependencies = TRUE) & Download App from App Store\\
-library("apaTables") & Open App\\
+App & package\\
+App Store & CRAN\\
+Download App from App Store & install.packages("apaTables", dependencies = TRUE)\\
+Open App & library("apaTables")\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -286,25 +319,25 @@ library("apaTables") & Open App\\
 \hypertarget{create-an-account-at-r-studio-cloud}{%
 \section{Create an account at R Studio Cloud}\label{create-an-account-at-r-studio-cloud}}
 
-R Studio Cloud accounts are free and required for this guide. Please go to the website and set up a new account.
+\href{http://www.rstudio.cloud}{R Studio Cloud} accounts are free and required for this guide. Please go to the website and set up a new account.
 
 \hypertarget{join-the-class-workspace}{%
 \section{Join the class workspace}\label{join-the-class-workspace}}
 
-To do the assignment required for this class you need to join the class workspace on R Studio Cloud. To do so:
+To do the assignment required for this class you need to join the class workspace on R Studio Cloud\index{R Studio Cloud}. To do so:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
   Log into R Studio Cloud (if you haven't already done so).
 \item
-  Go to your university email account and find the message were you will emailed the link to the class R Studio workspace. The email will have the subject ``R Studio Workspace Invitation''.
+  Go to your university email account and find the message with the subject ``R Studio Workspace Invitation''. In this message there is a link to the class R Studio Cloud workspace.
 \item
-  Click on that the link in the email or paste it into your web browser. You should see a screen like the one below in Figure \ref{fig:join}. Click on the Join button.
+  Click on the workspace link in the email or paste it into your web browser. You should see a screen like the one below in Figure \ref{fig:join}. Click on the Join button.
 \end{enumerate}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{first_time/images/screenshot_join} \caption{Screenshot of join message}\label{fig:join}
+\includegraphics[width=0.7\linewidth]{ch_introduction/images/screenshot_join} \caption{Screen shot of workspace join message.}\label{fig:join}
 \end{figure}
 
 \begin{enumerate}
@@ -316,7 +349,7 @@ To do the assignment required for this class you need to join the class workspac
 \end{enumerate}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{first_time/images/screenshot_welcome} \caption{Screenshot of welcome messag}\label{fig:welcome}
+\includegraphics[width=0.7\linewidth]{ch_introduction/images/screenshot_welcome} \caption{Screen shot of welcome messag}\label{fig:welcome}
 \end{figure}
 
 \begin{enumerate}
@@ -328,22 +361,30 @@ To do the assignment required for this class you need to join the class workspac
 \end{enumerate}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{first_time/images/screenshot_assignment} \caption{Screenshot of starting first assignment}\label{fig:assignment}
+\includegraphics[width=0.7\linewidth]{ch_introduction/images/screenshot_assignment} \caption{Screen shot of starting first assignment}\label{fig:assignment}
 \end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  In R Studio it is essential you use projects to keep your files organized and in the same spot. For this course, when your start an assignment on R Studio Cloud and the project will already have been made for you. Later you will learn to make your own R Studio Projects.
+\end{enumerate}
 
 \hypertarget{exploring-the-r-studio-interface}{%
 \section{Exploring the R Studio Interface}\label{exploring-the-r-studio-interface}}
 
-Once you have created a Project, you are presented with the R Studio interface. There are a few key elements to the user interface that are illustrated in Figure \ref{fig:interface} In the lower right of the screen you can see the a panel with several tabs (i.e., Files, Plots, Packages, etc) that I will refer to as the Files pane. You look in this pane to see all the files associated with your project. On the left side of the screen is the Console which is an interactive pane where you type and obtain results in real time. I've placed two large grey blocks on the screen with text to more clearly identify the Console and Files panes. Not shown in this figure is the Script panel where we can store our commands for later reuse.
+Once you have opened (or created) a Project folder, you are presented with the R Studio interface. There are a few key elements to the user interface that are illustrated in Figure \ref{fig:interface} In the lower right of the screen you can see the a panel with several tabs (i.e., Files, Plots, Packages, etc) that I will refer to as the Files pane. You look in this pane to see all the files associated with your project. On the left side of the screen is the Console which is an interactive pane where you type and obtain results in real time. I've placed two large grey blocks on the screen with text to more clearly identify the Console and Files panes. Not shown in this figure is the Script panel where we can store our commands for later reuse.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{first_time/images/screenshot_interface} \caption{R Studio interface}\label{fig:interface}
+\includegraphics[width=0.7\linewidth]{ch_introduction/images/screenshot_interface} \caption{R Studio interface}\label{fig:interface}
 \end{figure}
 
 \hypertarget{console-panel}{%
 \subsection{Console panel}\label{console-panel}}
 
-When you first start R, the Console panel is on the left side of the screen. Sometimes there are two panels on the left side; if so, the Console panel is the lower one. We can use R a bit like a calculator. Try typing the following into the Console window: 8 + 6 + 7 + 5. You can see that R immediately produced the result on a line preceded by two hashtags (\#\#).
+When you first start R, the Console panel is on the left side of the screen. Sometimes there are two panels on the left side (one above the other); if so, the Console panel is the lower one (and labeled accordingly). We can use R a bit like a calculator. Try typing the following into the Console window: 8 + 6 + 7 + 5. You can see that R immediately produced the result on a line preceded by two hashtags (\#\#).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -355,7 +396,7 @@ When you first start R, the Console panel is on the left side of the screen. Som
 ## [1] 26
 \end{verbatim}
 
-We can also put the result into a variable to store it. We can then print that variable at a later time to obtain our result. Specifically, we will add the numbers 3, 0, and 9 and store the result in the variable my\_sum. The text ``\textless-'' indicate you are putting what is on the right side of the arrow into the variable on the left side of the arrow. You can think of a variable as cup into which you can put different things. In this case, imagine a real-world cup with my\_sum written on the outside and inside the cup we have stored the sum of 3, 0, and 9 (i.e., 12).
+We can also put the result into a variable to store it. Later we can use the print command to see that result. In the example below we add the numbers 3, 0, and 9 and store the result in the variable my\_sum. The text ``\textless-'' indicate you are putting what is on the right side of the arrow into the variable on the left side of the arrow. You can think of a variable as cup into which you can put different things. In this case, imagine a real-world cup with my\_sum written on the outside and inside the cup we have stored the sum of 3, 0, and 9 (i.e., 12).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -375,7 +416,8 @@ We can inspect the contents of the my\_sum variable (i.e., my\_sum cup) with the
 ## [1] 12
 \end{verbatim}
 
-Variable are very useful in R. We will use them to store entire data sets as well as the results of analyses.
+Variable are very useful in R. We will use them to store a single number, an entire data set,
+the results of an analysis, or anything else.
 
 \hypertarget{script-panel}{%
 \subsection{Script Panel}\label{script-panel}}
@@ -384,7 +426,7 @@ Although you can use R with just with the Console panel, it's a better idea to u
 
 Scripts are valuable because if you need to run an analysis a second time you don't have to type the command in a second time. You can run the script again and again without retyping your commands. More importantly though, the script provides a record of your analyses.
 
-A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal \href{https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2}{Molecular Brain}. In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper.
+A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal \href{https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2}{Molecular Brain}. In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper. In a later chapter, it's generally poor practice to manipulate or modify or analyze your data using any menu driven software because this approach does not provide a record of what you have done.
 
 \hypertarget{writing-your-first-script}{%
 \section{Writing your first script}\label{writing-your-first-script}}
@@ -394,16 +436,16 @@ A common problem in science is that after an article is published, the authors c
 
 Create a script in your R Studio project by using the menu File \textgreater{} New File \textgreater{} R Script.
 
-Save the file with an appropriate name using the File menu. A common, and good, convention for naming is to start all script names with the word ``script'' and separate words with an underscore. You might save this file with the name ``script\_my\_first\_one.R''. The advantage of this approach is that when you look at your list of files alphabetically, all the script files will cluster together. Likewise, it's a good idea to save all data files such that they begin with ``data\_''. This way all the data files will cluster together in your directory view as well. You can see there is already a data file with this convention called ``data\_okcupid\_heights.csv''.
+Save the file with an appropriate name using the File menu. The file will be saved in your Project folder. A common, and good, convention for naming is to start all script names with the word ``script'' and separate words with an underscore. You might save this first script file with the name ``script\_my\_first\_one.R''. The advantage of beginning all script files with the word script is that when you look at your list of files alphabetically, all the script files will cluster together. Likewise, it's a good idea to save all data files such that they begin with ``data\_''. This way all the data files will cluster together in your directory view as well. You can see there is already a data file with this convention called ``data\_okcupid.csv''.
 
-You can see as discussed previously, we are trying to instill and effect workflow as you learn R. Using a good naming convention (that is consistent with what others use) is part of the workflow. When you write your scripts it's a good idea to follow the \href{https://style.tidyverse.org}{Tidyverse Style Guide}.
+You can see as discussed previously, we are trying to instill an effective workflow as you learn R. Using a good naming convention (that is consistent with what others use) is part of the workflow. When you write your scripts it's a good idea to follow the \href{https://style.tidyverse.org}{tidyverse style guide} for script names, variable name, file names, and more.
 
 \hypertarget{add-a-comment-to-your-script}{%
 \subsection{Add a comment to your script}\label{add-a-comment-to-your-script}}
 
 In the previous section you created your first script. We begin by adding a comment to the script. A comment is something that will be read by humans rather than the computer/R. You make comments for other people that will read your code and need to understand what you have done. However, realize that you are also making comments for your future self as illustrated in an \href{https://xkcd.com/1421/}{XKCD cartoon}.
 
-A good way to start every script is with a comment that includes the date of your script (or even better when you installed your packages, more on this later). Like smartphone apps, packages are updated regularly. Sometimes when a package is updated it will no longer work with an older script. Fortunately, the \href{https://cran.r-project.org/web/packages/checkpoint/index.html}{checkpoint package} lets users role back the clock and use older versions of packages. Adding a comment with the date of your script will help future users (including you) to use your script with the same version of the package you used when you wrote the script. Dating your script is an important part of an effective and reproducible workflow.
+A good way to start every script is with a comment that includes the date of your script (or even better when you installed your packages, more on this later). Like smartphone apps, packages are updated regularly. Sometimes after a package is updated it will no longer work with an older script. Fortunately, the \href{https://cran.r-project.org/web/packages/checkpoint/index.html}{checkpoint package}\index{R Studio Cloud} lets users role back the clock and use older versions of packages. Adding a comment with the date of your script will help future users (including you) to use your script with the same version of the package used when you wrote the script. Dating your script is an important part of an effective and reproducible workflow.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -412,14 +454,16 @@ A good way to start every script is with a comment that includes the date of you
 \end{Highlighting}
 \end{Shaded}
 
-Note that in the above comment I used the internationally accepted date format order Year/Month/Day. Some people use the mnemonic \emph{Your My Dream} to remember this order. Wikipedia provides more information about the \href{https://en.wikipedia.org/wiki/ISO_8601}{International Date Format ISO 8601}.
+Note that in the above comment I used the internationally accepted date format\index{date format} order Year/Month/Day. Some people use the mnemonic \emph{Your My Dream} to remember this order. Wikipedia provides more information about the \href{https://en.wikipedia.org/wiki/ISO_8601}{Internationally Date Format ISO 8601}.
 
 Moving forward, I suggest you use comments to make your own personal notes in your own code as your write it.
 
 \hypertarget{background-about-the-tidyverse}{%
 \subsection{Background about the tidyverse}\label{background-about-the-tidyverse}}
 
-One modern approach is using R is the tidyverse. The tidyverse represents not a single package but rather a collection of packages the work together to give R a modern workflow. These packages do many things to help the data analyst (graphing, rearranging data etc.). That is, each of these packages adds new commands to R. A current list of the packages in the tidyverse is below:
+There are generally two broad ways of using R, the older way and the newer way. Using R the older way is refered to as using base R. A more modern approach to using R is the tidyverse\index{tidyverse}. The tidyverse represents a collection of packages the work together to give R a modern workflow. These packages do many things to help the data analyst (loading data, rearranging data, graphing, etc.). We will use the tidyverse approach to R in this guide.
+
+A noted the tidyverse is a collection of packges. Each package adds new commands to R. The number of packges and correspondingly the number of new commands added to R by the tidyverse is large. Below is a list of the tidyverse packages:
 
 \begin{verbatim}
 ##  [1] "broom"      "cli"        "crayon"    
@@ -433,7 +477,7 @@ One modern approach is using R is the tidyverse. The tidyverse represents not a 
 ## [25] "tidyr"      "xml2"       "tidyverse"
 \end{verbatim}
 
-Before you can use a package it needs to be installed -- this is the same as downloading an app from the App Store. You can install a packages with the install.packages command. Previously, you needed run an install.package command for every package in the tidyverse. That is previously you would need to run the command below for every package in the tidyverse (dplyr, ggplot, etc.):
+Before you can use a package it needs to be installed -- this is the same as downloading an app from the App Store. Normally, you can install a \textbf{single} packages with the install.packages command. Previously, you needed run an install.package command for every package in the tidyverse as illustrated below (though we no longer use this approach).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -447,8 +491,7 @@ Before you can use a package it needs to be installed -- this is the same as dow
 \end{Highlighting}
 \end{Shaded}
 
-Fortunately, the packages have been officially grouped together into the tidyverse. Consequently, a single install can now install the entire set of tidyverse packages. Note that you should not put install.package command into your script - this can cause problems.
-Type the install.package command below into Console window.
+Fortunately, the tidyverse packages can now by installed with a single install.packages command. Specifically, the install.packages command below will install all of the packages listed above.
 
 \textbf{Class note: For the ``First Lab'', I've done the install.packages for you. So there is no need to use the install.packages command below in this first lab.}
 
@@ -461,8 +504,7 @@ Type the install.package command below into Console window.
 \hypertarget{add-librarytidyverse-to-your-script}{%
 \subsection{Add library(tidyverse) to your script}\label{add-librarytidyverse-to-your-script}}
 
-The tidyverse is now installed, so we need to activate it.
-We do that with the library command. Put the library line below at the top of your script file (below your comment):
+The tidyverse is now installed, so we need to activate it. We do that with the library command. Put the library line below at the top of your script file (below your comment):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -475,121 +517,60 @@ We do that with the library command. Put the library line below at the top of yo
 \hypertarget{activate-tidyverse-auto-complete-for-your-script}{%
 \subsection{Activate tidyverse auto-complete for your script}\label{activate-tidyverse-auto-complete-for-your-script}}
 
-Select the library(tidyverse) text with your mouse/track-pad and highlight it. Then click the Run button in the upper right of the Script panel. Doing this ``runs'' the selected text. After you click the Run button you should see text like the following the Console panel:
+Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this ``runs'' the selected text. After you click the Run button you should see text like the following the Console panel:
 
 \begin{verbatim}
-## -- Attaching packages ------------------------------- tidyverse 1.3.0 --
+## -- Attaching packages ----------------------------- tidyverse 1.3.0 --
 \end{verbatim}
 
 \begin{verbatim}
-## v ggplot2 3.3.0     v purrr   0.3.4
+## v ggplot2 3.3.1     v purrr   0.3.4
 ## v tibble  3.0.1     v dplyr   1.0.0
 ## v tidyr   1.1.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.5.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ---------------------------------- tidyverse_conflicts() --
+## -- Conflicts -------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
 
 When you use library(tidyverse) to activate the tidyverse you activate the most commonly used subset of the tidyverse packages. In the output you see checkmarks beside names of the tidyverse packages you have activated.
 
-By activating these packages you have added new commands to R that you will use. Sometimes these packages replace older versions of commands in R. The ``Conflicts'' section in the output shows you where you the packages you have activated have replaced older R commands with newer R commands. You can activate the other tidyverse package by running a library command for each package -- if needed. No need to do so now.
+By activating these packages you have added new commands to R that you will use. Sometimes these packages replace older versions of commands in R. The ``Conflicts'' section in the output shows you where the packages you activated replaced older R commands with newer R commands. You can activate the other tidyverse package by running a library command for each package -- if needed. No need to do so now.
 
 Most importantly, running the library(tidyverse) prior to entering the rest of your script allows R Studio to present auto-complete options when typing your text. Remember to start each script with the library(tidyverse) command and then Run it so you get the autocomplete options for the rest of the commands your enter.
 
 \hypertarget{loading-your-data}{%
 \section{Loading your data}\label{loading-your-data}}
 
-\hypertarget{use-read_csv-not-read.csv-to-open-the-file.}{%
-\subsection{Use read\_csv (not read.csv) to open the file.}\label{use-read_csv-not-read.csv-to-open-the-file.}}
+\hypertarget{use-read_csv-not-read.csv-to-open-files.}{%
+\subsection{Use read\_csv (not read.csv) to open files.}\label{use-read_csv-not-read.csv-to-open-files.}}
 
-If you inspect the Files pane on the right of the screen you see the \textbf{data\_okcupid\_heights.csv} data file in our project directory. We will load this data with the commands below. If you followed the steps above, you should have auto-complete for the tidyverse commands you type for now in -- in the current R session. Enter the command below into your script. Then highlight the text and click on the ``Run'' button.
+If you inspect the Files pane on the right of the screen you see the \textbf{data\_okcupid.csv} data file in our project directory. We will load this data with the commands below. If you followed the steps above, you should have auto-complete for the tidyverse commands you type for now in -- in the current R session. Enter the command below into your script. As your start to type read\_csv you will likely be presented with an auto-complete option. You can use the arrow keys to move up and down the list of options to select the one you want - then press tab to select it.
+
+Once your command looks like the one below select the text and click on the ``Run'' button.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{okcupid_profiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid_heights.csv"}\NormalTok{)}
+\NormalTok{okcupid_profiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
+##   age = col_double(),
+##   diet = col_character(),
+##   height = col_double(),
+##   pets = col_character(),
 ##   sex = col_character(),
-##   height = col_double()
+##   status = col_character()
 ## )
 \end{verbatim}
 
-The output indicates that you have loaded a data file. The sex column is of type col\_character which indicates it contains text/letters. The height column is of type col\_double which merely indicates that it is a column of numbers represented with \href{https://en.wikipedia.org/wiki/Double-precision_floating-point_format}{high precision}.
-
-\hypertarget{getting-your-data-ready-for-analysis}{%
-\section{Getting your data ready for analysis}\label{getting-your-data-ready-for-analysis}}
-
-\hypertarget{tell-r-which-variables-are-categorical-i.e.-a-factor}{%
-\subsection{Tell R which variables are categorical (i.e., a factor)}\label{tell-r-which-variables-are-categorical-i.e.-a-factor}}
-
-A key part of using R is telling it which variables are categorical variables. If you don't do this some analysis won't run. Worse - other analyses will run but provide the wrong numbers.
-
-We can use the commands below to look at the nature of each of the variable we have loaded.:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(okcupid_profiles)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Rows: 59,826
-## Columns: 2
-## $ sex    <chr> "male", "male", "male", "male", "ma...
-## $ height <dbl> 75, 70, 68, 71, 66, 67, 65, 70, 72,...
-\end{verbatim}
-
-We know that sex is a categorical variable (i.e., a factor). Yet when we look at the output above from glimpse it is of type chr - which means character. We need to make the data into a factor so that R knows it is a categorical variable. We so with the command below. Add this command to your script below read\_csv. Then select and Run the command. Don't worry if you don't understand this command just now - we'll learn more about it in the future.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{okcupid_profiles <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(okcupid_profiles, }\DataTypeTok{sex =} \KeywordTok{as.factor}\NormalTok{(sex))}
-\end{Highlighting}
-\end{Shaded}
-
-In later exercise we will deal with situation where numbers like 1 and 2 are used to designate sex instead of a label like male or female. When numbers are used in factors we have to provide labels for them (i.e., value labels in SPSS terms) using the level command; but that's a future exercise.
-
-Use the glimpse command again to see how the nature sex has changed. Notice now that we have made sex a factor, there is fct beside it in the glimpse output.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(okcupid_profiles)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Rows: 59,826
-## Columns: 2
-## $ sex    <fct> male, male, male, male, male, male,...
-## $ height <dbl> 75, 70, 68, 71, 66, 67, 65, 70, 72,...
-\end{verbatim}
-
-If you read other sources about R you may encounter the str function. This is similar to the glimpse function (part of the tidyverse) but provides somewhat different output since it is part of the older way of doing R (base R). When you see str in other peoples scripts recognize it's very similar to glimpse. You should use glimpse moving forward.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{str}\NormalTok{(okcupid_profiles)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## tibble [59,826 x 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ sex   : Factor w/ 2 levels "female","male": 2 2 2 2 2 2 2 2 2 2 ...
-##  $ height: num [1:59826] 75 70 68 71 66 67 65 70 72 72 ...
-##  - attr(*, "spec")=
-##   .. cols(
-##   ..   sex = col_character(),
-##   ..   height = col_double()
-##   .. )
-\end{verbatim}
+The output indicates that you have loaded a data file and the type of data in each column. The sex column is of type col\_character which indicates it contains text/letters. Most of the columns are of the type character. The age and height columns contain numbers are correspondingly indicated to be the type col\_double. The label col\_double indicates that a column of numbers represented in R with \href{https://en.wikipedia.org/wiki/Double-precision_floating-point_format}{high precision}. There are other ways of representing numbers in R but this is the type we will see/use most often.
 
 \hypertarget{checking-out-your-data}{%
 \section{Checking out your data}\label{checking-out-your-data}}
@@ -599,7 +580,7 @@ There many ways of viewing the actual data you loaded. A few of these are illust
 \hypertarget{view-see-a-spreadsheet-view-of-your-data}{%
 \subsection{view(): See a spreadsheet view of your data}\label{view-see-a-spreadsheet-view-of-your-data}}
 
-You can inspect your data in a spreadsheet view by using the view command. Do NOT add this command to your script file. Just type it in the Console. Adding it to the script can cause problems.
+You can inspect your data in a spreadsheet view by using the view command. Do NOT add this command to your script file -- EVER. Adding it to the script can cause substantial problems. Type this command in the Console.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -607,10 +588,10 @@ You can inspect your data in a spreadsheet view by using the view command. Do NO
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{print-check-out-the-data}{%
-\subsection{print(): Check out the data}\label{print-check-out-the-data}}
+\hypertarget{print-see-you-data-in-the-console}{%
+\subsection{print(): See you data in the Console}\label{print-see-you-data-in-the-console}}
 
-You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print command below in the Console:
+You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print() command below in the Console:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -619,26 +600,26 @@ You can inspect the first few rows of your data with the print() command. It is 
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 59,826 x 2
-##    sex   height
-##    <fct>  <dbl>
-##  1 male      75
-##  2 male      70
-##  3 male      68
-##  4 male      71
-##  5 male      66
-##  6 male      67
-##  7 male      65
-##  8 male      70
-##  9 male      72
-## 10 male      72
-## # ... with 59,816 more rows
+## # A tibble: 59,946 x 6
+##      age diet        height pets          sex   status 
+##    <dbl> <chr>        <dbl> <chr>         <chr> <chr>  
+##  1    22 strictly a~     75 likes dogs a~ m     single 
+##  2    35 mostly oth~     70 likes dogs a~ m     single 
+##  3    38 anything        68 has cats      m     availa~
+##  4    23 vegetarian      71 likes cats    m     single 
+##  5    29 <NA>            66 likes dogs a~ m     single 
+##  6    29 mostly any~     67 likes cats    m     single 
+##  7    32 strictly a~     65 likes dogs a~ f     single 
+##  8    31 mostly any~     65 likes dogs a~ f     single 
+##  9    24 strictly a~     67 likes dogs a~ f     single 
+## 10    37 mostly any~     65 likes dogs a~ m     single 
+## # ... with 59,936 more rows
 \end{verbatim}
 
 \hypertarget{head-check-out-the-first-few-rows-of-data}{%
 \subsection{head(): Check out the first few rows of data}\label{head-check-out-the-first-few-rows-of-data}}
 
-You can inspect the first few rows of your data with the head() command. Try the head() command below in the Console:
+You can inspect the first few rows of your data with the head() command. Try the command below in the Console:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -647,21 +628,38 @@ You can inspect the first few rows of your data with the head() command. Try the
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 2
-##   sex   height
-##   <fct>  <dbl>
-## 1 male      75
-## 2 male      70
-## 3 male      68
-## 4 male      71
-## 5 male      66
-## 6 male      67
+## # A tibble: 6 x 6
+##     age diet        height pets           sex   status 
+##   <dbl> <chr>        <dbl> <chr>          <chr> <chr>  
+## 1    22 strictly a~     75 likes dogs an~ m     single 
+## 2    35 mostly oth~     70 likes dogs an~ m     single 
+## 3    38 anything        68 has cats       m     availa~
+## 4    23 vegetarian      71 likes cats     m     single 
+## 5    29 <NA>            66 likes dogs an~ m     single 
+## 6    29 mostly any~     67 likes cats     m     single
 \end{verbatim}
 
-\hypertarget{tail-check-out-the-first-few-rows-of-data}{%
-\subsection{tail(): Check out the first few rows of data}\label{tail-check-out-the-first-few-rows-of-data}}
+You can be even more specific and indicate you only want the first three row of your data with the head() command. Try the command below in the Console:
 
-You can inspect the first few rows of your data with the head() command. Try the tail() command below in the Console:
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(okcupid_profiles, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 6
+##     age diet        height pets           sex   status 
+##   <dbl> <chr>        <dbl> <chr>          <chr> <chr>  
+## 1    22 strictly a~     75 likes dogs an~ m     single 
+## 2    35 mostly oth~     70 likes dogs an~ m     single 
+## 3    38 anything        68 has cats       m     availa~
+\end{verbatim}
+
+\hypertarget{tail-check-out-the-last-few-rows-of-data}{%
+\subsection{tail(): Check out the last few rows of data}\label{tail-check-out-the-last-few-rows-of-data}}
+
+You can inspect the last few rows of your data with the tail() command. Try the command below in the Console:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -670,23 +668,40 @@ You can inspect the first few rows of your data with the head() command. Try the
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 2
-##   sex    height
-##   <fct>   <dbl>
-## 1 female     64
-## 2 female     63
-## 3 female     67
-## 4 female     61
-## 5 female     62
-## 6 female     62
+## # A tibble: 6 x 6
+##     age diet        height pets            sex   status
+##   <dbl> <chr>        <dbl> <chr>           <chr> <chr> 
+## 1    31 <NA>            62 likes dogs      f     single
+## 2    59 <NA>            62 has dogs        f     single
+## 3    24 mostly any~     72 likes dogs and~ m     single
+## 4    42 mostly any~     71 <NA>            m     single
+## 5    27 mostly any~     73 likes dogs and~ m     single
+## 6    39 <NA>            68 likes dogs and~ m     single
+\end{verbatim}
+
+You can be even more specific and indicate you only want the last three row of your data with the tail() command. Try the command below in the Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(okcupid_profiles, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 6
+##     age diet        height pets            sex   status
+##   <dbl> <chr>        <dbl> <chr>           <chr> <chr> 
+## 1    42 mostly any~     71 <NA>            m     single
+## 2    27 mostly any~     73 likes dogs and~ m     single
+## 3    39 <NA>            68 likes dogs and~ m     single
 \end{verbatim}
 
 \hypertarget{summary-quick-summaries}{%
 \subsection{summary(): Quick summaries}\label{summary-quick-summaries}}
 
-You can a short summary of your data with the summary command. Note that we will use the summary command in many places in the guide. The output of the summary command changes depending on what you give it - that is put inside the brackets. You can give the summary command data, the results of a regression analysis, etc.
+You can a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.
 
-Add the summary command below to your script file, highlight it, and click Run.
+Try the command below in the Console. You will see that summary() give the mean and median for each of the numeric variables (age and height).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -695,19 +710,36 @@ Add the summary command below to your script file, highlight it, and click Run.
 \end{Shaded}
 
 \begin{verbatim}
-##      sex            height    
-##  female:24089   Min.   :55.0  
-##  male  :35737   1st Qu.:66.0  
-##                 Median :68.0  
-##                 Mean   :68.3  
-##                 3rd Qu.:71.0  
-##                 Max.   :80.0
+##       age            diet               height    
+##  Min.   : 18.0   Length:59946       Min.   : 1.0  
+##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
+##  Median : 30.0   Mode  :character   Median :68.0  
+##  Mean   : 32.3                      Mean   :68.3  
+##  3rd Qu.: 37.0                      3rd Qu.:71.0  
+##  Max.   :110.0                      Max.   :95.0  
+##                                     NA's   :3     
+##      pets               sex           
+##  Length:59946       Length:59946      
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
+##                                       
+##     status         
+##  Length:59946      
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+##                    
+## 
 \end{verbatim}
 
 \hypertarget{run-vs.-source-with-echo-vs.-source}{%
 \section{\texorpdfstring{Run \emph{vs.} Source with Echo \emph{vs.} Source}{Run vs. Source with Echo vs. Source}}\label{run-vs.-source-with-echo-vs.-source}}
 
-There are different ways of running commands in R. You can enter them into the Console as we have done already. Or you can put them in your script. There are three ways of running commands in your script.
+There are different ways of running commands in R. So far you have used two of these. You can enter them into the Console as we have done already. Or you can put them in your script select the text and clickk the Run button. There are four ways of running commands in your script.
 
 You can:
 
@@ -715,32 +747,34 @@ You can:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Select the command(s) and press the Run button.
+  Console: Enter commands directly
 \item
-  Source Without Echo
+  Script: Select the command(s) and press the Run button.
 \item
-  Source With Echo
+  Script: Source (Without Echo)
+\item
+  Script: Source With Echo
 \end{enumerate}
 
 Two of these approaches involve using the Source button, see Figure \ref{fig:sourcebutton}. You bring up the options for the Source button, illustrated in this figure, by clicking on the small arrow to the right of the word Source.
 
 \begin{figure}
-\includegraphics[width=0.35\linewidth]{first_time/images/screenshot_source} \caption{Source button options}\label{fig:sourcebutton}
+\includegraphics[width=0.35\linewidth]{ch_introduction/images/screenshot_source} \caption{Source button options}\label{fig:sourcebutton}
 \end{figure}
 
 \hypertarget{run-select-text}{%
 \subsection{Run select text}\label{run-select-text}}
 
-The Run button will run the text you highlight and present the relevant output. You have used this command a fair amount above.
+The Run button will run the text you highlight and present the relevant output. You have used this command a fair amount already.
 
-I strongly suggest you ONLY use the Run button when testing a command to make sure it works or to debug a script.
+I strongly suggest you ONLY use the Run button when testing a command to make sure it works or to debug a script. Or to run library(tidyverse) as you start working on your script so that you get the autocomplete options.
 
 In general, you should always try to execute your R Scripts using the Source with Echo command (preceded by a Restart, see below). This ensures your script will work beginning to end for you in the future and for others that attempt to use it. Using the Run button in an ad lib basis can create output that is not reproducible.
 
 \hypertarget{source-without-echo}{%
 \subsection{Source (without Echo)}\label{source-without-echo}}
 
-Source (without Echo) is not designed for the typical analysis workflow. It is mostly helpful when you run simulations. You can see below that when you run Source (without Echo) much of the output you would wish to read is suppressed. In general, avoid this option. If you use it, you often won't see what you want to see in the output.
+Source (without Echo) is not designed for the typical analysis workflow. It is mostly helpful when you run simulations. When you run Source (without Echo) much of the output you would wish to read is suppressed. In general, avoid this option. If you use it, you often won't see what you want to see in the output.
 
 \hypertarget{source-with-echo}{%
 \subsection{Source with Echo}\label{source-with-echo}}
@@ -755,118 +789,152 @@ So you should do the following EVERY time you run your script.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Menu item: \textbf{Session \textgreater{} Restart R}
+  Use the menu item: \textbf{Session \textgreater{} Restart R}
 \item
-  Click the down arrow beside Source, and click on Source With Echo
+  Click the down arrow beside the Source button, and click on Source With Echo
 \end{enumerate}
 
-This will clear potentially problematic previous stats, run the script commands, and display the output in the Console. Moving forward we will use this approach for running scripts.
+This will clear potentially problematic previous stats, run the script commands, and display the output in the Console. Moving forward we will use this approach for running scripts. Once you have used Source wiht Echo once, you can just click the Source button and it will use Source with Echo automatically (without the need to use the pull down option for selecting Source with Echo).
 
-\hypertarget{using-r-the-old-way-or-the-new-way-the-tidyverse-way}{%
-\section{Using R the old way or the new way (the tidyverse way)}\label{using-r-the-old-way-or-the-new-way-the-tidyverse-way}}
+\begin{rmdcaution}
+\begin{rmdcaution}
 
-Below are a few key differences to keep in mind as you move forward with R. We will be using the tidyverse approach to using R but on the internet you will often see sample code that use the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read\_csv) instead of another (e.g., read.csv).
+Using Restart R before you run a script, or R code in general, is a critical workflow tip.
 
-\hypertarget{tibbles-vs-data-frames-why-use-read_csv-instead-of-read.csv}{%
-\subsubsection{Tibbles vs Data Frames: Why use read\_csv instead of read.csv}\label{tibbles-vs-data-frames-why-use-read_csv-instead-of-read.csv}}
+\end{rmdcaution}
+\end{rmdcaution}
 
-When you load data into R it is typically represented in one of two formats inside the computer. Depending on the command you use to load data, it can be represented in different ways inside R.
+\hypertarget{trying-source-with-echo}{%
+\section{Trying Source with Echo}\label{trying-source-with-echo}}
 
-The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame.
-
-\hypertarget{read.csv-puts-data-into-a-data-frame}{%
-\subsubsection{read.csv puts data into a data frame}\label{read.csv-puts-data-into-a-data-frame}}
+Put the head(), tail(), and summary() command we used previously into your script. Then save your script using using the File \textgreater{} Save menu. You script should appear as below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my_dataframe <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid_heights.csv"}\NormalTok{)}
+\CommentTok{# Code written on: YYYY/MM/DD }
+\CommentTok{# By: John Smith}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{okcupid_profiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid.csv"}\NormalTok{)}
+
+\KeywordTok{head}\NormalTok{(okcupid_profiles)}
+
+\KeywordTok{tail}\NormalTok{(okcupid_profiles)}
+
+\KeywordTok{summary}\NormalTok{(okcupid_profiles)}
 \end{Highlighting}
 \end{Shaded}
 
-Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid\_profiles data.
+Now do the following:
 
-Here I actually pasted just the first 10 rows of the output - because all the rows are printed in your console.
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use the menu item: \textbf{Session \textgreater{} Restart R}
+\item
+  Click the down arrow beside the Source button, and click on Source With Echo
+\end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{print}\NormalTok{(my_dataframe)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##     sex height
-## 1  male     75
-## 2  male     70
-## 3  male     68
-## 4  male     71
-## 5  male     66
-## 6  male     67
-## 7  male     65
-## 8  male     70
-## 9  male     72
-## 10 male     72
-\end{verbatim}
-
-\hypertarget{read_csv-puts-data-into-a-tibble}{%
-\subsubsection{read\_csv puts data into a tibble}\label{read_csv-puts-data-into-a-tibble}}
-
-Notice that when you print a tibble it DOES show you the number of rows and columns. As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
+You should see the output below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my_tibble <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid_heights.csv"}\NormalTok{)}
+\CommentTok{# Code written on: YYYY/MM/DD }
+\CommentTok{# By: John Smith}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{okcupid_profiles <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Parsed with column specification:
 ## cols(
+##   age = col_double(),
+##   diet = col_character(),
+##   height = col_double(),
+##   pets = col_character(),
 ##   sex = col_character(),
-##   height = col_double()
+##   status = col_character()
 ## )
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{print}\NormalTok{(my_tibble)}
+\KeywordTok{head}\NormalTok{(okcupid_profiles)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 59,826 x 2
-##    sex   height
-##    <chr>  <dbl>
-##  1 male      75
-##  2 male      70
-##  3 male      68
-##  4 male      71
-##  5 male      66
-##  6 male      67
-##  7 male      65
-##  8 male      70
-##  9 male      72
-## 10 male      72
-## # ... with 59,816 more rows
+## # A tibble: 6 x 6
+##     age diet        height pets           sex   status 
+##   <dbl> <chr>        <dbl> <chr>          <chr> <chr>  
+## 1    22 strictly a~     75 likes dogs an~ m     single 
+## 2    35 mostly oth~     70 likes dogs an~ m     single 
+## 3    38 anything        68 has cats       m     availa~
+## 4    23 vegetarian      71 likes cats     m     single 
+## 5    29 <NA>            66 likes dogs an~ m     single 
+## 6    29 mostly any~     67 likes cats     m     single
 \end{verbatim}
-
-\hypertarget{deeper-differences-between-data-frames-and-tibbles}{%
-\subsubsection{Deeper differences between data frames and tibbles}\label{deeper-differences-between-data-frames-and-tibbles}}
-
-In short you should always use tibbles (i.e., use read\_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
-
-\hypertarget{converting-a-tibble-into-a-data-frame}{%
-\subsubsection{Converting a tibble into a data frame}\label{converting-a-tibble-into-a-data-frame}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{new_dataframe <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(my_tibble)}
+\KeywordTok{tail}\NormalTok{(okcupid_profiles)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 6
+##     age diet        height pets            sex   status
+##   <dbl> <chr>        <dbl> <chr>           <chr> <chr> 
+## 1    31 <NA>            62 likes dogs      f     single
+## 2    59 <NA>            62 has dogs        f     single
+## 3    24 mostly any~     72 likes dogs and~ m     single
+## 4    42 mostly any~     71 <NA>            m     single
+## 5    27 mostly any~     73 likes dogs and~ m     single
+## 6    39 <NA>            68 likes dogs and~ m     single
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(okcupid_profiles)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age            diet               height    
+##  Min.   : 18.0   Length:59946       Min.   : 1.0  
+##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
+##  Median : 30.0   Mode  :character   Median :68.0  
+##  Mean   : 32.3                      Mean   :68.3  
+##  3rd Qu.: 37.0                      3rd Qu.:71.0  
+##  Max.   :110.0                      Max.   :95.0  
+##                                     NA's   :3     
+##      pets               sex           
+##  Length:59946       Length:59946      
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+##                                       
+##                                       
+##     status         
+##  Length:59946      
+##  Class :character  
+##  Mode  :character  
+##                    
+##                    
+##                    
+## 
+\end{verbatim}
+
+Congratulations you just ran your first script!
 
 \hypertarget{a-few-key-points-about-r}{%
 \section{A Few Key Points About R}\label{a-few-key-points-about-r}}
 
-Sometimes you will need to send a command in R additional information. Moreover, that information often needs to be grouped together into a vector or a list before you can send it to a command. We'll learn more about doing so in the future but here is a quick over view of vector and lists to provide a foundation for future chapters.
+Sometimes you will need to send a command additional information. Moreover, that information often needs to be grouped together into a vector or a list before you can send it to the command. We'll learn more about doing so in the future but here is a quick over view of vectors and lists to provide a foundation for future chapters.
 
 \hypertarget{vector-of-numbers}{%
 \subsubsection{Vector of numbers}\label{vector-of-numbers}}
@@ -1001,10 +1069,822 @@ You can access an item in a list by its label/name using the dollar sign:
 
 Congratulations! You've reached the end of the introduction to R. Take a break, have a cookie, and read some more about R tomorrow!
 
-\hypertarget{the-foo-method}{%
-\chapter{The FOO Method}\label{the-foo-method}}
+\hypertarget{making-your-data-ready-for-analysis}{%
+\chapter{Making your data ready for analysis}\label{making-your-data-ready-for-analysis}}
 
-We talk about the \emph{FOO} method\index{FOO} in this chapter.
+A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal \href{https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2}{Molecular Brain}. In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper.
+
+\hypertarget{using-r-the-old-way-or-the-new-way-the-tidyverse-way}{%
+\section{Using R the old way or the new way (the tidyverse way)}\label{using-r-the-old-way-or-the-new-way-the-tidyverse-way}}
+
+Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these appoaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read\_csv with the tidyverse) instead of another (e.g., read.csv with base R).
+
+\hypertarget{tibbles-vs-data-frames-why-use-read_csv-instead-of-read.csv}{%
+\subsubsection{Tibbles vs Data Frames: Why use read\_csv instead of read.csv}\label{tibbles-vs-data-frames-why-use-read_csv-instead-of-read.csv}}
+
+When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame.
+
+\hypertarget{read.csv-puts-data-into-a-data-frame}{%
+\subsubsection{read.csv puts data into a data frame}\label{read.csv-puts-data-into-a-data-frame}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_dataframe <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid\_profiles data. It also list ALL of your data rather than just the first few rows. As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console (too much to show here).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(my_dataframe)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    age              diet height
+## 1   22 strictly anything     75
+## 2   35      mostly other     70
+## 3   38          anything     68
+## 4   23        vegetarian     71
+## 5   29              <NA>     66
+## 6   29   mostly anything     67
+## 7   32 strictly anything     65
+## 8   31   mostly anything     65
+## 9   24 strictly anything     67
+## 10  37   mostly anything     65
+##                         pets sex    status
+## 1  likes dogs and likes cats   m    single
+## 2  likes dogs and likes cats   m    single
+## 3                   has cats   m available
+## 4                 likes cats   m    single
+## 5  likes dogs and likes cats   m    single
+## 6                 likes cats   m    single
+## 7  likes dogs and likes cats   f    single
+## 8  likes dogs and likes cats   f    single
+## 9  likes dogs and likes cats   f    single
+## 10 likes dogs and likes cats   m    single
+\end{verbatim}
+
+\hypertarget{read_csv-puts-data-into-a-tibble}{%
+\subsubsection{read\_csv puts data into a tibble}\label{read_csv-puts-data-into-a-tibble}}
+
+When you use the read\_csv command the data you load is stored in the computer as a tibble. The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns. As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_tibble <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_okcupid.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   age = col_double(),
+##   diet = col_character(),
+##   height = col_double(),
+##   pets = col_character(),
+##   sex = col_character(),
+##   status = col_character()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(my_tibble)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 59,946 x 6
+##      age diet        height pets          sex   status 
+##    <dbl> <chr>        <dbl> <chr>         <chr> <chr>  
+##  1    22 strictly a~     75 likes dogs a~ m     single 
+##  2    35 mostly oth~     70 likes dogs a~ m     single 
+##  3    38 anything        68 has cats      m     availa~
+##  4    23 vegetarian      71 likes cats    m     single 
+##  5    29 <NA>            66 likes dogs a~ m     single 
+##  6    29 mostly any~     67 likes cats    m     single 
+##  7    32 strictly a~     65 likes dogs a~ f     single 
+##  8    31 mostly any~     65 likes dogs a~ f     single 
+##  9    24 strictly a~     67 likes dogs a~ f     single 
+## 10    37 mostly any~     65 likes dogs a~ m     single 
+## # ... with 59,936 more rows
+\end{verbatim}
+
+\hypertarget{deeper-differences-between-data-frames-and-tibbles}{%
+\subsubsection{Deeper differences between data frames and tibbles}\label{deeper-differences-between-data-frames-and-tibbles}}
+
+In short you should always use tibbles (i.e., use read\_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
+
+\hypertarget{converting-a-tibble-into-a-data-frame}{%
+\subsubsection{Converting a tibble into a data frame}\label{converting-a-tibble-into-a-data-frame}}
+
+This command creates a new data set called new\_data\_frame (use any name you want) from the tibble data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new_dataframe <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(my_tibble)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{required-packages}{%
+\section{Required Packages}\label{required-packages}}
+
+This chapter requires the following packages are installed:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Required Packages\tabularnewline
+\midrule
+\endhead
+apaTables\tabularnewline
+janitor\tabularnewline
+psych\tabularnewline
+tidyverse\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{Important Note:} that you should NOT use library(psych) at any point. There are major conflict between the psych package and the tidyverse. We will access the psych package command by preceding each command with psych:: instead of using library(psych).
+
+\hypertarget{objective}{%
+\section{Objective}\label{objective}}
+
+\hypertarget{context}{%
+\section{Context}\label{context}}
+
+There is a growing interest in ensuring your analyses are reproducible. That is, that a third part could generate the numbers in the research article from materials provided by the researcher. Although this sounds like a low bar for rigor, it is in fact a surprisingly challening bar. Indeed, the editor of \href{https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2}{Molecular Brain}. reported that a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers.
+
+Consequently, a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) \href{https://www.cos.io/our-services/top-guidelines}{guidelines}. These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new journal rating system even emerged call the \href{https://topfactor.org}{TOP Factor}.
+
+The idea is not that open science articles are not more trust worthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. This process avoids the problem reported at Molecular Brain (doubless is common to many journals) - because the data and scripts need to have been uploaded at the time of publication. The TOP open science guidelines have made an impact and newer journals such as Meta Psycchology have fully embraced open science. Figure \ref{fig:metapsychology} shows the header from an \href{https://open.lnu.se/index.php/metapsychology/article/view/1630/2266}{article} in Meta Psychology that clearly delineates the open science attributes of the article. Take note that the header even specifies who checked that the analyses in the article were reproducible.
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_score_items/images/screenshot_metapsychology} \caption{Open science in an article header}\label{fig:metapsychology}
+\end{figure}
+
+\hypertarget{a-mindset-for-moving-foward}{%
+\section{A mindset for moving foward}\label{a-mindset-for-moving-foward}}
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_score_items/images/pipeline} \caption{Data science pipeline by Roger Peng.}\label{fig:pipeline}
+\end{figure}
+
+In this chapter we walk you though the process of going from raw data to analytic data by creating processing script.
+
+see Figure \ref{fig:pipeline}
+
+\hypertarget{begin-with-the-end-in-mind}{%
+\chapter{Begin with the end in mind}\label{begin-with-the-end-in-mind}}
+
+-sample size analysis
+-unfalsible article by lakens
+
+TIDYVERSE NAMING CONVENTION ARE IMPORTANT BECAUSE IN SOME CASES THEY ARE REQUIRED for the SCRIPTS to work. If you haven't following the naming conventions you may be making your life quite difficult.
+
+\hypertarget{collecting-your-data}{%
+\chapter{Collecting your data}\label{collecting-your-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  data are collected in different ways
+\item
+  data collected by programs in the lab that require
+\item
+  lab measurementson paper and entering later
+\item
+  paper surveys and entering later
+\item
+  website surveys
+\item
+  a mix of all of the above
+\end{itemize}
+
+each trial is a row - multiple rows per person\ldots{}
+
+Distinguish between entering data and not. But also think about what's not confusing\ldots{}
+talk about wide not showing DV or IV just levels of IV
+
+if you're writing a cognitive program or making a survey think about the variable names
+think about how the data is outputed.
+
+If you have entirely within person data then tidy is the obvious choice
+If you have entirely between then wide makes sense
+If you have a mix - it's more difficult. Different research area. Think about the problems.
+
+For example, a good data code book is essential if you have wide with repeated measures varibles because there is no way to tell what the IV or DV is by inspecting the data.
+
+\hypertarget{entering-your-data}{%
+\chapter{Entering your data}\label{entering-your-data}}
+
+\hypertarget{making-analytic-data}{%
+\chapter{Making analytic data}\label{making-analytic-data}}
+
+Think about
+- missing data
+- column names
+- representation of categorical variables in the data set
+
+\hypertarget{entering-data}{%
+\chapter{Entering data}\label{entering-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  computer/web collection
+\end{itemize}
+
+\hypertarget{begin-with-a-project}{%
+\section{Begin with a project}\label{begin-with-a-project}}
+
+I suggest you begin every R Studio task in the following way:
+
+R Studio in the Cloud
+1. Create a new Project using the web interface
+2. Upload your data files in using the upload button in the Files pane
+
+R Studio on Your Computer
+1. Create a folder on your computer for the analysis
+2. Place your data files in that folder
+3. Use the menu item File \textgreater{} New Project\ldots{} to start the project
+4. On the window that appears select ``Existing Directory''
+5. On the next screen, press the ``Browse'' button and find/select the folder with your data
+6. Press the Create Project Button
+
+Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.
+
+\textbf{Class note: You dont' need to do either of these approach. You will just ``Start'' each assignment in the class workspace on R Studio Cloud".}
+
+\hypertarget{raw-data}{%
+\section{Raw data}\label{raw-data}}
+
+We begin by examining the data as originally entered into a spreadsheet. In Figure \ref{fig:rawdataitems} you see a screen shot of the intial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_score_items/images/screenshot_raw_data} \caption{Raw data for item scoring}\label{fig:rawdataitems}
+\end{figure}
+
+\hypertarget{loading-raw-data}{%
+\section{Loading raw data}\label{loading-raw-data}}
+
+Create an RStudio project for this activity
+Create a new script in your project and save it wite
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(janitor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'janitor'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     chisq.test, fisher.test
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my_missing_value_codes <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"-999"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{)}
+
+\NormalTok{raw_data <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_item_scoring.csv"}\NormalTok{,}
+                     \DataTypeTok{na =}\NormalTok{ my_missing_value_codes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   id = col_double(),
+##   age = col_double(),
+##   sex = col_character(),
+##   SE1 = col_double(),
+##   SE2 = col_double(),
+##   SE3 = col_double(),
+##   SE4 = col_double(),
+##   SE5 = col_double(),
+##   SE6 = col_double(),
+##   SE7 = col_double(),
+##   SE8 = col_double(),
+##   SE9 = col_double(),
+##   SE10 = col_double()
+## )
+\end{verbatim}
+
+\hypertarget{initial-inspection}{%
+\section{Initial inspection}\label{initial-inspection}}
+
+We use glimipse to do an initial inspection of the column names in this data set. All of the column name conform to \href{https://style.tidyverse.org}{tidyverse style guidelines} so we do not need to run the clean\_name() function from the janitor package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 13
+## $ id   <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12...
+## $ age  <dbl> 23, 22, 18, 23, 22, 17, 23, 22, 17, 2...
+## $ sex  <chr> "male", "female", "male", "female", "...
+## $ SE1  <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, N...
+## $ SE2  <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, 2, N...
+## $ SE3  <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, ...
+## $ SE4  <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, ...
+## $ SE5  <dbl> 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4,...
+## $ SE6  <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4...
+## $ SE7  <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3, 1, ...
+## $ SE8  <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+## $ SE9  <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5...
+## $ SE10 <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA,...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{view}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+See Figure \ref{fig:narawdataitems}
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_score_items/images/screenshot_raw_data_na} \caption{Missing values now NA}\label{fig:narawdataitems}
+\end{figure}
+
+\hypertarget{handling-categorical-variables}{%
+\section{Handling categorical variables}\label{handling-categorical-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Turn all columns that are of type character into factors}
+\NormalTok{raw_data <-}\StringTok{ }\NormalTok{raw_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
+                \DataTypeTok{.fns =}\NormalTok{ as.factor))}
+\end{Highlighting}
+\end{Shaded}
+
+We can see there was only one column that changes, but if there had been many columns that were characters they all would have changed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 13
+## $ id   <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12...
+## $ age  <dbl> 23, 22, 18, 23, 22, 17, 23, 22, 17, 2...
+## $ sex  <fct> male, female, male, female, male, fem...
+## $ SE1  <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, N...
+## $ SE2  <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, 2, N...
+## $ SE3  <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, ...
+## $ SE4  <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, ...
+## $ SE5  <dbl> 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4,...
+## $ SE6  <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4...
+## $ SE7  <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3, 1, ...
+## $ SE8  <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+## $ SE9  <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5...
+## $ SE10 <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA,...
+\end{verbatim}
+
+It's often helpful to has id as a factor rather than a number so we add and extra command that changes this value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{raw_data <-raw_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\end{Highlighting}
+\end{Shaded}
+
+Now it looks like our data is ready for the creation of scale scores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 13
+## $ id   <fct> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12...
+## $ age  <dbl> 23, 22, 18, 23, 22, 17, 23, 22, 17, 2...
+## $ sex  <fct> male, female, male, female, male, fem...
+## $ SE1  <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, N...
+## $ SE2  <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, 2, N...
+## $ SE3  <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, ...
+## $ SE4  <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, ...
+## $ SE5  <dbl> 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4,...
+## $ SE6  <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4...
+## $ SE7  <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3, 1, ...
+## $ SE8  <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+## $ SE9  <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5...
+## $ SE10 <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA,...
+\end{verbatim}
+
+\hypertarget{seeing-your-data}{%
+\section{Seeing your data}\label{seeing-your-data}}
+
+See the first six rows of the data with the \emph{head} command below. If you wanted to see all of the data you would use View(raw\_data). The NA values in the output indicate missing values (NA = Not Available).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 13
+##   id      age sex     SE1   SE2   SE3   SE4   SE5   SE6
+##   <fct> <dbl> <fct> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 1        23 male      3     2     4     3     4     3
+## 2 2        22 fema~     4     3     4     4     4     5
+## 3 3        18 male      4     3     4     4     4     4
+## 4 4        23 fema~     3     2     3     3     4     3
+## 5 5        22 male      3     2     4     4     4     3
+## 6 6        17 fema~     3     3     4     4    NA     3
+## # ... with 4 more variables: SE7 <dbl>, SE8 <dbl>,
+## #   SE9 <dbl>, SE10 <dbl>
+\end{verbatim}
+
+\hypertarget{dealing-with-reverse-key-items}{%
+\section{Dealing with reverse key items}\label{dealing-with-reverse-key-items}}
+
+Our first step is dealing with reverse key items. The way you deal with these items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
+
+\hypertarget{scoring-items-where-the-ratings-scale-starts-with-1}{%
+\subsection{Scoring items where the ratings scale starts with 1}\label{scoring-items-where-the-ratings-scale-starts-with-1}}
+
+We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the \emph{mutate} command from the \emph{dplyr} package.
+
+In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with reponse options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{raw_data <-raw_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{SE7c =} \DecValTok{6} \OperatorTok{-}\StringTok{ }\NormalTok{SE7)}
+\end{Highlighting}
+\end{Shaded}
+
+The command above creates a new column in raw\_data called SE7c that has the reverse-keyed values for SE7 in it. You can see the new SE7c column using command below that displays the first six rows of the data. The SE7c column is at the far right of the data displayed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 14
+## $ id   <fct> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12...
+## $ age  <dbl> 23, 22, 18, 23, 22, 17, 23, 22, 17, 2...
+## $ sex  <fct> male, female, male, female, male, fem...
+## $ SE1  <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, N...
+## $ SE2  <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, 2, N...
+## $ SE3  <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, ...
+## $ SE4  <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, ...
+## $ SE5  <dbl> 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4,...
+## $ SE6  <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4...
+## $ SE7  <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3, 1, ...
+## $ SE8  <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, ...
+## $ SE9  <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5...
+## $ SE10 <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA,...
+## $ SE7c <dbl> 5, 5, 5, NA, 5, 5, 4, 5, 4, 4, 3, 5, ...
+\end{verbatim}
+
+We have reverse keyed one item. So now when we create our scale we will use item SE7c (the c stands for correctly coded) instead of the original item SE7. That is, we will use items SE1, SE2, SE3, SE4, SE5, SE6, \textbf{SE7c}, SE8, SE9, and SE10 to form the scale.
+
+\textbf{Note for a box} multiple items what it looks like
+
+\textbf{Note FOR A BOX }. If you had used response options numbered 0 to 4 for each item you would use the command below instead. Note that we use 4 in the command this time instead of a value one higher.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{raw_data <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(raw_data, }\DataTypeTok{SE7c =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{SE7) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{creating-the-scale-score}{%
+\section{Creating the scale score}\label{creating-the-scale-score}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{raw_data <-}\StringTok{ }\NormalTok{raw_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{self_esteem =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{c}\NormalTok{(SE1, SE2, SE3, SE4, SE5, SE6, SE7c, SE8, SE9, SE10),}
+                            \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+When you see ungroup() in ths context you can think of it as ``turn off rowwise''.
+
+We can see our data now has the self esteem column:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(raw_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 15
+## $ id          <fct> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,...
+## $ age         <dbl> 23, 22, 18, 23, 22, 17, 23, 22...
+## $ sex         <fct> male, female, male, female, ma...
+## $ SE1         <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, ...
+## $ SE2         <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, ...
+## $ SE3         <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3,...
+## $ SE4         <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, ...
+## $ SE5         <dbl> 4, 4, 4, 4, 4, NA, NA, 4, 4, 4...
+## $ SE6         <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, ...
+## $ SE7         <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2,...
+## $ SE8         <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ SE9         <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4...
+## $ SE10        <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5,...
+## $ SE7c        <dbl> 5, 5, 5, NA, 5, 5, 4, 5, 4, 4,...
+## $ self_esteem <dbl> 3.556, 4.250, 4.100, 3.222, 3....
+\end{verbatim}
+
+(Alternative code: removing ITEM 7 and using begings with: show full example)
+Think about this when creating names for your column
+
+\hypertarget{creatinig-analytic-data-from-raw-data}{%
+\section{Creatinig analytic data from raw data}\label{creatinig-analytic-data-from-raw-data}}
+
+Select only the columns you will use in your analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{raw_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(id, age, sex, self_esteem)}
+\end{Highlighting}
+\end{Shaded}
+
+We can see our new data set has only these columns of interest:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 4
+## $ id          <fct> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,...
+## $ age         <dbl> 23, 22, 18, 23, 22, 17, 23, 22...
+## $ sex         <fct> male, female, male, female, ma...
+## $ self_esteem <dbl> 3.556, 4.250, 4.100, 3.222, 3....
+\end{verbatim}
+
+\hypertarget{wait-i-need-alpha}{%
+\section{Wait: I need alpha!}\label{wait-i-need-alpha}}
+
+We return to the raw\_data file that has the original item data to obtain Cronbach's alpha which is labeled ``raw alpha'' in the output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{self_esteem_item_analysis <-}\StringTok{ }\NormalTok{raw_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(SE1, SE2, SE3, SE4, SE5, SE6, SE7c, SE8, SE9, SE10) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{psych}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{()}
+
+\KeywordTok{print}\NormalTok{(self_esteem_item_analysis}\OperatorTok{$}\NormalTok{total)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  raw_alpha std.alpha G6(smc) average_r   S/N    ase
+##     0.8278    0.8333  0.8276    0.3333 4.999 0.0143
+##   mean     sd median_r
+##  3.656 0.3392   0.3277
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# To see the full item analysis use:}
+\CommentTok{# print(self_esteem_item_analysis)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{wait-i-need-item-correlations-and-descriptive-statistics}{%
+\section{Wait: I need item correlations and descriptive statistics}\label{wait-i-need-item-correlations-and-descriptive-statistics}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SE_items <-}\StringTok{ }\NormalTok{raw_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"SE"}\NormalTok{, }\DataTypeTok{ignore.case =} \OtherTok{FALSE}\NormalTok{))}
+
+\NormalTok{psych}\OperatorTok{::}\KeywordTok{describe}\NormalTok{(SE_items)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      vars   n mean   sd median
+## SE1     1 276 3.39 0.54      3
+## SE2     2 272 2.35 0.48      2
+## SE3     3 269 3.96 0.37      4
+## SE4     4 285 3.54 0.50      4
+## SE5     5 265 3.78 0.47      4
+## SE6     6 275 3.34 0.51      3
+## SE7     7 273 1.51 0.61      1
+## SE8     8 272 2.84 0.37      3
+## SE9     9 265 4.29 0.70      4
+## SE10   10 276 4.57 0.61      5
+## SE7c   11 273 4.49 0.61      5
+\end{verbatim}
+
+When you run the cor command you have to indicate how the it will handle missing the data. The options are below. You can learn more about what each one of these options means by typing: \textbf{?cor} into the Console, this will bring up the help page for the cor command.
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Missing data options for cor\tabularnewline
+\midrule
+\endhead
+everything\tabularnewline
+all.obs\tabularnewline
+complete.obs\tabularnewline
+na.or.complete\tabularnewline
+pairwise.complete.obs\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{SE_items }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{cor}\NormalTok{(}\DataTypeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{round}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        SE1   SE2   SE3   SE4   SE5   SE6   SE7   SE8
+## SE1   1.00  0.31  0.20  0.34  0.34  0.33 -0.32  0.28
+## SE2   0.31  1.00  0.24  0.22  0.31  0.32 -0.29  0.29
+## SE3   0.20  0.24  1.00  0.28  0.30  0.23 -0.43  0.38
+## SE4   0.34  0.22  0.28  1.00  0.29  0.34 -0.37  0.32
+## SE5   0.34  0.31  0.30  0.29  1.00  0.39 -0.41  0.41
+## SE6   0.33  0.32  0.23  0.34  0.39  1.00 -0.32  0.24
+## SE7  -0.32 -0.29 -0.43 -0.37 -0.41 -0.32  1.00 -0.44
+## SE8   0.28  0.29  0.38  0.32  0.41  0.24 -0.44  1.00
+## SE9   0.38  0.36  0.35  0.32  0.43  0.34 -0.42  0.51
+## SE10  0.31  0.34  0.28  0.19  0.40  0.25 -0.39  0.35
+## SE7c  0.32  0.29  0.43  0.37  0.41  0.32 -1.00  0.44
+##        SE9  SE10  SE7c
+## SE1   0.38  0.31  0.32
+## SE2   0.36  0.34  0.29
+## SE3   0.35  0.28  0.43
+## SE4   0.32  0.19  0.37
+## SE5   0.43  0.40  0.41
+## SE6   0.34  0.25  0.32
+## SE7  -0.42 -0.39 -1.00
+## SE8   0.51  0.35  0.44
+## SE9   1.00  0.36  0.42
+## SE10  0.36  1.00  0.39
+## SE7c  0.42  0.39  1.00
+\end{verbatim}
+
+\hypertarget{getting-data-into-r-studio}{%
+\chapter{Getting data into R Studio}\label{getting-data-into-r-studio}}
+
+SOMETHING ABOUT USING HELP IN TIDYVERSE CHAPTER BEFORE THIS ONE
+
+A large segment of the R community as moved toward a standardized way of naming your columns as desribed in the \href{https://style.tidyverse.org}{tidyverse style guide}. Likewise, in order to use the tidyverse packages effectively it helps to have \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{tidy data}. In animal or human participant research, however, it can be
+
+\hypertarget{creating-data-files}{%
+\section{Creating data files}\label{creating-data-files}}
+
+Moving from raw data to analytic data
+The following steps - and more if you have repeated measures data
+
+\hypertarget{column-name-conventions}{%
+\subsection{Column name conventions}\label{column-name-conventions}}
+
+\hypertarget{categorical-columns}{%
+\subsection{Categorical columns}\label{categorical-columns}}
+
+\hypertarget{missing-data-representation}{%
+\subsection{Missing data representation}\label{missing-data-representation}}
+
+Before you start entering data, stop and consider how you want to represent missing data. You may want a single missing data code for all data (e.g., -999) or you might want to have a variety of different missing data codes.
+
+As you do so, be sure to distinguish between codes for missing data and codes for particpants responses such as ``Not applicable''. Missing data is data that is missing - which is very different that a question being not applicable for a person. This distinction is particularly important if you start to use strategies for estimating the values for missing data (see McKnight et al., 2007). Consider the case of a particpant presented with two questions. The first question asks if they have children and the second question asks the age of their first born child. Imagine the participant indicates they have no children on the first question and then on the second question indicates ``No applicable'' when asked about the age of their first born child. It would not make sense to treat this ``Not applicable'' as a missing value and try to estimate it with missing data strategies. Consequently, when you enter your data (and conduct your analyses) be sure to distinguish missing data from not applicable and similar responses.
+
+\hypertarget{making-a-data-codebook}{%
+\subsection{Making a data codebook}\label{making-a-data-codebook}}
+
+Data codebooks are useful because they document the nature of the data in your data file. For example, you might have a column named ``ac1'' that contains the responses to a Likert-type question. The data codebook could clarify that ``ac1'' refers an affective commitment item and provide the text of the item. Likewise, sometimes people use value to represent categorical responses in data sets (but try to avoid this practice). In older data it's not uncommon to use 1 to represent male and 2 to represent female (or the other way around). A data codebook clarifies which sex you mean by 1 and which sex you mean by 2. Though as noted previously, you're better off entering ``male'' and ``female'' directly into your data file rather than using numerical proxies like 1 and 2.
+
+A data code book is often a spreadsheet that where the rows in the data code book
+
+reverse coded
+
+Figure showing data and data codebook.
+
+Figure \ref{fig:bfidata}
+Figure \ref{fig:bficodebook}
+
+There are a many ways to create data codeboos
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_load_data/images/screenshot_bfi_data} \caption{Illustrative Data}\label{fig:bfidata}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_load_data/images/screenshot_bfi_codebook} \caption{Illustrative Codebook}\label{fig:bficodebook}
+\end{figure}
+
+\hypertarget{loading-files}{%
+\section{Loading files}\label{loading-files}}
+
+\hypertarget{loading-csv-files}{%
+\subsection{Loading CSV files}\label{loading-csv-files}}
+
+\url{https://readr.tidyverse.org}
+
+\hypertarget{loading-spss-files}{%
+\subsection{Loading SPSS files}\label{loading-spss-files}}
+
+\url{https://haven.tidyverse.org}
+
+\hypertarget{cleaning-column-names}{%
+\section{Cleaning column names}\label{cleaning-column-names}}
+
+clean\_names()
+remove\_empty()
+\url{http://sfirke.github.io/janitor/articles/janitor.html}
+
+\hypertarget{numerical-variables}{%
+\section{Numerical variables}\label{numerical-variables}}
+
+\hypertarget{creating-scales-scores}{%
+\subsection{Creating scales scores}\label{creating-scales-scores}}
+
+A brief explanation of commands:
+
+You can read the ``\%\textgreater\%'' pipe command as ``as then'' - it is a way of linking one command to the next within one line.
+
+mean() provides the average the values it is sent. The na.rm = TRUE argument needs explaining though. na stand for ``not available''. rm stands for ``remove''. na.rm = TRUE tells the computer to remove missing values prior to calculating the mean.
+Always use mean to create scale scores.
+
+mutate() creates a new column based on directions in the brackets. Here mutate is creating a new affective\_commitment column that this the average (for each person/row) the
+
+\begin{rmdcaution}
+\begin{rmdcaution}
+
+Use mean() to create scale scores. Do not add the items and divide by the number of items - or you will likely not take missing values into accout appropriately. If there is any missing data this process will result in incorrect scale scores for anyone with missing data.
+
+\end{rmdcaution}
+\end{rmdcaution}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{attitude }\OperatorTok{%>%}\StringTok{ }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{affective_commitment =} \KeywordTok{mean}\NormalTok{(rating, complaints, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\NormalTok{attitude }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(rating, complaints, learning) }\OperatorTok{%>%}\StringTok{ }\NormalTok{psych}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{categorical-varibles}{%
+\section{Categorical varibles}\label{categorical-varibles}}
+
+\hypertarget{identifying-categorical-varibles}{%
+\subsection{Identifying categorical varibles}\label{identifying-categorical-varibles}}
+
+\hypertarget{levels-of-categorical-varibles}{%
+\subsection{Levels of categorical varibles}\label{levels-of-categorical-varibles}}
+
+\hypertarget{analytic-data}{%
+\section{Analytic data}\label{analytic-data}}
+
+\hypertarget{columns-just-what-you-need}{%
+\subsection{Columns: Just what you need}\label{columns-just-what-you-need}}
+
+\url{https://dplyr.tidyverse.org}
+
+\hypertarget{rows-just-what-you-need}{%
+\subsection{Rows: Just what you need}\label{rows-just-what-you-need}}
+
+\hypertarget{initial-demographics}{%
+\section{Initial demographics}\label{initial-demographics}}
+
+summary() review for nonenses
+
+Getting demographics
+tabyl()
+\%\textgreater\% tabyl(meat\_colour)
+tabyl(meat\_colour, plant)
 
 \cleardoublepage
 

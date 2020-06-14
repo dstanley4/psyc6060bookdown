@@ -2,15 +2,15 @@
 
 # Introduction
 
-Welcome! In this guide, we will use the statistical software R with the interface provided by R Studio. You can access R Studio using the website [R Studio Cloud](http://www.rstudio.cloud).
+Welcome! In this guide, we will teach you about statistics using the statistical software R with the interface provided by R Studio.  The purpose of this chapter to is provide you with a set of activities that get you up-and-running in R quickly so get a sense of how it works. In later chatpers we will revisit these same topics in more detail. 
 
 ## A focus on workflow
 
-An important part of this guide is training you in a workflow that will avoid a large number of problems than can occur when using R.
+An important part of this guide is training you in a workflow that will avoid many problems than can occur when using R.
 
 ## R works with plug-ins
 
-R is a statistical language with many plug-ins called **packages** that you will use for analyses. You can think of R as being like your smartphone. To do things with your phone you need **an App** (R equivalent: a *package*). Before you can use the App you need to **download**  it (R equivalent: *install.packages*) from the **App Store** (R equivalent: *CRAN*). To use the app you need **Open** it  (R equivalent:  *library command*). These similarities are illustrated in Table \@ref(tab:appstore) below.
+R is a statistical language with many plug-ins called **packages** that you will use for analyses. You can think of R as being like your smartphone. To do things with your phone you need **an App** (R equivalent: a *package*) from the App Store (R equivalent: *CRAN*). Apps need to be **downloaded** (R equivalent: *install.packages*) before you can use them. To use the app you need **Open** it  (R equivalent:  *library command*). These similarities are illustrated in Table \@ref(tab:appstore) below.
 
 
 ```{r appstore, echo = FALSE}
@@ -24,7 +24,7 @@ knitr::kable(
 
 ## Create an account at R Studio Cloud
 
-R Studio Cloud accounts are free and required for this guide. Please go to the website and set up a new account.
+[R Studio Cloud](http://www.rstudio.cloud) accounts are free and required for this guide. Please go to the website and set up a new account. 
 
 
 ## Join the class workspace
@@ -33,44 +33,46 @@ To do the assignment required for this class you need to join the class workspac
 
 1. Log into R Studio Cloud (if you haven't already done so).
 
-2. Go to your university email account and find the message were you will emailed the link to the class R Studio workspace. The email will have the subject "R Studio Workspace Invitation".
+2. Go to your university email account and find the message with the subject "R Studio Workspace Invitation". In this message there is a link to the class R Studio Cloud workspace. 
 
-3. Click on that the link in the email or paste it into your web browser. You should see a screen like the one below in Figure \@ref(fig:join). Click on the Join button.
+3. Click on the workspace link in the email or paste it into your web browser. You should see a screen like the one below in Figure \@ref(fig:join). Click on the Join button.
 
 ```{r join, fig.cap="Screen shot of workspace join message.", echo = FALSE, out.width="70%"}
-knitr::include_graphics("ch_first_time/images/screenshot_join.png")
+knitr::include_graphics("ch_introduction/images/screenshot_join.png")
 ```
 
 4. Then you should see the welcome message illustrated in Figure \@ref(fig:welcome). Above this message is the Projects menu option. Click on the word Project.
 
 ```{r welcome, fig.cap="Screen shot of welcome messag", echo = FALSE, out.width="70%"}
-knitr::include_graphics("ch_first_time/images/screenshot_welcome.png")
+knitr::include_graphics("ch_introduction/images/screenshot_welcome.png")
 ```
 
 5. You should now see the First Project displayed as in \@ref(fig:assignment). Click the Start button. You will then move to a view of R Studio.
 
 ```{r assignment, fig.cap="Screen shot of starting first assignment", echo = FALSE, out.width="70%"}
-knitr::include_graphics("ch_first_time/images/screenshot_assignment.png")
+knitr::include_graphics("ch_introduction/images/screenshot_assignment.png")
 ```
+
+5. In R Studio it is essential you use projects to keep your files organized and in the same spot. For this course, when your start an assignment on R Studio Cloud and the project will already have been made for you. Later you will learn to make your own R Studio Projects.
 
 
 ## Exploring the R Studio Interface
 
-Once you have created a Project, you are presented with the R Studio interface. There are a few key elements to the user interface that are illustrated in Figure \@ref(fig:interface) In the lower right of the screen you can see the a panel with several tabs (i.e., Files, Plots, Packages, etc) that I will refer to as the Files pane. You look in this pane to see all the files associated with your project. On the left side of the screen is the Console which is an interactive pane where you type and obtain results in real time. I've placed two large grey blocks on the screen with text to more clearly identify the Console and Files panes. Not shown in this figure is the Script panel where we can store our commands for later reuse.
+Once you have opened (or created) a Project folder, you are presented with the R Studio interface. There are a few key elements to the user interface that are illustrated in Figure \@ref(fig:interface) In the lower right of the screen you can see the a panel with several tabs (i.e., Files, Plots, Packages, etc) that I will refer to as the Files pane. You look in this pane to see all the files associated with your project. On the left side of the screen is the Console which is an interactive pane where you type and obtain results in real time. I've placed two large grey blocks on the screen with text to more clearly identify the Console and Files panes. Not shown in this figure is the Script panel where we can store our commands for later reuse.
 
 ```{r interface, fig.cap = "R Studio interface", echo = FALSE, out.width="70%"}
-knitr::include_graphics("ch_first_time/images/screenshot_interface.png")
+knitr::include_graphics("ch_introduction/images/screenshot_interface.png")
 ```
 
 ### Console panel
 
-When you first start R, the Console panel is on the left side of the screen. Sometimes there are two panels on the left side; if so, the Console panel is the lower one. We can use R a bit like a calculator. Try typing the following into the Console window: 8 + 6 + 7 + 5. You can see that R immediately produced the result on a line preceded by two hashtags (##).
+When you first start R, the Console panel is on the left side of the screen. Sometimes there are two panels on the left side (one above the other); if so, the Console panel is the lower one (and labeled accordingly). We can use R a bit like a calculator. Try typing the following into the Console window: 8 + 6 + 7 + 5. You can see that R immediately produced the result on a line preceded by two hashtags (##).
 
 ```{r}
 8 + 6 + 7 + 5
 ```
 
-We can also put the result into a variable to store it. We  can then print that variable at a later time to obtain our result. Specifically, we will add the numbers 3, 0, and 9 and store the result in the variable my_sum. The text "<-" indicate you are putting what is on the right side of the arrow into the variable on the left side of the arrow. You can think of a variable as cup into which you can put different things. In this case, imagine a real-world cup with  my_sum written on the outside and inside the cup we have stored the sum of 3, 0, and 9 (i.e., 12).
+We can also put the result into a variable to store it. Later we can use the print command to see that result. In the example below we add the numbers 3, 0, and 9 and store the result in the variable my_sum. The text "<-" indicate you are putting what is on the right side of the arrow into the variable on the left side of the arrow. You can think of a variable as cup into which you can put different things. In this case, imagine a real-world cup with my_sum written on the outside and inside the cup we have stored the sum of 3, 0, and 9 (i.e., 12).
 
 ```{r}
 my_sum <- 3 + 0 + 9
@@ -83,7 +85,8 @@ We can inspect the contents of the my_sum variable (i.e., my_sum cup) with the p
 print(my_sum)
 ```
 
-Variable are very useful in R. We will use them to store entire data sets as well as the results of analyses.
+Variable are very useful in R. We will use them to store a single number, an entire data set, 
+the results of an analysis, or anything else.
 
 ### Script Panel
 
@@ -91,7 +94,7 @@ Although you can use R with just with the Console panel, it's a better idea to u
 
 Scripts are valuable because if you need to run an analysis a second time you don't have to type the command in a second time. You can run the script again and again without retyping your commands. More importantly though, the script provides a record of your analyses. 
 
-A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper.
+A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper. In a later chapter, it's generally poor practice to manipulate or modify or analyze your data using any menu driven software because this approach does not provide a record of what you have done.
 
 ## Writing your first script
 
@@ -99,16 +102,16 @@ A common problem in science is that after an article is published, the authors c
 
 Create a script in your R Studio project by using the menu File > New File > R Script.
 
-Save the file with an appropriate name using the File menu. A common, and good, convention for naming is to start all script names with the word "script" and separate words with an underscore. You might save this file with the name "script_my_first_one.R". The advantage of this approach is that when you look at your list of files alphabetically, all the script files will cluster together. Likewise, it's a good idea to save all data files such that they begin with "data_". This way all the data files will cluster together in your directory view as well. You can see there is already a data file with this convention called "data_okcupid.csv". 
+Save the file with an appropriate name using the File menu. The file will be saved in your Project folder. A common, and good, convention for naming is to start all script names with the word "script" and separate words with an underscore. You might save this first script file with the name "script_my_first_one.R". The advantage of beginning all script files with the word script is that when you look at your list of files alphabetically, all the script files will cluster together. Likewise, it's a good idea to save all data files such that they begin with "data_". This way all the data files will cluster together in your directory view as well. You can see there is already a data file with this convention called "data_okcupid.csv". 
 
-You can see as discussed previously, we are trying to instill and effect workflow as you learn R. Using a good naming convention (that is consistent with what others use) is part of the workflow. When you write your scripts it's a good idea to follow the [tidyverse style guide](https://style.tidyverse.org).
+You can see as discussed previously, we are trying to instill an effective workflow as you learn R. Using a good naming convention (that is consistent with what others use) is part of the workflow. When you write your scripts it's a good idea to follow the [tidyverse style guide](https://style.tidyverse.org) for script names, variable name, file names, and more.
 
 
 ### Add a comment to your script
 
 In the previous section you created your first script. We begin by adding a comment to the script. A comment is something that will be read by humans rather than the computer/R. You make comments for other people that will read your code and need to understand what you have done. However, realize that you are also making comments for your future self as illustrated in an [XKCD cartoon](https://xkcd.com/1421/). 
 
-A good way to start every script is with a comment that includes the date of your script (or even better when you installed your packages, more on this later). Like smartphone apps, packages are updated regularly. Sometimes when a package is updated it will no longer work with an older script. Fortunately, the [checkpoint package](https://cran.r-project.org/web/packages/checkpoint/index.html)\index{R Studio Cloud} lets users role back the clock and use older versions of packages. Adding a comment with the date of your script will help future users (including you) to use your script with the same version of the package you used when you wrote the script. Dating your script is an important part of an effective and reproducible workflow.
+A good way to start every script is with a comment that includes the date of your script (or even better when you installed your packages, more on this later). Like smartphone apps, packages are updated regularly. Sometimes after a package is updated it will no longer work with an older script. Fortunately, the [checkpoint package](https://cran.r-project.org/web/packages/checkpoint/index.html)\index{R Studio Cloud} lets users role back the clock and use older versions of packages. Adding a comment with the date of your script will help future users (including you) to use your script with the same version of the package used when you wrote the script. Dating your script is an important part of an effective and reproducible workflow.
 
 
 ```{r}
@@ -116,21 +119,23 @@ A good way to start every script is with a comment that includes the date of you
 # By: John Smith
 ```
 
-Note that in the above comment I used the internationally accepted date format\index{date format} order Year/Month/Day. Some people use the mnemonic *Your My Dream* to remember this order. Wikipedia provides more information about the [International Date Format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+Note that in the above comment I used the internationally accepted date format\index{date format} order Year/Month/Day. Some people use the mnemonic *Your My Dream* to remember this order. Wikipedia provides more information about the [Internationally Date Format ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
 
 
 Moving forward, I suggest you use comments to make your own personal notes in your own code as your write it.
 
 ### Background about the tidyverse
 
-One modern approach is using R is the tidyverse\index{tidyverse}. The tidyverse represents not a single package but rather a collection of packages the work together to give R a modern workflow. These packages do many things to help the data analyst (graphing, rearranging data etc.). That is, each of these packages adds new commands to R. A current list of the packages in the tidyverse is below:
+There are generally two broad ways of using R, the older way and the newer way. Using R the older way is refered to as using base R. A more modern approach to using R is the tidyverse\index{tidyverse}. The tidyverse represents a collection of packages the work together to give R a modern workflow. These packages do many things to help the data analyst (loading data, rearranging data, graphing, etc.). We will use the tidyverse approach to R in this guide.
+
+A noted the tidyverse is a collection of packges. Each package adds new commands to R. The number of packges and correspondingly the number of new commands added to R by the tidyverse is large. Below is a list of the tidyverse packages:
 
 ```{r, echo = FALSE}
 tidyverse::tidyverse_packages(include_self = TRUE)
 ```
 
 
-Before you can use a package it needs to be installed -- this is the same as downloading an app from the App Store. You can install a packages with the install.packages command. Previously, you needed run an install.package command for every package in the tidyverse. That is previously you would need to run the command below for every package in the tidyverse (dplyr, ggplot, etc.):
+Before you can use a package it needs to be installed -- this is the same as downloading an app from the App Store. Normally, you can install a **single** packages with the install.packages command. Previously, you needed run an install.package command for every package in the tidyverse as illustrated below (though we no longer use this approach).
 
 ```{r, eval=FALSE}
 # The old way of installing the tidyverse packages
@@ -142,8 +147,7 @@ install.packages("ggplot", dep = TRUE)
 # etc
 ```
 
-Fortunately, the packages have been officially grouped together into the tidyverse. Consequently, a single install can now install the entire set of tidyverse packages. Note that you should not put install.package command into your script - this can cause problems.
-Type the install.package command below into Console window. 
+Fortunately, the tidyverse packages can now by installed with a single install.packages command. Specifically, the install.packages command below will install all of the packages listed above.
 
 **Class note: For the "First Lab", I've done the install.packages for you. So there is no need to use the install.packages command below in this first lab.**
 
@@ -153,8 +157,7 @@ install.packages("tidyverse", dep = TRUE)
 
 ### Add library(tidyverse) to your script 
 
-The tidyverse is now installed, so we need to activate it. 
-We do that with the library command. Put the library line below at the top of your script file (below your comment):
+The tidyverse is now installed, so we need to activate it. We do that with the library command. Put the library line below at the top of your script file (below your comment):
 
 ```{r librarytidyverse, eval = FALSE}
 # Code written on: YYYY/MM/DD 
@@ -164,63 +167,31 @@ library(tidyverse)
 
 ### Activate tidyverse auto-complete for your script
 
-Select the library(tidyverse) text with your mouse/track-pad and highlight it. Then click the Run button in the upper right of the Script panel. Doing this "runs" the selected text. After you click the Run button you should see text like the following the Console panel:
+Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this "runs" the selected text. After you click the Run button you should see text like the following the Console panel:
 
 ```{r librarytidyverse, echo = FALSE, eval = TRUE}
 ```
 
 When you use library(tidyverse) to activate the tidyverse you activate the most commonly used subset of the tidyverse packages. In the output you see checkmarks beside names of the tidyverse packages you have activated. 
 
-By activating these packages you have added new commands to R that you will use. Sometimes these packages replace older versions of commands in R. The "Conflicts" section in the output shows you where you the packages you have activated have replaced older R commands with newer R commands. You can activate the other tidyverse package by running a library command for each package -- if needed. No need to do so now.
+By activating these packages you have added new commands to R that you will use. Sometimes these packages replace older versions of commands in R. The "Conflicts" section in the output shows you where  the packages you  activated  replaced older R commands with newer R commands. You can activate the other tidyverse package by running a library command for each package -- if needed. No need to do so now.
 
 Most importantly, running the library(tidyverse) prior to entering the rest of your script allows R Studio to present auto-complete options when typing your text. Remember to start each script with the library(tidyverse) command and then Run it so you get the autocomplete options for the rest of the commands your enter.
 
 ## Loading your data
 
-### Use read_csv (not read.csv) to open the file. 
+### Use read_csv (not read.csv) to open files. 
 
-If you inspect the Files pane on the right of the screen you see the  **data_okcupid.csv** data file in our project directory. We will load this data with the commands below. If you followed the steps above, you should have auto-complete for the tidyverse commands you type for now in -- in the current R session. Enter the command below into your script. Then highlight the text and click on the "Run" button.
+If you inspect the Files pane on the right of the screen you see the  **data_okcupid.csv** data file in our project directory. We will load this data with the commands below. If you followed the steps above, you should have auto-complete for the tidyverse commands you type for now in -- in the current R session. Enter the command below into your script. As your start to type read_csv you will likely be presented with an auto-complete option. You can use the arrow keys to move up and down the list of options to select the one you want - then press tab to select it.
+
+Once your command looks like the one below select the text and click on the "Run" button.
 
 ```{r firstread}
 okcupid_profiles <- read_csv(file = "data_okcupid.csv")
 
 ```
 
-The output indicates that you have loaded a data file. The sex column is of type col_character which indicates it contains text/letters. The height column is of type col_double which merely indicates that it is a column of numbers represented with [high precision](https://en.wikipedia.org/wiki/Double-precision_floating-point_format).
-
-
-## Getting your data ready for analysis
-
-### Tell R which variables are categorical (i.e., a factor)
-
-A key part of using R is telling it which variables are categorical variables. If you don't do this some analysis won't run. Worse - other analyses will run but provide the wrong numbers.
-
-We can use the commands below to look at the nature of each of the variable we have loaded.:
-
-```{r}
-glimpse(okcupid_profiles)
-```
-
-We know that sex is a categorical variable (i.e., a factor). Yet when we look at the output above from glimpse it is of type chr - which means character. We need to make the data into a factor so that R knows it is a categorical variable. We so with the command below. Add this command to your script below read_csv. Then select and Run the command. Don't worry if you don't understand this command just now - we'll learn more about it in the future.
-
-```{r}
-okcupid_profiles <- mutate(okcupid_profiles, sex = as.factor(sex))
-
-```
-
-In later exercise we will deal with situation where numbers like 1 and 2 are used to designate sex instead of a label like male or female. When numbers are used in factors we have to provide labels for them (i.e., value labels in SPSS terms) using the level command; but that's a future exercise.
-
-Use the glimpse command again to see how the nature sex has changed. Notice now that we have made sex a factor, there is fct beside it in the glimpse output.
-
-```{r}
-glimpse(okcupid_profiles)
-```
-
-If you read other sources about R you may encounter the str function. This is similar to the glimpse function (part of the tidyverse) but provides somewhat different output since it is part of the older way of doing R (base R). When you see str in other peoples scripts recognize it's very similar to glimpse. You should use glimpse moving forward.
-
-```{r}
-str(okcupid_profiles)
-```
+The output indicates that you have loaded a data file and the type of data in each column. The sex column is of type col_character which indicates it contains text/letters. Most of the columns are of the type character. The age and height columns contain numbers are correspondingly indicated to be the type col_double. The label col_double indicates that a column of numbers represented in R with [high precision](https://en.wikipedia.org/wiki/Double-precision_floating-point_format). There are other ways of representing numbers in R but this is the type we will see/use most often.
 
 ## Checking out your data
 
@@ -228,15 +199,15 @@ There many ways of viewing the actual data you loaded. A few of these are illust
 
 ### view(): See a spreadsheet view of your data
 
-You can inspect your data in a spreadsheet view by using the view command. Do NOT add this command to your script file. Just type it in the Console. Adding it to the script can cause problems. 
+You can inspect your data in a spreadsheet view by using the view command. Do NOT add this command to your script file -- EVER. Adding it to the script can cause substantial problems. Type this command in the Console.
 
 ```{r, eval = FALSE}
 view(okcupid_profiles)
 ```
 
 
-### print(): Check out the data
-You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print command below in the Console:
+### print(): See you data in the Console
+You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print() command below in the Console:
 
 ```{r}
 print(okcupid_profiles)
@@ -244,57 +215,71 @@ print(okcupid_profiles)
 
 ### head(): Check out the first few rows of data 
 
-You can inspect the first few rows of your data with the head() command. Try the head() command below in the Console:
+You can inspect the first few rows of your data with the head() command. Try the command below in the Console:
 
 ```{r}
 head(okcupid_profiles)
 ```
 
+You can be even more specific and indicate you only want the first three row of your data with the head() command.  Try the command below in the Console:
+
+```{r}
+head(okcupid_profiles, 3)
+```
+
 ### tail(): Check out the last few rows of data 
 
-You can inspect the last few rows of your data with the tail() command. Try the tail() command below in the Console:
+You can inspect the last few rows of your data with the tail() command. Try the command below in the Console:
 
 ```{r}
 tail(okcupid_profiles)
 ```
 
+You can be even more specific and indicate you only want the last three row of your data with the tail() command.  Try the command below in the Console:
+
+```{r}
+tail(okcupid_profiles, 3)
+```
+
 ### summary(): Quick summaries
 
-You can a short summary of your data with the summary command. Note that we will use the summary command in many places in the guide. The output of the summary command changes depending on what you give it - that is put inside the brackets.  You can give the summary command data, the results of a regression analysis, etc.
+You can a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.
 
-Add the summary command below to your script file, highlight it, and click Run.
+Try the command below in the Console. You will see that summary() give the mean and median for each of the numeric variables (age and height).
 
 ```{r}
 summary(okcupid_profiles)
 ```
 
+
 ## Run *vs.* Source with Echo *vs.* Source 
 
-There are different ways of running commands in R. You can enter them into the Console as we have done already. Or you can put them in your script. There are three ways of running commands in your script. 
+There are different ways of running commands in R.  So far you have used two of these. You can enter them into the Console as we have done already. Or you can put them in your script select the text and clickk the Run button. There are four ways of running commands in your script. 
 
 You can:
 
-1. Select the command(s) and press the Run button.
-2. Source Without Echo
-3. Source With Echo
+1. Console: Enter commands directly
+2. Script: Select the command(s) and press the Run button.
+2. Script: Source (Without Echo)
+3. Script: Source With Echo
 
-Two of these approaches involve using the Source button, see Figure \@ref(fig:sourcebutton). You bring up the options for the Source button, illustrated in this figure, by clicking on the small arrow to the right of the word Source.
+Two of these approaches involve using the Source button, see Figure \@ref(fig:sourcebutton). You bring up the options for the Source button, illustrated in this figure, by clicking on the small arrow to the right of the word Source. 
 
 ```{r sourcebutton, fig.cap = "Source button options", echo=FALSE, out.width="35%"}
-knitr::include_graphics("ch_first_time/images/screenshot_source.png")
+knitr::include_graphics("ch_introduction/images/screenshot_source.png")
 ```
 
 ### Run select text
 
-The Run button will run the text you highlight and present the relevant output. You have used this command a fair amount above.
+The Run button will run the text you highlight and present the relevant output. You have used this command a fair amount already.
 
-I strongly suggest you ONLY use the Run button when testing a command to make sure it works or to debug a script.
+I strongly suggest you ONLY use the Run button when testing a command to make sure it works or to debug a script. Or to run library(tidyverse) as you start working on your script so that you get the autocomplete options.
 
 In general, you should always try to execute your R Scripts using the Source with Echo command (preceded by a Restart, see below). This ensures your script will work beginning to end for you in the future and for others that attempt to use it. Using the Run button in an ad lib basis can create output that is not reproducible.
 
 ### Source (without Echo)
 
-Source (without Echo) is not designed for the typical analysis workflow. It is mostly helpful when you run simulations. You can see below that when you run Source (without Echo) much of the output you would wish to read is suppressed. In general, avoid this option. If you use it, you often won't see what you want to see in the output.
+Source (without Echo) is not designed for the typical analysis workflow. It is mostly helpful when you run simulations. When you run Source (without Echo) much of the output you would wish to read is suppressed. In general, avoid this option. If you use it, you often won't see what you want to see in the output.
 
 ### Source with Echo
 
@@ -304,65 +289,50 @@ Prior to running Source with Echo (or just Source), it's always a good idea to r
 
 So you should do the following EVERY time you run your script.
 
-1.  Menu item: **Session > Restart R**
-2.  Click the down arrow beside Source, and click on Source With Echo
+1.  Use the menu item: **Session > Restart R**
+2.  Click the down arrow beside the Source button, and click on Source With Echo
 
-This will clear potentially problematic previous stats, run the script commands, and display the output in the Console.  Moving forward we will use this approach for running scripts.
+This will clear potentially problematic previous stats, run the script commands, and display the output in the Console.  Moving forward we will use this approach for running scripts. Once you have used Source wiht Echo once, you can just click the Source button and it will use Source with Echo automatically (without the need to use the pull down option for selecting Source with Echo).
 
 
-## Using R the old way or the new way (the tidyverse way) 
-
-Below are a few key differences to keep in mind as you move forward with R. We will be using the tidyverse approach to using R but on the internet you will often see sample code that use the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv) instead of another (e.g., read.csv).
-
-#### Tibbles vs Data Frames: Why use read_csv instead of read.csv
-
-When you load data into R it is typically represented in one of two formats inside the computer. Depending on the command you use to load data, it can be represented in different ways inside R.
-
-The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame. 
-
-#### read.csv puts data into a data frame
-```{r}
-my_dataframe <- read.csv(file = "data_okcupid.csv")
-
+```{block2, type='rmdcaution'}
+Using Restart R before you run a script, or R code in general, is a critical workflow tip.
 ```
 
-Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid_profiles data.  
+## Trying Source with Echo
 
-Here I actually pasted just the first 10 rows of the output - because all the rows are printed in your console.
-```{r, eval = FALSE}
-print(my_dataframe)
+Put the head(), tail(), and summary() command we used previously into your script. Then save your script using using the File > Save menu. You script should appear as below.
+
+```{r firstsource, eval=FALSE}
+# Code written on: YYYY/MM/DD 
+# By: John Smith
+library(tidyverse)
+
+okcupid_profiles <- read_csv(file = "data_okcupid.csv")
+
+head(okcupid_profiles)
+
+tail(okcupid_profiles)
+
+summary(okcupid_profiles)
 ```
 
-```{r, eval = TRUE, echo = FALSE}
-print(my_dataframe[1:10, ])
+Now do the following:
+
+1.  Use the menu item: **Session > Restart R**
+2.  Click the down arrow beside the Source button, and click on Source With Echo
+
+You should see the output below:
+
+```{r firstsource, eval=TRUE}
 ```
 
-#### read_csv puts data into a tibble
+Congratulations you just ran your first script!
 
-Notice that when you print a tibble it DOES show you the number of rows and columns.  As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
-
-
-```{r}
-my_tibble <- read_csv(file = "data_okcupid.csv")
-
-```
-```{r}
-print(my_tibble)
-```
-
-#### Deeper differences between data frames and tibbles
-
-In short you should always use tibbles (i.e., use read_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
-
-#### Converting a tibble into a data frame
-
-```{r}
-new_dataframe <- as.data.frame(my_tibble)
-```
 
 ## A Few Key Points About R
 
-Sometimes you will need to send a command in R additional information. Moreover, that information often needs to be grouped together into a vector or a list before you can send it to a command. We'll learn more about doing so in the future but here is a quick over view of vector and lists to provide a foundation for future chapters.
+Sometimes you will need to send a command additional information. Moreover, that information often needs to be grouped together into a vector or a list before you can send it to the command. We'll learn more about doing so in the future but here is a quick over view of vectors and lists to provide a foundation for future chapters.
 
 #### Vector of numbers
 
@@ -430,17 +400,3 @@ print(my_list$office_number)
 ## That's it!
 
 Congratulations! You've reached the end of the introduction to R. Take a break, have a cookie, and read some more about R tomorrow!
-
-
-```{block2, type='rmdcaution'}
-
-Here are some warnings.
-
-1. warning. asdfaslkj asdfl sadf. asdf.jasdf asd. asdfas.jdas.
-
-2. warning again
-
-3. last warning.
-
-```
-
