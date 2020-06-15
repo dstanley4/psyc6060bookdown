@@ -3,57 +3,6 @@
 ```{r, include=FALSE}
 library(tidyverse)
 ```
-A common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers. Long story short -- keep track of the data and scripts you use for your paper.
-
-
-## Using R the old way or the new way (the tidyverse way) 
-
-
-Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these appoaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
-
-#### Tibbles vs Data Frames: Why use read_csv instead of read.csv
-
-When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame.
-
-#### read.csv puts data into a data frame
-```{r}
-my_dataframe <- read.csv(file = "data_okcupid.csv")
-
-```
-
-Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid_profiles data. It also list ALL of your data rather than just the first few rows. As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console (too much to show here).
-```{r, eval = FALSE}
-print(my_dataframe)
-```
-
-```{r, eval = TRUE, echo = FALSE}
-print(my_dataframe[1:10, ])
-```
-
-#### read_csv puts data into a tibble
-
-When you use the read_csv command the data you load is stored in the computer as a tibble. The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns.  As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
-
-
-```{r}
-my_tibble <- read_csv(file = "data_okcupid.csv")
-
-```
-```{r}
-print(my_tibble)
-```
-
-#### Deeper differences between data frames and tibbles
-
-In short you should always use tibbles (i.e., use read_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
-
-#### Converting a tibble into a data frame
-
-This command creates a new data set called new_data_frame (use any name you want) from the tibble data.
-
-```{r}
-new_dataframe <- as.data.frame(my_tibble)
-```
 
 ## Required Packages
 
@@ -72,6 +21,11 @@ This chapter requires the following packages are installed:
 
 
 ## Context
+
+[@baker2016]
+[@cos2015]
+
+A suprisingly common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers [@miyakawa2020]. Long story short -- keep track of the data and scripts you use for your paper.
 
 There is a growing interest in ensuring your analyses are reproducible. That is, that a third part could generate the numbers in the research article from materials provided by the researcher. Although this sounds like a low bar for rigor, it is in fact a surprisingly challening bar. Indeed, the editor of [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). reported that a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers.
 
@@ -437,5 +391,58 @@ y %>% pivot_wider(names_from = stat,
 ```{r, include=FALSE, eval = FALSE}
 y %>% pivot_wider(names_from = stat,
                   values_from = value)
+```
+
+
+
+
+
+## Using R the old way or the new way (the tidyverse way) 
+
+
+Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these appoaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
+
+#### Tibbles vs Data Frames: Why use read_csv instead of read.csv
+
+When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame.
+
+#### read.csv puts data into a data frame
+```{r}
+my_dataframe <- read.csv(file = "data_okcupid.csv")
+
+```
+
+Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid_profiles data. It also list ALL of your data rather than just the first few rows. As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console (too much to show here).
+```{r, eval = FALSE}
+print(my_dataframe)
+```
+
+```{r, eval = TRUE, echo = FALSE}
+print(my_dataframe[1:10, ])
+```
+
+#### read_csv puts data into a tibble
+
+When you use the read_csv command the data you load is stored in the computer as a tibble. The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns.  As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
+
+
+```{r}
+my_tibble <- read_csv(file = "data_okcupid.csv")
+
+```
+```{r}
+print(my_tibble)
+```
+
+#### Deeper differences between data frames and tibbles
+
+In short you should always use tibbles (i.e., use read_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
+
+#### Converting a tibble into a data frame
+
+This command creates a new data set called new_data_frame (use any name you want) from the tibble data.
+
+```{r}
+new_dataframe <- as.data.frame(my_tibble)
 ```
 
