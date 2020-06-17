@@ -70,9 +70,9 @@ When conducting many types of analyses it is necessary to have data in a format 
 1. Each variable forms a column.
 2. Each observation forms a row.
 
-The tidydata format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human particpant data and how they can be done keeping the  tidydata requirement in mind. It's not essential that data be entered in a tidydata format but it is essential that you enter data in way that makes it easy to later convert data to a tidydata format.
+The tidydata format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human particpant data and how they can be done keeping the  tidydata requirement in mind. It's not essential that data be entered in a tidydata format but it is essential that you enter data in way that makes it easy to later convert data to a tidydata format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable.
 
-When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable. This approach is relatively straight forward with between participant data. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for exercise. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidydata specification. Thus, single occasion between subject data like this conforms to the tidydata specification.
+**Between participant data**. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for six human particpants running 5 kilometers  The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidydata specification. Thus, single occasion between subject data like this conforms to the tidydata specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidydata format.
 
 
 ```{r betweenex, echo = FALSE}
@@ -84,8 +84,7 @@ knitr::kable(
 ```
 
 
-Within particpant data can be substantially more complicated than between participant data. Consider the a similar example with five km times over .... see Table \@ref(tab:withinex).
-more aobut the example
+**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within particpant data for six human particpants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contians the times for particpants in May. The july column contains the times for participants in July, These three columns are not in a tidydata format. 
 
 
 ```{r withinex, echo = FALSE}
@@ -95,7 +94,23 @@ knitr::kable(
   booktabs = TRUE
 )
 ```
-```{r, echo=FALSE, eval = FALSE}
+
+
+The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the variable occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (time). Thus, a major problem with entering data in this format is that there are hidden varibles in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
+
+
+| Disadvantages  | Advantages | 
+| ---------------|------------|
+| Predictor variable (occassion) is hidden and spread over multiple columns | Easy to enter this way | 
+| Unclear that each month is a level of occasion | |
+| Dependent variable (time) is not  indicated    | |
+| Unclear that time is the measurement in each month column | |
+
+
+Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidydata format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidydata format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex).
+
+
+```{r, include=FALSE}
 data_within_tidy <- data_within %>% 
   pivot_longer(cols = march:july,
                names_to = "measurement_month",
@@ -103,36 +118,34 @@ data_within_tidy <- data_within %>%
 
 ```
 
-sadf
-asdfasd
-fdsa
-asdf
 
+```{r withintidyex, echo = FALSE}
+knitr::kable(
+  head(data_within_tidy,18), caption = 'A tidydata version of the within participant',
+  booktabs = TRUE
+)
+```
 
-asdfsa
+This arrangement of the data, ...sadfasdf
 
+asdfas
 
-
-| Problems with within participant data in Table \@ref(tab:withinex) |
-| -------------------------------------------------------------|
-| Actually a mix of between (e.g., sex) and within data (times)|
-| Multiple 5km times per row - not a single 5km time per row  |
-| Unclear what the measured variable is in the march, may, july columns |
-| Levels of the variable occasion (march, etc) are represented in headers instead of rows |
-| more |
+asdfa
 
 
 
+| Disadvantages  | Advantages | 
+| ---------------|------------|
+| sex designation is repeated over multiple rows for each participant | Predictor varible occasion is now a column  |
+|  | Clear that each month is a level of the variable occasion |
+|  | Dependent varible time is clearly identified |
+|  | Dependent varible time is now in a single column |
+|  | A codebook is not required to know about the occasion and time variables |
 
-Figure XX shows the first few rows of a between participant data set 
-to use an approach based on the principle of one participant per row in a data file. 
-That is data files are structured so that 
+
 
 
 ### Naming conventions for files, columns, and variables
-
-
-
 
 
 ### Data collection and entry
