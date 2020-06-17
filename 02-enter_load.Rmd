@@ -22,42 +22,133 @@ This chapter requires the following packages are installed:
 
 ## Context
 
-[@baker2016]
-[@cos2015]
+Due to a number of high profile failure to replicate study results [@cos2015] it's become increasely clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
 
-A suprisingly common problem in science is that after an article is published, the authors can't reproduce the numbers in the paper. You can read more about the important problem in a surprising article in the journal [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). In this article an editor reports how a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers [@miyakawa2020]. Long story short -- keep track of the data and scripts you use for your paper.
-
-There is a growing interest in ensuring your analyses are reproducible. That is, that a third part could generate the numbers in the research article from materials provided by the researcher. Although this sounds like a low bar for rigor, it is in fact a surprisingly challening bar. Indeed, the editor of [Molecular Brain](https://molecularbrain.biomedcentral.com/articles/10.1186/s13041-020-0552-2). reported that a request for the data underlying articles resulted in the wrong data for 40 out of 41 papers.
-
-Consequently, a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
-). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new journal rating system even emerged call the [TOP Factor](https://topfactor.org
+Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
+). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org
 ).
 
-The idea is not that open science articles are not more trust worthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. This process avoids the problem reported at Molecular Brain (doubless is common to many journals) - because the data and scripts need to have been uploaded at the time of publication. The TOP open science guidelines have made an impact and newer journals such as Meta Psycchology have fully embraced open science. Figure \@ref(fig:metapsychology) shows the header from an [article](https://open.lnu.se/index.php/metapsychology/article/view/1630/2266) in Meta Psychology that clearly delineates the open science attributes of the article. Take note that the header even specifies who checked that the analyses in the article were reproducible.
+The idea is not that open science articles are  more trustworthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. The problems reported at Molecular Brain (doubtless is common to many journals) are avoided with open science - because the data and scripts needed to reproduce the numbers in the articles are uploaded prior to publication. 
+
+The TOP open science guidelines have made an impact and some newer journals, such as Meta Psycchology, have fully embraced open science. Figure \@ref(fig:metapsychology) shows the header from an [article](https://open.lnu.se/index.php/metapsychology/article/view/1630/2266) in Meta Psychology that clearly delineates the open science attributes of the article. Take note that the header even specifies who checked that the analyses in the article were reproducible from the scripts and data made publicly available by the authors.
 
 ```{r metapsychology, echo=FALSE, out.width="85%", fig.cap="Open science in an article header"}
 knitr::include_graphics("ch_score_items/images/screenshot_metapsychology.png")
 ```
 
+In Canada, the majority of university research is funded by the Federal Government's Tri-Agency (i.e., [NSERC](https://www.nserc-crsng.gc.ca), [SSHRC](https://www.sshrc-crsh.gc.ca), [CIHR](https://cihr-irsc.gc.ca)). The agency has a new draft [Data Management Policy](https://www.ic.gc.ca/eic/site/063.nsf/eng/h_83F7624E.html) in which they state that "**The agencies believe that research data collected with the use of public funds belong, to the fullest extent possible, in the public domain and available for reuse by others.**" This perspective of the funding agency differs from that of some researchers who incorrectly believe "they own their data". In Canada at least, the government makes it clear that tax payers fund the research so the data is public property. Additionally the Tri-Agency Data Management policy clearly indicates the responsibilities of funded researchers:
 
-## A mindset for moving foward
+"Responsibilities of researchers include:
+
+- incorporating data management best practices into their research;
+- developing data management plans to guide the responsible collection, formatting, preservation and sharing of their data throughout the entire lifecycle of a research project and beyond;
+- following the requirements of applicable institutional and/or funding agency policies and professional or disciplinary standards;
+- acknowledging and citing datasets that contribute to their research; and
+- staying abreast of standards and expectations of their disciplinary community."
+
+As a result of this perspective on data, it's important that you think about structuring your data for reuse by yourself and others before you collect it. Toward this end, you will see documentation of your data file via data codebooks is critical.
+
+
+## Begin with the end in mind
+
+In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of analytic data via preprocessing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data the data the has been structured and processed so that it is ready for analyis. This pre-processing could include such things as identifying categorical variables to the computer, combining multiple items measuring the same thing into scale scale scores, among other tasks.
+
+It's critial that you don't think of analysis of your results as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
+
 
 ```{r pipeline, echo = FALSE, out.width="85%", fig.cap = "Data science pipeline by Roger Peng."}
-knitr::include_graphics("ch_score_items/images/pipeline.png")
+knitr::include_graphics("ch_enter_load/images/pipeline.png")
 ```
 
-In this chapter we walk you though the process of going from raw data to analytic data by creating processing script.
 
-see Figure \@ref(fig:pipeline)
+It's difficult to being with the end in mind when you haven't read later chapters. So here we will be provide you with some general thoughts around different approaches to structuring data files and the naming conventions you use when creating those data files.
 
-# Begin with the end in mind
+### Tidydata: Comparing wide vs long formats
+
+When conducting many types of analyses it is necessary to have data in a format called tidydata [@tidy-data]. [Tidydata](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) as defined by Hadley involves (among other requirements) that: 
+
+1. Each variable forms a column.
+2. Each observation forms a row.
+
+The tidydata format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human particpant data and how they can be done keeping the  tidydata requirement in mind. It's not essential that data be entered in a tidydata format but it is essential that you enter data in way that makes it easy to later convert data to a tidydata format.
+
+When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable. This approach is relatively straight forward with between participant data. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for exercise. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidydata specification. Thus, single occasion between subject data like this conforms to the tidydata specification.
+
+
+```{r betweenex, echo = FALSE}
+data_between <- read_csv("data_ex_between.csv", col_type = cols())
+knitr::kable(
+  head(data_between), caption = 'Between participant data entered one row per participant',
+  booktabs = TRUE
+)
+```
+
+
+Within particpant data can be substantially more complicated than between participant data. Consider the a similar example with five km times over .... see Table \@ref(tab:withinex).
+more aobut the example
+
+
+```{r withinex, echo = FALSE}
+data_within <- read_csv("data_ex_within.csv", col_types = cols())
+knitr::kable(
+  head(data_within), caption = 'Within participant data entered one row per participant',
+  booktabs = TRUE
+)
+```
+```{r, echo=FALSE, eval = FALSE}
+data_within_tidy <- data_within %>% 
+  pivot_longer(cols = march:july,
+               names_to = "measurement_month",
+               values_to =  "five_km_time")
+
+```
+
+sadf
+asdfasd
+fdsa
+asdf
+
+
+asdfsa
+
+
+
+| Problems with within participant data in Table \@ref(tab:withinex) |
+| -------------------------------------------------------------|
+| Actually a mix of between (e.g., sex) and within data (times)|
+| Multiple 5km times per row - not a single 5km time per row  |
+| Unclear what the measured variable is in the march, may, july columns |
+| Levels of the variable occasion (march, etc) are represented in headers instead of rows |
+| more |
+
+
+
+
+Figure XX shows the first few rows of a between participant data set 
+to use an approach based on the principle of one participant per row in a data file. 
+That is data files are structured so that 
+
+
+### Naming conventions for files, columns, and variables
+
+
+
+
+
+### Data collection and entry
+
+Surveys - use meaningful names
+- use meaningful names for subsets
+
+
+
+
+### Data entry
+
 
 -sample size analysis
 -unfalsible article by lakens
 
-
-
-TIDYVERSE NAMING CONVENTION ARE IMPORTANT BECAUSE IN SOME CASES THEY ARE REQUIRED for the SCRIPTS to work. If you haven't following the naming conventions you may be making your life quite difficult.
 
 
 # Collecting your data
@@ -88,6 +179,7 @@ For example, a good data code book is essential if you have wide with repeated m
 
 
 
+TIDYVERSE NAMING CONVENTION ARE IMPORTANT BECAUSE IN SOME CASES THEY ARE REQUIRED for the SCRIPTS to work. If you haven't following the naming conventions you may be making your life quite difficult.
 
 # Entering your data
 
