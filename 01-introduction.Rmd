@@ -2,6 +2,8 @@
 
 # Introduction
 
+## SHIFT RETURN SOMEWHERE
+
 Welcome! In this guide, we will teach you about statistics using the statistical software R with the interface provided by R Studio.  The purpose of this chapter to is provide you with a set of activities that get you up-and-running in R quickly so get a sense of how it works. In later chatpers we will revisit these same topics in more detail. 
 
 ## A focus on workflow
@@ -14,6 +16,7 @@ R is a statistical language with many plug-ins called **packages** that you will
 
 
 ```{r appstore, echo = FALSE}
+options(width = 60)
 app_store <- readr::read_csv("data_app_store_analogy.csv", col_type = readr::cols())
 knitr::kable(
   head(app_store), caption = 'R packages are similar to smart phone apps (Kim, 2018)',
@@ -169,7 +172,8 @@ library(tidyverse)
 
 Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this "runs" the selected text. After you click the Run button you should see text like the following the Console panel:
 
-```{r librarytidyverse, echo = FALSE, eval = TRUE}
+```{r, echo = FALSE, eval = TRUE}
+library(tidyverse)
 ```
 
 When you use library(tidyverse) to activate the tidyverse you activate the most commonly used subset of the tidyverse packages. In the output you see checkmarks beside names of the tidyverse packages you have activated. 
@@ -355,10 +359,12 @@ print(even_numbers[2])
 
 #### Vector of characters
 
-We can also create vectors using only characters:
+We can also create vectors using only characters. Note that I use **SHIFT RETURN** after each comma to move to the next line.
 
 ```{r}
-favourite_things <- c("copper kettles", "woolen mittens", "brown paper packages")
+favourite_things <- c("copper kettles",
+                      "woolen mittens",
+                      "brown paper packages")
 ```
 
 ```{r}
@@ -374,7 +380,7 @@ print(favourite_things[2])
 
 ### Lists
 
-Lists are similar to vectors in that you can create them and access items by their numeric position. Vectors must be all characters or all numbers. Lists can be a mix of characters or numbers. Most importantly items in lists can be accessed by their label.
+Lists are similar to vectors in that you can create them and access items by their numeric position. Vectors must be all characters or all numbers. Lists can be a mix of characters or numbers. Most importantly items in lists can be accessed by their label. Note that I use **SHIFT RETURN** after each comma to move to the next line in the code below.
 
 ```{r}
 my_list <- list(last_name = "Smith",

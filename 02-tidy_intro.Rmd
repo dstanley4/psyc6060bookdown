@@ -1,0 +1,152 @@
+# Making your data ready for analysis
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+## Required Packages
+
+This chapter requires the following packages are installed:
+
+| Required Packages |
+|-------------------|
+|tidyverse          |
+
+
+## Objective
+
+
+
+## R Studio Cloud vs R Studio Desktop
+
+If you're using R Studio Cloud you can skip this step and move to the next section.
+If you're using R Studio Desktop
+
+## Shift Return
+
+In many of the commands you see moving forward, the commands will be split over multiple lines. To do so you do not press RETURN/ENTER on your keyboard. Rather, to spread a command over multiple lines you should press SHIFT-RETURN or SHIFT-ENTER As well, be sure you do so at the same spot illustrated in the code below. The appropriate place to press SHIFT-RETURN is after a comma or after %>% as you will see.
+
+```{r}
+
+```
+
+## Chaining multiple commands together
+
+In the R code that follows you will see extensive use of the symbol %>%. The %>% is technically called a pipe which is a way of sending the output from one object to another object. In practical terms when you type or read %>% you should think in your head "and then". You can join many commands together using "and then". 
+
+Previously we  loaded the okcupid data:
+
+```{r, eval = FALSE}
+okcupid_profiles <- read_csv(file = "data_okcupid.csv")
+
+```
+
+```{r, include = FALSE}
+okcupid_profiles <- read_csv(file = "data_okcupid.csv")
+
+```
+
+Following this we used glimpse to see the structure of the data:
+
+```{r}
+glimpse(okcupid_profiles)
+```
+
+Another way we could have accomplished the glimpse is by using the %>% operator.
+
+```{r}
+okcupid_profiles %>% glimpse()
+```
+
+This code reads roughly as take the okcupid profiles data "and then" run the glimpse command on it. You can imagine the %>% symbol takes the data on the left and puts it into the brackets after the glimpse command on the right.
+
+## read_csv
+
+
+## summarise()
+## summarise_if, summarise_all
+
+## summarise() using group_by()
+
+## mutate()
+## rowwise
+## mutate_if, mutate_all
+
+
+## select()
+
+## filter()
+
+## arrange()
+
+
+# background for this:
+
+```{r}
+library(tidyverse)
+raw_data <- read_csv("bfi_test2.csv") 
+analytic_data <- raw_data
+
+head(analytic_data)
+
+# recode
+analytic_data <- analytic_data %>% 
+  mutate(7 - across(.cols = contains("_rev16")) ) %>% 
+  rename_with(.fn = str_remove,
+              .cols = contains("_rev16"),
+              pattern = "_rev16")
+
+head(analytic_data)
+
+
+# analytic_data %>% rename_with(.fn = rmsx,
+#                               .cols = contains("_rev16"))
+
+head(analytic_data)
+
+# scale score agreeableness times 1
+analytic_data <- analytic_data %>% 
+  rowwise() %>% 
+  mutate(agree_time1= mean( c_across(starts_with("t1_agree")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("t1_agree"))
+
+# scale score agreeableness times 2
+analytic_data <- analytic_data %>% 
+  rowwise() %>% 
+  mutate(agree_time2 = mean( c_across(starts_with("t2_agree")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("t2_agree"))
+
+# scale score consc times 1
+analytic_data <- analytic_data %>% 
+  rowwise() %>% 
+  mutate(consc_time1 = mean( c_across(starts_with("t1_con")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("t1_con"))
+
+# scale score consc times 2
+analytic_data <- analytic_data %>% 
+  rowwise() %>% 
+  mutate(consc_time2 = mean( c_across(starts_with("t2_con")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("t2_con"))
+
+
+# show scale scores
+print(analytic_data)
+
+
+# make tidy data
+adata <- analytic_data %>%
+  pivot_longer(agree_time1:consc_time2,
+               names_to = c(".value", "time"),
+               names_pattern = "(.*)_(time.)"
+  )
+
+```
+

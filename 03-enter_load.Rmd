@@ -22,7 +22,7 @@ This chapter requires the following packages are installed:
 
 ## Context
 
-Due to a number of high profile failure to replicate study results [@cos2015] it's become increasely clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
+Due to a number of high profile failure to replicate study results [@cos2015] it's become increasingly clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
 
 Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
 ). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org
@@ -32,11 +32,11 @@ The idea is not that open science articles are  more trustworthy that other type
 
 The TOP open science guidelines have made an impact and some newer journals, such as Meta Psycchology, have fully embraced open science. Figure \@ref(fig:metapsychology) shows the header from an [article](https://open.lnu.se/index.php/metapsychology/article/view/1630/2266) in Meta Psychology that clearly delineates the open science attributes of the article. Take note that the header even specifies who checked that the analyses in the article were reproducible from the scripts and data made publicly available by the authors.
 
-```{r metapsychology, echo=FALSE, out.width="85%", fig.cap="Open science in an article header"}
+```{r metapsychology, echo=FALSE, out.width="100%", fig.cap="Open science in an article header"}
 knitr::include_graphics("ch_score_items/images/screenshot_metapsychology.png")
 ```
 
-In Canada, the majority of university research is funded by the Federal Government's Tri-Agency (i.e., [NSERC](https://www.nserc-crsng.gc.ca), [SSHRC](https://www.sshrc-crsh.gc.ca), [CIHR](https://cihr-irsc.gc.ca)). The agency has a new draft [Data Management Policy](https://www.ic.gc.ca/eic/site/063.nsf/eng/h_83F7624E.html) in which they state that "**The agencies believe that research data collected with the use of public funds belong, to the fullest extent possible, in the public domain and available for reuse by others.**" This perspective of the funding agency differs from that of some researchers who incorrectly believe "they own their data". In Canada at least, the government makes it clear that tax payers fund the research so the data is public property. Additionally the Tri-Agency Data Management policy clearly indicates the responsibilities of funded researchers:
+In Canada, the majority of university research is funded by the Federal Government's Tri-Agency (i.e., NSERC, SSHRC, CIHR). The agency has a new draft [Data Management Policy](https://www.ic.gc.ca/eic/site/063.nsf/eng/h_83F7624E.html) in which they state that "*The agencies believe that research data collected with the use of public funds belong, to the fullest extent possible, in the public domain and available for reuse by others.*" This perspective of the funding agency differs from that of some researchers who incorrectly believe "they own their data". In Canada at least, the government makes it clear that tax payers fund the research so the data is public property. Additionally the Tri-Agency Data Management policy clearly indicates the responsibilities of funded researchers:
 
 "Responsibilities of researchers include:
 
@@ -63,112 +63,110 @@ knitr::include_graphics("ch_enter_load/images/pipeline.png")
 
 It's difficult to being with the end in mind when you haven't read later chapters. So here we will be provide you with some general thoughts around different approaches to structuring data files and the naming conventions you use when creating those data files.
 
-### Tidydata: Comparing wide vs long formats
+### tidy data: Comparing wide vs long formats
 
-When conducting many types of analyses it is necessary to have data in a format called tidydata [@tidy-data]. [Tidydata](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) as defined by Hadley involves (among other requirements) that: 
+When conducting many types of analyses it is necessary to have data in a format called tidy data [@tidy-data]. [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) as defined by Hadley involves (among other requirements) that: 
 
 1. Each variable forms a column.
 2. Each observation forms a row.
 
-The tidydata format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human particpant data and how they can be done keeping the  tidydata requirement in mind. It's not essential that data be entered in a tidydata format but it is essential that you enter data in way that makes it easy to later convert data to a tidydata format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable.
+The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human particpant data and how they can be done keeping the  tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in way that makes it easy to later convert data to a tidy data format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable.
 
-**Between participant data**. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for six human particpants running 5 kilometers  The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidydata specification. Thus, single occasion between subject data like this conforms to the tidydata specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidydata format.
+**Between participant data**. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for six human particpants running 5 kilometers  The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
 
 
 ```{r betweenex, echo = FALSE}
 data_between <- read_csv("data_ex_between.csv", col_type = cols())
 knitr::kable(
   head(data_between), caption = 'Between participant data entered one row per participant',
-  booktabs = TRUE
+  booktabs = TRUE,
+  linesep = c("","","","","","","\\addlinespace")
 )
 ```
 
 
-**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within particpant data for six human particpants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidydata specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidydata specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contians the times for particpants in May. The july column contains the times for participants in July, These three columns are not in a tidydata format. 
+**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within particpant data for six human particpants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contians the times for particpants in May. The july column contains the times for participants in July, These three columns are not in a tidy data format. 
 
 
 ```{r withinex, echo = FALSE}
 data_within <- read_csv("data_ex_within.csv", col_types = cols())
 knitr::kable(
   head(data_within), caption = 'Within participant data entered one row per participant',
-  booktabs = TRUE
+  booktabs = TRUE,
+  linesep = c("","","","","","","\\addlinespace")
 )
 ```
-
-
-The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the variable occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (time). Thus, a major problem with entering data in this format is that there are hidden varibles in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
-
-
-| Disadvantages  | Advantages | 
-| ---------------|------------|
-| Predictor variable (occassion) is hidden and spread over multiple columns | Easy to enter this way | 
-| Unclear that each month is a level of occasion | |
-| Dependent variable (time) is not  indicated    | |
-| Unclear that time is the measurement in each month column | |
-
-
-Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidydata format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidydata format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex).
-
 
 ```{r, include=FALSE}
 data_within_tidy <- data_within %>% 
   pivot_longer(cols = march:july,
-               names_to = "measurement_month",
-               values_to =  "five_km_time")
+               names_to = "occasion",
+               values_to =  "elapsedtime")
 
 ```
-
 
 ```{r withintidyex, echo = FALSE}
 knitr::kable(
-  head(data_within_tidy,18), caption = 'A tidydata version of the within participant',
-  booktabs = TRUE
+  head(data_within_tidy,18), caption = 'A tidy data version of the within participant data',
+  booktabs = TRUE,
+  linesep = c("", "","\\addlinespace")
 )
 ```
 
-This arrangement of the data, ...sadfasdf
 
-asdfas
-
-asdfa
+The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the variable occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (time). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
 
 
-
-| Disadvantages  | Advantages | 
+| Disadvantages one row per participant  | Advantages one row per participant | 
 | ---------------|------------|
-| sex designation is repeated over multiple rows for each participant | Predictor varible occasion is now a column  |
-|  | Clear that each month is a level of the variable occasion |
-|  | Dependent varible time is clearly identified |
-|  | Dependent varible time is now in a single column |
-|  | A codebook is not required to know about the occasion and time variables |
+| 1) Predictor variable (*occassion*) is hidden and spread over multiple columns | 1) Easy to enter this way | 
+| 2) Unclear that each month is a level of the predictor variable *occasion* | |
+| 3) Dependent variable (*elapsedtime*) is not  indicated    | |
+| 4) Unclear that *elapsedtime* is the measurement in each month column | |
+
+
+Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidy data format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex). For elapsedtime variable this data is now in the tidy data format. Each row corresponds to a single elapsedtime observed. Each column corresponds to a single variable. Somewhat problematically, however, sex if repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense.
+
+Why did we walk you through this technical treatment of structuring data within the computer at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in the rest of this chapter around the naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \@ref(tab:withinex) to the data in Figure \@ref(tab:withintidyex) by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
+
+
+## Data collection and entry
+
+### Question with numerical answers
+
+### Likert-type items
+
+relate back to select function in previous chapter 
+
+### Multi-item scales
+
+### Questions with categorical answers
+Avoid categorical if not really categorical
+Avoid numerical representation of categorical variables
+
+### Levels of an independent varible 
+
+### Levels of a single within participant variable
+
+### Levels of multiple within participant variables
+relate back to select function in previous chapter 
+
+Do this one first when generating above advice
 
 
 
-
-### Naming conventions for files, columns, and variables
-
-
-### Data collection and entry
 
 Surveys - use meaningful names
 - use meaningful names for subsets
 
-
-
-
-### Data entry
-
-
 -sample size analysis
--unfalsible article by lakens
+-unfeasible article by lakens
 
 
-
-# Collecting your data
 
 - data are collected in different ways
 - data collected by programs in the lab that require 
-- lab measurementson paper and entering later
+- lab measurements paper and entering later
 - paper surveys and entering later
 - website surveys 
 - a mix of all of the above
@@ -180,25 +178,20 @@ talk about wide not showing DV or IV just levels of IV
 
 
 if you're writing a cognitive program or making a survey think about the variable names
-think about how the data is outputed.
+think about how the data is outputted.
 
 
 If you have entirely within person data then tidy is the obvious choice
 If you have entirely between then wide makes sense
 If you have a mix - it's more difficult. Different research area. Think about the problems. 
 
-For example, a good data code book is essential if you have wide with repeated measures varibles because there is no way to tell what the IV or DV is by inspecting the data.
+For example, a good data code book is essential if you have wide with repeated measures variables because there is no way to tell what the IV or DV is by inspecting the data.
 
 
 
 
 TIDYVERSE NAMING CONVENTION ARE IMPORTANT BECAUSE IN SOME CASES THEY ARE REQUIRED for the SCRIPTS to work. If you haven't following the naming conventions you may be making your life quite difficult.
 
-# Entering your data
-
-
-
-# Making analytic data
 
 
 
@@ -209,19 +202,22 @@ Think about
 - representation of categorical variables in the data set
 
 
-
-# Entering data
-
 - computer/web collection
 
 
 
 
 
+## Raw data
+
+We begin by examining the data as originally entered into a spreadsheet. In Figure \@ref(fig:rawdataitems) you see a screen shot of the initial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
 
 
+```{r rawdataitems, echo = FALSE, out.width="85%", fig.cap = "Raw data for item scoring"}
+knitr::include_graphics("ch_score_items/images/screenshot_raw_data.png")
+```
 
-## Begin with a project
+## Loading raw data
 
 I suggest you begin every R Studio task in the following way:
 
@@ -239,21 +235,10 @@ R Studio on Your Computer
 
 Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.
 
-**Class note: You dont' need to do either of these approach. You will just "Start" each assignment in the class workspace on R Studio Cloud".**
+**Class note: You don't' need to do either of these approach. You will just "Start" each assignment in the class workspace on R Studio Cloud".**
 
-## Raw data
-
-We begin by examining the data as originally entered into a spreadsheet. In Figure \@ref(fig:rawdataitems) you see a screen shot of the intial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
-
-
-```{r rawdataitems, echo = FALSE, out.width="85%", fig.cap = "Raw data for item scoring"}
-knitr::include_graphics("ch_score_items/images/screenshot_raw_data.png")
-```
-
-## Loading raw data
-
-Create an  RStudio project for this activity 
-Create a new script in your project and save it wite
+Create an  R Studio project for this activity 
+Create a new script in your project and save it quite
 
 ```{r, results='hide'}
 library(tidyverse)
@@ -266,11 +251,9 @@ raw_data <- read_csv(file = "data_item_scoring.csv",
 ```
 
 
-
-
 ## Initial inspection
 
-We use glimipse to do an initial inspection of the column names in this data set. All of the column name conform to [tidyverse style guidelines](https://style.tidyverse.org) so we do not need to run the clean_name() function from the janitor package
+We use glimpse to do an initial inspection of the column names in this data set. All of the column name conform to [tidyverse style guidelines](https://style.tidyverse.org) so we do not need to run the clean_name() function from the janitor package
 
 
 ```{r}
@@ -320,8 +303,6 @@ glimpse(raw_data)
 ```
 
 
-
-
 ## Seeing your data
 
 See the first six rows of the data with the *head* command below. If you wanted to see all of the data you would use View(raw_data). The NA values in the output indicate missing values (NA = Not Available).
@@ -337,7 +318,7 @@ Our first step is dealing with reverse key items. The way you deal with these it
 ### Scoring items where the ratings scale starts with 1
 We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the *mutate* command from the *dplyr* package.
 
-In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with reponse options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
+In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with response options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
 
 ```{r,echo=TRUE,eval=TRUE}
 raw_data <-raw_data %>%
@@ -359,7 +340,6 @@ We have reverse keyed one item. So now when we create our scale we will use item
 raw_data <- mutate(raw_data, SE7c = 4 - SE7) 
 ```
 
-
 ## Creating the scale score
 
 ```{r}
@@ -370,8 +350,7 @@ raw_data <- raw_data %>%
   ungroup()
 ```
 
-When you see ungroup() in ths context you can think of it as "turn off rowwise".
-
+When you see ungroup() in this context you can think of it as "turn off rowwise".
 
 We can see our data now has the self esteem column:
 
@@ -379,7 +358,7 @@ We can see our data now has the self esteem column:
 glimpse(raw_data)
 ```
 
-(Alternative code: removing ITEM 7 and using begings with: show full example)
+(Alternative code: removing ITEM 7 and using beings with: show full example)
 Think about this when creating names for your column
 
 
@@ -505,7 +484,7 @@ y %>% pivot_wider(names_from = stat,
 ## Using R the old way or the new way (the tidyverse way) 
 
 
-Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these appoaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
+Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these approaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
 
 #### Tibbles vs Data Frames: Why use read_csv instead of read.csv
 
