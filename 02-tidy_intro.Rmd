@@ -21,7 +21,7 @@ The following data files are used in this chapter:
 
 ## Objective
 
-The objective of this chapter is to familiarize you with some key commands in the tidyverse. The commands, as used in the chapter, and used in isolation of each other. In the next chapter we will use the commands in a more contextualized way as we load a data and move it from raw data to data that is ready for analysis (i.e., analytic data).
+The objective of this chapter is to familiarize you with some key commands in the tidyverse. The many commands are used in isolation of each other. In the next chapter we will use the commands in a more coordinated way as we load a data and move it from raw data to data that is ready for analysis (i.e., analytic data). You can start this project by Starting the class assignment on R Studio Cloud that corresponds to the chapter name.
 
 
 ## Using the Console
@@ -41,13 +41,13 @@ library(tidyverse)
 okcupid_profiles <- read_csv("data_okcupid.csv")
 ```
 
-You can see the first few rows of the data set using the print() command:
+You can see the first few rows of the data using the print() command:
 
 ```{r}
 print(okcupid_profiles)
 ```
 
-But it's also helpful just to see a list of the columns in the data set with the glimpse() command:
+But it's also helpful just to see a list of the columns in the data with the glimpse() command:
 
 ```{r}
 glimpse(okcupid_profiles)
@@ -55,14 +55,14 @@ glimpse(okcupid_profiles)
 
 ### select()
 
-The select() command allows you to obtain a subset of the columns in your data. The command below obtains can be used to obtain the age and height columns. You can read the command as: take the okcupid_profiles data and then select the age and height columns. You can see that this prints out the data with just the age and height columns.
+The select() command allows you to obtain a subset of the columns in your data. The commands below can be used to obtain the age and height columns. You can read the command as: take the okcupid_profiles data and then select the age and height columns. You can see that this prints out the data with just the age and height columns.
 
 ```{r}
 okcupid_profiles %>% select(age, height)
 ```
 
 
-Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data set. In the command below we store the resulting data set in a data set called new_data.
+Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data. In the command below we store the resulting data in a new data set called new_data.
 
 ```{r}
 new_data <- okcupid_profiles %>% select(age, height)
@@ -74,7 +74,7 @@ The glimpse() command shows us that only the age and height columns are in new_d
 glimpse(new_data)
 ```
 
-In the above example we indicated the columns we wanted to retain from the okcupid_profiles data in the select() command. However, we can also indicate the columns we want to drop from the data set my using a minus sign (-) in front of the columns we specify in the select() command. 
+In the above example we indicated the columns we wanted to retain from the okcupid_profiles data using the select() command. However, we can also indicate the columns we want to drop from okcupid_profiles using a minus sign (-) in front of the columns we specify in the select() command. 
 
 ```{r}
 new_data <- okcupid_profiles %>% select(-age, -height)
@@ -89,16 +89,16 @@ glimpse(new_data)
 
 ### summarise()
 
-The summarise() command can be used to generate descriptive statistics for a specified column. You can easily calculate column descriptives using the corresponding commands for mean(), sd(), min(), max(), among others. In the example below we calculate the mean for the age column. To move to the next line while typing this command press SHIFT and ENTER (or RETURN) at the same time.
+The summarise() command can be used to generate descriptive statistics for a specified column. You can easily calculate column descriptive statistics using the corresponding commands for mean(), sd(), min(), max(), among others. In the example below we calculate the mean for the age column.
 
-In code below mean(age, na.rm = TRUE) indicates that to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking should we remove missing values when calculating the mean. The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is place into a variable labelled age_mean, though we could have used any label we wanted instead of age_mean. We see that the mean of the age column is, with rounding, `r round(mean(okcupid_profiles$age, na.rm = TRUE),1)`.
+In code below mean(age, na.rm = TRUE) indicates that to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking should we remove missing values when calculating the mean. The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is placed into a variable labelled age_mean, though we could have used any label we wanted instead of age_mean. We see that the mean of the age column is, with rounding, `r round(mean(okcupid_profiles$age, na.rm = TRUE),1)`.
 
 ```{r}
 okcupid_profiles %>% 
   summarise(age_mean = mean(age, na.rm = TRUE))
 ```
 
-More than one calculation can occur in the same summarise() command. You can easily add the calculation for the stanard deviation with the sd() command. 
+More than one calculation can occur in the same summarise() command. You can easily add the calculation for the standared deviation with the sd() command. 
 
 ```{r}
 okcupid_profiles %>% 
@@ -109,15 +109,15 @@ okcupid_profiles %>%
 
 ### filter()
 
-The filter() command allows you to obtain a subset of the rows in your data. In the example below we create a new data sets with just the males from the original data set.
+The filter() command allows you to obtain a subset of the rows in your data. In the example below we create a new data set with just the males from the original data.
 
-Notice the structure of the original data set below in the glimpse() output. There is a column called sex that used m and f to indicate male and female, respectively. Also notice that there are `r dim(okcupid_profiles)[1]` rows in the okcupid_profiles data set.
+Notice the structure of the original data below in the glimpse() output. There is a column called sex that uses m and f to indicate male and female, respectively. Also notice that there are `r dim(okcupid_profiles)[1]` rows in the okcupid_profiles data.
 
 ```{r}
 glimpse(okcupid_profiles)
 ```
 
-We use the the filter command to select a subset of the rows based on the contents of any column. In this case the sex column. Notice the use of the the double equals sign to indicate "equal to". The reason a double equals sign is used here it to distinguish it from the use of the equals in the summarise command above were it was used to indicate "assign to" age_mean after the mean was calculated. Single equals sign indicates "assign to" whereas a double equals sign indicates "is equal to".
+We use the the filter command to select a subset of the rows based on the contents of any column. In this case the sex column. Notice the use of the the double equals sign to indicate "equal to". The reason a double equals sign is used here (instead of a single equals sign) it to distinguish it from the use of the single equals sign in the summarise command above. In the summarise command above, the single equal sign was used to indicate "assign to". That is assign to age_mean the mean after it is calculated calculated. Single equals sign indicates "assign to" whereas a double equals sign indicates "is equal to".
 
 ```{r}
 okcupid_males <- okcupid_profiles %>%
@@ -129,13 +129,13 @@ okcupid_females <- okcupid_profiles %>%
   filter(sex == "f")
 ```
 
-We use glimpse() to inspect this all male data set. Notice that only the letter m is in the sex column. Also notice that there are `r dim(okcupid_males)[1]` rows in the okcupid_males data set; fewer people because only the males are in this data set.
+We use glimpse() to inspect this all male data. Notice that only the letter m is in the sex column. Also notice that there are `r dim(okcupid_males)[1]` rows in the okcupid_males data; fewer people because only the males are in this data.
 
 ```{r}
 glimpse(okcupid_males)
 ```
 
-The filter command can be commbined with the summarise command to get the descriptive statistics for males without the hassle of creating a new data set. This is done using the %>% "and then" operator.
+The filter command can be commbined with the summarise command to get the descriptive statistics for males without the hassle of creating a new data. This is done using the %>% "and then" operator.
 
 ```{r}
 okcupid_profiles %>%
@@ -160,7 +160,7 @@ We see that for the `r dim(okcupid_females)[1]` females the mean age is `r sprin
 
 ### group_by()
 
-The process we used with the filter command would quickly become onerous if we had many subgroups for a column. Consequently, it's often better to use the group() command to calculate descriptives for the levels of a variable. By telling the computer to group_by() sex the summarise command is run separately for every level of sex (i.e., m and f).
+The process we used with the filter command would quickly become onerous if we had many subgroups for a column. Consequently, it's often better to use the group() command to calculate descriptive statistics for the levels (e.g., male/female) of a variable. By telling the computer to group_by() sex the summarise command is run separately for every level of sex (i.e., m and f).
 
 ```{r}
 okcupid_profiles %>%
@@ -183,7 +183,7 @@ The resulting output provide for age the mean and standard deviation for every c
 
 ### mutate()
 
-The mutate() command can be used to calculate a new column in a data set.  In the example below we calculate a new column we call age_centered which is the new version of the age_column where the mean of the column has been removed from every value. Consequently, the mean of the new column, age_centered, is (within computer rounding) zero. This is merely an example of the many different types of calculations can can perform to create a new column using mutate().
+The mutate() command can be used to calculate a new column in a data.  In the example below we calculate a new column called age_centered which is the new version of the age_column where the mean of the column has been removed from every value. This is merely an example of the many different types of calculations can can perform to create a new column using mutate().
 
 ```{r}
 okcupid_profiles <- okcupid_profiles %>%
@@ -198,12 +198,12 @@ glimpse(okcupid_profiles)
 
 ## Advanced Tidyverse Commands
 
-In this advanced selection we will use more complicated code to either select or apply an action to more than one column at a time. We will indicate ths columns we want to select or apply an action to using: starts_with(), ends_with(), contains(), matches(), or where().  The first four of these apply to indicating columns with the contents of column names where as the last one, where(), indicates the column we want base on the column type (numeric, character, factor, etc.). You can learn more about one of these by simply typing into the console a question mark followed by the function name  (e.g., ?where) and then pressing return/enter.
+In this advanced selection we will revisit the commands from the basic tidyverse section but use more complicated code to either select or apply an action to more than one column at a time. We will indicate the columns that we want to select or apply an action to using: starts_with(), ends_with(), contains(), matches(), or where().  The first four of these are used to indicate columns based on column names. In contrast, the last command, where(), i sued to indicate the columns we want base on the column type (numeric, character, factor, etc.). You can learn more about each of these commands by simply typing into the console a question mark followed by the function name  (e.g., ?where) and then pressing return/enter. This will provide the help page for that function in Help tab in the lower right of R Studio. Note that you must have first activiated the tidyverse via library command for the help file to be accessible.
 
 We will review all five commands for indicating the columns we want in the select() selection below. Following that we will, for brevity, typically use only one of the five commands when illustrating how they work with summarise() and mutate().
 
 
-We begin by loading a new data set.
+We begin by loading a new data.
 
 ```{r}
 library(tidyverse)
@@ -211,7 +211,7 @@ data_exp <- read_csv("data_experiment.csv")
 
 ```
 
-The glimpse() command reveals that this is a small data set where every row represents one rat. The sex of the rat is recorded as well as, for each of two time points, a rating of how frequently they vomitted or engaged in aggression.
+The glimpse() command reveals that this is a small data where every row represents one rat. The sex of the rat is recorded as well as, for each of two time points, a rating of vomiting and aggression.
 
 
 ```{r}
@@ -222,9 +222,9 @@ glimpse(data_exp)
 
 #### select() using column name
 
-
 ##### starts_with()
-starts_with() allows us to select columns based on how the column name begins. Here we put the columns that begin with "t1" into a new data set called data_time1.
+
+starts_with() allows us to select columns based on how the column name begins. Here we put the columns that begin with "t1" into a new data called data_time1.
 
 ```{r}
 data_time1 <- data_exp %>% 
@@ -232,7 +232,7 @@ data_time1 <- data_exp %>%
 ```
 
 
-The glimpse command shows us the new data set only contains the columns that begin with "t1"
+The glimpse command shows us the new data only contains the columns that begin with "t1"
 
 ```{r}
 glimpse(data_time1)
@@ -268,7 +268,7 @@ glimpse(new_data)
 
 ##### matches()
 
-It's also possible to use *regex* (regular expressiona) to select columns. Regex is a powerful way to indicating search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. But the example below selects any column with and underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
+It's also possible to use *regex* (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. But the example below selects any column with and underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
 
 ```{r}
 data_matched<- data_exp %>% 
@@ -283,12 +283,12 @@ You can see the columns selected using regex:
 glimpse(data_matched)
 ```
 
-You can learn about regex at [RegexOne](https://regexone.com) and test your regex at [Regex101](https://regex101.com). Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently considered that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user \@ThatJenPerson noted "Regex is like tequila: use it to try to solve a problem and now you have two problems." Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
+You can learn about regex at [RegexOne](https://regexone.com) and test your regex specification at [Regex101](https://regex101.com). Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently considered that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user \@ThatJenPerson noted "Regex is like tequila: use it to try to solve a problem and now you have two problems." Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
 
 
 #### select() using column type
 
-If many cases we will want to select or perform on action on a column based on whether the column is a numeric, chractor, or factor columns (indicated in glimpse output as dbl, chr, and fct, respectively).  We will learn more about factor column in a subsequent chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor in combination with the where() command.
+If many cases we will want to select or perform on action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively).  We will learn more about factors in a subsequent chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
 
 We can select numeric columns using where() and is.numeric:
 
@@ -297,7 +297,7 @@ data_numeric_columns <- data_exp %>%
   select(where(is.numeric))
 ```
 
-You can see the new data set contains only the numeric columns:
+You can see the new data contains only the numeric columns:
 
 ```{r}
 glimpse(data_numeric_columns)
@@ -311,7 +311,7 @@ data_character_columns <- data_exp %>%
   select(where(is.character))
 ```
 
-You can see the new data set contains only the character columns:
+You can see the new data contains only the character columns:
 
 ```{r}
 glimpse(data_character_columns)
@@ -322,9 +322,9 @@ If a future chapter you will see how we can select factors using where(is.factor
 
 ### summarise()
 
-The summarise command becomes more powerful and can summarise multiple columns when combined with starts_with(), ends_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
+The summarise() command can summarise multiple columns when combined with starts_with(), ends_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
 
-If we want to obtain the mean of all the columns that start with "t1" we use the command below. The across command requires that we indicate the columns the columns we want via the .cols argument and the command/function we want to run of those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data.
+If we want to obtain the mean of all the columns that start with "t1" we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data.
 
 ```{r}
 data_exp %>%
@@ -344,9 +344,10 @@ data_exp %>%
 ```
 
 
-Often you want more than one statistics for each column. You might want the mean, standard deviation, min, and max. Those statistics are available via the mean, sd, min, and max commands respectively. However, you need to create a list with the statistics you desired.
+Often you want to calculate more than one statistic for each column. For example, you might want the mean, standard deviation, min, and max. These statistics can be calculated via the mean, sd, min, and max commands, respectively. However, you need to create a list with the statistics you desire.
 
-Below we create a list of the descriptive statistics we desire. This only needs to be done once, but I will repeat it in the examples below for clarity.
+Below we create a list of the descriptive statistics we desire called desired_statistics, but you can use any name you want. This list only needs to be specified once, but we will repeat it in the examples below for clarity.
+
 ```{r}
 desired_descriptives <- list(
   mean = ~mean(.x, na.rm = TRUE),
@@ -380,10 +381,7 @@ Note that in the across command above we could also have used: ends_with(), cont
 
 ### mutate()
 
-
-```{r}
-glimpse(data_exp)
-```
+The mutate command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make_centered. This custom function takes the values in a column an subtracts the column mean from each value in the column. This is the same task we did the mutate() command in the basic tidyverse section above.
 
 ```{r}
 
@@ -393,6 +391,13 @@ make_centered <- function(values) {
 }
 ```
 
+The glimpse() command shows us all the column names. Also notice the values in the agresssion columns.s
+
+```{r}
+glimpse(data_exp)
+```
+
+We combine the mutate() command with the across() command and our custom make_centered() command below. The command "centers" or subtracts the mean from any column that ends with "aggression".
 
 ```{r}
 data_exp <- data_exp %>% 
@@ -401,6 +406,7 @@ data_exp <- data_exp %>%
 
 ```
 
+You can see via the glimpse() output that the contents of all the columns that end with "aggression" have changed. Every value in one these columns has had the column mean subtracted from it.
 
 ```{r}
 glimpse(data_exp)
@@ -410,7 +416,9 @@ Note that in the across command above we could also have used: starts_with(), co
 
 #### mutate() across rows
 
-Researchers often want to average with rows and across columns to create a new column. To average within rows (and across columns) we have to tell R that we want mean using the rowwise() command. After we do the necessary operation though we have to shut off the rowwise() command by using the ungroup() command. As well, when we are averaging within rows we have to use c_across() instead of across(). The command below creates a new column called vomit_avg which the average of the vomit ratings across both times.
+Researchers often want to average within rows and across columns to create a new column. That is for each participant (i.e., rat in the current data) we might want to calculate an vomit rating that is the average of the two time points (that we will call vomit_avg).
+
+To average within rows (and across columns) we use the rowwise() command to inform R of our intent. After we do the necessary calculations though we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c_across() instead of across(). The command below creates a new column called vomit_avg which the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
 
 ```{r}
 data_exp <- data_exp %>% 
