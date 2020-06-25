@@ -202,7 +202,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-06-23}
+\date{2020-06-25}
 
 \begin{document}
 \maketitle
@@ -1083,13 +1083,13 @@ You can access an item in a list by its label/name using the dollar sign:
 
 Congratulations! You've reached the end of the introduction to R. Take a break, have a cookie, and read some more about R tomorrow!
 
-\hypertarget{data-management-with-the-tidyverse}{%
-\chapter{Data Management with the Tidyverse}\label{data-management-with-the-tidyverse}}
+\hypertarget{handling-data-with-the-tidyverse}{%
+\chapter{Handling Data with the Tidyverse}\label{handling-data-with-the-tidyverse}}
 
-\hypertarget{required-packages}{%
-\section{Required Packages}\label{required-packages}}
+\hypertarget{required}{%
+\section{Required}\label{required}}
 
-This chapter requires the following packages are installed:
+The following packages must be installed before starting this chapter.
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -1099,6 +1099,28 @@ Required Packages\tabularnewline
 tidyverse\tabularnewline
 \bottomrule
 \end{longtable}
+
+The following data files are used in this chapter:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Required Data\tabularnewline
+\midrule
+\endhead
+data\_okcupid.csv\tabularnewline
+data\_experiment.csv\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{objective}{%
+\section{Objective}\label{objective}}
+
+The objective of this chapter is to familiarize you with some key commands in the tidyverse. The many commands are used in isolation of each other. In the next chapter we will use the commands in a more coordinated way as we load a data and move it from raw data to data that is ready for analysis (i.e., analytic data). You can start this project by Starting the class assignment on R Studio Cloud that corresponds to the chapter name.
+
+\hypertarget{using-the-console}{%
+\section{Using the Console}\label{using-the-console}}
+
+All of the commands in this chapter should be typed into the Console within R. If you see a command split over multiple lines, use SHIFT-RETURN or SHIFT-ENTER to move the next line that is part of the same command.
 
 \hypertarget{basic-tidyverse-commands}{%
 \section{Basic Tidyverse Commands}\label{basic-tidyverse-commands}}
@@ -1110,7 +1132,7 @@ tidyverse\tabularnewline
 \end{Highlighting}
 \end{Shaded}
 
-You can see the first few rows of the data set using the print() command:
+You can see the first few rows of the data using the print() command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1135,7 +1157,7 @@ You can see the first few rows of the data set using the print() command:
 ## # ... with 59,936 more rows
 \end{verbatim}
 
-But it's also helpful just to see a list of the columns in the data set with the glimpse() command:
+But it's also helpful just to see a list of the columns in the data with the glimpse() command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1157,7 +1179,7 @@ But it's also helpful just to see a list of the columns in the data set with the
 \hypertarget{select}{%
 \subsection{select()}\label{select}}
 
-The select() command allows you to obtain a subset of the columns in your data. The command below obtains can be used to obtain the age and height columns. You can read the command as: take the okcupid\_profiles data and then select the age and height columns. You can see that this prints out the data with just the age and height columns.
+The select() command allows you to obtain a subset of the columns in your data. The commands below can be used to obtain the age and height columns. You can read the command as: take the okcupid\_profiles data and then select the age and height columns. You can see that this prints out the data with just the age and height columns.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1182,7 +1204,7 @@ The select() command allows you to obtain a subset of the columns in your data. 
 ## # ... with 59,936 more rows
 \end{verbatim}
 
-Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data set. In the command below we store the resulting data set in a data set called new\_data.
+Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data. In the command below we store the resulting data in a new data set called new\_data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1205,7 +1227,7 @@ The glimpse() command shows us that only the age and height columns are in new\_
 ## $ height <dbl> 75, 70, 68, 71, 66, 67, 65, 65, 67, 65, ...
 \end{verbatim}
 
-In the above example we indicated the columns we wanted to retain from the okcupid\_profiles data in the select() command. However, we also indicate the columns we want to drop from the data set my using a minus sign (-) in front of the columns we specify in the select() command.
+In the above example we indicated the columns we wanted to retain from the okcupid\_profiles data using the select() command. However, we can also indicate the columns we want to drop from okcupid\_profiles using a minus sign (-) in front of the columns we specify in the select() command.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1233,9 +1255,9 @@ The glimpse() command shows us that we kept all the columns except the age and h
 \hypertarget{summarise}{%
 \subsection{summarise()}\label{summarise}}
 
-The summarise() command can be used to generate descriptive statistics for a specified column. You can easily calculate column descriptives using the corresponding commands for mean(), sd(), min(), max(), among others. In the example below we calculate the mean for the age column. To move to the next line while typing this command press SHIFT and ENTER (or RETURN) at the same time.
+The summarise() command can be used to generate descriptive statistics for a specified column. You can easily calculate column descriptive statistics using the corresponding commands for mean(), sd(), min(), max(), among others. In the example below we calculate the mean for the age column.
 
-In code below mean(age, na.rm = TRUE) indicates that to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking should we remove missing values when calculating the mean. The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is place into a variable labelled age\_mean, though we could have used any label we wanted instead of age\_mean. We see that the mean of the age column is, with rounding, 32.3.
+In code below mean(age, na.rm = TRUE) indicates that to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking should we remove missing values when calculating the mean. The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is placed into a variable labelled age\_mean, though we could have used any label we wanted instead of age\_mean. We see that the mean of the age column is, with rounding, 32.3.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1251,7 +1273,7 @@ In code below mean(age, na.rm = TRUE) indicates that to R that it should calcula
 ## 1     32.3
 \end{verbatim}
 
-More than one calculation can occur in the same summarise() command. You can easily add the calculation for the stanard deviation with the sd() command.
+More than one calculation can occur in the same summarise() command. You can easily add the calculation for the standared deviation with the sd() command.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1268,30 +1290,12 @@ More than one calculation can occur in the same summarise() command. You can eas
 ## 1     32.3   9.45
 \end{verbatim}
 
-We can use the n() command to also display the number of participants in the calculation:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{okcupid_profiles }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_mean =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 1 x 3
-##   age_mean age_sd     n
-##      <dbl>  <dbl> <int>
-## 1     32.3   9.45 59946
-\end{verbatim}
-
 \hypertarget{filter}{%
 \subsection{filter()}\label{filter}}
 
-The filter() command allows you to obtain a subset of the rows in your data. In the example below we create a new data sets with just the males from the original data set.
+The filter() command allows you to obtain a subset of the rows in your data. In the example below we create a new data set with just the males from the original data.
 
-Notice the structure of the original data set below in the glimpse() output. There is a column called sex that used m and f to indicate male and female, respectively. Also notice that there are 59946 rows in the okcupid\_profiles data set.
+Notice the structure of the original data below in the glimpse() output. There is a column called sex that uses m and f to indicate male and female, respectively. Also notice that there are 59946 rows in the okcupid\_profiles data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1310,7 +1314,7 @@ Notice the structure of the original data set below in the glimpse() output. The
 ## $ status <chr> "single", "single", "available", "single...
 \end{verbatim}
 
-We use the the filter command to select a subset of the rows based on the contents of any column. In this case the sex column. Notice the use of the the double equals sign to indicate ``equal to''. The reason a double equals sign is used here it to distinguish it from the use of the equals in the summarise command above were it was used to indicate ``assign to'' age\_mean after the mean was calculated. Single equals sign indicates ``assign to'' whereas a double equals sign indicates ``is equal to''.
+We use the the filter command to select a subset of the rows based on the contents of any column. In this case the sex column. Notice the use of the the double equals sign to indicate ``equal to''. The reason a double equals sign is used here (instead of a single equals sign) it to distinguish it from the use of the single equals sign in the summarise command above. In the summarise command above, the single equal sign was used to indicate ``assign to''. That is assign to age\_mean the mean after it is calculated calculated. Single equals sign indicates ``assign to'' whereas a double equals sign indicates ``is equal to''.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1319,7 +1323,7 @@ We use the the filter command to select a subset of the rows based on the conten
 \end{Highlighting}
 \end{Shaded}
 
-We use glimpse() to inspect this all male data set. Notice that only the letter m is in the sex column. Also notice that there are 35829 rows in the okcupid\_males data set; fewer people because only the males are in this data set.
+We use glimpse() to inspect this all male data. Notice that only the letter m is in the sex column. Also notice that there are 35829 rows in the okcupid\_males data; fewer people because only the males are in this data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1338,23 +1342,22 @@ We use glimpse() to inspect this all male data set. Notice that only the letter 
 ## $ status <chr> "single", "single", "available", "single...
 \end{verbatim}
 
-The filter command can be commbined with the summarise command to get the descriptive statistics for males without the hassle of creating a new data set. This is done using the \%\textgreater\% ``and then'' operator.
+The filter command can be commbined with the summarise command to get the descriptive statistics for males without the hassle of creating a new data. This is done using the \%\textgreater\% ``and then'' operator.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{okcupid_profiles }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "m"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_mean =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1 x 3
-##   age_mean age_sd     n
-##      <dbl>  <dbl> <int>
-## 1     32.0   9.03 35829
+## # A tibble: 1 x 2
+##   age_mean age_sd
+##      <dbl>  <dbl>
+## 1     32.0   9.03
 \end{verbatim}
 
 We see that for the 35829 females the mean age is 32.0 and the standard deviation is 9.0.
@@ -1366,16 +1369,15 @@ Likewise, we can obtain the descriptive statistics for females with only a sligh
 \NormalTok{okcupid_profiles }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "f"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_mean =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{())}
+            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 1 x 3
-##   age_mean age_sd     n
-##      <dbl>  <dbl> <int>
-## 1     32.8   10.0 24117
+## # A tibble: 1 x 2
+##   age_mean age_sd
+##      <dbl>  <dbl>
+## 1     32.8   10.0
 \end{verbatim}
 
 We see that for the 24117 females the mean age is 32.8 and the standard deviation is 10.0.
@@ -1383,15 +1385,14 @@ We see that for the 24117 females the mean age is 32.8 and the standard deviatio
 \hypertarget{group_by}{%
 \subsection{group\_by()}\label{group_by}}
 
-The process we used with the filter command would quickly become onerous if we had many subgroups for a column. Consequently, it's often better to use the group() command to calculate descriptives for the levels of a variable. By telling the computer to group\_by() sex the summarise command is run separately for every level of sex (i.e., m and f).
+The process we used with the filter command would quickly become onerous if we had many subgroups for a column. Consequently, it's often better to use the group() command to calculate descriptive statistics for the levels (e.g., male/female) of a variable. By telling the computer to group\_by() sex the summarise command is run separately for every level of sex (i.e., m and f).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{okcupid_profiles }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(sex) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_mean =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{()) }
+            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1400,11 +1401,11 @@ The process we used with the filter command would quickly become onerous if we h
 \end{verbatim}
 
 \begin{verbatim}
-## # A tibble: 2 x 4
-##   sex   age_mean age_sd     n
-##   <chr>    <dbl>  <dbl> <int>
-## 1 f         32.8  10.0  24117
-## 2 m         32.0   9.03 35829
+## # A tibble: 2 x 3
+##   sex   age_mean age_sd
+##   <chr>    <dbl>  <dbl>
+## 1 f         32.8  10.0 
+## 2 m         32.0   9.03
 \end{verbatim}
 
 Fortunately, it's possible to use more than one grouping varible with the group\_by() command. In the code below we group by sex and status (i.e., dating status).
@@ -1414,8 +1415,7 @@ Fortunately, it's possible to use more than one grouping varible with the group\
 \NormalTok{okcupid_profiles }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(sex, status) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{age_mean =} \KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-            \DataTypeTok{n =} \KeywordTok{n}\NormalTok{()) }
+            \DataTypeTok{age_sd =} \KeywordTok{sd}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1424,20 +1424,20 @@ Fortunately, it's possible to use more than one grouping varible with the group\
 \end{verbatim}
 
 \begin{verbatim}
-## # A tibble: 10 x 5
+## # A tibble: 10 x 4
 ## # Groups:   sex [2]
-##    sex   status         age_mean age_sd     n
-##    <chr> <chr>             <dbl>  <dbl> <int>
-##  1 f     available          32.2   8.54   656
-##  2 f     married            33.7   8.13   135
-##  3 f     seeing someone     28.1   6.44  1003
-##  4 f     single             33.0  10.2  22319
-##  5 f     unknown            27.8   5.91     4
-##  6 m     available          34.8   9.40  1209
-##  7 m     married            38.7  10.1    175
-##  8 m     seeing someone     30.8   7.06  1061
-##  9 m     single             31.9   9.04 33378
-## 10 m     unknown            40.7   8.87     6
+##    sex   status         age_mean age_sd
+##    <chr> <chr>             <dbl>  <dbl>
+##  1 f     available          32.2   8.54
+##  2 f     married            33.7   8.13
+##  3 f     seeing someone     28.1   6.44
+##  4 f     single             33.0  10.2 
+##  5 f     unknown            27.8   5.91
+##  6 m     available          34.8   9.40
+##  7 m     married            38.7  10.1 
+##  8 m     seeing someone     30.8   7.06
+##  9 m     single             31.9   9.04
+## 10 m     unknown            40.7   8.87
 \end{verbatim}
 
 The resulting output provide for age the mean and standard deviation for every combination of sex and dating status. The first five rows provide output for females at every level of dating status whereas the subsequent five rows provide output for males at every level of dating status.
@@ -1445,10 +1445,43 @@ The resulting output provide for age the mean and standard deviation for every c
 \hypertarget{mutate}{%
 \subsection{mutate()}\label{mutate}}
 
-The mutate() command can be used to calculate a new column in the data set.
+The mutate() command can be used to calculate a new column in a data. In the example below we calculate a new column called age\_centered which is the new version of the age\_column where the mean of the column has been removed from every value. This is merely an example of the many different types of calculations can can perform to create a new column using mutate().
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{okcupid_profiles <-}\StringTok{ }\NormalTok{okcupid_profiles }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{age_centered =}\NormalTok{ age }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(age, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that the glimpse() command reveals that after we use the mutate() command there is a new column called age\_centered.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(okcupid_profiles)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 59,946
+## Columns: 7
+## $ age          <dbl> 22, 35, 38, 23, 29, 29, 32, 31, 24...
+## $ diet         <chr> "strictly anything", "mostly other...
+## $ height       <dbl> 75, 70, 68, 71, 66, 67, 65, 65, 67...
+## $ pets         <chr> "likes dogs and likes cats", "like...
+## $ sex          <chr> "m", "m", "m", "m", "m", "m", "f",...
+## $ status       <chr> "single", "single", "available", "...
+## $ age_centered <dbl> -10.3403, 2.6597, 5.6597, -9.3403,...
+\end{verbatim}
 
 \hypertarget{advanced-tidyverse-commands}{%
 \section{Advanced Tidyverse Commands}\label{advanced-tidyverse-commands}}
+
+In this advanced selection we will revisit the commands from the basic tidyverse section but use more complicated code to either select or apply an action to more than one column at a time. We will indicate the columns that we want to select or apply an action to using: starts\_with(), ends\_with(), contains(), matches(), or where(). The first four of these are used to indicate columns based on column names. In contrast, the last command, where(), i sued to indicate the columns we want base on the column type (numeric, character, factor, etc.). You can learn more about each of these commands by simply typing into the console a question mark followed by the function name (e.g., ?where) and then pressing return/enter. This will provide the help page for that function in Help tab in the lower right of R Studio. Note that you must have first activiated the tidyverse via library command for the help file to be accessible.
+
+We will review all five commands for indicating the columns we want in the select() selection below. Following that we will, for brevity, typically use only one of the five commands when illustrating how they work with summarise() and mutate().
+
+We begin by loading a new data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1462,12 +1495,14 @@ The mutate() command can be used to calculate a new column in the data set.
 ## cols(
 ##   id = col_double(),
 ##   sex = col_character(),
-##   time1_vomit = col_double(),
-##   time1_aggression = col_double(),
-##   time2_vomit = col_double(),
-##   time2_aggression = col_double()
+##   t1_vomit = col_double(),
+##   t1_aggression = col_double(),
+##   t2_vomit = col_double(),
+##   t2_aggression = col_double()
 ## )
 \end{verbatim}
+
+The glimpse() command reveals that this is a small data where every row represents one rat. The sex of the rat is recorded as well as, for each of two time points, a rating of vomiting and aggression.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1478,19 +1513,136 @@ The mutate() command can be used to calculate a new column in the data set.
 \begin{verbatim}
 ## Rows: 6
 ## Columns: 6
-## $ id               <dbl> 1, 2, 3, 4, 5, 6
-## $ sex              <chr> "male", "female", "male", "fem...
-## $ time1_vomit      <dbl> 3, 2, 0, 3, 2, 1
-## $ time1_aggression <dbl> 5, 6, 4, 7, 3, 8
-## $ time2_vomit      <dbl> 2, 1, 1, 2, 1, 2
-## $ time2_aggression <dbl> 6, 7, 6, 7, 5, 8
+## $ id            <dbl> 1, 2, 3, 4, 5, 6
+## $ sex           <chr> "male", "female", "male", "female...
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
 \end{verbatim}
 
 \hypertarget{select-1}{%
 \subsection{select()}\label{select-1}}
 
-\hypertarget{select-using-where}{%
-\subsubsection{select() using where()}\label{select-using-where}}
+\hypertarget{select-using-column-name}{%
+\subsubsection{select() using column name}\label{select-using-column-name}}
+
+\hypertarget{starts_with}{%
+\paragraph{starts\_with()}\label{starts_with}}
+
+starts\_with() allows us to select columns based on how the column name begins. Here we put the columns that begin with ``t1'' into a new data called data\_time1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_time1 <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"t1"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+The glimpse command shows us the new data only contains the columns that begin with ``t1''
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(data_time1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 2
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+\end{verbatim}
+
+\hypertarget{ends_with}{%
+\paragraph{ends\_with()}\label{ends_with}}
+
+ends\_with() allows us to select columns based on how the column name ends. Here we put the columns that end with ``aggression'' into a new data set called data\_aggression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_aggression <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{ends_with}\NormalTok{(}\StringTok{"aggression"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(data_aggression)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 2
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
+\end{verbatim}
+
+\hypertarget{contains}{%
+\paragraph{contains()}\label{contains}}
+
+contains() allows us to select columns based on the contents of the column name. Here we put the columns that have "\_" in the name into a new data set called new\_data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new_data <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"_"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(new_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 4
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
+\end{verbatim}
+
+\hypertarget{matches}{%
+\paragraph{matches()}\label{matches}}
+
+It's also possible to use \emph{regex} (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. But the example below selects any column with and underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_matched<-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{matches}\NormalTok{(}\StringTok{"(_.)"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You can see the columns selected using regex:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(data_matched)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 4
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
+\end{verbatim}
+
+You can learn about regex at \href{https://regexone.com}{RegexOne} and test your regex specification at \href{https://regex101.com}{Regex101}. Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently considered that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user @ThatJenPerson noted ``Regex is like tequila: use it to try to solve a problem and now you have two problems.'' Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
+
+\hypertarget{select-using-column-type}{%
+\subsubsection{select() using column type}\label{select-using-column-type}}
+
+If many cases we will want to select or perform on action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively). We will learn more about factors in a subsequent chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
+
+We can select numeric columns using where() and is.numeric:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1498,6 +1650,8 @@ The mutate() command can be used to calculate a new column in the data set.
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.numeric))}
 \end{Highlighting}
 \end{Shaded}
+
+You can see the new data contains only the numeric columns:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1508,12 +1662,14 @@ The mutate() command can be used to calculate a new column in the data set.
 \begin{verbatim}
 ## Rows: 6
 ## Columns: 5
-## $ id               <dbl> 1, 2, 3, 4, 5, 6
-## $ time1_vomit      <dbl> 3, 2, 0, 3, 2, 1
-## $ time1_aggression <dbl> 5, 6, 4, 7, 3, 8
-## $ time2_vomit      <dbl> 2, 1, 1, 2, 1, 2
-## $ time2_aggression <dbl> 6, 7, 6, 7, 5, 8
+## $ id            <dbl> 1, 2, 3, 4, 5, 6
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
 \end{verbatim}
+
+We can select numeric columns using where() and is.character:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1521,6 +1677,8 @@ The mutate() command can be used to calculate a new column in the data set.
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.character))}
 \end{Highlighting}
 \end{Shaded}
+
+You can see the new data contains only the character columns:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1534,62 +1692,256 @@ The mutate() command can be used to calculate a new column in the data set.
 ## $ sex <chr> "male", "female", "male", "female", "male",...
 \end{verbatim}
 
-\hypertarget{select-using-starts_with}{%
-\subsubsection{select() using starts\_with()}\label{select-using-starts_with}}
+If a future chapter you will see how we can select factors using where(is.factor).
+
+\hypertarget{summarise-1}{%
+\subsection{summarise()}\label{summarise-1}}
+
+The summarise() command can summarise multiple columns when combined with starts\_with(), ends\_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
+
+If we want to obtain the mean of all the columns that start with ``t1'' we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_time1 <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"time1_"}\NormalTok{))}
+\NormalTok{data_exp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"t1"}\NormalTok{), }
+                   \DataTypeTok{.fns =}\NormalTok{ mean,}
+                   \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   t1_vomit t1_aggression
+##      <dbl>         <dbl>
+## 1     1.83           5.5
+\end{verbatim}
+
+If you want to get fancy, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "\_mean".
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(data_time1)}
+\NormalTok{data_exp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"t1"}\NormalTok{), }
+                   \DataTypeTok{.fns =}\NormalTok{ mean,}
+                   \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{,}
+                   \DataTypeTok{.names =} \StringTok{"\{col\}_mean"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 2
+##   t1_vomit_mean t1_aggression_mean
+##           <dbl>              <dbl>
+## 1          1.83                5.5
+\end{verbatim}
+
+Often you want to calculate more than one statistic for each column. For example, you might want the mean, standard deviation, min, and max. These statistics can be calculated via the mean, sd, min, and max commands, respectively. However, you need to create a list with the statistics you desire.
+
+Below we create a list of the descriptive statistics we desire called desired\_statistics, but you can use any name you want. This list only needs to be specified once, but we will repeat it in the examples below for clarity.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desired_descriptives <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{mean =} \OperatorTok{~}\KeywordTok{mean}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{sd =} \OperatorTok{~}\KeywordTok{sd}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Once you have created the list of descriptive statistics you want you can run the command below to obtain those statistics. However, as you will see the output is too wide to be helpful.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_exp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"t1"}\NormalTok{), }
+                   \DataTypeTok{.fns =}\NormalTok{ desired_descriptives))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 4
+##   t1_vomit_mean t1_vomit_sd t1_aggression_m~
+##           <dbl>       <dbl>            <dbl>
+## 1          1.83        1.17              5.5
+## # ... with 1 more variable: t1_aggression_sd <dbl>
+\end{verbatim}
+
+Consequently, we add the t() command (i.e., transpose command) to the end of the summarise request to get a more readable list of statistics:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{desired_descriptives <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{mean =} \OperatorTok{~}\KeywordTok{mean}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{sd =} \OperatorTok{~}\KeywordTok{sd}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{)}
+
+\NormalTok{data_exp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{starts_with}\NormalTok{(}\StringTok{"t1"}\NormalTok{), }
+                   \DataTypeTok{.fns =}\NormalTok{ desired_descriptives)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{t}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     [,1]
+## t1_vomit_mean      1.833
+## t1_vomit_sd        1.169
+## t1_aggression_mean 5.500
+## t1_aggression_sd   1.871
+\end{verbatim}
+
+Note that in the across command above we could also have used: ends\_with(), contains(), matches(), or where().
+
+\hypertarget{mutate-1}{%
+\subsection{mutate()}\label{mutate-1}}
+
+The mutate command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make\_centered. This custom function takes the values in a column an subtracts the column mean from each value in the column. This is the same task we did the mutate() command in the basic tidyverse section above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make_centered <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(values) \{}
+\NormalTok{  values_out <-}\StringTok{ }\NormalTok{values }\OperatorTok{-}\StringTok{ }\KeywordTok{mean}\NormalTok{(values, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+  \KeywordTok{return}\NormalTok{(values_out)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+The glimpse() command shows us all the column names. Also notice the values in the agresssion columns.s
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(data_exp)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Rows: 6
-## Columns: 2
-## $ time1_vomit      <dbl> 3, 2, 0, 3, 2, 1
-## $ time1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## Columns: 6
+## $ id            <dbl> 1, 2, 3, 4, 5, 6
+## $ sex           <chr> "male", "female", "male", "female...
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> 5, 6, 4, 7, 3, 8
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
 \end{verbatim}
 
-\hypertarget{select-using-starts_with-1}{%
-\subsubsection{select() using starts\_with()}\label{select-using-starts_with-1}}
+We combine the mutate() command with the across() command and our custom make\_centered() command below. The command ``centers'' or subtracts the mean from any column that ends with ``aggression''.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data_aggression <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{ends_with}\NormalTok{(}\StringTok{"_aggression"}\NormalTok{))}
+\NormalTok{data_exp <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{ends_with}\NormalTok{(}\StringTok{"aggression"}\NormalTok{), }
+                \DataTypeTok{.fns =}\NormalTok{ make_centered))}
 \end{Highlighting}
 \end{Shaded}
 
+You can see via the glimpse() output that the contents of all the columns that end with ``aggression'' have changed. Every value in one these columns has had the column mean subtracted from it.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(data_aggression)}
+\KeywordTok{glimpse}\NormalTok{(data_exp)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Rows: 6
-## Columns: 2
-## $ time1_aggression <dbl> 5, 6, 4, 7, 3, 8
-## $ time2_aggression <dbl> 6, 7, 6, 7, 5, 8
+## Columns: 6
+## $ id            <dbl> 1, 2, 3, 4, 5, 6
+## $ sex           <chr> "male", "female", "male", "female...
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> -0.5, 0.5, -1.5, 1.5, -2.5, 2.5
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> -0.5, 0.5, -0.5, 0.5, -1.5, 1.5
 \end{verbatim}
 
-\hypertarget{select-using-matches}{%
-\subsubsection{select() using matches()}\label{select-using-matches}}
+Note that in the across command above we could also have used: starts\_with(), contains(), matches(), or where().
 
-It's also possible to use \emph{regex} (regular expressiona) to select columns. Regex is a powerful way to indicating search/matching requirements for text - in this case the text of column names. You can learn about regex at \href{https://regexone.com}{RegexOne} and test your regex at \href{https://regex101.com}{Regex101}. Ideally though, as we discuss in the next chapter, you can use naming conventions are sufficiently considered you don't need regex or only rarely. The reason for this is that regex can be challenging to use. As Twitter user @ThatJenPerson noted ``Regex is like tequila: use it to try to solve a problem and now you have two problems.'' Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
+\hypertarget{mutate-across-rows}{%
+\subsubsection{mutate() across rows}\label{mutate-across-rows}}
+
+Researchers often want to average within rows and across columns to create a new column. That is for each participant (i.e., rat in the current data) we might want to calculate an vomit rating that is the average of the two time points (that we will call vomit\_avg).
+
+To average within rows (and across columns) we use the rowwise() command to inform R of our intent. After we do the necessary calculations though we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c\_across() instead of across(). The command below creates a new column called vomit\_avg which the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_exp <-}\StringTok{ }\NormalTok{data_exp }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{vomit_avg =} \KeywordTok{mean}\NormalTok{( }\KeywordTok{c_across}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{ends_with}\NormalTok{(}\StringTok{"vomit"}\NormalTok{)),}
+                               \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+You can see the new column we created with the glimpse() command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(data_exp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 7
+## $ id            <dbl> 1, 2, 3, 4, 5, 6
+## $ sex           <chr> "male", "female", "male", "female...
+## $ t1_vomit      <dbl> 3, 2, 0, 3, 2, 1
+## $ t1_aggression <dbl> -0.5, 0.5, -1.5, 1.5, -2.5, 2.5
+## $ t2_vomit      <dbl> 2, 1, 1, 2, 1, 2
+## $ t2_aggression <dbl> -0.5, 0.5, -0.5, 0.5, -1.5, 1.5
+## $ vomit_avg     <dbl> 2.5, 1.5, 0.5, 2.5, 1.5, 1.5
+\end{verbatim}
+
+The print() command makes it easier to see the new column is the average of the other two.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(data_exp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 7
+##      id sex   t1_vomit t1_aggression t2_vomit t2_aggression
+##   <dbl> <chr>    <dbl>         <dbl>    <dbl>         <dbl>
+## 1     1 male         3          -0.5        2          -0.5
+## 2     2 fema~        2           0.5        1           0.5
+## 3     3 male         0          -1.5        1          -0.5
+## 4     4 fema~        3           1.5        2           0.5
+## 5     5 male         2          -2.5        1          -1.5
+## 6     6 fema~        1           2.5        2           1.5
+## # ... with 1 more variable: vomit_avg <dbl>
+\end{verbatim}
+
+We can make it even easier to see by combining tidyverse commands and using only the commands colums we are interested in:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_exp }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{contains}\NormalTok{(}\StringTok{"vomit"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{print}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 3
+##   t1_vomit t2_vomit vomit_avg
+##      <dbl>    <dbl>     <dbl>
+## 1        3        2       2.5
+## 2        2        1       1.5
+## 3        0        1       0.5
+## 4        3        2       2.5
+## 5        2        1       1.5
+## 6        1        2       1.5
+\end{verbatim}
 
 \hypertarget{making-your-data-ready-for-analysis}{%
 \chapter{Making your data ready for analysis}\label{making-your-data-ready-for-analysis}}
 
-\hypertarget{required-packages-1}{%
-\section{Required Packages}\label{required-packages-1}}
+\hypertarget{required-packages}{%
+\section{Required Packages}\label{required-packages}}
 
 This chapter requires the following packages are installed:
 
@@ -1607,8 +1959,8 @@ tidyverse\tabularnewline
 
 \textbf{Important Note:} that you should NOT use library(psych) at any point. There are major conflict between the psych package and the tidyverse. We will access the psych package command by preceding each command with psych:: instead of using library(psych).
 
-\hypertarget{objective}{%
-\section{Objective}\label{objective}}
+\hypertarget{objective-1}{%
+\section{Objective}\label{objective-1}}
 
 \hypertarget{context}{%
 \section{Context}\label{context}}
