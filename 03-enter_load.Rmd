@@ -134,20 +134,15 @@ Why did we walk you through this technical treatment of structuring data within 
 
 
 ## Data collection and entry
-- data are collected in different ways
-- data collected by programs in the lab that require 
-- lab measurements paper and entering later
-- paper surveys and entering later
-- website surveys 
-- a mix of all of the above
 
-Think about
-- missing data 
-- column names
-- representation of categorical variables in the data set
-- computer/web collection
+Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). Regardless of the approach it is critical to name your variables appropriately. For spreadsheet users, this mean setting of the spreadsheet the data will be recorded in with column names that are amenible to the future analyses you want to conduct. Likewise, for software uses, this means setting up the software prior to running the experiment/survey to that when the data is exported for analysis the column names you obtain are amenible to subsequent analyses approaches. Although failure to take this thoughful approach in advance can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
-### Question with numerical answers
+### Naming conventions
+
+*
+
+
+### Collect variables with numerical answers
 
 ### Likert-type items
 
@@ -516,5 +511,50 @@ This command creates a new data set called new_data_frame (use any name you want
 
 ```{r}
 new_dataframe <- as.data.frame(my_tibble)
+```
+
+
+## Wait: I want to make all my summary statistics with the tidyverse
+
+The code below generates a summary table for commonly requested statistics. Using mostly the tidyverse. Hmisc package is required for the 
+
+```{r}
+library(tidyverse)
+# HMisc package must be installed. Library command not needed for HMisc package.
+
+desired_descriptives <- list(
+  mean = ~mean(.x, na.rm = TRUE),
+  LL_95 = ~Hmisc::smean.cl.normal(.x)[2],
+  UL_95 = ~Hmisc::smean.cl.normal(.x)[3],
+  sd = ~sd(.x, na.rm = TRUE),
+  min = ~min(.x, na.rm = TRUE),
+  max = ~max(.x, na.rm = TRUE),
+  n = ~sum(!is.na(.x))
+)
+
+row_sum <- analytic_data %>% 
+  summarise(across(.cols = where(is.numeric),
+                   .fns =  desired_descriptives,
+                   .names = "{col}___{fn}"))
+
+long_summary <- row_sum %>%
+  pivot_longer(cols = everything(),
+               names_to = c("var", "stat"),
+               names_sep = c("___"),
+               values_to = "value")
+
+summary_table <- long_summary %>% 
+  pivot_wider(names_from = stat,
+              values_from = value)
+
+summary_table_rounded <- summary_table %>%
+  mutate(across(.cols = where(is.numeric),
+                .fns= round,
+                digits = 3)) %>%
+  as.data.frame()
+
+print(summary_table_rounded)
+
+
 ```
 
