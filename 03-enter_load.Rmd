@@ -66,16 +66,16 @@ knitr::include_graphics("ch_enter_load/images/pipeline.png")
 
 It's difficult to being with the end in mind when you haven't read later chapters. So here we will be provide you with some general thoughts around different approaches to structuring data files and the naming conventions you use when creating those data files.
 
-### tidy data: Comparing wide vs long formats
+### Structuring data: Obtaining tidy data
 
-When conducting many types of analyses it is necessary to have data in a format called tidy data [@tidy-data]. [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) as defined by Hadley involves (among other requirements) that: 
+When conducting analyses in R it is typically necessary to have data in a format called tidy data [@tidy-data]. [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) as defined by Hadley involves (among other requirements) that: 
 
 1. Each variable forms a column.
 2. Each observation forms a row.
 
 The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable.
 
-**Between participant data**. Consider  Table \@ref(tab:betweenex) which illustrates between particpant data for six human particpants running 5 kilometers  The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
+**Between participant data**. Consider Table \@ref(tab:betweenex) which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
 
 
 ```{r betweenex, echo = FALSE}
@@ -104,7 +104,7 @@ knitr::kable(
 data_within_tidy <- data_within %>% 
   pivot_longer(cols = march:july,
                names_to = "occasion",
-               values_to =  "elapsedtime")
+               values_to =  "elapsed_time")
 
 ```
 
@@ -117,18 +117,18 @@ knitr::kable(
 ```
 
 
-The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the label occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable elapsedtime. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (elapsedtime.). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
+The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the label occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable elapsed_time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (elapsed_time.). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
 
 
 | Disadvantages one row per participant  | Advantages one row per participant | 
 | ---------------|------------|
 | 1) Predictor variable (*occassion*) is hidden and spread over multiple columns | 1) Easy to enter this way | 
 | 2) Unclear that each month is a level of the predictor variable *occasion* | |
-| 3) Dependent variable (*elapsedtime*) is not  indicated    | |
-| 4) Unclear that *elapsedtime* is the measurement in each month column | |
+| 3) Dependent variable (*elapsed_time*) is not  indicated    | |
+| 4) Unclear that *elapsed_time* is the measurement in each month column | |
 
 
-Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidy data format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex). For elapsedtime variable this data is now in the tidy data format. Each row corresponds to a single elapsedtime observed. Each column corresponds to a single variable. Somewhat problematically, however, sex if repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense.
+Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidy data format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex). For elapsed_time variable this data is now in the tidy data format. Each row corresponds to a single elapsed_time observed. Each column corresponds to a single variable. Somewhat problematically, however, sex is repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense. Importantly, there is an id column for each participant so R knows that this information is repeated for each participant and is not confused by the repeating the sex designation over three rows. In directly, this illustrates the importance of having an id column to indicate each unique participant.
 
 Why did we walk you through this technical treatment of structuring data within the computer at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in the rest of this chapter around the naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \@ref(tab:withinex) to the data in Figure \@ref(tab:withintidyex) by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
 
@@ -139,59 +139,60 @@ Data can be collected in a wide variety of way. Regardless of the methods of loc
 
 ### Naming conventions
 
-*
+To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that is uses a naming convention prior to data collection. The naming conventations suggested here are adapted from the tidyverse [style guide](https://style.tidyverse.org).
 
 
-### Collect variables with numerical answers
+* Lowercase letters only
+
+* If two word column names are necessary, only use the underscore ("_") character to separate words in the name.
+
+* Avoid short uncontextualized variable names like q1, q2, q3, etc.
+
+* Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unqiue item prefixes so that it will easy to select with those columns using start_with() in wat that you don't accidentially get additionally columns you don't want - that have a similar prefix. See Likert-type item section below for details.
+
+* If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-particpant ANOVA section below for details.
 
 ### Likert-type items
 
-Likert type scales. 
+A Likert-type item is typically composed of a statement that participants are asked to agree or disagree with. For example, participants could be asked to indicate the extent to which they agree a number of statements such as "I like my job". They would then be presented with response scale such as: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. A common question is how should I enter the data?
 
-Score and analysis section of wikipedia page
-https://en.wikipedia.org/wiki/Likert_scale
-Basic issue if if the data is orginal or interval. Is the psychological interval between 1 and 2 the same as the numerical interval between 1 an 2.
-Mean, standard deviation, and averaging is in appropriate.
-Probably avoid this concern by simply labelling the end points and none of the middle points.
-See wiki references.
+* **Enter numeric responses not the labels**. You should enter the numeric value for each item response (e.g., 5) into your data - not the label (e.g., Strongly Agree). The labels associated with each value can be applied later in a script, if needed.
 
+* **High numbers should be associated with more of the construct being measured.** When designing your survey or data collection tools, it is important that you set of the response options appropriately. If you scale measures job satisfaction, it is important that you collect data in a manner that ensures high numbers on the job satisfaction scale indicate high levels of job satisfaction. Therefore, assigning numbers make sense using the 5-point scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. With this approach high response numbers indicate more job satisfaction. However, using the opposite scale would not make sense: 1 - Strongly Agree, 2 - Moderately Agree, 3 - Neutral, 4, Moderately Disagree, 5 - Strongly Disagree. With this opposite scale high numbers on a job satisfaction scale would indicate lower levels of job satisfaction - a very confusing situation. Avoid this situation, assign numbers so that higher numbers are associated with more of the construct being measured. 
 
-You can add the labels later with if needed. Basic distinction - if you plan to do a numerical analysis or create scales enter the numbers. If you plan to treat them as cateogrical responses enter labels.
+* **Use appropriate item names.** As described in the naming convention section, use moderate length names with different labels for each subscale.
 
+* **Use moderate length column names unique to each subscale**. Imagine you have a survey with an 18-item commitment scale [@meyer1993commitment] composed of three 6-item subscales: affective, normative, and continuance commitment. It would be a poor choice to prefix the labels of all 18 columns in your data with "commit" such that the names would be commit1, commit2, commit3, etc. The problem with this approach is that it fails to distinguishing between the three subscales in naming convention; making it impossible to select the items for a single subscale using starts_with(). A better, but still poor choice for a naming convention would be use use a two letter prefix for the three scale such ac, nc, and cc. This would result in names for the columns like ac1, ac2, ac3, etc. This is an improvement because you could apparently (but likely not) select the columns using starts_with("ac"). The problem with these short names is that there could be many columns in data set that start with "ac" beside the affective commitment items. You might want to select the affective commtiment items using starts_with("ac"); but you would get all the affective commitment item columns but also all the columns measuring other variables that also start with "ac". Therefore, it's a good idea to use a moderate length unique prefix for column names. For example, you might use prefixes like affectcom, normcom, and contincom for the three subscales. This would create column names like affectcom1, affectcom2, affectcom3, etc. These column prefixes are unlikely to be duplicated in other places in your column name conventions making it easy to select those columns using a command like starts_with("affectcom").
 
-Enter the numbers, not the labels strongly agree etc. into your data
-if you have a measure with subscale label the items in your survey etc by subscale
-affcomm1  affcomm2, affcomi
+* **Indicate in the item name if the item is reversed keyed ** Sometimes with Likert-type items, an item is reverse keyed. For example, on a job satisfaction scale participants will typically respond to items that reflect job satisfaction using the scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. Higher numbers indicate more job satisfaction. Sometimes however, some items will use the same 1 to 5 response scale but be worded "I hate my job". Responding with a 5 to this item would indicate high job disatsifaction not high job satisfaction - to the response will need to be flipped in your analysis script after data collection (i.e., 1 need to become a 5 and vica versa). To make it easier to do so, you should indicate if an item is reverse keyed in the item name. The proceedure for doing so is outlined in the next point.  
 
-avoid labels like AC1, AC2 these are insufficiently unique. Consequently it may be hard to select them with a command like starts_with()
+* **Indicate in the item name the range for reverse key items. ** If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reveresed keyed on scale using a 1 to 5 response format you might name the item: jobsat3_rev15. The suffix "_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
 
-besure to indicate reverse key items using a suffix at the end of the column name
-besure to indicate for reservse key items the range of the scale 0 to 5 or 1 to 6. The actual numbers used on the scale will dictate how the items are reverse keyed.
-
-
-### Categorical classifications (between participant)
-
-Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your speadsheet - likewise in yoru survey program.
-Similarily don't use 1, 2, 3, for education if you plan to analyze it as a categorical variable, indicate the levels "elementary", "secondardy", "college", etc.
-
-Likewise, for between particpant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
+* If you collect items over multiple time points prefix the time and the xxx show both a time prefix and reverse suffix.
 
 
 
-### Categorical classifications (between participant)
+### ANOVA between-participant levels
 
-If you have an stdu that is a survey over time.....
+Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your speadsheet - likewise in yoru survey program. Likewise, for between particpant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
 
 
-If you have a sstudy that involves a within- or within/between particpants ANOVA design be very carefuly how you collect an name that data.
+### ANOVA within-participant levels
 
-Andy Field discussess ..... within/between data...
- see data set from apaTAbles
+If you have a sstudy that involves a within-participant ANOVA. 
 
-For example, a good data code book is essential if you have wide with repeated measures variables because there is no way to tell what the IV or DV is by inspecting the data.
+One-way repeated meaure predictor.  == See example above with run times.
+
+Multiway repeates measures predictors. If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. For example, if imagine you are a food researcher interested in taste ratings as a dependent various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attemps to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables.
+
+### Other types of information.
+education, income, etc
 
 
 ## Raw data
+
+Even assuming you did everything right there is still a fair amount of work to get things started paragraph here...
+
 
 We begin by examining the data as originally entered into a spreadsheet. In Figure \@ref(fig:rawdataitems) you see a screen shot of the initial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
 
@@ -200,15 +201,18 @@ We begin by examining the data as originally entered into a spreadsheet. In Figu
 knitr::include_graphics("ch_score_items/images/screenshot_raw_data.png")
 ```
 
-## Loading raw data
+### Loading raw data
 
 I suggest you begin every R Studio task in the following way:
 
-R Studio in the Cloud
+R Studio in the Cloud Assignment
+1. The data should be in the assignment project automatically
+
+R Studio in the Cloud, custom project
 1. Create a new Project using the web interface
 2. Upload your data files in using the upload button in the Files pane
 
-R Studio on Your Computer
+R Studio Local Computer, custom project
 1. Create a folder on your computer for the analysis
 2. Place your data files in that folder
 3. Use the menu item File > New Project... to start the project
@@ -218,83 +222,144 @@ R Studio on Your Computer
 
 Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.
 
-**Class note: You don't' need to do either of these approach. You will just "Start" each assignment in the class workspace on R Studio Cloud".**
-
-Create an  R Studio project for this activity 
-Create a new script in your project and save it quite
+ * Create a new script in your project and save it with the name "script_raw_to_analytic.R"
+ * Type the code below into that script
+ 
 
 ```{r, results='hide'}
+# Date: YYYY-MM-DD
+# Name: your name here
+
+# Load data
 library(tidyverse)
-library(janitor)
 
 my_missing_value_codes <- c("-999", "", "NA")
 
 raw_data <- read_csv(file = "data_item_scoring.csv",
                      na = my_missing_value_codes)
+
+analytic_data <- raw_data
+
 ```
 
 
-## Initial inspection
+Remove empty row and columns from your data using the remove_empty_cols() and remove_empty_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions. This cleaning process ensures that names are all lower case, word separators are underscores and so on to match the [tidyverse style guidelines](https://style.tidyverse.org). This will correct many of the errors you may have made in your naming conventions when setting up your spreadsheet or data collection software. 
 
-We use glimpse to do an initial inspection of the column names in this data set. All of the column name conform to [tidyverse style guidelines](https://style.tidyverse.org) so we do not need to run the clean_name() function from the janitor package
+```{r, include=FALSE}
+library(janitor)
 
+```
 
 ```{r}
-glimpse(raw_data)
+library(janitor)
+
+# Intial cleaning
+analytic_data <- analytic_data %>%
+  remove_empty("rows") %>%
+  remove_empty("cols") %>%
+  clean_names()
 ```
 
 
-```{r, eval = FALSE}
-view(raw_data)
-```
-
-See Figure \@ref(fig:narawdataitems)
-
-```{r narawdataitems, echo = FALSE, out.width="85%", fig.cap = "Missing values now NA"}
-knitr::include_graphics("ch_score_items/images/screenshot_raw_data_na.png")
-```
-
-
-## Handling categorical variables
+You can see the column names after the cleaning, and the corresponding data type for each column. 
 
 ```{r}
-
-# Turn all columns that are of type character into factors
-raw_data <- raw_data %>%
-  mutate(across(.cols = where(is.character),
-                .fns = as.factor))
-
+glimpse(analytic_data)
 ```
 
-We can see there was only one column that changes, but if there had been many columns that were characters they all would have changed.
 
-```{r}
-glimpse(raw_data)
-```
+### Preparing categorical variables
+
+Levels of ANOVA variables. But also, assfasd.
+
 
 It's often helpful to has id as a factor rather than a number so we add and extra command that changes this value:
 
 ```{r}
-raw_data <-raw_data %>%
+analytic_data <-analytic_data %>%
   mutate(id = as.factor(id))
 ```
+
+```{r}
+
+# Turn all columns that are of type character into factors
+analytic_data <- analytic_data %>%
+  mutate(across(.cols = where(is.character),
+                .fns = as_factor))
+
+```
+
+
+```{r}
+glimpse(analytic_data)
+```
+
+Check levels of factors. Make sure it's ok.
+
+```{r}
+analytic_data %>%
+  select(where(is.factor)) %>%
+  summary()
+```
+
+
+Adjust order of levels of factors.
+
+```{r}
+# Custom reordering of factor levels
+analytic_data <- analytic_data %>%
+  mutate(sex = fct_relevel(sex,
+                           "intersex",
+                           "female",
+                           "male"))
+```
+
+```{r}
+#  Reordering factor levels by frequency
+analytic_data <- analytic_data %>%
+  mutate(eye_color = fct_infreq(eye_color))
+```
+
+
+```{r}
+analytic_data %>%
+  select(where(is.factor)) %>%
+  summary()
+```
+
+### Checking numerical variables
+
+
+```{r, eval = FALSE}
+analytic_data %>%
+  select(where(is.numeric)) %>%
+  summary()
+```
+
+```{r, eval = TRUE, echo = FALSE}
+analytic_data %>%
+  select(esteem1, esteem2, esteem3) %>%
+  summary()
+```
+
+
+
+### Create Scale Scores
+
+Likert caveats. Depending on your research area, there are very different perspectives on how to analyze Likert-type items. The perspectives differ based on how they view the [level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement) assciated with the Likert-type items. One perspective, common in Psychology, is that the numbers corresponding to each response option are of the interval type. This mean that the psychological difference between each response option perfectly corresponds to the numerical difference between each response option. That is, the psychological difference between Strongly Agree and Moderately Agree is equal to the psychological diffference between Moderately Agree and Neutral, and so on.
+
+
 
 Now it looks like our data is ready for the creation of scale scores:
 
 ```{r}
-glimpse(raw_data)
+glimpse(analytic_data)
 ```
 
 
-## Seeing your data
 
-See the first six rows of the data with the *head* command below. If you wanted to see all of the data you would use View(raw_data). The NA values in the output indicate missing values (NA = Not Available).
-```{r,echo=TRUE,eval=TRUE}
-head(raw_data)
-```
+#### Dealing with reverse key items
 
-
-## Dealing with reverse key items
 
 Our first step is dealing with reverse key items. The way you deal with these items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
 
@@ -303,229 +368,121 @@ We need to take items that were reversed-key when the participant wrote them and
 
 In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with response options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
 
-```{r,echo=TRUE,eval=TRUE}
-raw_data <-raw_data %>%
-  mutate(SE7c = 6 - SE7)
-```
-The command above creates a new column in raw_data called SE7c that has the reverse-keyed values for SE7 in it.  You can see the new SE7c column using command below that displays the first six rows of the data. The SE7c column is at the far right of the data displayed.
 
-```{r,echo=TRUE,eval=TRUE}
-glimpse(raw_data)
+
+```{r}
+analytic_data %>%
+  select(ends_with("_rev15")) %>%
+  glimpse()
 ```
 
-We have reverse keyed one item. So now when we create our scale we will use item SE7c (the c stands for correctly coded) instead of the original item SE7. That is, we will use items SE1, SE2, SE3, SE4, SE5, SE6, **SE7c**, SE8, SE9, and SE10 to form the scale.
+```{r,echo=TRUE,eval=TRUE}
+analytic_data <- analytic_data %>% 
+  mutate(6 - across(.cols = ends_with("_rev15")) ) %>% 
+  rename_with(.fn = str_remove,
+              .cols = ends_with("_rev15"),
+              pattern = "_rev15")
+```
+The command above creates a new column in analytic_data called SE7c that has the reverse-keyed values for SE7 in it.  You can see the new SE7c column using command below that displays the first six rows of the data. The SE7c column is at the far right of the data displayed.
 
-
-**Note for a box** multiple items what it looks like
+```{r,echo=TRUE,eval=TRUE}
+glimpse(analytic_data)
+```
 
 **Note FOR A BOX **. If you had used response options numbered 0 to 4 for each item you would use the command below instead. Note that we use 4 in the command this time instead of a value one higher.
 ```{r,echo=TRUE,eval=FALSE}
-raw_data <- mutate(raw_data, SE7c = 4 - SE7) 
+analytic_data <- mutate(analytic_data, esteem7c = 4 - SE7) 
 ```
 
-## Creating the scale score
+### Creating the scale scores
 
 ```{r}
-raw_data <- raw_data %>% 
+analytic_data_items <- analytic_data
+```
+
+
+```{r}
+# confirm select will select the columns you want (and not others)
+analytic_data %>%
+  select(starts_with("esteem")) %>%
+  glimpse()
+```
+
+
+```{r}
+analytic_data <- analytic_data %>% 
   rowwise() %>% 
-  mutate(self_esteem = mean(c(SE1, SE2, SE3, SE4, SE5, SE6, SE7c, SE8, SE9, SE10),
-                            na.rm = TRUE)) %>%
-  ungroup()
+  mutate(self_esteem = mean( c_across(cols = starts_with("esteem")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("esteem"))
 ```
 
 When you see ungroup() in this context you can think of it as "turn off rowwise".
 
-We can see our data now has the self esteem column:
+We can see our data now has the self esteem column and no esteem items.
 
-```{r}
-glimpse(raw_data)
-```
-
-(Alternative code: removing ITEM 7 and using beings with: show full example)
-Think about this when creating names for your column
-
-
-## Creatinig analytic data from raw data
-
-Select only the columns you will use in your analysis:
-```{r}
-analytic_data <- raw_data %>%
-  select(id, age, sex, self_esteem)
-```
-
-We can see our new data set has only these columns of interest:
 ```{r}
 glimpse(analytic_data)
 ```
 
 
-## Wait: I need alpha!
 
-We return to the raw_data file that has the original item data to obtain Cronbach's alpha which is labeled "raw alpha" in the output.
+## confirm select will select the columns you want (and not others)
+
+```{r}
+analytic_data %>%
+  select(starts_with("jobsat")) %>%
+  glimpse()
+```
 
 
 ```{r}
-self_esteem_item_analysis <- raw_data %>%
-  select(SE1, SE2, SE3, SE4, SE5, SE6, SE7c, SE8, SE9, SE10) %>%
-  psych::alpha()
-
-print(self_esteem_item_analysis$total)
-
-# To see the full item analysis use:
-# print(self_esteem_item_analysis)
+analytic_data <- analytic_data %>% 
+  rowwise() %>% 
+  mutate(job_sat = mean( c_across(cols = starts_with("jobsat")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("jobsat"))
 ```
-
-
-## Wait: I need item correlations and descriptive statistics
-
-
-```{r, eval = FALSE}
-SE_items <- raw_data %>% 
-  select(starts_with("SE", ignore.case = FALSE))
-
-psych::describe(SE_items)
-```
-
-```{r, echo = FALSE}
-SE_items <- raw_data %>% 
-  select(starts_with("SE", ignore.case = FALSE))
-psych::describe(SE_items)[,1:5]
-```
-
-
-When you run the cor command you have to indicate how the it will handle missing the data. The options are below. You can learn more about what each one of these options means  by typing: **?cor** into the Console, this will bring up the help page for the cor command.
-
-|Missing data options for cor  |
-|-----------------------|
-| everything            |
-| all.obs               |
-| complete.obs          |
-| na.or.complete        |
-| pairwise.complete.obs |
 
 ```{r}
-SE_items %>%
-  cor(use = "pairwise.complete.obs") %>%
-  round(2)
+glimpse(analytic_data)
 ```
 
+## Congratulations you have your analytic data
 
 
-```{r, include=FALSE, eval = FALSE}
-desc_summary <- list(
-  mean  = ~mean(.x, na.rm = TRUE), 
-  sd    = ~sd(.x, na.rm = TRUE),
-  min   = ~min(.x, na.rm = TRUE),
-  max   = ~max(.x, na.rm = TRUE)
-)
-
-numeric_data <- raw_data %>% select(where(is.numeric)) %>% select(-self_esteem)
-
-row_sum <- numeric_data %>% summarise(across(everything(), desc_summary), sep = c("z"))
-
-long_summary <- row_sum %>% pivot_longer(cols = everything(),
-                        names_to = c("var", "stat"),
-                        names_sep = c("z"),
-                        values_to = "value")
-
-wide_summary <- long_summary %>% pivot_wider(names_from = stat,
-                                 values_from = value)
-
-print(wide_summary)
-  
+## Basic descriptive statistics
 
 
+### The usual suspects
 
-```
-
-
-```{r, include=FALSE, eval = FALSE}
-
-x <- raw_data %>% summarise(across(starts_with("SE", ignore.case = FALSE), 
-                              desc_summary)) 
-
-
-y <- x %>% pivot_longer(cols = everything(),
-                   names_to = c("var", "stat"),
-                   names_sep = c("_"),
-                   values_to = "value")
-
-y %>% pivot_wider(names_from = stat,
-                  values_from = value)
-
-```
-
-```{r, include=FALSE, eval = FALSE}
-y %>% pivot_wider(names_from = stat,
-                  values_from = value)
-```
-
-
-
-
-
-## Using R the old way or the new way (the tidyverse way) 
-
-
-Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these approaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
-
-#### Tibbles vs Data Frames: Why use read_csv instead of read.csv
-
-When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame.
-
-#### read.csv puts data into a data frame
+One approach is the describe() command from the psych package.
 ```{r}
-my_dataframe <- read.csv(file = "data_okcupid.csv")
-
+psych::describe(analytic_data)
 ```
 
-Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid_profiles data. It also list ALL of your data rather than just the first few rows. As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console (too much to show here).
-```{r, eval = FALSE}
-print(my_dataframe)
-```
 
-```{r, eval = TRUE, echo = FALSE}
-print(my_dataframe[1:10, ])
-```
-
-#### read_csv puts data into a tibble
-
-When you use the read_csv command the data you load is stored in the computer as a tibble. The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns.  As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
-
-
+One approach is the apa.cor.table() command from the apaTables package.
 ```{r}
-my_tibble <- read_csv(file = "data_okcupid.csv")
-
-```
-```{r}
-print(my_tibble)
-```
-
-#### Deeper differences between data frames and tibbles
-
-In short you should always use tibbles (i.e., use read_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
-
-#### Converting a tibble into a data frame
-
-This command creates a new data set called new_data_frame (use any name you want) from the tibble data.
-
-```{r}
-new_dataframe <- as.data.frame(my_tibble)
+library(apaTables)
+analytic_data %>%
+  select(where(is.numeric)) %>%
+  apa.cor.table()
 ```
 
-
-## Wait: I want to make all my summary statistics with the tidyverse
-
-The code below generates a summary table for commonly requested statistics. Using mostly the tidyverse. Hmisc package is required for the 
+The tidyverse approach is oddly long but incredibly flexible. More details on why.
 
 ```{r}
 library(tidyverse)
-# HMisc package must be installed. Library command not needed for HMisc package.
+# HMisc package must be installed. 
+# Library command not needed for HMisc package.
 
 desired_descriptives <- list(
   mean = ~mean(.x, na.rm = TRUE),
-  LL_95 = ~Hmisc::smean.cl.normal(.x)[2],
-  UL_95 = ~Hmisc::smean.cl.normal(.x)[3],
+  CI95_LL = ~Hmisc::smean.cl.normal(.x)[2],
+  CI95_UL = ~Hmisc::smean.cl.normal(.x)[3],
   sd = ~sd(.x, na.rm = TRUE),
   min = ~min(.x, na.rm = TRUE),
   max = ~max(.x, na.rm = TRUE),
@@ -554,7 +511,18 @@ summary_table_rounded <- summary_table %>%
   as.data.frame()
 
 print(summary_table_rounded)
-
-
 ```
+
+### Cronbach's alpha
+
+If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach's alphs is labelled "raw alpha" in the output.
+
+```{r, eval = TRUE}
+self_esteem_item_analysis <- analytic_data_items %>%
+  select(starts_with("esteem")) %>%
+  psych::alpha()
+
+print(self_esteem_item_analysis$total)
+```
+
 
