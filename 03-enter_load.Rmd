@@ -19,13 +19,13 @@ This chapter requires the following packages are installed:
 
 ## Objective
 
-Advice is not right or the best - but it is a system. Encourage you to evolve your own system. But perhaps not in the first few months/years of using R until you see the benneefits of this system - and correspondingly it's shortcommings.
+Advice is not right or the best - but it is a system. Encourage you to evolve your own system. But perhaps not in the first few months/years of using R until you see the benefits of this system - and correspondingly it's shortcomings.
 
 ## Context
 
 Due to a number of high profile failure to replicate study results [@cos2015] it's become increasingly clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
 
-Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. Unfortunately, some authors use these two terms interchangably and fail to make any distinction between them. I encourage you to make the distinction and the use the terms consist with use sugggested by [@patil2019].
+Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. Unfortunately, some authors use these two terms interchangeably and fail to make any distinction between them. I encourage you to make the distinction and the use the terms consist with use suggested by [@patil2019].
 
 It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
 ). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org
@@ -44,19 +44,19 @@ In Canada, the majority of university research is funded by the Federal Governme
 "Responsibilities of researchers include:
 
 - incorporating data management best practices into their research;
-- developing data management plans to guide the responsible collection, formatting, preservation and sharing of their data throughout the entire lifecycle of a research project and beyond;
+- developing data management plans to guide the responsible collection, formatting, preservation and sharing of their data throughout the entire life cycle of a research project and beyond;
 - following the requirements of applicable institutional and/or funding agency policies and professional or disciplinary standards;
-- acknowledging and citing datasets that contribute to their research; and
+- acknowledging and citing data sets that contribute to their research; and
 - staying abreast of standards and expectations of their disciplinary community."
 
-As a result of this perspective on data, it's important that you think about structuring your data for reuse by yourself and others before you collect it. Toward this end, you will see documentation of your data file via data codebooks is critical.
+As a result of this perspective on data, it's important that you think about structuring your data for reuse by yourself and others before you collect it. Toward this end, you will see documentation of your data file via data code books is critical.
 
 
 ## Begin with the end in mind
 
-In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze,  analytic data, via preprocessing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data the data the has been structured and processed so that it is ready for analyis. This pre-processing could include such things as identifying categorical variables to the computer, combining multiple items measuring the same thing into scale scale scores, among other tasks.
+In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze,  analytic data, via preprocessing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data the data the has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, combining multiple items measuring the same thing into scale scale scores, among other tasks.
 
-It's critial that you don't think of analysis of your results as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
+It's critical that you don't think of analysis of your results as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
 
 
 ```{r pipeline, echo = FALSE, out.width="85%", fig.cap = "Data science pipeline by Roger Peng."}
@@ -73,9 +73,9 @@ When conducting analyses in R it is typically necessary to have data in a format
 1. Each variable forms a column.
 2. Each observation forms a row.
 
-The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadshet is used to represent a variable.
+The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadsheet is used to represent a variable.
 
-**Between participant data**. Consider Table \@ref(tab:betweenex) which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
+**Between participant data**. Consider Table \@ref(tab:betweenex) which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the variable and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
 
 
 ```{r betweenex, echo = FALSE}
@@ -88,7 +88,7 @@ knitr::kable(
 ```
 
 
-**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within particpant data for six human particpants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the varible and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a varible, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contains the times for participants in May. The july column contains the times for participants in July, These three columns are not in a tidy data format. 
+**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the variable and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contains the times for participants in May. The july column contains the times for participants in July, These three columns are not in a tidy data format. 
 
 
 ```{r withinex, echo = FALSE}
@@ -117,12 +117,12 @@ knitr::kable(
 ```
 
 
-The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the label occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labelled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable elapsed_time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occassion) is nor do you know the dependent varible (elapsed_time.). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
+The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the label occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labeled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable elapsed_time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occasion) is nor do you know the dependent variable (elapsed_time.). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
 
 
 | Disadvantages one row per participant  | Advantages one row per participant | 
 | ---------------|------------|
-| 1) Predictor variable (*occassion*) is hidden and spread over multiple columns | 1) Easy to enter this way | 
+| 1) Predictor variable (*occasion*) is hidden and spread over multiple columns | 1) Easy to enter this way | 
 | 2) Unclear that each month is a level of the predictor variable *occasion* | |
 | 3) Dependent variable (*elapsed_time*) is not  indicated    | |
 | 4) Unclear that *elapsed_time* is the measurement in each month column | |
@@ -135,11 +135,11 @@ Why did we walk you through this technical treatment of structuring data within 
 
 ## Data collection and entry
 
-Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). Regardless of the approach it is critical to name your variables appropriately. For spreadsheet users, this mean setting of the spreadsheet the data will be recorded in with column names that are amenible to the future analyses you want to conduct. Likewise, for software uses, this means setting up the software prior to running the experiment/survey to that when the data is exported for analysis the column names you obtain are amenible to subsequent analyses approaches. Although failure to take this thoughful approach in advance can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
+Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). Regardless of the approach it is critical to name your variables appropriately. For spreadsheet users, this mean setting of the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct. Likewise, for software uses, this means setting up the software prior to running the experiment/survey to that when the data is exported for analysis the column names you obtain are amenable to subsequent analyses approaches. Although failure to take this thoughtful approach in advance can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
 ### Naming conventions
 
-To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that is uses a naming convention prior to data collection. The naming conventations suggested here are adapted from the tidyverse [style guide](https://style.tidyverse.org).
+To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that is uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse [style guide](https://style.tidyverse.org).
 
 
 * Lowercase letters only
@@ -148,9 +148,9 @@ To make your life easier down the road, it is critical you set up your spreadshe
 
 * Avoid short uncontextualized variable names like q1, q2, q3, etc.
 
-* Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unqiue item prefixes so that it will easy to select with those columns using start_with() in wat that you don't accidentially get additionally columns you don't want - that have a similar prefix. See Likert-type item section below for details.
+* Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start_with() in that you don't accidentally get additionally columns you don't want - that have a similar prefix. See Likert-type item section below for details.
 
-* If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-particpant ANOVA section below for details.
+* If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.
 
 ### Likert-type items
 
@@ -162,11 +162,11 @@ A Likert-type item is typically composed of a statement that participants are as
 
 * **Use appropriate item names.** As described in the naming convention section, use moderate length names with different labels for each subscale.
 
-* **Use moderate length column names unique to each subscale**. Imagine you have a survey with an 18-item commitment scale [@meyer1993commitment] composed of three 6-item subscales: affective, normative, and continuance commitment. It would be a poor choice to prefix the labels of all 18 columns in your data with "commit" such that the names would be commit1, commit2, commit3, etc. The problem with this approach is that it fails to distinguishing between the three subscales in naming convention; making it impossible to select the items for a single subscale using starts_with(). A better, but still poor choice for a naming convention would be use use a two letter prefix for the three scale such ac, nc, and cc. This would result in names for the columns like ac1, ac2, ac3, etc. This is an improvement because you could apparently (but likely not) select the columns using starts_with("ac"). The problem with these short names is that there could be many columns in data set that start with "ac" beside the affective commitment items. You might want to select the affective commtiment items using starts_with("ac"); but you would get all the affective commitment item columns but also all the columns measuring other variables that also start with "ac". Therefore, it's a good idea to use a moderate length unique prefix for column names. For example, you might use prefixes like affectcom, normcom, and contincom for the three subscales. This would create column names like affectcom1, affectcom2, affectcom3, etc. These column prefixes are unlikely to be duplicated in other places in your column name conventions making it easy to select those columns using a command like starts_with("affectcom").
+* **Use moderate length column names unique to each subscale**. Imagine you have a survey with an 18-item commitment scale [@meyer1993commitment] composed of three 6-item subscales: affective, normative, and continuance commitment. It would be a poor choice to prefix the labels of all 18 columns in your data with "commit" such that the names would be commit1, commit2, commit3, etc. The problem with this approach is that it fails to distinguishing between the three subscales in naming convention; making it impossible to select the items for a single subscale using starts_with(). A better, but still poor choice for a naming convention would be use use a two letter prefix for the three scale such ac, nc, and cc. This would result in names for the columns like ac1, ac2, ac3, etc. This is an improvement because you could apparently (but likely not) select the columns using starts_with("ac"). The problem with these short names is that there could be many columns in data set that start with "ac" beside the affective commitment items. You might want to select the affective commitment items using starts_with("ac"); but you would get all the affective commitment item columns but also all the columns measuring other variables that also start with "ac". Therefore, it's a good idea to use a moderate length unique prefix for column names. For example, you might use prefixes like affectcom, normcom, and contincom for the three subscales. This would create column names like affectcom1, affectcom2, affectcom3, etc. These column prefixes are unlikely to be duplicated in other places in your column name conventions making it easy to select those columns using a command like starts_with("affectcom").
 
-* **Indicate in the item name if the item is reversed keyed ** Sometimes with Likert-type items, an item is reverse keyed. For example, on a job satisfaction scale participants will typically respond to items that reflect job satisfaction using the scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. Higher numbers indicate more job satisfaction. Sometimes however, some items will use the same 1 to 5 response scale but be worded "I hate my job". Responding with a 5 to this item would indicate high job disatsifaction not high job satisfaction - to the response will need to be flipped in your analysis script after data collection (i.e., 1 need to become a 5 and vica versa). To make it easier to do so, you should indicate if an item is reverse keyed in the item name. The proceedure for doing so is outlined in the next point.  
+* **Indicate in the item name if the item is reversed keyed ** Sometimes with Likert-type items, an item is reverse keyed. For example, on a job satisfaction scale participants will typically respond to items that reflect job satisfaction using the scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. Higher numbers indicate more job satisfaction. Sometimes however, some items will use the same 1 to 5 response scale but be worded "I hate my job". Responding with a 5 to this item would indicate high job dissatisfaction not high job satisfaction - to the response will need to be flipped in your analysis script after data collection (i.e., 1 need to become a 5 and vice versa). To make it easier to do so, you should indicate if an item is reverse keyed in the item name. The procedure for doing so is outlined in the next point.  
 
-* **Indicate in the item name the range for reverse key items. ** If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reveresed keyed on scale using a 1 to 5 response format you might name the item: jobsat3_rev15. The suffix "_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
+* **Indicate in the item name the range for reverse key items. ** If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reversed keyed on scale using a 1 to 5 response format you might name the item: jobsat3_rev15. The suffix "_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
 
 * If you collect items over multiple time points prefix the time and the xxx show both a time prefix and reverse suffix.
 
@@ -174,16 +174,16 @@ A Likert-type item is typically composed of a statement that participants are as
 
 ### ANOVA between-participant levels
 
-Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your speadsheet - likewise in yoru survey program. Likewise, for between particpant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
+Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your spreadsheet - likewise in your survey program. Likewise, for between participant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
 
 
 ### ANOVA within-participant levels
 
-If you have a sstudy that involves a within-participant ANOVA. 
+If you have a study that involves a within-participant ANOVA. 
 
-One-way repeated meaure predictor.  == See example above with run times.
+One-way repeated measure predictor.  == See example above with run times.
 
-Multiway repeates measures predictors. If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. For example, if imagine you are a food researcher interested in taste ratings as a dependent various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attemps to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables.
+Multi-way repeated measures predictors. If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. For example, if imagine you are a food researcher interested in taste ratings as a dependent various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables.
 
 ### Other types of information.
 education, income, etc
@@ -253,7 +253,7 @@ library(janitor)
 ```{r}
 library(janitor)
 
-# Intial cleaning
+# Initial cleaning
 analytic_data <- analytic_data %>%
   remove_empty("rows") %>%
   remove_empty("cols") %>%
@@ -270,7 +270,7 @@ glimpse(analytic_data)
 
 ### Preparing categorical variables
 
-Levels of ANOVA variables. But also, assfasd.
+Levels of ANOVA variables. But also, remember.
 
 
 It's often helpful to has id as a factor rather than a number so we add and extra command that changes this value:
@@ -346,7 +346,7 @@ analytic_data %>%
 
 ### Create Scale Scores
 
-Likert caveats. Depending on your research area, there are very different perspectives on how to analyze Likert-type items. The perspectives differ based on how they view the [level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement) assciated with the Likert-type items. One perspective, common in Psychology, is that the numbers corresponding to each response option are of the interval type. This mean that the psychological difference between each response option perfectly corresponds to the numerical difference between each response option. That is, the psychological difference between Strongly Agree and Moderately Agree is equal to the psychological diffference between Moderately Agree and Neutral, and so on.
+Likert caveats. Depending on your research area, there are very different perspectives on how to analyze Likert-type items. The perspectives differ based on how they view the [level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement) associated with the Likert-type items. One perspective, common in Psychology, is that the numbers corresponding to each response option are of the interval type. This mean that the psychological difference between each response option perfectly corresponds to the numerical difference between each response option. That is, the psychological difference between Strongly Agree and Moderately Agree is equal to the psychological difference between Moderately Agree and Neutral, and so on.
 
 
 
@@ -515,14 +515,13 @@ print(summary_table_rounded)
 
 ### Cronbach's alpha
 
-If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach's alphs is labelled "raw alpha" in the output.
+If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach's alpha is labeled "raw alpha" in the output.
 
 ```{r, eval = TRUE}
-self_esteem_item_analysis <- analytic_data_items %>%
+rxx_alpha <- analytic_data_items %>%
   select(starts_with("esteem")) %>%
   psych::alpha()
 
-print(self_esteem_item_analysis$total)
+print(rxx_alpha$total)
 ```
-
 
