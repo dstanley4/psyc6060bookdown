@@ -168,8 +168,9 @@ A Likert-type item is typically composed of a statement that participants are as
 
 * **Indicate in the item name the range for reverse key items. ** If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reversed keyed on scale using a 1 to 5 response format you might name the item: jobsat3_rev15. The suffix "_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
 
-* If you collect items over multiple time points prefix the time and the xxx show both a time prefix and reverse suffix.
+* If you collect items over multiple time points use a prefix with the 
 
+prefix the time and the xxx show both a time prefix and reverse suffix.
 
 
 ### ANOVA between-participant levels
@@ -408,14 +409,25 @@ analytic_data %>%
   glimpse()
 ```
 
+```{r}
+# confirm select will select the columns you want (and not others)
+analytic_data %>%
+  select(starts_with("jobsat")) %>%
+  glimpse()
+```
+
 
 ```{r}
 analytic_data <- analytic_data %>% 
   rowwise() %>% 
-  mutate(self_esteem = mean( c_across(cols = starts_with("esteem")),
+  mutate(self_esteem = mean(c_across(starts_with("esteem")),
+                               na.rm = TRUE)) %>%
+  mutate(job_sat = mean(c_across(starts_with("jobsat")),
                                na.rm = TRUE)) %>%
   ungroup() %>%
-  select(-starts_with("esteem"))
+  select(-starts_with("esteem")) %>%
+  select(-starts_with("jobsat")) 
+  
 ```
 
 When you see ungroup() in this context you can think of it as "turn off rowwise".
@@ -426,29 +438,6 @@ We can see our data now has the self esteem column and no esteem items.
 glimpse(analytic_data)
 ```
 
-
-
-## confirm select will select the columns you want (and not others)
-
-```{r}
-analytic_data %>%
-  select(starts_with("jobsat")) %>%
-  glimpse()
-```
-
-
-```{r}
-analytic_data <- analytic_data %>% 
-  rowwise() %>% 
-  mutate(job_sat = mean( c_across(cols = starts_with("jobsat")),
-                               na.rm = TRUE)) %>%
-  ungroup() %>%
-  select(-starts_with("jobsat"))
-```
-
-```{r}
-glimpse(analytic_data)
-```
 
 ## Congratulations you have your analytic data
 
@@ -523,5 +512,100 @@ rxx_alpha <- analytic_data_items %>%
   psych::alpha()
 
 print(rxx_alpha$total)
+```
+
+
+
+## Walk though: Surveys with multiple occasions
+
+```{r}
+library(tidyverse)
+
+raw_data_survey <- read_csv("data_item_time.csv")
+
+analytic_data_survey <- raw_data_survey
+
+```
+
+
+```{r}
+glimpse(analytic_data_survey)
+```
+
+Handle categorical variables:
+
+```{r}
+analytic_data_survey <-analytic_data_survey %>%
+  mutate(id = as.factor(id))
+
+# Turn all columns that are of type character into factors
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(across(.cols = where(is.character),
+                .fns = as_factor))
+
+
+# Custom reordering of factor levels for sex
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(sex = fct_relevel(sex,
+                           "intersex",
+                           "female",
+                           "male"))
+
+#  Reordering factor levels by frequency for eye color
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(eye_color = fct_infreq(eye_color))
+```
+
+
+Create scale scores:
+
+```{r}
+
+# Reverse code items
+analytic_data_survey <- analytic_data_survey %>% 
+  mutate(6 - across(.cols = ends_with("_rev15")) ) %>% 
+  rename_with(.fn = str_remove,
+              .cols = ends_with("_rev15"),
+              pattern = "_rev15")
+
+
+analytic_data_survey <- analytic_data_survey %>% 
+  rowwise() %>% 
+  mutate(esteem_t1 = mean(c_across(starts_with("t1_esteem")),
+                               na.rm = TRUE)) %>%
+  mutate(esteem_t2 = mean(c_across(starts_with("t2_esteem")),
+                               na.rm = TRUE)) %>%
+  mutate(jobsat_t1 = mean(c_across(starts_with("t1_jobsat")),
+                               na.rm = TRUE)) %>%
+  mutate(jobsat_t2 = mean(c_across(starts_with("t2_jobsat")),
+                               na.rm = TRUE)) %>%
+  ungroup() %>%
+  select(-starts_with("t1_esteem")) %>%
+  select(-starts_with("t2_esteem")) %>%
+  select(-starts_with("t1_jobsat")) %>%
+  select(-starts_with("t2_jobsat"))
+
+```
+
+```{r}
+glimpse(analytic_data_survey)
+```
+
+But now comes the complicated point wher eyou need to pivot the data to longer.
+
+```{r}
+print(analytic_data_survey)
+```
+
+```{r}
+analytic_survey_tidy <- analytic_data_survey %>%
+  pivot_longer(esteem_t1:jobsat_t2,
+               names_to = c(".value", "time"),
+               names_pattern = "(.*)_(t.)"
+  )
+```
+
+```{r}
+print(analytic_survey_tidy)
 ```
 

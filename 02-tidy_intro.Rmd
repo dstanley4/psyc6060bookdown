@@ -29,7 +29,7 @@ The objective of this chapter is to familiarize you with some key commands in th
 All of the commands in this chapter should be typed into the Console within R. If you see a command split over multiple lines, use SHIFT-RETURN or SHIFT-ENTER to move the next line that is part of the same command. 
 
 
-## Basic Tidyverse Commands
+## Basic tidyverse commands
 
 ```{r, eval = FALSE}
 library(tidyverse)
@@ -196,7 +196,7 @@ Notice that the glimpse() command reveals that after we use the mutate() command
 glimpse(okcupid_profiles)
 ```
 
-## Advanced Tidyverse Commands
+## Advanced tidyverse commands
 
 In this advanced selection we will revisit the commands from the basic tidyverse section but use more complicated code to either select or apply an action to more than one column at a time. We will indicate the columns that we want to select or apply an action to using: starts_with(), ends_with(), contains(), matches(), or where().  The first four of these are used to indicate columns based on column names. In contrast, the last command, where(), i sued to indicate the columns we want base on the column type (numeric, character, factor, etc.). You can learn more about each of these commands by simply typing into the console a question mark followed by the function name  (e.g., ?where) and then pressing return/enter. This will provide the help page for that function in Help tab in the lower right of R Studio. Note that you must have first activiated the tidyverse via library command for the help file to be accessible.
 
@@ -450,22 +450,27 @@ data_exp %>%
 ```
 
 
-## Using R the old way or the new way (the tidyverse way) 
+## Base R vs tidyverse
 
+All of the commands used to this point in the chapter have been the tidyverse appraoch to using. That is the approach we will normally use. However, it's important to note that there is another way of using R, called base R. 
 
-Previously we noted that there is an older way of using R (base R) and the new way of using R (the tidyverse) that we will use. Sometimes students have problems with their code when they mix and match these approaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
+Sometimes students have problems with their code when they mix and match these approaches using a bit of both. We will be using the tidyverse approach to using R but on the internet you will often see sample code that uses the older base R approach. A bit of background knowledge is helpful for understanding why we do things one way (e.g., read_csv with the tidyverse) instead of another (e.g., read.csv with base R). 
 
-### Tibbles vs Data Frames: Why use read_csv instead of read.csv
+### Tibbles vs. data frames
 
-When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame.
+When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame. This contrasts with the newer tidyverse approach to representing data in the computer called a tibble - which is just an newer more advanced version of the data frame.
 
-### read.csv puts data into a data frame
+### read.csv and data frames
+
+When you read data into R using the command read.csv (with a period) you load the data into a data frame (base R).
+
 ```{r}
 my_dataframe <- read.csv(file = "data_okcupid.csv")
 
 ```
 
-Notice that when you print a data frame it does NOT show you the number of rows or columns above the data like our example did with the okcupid_profiles data. It also list ALL of your data rather than just the first few rows. As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console (too much to show here).
+Notice that when you print a data frame it does not show you the number of rows or columns above the data like our example did with the okcupid_profiles data. Likewise, it does not show you the type of data in each column (e..g, dbl, fct, chr. But, it also list all of your data rather than just the first few rows (as the tibble does). As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console with a data frame (too much to show here).
+
 ```{r, eval = FALSE}
 print(my_dataframe)
 ```
@@ -474,28 +479,26 @@ print(my_dataframe)
 print(my_dataframe[1:10, ])
 ```
 
-### read_csv puts data into a tibble
-
-When you use the read_csv command the data you load is stored in the computer as a tibble. The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns.  As well, the tibble only provides the first few rows of output so it doesn't fill your screen.
-
+### read_csv and tibbles
+When you read data into R using the command read_csv (with an underscore) you load the data into a tibble (tidyverse).
 
 ```{r}
 my_tibble <- read_csv(file = "data_okcupid.csv")
 
 ```
+
+The tibble is modern version of the data frame. Notice that when you print a tibble it DOES show you the number of rows and columns. As well, it shows you the type of data in each column. Importantly, the tibble only provides the first few rows of output so it doesn't fill your screen.
+
+
 ```{r}
 print(my_tibble)
 ```
 
-### Deeper differences between data frames and tibbles
+In short you should always use tibbles (i.e., use read_csv not read.csv). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you in the next.
 
-In short you should always use tibbles (i.e., use read_csv) - they are simply enhanced data frames (i.e., the new version of the data frame). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below:
-
-### Converting a tibble into a data frame
-
-This command creates a new data set called new_data_frame (use any name you want) from the tibble data.
 
 ```{r}
+# Create a data frame from a tibble
 new_dataframe <- as.data.frame(my_tibble)
 ```
 
