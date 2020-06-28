@@ -190,7 +190,115 @@ Multi-way repeated measures predictors. If you have a column name that represent
 education, income, etc
 
 
-## Raw data
+## Experiments: Raw to Analytic Data
+
+### Between-participant designs
+
+
+### Within-participant designs
+
+#### One repeated measures variable
+
+
+#### Multiple repeated measures variables
+```{r, include = FALSE}
+my_missing_value_codes <- c("-999", "", "NA")
+
+raw_data_food <- read_csv(file = "data_food.csv",
+                     na = my_missing_value_codes)
+
+analytic_data_food <- raw_data_food
+
+```
+```{r, eval = FALSE}
+my_missing_value_codes <- c("-999", "", "NA")
+
+raw_data_food <- read_csv(file = "data_food.csv",
+                     na = my_missing_value_codes)
+
+analytic_data_food <- raw_data_food
+
+```
+
+```{r, include=FALSE}
+library(janitor)
+
+```
+
+```{r}
+library(janitor)
+
+# Initial cleaning
+analytic_data_food <- analytic_data_food %>%
+  remove_empty("rows") %>%
+  remove_empty("cols") %>%
+  clean_names()
+```
+
+
+```{r}
+glimpse(analytic_data_food)
+```
+
+
+
+
+```{r}
+print(analytic_data_food)
+```
+
+```{r}
+analytic_food_tidy <- analytic_data_food %>%
+  pivot_longer(pizza_hot:burger_cold,
+               names_to = c("food", "temperature"),
+               names_sep = "_",
+               values_to = "taste"
+  )
+```
+
+```{r}
+print(analytic_food_tidy)
+```
+
+```{r}
+
+# Turn all columns that are of type character into factors
+analytic_food_tidy <- analytic_food_tidy %>%
+  mutate(across(.cols = where(is.character),
+                .fns = as_factor))
+
+# sex is numeric so must be done the hard way
+analytic_food_tidy <- analytic_food_tidy %>%
+  mutate(sex = as_factor(sex))
+
+# establish that 1 indicates males and 2 indicates females
+analytic_food_tidy <- analytic_food_tidy %>%
+  mutate(sex = fct_recode(sex, 
+                          male = "1",
+                          female = "2"))
+
+
+# see order of factors
+analytic_food_tidy %>%
+  select(where(is.factor)) %>%
+  summary()
+
+# set order of factors for x-axis or legend
+analytic_food_tidy <- analytic_food_tidy %>%
+  mutate(sex = fct_relevel(sex,
+                           "female",
+                           "male"))
+
+# see order of factors
+analytic_food_tidy %>%
+  select(where(is.factor)) %>%
+  summary()
+
+```
+
+
+
+## Surveys: Raw to Analytic Data
 
 Even assuming you did everything right there is still a fair amount of work to get things started paragraph here...
 
@@ -516,9 +624,9 @@ print(rxx_alpha$total)
 
 
 
-## Walk though: Surveys with multiple occasions
+## Surveys: Multiple Occasions
 
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
 
 raw_data_survey <- read_csv("data_item_time.csv")
@@ -527,6 +635,14 @@ analytic_data_survey <- raw_data_survey
 
 ```
 
+```{r, eval=FALSE}
+library(tidyverse)
+
+raw_data_survey <- read_csv("data_item_time.csv")
+
+analytic_data_survey <- raw_data_survey
+
+```
 
 ```{r}
 glimpse(analytic_data_survey)
