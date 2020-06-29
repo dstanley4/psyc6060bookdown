@@ -481,7 +481,7 @@ analytic_data_food <- analytic_data_food %>%
 You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
 
 ```{r}
-glimpse(analytic_data_survey)
+glimpse(analytic_data_food)
 ```
 
 ### Converting categorical variables to factors
@@ -490,14 +490,14 @@ Following initial cleaning, identify categorical variables as factors. If you pl
 
 
 ```{r}
-glimpse(analytic_data_survey)
+glimpse(analytic_data_food)
 ```
 
 You can quickly convert all character columns to factors using the text below:
 
 ```{r}
 # Turn all columns that are of type character into factors
-analytic_data_survey <- analytic_data_survey %>%
+analytic_data_food <- analytic_data_food %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
 
@@ -506,14 +506,14 @@ analytic_data_survey <- analytic_data_survey %>%
 The participant identification number in the id column is a numeric column, so we have handle that column on it's own. 
 
 ```{r}
-analytic_data_survey <-analytic_data_survey %>%
+analytic_data_food <-analytic_data_food %>%
   mutate(id = as.factor(id))
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
 
 ```{r}
-glimpse(analytic_data_survey)
+glimpse(analytic_data_food)
 ```
 
 Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
@@ -524,7 +524,7 @@ Inspect the output of the glimpse() command and make sure you have coverted all 
 The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
 
 ```{r}
-analytic_data_survey %>%
+analytic_data_food %>%
   select(where(is.factor)) %>%
   summary()
 ```
@@ -532,31 +532,21 @@ analytic_data_survey %>%
 
 Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: intersex, female, male. 
 
-```{r}
+```{r, eval = FALSE}
 # Custom reordering of factor levels
-analytic_data_survey <- analytic_data_survey %>%
+analytic_data_food <- analytic_data_food %>%
   mutate(sex = fct_relevel(sex,
-                           "intersex",
                            "female",
                            "male"))
 ```
 
-For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:
-```{r}
-#  Reordering factor levels by frequency
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(eye_color = fct_infreq(eye_color))
-```
 
 You can see the new order of the factor levels with summary():
 ```{r}
-analytic_data_survey %>%
+analytic_data_food %>%
   select(where(is.factor)) %>%
   summary()
 ```
-
-
-
 
 
 ```{r}
@@ -762,7 +752,7 @@ Likert caveats. Depending on your research area, there are very different perspe
 Now it looks like our data is ready for the creation of scale scores:
 
 ```{r}
-glimpse(analytic_data)
+glimpse(analytic_data_survey)
 ```
 
 
@@ -780,13 +770,13 @@ In this data file the only reverse-key item was SE7 (we known this from when we 
 
 
 ```{r}
-analytic_data %>%
+analytic_data_survey %>%
   select(ends_with("_rev15")) %>%
   glimpse()
 ```
 
 ```{r,echo=TRUE,eval=TRUE}
-analytic_data <- analytic_data %>% 
+analytic_data_survey <- analytic_data_survey %>% 
   mutate(6 - across(.cols = ends_with("_rev15")) ) %>% 
   rename_with(.fn = str_remove,
               .cols = ends_with("_rev15"),
@@ -795,38 +785,38 @@ analytic_data <- analytic_data %>%
 The command above creates a new column in analytic_data called SE7c that has the reverse-keyed values for SE7 in it.  You can see the new SE7c column using command below that displays the first six rows of the data. The SE7c column is at the far right of the data displayed.
 
 ```{r,echo=TRUE,eval=TRUE}
-glimpse(analytic_data)
+glimpse(analytic_data_survey)
 ```
 
 **Note FOR A BOX **. If you had used response options numbered 0 to 4 for each item you would use the command below instead. Note that we use 4 in the command this time instead of a value one higher.
 ```{r,echo=TRUE,eval=FALSE}
-analytic_data <- mutate(analytic_data, esteem7c = 4 - SE7) 
+analytic_data_survey <- mutate(analytic_data_survey, esteem7c = 4 - SE7) 
 ```
 
 ### Creating the scale scores
 
 ```{r}
-analytic_data_items <- analytic_data
+analytic_data_items <- analytic_data_survey
 ```
 
 
 ```{r}
 # confirm select will select the columns you want (and not others)
-analytic_data %>%
+analytic_data_survey %>%
   select(starts_with("esteem")) %>%
   glimpse()
 ```
 
 ```{r}
 # confirm select will select the columns you want (and not others)
-analytic_data %>%
+analytic_data_survey %>%
   select(starts_with("jobsat")) %>%
   glimpse()
 ```
 
 
 ```{r}
-analytic_data <- analytic_data %>% 
+analytic_data_survey <- analytic_data_survey %>% 
   rowwise() %>% 
   mutate(self_esteem = mean(c_across(starts_with("esteem")),
                                na.rm = TRUE)) %>%
@@ -843,7 +833,7 @@ When you see ungroup() in this context you can think of it as "turn off rowwise"
 We can see our data now has the self esteem column and no esteem items.
 
 ```{r}
-glimpse(analytic_data)
+glimpse(analytic_data_survey)
 ```
 
 
@@ -957,14 +947,14 @@ print(analytic_survey_tidy)
 
 One approach is the describe() command from the psych package.
 ```{r}
-psych::describe(analytic_data)
+psych::describe(analytic_data_survey)
 ```
 
 
 One approach is the apa.cor.table() command from the apaTables package.
 ```{r}
 library(apaTables)
-analytic_data %>%
+analytic_data_survey %>%
   select(where(is.numeric)) %>%
   apa.cor.table()
 ```
@@ -986,7 +976,7 @@ desired_descriptives <- list(
   n = ~sum(!is.na(.x))
 )
 
-row_sum <- analytic_data %>% 
+row_sum <- analytic_data_survey %>% 
   summarise(across(.cols = where(is.numeric),
                    .fns =  desired_descriptives,
                    .names = "{col}___{fn}"))
