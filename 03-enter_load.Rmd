@@ -556,82 +556,6 @@ glimpse(analytic_data)
 ```
 
 
-## Congratulations you have your analytic data
-
-
-## Basic descriptive statistics
-
-
-### The usual suspects
-
-One approach is the describe() command from the psych package.
-```{r}
-psych::describe(analytic_data)
-```
-
-
-One approach is the apa.cor.table() command from the apaTables package.
-```{r}
-library(apaTables)
-analytic_data %>%
-  select(where(is.numeric)) %>%
-  apa.cor.table()
-```
-
-The tidyverse approach is oddly long but incredibly flexible. More details on why.
-
-```{r}
-library(tidyverse)
-# HMisc package must be installed. 
-# Library command not needed for HMisc package.
-
-desired_descriptives <- list(
-  mean = ~mean(.x, na.rm = TRUE),
-  CI95_LL = ~Hmisc::smean.cl.normal(.x)[2],
-  CI95_UL = ~Hmisc::smean.cl.normal(.x)[3],
-  sd = ~sd(.x, na.rm = TRUE),
-  min = ~min(.x, na.rm = TRUE),
-  max = ~max(.x, na.rm = TRUE),
-  n = ~sum(!is.na(.x))
-)
-
-row_sum <- analytic_data %>% 
-  summarise(across(.cols = where(is.numeric),
-                   .fns =  desired_descriptives,
-                   .names = "{col}___{fn}"))
-
-long_summary <- row_sum %>%
-  pivot_longer(cols = everything(),
-               names_to = c("var", "stat"),
-               names_sep = c("___"),
-               values_to = "value")
-
-summary_table <- long_summary %>% 
-  pivot_wider(names_from = stat,
-              values_from = value)
-
-summary_table_rounded <- summary_table %>%
-  mutate(across(.cols = where(is.numeric),
-                .fns= round,
-                digits = 3)) %>%
-  as.data.frame()
-
-print(summary_table_rounded)
-```
-
-### Cronbach's alpha
-
-If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach's alpha is labeled "raw alpha" in the output.
-
-```{r, eval = TRUE}
-rxx_alpha <- analytic_data_items %>%
-  select(starts_with("esteem")) %>%
-  psych::alpha()
-
-print(rxx_alpha$total)
-```
-
-
 
 ## Surveys: Multiple Occasions
 
@@ -733,4 +657,78 @@ analytic_survey_tidy <- analytic_data_survey %>%
 ```{r}
 print(analytic_survey_tidy)
 ```
+
+
+## Basic descriptive statistics
+
+
+### The usual suspects
+
+One approach is the describe() command from the psych package.
+```{r}
+psych::describe(analytic_data)
+```
+
+
+One approach is the apa.cor.table() command from the apaTables package.
+```{r}
+library(apaTables)
+analytic_data %>%
+  select(where(is.numeric)) %>%
+  apa.cor.table()
+```
+
+The tidyverse approach is oddly long but incredibly flexible. More details on why.
+
+```{r}
+library(tidyverse)
+# HMisc package must be installed. 
+# Library command not needed for HMisc package.
+
+desired_descriptives <- list(
+  mean = ~mean(.x, na.rm = TRUE),
+  CI95_LL = ~Hmisc::smean.cl.normal(.x)[2],
+  CI95_UL = ~Hmisc::smean.cl.normal(.x)[3],
+  sd = ~sd(.x, na.rm = TRUE),
+  min = ~min(.x, na.rm = TRUE),
+  max = ~max(.x, na.rm = TRUE),
+  n = ~sum(!is.na(.x))
+)
+
+row_sum <- analytic_data %>% 
+  summarise(across(.cols = where(is.numeric),
+                   .fns =  desired_descriptives,
+                   .names = “{col}___{fn}”))
+
+long_summary <- row_sum %>%
+  pivot_longer(cols = everything(),
+               names_to = c(“var”, “stat”),
+               names_sep = c(“___”),
+               values_to = “value”)
+
+summary_table <- long_summary %>% 
+  pivot_wider(names_from = stat,
+              values_from = value)
+
+summary_table_rounded <- summary_table %>%
+  mutate(across(.cols = where(is.numeric),
+                .fns= round,
+                digits = 3)) %>%
+  as.data.frame()
+
+print(summary_table_rounded)
+```
+
+### Cronbach’s alpha
+
+If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach’s alpha is labeled “raw alpha” in the output.
+
+```{r, eval = TRUE}
+rxx_alpha <- analytic_data_items %>%
+  select(starts_with(“esteem”)) %>%
+  psych::alpha()
+
+print(rxx_alpha$total)
+```
+
 
