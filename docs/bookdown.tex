@@ -202,7 +202,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-06-28}
+\date{2020-06-29}
 
 \begin{document}
 \maketitle
@@ -2092,6 +2092,8 @@ tidyverse\tabularnewline
 
 Advice is not right or the best - but it is a system. Encourage you to evolve your own system. But perhaps not in the first few months/years of using R until you see the benefits of this system - and correspondingly it's shortcomings.
 
+Warning you need mastery of the Handing data in the tidyvsere chapter before doing this chapter.
+
 \hypertarget{context}{%
 \section{Context}\label{context}}
 
@@ -2313,10 +2315,8 @@ A Likert-type item is typically composed of a statement that participants are as
 \item
   \textbf{Indicate in the item name the range for reverse key items. } If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reversed keyed on scale using a 1 to 5 response format you might name the item: jobsat3\_rev15. The suffix "\_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
 \item
-  If you collect items over multiple time points use a prefix with the
+  If you collect items over multiple time points use a prefix with a short code to indicate the time followed by and underscore. For example, if you had a multi-item self-esteem scale you might call the column for the firs time ``t1\_esteem1\_rev15''. This indicate that you have for time 1 (t1), the first self-esteem item (esteem1) and that item is reverse keyed on a 1 to 5 scale.
 \end{itemize}
-
-prefix the time and the xxx show both a time prefix and reverse suffix.
 
 \hypertarget{anova-between-participant-levels}{%
 \subsection{ANOVA between-participant levels}\label{anova-between-participant-levels}}
@@ -2337,24 +2337,15 @@ Multi-way repeated measures predictors. If you have a column name that represent
 
 education, income, etc
 
-\hypertarget{raw-data}{%
-\section{Raw data}\label{raw-data}}
+\hypertarget{working-the-examples}{%
+\subsection{Working the examples}\label{working-the-examples}}
 
-Even assuming you did everything right there is still a fair amount of work to get things started paragraph here\ldots{}
+Below we present example scripts transforming raw data to analytic data for various study designs (experimental and survey). These scripts illustrate the value of using the naming conventations outlined previously. Follow along with the projects by placing the data in your R Studio project folder and typing your own script. Resist the urge to cut and paste from this document. After learning and teaching scripting for years, there we've found there is substantial bennefit to the process of simply typing the script yourself.
 
-We begin by examining the data as originally entered into a spreadsheet. In Figure \ref{fig:rawdataitems} you see a screen shot of the initial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
-
-\begin{figure}
-\includegraphics[width=0.85\linewidth]{ch_score_items/images/screenshot_raw_data} \caption{Raw data for item scoring}\label{fig:rawdataitems}
-\end{figure}
-
-\hypertarget{loading-raw-data}{%
-\subsection{Loading raw data}\label{loading-raw-data}}
-
-I suggest you begin every R Studio task in the following way:
+Setup an R Studio project using one of these approaches:
 
 R Studio in the Cloud Assignment
-1. The data should be in the assignment project automatically
+1. The data should be in the assignment project automatically. Just start the assignment.
 
 R Studio in the Cloud, custom project
 1. Create a new Project using the web interface
@@ -2370,6 +2361,756 @@ R Studio Local Computer, custom project
 
 Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.
 
+As you read each of these example scripts pay attention to the redundancy. Regardless of the of the type of data you analyze there is a great deal of consistency in terms of how all of the scripts start.
+
+Pay particular attention to XXXX where the reearcher assistant didn't fllow and sex as 1 and
+
+\hypertarget{experiment-between-participant}{%
+\section{Experiment: Between-participant}\label{experiment-between-participant}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Date: YYYY-MM-DD}
+\CommentTok{# Name: your name here}
+\CommentTok{# Example: Between-participant experiment}
+
+\CommentTok{# Load data}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{my_missing_value_codes <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"-999"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{)}
+
+\NormalTok{raw_data_beween <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_ex_between.csv"}\NormalTok{,}
+                     \DataTypeTok{na =}\NormalTok{ my_missing_value_codes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   id = col_double(),
+##   sex = col_character(),
+##   elapsed_time = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_between <-}\StringTok{ }\NormalTok{raw_data_beween}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(janitor)}
+
+\CommentTok{# Initial cleaning}
+\NormalTok{analytic_data_between <-}\StringTok{ }\NormalTok{analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"rows"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"cols"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{clean_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_between)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 3
+## $ id           <dbl> 1, 2, 3, 4, 5, 6
+## $ sex          <chr> "male", "female", "male", "female"...
+## $ elapsed_time <dbl> 40, 35, 38, 33, 42, 36
+\end{verbatim}
+
+\hypertarget{converting-categorical-variables-to-factors}{%
+\subsection{Converting categorical variables to factors}\label{converting-categorical-variables-to-factors}}
+
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character. We have one variable sex that is categorical that is of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_between)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 3
+## $ id           <dbl> 1, 2, 3, 4, 5, 6
+## $ sex          <chr> "male", "female", "male", "female"...
+## $ elapsed_time <dbl> 40, 35, 38, 33, 42, 36
+\end{verbatim}
+
+You can quickly convert all character columns to factors using the text below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Turn all columns that are of type character into factors}
+\NormalTok{analytic_data_between <-}\StringTok{ }\NormalTok{analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
+                \DataTypeTok{.fns =}\NormalTok{ as_factor))}
+\end{Highlighting}
+\end{Shaded}
+
+The participant identification number in the id column is a numeric column, so we have handle that column on it's own.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_between <-analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\end{Highlighting}
+\end{Shaded}
+
+You can ensure all of these columns are now factors using the glimpse() command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_between)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 3
+## $ id           <fct> 1, 2, 3, 4, 5, 6
+## $ sex          <fct> male, female, male, female, male, ...
+## $ elapsed_time <dbl> 40, 35, 38, 33, 42, 36
+\end{verbatim}
+
+Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+
+\hypertarget{levels-of-factors}{%
+\subsection{Levels of factors}\label{levels-of-factors}}
+
+The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex   
+##  1:1   male  :3  
+##  2:1   female:3  
+##  3:1             
+##  4:1             
+##  5:1             
+##  6:1
+\end{verbatim}
+
+The sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Custom reordering of factor levels}
+\NormalTok{analytic_data_between <-}\StringTok{ }\NormalTok{analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_relevel}\NormalTok{(sex,}
+                           \StringTok{"female"}\NormalTok{,}
+                           \StringTok{"male"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You can see the new order of the factor levels with summary():
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_between }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex   
+##  1:1   female:3  
+##  2:1   male  :3  
+##  3:1             
+##  4:1             
+##  5:1             
+##  6:1
+\end{verbatim}
+
+You now have a between-participant analytic data set.
+
+\hypertarget{experiment-within-participant}{%
+\section{Experiment: Within-participant}\label{experiment-within-participant}}
+
+\hypertarget{one-repeated-measures-variable}{%
+\subsection{One repeated measures variable}\label{one-repeated-measures-variable}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Date: YYYY-MM-DD}
+\CommentTok{# Name: your name here}
+\CommentTok{# Example: Within-participant experiment}
+
+\CommentTok{# Load data}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{my_missing_value_codes <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"-999"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{)}
+
+\NormalTok{raw_data_within <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_ex_within.csv"}\NormalTok{,}
+                     \DataTypeTok{na =}\NormalTok{ my_missing_value_codes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   id = col_double(),
+##   sex = col_character(),
+##   march = col_double(),
+##   may = col_double(),
+##   july = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within <-}\StringTok{ }\NormalTok{raw_data_within}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(janitor)}
+
+\CommentTok{# Initial cleaning}
+\NormalTok{analytic_data_within <-}\StringTok{ }\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"rows"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"cols"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{clean_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_within)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 5
+## $ id    <dbl> 1, 2, 3, 4, 5, 6
+## $ sex   <chr> "male", "female", "male", "female", "male...
+## $ march <dbl> 40, 35, 38, 33, 42, 36
+## $ may   <dbl> 37, 32, 35, 30, 39, 33
+## $ july  <dbl> 35, 30, 33, 28, 37, 31
+\end{verbatim}
+
+\hypertarget{converting-categorical-variables-to-factors-1}{%
+\subsection{Converting categorical variables to factors}\label{converting-categorical-variables-to-factors-1}}
+
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character. We have one variable sex that is categorical that is of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
+
+Importantly, note that we have a categorical variable that is missing because our data is not in the tidy data format. The predictor ``occassion'' (levels: march, may, and july) is missing. The levels for occasion are distributed over three columns. We will have to fix this later. For now we focus on the sex and id columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_within)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 5
+## $ id    <dbl> 1, 2, 3, 4, 5, 6
+## $ sex   <chr> "male", "female", "male", "female", "male...
+## $ march <dbl> 40, 35, 38, 33, 42, 36
+## $ may   <dbl> 37, 32, 35, 30, 39, 33
+## $ july  <dbl> 35, 30, 33, 28, 37, 31
+\end{verbatim}
+
+You can quickly convert all character columns to factors using the text below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Turn all columns that are of type character into factors}
+\NormalTok{analytic_data_within <-}\StringTok{ }\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
+                \DataTypeTok{.fns =}\NormalTok{ as_factor))}
+\end{Highlighting}
+\end{Shaded}
+
+The participant identification number in the id column is a numeric column, so we have handle that column on it's own.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within <-analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\end{Highlighting}
+\end{Shaded}
+
+You can ensure all of these columns are now factors using the glimpse() command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_within)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 5
+## $ id    <fct> 1, 2, 3, 4, 5, 6
+## $ sex   <fct> male, female, male, female, male, female
+## $ march <dbl> 40, 35, 38, 33, 42, 36
+## $ may   <dbl> 37, 32, 35, 30, 39, 33
+## $ july  <dbl> 35, 30, 33, 28, 37, 31
+\end{verbatim}
+
+Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+
+\hypertarget{levels-of-factors-1}{%
+\subsection{Levels of factors}\label{levels-of-factors-1}}
+
+The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex   
+##  1:1   male  :3  
+##  2:1   female:3  
+##  3:1             
+##  4:1             
+##  5:1             
+##  6:1
+\end{verbatim}
+
+Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Custom reordering of factor levels}
+\NormalTok{analytic_data_within <-}\StringTok{ }\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_relevel}\NormalTok{(sex,}
+                           \StringTok{"female"}\NormalTok{,}
+                           \StringTok{"male"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You can see the new order of the factor levels with summary():
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex   
+##  1:1   female:3  
+##  2:1   male  :3  
+##  3:1             
+##  4:1             
+##  5:1             
+##  6:1
+\end{verbatim}
+
+\hypertarget{pivot-to-tidy-data}{%
+\subsection{Pivot to tidy data}\label{pivot-to-tidy-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(analytic_data_within)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 5
+##   id    sex    march   may  july
+##   <fct> <fct>  <dbl> <dbl> <dbl>
+## 1 1     male      40    37    35
+## 2 2     female    35    32    30
+## 3 3     male      38    35    33
+## 4 4     female    33    30    28
+## 5 5     male      42    39    37
+## 6 6     female    36    33    31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within_tidy <-}\StringTok{ }\NormalTok{analytic_data_within }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(march}\OperatorTok{:}\NormalTok{july,}
+               \DataTypeTok{names_to =} \StringTok{"occasion"}\NormalTok{,}
+               \DataTypeTok{values_to =} \StringTok{"elapsed_time"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(analytic_data_within_tidy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 18 x 4
+##    id    sex    occasion elapsed_time
+##    <fct> <fct>  <chr>           <dbl>
+##  1 1     male   march              40
+##  2 1     male   may                37
+##  3 1     male   july               35
+##  4 2     female march              35
+##  5 2     female may                32
+##  6 2     female july               30
+##  7 3     male   march              38
+##  8 3     male   may                35
+##  9 3     male   july               33
+## 10 4     female march              33
+## 11 4     female may                30
+## 12 4     female july               28
+## 13 5     male   march              42
+## 14 5     male   may                39
+## 15 5     male   july               37
+## 16 6     female march              36
+## 17 6     female may                33
+## 18 6     female july               31
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_within_tidy <-analytic_data_within_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{occasion =} \KeywordTok{as.factor}\NormalTok{(occasion))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_within)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 5
+## $ id    <fct> 1, 2, 3, 4, 5, 6
+## $ sex   <fct> male, female, male, female, male, female
+## $ march <dbl> 40, 35, 38, 33, 42, 36
+## $ may   <dbl> 37, 32, 35, 30, 39, 33
+## $ july  <dbl> 35, 30, 33, 28, 37, 31
+\end{verbatim}
+
+\hypertarget{multiple-repeated-measures-variables}{%
+\subsection{Multiple repeated measures variables}\label{multiple-repeated-measures-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Date: YYYY-MM-DD}
+\CommentTok{# Name: your name here}
+\CommentTok{# Example: Within-participant experiment}
+
+\CommentTok{# Load data}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+
+\NormalTok{my_missing_value_codes <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"-999"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{)}
+
+\NormalTok{raw_data_food <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_food.csv"}\NormalTok{,}
+                     \DataTypeTok{na =}\NormalTok{ my_missing_value_codes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   id = col_double(),
+##   sex = col_double(),
+##   pizza_hot = col_double(),
+##   pizza_cold = col_double(),
+##   steak_hot = col_double(),
+##   steak_cold = col_double(),
+##   burger_hot = col_double(),
+##   burger_cold = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_food <-}\StringTok{ }\NormalTok{raw_data_food}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(janitor)}
+
+\CommentTok{# Initial cleaning}
+\NormalTok{analytic_data_food <-}\StringTok{ }\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"rows"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"cols"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{clean_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_food)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 8
+## $ id          <dbl> 1, 2, 3, 4, 5, 6
+## $ sex         <dbl> 1, 2, 1, 2, 1, 2
+## $ pizza_hot   <dbl> 7, 8, 7, 8, 7, 9
+## $ pizza_cold  <dbl> 6, 7, 5, 7, 6, 7
+## $ steak_hot   <dbl> 6, 6, 7, 7, 8, 7
+## $ steak_cold  <dbl> 3, 3, 4, 5, 7, 8
+## $ burger_hot  <dbl> 7, 8, 7, 8, 7, 8
+## $ burger_cold <dbl> 4, 3, 3, 3, 2, 5
+\end{verbatim}
+
+\hypertarget{converting-categorical-variables-to-factors-2}{%
+\subsection{Converting categorical variables to factors}\label{converting-categorical-variables-to-factors-2}}
+
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_food)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 8
+## $ id          <dbl> 1, 2, 3, 4, 5, 6
+## $ sex         <dbl> 1, 2, 1, 2, 1, 2
+## $ pizza_hot   <dbl> 7, 8, 7, 8, 7, 9
+## $ pizza_cold  <dbl> 6, 7, 5, 7, 6, 7
+## $ steak_hot   <dbl> 6, 6, 7, 7, 8, 7
+## $ steak_cold  <dbl> 3, 3, 4, 5, 7, 8
+## $ burger_hot  <dbl> 7, 8, 7, 8, 7, 8
+## $ burger_cold <dbl> 4, 3, 3, 3, 2, 5
+\end{verbatim}
+
+You can quickly convert all character columns to factors using the text below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Turn all columns that are of type character into factors}
+\NormalTok{analytic_data_food <-}\StringTok{ }\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
+                \DataTypeTok{.fns =}\NormalTok{ as_factor))}
+\end{Highlighting}
+\end{Shaded}
+
+The participant identification number in the id column is a numeric column, so we have handle that column on it's own.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_food <-analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\end{Highlighting}
+\end{Shaded}
+
+You can ensure all of these columns are now factors using the glimpse() command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_food)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6
+## Columns: 8
+## $ id          <fct> 1, 2, 3, 4, 5, 6
+## $ sex         <dbl> 1, 2, 1, 2, 1, 2
+## $ pizza_hot   <dbl> 7, 8, 7, 8, 7, 9
+## $ pizza_cold  <dbl> 6, 7, 5, 7, 6, 7
+## $ steak_hot   <dbl> 6, 6, 7, 7, 8, 7
+## $ steak_cold  <dbl> 3, 3, 4, 5, 7, 8
+## $ burger_hot  <dbl> 7, 8, 7, 8, 7, 8
+## $ burger_cold <dbl> 4, 3, 3, 3, 2, 5
+\end{verbatim}
+
+Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+
+\hypertarget{levels-of-factors-2}{%
+\subsection{Levels of factors}\label{levels-of-factors-2}}
+
+The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id   
+##  1:1  
+##  2:1  
+##  3:1  
+##  4:1  
+##  5:1  
+##  6:1
+\end{verbatim}
+
+Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: intersex, female, male.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Custom reordering of factor levels}
+\NormalTok{analytic_data_food <-}\StringTok{ }\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_relevel}\NormalTok{(sex,}
+                           \StringTok{"female"}\NormalTok{,}
+                           \StringTok{"male"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+You can see the new order of the factor levels with summary():
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id   
+##  1:1  
+##  2:1  
+##  3:1  
+##  4:1  
+##  5:1  
+##  6:1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analytic_food_tidy <-}\StringTok{ }\NormalTok{analytic_data_food }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(pizza_hot}\OperatorTok{:}\NormalTok{burger_cold,}
+               \DataTypeTok{names_to =} \KeywordTok{c}\NormalTok{(}\StringTok{"food"}\NormalTok{, }\StringTok{"temperature"}\NormalTok{),}
+               \DataTypeTok{names_sep =} \StringTok{"_"}\NormalTok{,}
+               \DataTypeTok{values_to =} \StringTok{"taste"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(analytic_food_tidy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 36 x 5
+##    id      sex food   temperature taste
+##    <fct> <dbl> <chr>  <chr>       <dbl>
+##  1 1         1 pizza  hot             7
+##  2 1         1 pizza  cold            6
+##  3 1         1 steak  hot             6
+##  4 1         1 steak  cold            3
+##  5 1         1 burger hot             7
+##  6 1         1 burger cold            4
+##  7 2         2 pizza  hot             8
+##  8 2         2 pizza  cold            7
+##  9 2         2 steak  hot             6
+## 10 2         2 steak  cold            3
+## # ... with 26 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Turn all columns that are of type character into factors}
+\NormalTok{analytic_food_tidy <-}\StringTok{ }\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
+                \DataTypeTok{.fns =}\NormalTok{ as_factor))}
+
+\CommentTok{# sex is numeric so must be done the hard way}
+\NormalTok{analytic_food_tidy <-}\StringTok{ }\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{as_factor}\NormalTok{(sex))}
+
+\CommentTok{# establish that 1 indicates males and 2 indicates females}
+\NormalTok{analytic_food_tidy <-}\StringTok{ }\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_recode}\NormalTok{(sex, }
+                          \DataTypeTok{male =} \StringTok{"1"}\NormalTok{,}
+                          \DataTypeTok{female =} \StringTok{"2"}\NormalTok{))}
+
+
+\CommentTok{# see order of factors}
+\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex         food    temperature
+##  1:6   male  :18   pizza :12   hot :18    
+##  2:6   female:18   steak :12   cold:18    
+##  3:6               burger:12              
+##  4:6                                      
+##  5:6                                      
+##  6:6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# set order of factors for x-axis or legend}
+\NormalTok{analytic_food_tidy <-}\StringTok{ }\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_relevel}\NormalTok{(sex,}
+                           \StringTok{"female"}\NormalTok{,}
+                           \StringTok{"male"}\NormalTok{))}
+
+\CommentTok{# see order of factors}
+\NormalTok{analytic_food_tidy }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  id        sex         food    temperature
+##  1:6   female:18   pizza :12   hot :18    
+##  2:6   male  :18   steak :12   cold:18    
+##  3:6               burger:12              
+##  4:6                                      
+##  5:6                                      
+##  6:6
+\end{verbatim}
+
+\hypertarget{surveys-single-occassion}{%
+\section{Surveys: Single Occassion}\label{surveys-single-occassion}}
+
+Even assuming you did everything right there is still a fair amount of work to get things started paragraph here\ldots{}
+
+We begin by examining the data as originally entered into a spreadsheet. In Figure \ref{fig:rawdataitems} you see a screen shot of the initial raw data as a researcher might receive it. Take careful note of the numerous -999 values used to indicate missing values. As part of creating the analytic data that we will analyze we need to indicate to the computer that the -999 are not data but codes to represent missing values.
+
+\begin{figure}
+\includegraphics[width=0.85\linewidth]{ch_score_items/images/screenshot_raw_data} \caption{Raw data for item scoring}\label{fig:rawdataitems}
+\end{figure}
+
 \begin{itemize}
 \tightlist
 \item
@@ -2382,13 +3123,14 @@ Regardless of whether your are working from the cloud or locally you should now 
 \begin{Highlighting}[]
 \CommentTok{# Date: YYYY-MM-DD}
 \CommentTok{# Name: your name here}
+\CommentTok{# Example: single occasion survey}
 
 \CommentTok{# Load data}
 \KeywordTok{library}\NormalTok{(tidyverse)}
 
 \NormalTok{my_missing_value_codes <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"-999"}\NormalTok{, }\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{)}
 
-\NormalTok{raw_data <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_item_scoring.csv"}\NormalTok{,}
+\NormalTok{raw_data_survey <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"data_item_scoring.csv"}\NormalTok{,}
                      \DataTypeTok{na =}\NormalTok{ my_missing_value_codes)}
 \end{Highlighting}
 \end{Shaded}
@@ -2415,29 +3157,29 @@ Regardless of whether your are working from the cloud or locally you should now 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{raw_data}
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{raw_data_survey}
 \end{Highlighting}
 \end{Shaded}
 
-Remove empty row and columns from your data using the remove\_empty\_cols() and remove\_empty\_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions. This cleaning process ensures that names are all lower case, word separators are underscores and so on to match the \href{https://style.tidyverse.org}{tidyverse style guidelines}. This will correct many of the errors you may have made in your naming conventions when setting up your spreadsheet or data collection software.
+Remove empty row and columns from your data using the remove\_empty\_cols() and remove\_empty\_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(janitor)}
 
 \CommentTok{# Initial cleaning}
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"rows"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{remove_empty}\NormalTok{(}\StringTok{"cols"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{clean_names}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-You can see the column names after the cleaning, and the corresponding data type for each column.
+You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2460,32 +3202,61 @@ You can see the column names after the cleaning, and the corresponding data type
 ## $ jobsat5       <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4,...
 \end{verbatim}
 
-\hypertarget{preparing-categorical-variables}{%
-\subsection{Preparing categorical variables}\label{preparing-categorical-variables}}
+\hypertarget{converting-categorical-variables-to-factors-3}{%
+\subsection{Converting categorical variables to factors}\label{converting-categorical-variables-to-factors-3}}
 
-Levels of ANOVA variables. But also, remember.
-
-It's often helpful to has id as a factor rather than a number so we add and extra command that changes this value:
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data <-analytic_data }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Rows: 300
+## Columns: 14
+## $ id            <dbl> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11...
+## $ age           <dbl> 23, 22, 18, 23, 22, 17, 23, 22, 1...
+## $ sex           <chr> "male", "female", "male", "female...
+## $ eye_color     <chr> "blue", "brown", "hazel", "blue",...
+## $ esteem1       <dbl> 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, ...
+## $ esteem2       <dbl> 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, ...
+## $ esteem3       <dbl> 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4,...
+## $ esteem4       <dbl> 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA,...
+## $ esteem5_rev15 <dbl> 2, 2, 2, 2, 2, NA, NA, 2, 2, 2, 3...
+## $ jobsat1       <dbl> 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, ...
+## $ jobsat2_rev15 <dbl> 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3,...
+## $ jobsat3       <dbl> 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ jobsat4       <dbl> NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, N...
+## $ jobsat5       <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4,...
+\end{verbatim}
+
+You can quickly convert all character columns to factors using the text below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Turn all columns that are of type character into factors}
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.character),}
                 \DataTypeTok{.fns =}\NormalTok{ as_factor))}
 \end{Highlighting}
 \end{Shaded}
 
+The participant identification number in the id column is a numeric column, so we have handle that column on it's own.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\NormalTok{analytic_data_survey <-analytic_data_survey }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{id =} \KeywordTok{as.factor}\NormalTok{(id))}
+\end{Highlighting}
+\end{Shaded}
+
+You can ensure all of these columns are now factors using the glimpse() command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2508,11 +3279,16 @@ It's often helpful to has id as a factor rather than a number so we add and extr
 ## $ jobsat5       <dbl> 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4,...
 \end{verbatim}
 
-Check levels of factors. Make sure it's ok.
+Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+
+\hypertarget{levels-of-factors-3}{%
+\subsection{Levels of factors}\label{levels-of-factors-3}}
+
+The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summary}\NormalTok{()}
 \end{Highlighting}
@@ -2529,12 +3305,12 @@ Check levels of factors. Make sure it's ok.
 ##  (Other):294
 \end{verbatim}
 
-Adjust order of levels of factors.
+Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: intersex, female, male.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Custom reordering of factor levels}
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{sex =} \KeywordTok{fct_relevel}\NormalTok{(sex,}
                            \StringTok{"intersex"}\NormalTok{,}
                            \StringTok{"female"}\NormalTok{,}
@@ -2542,17 +3318,21 @@ Adjust order of levels of factors.
 \end{Highlighting}
 \end{Shaded}
 
+For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{#  Reordering factor levels by frequency}
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{eye_color =} \KeywordTok{fct_infreq}\NormalTok{(eye_color))}
 \end{Highlighting}
 \end{Shaded}
 
+You can see the new order of the factor levels with summary():
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.factor)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summary}\NormalTok{()}
 \end{Highlighting}
@@ -2574,7 +3354,7 @@ Adjust order of levels of factors.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.numeric)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summary}\NormalTok{()}
 \end{Highlighting}
@@ -2600,7 +3380,7 @@ Now it looks like our data is ready for the creation of scale scores:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2637,7 +3417,7 @@ In this data file the only reverse-key item was SE7 (we known this from when we 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{ends_with}\NormalTok{(}\StringTok{"_rev15"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{glimpse}\NormalTok{()}
 \end{Highlighting}
@@ -2652,7 +3432,7 @@ In this data file the only reverse-key item was SE7 (we known this from when we 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DecValTok{6} \OperatorTok{-}\StringTok{ }\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{ends_with}\NormalTok{(}\StringTok{"_rev15"}\NormalTok{)) ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{rename_with}\NormalTok{(}\DataTypeTok{.fn =}\NormalTok{ str_remove,}
               \DataTypeTok{.cols =} \KeywordTok{ends_with}\NormalTok{(}\StringTok{"_rev15"}\NormalTok{),}
@@ -2664,7 +3444,7 @@ The command above creates a new column in analytic\_data called SE7c that has th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2691,7 +3471,7 @@ The command above creates a new column in analytic\_data called SE7c that has th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(analytic_data, }\DataTypeTok{esteem7c =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{SE7) }
+\NormalTok{analytic_data_survey <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(analytic_data_survey, }\DataTypeTok{esteem7c =} \DecValTok{4} \OperatorTok{-}\StringTok{ }\NormalTok{SE7) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -2700,14 +3480,14 @@ The command above creates a new column in analytic\_data called SE7c that has th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data_items <-}\StringTok{ }\NormalTok{analytic_data}
+\NormalTok{analytic_data_items <-}\StringTok{ }\NormalTok{analytic_data_survey}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# confirm select will select the columns you want (and not others)}
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"esteem"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{glimpse}\NormalTok{()}
 \end{Highlighting}
@@ -2726,7 +3506,7 @@ The command above creates a new column in analytic\_data called SE7c that has th
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# confirm select will select the columns you want (and not others)}
-\NormalTok{analytic_data }\OperatorTok{%>%}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"jobsat"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{glimpse}\NormalTok{()}
 \end{Highlighting}
@@ -2744,7 +3524,7 @@ The command above creates a new column in analytic\_data called SE7c that has th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{analytic_data <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}\StringTok{ }
+\NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{self_esteem =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{c_across}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"esteem"}\NormalTok{)),}
                                \DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
@@ -2762,7 +3542,7 @@ We can see our data now has the self esteem column and no esteem items.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{glimpse}\NormalTok{(analytic_data)}
+\KeywordTok{glimpse}\NormalTok{(analytic_data_survey)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2777,173 +3557,15 @@ We can see our data now has the self esteem column and no esteem items.
 ## $ job_sat     <dbl> 4.00, 5.00, 4.40, 3.50, 4.00, 3.80,...
 \end{verbatim}
 
-\hypertarget{congratulations-you-have-your-analytic-data}{%
-\section{Congratulations you have your analytic data}\label{congratulations-you-have-your-analytic-data}}
-
-\hypertarget{basic-descriptive-statistics}{%
-\section{Basic descriptive statistics}\label{basic-descriptive-statistics}}
-
-\hypertarget{the-usual-suspects}{%
-\subsection{The usual suspects}\label{the-usual-suspects}}
-
-One approach is the describe() command from the psych package.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{psych}\OperatorTok{::}\KeywordTok{describe}\NormalTok{(analytic_data)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##             vars   n   mean    sd median trimmed    mad
-## id*            1 300 150.50 86.75  150.5  150.50 111.19
-## age            2 297  20.52  2.05   20.0   20.49   2.97
-## sex*           3 298   2.49  0.51    2.0    2.49   0.74
-## eye_color*     4 297   1.99  0.82    2.0    1.99   1.48
-## self_esteem    5 300   3.40  0.32    3.4    3.40   0.30
-## job_sat        6 300   3.91  0.43    4.0    3.94   0.37
-##              min    max  range  skew kurtosis   se
-## id*          1.0 300.00 299.00  0.00    -1.21 5.01
-## age         17.0  24.00   7.00  0.08    -1.03 0.12
-## sex*         1.0   3.00   2.00 -0.09    -1.64 0.03
-## eye_color*   1.0   3.00   2.00  0.01    -1.51 0.05
-## self_esteem  2.5   4.25   1.75  0.06    -0.36 0.02
-## job_sat      2.0   5.00   3.00 -0.69     0.74 0.03
-\end{verbatim}
-
-One approach is the apa.cor.table() command from the apaTables package.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(apaTables)}
-\NormalTok{analytic_data }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.numeric)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{apa.cor.table}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## 
-## Means, standard deviations, and correlations with confidence intervals
-##  
-## 
-##   Variable       M     SD   1           2         
-##   1. age         20.52 2.05                       
-##                                                   
-##   2. self_esteem 3.40  0.32 -.04                  
-##                             [-.15, .08]           
-##                                                   
-##   3. job_sat     3.91  0.43 -.00        .64**     
-##                             [-.12, .11] [.56, .70]
-##                                                   
-## 
-## Note. M and SD are used to represent mean and standard deviation, respectively.
-## Values in square brackets indicate the 95% confidence interval.
-## The confidence interval is a plausible range of population correlations 
-## that could have caused the sample correlation (Cumming, 2014).
-## * indicates p < .05. ** indicates p < .01.
-## 
-\end{verbatim}
-
-The tidyverse approach is oddly long but incredibly flexible. More details on why.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\CommentTok{# HMisc package must be installed. }
-\CommentTok{# Library command not needed for HMisc package.}
-
-\NormalTok{desired_descriptives <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-  \DataTypeTok{mean =} \OperatorTok{~}\KeywordTok{mean}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-  \DataTypeTok{CI95_LL =} \OperatorTok{~}\NormalTok{Hmisc}\OperatorTok{::}\KeywordTok{smean.cl.normal}\NormalTok{(.x)[}\DecValTok{2}\NormalTok{],}
-  \DataTypeTok{CI95_UL =} \OperatorTok{~}\NormalTok{Hmisc}\OperatorTok{::}\KeywordTok{smean.cl.normal}\NormalTok{(.x)[}\DecValTok{3}\NormalTok{],}
-  \DataTypeTok{sd =} \OperatorTok{~}\KeywordTok{sd}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-  \DataTypeTok{min =} \OperatorTok{~}\KeywordTok{min}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-  \DataTypeTok{max =} \OperatorTok{~}\KeywordTok{max}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-  \DataTypeTok{n =} \OperatorTok{~}\KeywordTok{sum}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(.x))}
-\NormalTok{)}
-
-\NormalTok{row_sum <-}\StringTok{ }\NormalTok{analytic_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.numeric),}
-                   \DataTypeTok{.fns =}\NormalTok{  desired_descriptives,}
-                   \DataTypeTok{.names =} \StringTok{"\{col\}___\{fn\}"}\NormalTok{))}
-
-\NormalTok{long_summary <-}\StringTok{ }\NormalTok{row_sum }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{everything}\NormalTok{(),}
-               \DataTypeTok{names_to =} \KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{, }\StringTok{"stat"}\NormalTok{),}
-               \DataTypeTok{names_sep =} \KeywordTok{c}\NormalTok{(}\StringTok{"___"}\NormalTok{),}
-               \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{)}
-
-\NormalTok{summary_table <-}\StringTok{ }\NormalTok{long_summary }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{names_from =}\NormalTok{ stat,}
-              \DataTypeTok{values_from =}\NormalTok{ value)}
-
-\NormalTok{summary_table_rounded <-}\StringTok{ }\NormalTok{summary_table }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.numeric),}
-                \DataTypeTok{.fns=}\NormalTok{ round,}
-                \DataTypeTok{digits =} \DecValTok{3}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
-
-\KeywordTok{print}\NormalTok{(summary_table_rounded)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           var   mean CI95_LL CI95_UL    sd  min   max   n
-## 1         age 20.522  20.288  20.756 2.048 17.0 24.00 297
-## 2 self_esteem  3.403   3.366   3.440 0.324  2.5  4.25 300
-## 3     job_sat  3.905   3.856   3.955 0.435  2.0  5.00 300
-\end{verbatim}
-
-\hypertarget{cronbachs-alpha}{%
-\subsection{Cronbach's alpha}\label{cronbachs-alpha}}
-
-If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic\_data\_items. Cronbach's alpha is labeled ``raw alpha'' in the output.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rxx_alpha <-}\StringTok{ }\NormalTok{analytic_data_items }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"esteem"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{psych}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{()}
-
-\KeywordTok{print}\NormalTok{(rxx_alpha}\OperatorTok{$}\NormalTok{total)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  raw_alpha std.alpha G6(smc) average_r  S/N     ase  mean
-##     0.6622    0.6634  0.6173    0.2827 1.97 0.03035 3.403
-##      sd median_r
-##  0.3239   0.2927
-\end{verbatim}
-
-\hypertarget{walk-though-surveys-with-multiple-occasions}{%
-\section{Walk though: Surveys with multiple occasions}\label{walk-though-surveys-with-multiple-occasions}}
+\hypertarget{surveys-multiple-occasions}{%
+\section{Surveys: Multiple Occasions}\label{surveys-multiple-occasions}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
 
 \NormalTok{raw_data_survey <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"data_item_time.csv"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{verbatim}
-## Parsed with column specification:
-## cols(
-##   .default = col_double(),
-##   sex = col_character(),
-##   eye_color = col_character()
-## )
-\end{verbatim}
-
-\begin{verbatim}
-## See spec(...) for full column specifications.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{analytic_data_survey <-}\StringTok{ }\NormalTok{raw_data_survey}
 \end{Highlighting}
 \end{Shaded}
@@ -3116,6 +3738,173 @@ But now comes the complicated point wher eyou need to pivot the data to longer.
 ## 10 5        22 male   <NA>      t2       4     4.25
 ## # ... with 590 more rows
 \end{verbatim}
+
+\hypertarget{basic-descriptive-statistics}{%
+\section{Basic descriptive statistics}\label{basic-descriptive-statistics}}
+
+\hypertarget{the-usual-suspects}{%
+\subsection{The usual suspects}\label{the-usual-suspects}}
+
+One approach is the describe() command from the psych package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{psych}\OperatorTok{::}\KeywordTok{describe}\NormalTok{(analytic_data_survey)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            vars   n   mean    sd median trimmed    mad  min
+## id*           1 300 150.50 86.75  150.5  150.50 111.19  1.0
+## age           2 297  20.52  2.05   20.0   20.49   2.97 17.0
+## sex*          3 298   2.49  0.51    2.0    2.49   0.74  1.0
+## eye_color*    4 297   1.99  0.82    2.0    1.99   1.48  1.0
+## esteem_t1     5 300   3.40  0.32    3.4    3.40   0.30  2.5
+## esteem_t2     6 300   3.93  0.34    4.0    3.93   0.30  3.2
+## jobsat_t1     7 300   3.91  0.43    4.0    3.94   0.37  2.0
+## jobsat_t2     8 300   4.37  0.42    4.4    4.39   0.30  3.0
+##               max  range  skew kurtosis   se
+## id*        300.00 299.00  0.00    -1.21 5.01
+## age         24.00   7.00  0.08    -1.03 0.12
+## sex*         3.00   2.00 -0.09    -1.64 0.03
+## eye_color*   3.00   2.00  0.01    -1.51 0.05
+## esteem_t1    4.25   1.75  0.06    -0.36 0.02
+## esteem_t2    4.80   1.60 -0.02    -0.44 0.02
+## jobsat_t1    5.00   3.00 -0.69     0.74 0.03
+## jobsat_t2    5.25   2.25 -0.42    -0.05 0.02
+\end{verbatim}
+
+One approach is the apa.cor.table() command from the apaTables package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(apaTables)}
+\NormalTok{analytic_data_survey }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{where}\NormalTok{(is.numeric)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{apa.cor.table}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Means, standard deviations, and correlations with confidence intervals
+##  
+## 
+##   Variable     M     SD   1           2          3         
+##   1. age       20.52 2.05                                  
+##                                                            
+##   2. esteem_t1 3.40  0.32 -.04                             
+##                           [-.15, .08]                      
+##                                                            
+##   3. esteem_t2 3.93  0.34 .01         .84**                
+##                           [-.10, .13] [.80, .87]           
+##                                                            
+##   4. jobsat_t1 3.91  0.43 -.00        .64**      .56**     
+##                           [-.12, .11] [.56, .70] [.48, .63]
+##                                                            
+##   5. jobsat_t2 4.37  0.42 -.02        .58**      .52**     
+##                           [-.13, .10] [.50, .65] [.43, .60]
+##                                                            
+##   4         
+##             
+##             
+##             
+##             
+##             
+##             
+##             
+##             
+##             
+##             
+##             
+##   .82**     
+##   [.77, .85]
+##             
+## 
+## Note. M and SD are used to represent mean and standard deviation, respectively.
+## Values in square brackets indicate the 95% confidence interval.
+## The confidence interval is a plausible range of population correlations 
+## that could have caused the sample correlation (Cumming, 2014).
+## * indicates p < .05. ** indicates p < .01.
+## 
+\end{verbatim}
+
+The tidyverse approach is oddly long but incredibly flexible. More details on why.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\CommentTok{# HMisc package must be installed. }
+\CommentTok{# Library command not needed for HMisc package.}
+
+\NormalTok{desired_descriptives <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{mean =} \OperatorTok{~}\KeywordTok{mean}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{CI95_LL =} \OperatorTok{~}\NormalTok{Hmisc}\OperatorTok{::}\KeywordTok{smean.cl.normal}\NormalTok{(.x)[}\DecValTok{2}\NormalTok{],}
+  \DataTypeTok{CI95_UL =} \OperatorTok{~}\NormalTok{Hmisc}\OperatorTok{::}\KeywordTok{smean.cl.normal}\NormalTok{(.x)[}\DecValTok{3}\NormalTok{],}
+  \DataTypeTok{sd =} \OperatorTok{~}\KeywordTok{sd}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{min =} \OperatorTok{~}\KeywordTok{min}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{max =} \OperatorTok{~}\KeywordTok{max}\NormalTok{(.x, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+  \DataTypeTok{n =} \OperatorTok{~}\KeywordTok{sum}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(.x))}
+\NormalTok{)}
+
+\NormalTok{row_sum <-}\StringTok{ }\NormalTok{analytic_data_survey }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.numeric),}
+                   \DataTypeTok{.fns =}\NormalTok{  desired_descriptives,}
+                   \DataTypeTok{.names =} \StringTok{"\{col\}___\{fn\}"}\NormalTok{))}
+
+\NormalTok{long_summary <-}\StringTok{ }\NormalTok{row_sum }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{pivot_longer}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{everything}\NormalTok{(),}
+               \DataTypeTok{names_to =} \KeywordTok{c}\NormalTok{(}\StringTok{"var"}\NormalTok{, }\StringTok{"stat"}\NormalTok{),}
+               \DataTypeTok{names_sep =} \KeywordTok{c}\NormalTok{(}\StringTok{"___"}\NormalTok{),}
+               \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{)}
+
+\NormalTok{summary_table <-}\StringTok{ }\NormalTok{long_summary }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{pivot_wider}\NormalTok{(}\DataTypeTok{names_from =}\NormalTok{ stat,}
+              \DataTypeTok{values_from =}\NormalTok{ value)}
+
+\NormalTok{summary_table_rounded <-}\StringTok{ }\NormalTok{summary_table }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\KeywordTok{across}\NormalTok{(}\DataTypeTok{.cols =} \KeywordTok{where}\NormalTok{(is.numeric),}
+                \DataTypeTok{.fns=}\NormalTok{ round,}
+                \DataTypeTok{digits =} \DecValTok{3}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
+
+\KeywordTok{print}\NormalTok{(summary_table_rounded)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         var   mean CI95_LL CI95_UL    sd  min   max   n
+## 1       age 20.522  20.288  20.756 2.048 17.0 24.00 297
+## 2 esteem_t1  3.403   3.366   3.440 0.324  2.5  4.25 300
+## 3 esteem_t2  3.927   3.889   3.966 0.337  3.2  4.80 300
+## 4 jobsat_t1  3.905   3.856   3.955 0.435  2.0  5.00 300
+## 5 jobsat_t2  4.368   4.320   4.416 0.425  3.0  5.25 300
+\end{verbatim}
+
+\hypertarget{cronbachs-alpha}{%
+\subsection{Cronbach's alpha}\label{cronbachs-alpha}}
+
+If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic\_data\_items. Cronbach's alpha is labeled ``raw alpha'' in the output.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rxx_alpha <-}\StringTok{ }\NormalTok{analytic_data_items }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{starts_with}\NormalTok{(}\StringTok{"esteem"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{psych}\OperatorTok{::}\KeywordTok{alpha}\NormalTok{()}
+
+\KeywordTok{print}\NormalTok{(rxx_alpha}\OperatorTok{$}\NormalTok{total)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  raw_alpha std.alpha G6(smc) average_r  S/N     ase  mean
+##     0.6622    0.6634  0.6173    0.2827 1.97 0.03035 3.403
+##      sd median_r
+##  0.3239   0.2927
+\end{verbatim}
+
+If you entered data following the style guide recommended here; entering categorical variables by the category name rather than numerically we can quickly convert categorical variable to factors. For example, if you used a data entry convention where you entered male/female in the column for sex rather than 1 and 2 we can quickly convert all of those columns to factors. This because if you followed the naming convention, columns that contain categorical information will be of the character type. This is quickly revealed by a glimpse command:
 
 \cleardoublepage
 
