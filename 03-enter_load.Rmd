@@ -220,7 +220,9 @@ Pay particular attention to XXXX where the reearcher assistant didn't fllow and 
 
 ## Experiment: Between-participant
 
-```{r, results='hide'}
+The between-participant example uses the data file data_ex_between.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in comparing run times (elapsed_time) based on sex (male/female).
+
+```{r, results=FALSE, message=FALSE}
 # Date: YYYY-MM-DD
 # Name: your name here
 # Example: Between-participant experiment
@@ -237,7 +239,9 @@ analytic_data_between <- raw_data_beween
 
 ```
 
-```{r, results='hide'}
+After loading the data we do initial cleaning to remove empty row/columns and ensure proper naming for columns:
+
+```{r, results=FALSE, message=FALSE}
 library(janitor)
 
 # Initial cleaning
@@ -253,7 +257,7 @@ You can confirm the column names following our naming convention with the glimps
 glimpse(analytic_data_between)
 ```
 
-### Converting categorical variables to factors
+### Creating factors
 
 Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character. We have one variable sex that is categorical that is of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
 
@@ -262,7 +266,7 @@ Following initial cleaning, identify categorical variables as factors. If you pl
 glimpse(analytic_data_between)
 ```
 
-You can quickly convert all character columns to factors using the text below:
+You can quickly convert all character columns to factors using the code below:
 
 ```{r}
 # Turn all columns that are of type character into factors
@@ -288,9 +292,10 @@ glimpse(analytic_data_between)
 Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
 
 
-### Levels of factors
+### Factor screening
 
-The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+
 
 ```{r}
 analytic_data_between %>%
@@ -298,7 +303,9 @@ analytic_data_between %>%
   summary()
 ```
 
-The sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
+
+Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
+
 ```{r}
 # Custom reordering of factor levels
 analytic_data_between <- analytic_data_between %>%
@@ -315,9 +322,41 @@ analytic_data_between %>%
   summary()
 ```
 
-You now have a between-participant analytic data set.
+
+### Numeric screening
+
+For numeric variables, you should search for impossible values.e For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.
+
+One options for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
+
+```{r, eval = FALSE}
+analytic_data_between %>%
+  select(where(is.numeric)) %>%
+  summary()
+```
+
+A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
+
+```{r, eval = FALSE}
+analytic_data_between %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+```
+
+```{r, echo = FALSE}
+output <- analytic_data_between %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+
+output[,c(1,2,3,4,5,8,9)]
+```
+
+Scan the min and max values for each variable to ensulere there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
 
 ## Experiment: Within one-way
+
 
 ```{r, results='hide'}
 # Date: YYYY-MM-DD
@@ -364,7 +403,7 @@ Importantly, note that we have a categorical variable that is missing because ou
 glimpse(analytic_data_within)
 ```
 
-You can quickly convert all character columns to factors using the text below. 
+You can quickly convert all character columns to factors using the code below. 
 
 ```{r}
 # Turn all columns that are of type character into factors
@@ -444,7 +483,7 @@ analytic_data_within_tidy <-analytic_data_within_tidy %>%
 ```
 
 ```{r}
-glimpse(analytic_data_within)
+glimpse(analytic_data_within_tidy)
 ```
 
 ## Experiment: Within N-way
@@ -491,7 +530,7 @@ Following initial cleaning, identify categorical variables as factors. If you pl
 glimpse(analytic_data_food)
 ```
 
-You can quickly convert all character columns to factors using the text below:
+You can quickly convert all character columns to factors using the code below:
 
 ```{r}
 # Turn all columns that are of type character into factors
@@ -660,7 +699,7 @@ Following initial cleaning, identify categorical variables as factors. If you pl
 glimpse(analytic_data_survey)
 ```
 
-You can quickly convert all character columns to factors using the text below:
+You can quickly convert all character columns to factors using the code below:
 
 ```{r}
 # Turn all columns that are of type character into factors
