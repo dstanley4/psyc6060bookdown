@@ -1,5 +1,7 @@
 # Making your data ready for analysis
 
+Use skim instead of summary?
+
 ```{r, include=FALSE}
 library(tidyverse)
 ```
@@ -31,8 +33,7 @@ Due to a number of high profile failure to replicate study results [@cos2015] it
 Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. Unfortunately, some authors use these two terms interchangeably and fail to make any distinction between them. I encourage you to make the distinction and the use the terms consist with use suggested by [@patil2019].
 
 It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
-). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org
-).
+). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org).
 
 The idea is not that open science articles are  more trustworthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business some people don't like the idea of make it possible for other to audit their work. The problems reported at Molecular Brain (doubtless is common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the numbers in the articles are uploaded prior to publication. 
 
@@ -218,9 +219,9 @@ As you read each of these example scripts pay attention to the redundancy. Regar
 
 Pay particular attention to XXXX where the reearcher assistant didn't fllow and sex as 1 and 
 
-## Experiment: Between-participant
+## Experiment: Between 
 
-The between-participant example uses the data file data_ex_between.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in comparing run times (elapsed_time) based on sex (male/female).
+The between-participant example uses the data file data_ex_between.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in comparing run times (elapsed_time) based on sex (male/female). This type of workflow is appropriate when you have independent groups t-tests and between-particpant ANOVA.
 
 ```{r, results=FALSE, message=FALSE}
 # Date: YYYY-MM-DD
@@ -714,7 +715,7 @@ You can confirm the column names following our naming convention with the glimps
 glimpse(analytic_data_survey)
 ```
 
-### Converting categorical variables to factors
+### Creating factors
 
 Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
 
@@ -749,9 +750,9 @@ glimpse(analytic_data_survey)
 Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
 
 
-### Levels of factors
+### Factor screening
 
-The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_survey %>%
@@ -760,7 +761,7 @@ analytic_data_survey %>%
 ```
 
 
-Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: intersex, female, male. 
+Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male.
 
 ```{r}
 # Custom reordering of factor levels
@@ -785,10 +786,11 @@ analytic_data_survey %>%
   summary()
 ```
 
+### Numeric screening
 
+For numeric variables, you should search for impossible values.e For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.
 
-### Checking numerical variables
-
+One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.
 
 ```{r, eval = FALSE}
 analytic_data_survey %>%
@@ -796,18 +798,94 @@ analytic_data_survey %>%
   summary()
 ```
 
-```{r, eval = TRUE, echo = FALSE}
+With larger numers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
+
+
+Start by examining the range of non-scale items. In this case it's only age:
+
+```{r, eval = FALSE}
+library(skimr)
 analytic_data_survey %>%
-  select(esteem1, esteem2, esteem3) %>%
-  summary()
+  select(age) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+library(skimr)
+
+outdf <- analytic_data_survey %>%
+  select(starts_with("age")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -p50, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+outdf$complete_rate= round(outdf$complete_rate,2)
+
+outdf
+```
+
+Look the items in the first scale, self-esteem. Items responses in this scale range from 1 to 5, make sure they are all in this range.
+
+```{r, eval=FALSE}
+analytic_data_survey %>%
+  select(starts_with("esteem")) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+outdf <- analytic_data_survey %>%
+  select(starts_with("esteem")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -p50, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+outdf$complete_rate= round(outdf$complete_rate,2)
+
+outdf
+```
+
+Look the items in the second scale, job satisfaction. Items responses in this scale range from 1 to 5, make sure they are all in this range.
+
+```{r, eval=FALSE}
+analytic_data_survey %>%
+  select(starts_with("jobsat")) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+outdf <- analytic_data_survey %>%
+  select(starts_with("jobsat")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -p50, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+outdf$complete_rate= round(outdf$complete_rate,2)
+
+outdf
 ```
 
 
-
-### Create Scale Scores
+### Scale Scores
 
 Likert caveats. Depending on your research area, there are very different perspectives on how to analyze Likert-type items. The perspectives differ based on how they view the [level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement) associated with the Likert-type items. One perspective, common in Psychology, is that the numbers corresponding to each response option are of the interval type. This mean that the psychological difference between each response option perfectly corresponds to the numerical difference between each response option. That is, the psychological difference between Strongly Agree and Moderately Agree is equal to the psychological difference between Moderately Agree and Neutral, and so on.
-
 
 
 Now it looks like our data is ready for the creation of scale scores:
@@ -818,12 +896,10 @@ glimpse(analytic_data_survey)
 
 
 
-#### Dealing with reverse key items
-
+#### Reverse key items
 
 Our first step is dealing with reverse key items. The way you deal with these items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
 
-### Scoring items where the ratings scale starts with 1
 We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the *mutate* command from the *dplyr* package.
 
 In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with response options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
@@ -854,7 +930,7 @@ glimpse(analytic_data_survey)
 analytic_data_survey <- mutate(analytic_data_survey, esteem7c = 4 - SE7) 
 ```
 
-### Creating the scale scores
+#### Calculation scale scores
 
 ```{r}
 analytic_data_items <- analytic_data_survey
@@ -923,7 +999,7 @@ analytic_data_survey <- raw_data_survey
 glimpse(analytic_data_survey)
 ```
 
-Handle categorical variables:
+### Creating factors
 
 ```{r}
 analytic_data_survey <-analytic_data_survey %>%
@@ -933,8 +1009,11 @@ analytic_data_survey <-analytic_data_survey %>%
 analytic_data_survey <- analytic_data_survey %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
+```
 
+### Screening factors
 
+```{r}
 # Custom reordering of factor levels for sex
 analytic_data_survey <- analytic_data_survey %>%
   mutate(sex = fct_relevel(sex,
@@ -947,8 +1026,9 @@ analytic_data_survey <- analytic_data_survey %>%
   mutate(eye_color = fct_infreq(eye_color))
 ```
 
+### Numeric screening
 
-Create scale scores:
+### Scale scores
 
 ```{r}
 
@@ -981,6 +1061,9 @@ analytic_data_survey <- analytic_data_survey %>%
 ```{r}
 glimpse(analytic_data_survey)
 ```
+
+### Pivot to tidy data
+
 
 But now comes the complicated point wher eyou need to pivot the data to longer.
 
