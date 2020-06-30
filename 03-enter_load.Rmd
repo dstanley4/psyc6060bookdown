@@ -13,6 +13,7 @@ This chapter requires the following packages are installed:
 | Required Packages |
 |-------------------|
 |apaTables          |
+|HMisc              |
 |janitor            |
 |psych              |
 |tidyverse          |
@@ -1109,21 +1110,52 @@ print(analytic_survey_tidy)
 ## Basic descriptive statistics
 
 
-### The usual suspects
+### skim()
 
-One approach is the describe() command from the psych package.
+One approach is the skim() command from the skimr package.
 ```{r, eval = FALSE}
-psych::describe(analytic_data_survey)
+library(skimr)
+skim(analytic_data_survey)
 ```
 
+```{r, echo=FALSE}
+library(tidyverse)
 
-One approach is the apa.cor.table() command from the apaTables package.
+outdf <- analytic_data_survey %>%
+  select(where(is.numeric)) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -p50, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+outdf$complete_rate= round(outdf$complete_rate,2)
+
+outdf
+```
+
+### apa.cor.table()
+
+
+One approach is the apa.cor.table() command from the apaTables package which creates a Word document with the table, see Figure \@ref(fig:descapa).
+
 ```{r, eval = FALSE}
 library(apaTables)
 analytic_data_survey %>%
   select(where(is.numeric)) %>%
-  apa.cor.table()
+  apa.cor.table(filename = "apa_descriptives.doc")
 ```
+
+```{r descapa, echo=FALSE, out.width="100%", fig.cap="Word document created by apa.cor.table"}
+knitr::include_graphics("ch_score_items/images/desc_apa.png")
+```
+
+### tidyverse
 
 The tidyverse approach is oddly long but incredibly flexible. More details on why.
 
@@ -1168,7 +1200,15 @@ print(summary_table_rounded)
 
 ### Cronbach’s alpha
 
-If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach’s alpha is labeled “raw alpha” in the output.
+If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. The glimpse() command illustrates this file has all the original items (after reverse-coding has been fixed).
+
+```{r}
+analytic_data_items %>%
+  glimpse()
+```
+
+
+We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output.
 
 ```{r, eval = TRUE}
 rxx_alpha <- analytic_data_items %>%
