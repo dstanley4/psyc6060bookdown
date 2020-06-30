@@ -243,8 +243,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.11.5" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#pivot-to-tidy-data-2"><i class="fa fa-check"></i><b>3.11.5</b> Pivot to tidy data</a></li>
 </ul></li>
 <li class="chapter" data-level="3.12" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#basic-descriptive-statistics"><i class="fa fa-check"></i><b>3.12</b> Basic descriptive statistics</a><ul>
-<li class="chapter" data-level="3.12.1" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#the-usual-suspects"><i class="fa fa-check"></i><b>3.12.1</b> The usual suspects</a></li>
-<li class="chapter" data-level="3.12.2" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#cronbachs-alpha"><i class="fa fa-check"></i><b>3.12.2</b> Cronbach’s alpha</a></li>
+<li class="chapter" data-level="3.12.1" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#skim"><i class="fa fa-check"></i><b>3.12.1</b> skim()</a></li>
+<li class="chapter" data-level="3.12.2" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#apa.cor.table"><i class="fa fa-check"></i><b>3.12.2</b> apa.cor.table()</a></li>
+<li class="chapter" data-level="3.12.3" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#tidyverse"><i class="fa fa-check"></i><b>3.12.3</b> tidyverse</a></li>
+<li class="chapter" data-level="3.12.4" data-path="making-your-data-ready-for-analysis.html"><a href="making-your-data-ready-for-analysis.html#cronbachs-alpha"><i class="fa fa-check"></i><b>3.12.4</b> Cronbach’s alpha</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -287,12 +289,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>apaTables</td>
 </tr>
 <tr class="even">
-<td>janitor</td>
+<td>HMisc</td>
 </tr>
 <tr class="odd">
-<td>psych</td>
+<td>janitor</td>
 </tr>
 <tr class="even">
+<td>psych</td>
+</tr>
+<tr class="odd">
 <td>tidyverse</td>
 </tr>
 </tbody>
@@ -1409,45 +1414,43 @@ For each item you would use subtract values from the highest possible point (i.e
 <tbody>
 <tr class="odd">
 <td align="center">0</td>
-<td align="center">5 - 0</td>
+<td align="center">4 - 0</td>
 <td align="center">4</td>
 </tr>
 <tr class="even">
 <td align="center">1</td>
-<td align="center">5 - 1</td>
+<td align="center">4 - 1</td>
 <td align="center">3</td>
 </tr>
 <tr class="odd">
 <td align="center">2</td>
-<td align="center">5 - 2</td>
+<td align="center">4 - 2</td>
 <td align="center">2</td>
 </tr>
 <tr class="even">
 <td align="center">3</td>
-<td align="center">5 - 3</td>
+<td align="center">4 - 3</td>
 <td align="center">1</td>
 </tr>
 <tr class="odd">
 <td align="center">4</td>
-<td align="center">5 - 4</td>
+<td align="center">4 - 4</td>
 <td align="center">0</td>
 </tr>
 </tbody>
 </table>
 <p>Thus the mutate command would instead be:</p>
-mutate(5 - across(.cols = ends_with("_rev15")) )
+mutate(4 - across(.cols = ends_with("_rev15")) )
 </div>
 
-<p><strong>Note FOR A BOX </strong>. If you had used response options numbered 0 to 4 for each item you would use the command below instead. Note that we use 4 in the command this time instead of a value one higher.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="making-your-data-ready-for-analysis.html#cb242-1"></a>analytic_data_survey &lt;-<span class="st"> </span><span class="kw">mutate</span>(analytic_data_survey, <span class="dt">esteem7c =</span> <span class="dv">4</span> <span class="op">-</span><span class="st"> </span>SE7) </span></code></pre></div>
 </div>
 <div id="calculation-scale-scores" class="section level4">
 <h4><span class="header-section-number">3.10.4.2</span> Calculation scale scores</h4>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="making-your-data-ready-for-analysis.html#cb243-1"></a>analytic_data_items &lt;-<span class="st"> </span>analytic_data_survey</span></code></pre></div>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="making-your-data-ready-for-analysis.html#cb244-1"></a><span class="co"># confirm select will select the columns you want (and not others)</span></span>
-<span id="cb244-2"><a href="making-your-data-ready-for-analysis.html#cb244-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb244-3"><a href="making-your-data-ready-for-analysis.html#cb244-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb244-4"><a href="making-your-data-ready-for-analysis.html#cb244-4"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="making-your-data-ready-for-analysis.html#cb242-1"></a>analytic_data_items &lt;-<span class="st"> </span>analytic_data_survey</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="making-your-data-ready-for-analysis.html#cb243-1"></a><span class="co"># confirm select will select the columns you want (and not others)</span></span>
+<span id="cb243-2"><a href="making-your-data-ready-for-analysis.html#cb243-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb243-3"><a href="making-your-data-ready-for-analysis.html#cb243-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb243-4"><a href="making-your-data-ready-for-analysis.html#cb243-4"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 300
 ## Columns: 5
 ## $ esteem1 &lt;dbl&gt; 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, NA, N…
@@ -1455,10 +1458,10 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 ## $ esteem3 &lt;dbl&gt; 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, 4, N…
 ## $ esteem4 &lt;dbl&gt; 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, 3, 3…
 ## $ esteem5 &lt;dbl&gt; 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4, 4, …</code></pre>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="making-your-data-ready-for-analysis.html#cb246-1"></a><span class="co"># confirm select will select the columns you want (and not others)</span></span>
-<span id="cb246-2"><a href="making-your-data-ready-for-analysis.html#cb246-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb246-3"><a href="making-your-data-ready-for-analysis.html#cb246-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb246-4"><a href="making-your-data-ready-for-analysis.html#cb246-4"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="making-your-data-ready-for-analysis.html#cb245-1"></a><span class="co"># confirm select will select the columns you want (and not others)</span></span>
+<span id="cb245-2"><a href="making-your-data-ready-for-analysis.html#cb245-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb245-3"><a href="making-your-data-ready-for-analysis.html#cb245-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb245-4"><a href="making-your-data-ready-for-analysis.html#cb245-4"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 300
 ## Columns: 5
 ## $ jobsat1 &lt;dbl&gt; 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4, 3,…
@@ -1466,18 +1469,18 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 ## $ jobsat3 &lt;dbl&gt; 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2…
 ## $ jobsat4 &lt;dbl&gt; NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5, 4,…
 ## $ jobsat5 &lt;dbl&gt; 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA, 4, …</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="making-your-data-ready-for-analysis.html#cb248-1"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb248-2"><a href="making-your-data-ready-for-analysis.html#cb248-2"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb248-3"><a href="making-your-data-ready-for-analysis.html#cb248-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">self_esteem =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)),</span>
-<span id="cb248-4"><a href="making-your-data-ready-for-analysis.html#cb248-4"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb248-5"><a href="making-your-data-ready-for-analysis.html#cb248-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">job_sat =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)),</span>
-<span id="cb248-6"><a href="making-your-data-ready-for-analysis.html#cb248-6"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb248-7"><a href="making-your-data-ready-for-analysis.html#cb248-7"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb248-8"><a href="making-your-data-ready-for-analysis.html#cb248-8"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb248-9"><a href="making-your-data-ready-for-analysis.html#cb248-9"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="making-your-data-ready-for-analysis.html#cb247-1"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb247-2"><a href="making-your-data-ready-for-analysis.html#cb247-2"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb247-3"><a href="making-your-data-ready-for-analysis.html#cb247-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">self_esteem =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)),</span>
+<span id="cb247-4"><a href="making-your-data-ready-for-analysis.html#cb247-4"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb247-5"><a href="making-your-data-ready-for-analysis.html#cb247-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">job_sat =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)),</span>
+<span id="cb247-6"><a href="making-your-data-ready-for-analysis.html#cb247-6"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb247-7"><a href="making-your-data-ready-for-analysis.html#cb247-7"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb247-8"><a href="making-your-data-ready-for-analysis.html#cb247-8"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb247-9"><a href="making-your-data-ready-for-analysis.html#cb247-9"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;jobsat&quot;</span>)) </span></code></pre></div>
 <p>When you see ungroup() in this context you can think of it as “turn off rowwise”.</p>
 <p>We can see our data now has the self esteem column and no esteem items.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="making-your-data-ready-for-analysis.html#cb249-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="making-your-data-ready-for-analysis.html#cb248-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 300
 ## Columns: 6
 ## $ id          &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12…
@@ -1491,12 +1494,12 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 </div>
 <div id="surveys-multiple-occasions" class="section level2">
 <h2><span class="header-section-number">3.11</span> Surveys: Multiple Occasions</h2>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="making-your-data-ready-for-analysis.html#cb251-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb251-2"><a href="making-your-data-ready-for-analysis.html#cb251-2"></a></span>
-<span id="cb251-3"><a href="making-your-data-ready-for-analysis.html#cb251-3"></a>raw_data_survey &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_item_time.csv&quot;</span>)</span>
-<span id="cb251-4"><a href="making-your-data-ready-for-analysis.html#cb251-4"></a></span>
-<span id="cb251-5"><a href="making-your-data-ready-for-analysis.html#cb251-5"></a>analytic_data_survey &lt;-<span class="st"> </span>raw_data_survey</span></code></pre></div>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="making-your-data-ready-for-analysis.html#cb252-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="making-your-data-ready-for-analysis.html#cb250-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb250-2"><a href="making-your-data-ready-for-analysis.html#cb250-2"></a></span>
+<span id="cb250-3"><a href="making-your-data-ready-for-analysis.html#cb250-3"></a>raw_data_survey &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data_item_time.csv&quot;</span>)</span>
+<span id="cb250-4"><a href="making-your-data-ready-for-analysis.html#cb250-4"></a></span>
+<span id="cb250-5"><a href="making-your-data-ready-for-analysis.html#cb250-5"></a>analytic_data_survey &lt;-<span class="st"> </span>raw_data_survey</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="making-your-data-ready-for-analysis.html#cb251-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 300
 ## Columns: 24
 ## $ id               &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1…
@@ -1525,56 +1528,56 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 ## $ t2_jobsat5       &lt;dbl&gt; 6, 3, 6, 5, NA, 5, 5, 6, 6, 6, 5…</code></pre>
 <div id="creating-factors-4" class="section level3">
 <h3><span class="header-section-number">3.11.1</span> Creating factors</h3>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="making-your-data-ready-for-analysis.html#cb254-1"></a>analytic_data_survey &lt;-analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb254-2"><a href="making-your-data-ready-for-analysis.html#cb254-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">as_factor</span>(id))</span>
-<span id="cb254-3"><a href="making-your-data-ready-for-analysis.html#cb254-3"></a></span>
-<span id="cb254-4"><a href="making-your-data-ready-for-analysis.html#cb254-4"></a><span class="co"># Turn all columns that are of type character into factors</span></span>
-<span id="cb254-5"><a href="making-your-data-ready-for-analysis.html#cb254-5"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb254-6"><a href="making-your-data-ready-for-analysis.html#cb254-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
-<span id="cb254-7"><a href="making-your-data-ready-for-analysis.html#cb254-7"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="making-your-data-ready-for-analysis.html#cb253-1"></a>analytic_data_survey &lt;-analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb253-2"><a href="making-your-data-ready-for-analysis.html#cb253-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">as_factor</span>(id))</span>
+<span id="cb253-3"><a href="making-your-data-ready-for-analysis.html#cb253-3"></a></span>
+<span id="cb253-4"><a href="making-your-data-ready-for-analysis.html#cb253-4"></a><span class="co"># Turn all columns that are of type character into factors</span></span>
+<span id="cb253-5"><a href="making-your-data-ready-for-analysis.html#cb253-5"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb253-6"><a href="making-your-data-ready-for-analysis.html#cb253-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
+<span id="cb253-7"><a href="making-your-data-ready-for-analysis.html#cb253-7"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
 </div>
 <div id="screening-factors" class="section level3">
 <h3><span class="header-section-number">3.11.2</span> Screening factors</h3>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="making-your-data-ready-for-analysis.html#cb255-1"></a><span class="co"># Custom reordering of factor levels for sex</span></span>
-<span id="cb255-2"><a href="making-your-data-ready-for-analysis.html#cb255-2"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb255-3"><a href="making-your-data-ready-for-analysis.html#cb255-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_relevel</span>(sex,</span>
-<span id="cb255-4"><a href="making-your-data-ready-for-analysis.html#cb255-4"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
-<span id="cb255-5"><a href="making-your-data-ready-for-analysis.html#cb255-5"></a>                           <span class="st">&quot;female&quot;</span>,</span>
-<span id="cb255-6"><a href="making-your-data-ready-for-analysis.html#cb255-6"></a>                           <span class="st">&quot;male&quot;</span>))</span>
-<span id="cb255-7"><a href="making-your-data-ready-for-analysis.html#cb255-7"></a></span>
-<span id="cb255-8"><a href="making-your-data-ready-for-analysis.html#cb255-8"></a><span class="co">#  Reordering factor levels by frequency for eye color</span></span>
-<span id="cb255-9"><a href="making-your-data-ready-for-analysis.html#cb255-9"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb255-10"><a href="making-your-data-ready-for-analysis.html#cb255-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_infreq</span>(eye_color))</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="making-your-data-ready-for-analysis.html#cb254-1"></a><span class="co"># Custom reordering of factor levels for sex</span></span>
+<span id="cb254-2"><a href="making-your-data-ready-for-analysis.html#cb254-2"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb254-3"><a href="making-your-data-ready-for-analysis.html#cb254-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sex =</span> <span class="kw">fct_relevel</span>(sex,</span>
+<span id="cb254-4"><a href="making-your-data-ready-for-analysis.html#cb254-4"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
+<span id="cb254-5"><a href="making-your-data-ready-for-analysis.html#cb254-5"></a>                           <span class="st">&quot;female&quot;</span>,</span>
+<span id="cb254-6"><a href="making-your-data-ready-for-analysis.html#cb254-6"></a>                           <span class="st">&quot;male&quot;</span>))</span>
+<span id="cb254-7"><a href="making-your-data-ready-for-analysis.html#cb254-7"></a></span>
+<span id="cb254-8"><a href="making-your-data-ready-for-analysis.html#cb254-8"></a><span class="co">#  Reordering factor levels by frequency for eye color</span></span>
+<span id="cb254-9"><a href="making-your-data-ready-for-analysis.html#cb254-9"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb254-10"><a href="making-your-data-ready-for-analysis.html#cb254-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_infreq</span>(eye_color))</span></code></pre></div>
 </div>
 <div id="numeric-screening-4" class="section level3">
 <h3><span class="header-section-number">3.11.3</span> Numeric screening</h3>
 </div>
 <div id="scale-scores-1" class="section level3">
 <h3><span class="header-section-number">3.11.4</span> Scale scores</h3>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="making-your-data-ready-for-analysis.html#cb256-1"></a><span class="co"># Reverse code items</span></span>
-<span id="cb256-2"><a href="making-your-data-ready-for-analysis.html#cb256-2"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb256-3"><a href="making-your-data-ready-for-analysis.html#cb256-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">ends_with</span>(<span class="st">&quot;_rev15&quot;</span>)) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb256-4"><a href="making-your-data-ready-for-analysis.html#cb256-4"></a><span class="st">  </span><span class="kw">rename_with</span>(<span class="dt">.fn =</span> str_remove,</span>
-<span id="cb256-5"><a href="making-your-data-ready-for-analysis.html#cb256-5"></a>              <span class="dt">.cols =</span> <span class="kw">ends_with</span>(<span class="st">&quot;_rev15&quot;</span>),</span>
-<span id="cb256-6"><a href="making-your-data-ready-for-analysis.html#cb256-6"></a>              <span class="dt">pattern =</span> <span class="st">&quot;_rev15&quot;</span>)</span>
-<span id="cb256-7"><a href="making-your-data-ready-for-analysis.html#cb256-7"></a></span>
-<span id="cb256-8"><a href="making-your-data-ready-for-analysis.html#cb256-8"></a></span>
-<span id="cb256-9"><a href="making-your-data-ready-for-analysis.html#cb256-9"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb256-10"><a href="making-your-data-ready-for-analysis.html#cb256-10"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb256-11"><a href="making-your-data-ready-for-analysis.html#cb256-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">esteem_t1 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)),</span>
-<span id="cb256-12"><a href="making-your-data-ready-for-analysis.html#cb256-12"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-13"><a href="making-your-data-ready-for-analysis.html#cb256-13"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">esteem_t2 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t2_esteem&quot;</span>)),</span>
-<span id="cb256-14"><a href="making-your-data-ready-for-analysis.html#cb256-14"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-15"><a href="making-your-data-ready-for-analysis.html#cb256-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">jobsat_t1 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_jobsat&quot;</span>)),</span>
-<span id="cb256-16"><a href="making-your-data-ready-for-analysis.html#cb256-16"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-17"><a href="making-your-data-ready-for-analysis.html#cb256-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">jobsat_t2 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t2_jobsat&quot;</span>)),</span>
-<span id="cb256-18"><a href="making-your-data-ready-for-analysis.html#cb256-18"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-19"><a href="making-your-data-ready-for-analysis.html#cb256-19"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb256-20"><a href="making-your-data-ready-for-analysis.html#cb256-20"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-21"><a href="making-your-data-ready-for-analysis.html#cb256-21"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t2_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-22"><a href="making-your-data-ready-for-analysis.html#cb256-22"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t1_jobsat&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb256-23"><a href="making-your-data-ready-for-analysis.html#cb256-23"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t2_jobsat&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="making-your-data-ready-for-analysis.html#cb257-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="making-your-data-ready-for-analysis.html#cb255-1"></a><span class="co"># Reverse code items</span></span>
+<span id="cb255-2"><a href="making-your-data-ready-for-analysis.html#cb255-2"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb255-3"><a href="making-your-data-ready-for-analysis.html#cb255-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dv">6</span> <span class="op">-</span><span class="st"> </span><span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">ends_with</span>(<span class="st">&quot;_rev15&quot;</span>)) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb255-4"><a href="making-your-data-ready-for-analysis.html#cb255-4"></a><span class="st">  </span><span class="kw">rename_with</span>(<span class="dt">.fn =</span> str_remove,</span>
+<span id="cb255-5"><a href="making-your-data-ready-for-analysis.html#cb255-5"></a>              <span class="dt">.cols =</span> <span class="kw">ends_with</span>(<span class="st">&quot;_rev15&quot;</span>),</span>
+<span id="cb255-6"><a href="making-your-data-ready-for-analysis.html#cb255-6"></a>              <span class="dt">pattern =</span> <span class="st">&quot;_rev15&quot;</span>)</span>
+<span id="cb255-7"><a href="making-your-data-ready-for-analysis.html#cb255-7"></a></span>
+<span id="cb255-8"><a href="making-your-data-ready-for-analysis.html#cb255-8"></a></span>
+<span id="cb255-9"><a href="making-your-data-ready-for-analysis.html#cb255-9"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb255-10"><a href="making-your-data-ready-for-analysis.html#cb255-10"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb255-11"><a href="making-your-data-ready-for-analysis.html#cb255-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">esteem_t1 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)),</span>
+<span id="cb255-12"><a href="making-your-data-ready-for-analysis.html#cb255-12"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-13"><a href="making-your-data-ready-for-analysis.html#cb255-13"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">esteem_t2 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t2_esteem&quot;</span>)),</span>
+<span id="cb255-14"><a href="making-your-data-ready-for-analysis.html#cb255-14"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-15"><a href="making-your-data-ready-for-analysis.html#cb255-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">jobsat_t1 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_jobsat&quot;</span>)),</span>
+<span id="cb255-16"><a href="making-your-data-ready-for-analysis.html#cb255-16"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-17"><a href="making-your-data-ready-for-analysis.html#cb255-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">jobsat_t2 =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t2_jobsat&quot;</span>)),</span>
+<span id="cb255-18"><a href="making-your-data-ready-for-analysis.html#cb255-18"></a>                               <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-19"><a href="making-your-data-ready-for-analysis.html#cb255-19"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb255-20"><a href="making-your-data-ready-for-analysis.html#cb255-20"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-21"><a href="making-your-data-ready-for-analysis.html#cb255-21"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t2_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-22"><a href="making-your-data-ready-for-analysis.html#cb255-22"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t1_jobsat&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb255-23"><a href="making-your-data-ready-for-analysis.html#cb255-23"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">starts_with</span>(<span class="st">&quot;t2_jobsat&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="making-your-data-ready-for-analysis.html#cb256-1"></a><span class="kw">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 300
 ## Columns: 8
 ## $ id        &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, …
@@ -1589,7 +1592,7 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 <div id="pivot-to-tidy-data-2" class="section level3">
 <h3><span class="header-section-number">3.11.5</span> Pivot to tidy data</h3>
 <p>But now comes the complicated point wher eyou need to pivot the data to longer.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="making-your-data-ready-for-analysis.html#cb259-1"></a><span class="kw">print</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="making-your-data-ready-for-analysis.html#cb258-1"></a><span class="kw">print</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## # A tibble: 300 x 8
 ##    id      age sex   eye_color esteem_t1 esteem_t2 jobsat_t1
 ##    &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -1605,12 +1608,12 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 ## 10 10       NA fema… blue            3.6       4.2      3.8 
 ## # … with 290 more rows, and 1 more variable:
 ## #   jobsat_t2 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="making-your-data-ready-for-analysis.html#cb261-1"></a>analytic_survey_tidy &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
-<span id="cb261-2"><a href="making-your-data-ready-for-analysis.html#cb261-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(esteem_t1<span class="op">:</span>jobsat_t2,</span>
-<span id="cb261-3"><a href="making-your-data-ready-for-analysis.html#cb261-3"></a>               <span class="dt">names_to =</span> <span class="kw">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
-<span id="cb261-4"><a href="making-your-data-ready-for-analysis.html#cb261-4"></a>               <span class="dt">names_pattern =</span> <span class="st">&quot;(.*)_(t.)&quot;</span></span>
-<span id="cb261-5"><a href="making-your-data-ready-for-analysis.html#cb261-5"></a>  )</span></code></pre></div>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="making-your-data-ready-for-analysis.html#cb262-1"></a><span class="kw">print</span>(analytic_survey_tidy)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="making-your-data-ready-for-analysis.html#cb260-1"></a>analytic_survey_tidy &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
+<span id="cb260-2"><a href="making-your-data-ready-for-analysis.html#cb260-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(esteem_t1<span class="op">:</span>jobsat_t2,</span>
+<span id="cb260-3"><a href="making-your-data-ready-for-analysis.html#cb260-3"></a>               <span class="dt">names_to =</span> <span class="kw">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
+<span id="cb260-4"><a href="making-your-data-ready-for-analysis.html#cb260-4"></a>               <span class="dt">names_pattern =</span> <span class="st">&quot;(.*)_(t.)&quot;</span></span>
+<span id="cb260-5"><a href="making-your-data-ready-for-analysis.html#cb260-5"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="making-your-data-ready-for-analysis.html#cb261-1"></a><span class="kw">print</span>(analytic_survey_tidy)</span></code></pre></div>
 <pre><code>## # A tibble: 600 x 7
 ##    id      age sex    eye_color time  esteem jobsat
 ##    &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;     &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -1629,15 +1632,40 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 </div>
 <div id="basic-descriptive-statistics" class="section level2">
 <h2><span class="header-section-number">3.12</span> Basic descriptive statistics</h2>
-<div id="the-usual-suspects" class="section level3">
-<h3><span class="header-section-number">3.12.1</span> The usual suspects</h3>
-<p>One approach is the describe() command from the psych package.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="making-your-data-ready-for-analysis.html#cb264-1"></a>psych<span class="op">::</span><span class="kw">describe</span>(analytic_data_survey)</span></code></pre></div>
-<p>One approach is the apa.cor.table() command from the apaTables package.</p>
+<div id="skim" class="section level3">
+<h3><span class="header-section-number">3.12.1</span> skim()</h3>
+<p>One approach is the skim() command from the skimr package.</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="making-your-data-ready-for-analysis.html#cb263-1"></a><span class="kw">library</span>(skimr)</span>
+<span id="cb263-2"><a href="making-your-data-ready-for-analysis.html#cb263-2"></a><span class="kw">skim</span>(analytic_data_survey)</span></code></pre></div>
+<pre><code>##   skim_variable n_missing complete_rate  mean   sd   p0
+## 1           age         3          0.99 20.52 2.05 17.0
+## 2     esteem_t1         0          1.00  3.40 0.32  2.5
+## 3     esteem_t2         0          1.00  3.93 0.34  3.2
+## 4     jobsat_t1         0          1.00  3.91 0.43  2.0
+## 5     jobsat_t2         0          1.00  4.37 0.42  3.0
+##    p100
+## 1 24.00
+## 2  4.25
+## 3  4.80
+## 4  5.00
+## 5  5.25</code></pre>
+</div>
+<div id="apa.cor.table" class="section level3">
+<h3><span class="header-section-number">3.12.2</span> apa.cor.table()</h3>
+<p>One approach is the apa.cor.table() command from the apaTables package which creates a Word document with the table, see Figure <a href="making-your-data-ready-for-analysis.html#fig:descapa">3.4</a>.</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="making-your-data-ready-for-analysis.html#cb265-1"></a><span class="kw">library</span>(apaTables)</span>
 <span id="cb265-2"><a href="making-your-data-ready-for-analysis.html#cb265-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb265-3"><a href="making-your-data-ready-for-analysis.html#cb265-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span></span>
-<span id="cb265-4"><a href="making-your-data-ready-for-analysis.html#cb265-4"></a><span class="st">  </span><span class="kw">apa.cor.table</span>()</span></code></pre></div>
+<span id="cb265-4"><a href="making-your-data-ready-for-analysis.html#cb265-4"></a><span class="st">  </span><span class="kw">apa.cor.table</span>(<span class="dt">filename =</span> <span class="st">&quot;apa_descriptives.doc&quot;</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:descapa"></span>
+<img src="ch_score_items/images/desc_apa.png" alt="Word document created by apa.cor.table" width="100%" />
+<p class="caption">
+FIGURE 3.4: Word document created by apa.cor.table
+</p>
+</div>
+</div>
+<div id="tidyverse" class="section level3">
+<h3><span class="header-section-number">3.12.3</span> tidyverse</h3>
 <p>The tidyverse approach is oddly long but incredibly flexible. More details on why.</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="making-your-data-ready-for-analysis.html#cb266-1"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb266-2"><a href="making-your-data-ready-for-analysis.html#cb266-2"></a><span class="co"># HMisc package must be installed. </span></span>
@@ -1683,13 +1711,32 @@ mutate(5 - across(.cols = ends_with("_rev15")) )
 ## 5 jobsat_t2  4.368   4.320   4.416 0.425  3.0  5.25 300</code></pre>
 </div>
 <div id="cronbachs-alpha" class="section level3">
-<h3><span class="header-section-number">3.12.2</span> Cronbach’s alpha</h3>
-<p>If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. Cronbach’s alpha is labeled “raw alpha” in the output.</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="making-your-data-ready-for-analysis.html#cb268-1"></a>rxx_alpha &lt;-<span class="st"> </span>analytic_data_items <span class="op">%&gt;%</span></span>
-<span id="cb268-2"><a href="making-your-data-ready-for-analysis.html#cb268-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb268-3"><a href="making-your-data-ready-for-analysis.html#cb268-3"></a><span class="st">  </span>psych<span class="op">::</span><span class="kw">alpha</span>()</span>
-<span id="cb268-4"><a href="making-your-data-ready-for-analysis.html#cb268-4"></a></span>
-<span id="cb268-5"><a href="making-your-data-ready-for-analysis.html#cb268-5"></a><span class="kw">print</span>(rxx_alpha<span class="op">$</span>total)</span></code></pre></div>
+<h3><span class="header-section-number">3.12.4</span> Cronbach’s alpha</h3>
+<p>If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. The glimpse() command illustrates this file has all the original items (after reverse-coding has been fixed).</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="making-your-data-ready-for-analysis.html#cb268-1"></a>analytic_data_items <span class="op">%&gt;%</span></span>
+<span id="cb268-2"><a href="making-your-data-ready-for-analysis.html#cb268-2"></a><span class="st">  </span><span class="kw">glimpse</span>()</span></code></pre></div>
+<pre><code>## Rows: 300
+## Columns: 14
+## $ id        &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, …
+## $ age       &lt;dbl&gt; 23, 22, 18, 23, 22, 17, 23, 22, 17, NA,…
+## $ sex       &lt;fct&gt; male, female, male, female, male, femal…
+## $ eye_color &lt;fct&gt; blue, brown, hazel, blue, NA, hazel, bl…
+## $ esteem1   &lt;dbl&gt; 3, 4, 4, 3, 3, 3, 3, 4, 4, 4, 3, 4, NA,…
+## $ esteem2   &lt;dbl&gt; 2, 3, 3, 2, 2, 3, 2, 3, 3, 3, 2, 2, NA,…
+## $ esteem3   &lt;dbl&gt; 4, 4, 4, 3, 4, 4, NA, 4, 4, 3, 4, 4, 4,…
+## $ esteem4   &lt;dbl&gt; 3, 4, 4, 3, 4, 4, 4, 4, 3, 4, NA, 4, 3,…
+## $ esteem5   &lt;dbl&gt; 4, 4, 4, 4, 4, NA, NA, 4, 4, 4, 3, 4, 4…
+## $ jobsat1   &lt;dbl&gt; 3, 5, 4, 3, 3, 3, 3, 5, 3, 3, 3, 4, 4, …
+## $ jobsat2   &lt;dbl&gt; 5, 5, 5, NA, 5, 5, 4, 5, 4, 4, 3, 5, 3,…
+## $ jobsat3   &lt;dbl&gt; 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
+## $ jobsat4   &lt;dbl&gt; NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5, …
+## $ jobsat5   &lt;dbl&gt; 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA, 4…</code></pre>
+<p>We calculated reliability using psych::alpha() command. Cronbach’s alpha is labeled “raw alpha” in the output.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="making-your-data-ready-for-analysis.html#cb270-1"></a>rxx_alpha &lt;-<span class="st"> </span>analytic_data_items <span class="op">%&gt;%</span></span>
+<span id="cb270-2"><a href="making-your-data-ready-for-analysis.html#cb270-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb270-3"><a href="making-your-data-ready-for-analysis.html#cb270-3"></a><span class="st">  </span>psych<span class="op">::</span><span class="kw">alpha</span>()</span>
+<span id="cb270-4"><a href="making-your-data-ready-for-analysis.html#cb270-4"></a></span>
+<span id="cb270-5"><a href="making-your-data-ready-for-analysis.html#cb270-5"></a><span class="kw">print</span>(rxx_alpha<span class="op">$</span>total)</span></code></pre></div>
 <pre><code>##  raw_alpha std.alpha G6(smc) average_r  S/N     ase  mean
 ##     0.6622    0.6634  0.6173    0.2827 1.97 0.03035 3.403
 ##      sd median_r
