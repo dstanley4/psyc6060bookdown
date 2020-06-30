@@ -335,24 +335,6 @@ analytic_data_between %>%
   summary()
 ```
 
-A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
-
-```{r, eval = FALSE}
-analytic_data_between %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-```
-
-```{r, eval = FALSE}
-output <- analytic_data_between %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-
-output[,c(1,2,3,4,5,8,9)]
-```
-
 Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
 
 ## Experiment: Within one-way
@@ -466,29 +448,12 @@ For numeric variables, you should search for impossible values.e For example, in
 
 One options for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 analytic_data_within %>%
   select(where(is.numeric)) %>%
   summary()
 ```
 
-A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
-
-```{r, eval = FALSE}
-analytic_data_within %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-```
-
-```{r, echo = FALSE}
-output <- analytic_data_within %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-
-output[,c(1,2,3,4,5,8,9)]
-```
 
 Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
 
@@ -500,7 +465,7 @@ The analytic data in it's current for does not conform to the the tidy data spec
 print(analytic_data_within)
 ```
 
-The pivot_long() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single varible called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument indicates to the computer to use the march column and the july column and all the columns in between. Each column name represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single varible called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument indicates to the computer to use the march column and the july column and all the columns in between. Each column name represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
 
 ```{r}
 analytic_data_within_tidy <- analytic_data_within %>%
@@ -652,24 +617,6 @@ One options for doing so is the summary command again. This time, however, we us
 analytic_data_within_nway %>%
   select(where(is.numeric)) %>%
   summary()
-```
-
-A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
-
-```{r, eval = FALSE}
-analytic_data_within_nway %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-```
-
-```{r, echo = FALSE}
-output <- analytic_data_within_nway %>%
-  select(where(is.numeric)) %>%
-  as.data.frame() %>%
-  psych::describe()
-
-output[,c(1,2,3,4,5,8,9)]
 ```
 
 Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
@@ -1060,7 +1007,7 @@ print(analytic_survey_tidy)
 ### The usual suspects
 
 One approach is the describe() command from the psych package.
-```{r}
+```{r, eval = FALSE}
 psych::describe(analytic_data_survey)
 ```
 
