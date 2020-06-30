@@ -801,7 +801,7 @@ analytic_data_survey %>%
 With larger numers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
 
 
-Start by examining the range of non-scale items. In this case it's only age:
+Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
 
 ```{r, eval = FALSE}
 library(skimr)
@@ -830,7 +830,8 @@ outdf$complete_rate= round(outdf$complete_rate,2)
 outdf
 ```
 
-Look the items in the first scale, self-esteem. Items responses in this scale range from 1 to 5, make sure they are all in this range.
+Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+
 
 ```{r, eval=FALSE}
 analytic_data_survey %>%
@@ -856,7 +857,7 @@ outdf$complete_rate= round(outdf$complete_rate,2)
 outdf
 ```
 
-Look the items in the second scale, job satisfaction. Items responses in this scale range from 1 to 5, make sure they are all in this range.
+Follow the same process for the job satisfaction items. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 ```{r, eval=FALSE}
 analytic_data_survey %>%
@@ -883,34 +884,39 @@ outdf
 ```
 
 
-### Scale Scores
+### Scale scores
 
-Likert caveats. Depending on your research area, there are very different perspectives on how to analyze Likert-type items. The perspectives differ based on how they view the [level of measurement](https://en.wikipedia.org/wiki/Level_of_measurement) associated with the Likert-type items. One perspective, common in Psychology, is that the numbers corresponding to each response option are of the interval type. This mean that the psychological difference between each response option perfectly corresponds to the numerical difference between each response option. That is, the psychological difference between Strongly Agree and Moderately Agree is equal to the psychological difference between Moderately Agree and Neutral, and so on.
-
-
-Now it looks like our data is ready for the creation of scale scores:
-
-```{r}
-glimpse(analytic_data_survey)
-```
-
-
+Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items, as described previously.
 
 #### Reverse key items
 
-Our first step is dealing with reverse key items. The way you deal with these items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
+The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
 
-We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the *mutate* command from the *dplyr* package.
+We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the *mutate* command.
 
-In this data file the only reverse-key item was SE7 (we known this from when we created the survey). We use the command below to reverse key an item with response options ranging from 1 to 5. So we use 6 in the command (i.e., one higher than 5).
-
-
+In this data file all the reverse-keyed were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse-keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse keyed items - both on difference scales.
 
 ```{r}
 analytic_data_survey %>%
   select(ends_with("_rev15")) %>%
   glimpse()
 ```
+
+To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obaiin the recoded value.
+
+|  original value | math  | recoded value |
+|             :-: |  :-:  | :-:           |
+| 1               | 6 - 1 | 5             |
+| 2               | 6 - 2 | 4             |
+| 3               | 6 - 3 | 3             |
+| 4               | 6 - 4 | 2             |
+| 5               | 6 - 5 | 1             |
+
+
+The code below:
+* selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
+* subtracts each value in that column from 6
+* rames the column by removing "_rev15" because the reverse coding is complete.
 
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -919,11 +925,31 @@ analytic_data_survey <- analytic_data_survey %>%
               .cols = ends_with("_rev15"),
               pattern = "_rev15")
 ```
-The command above creates a new column in analytic_data called SE7c that has the reverse-keyed values for SE7 in it.  You can see the new SE7c column using command below that displays the first six rows of the data. The SE7c column is at the far right of the data displayed.
+
+You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names not longer indicate the items are reverse-keyed.
 
 ```{r,echo=TRUE,eval=TRUE}
 glimpse(analytic_data_survey)
 ```
+
+```{block2, type='rmdcaution'}
+If your scale had used response options numbered 0 to 4 the math is different.
+For each item you would use subtract values from the highest possible point (i.e, 4) instead of one larger than the highest possible point.
+
+|  original value | math  | recoded value |
+|             :-: |  :-:  | :-:           |
+| 0               | 5 - 0 | 4             |
+| 1               | 5 - 1 | 3             |
+| 2               | 5 - 2 | 2             |
+| 3               | 5 - 3 | 1             |
+| 4               | 5 - 4 | 0             |
+
+Thus the mutate command would instead be:
+
+  mutate(5 - across(.cols = ends_with("_rev15")) ) 
+```
+
+
 
 **Note FOR A BOX **. If you had used response options numbered 0 to 4 for each item you would use the command below instead. Note that we use 4 in the command this time instead of a value one higher.
 ```{r,echo=TRUE,eval=FALSE}
