@@ -174,12 +174,12 @@ A Likert-type item is typically composed of a statement that participants are as
 * If you collect items over multiple time points use a prefix with a short code to indicate the time followed by and underscore. For example, if you had a multi-item self-esteem scale you might call the column for the firs time "t1_esteem1_rev15". This indicate that you have for time 1 (t1), the first self-esteem item (esteem1) and that item is reverse keyed on a 1 to 5 scale.
 
 
-### ANOVA between-participant levels
+### ANOVA between
 
 Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your spreadsheet - likewise in your survey program. Likewise, for between participant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
 
 
-### ANOVA within-participant levels
+### ANOVA within
 
 If you have a study that involves a within-participant ANOVA. 
 
@@ -187,11 +187,11 @@ One-way repeated measure predictor.  == See example above with run times.
 
 Multi-way repeated measures predictors. If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. For example, if imagine you are a food researcher interested in taste ratings as a dependent various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables.
 
-### Other types of information.
+### Other information
 education, income, etc
 
 
-### Working the examples
+## Following the examples
 
 Below we present example scripts transforming raw data to analytic data for various study designs (experimental and survey). These scripts illustrate the value of using the naming conventations outlined previously. Follow along with the projects by placing the data in your R Studio project folder and typing your own script. Resist the urge to cut and paste from this document. After learning and teaching scripting for years, there we've found there is substantial bennefit to the process of simply typing the script yourself.
 
@@ -280,7 +280,7 @@ The participant identification number in the id column is a numeric column, so w
 
 ```{r}
 analytic_data_between <-analytic_data_between %>%
-  mutate(id = as.factor(id))
+  mutate(id = as_factor(id))
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
@@ -353,10 +353,11 @@ output <- analytic_data_between %>%
 output[,c(1,2,3,4,5,8,9)]
 ```
 
-Scan the min and max values for each variable to ensulere there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
+Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
 
 ## Experiment: Within one-way
 
+The one-way within-participant ANOVA example uses the data file data_ex_within.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in comparing run times (elapsed_time) across three different occasions (march/may/june).
 
 ```{r, results='hide'}
 # Date: YYYY-MM-DD
@@ -375,8 +376,9 @@ analytic_data_within <- raw_data_within
 
 ```
 
+After loading the data we do initial cleaning to remove empty row/columns and ensure proper naming for columns:
 
-```{r, results='hide'}
+```{r, results=FALSE, message=FALSE}
 library(janitor)
 
 # Initial cleaning
@@ -392,18 +394,16 @@ You can confirm the column names following our naming convention with the glimps
 glimpse(analytic_data_within)
 ```
 
-### Converting categorical variables to factors
+### Creating factors
 
 Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character. We have one variable sex that is categorical that is of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
-
-Importantly, note that we have a categorical variable that is missing because our data is not in the tidy data format. The predictor "occassion" (levels: march, may, and july) is missing. The levels for occasion are distributed over three columns. We will have to fix this later. For now we focus on the sex and id columns.
 
 
 ```{r}
 glimpse(analytic_data_within)
 ```
 
-You can quickly convert all character columns to factors using the code below. 
+You can quickly convert all character columns to factors using the code below:
 
 ```{r}
 # Turn all columns that are of type character into factors
@@ -417,7 +417,7 @@ The participant identification number in the id column is a numeric column, so w
 
 ```{r}
 analytic_data_within <-analytic_data_within %>%
-  mutate(id = as.factor(id))
+  mutate(id = as_factor(id))
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
@@ -429,9 +429,10 @@ glimpse(analytic_data_within)
 Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
 
 
-### Levels of factors
+### Factor screening
 
-The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+
 
 ```{r}
 analytic_data_within %>%
@@ -440,7 +441,7 @@ analytic_data_within %>%
 ```
 
 
-Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
+Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
 
 ```{r}
 # Custom reordering of factor levels
@@ -450,6 +451,7 @@ analytic_data_within <- analytic_data_within %>%
                            "male"))
 ```
 
+
 You can see the new order of the factor levels with summary():
 ```{r}
 analytic_data_within %>%
@@ -457,38 +459,83 @@ analytic_data_within %>%
   summary()
 ```
 
+
+### Numeric screening
+
+For numeric variables, you should search for impossible values.e For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.
+
+One options for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
+
+```{r, eval = FALSE}
+analytic_data_within %>%
+  select(where(is.numeric)) %>%
+  summary()
+```
+
+A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
+
+```{r, eval = FALSE}
+analytic_data_within %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+```
+
+```{r, echo = FALSE}
+output <- analytic_data_within %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+
+output[,c(1,2,3,4,5,8,9)]
+```
+
+Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
+
 ### Pivot to tidy data
+
+The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion. The levels of occasion are spread across three columns. Correspondingly, elapsed time is spread across multiple columns in the same row and is not labeled as elaped time. We need to restructure the data into the tidy data format so that we have a single elapsed time observation per row and a single column per variable.
 
 ```{r}
 print(analytic_data_within)
 ```
 
+The pivot_long() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single varible called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument indicates to the computer to use the march column and the july column and all the columns in between. Each column name represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
 
 ```{r}
 analytic_data_within_tidy <- analytic_data_within %>%
-  pivot_longer(march:july,
+  pivot_longer(cols = march:july,
                names_to = "occasion",
                values_to = "elapsed_time"
   )
 ```
 
+You can see the data in the new format below. 
 ```{r}
 print(analytic_data_within_tidy)
 ```
 
+But notice that the new column occasion is of the type character. We need it to be a factor. So use the code below to do so:
 
 ```{r}
 analytic_data_within_tidy <-analytic_data_within_tidy %>%
-  mutate(occasion = as.factor(occasion))
+  mutate(occasion = as_factor(occasion))
 ```
+
+You can confirm that occasion is now a factor with the glimpse() command. Once this is complete, you are done preparing your one-way within participant analytic data.
 
 ```{r}
 glimpse(analytic_data_within_tidy)
 ```
 
+
+
 ## Experiment: Within N-way
 
-```{r, results='hide'}
+The N-way within-participant ANOVA example uses the data file data_food.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in assessing the taste of food as a function of food type (pizza/steak/burger) and temperature (hot/cold).
+
+
+```{r, results='hide', message = FALSE}
 # Date: YYYY-MM-DD
 # Name: your name here
 # Example: Within-participant experiment
@@ -498,18 +545,20 @@ library(tidyverse)
 
 my_missing_value_codes <- c("-999", "", "NA")
 
-raw_data_food <- read_csv(file = "data_food.csv",
+raw_data_within_nway <- read_csv(file = "data_food.csv",
                      na = my_missing_value_codes)
 
-analytic_data_food <- raw_data_food
+analytic_data_within_nway <- raw_data_within_nway
 
 ```
 
-```{r, results='hide'}
+After loading the data we do initial cleaning to remove empty row/columns and ensure proper naming for columns:
+
+```{r, results=FALSE, message=FALSE}
 library(janitor)
 
 # Initial cleaning
-analytic_data_food <- analytic_data_food %>%
+analytic_data_within_nway <- analytic_data_within_nway %>%
   remove_empty("rows") %>%
   remove_empty("cols") %>%
   clean_names()
@@ -518,60 +567,67 @@ analytic_data_food <- analytic_data_food %>%
 You can confirm the column names following our naming convention with the glimpse command - and see the data type for each column.
 
 ```{r}
-glimpse(analytic_data_food)
+glimpse(analytic_data_within_nway)
 ```
 
-### Converting categorical variables to factors
+### Creating factors
 
-Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character. We have one variable sex that is categorical that is of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
 
 
 ```{r}
-glimpse(analytic_data_food)
+glimpse(analytic_data_within_nway)
 ```
 
-You can quickly convert all character columns to factors using the code below:
+The sex column is a numeric column, so we have handle that column on it's own. 
 
 ```{r}
-# Turn all columns that are of type character into factors
-analytic_data_food <- analytic_data_food %>%
-  mutate(across(.cols = where(is.character),
-                .fns = as_factor))
+analytic_data_within_nway <-analytic_data_within_nway %>%
+  mutate(sex = as_factor(sex))
+```
 
+Now the sex column is a factor but we have to tell the computer that 1 indicates male and 2 indicates female.
+
+```{r}
+analytic_data_within_nway <-analytic_data_within_nway %>%
+  mutate(sex = fct_recode(sex,
+                          male = "1",
+                          female = "2"))
 ```
 
 The participant identification number in the id column is a numeric column, so we have handle that column on it's own. 
 
 ```{r}
-analytic_data_food <-analytic_data_food %>%
-  mutate(id = as.factor(id))
+analytic_data_within_nway <-analytic_data_within_nway %>%
+  mutate(id = as_factor(id))
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
 
 ```{r}
-glimpse(analytic_data_food)
+glimpse(analytic_data_within_nway)
 ```
 
 Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
 
 
-### Levels of factors
+### Factor screening
 
-The order of the levels of factors influences how text output and graphs are generated. You can see the order of the factor levels using:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+
 
 ```{r}
-analytic_data_food %>%
+analytic_data_within_nway %>%
   select(where(is.factor)) %>%
   summary()
 ```
 
 
-Here we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: intersex, female, male. 
+Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
 
-```{r, eval = FALSE}
+```{r}
 # Custom reordering of factor levels
-analytic_data_food <- analytic_data_food %>%
+analytic_data_within_nway <- analytic_data_within_nway %>%
   mutate(sex = fct_relevel(sex,
                            "female",
                            "male"))
@@ -580,14 +636,57 @@ analytic_data_food <- analytic_data_food %>%
 
 You can see the new order of the factor levels with summary():
 ```{r}
-analytic_data_food %>%
+analytic_data_within_nway %>%
   select(where(is.factor)) %>%
   summary()
 ```
 
 
+### Numeric screening
+
+For numeric variables, you should search for impossible values.e For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.
+
+One options for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
+
+```{r, eval = FALSE}
+analytic_data_within_nway %>%
+  select(where(is.numeric)) %>%
+  summary()
+```
+
+A better option is to use the describe() command from the psych package. Note that this command is an older command and we need to convert our data to a data.frame using as.data.frame() before we call it.
+
+```{r, eval = FALSE}
+analytic_data_within_nway %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+```
+
+```{r, echo = FALSE}
+output <- analytic_data_within_nway %>%
+  select(where(is.numeric)) %>%
+  as.data.frame() %>%
+  psych::describe()
+
+output[,c(1,2,3,4,5,8,9)]
+```
+
+Scan the min and max values for each variable to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). Once this is complete, you are done preparing your between participant analytic data.
+
+### Pivot to tidy data
+
+
+The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion. The levels of occasion are spread across three columns. Correspondingly, elapsed time is spread across multiple columns in the same row and is not labeled as elaped time. We need to restructure the data into the tidy data format so that we have a single elapsed time observation per row and a single column per variable.
+
 ```{r}
-analytic_food_tidy <- analytic_data_food %>%
+print(analytic_data_within_nway)
+```
+
+The pivot_long() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single varible called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument indicates to the computer to use the march column and the july column and all the columns in between. Each column name represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
+
+```{r}
+analytic_data_nway_tidy <- analytic_data_within_nway %>%
   pivot_longer(pizza_hot:burger_cold,
                names_to = c("food", "temperature"),
                names_sep = "_",
@@ -595,47 +694,25 @@ analytic_food_tidy <- analytic_data_food %>%
   )
 ```
 
-```{r}
-print(analytic_food_tidy)
-```
+You can see the data in the new format below. 
 
 ```{r}
-
-# Turn all columns that are of type character into factors
-analytic_food_tidy <- analytic_food_tidy %>%
-  mutate(across(.cols = where(is.character),
-                .fns = as_factor))
-
-# sex is numeric so must be done the hard way
-analytic_food_tidy <- analytic_food_tidy %>%
-  mutate(sex = as_factor(sex))
-
-# establish that 1 indicates males and 2 indicates females
-analytic_food_tidy <- analytic_food_tidy %>%
-  mutate(sex = fct_recode(sex, 
-                          male = "1",
-                          female = "2"))
-
-
-# see order of factors
-analytic_food_tidy %>%
-  select(where(is.factor)) %>%
-  summary()
-
-# set order of factors for x-axis or legend
-analytic_food_tidy <- analytic_food_tidy %>%
-  mutate(sex = fct_relevel(sex,
-                           "female",
-                           "male"))
-
-# see order of factors
-analytic_food_tidy %>%
-  select(where(is.factor)) %>%
-  summary()
-
+print(analytic_data_nway_tidy)
 ```
 
+But notice that the new column occasion is of the type character. We need it to be a factor. So use the code below to do so:
 
+```{r}
+analytic_data_nway_tidy <-analytic_data_nway_tidy %>%
+  mutate(food = as_factor(food),
+         temperature = as_factor(temperature))
+```
+
+You can confirm that occasion is now a factor with the glimpse() command. Once this is complete, you are done preparing your one-way within participant analytic data.
+
+```{r}
+glimpse(analytic_data_nway_tidy)
+```
 
 ## Surveys: Single Occassion
 
@@ -713,7 +790,7 @@ The participant identification number in the id column is a numeric column, so w
 
 ```{r}
 analytic_data_survey <-analytic_data_survey %>%
-  mutate(id = as.factor(id))
+  mutate(id = as_factor(id))
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
@@ -903,7 +980,7 @@ Handle categorical variables:
 
 ```{r}
 analytic_data_survey <-analytic_data_survey %>%
-  mutate(id = as.factor(id))
+  mutate(id = as_factor(id))
 
 # Turn all columns that are of type character into factors
 analytic_data_survey <- analytic_data_survey %>%
@@ -989,7 +1066,7 @@ psych::describe(analytic_data_survey)
 
 
 One approach is the apa.cor.table() command from the apaTables package.
-```{r}
+```{r, eval = FALSE}
 library(apaTables)
 analytic_data_survey %>%
   select(where(is.numeric)) %>%
