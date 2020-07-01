@@ -348,8 +348,8 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 <h3><span class="header-section-number">3.4.1</span> Structuring data: Obtaining tidy data</h3>
 <p>When conducting analyses in R it is typically necessary to have data in a format called tidy data <span class="citation">(Wickham <a href="#ref-tidy-data" role="doc-biblioref">2014</a>)</span>. <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidy data</a> as defined by Hadley involves (among other requirements) that:</p>
 <ol style="list-style-type: decimal">
-<li>Each variable forms a column.</li>
-<li>Each observation forms a row.</li>
+<li><p>Each variable forms a column.</p></li>
+<li><p>Each observation forms a row.</p></li>
 </ol>
 <p>The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It’s not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format. When dealing with animal or human participant data it’s common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadsheet is used to represent a variable.</p>
 <p><strong>Between participant data</strong>. Consider Table <a href="making-your-data-ready-for-analysis.html#tab:betweenex">3.1</a> which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the variable and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row – also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.</p>
@@ -657,15 +657,19 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 <p>R Studio in the Cloud Assignment
 1. The data should be in the assignment project automatically. Just start the assignment.</p>
 <p>R Studio in the Cloud, custom project
-1. Create a new Project using the web interface
-2. Upload your data files in using the upload button in the Files pane</p>
+1. Create a new Project using the web interface</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Upload your data files in using the upload button in the Files pane</li>
+</ol>
 <p>R Studio Local Computer, custom project
-1. Create a folder on your computer for the analysis
-2. Place your data files in that folder
-3. Use the menu item File &gt; New Project… to start the project
-4. On the window that appears select “Existing Directory”
-5. On the next screen, press the “Browse” button and find/select the folder with your data
-6. Press the Create Project Button</p>
+1. Create a folder on your computer for the analysis</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Place your data files in that folder</p></li>
+<li><p>Use the menu item File &gt; New Project… to start the project</p></li>
+<li><p>On the window that appears select “Existing Directory”</p></li>
+<li><p>On the next screen, press the “Browse” button and find/select the folder with your data</p></li>
+<li><p>Press the Create Project Button</p></li>
+</ol>
 <p>Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.</p>
 <p>As you read each of these example scripts pay attention to the redundancy. Regardless of the of the type of data you analyze there is a great deal of consistency in terms of how all of the scripts start.</p>
 <p>Pay particular attention to XXXX where the reearcher assistant didn’t fllow and sex as 1 and</p>
@@ -1286,7 +1290,7 @@ FIGURE 3.3: Raw data for item scoring
 </div>
 <div id="numeric-screening-3" class="section level3">
 <h3><span class="header-section-number">3.10.3</span> Numeric screening</h3>
-<p>For numeric variables, you should search for impossible values.e For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.</p>
+<p>For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.</p>
 <p>One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="making-your-data-ready-for-analysis.html#cb230-1"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb230-2"><a href="making-your-data-ready-for-analysis.html#cb230-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span></span>
