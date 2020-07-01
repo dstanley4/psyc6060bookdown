@@ -12,6 +12,7 @@ The following packages must be installed before starting this chapter.
 |-------------------|
 |tidyverse          |
 
+
 The following data files are used in this chapter:
 
 | Required Data |
@@ -449,6 +450,42 @@ data_exp %>%
   print()
 ```
 
+
+#### mutate() for factors
+
+In R it it is critical that you identify categorical variable as categorical variables. In R categorical variables are referred to as factors. A factor like sex has three possible levels: female, male, intersex. 
+
+An inspection of the glimpse() command output reveals that the sex column has the type character - as indicated by <chr>. Also notice as you inspect this output that we use words (e.g., female) to indicate the sex in the column rather than a number represent a female participant (e.g., 2). This is the preferred but less common approach to entering data.
+
+```{r}
+glimpse(data_exp)
+```
+
+We need to convert the sex column to a factor in order for R to handle it appropriately in analyses. Failure to indicate column is a factor could result in R conducting all the analyses and presenting the incorrect results. Consequently, it is critical that we covert the column to a factor. Fortunately, that is easily done using the as_factor() command (there is also an as.factor command if as_factor won't work for some reason).
+
+We convert the sex column to a factor with this code:
+
+```{r}
+data_exp <- data_exp %>%
+  mutate(sex = as_factor(sex))
+```
+
+You can confirm this worked with the glimpse() command:
+
+```{r}
+data_exp <- data_exp %>%
+  mutate(sex = as_factor(sex))
+```
+
+
+If you entered your data using words (e.g., male, female) for the levels of sex you're done at this point. However, if you used numbers to represent each sex in your data there is one more step. You have to indicate to R which sex each number represents. We do that with the code below.
+
+```{r}
+data_exp <- data_exp %>%
+  mutate(sex = fct_recode(sex,
+                          male = "1",
+                          female = "2"))
+```
 
 ## Base R vs tidyverse
 
