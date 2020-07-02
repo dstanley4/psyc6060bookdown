@@ -977,15 +977,15 @@ Thus the mutate command would instead be:
   mutate(4 - across(.cols = ends_with("_rev15")) )
 ```
 
-
-
-
 #### Creating scores
+
+The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process we it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_items. We will need to use this backup later to compute the reliability of the scales we are creating.
 
 ```{r}
 analytic_data_items <- analytic_data_survey
 ```
 
+We want to make a self_esteem scale and plan to select items using starts_with("esteem"). But prior to doing this we make sure the start_with() command only gives us the items we want - and not additional unwanted items. The output below confirms there are not problems associated with using starts_with("esteem").
 
 ```{r}
 # confirm select will select the columns you want (and not others)
@@ -994,12 +994,17 @@ analytic_data_survey %>%
   glimpse()
 ```
 
+Likewise, we want to make a job_sat scale and plan to select items using starts_with("jobsat"). The code and output below using starts_with("jobsat") only returns the items we are interested in.
+
 ```{r}
 # confirm select will select the columns you want (and not others)
 analytic_data_survey %>%
   select(starts_with("jobsat")) %>%
   glimpse()
 ```
+
+
+We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate comand calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.
 
 
 ```{r}
@@ -1015,14 +1020,13 @@ analytic_data_survey <- analytic_data_survey %>%
   
 ```
 
-When you see ungroup() in this context you can think of it as "turn off rowwise".
-
-We can see our data now has the self esteem column and no esteem items.
+We can see our data now has the self esteem column, a job_sat column, and that all of the item level data has been removed.
 
 ```{r}
 glimpse(analytic_data_survey)
 ```
 
+These data are ready for analysis.
 
 
 ## Surveys: Multiple Occasions
@@ -1130,8 +1134,7 @@ print(analytic_data_survey)
 analytic_survey_tidy <- analytic_data_survey %>%
   pivot_longer(esteem_t1:jobsat_t2,
                names_to = c(".value", "time"),
-               names_pattern = "(.*)_(t.)"
-  )
+               names_sep = "_")
 ```
 
 ```{r}
