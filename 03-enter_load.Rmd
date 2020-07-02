@@ -139,9 +139,13 @@ Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved
 Why did we walk you through this technical treatment of structuring data within the computer at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in the rest of this chapter around the naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \@ref(tab:withinex) to the data in Figure \@ref(tab:withintidyex) by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
 
 
-## Data collection and entry
+## Data collection considerations 
 
-Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). Regardless of the approach it is critical to name your variables appropriately. For spreadsheet users, this mean setting of the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct. Likewise, for software uses, this means setting up the software prior to running the experiment/survey to that when the data is exported for analysis the column names you obtain are amenable to subsequent analyses approaches. Although failure to take this thoughtful approach in advance can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
+Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). 
+
+Regardless of the approach it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the survey to using appropriate variable names PRIOR to data collection - so the exported file has desirable variable names. For spreadsheet users, this means setting up the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct. 
+
+Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
 ### Naming conventions
 
@@ -227,9 +231,28 @@ As you read each of these example scripts pay attention to the redundancy. Regar
 
 Also as you follow along on your computer, be sure to used read_csv when you load data not read.csv (the base R appoach). Also note how in the N-way repeated measures design we were forced to deal with a situation where the research assistant indicated male and female using numbers instead of words when entering the data.
 
+## Entering data into spreadsheets
+
+The first example uses a data file data_ex_between.csv that corresponds to an example where we recorded the run times for a number of male and female participants. How did we create this data file. We used a spreadsheet to enter the data, as illustrated in Figure  \@ref(fig:spreadsheetbetween). Programs like Microsoft Excel and Google Sheets are good options for entering data. 
+
+```{r spreadsheetbetween, echo = FALSE, out.width="40%", fig.cap = "Spreadsheet entry of running data"}
+knitr::include_graphics("ch_score_items/images/screenshot_data_between.png")
+```
+
+The key to using these types of programs is to the save the data as a .csv file when you are done. CSV is short for Comma Separated Values. After entering the data in Figure \@ref(fig:spreadsheetbetween) we saved it as data_ex_between.csv. There is no need to do so, but if you were to open this file in a text editor (such as TextEdit on a Mac or Notepad on Windows) you would see the information displayed in Figure   \@ref(fig:csvsheetbetween). You can see there is one row per person and the columns are created by separating each values by a comma; hence, comma separated values. 
+
+```{r csvsheetbetween, echo = FALSE, out.width="25%", fig.cap = "Text view of CSV data"}
+knitr::include_graphics("ch_score_items/images/screenshot_csv_between.png")
+```
+
+There are many ways to save data, but the CSV data is one of the better ones because it is a non-proprietary format. Some software, such as SPSS, using a proprietary format (e.g., .sav for SPSS) the make it challenging to access that data if you don't have that (often expensive software). One of our goals as scientists is to make it easy for others to audit our work - so that science can be self-correcting. Therefore, choose an open format for your data like .csv.
+
+
 ## Experiment: Between 
 
-The between-participant example uses the data file data_ex_between.csv. Initial loading of the file, including the specification of missing data codes, is provided by the code below. The data corresponds to a designs where the researcher is interested in comparing run times (elapsed_time) based on sex (male/female). This type of workflow is appropriate when you have independent groups t-tests and between-particpant ANOVA.
+Ensure your data is in the folder. Start a new script with the name. In that script enter the commands below.
+
+We can load the data_ex_between.csv data by creating a script with commands below. As noted previously, these data corresponds to a design where the researcher is interested in comparing run times (elapsed_time) based on sex (male/female). This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-particpants ANOVA.
 
 ```{r, results=FALSE, message=FALSE}
 # Date: YYYY-MM-DD
