@@ -851,12 +851,11 @@ outdf <- analytic_data_survey %>%
     rename_with(.fn = str_remove,
               .cols = everything(),
               pattern = "numeric.") %>%
-  select(-p25, -p50, -p75) %>%
+  select(-p25, -complete_rate, -p75) %>%
   as.data.frame()
 
 outdf$mean = round(outdf$mean,2)
 outdf$sd = round(outdf$sd,2)
-outdf$complete_rate= round(outdf$complete_rate,2)
 
 outdf
 ```
@@ -878,12 +877,11 @@ outdf <- analytic_data_survey %>%
     rename_with(.fn = str_remove,
               .cols = everything(),
               pattern = "numeric.") %>%
-  select(-p25, -p50, -p75) %>%
+  select(-p25, -complete_rate, -p75) %>%
   as.data.frame()
 
 outdf$mean = round(outdf$mean,2)
 outdf$sd = round(outdf$sd,2)
-outdf$complete_rate= round(outdf$complete_rate,2)
 
 outdf
 ```
@@ -904,12 +902,11 @@ outdf <- analytic_data_survey %>%
     rename_with(.fn = str_remove,
               .cols = everything(),
               pattern = "numeric.") %>%
-  select(-p25, -p50, -p75) %>%
+  select(-p25, -complete_rate, -p75) %>%
   as.data.frame()
 
 outdf$mean = round(outdf$mean,2)
 outdf$sd = round(outdf$sd,2)
-outdf$complete_rate= round(outdf$complete_rate,2)
 
 outdf
 ```
@@ -977,13 +974,13 @@ For each item you would use subtract values from the highest possible point (i.e
 
 Thus the mutate command would instead be:
 
-  mutate(4 - across(.cols = ends_with("_rev15")) ) 
+  mutate(4 - across(.cols = ends_with("_rev15")) )
 ```
 
 
 
 
-#### Calculation scale scores
+#### Creating scores
 
 ```{r}
 analytic_data_items <- analytic_data_survey
@@ -1083,6 +1080,8 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ### Scale scores
 
+#### Reverse key items
+
 ```{r}
 
 # Reverse code items
@@ -1091,8 +1090,11 @@ analytic_data_survey <- analytic_data_survey %>%
   rename_with(.fn = str_remove,
               .cols = ends_with("_rev15"),
               pattern = "_rev15")
+```
 
+#### Creating scores
 
+```{r}
 analytic_data_survey <- analytic_data_survey %>% 
   rowwise() %>% 
   mutate(esteem_t1 = mean(c_across(starts_with("t1_esteem")),
@@ -1141,8 +1143,8 @@ print(analytic_survey_tidy)
 
 
 ### skim()
+One approach is the skim() command from the skimr package. This quickly provides the basic descriptive statistics. In the output for this command there are also several columns that beging with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The median is the 50th percentile. The interquartile range is the range between p25 and p75. Notice that we run this command on the "wide" version of the data (analytic_data_survey) rather than tidy version of the data (analytic_survey_tidy).
 
-One approach is the skim() command from the skimr package.
 ```{r, eval = FALSE}
 library(skimr)
 skim(analytic_data_survey)
@@ -1159,20 +1161,18 @@ outdf <- analytic_data_survey %>%
     rename_with(.fn = str_remove,
               .cols = everything(),
               pattern = "numeric.") %>%
-  select(-p25, -p50, -p75) %>%
+  select(-p25, -complete_rate, -p75) %>%
   as.data.frame()
 
 outdf$mean = round(outdf$mean,2)
 outdf$sd = round(outdf$sd,2)
-outdf$complete_rate= round(outdf$complete_rate,2)
 
 outdf
 ```
 
 ### apa.cor.table()
 
-
-One approach is the apa.cor.table() command from the apaTables package which creates a Word document with the table, see Figure \@ref(fig:descapa).
+Another approach is the apa.cor.table() command from the apaTables package. This quickly provides the basic descriptive statistics as well as correlations among variable. As well, it will even create a Word document with this information, see Figure \@ref(fig:descapa). Notice that we run this command on the "wide" version of the data (analytic_data_survey) rather than tidy version of the data (analytic_survey_tidy).
 
 ```{r, eval = FALSE}
 library(apaTables)
@@ -1187,7 +1187,7 @@ knitr::include_graphics("ch_score_items/images/desc_apa.png")
 
 ### tidyverse
 
-The tidyverse approach is oddly long but incredibly flexible. More details on why.
+A final approach uses tidyverse commands. This approach is oddly long - and we won't describe how it works in detail. But, based on the information in the previous chapter you should be able to work out how this code works. Even though this code is long - it provide the ultimate in flexibility. If a new statistics is development that you want to use, you can simply include the command for it in the desired_descriptives list and it will be included in your table.
 
 ```{r}
 library(tidyverse)
@@ -1238,7 +1238,7 @@ analytic_data_items %>%
 ```
 
 
-We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output.
+We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of varibilty in observed scores that is due to actual differences among participants (rather than measurement error).
 
 ```{r, eval = TRUE}
 rxx_alpha <- analytic_data_items %>%
@@ -1247,9 +1247,4 @@ rxx_alpha <- analytic_data_items %>%
 
 print(rxx_alpha$total)
 ```
-
-
-
-
-If you entered data following the style guide recommended here;  entering categorical variables by the category name rather than numerically we can quickly convert categorical variable to factors. For example, if you used a data entry convention where you entered male/female in the column for sex rather than 1 and 2 we can quickly convert all of those columns to factors. This because if you followed the naming convention, columns that contain categorical information will be of the character <chr> type. This is quickly revealed by a glimpse command:
 
