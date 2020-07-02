@@ -1130,6 +1130,9 @@ But now comes the complicated point wher eyou need to pivot the data to longer.
 print(analytic_data_survey)
 ```
 
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is excuted it creates a tidy version of data set stored in analytic_survey_tidy.
+
+
 ```{r}
 analytic_survey_tidy <- analytic_data_survey %>%
   pivot_longer(esteem_t1:jobsat_t2,
@@ -1137,9 +1140,13 @@ analytic_survey_tidy <- analytic_data_survey %>%
                names_sep = "_")
 ```
 
+You can see the new data with the print() command. Notice that each particpant has multiple rows associated with them.
+
 ```{r}
 print(analytic_survey_tidy)
 ```
+
+These data are ready for analysis.
 
 
 ## Basic descriptive statistics
