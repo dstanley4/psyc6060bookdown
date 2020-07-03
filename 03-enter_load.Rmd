@@ -944,7 +944,7 @@ To correct a reverse-keyed items that ranges where the lowest possible rating va
 The code below:
 * selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
 * subtracts each value in that column from 6
-* rames the column by removing "_rev15" because the reverse coding is complete.
+* renames the column by removing "_rev15" because the reverse coding is complete.
 
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -1034,57 +1034,203 @@ These data are ready for analysis.
 ```{r, include=FALSE}
 library(tidyverse)
 
-raw_data_survey <- read_csv("data_item_time.csv")
+raw_data_occasions <- read_csv("data_item_time.csv")
 
-analytic_data_survey <- raw_data_survey
+analytic_data_occasions <- raw_data_occasions
 
 ```
 
 ```{r, eval=FALSE}
 library(tidyverse)
 
-raw_data_survey <- read_csv("data_item_time.csv")
+raw_data_occasions <- read_csv("data_item_time.csv")
 
-analytic_data_survey <- raw_data_survey
+analytic_data_occasions <- raw_data_occasions
 
 ```
 
 ```{r}
-glimpse(analytic_data_survey)
+glimpse(analytic_data_occasions)
 ```
 
 ### Creating factors
 
-```{r}
-analytic_data_survey <-analytic_data_survey %>%
-  mutate(id = as_factor(id))
+Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
 
-# Turn all columns that are of type character into factors
-analytic_data_survey <- analytic_data_survey %>%
+```{r}
+glimpse(analytic_data_occasions)
+```
+
+You can quickly convert all character columns to factors using the code below. In this case, that will convert the sex and eye_colour columns to factors.
+
+```{r}
+analytic_data_occasions <- analytic_data_occasions %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
 ```
 
+The participant identification number in the id column is a numeric column, so we have handle that column on it's own. 
+
+```{r}
+analytic_data_occasions <-analytic_data_occasions %>%
+  mutate(id = as_factor(id))
+```
+
+
+You can ensure all of these columns are now factors using the glimpse() command. 
+
+```{r}
+glimpse(analytic_data_occasions)
+```
+
+Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+
 ### Screening factors
+
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+
+```{r}
+analytic_data_occasions %>%
+  select(where(is.factor)) %>%
+  summary()
+```
+
+Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex varible because we want the x-axis of a future graph to display columns in the left to right order: female, male.
 
 ```{r}
 # Custom reordering of factor levels for sex
-analytic_data_survey <- analytic_data_survey %>%
+analytic_data_occasions <- analytic_data_occasions %>%
   mutate(sex = fct_relevel(sex,
                            "intersex",
                            "female",
                            "male"))
 
-#  Reordering factor levels by frequency for eye color
-analytic_data_survey <- analytic_data_survey %>%
+```
+
+For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:
+
+```{r}
+#  Reordering factor levels by frequency
+analytic_data_occasions <- analytic_data_occasions %>%
   mutate(eye_color = fct_infreq(eye_color))
 ```
 
+You can see the new order of the factor levels with summary():
+
+```{r}
+analytic_data_occasions %>%
+  select(where(is.factor)) %>%
+  summary()
+```
+
+
 ### Numeric screening
+
+For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.
+
+One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.
+
+```{r, eval = FALSE}
+analytic_data_occasions %>%
+  select(where(is.numeric)) %>%
+  summary()
+```
+
+With larger numers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
+
+
+Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
+
+```{r, eval = FALSE}
+library(skimr)
+analytic_data_occasions %>%
+  select(age) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+library(skimr)
+
+outdf <- analytic_data_occasions %>%
+  select(starts_with("age")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -complete_rate, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+
+outdf
+```
+
+Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+
+
+```{r, eval=FALSE}
+analytic_data_occasions %>%
+  select(starts_with("esteem")) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+outdf <- analytic_data_occasions %>%
+  select(starts_with("esteem")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -complete_rate, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+
+outdf
+```
+
+Follow the same process for the job satisfaction items. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+
+```{r, eval=FALSE}
+analytic_data_occasions %>%
+  select(starts_with("jobsat")) %>%
+  skim_without_charts()
+```
+```{r, echo=FALSE}
+outdf <- analytic_data_occasions %>%
+  select(starts_with("jobsat")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -complete_rate, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+
+outdf
+```
 
 ### Scale scores
 
 #### Reverse key items
+
+Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items, as described previously. The logic of the math behind this correction is described previously in Surveys: Single occasion. 
+
+
+In these data, the items use a 1 to 5 response scale so we use the reverse item correction for response scales that beging with 1.  See Surveys: Single occasion for how to handle a response format that begins with zero - the math is different.
+
+The code below:
+* selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
+* subtracts each value in that column from 6
+* renames the column by removing "_rev15" because the reverse coding is complete.
 
 ```{r}
 
@@ -1097,6 +1243,8 @@ analytic_data_survey <- analytic_data_survey %>%
 ```
 
 #### Creating scores
+
+
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>% 
