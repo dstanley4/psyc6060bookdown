@@ -1,14 +1,12 @@
 # Making your data ready for analysis
 
-Use skim instead of summary?
-
 ```{r, include=FALSE}
 library(tidyverse)
 ```
 
 ## Required Packages
 
-This chapter requires the following packages are installed:
+The following packages must be installed before starting this chapter.
 
 | Required Packages |
 |-------------------|
@@ -16,27 +14,39 @@ This chapter requires the following packages are installed:
 |HMisc              |
 |janitor            |
 |psych              |
+|skimr              |
 |tidyverse          |
 
-**Important Note:** that you should NOT use library(psych) at any point. There are major conflicts between the psych package and the tidyverse. We will access the psych package command by preceding each command with psych:: instead of using library(psych).
+**Important Note:** that you should NOT use library(psych) at any point. There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
+
+The following data files are used in this chapter:
+
+| Required Data |
+|-------------------|
+|data_ex_between.csv |
+|data_ex_within.csv |
+|data_food.csv |
+|data_item_scoring.csv |
+|data_item_time.csv |
+
+The files are available at: https://github.com/dstanley4/psyc6060bookdown
+
+
 
 ## Objective
 
-Advice is not right or the best - but it is a system. Encourage you to evolve your own system. But perhaps not in the first few months/years of using R until you see the benefits of this system - and correspondingly it's shortcomings.
-
-Warning you need mastery of the Handing data in the tidyvsere chapter before doing this chapter.
-
+In this chatper we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not "right" - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it's shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention sytem.
 
 ## Context
 
-Due to a number of high profile failure to replicate study results [@cos2015] it's become increasingly clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
+Due to a number of high profile failure to replicate study results [@cos2015] it's become increasingly clear that there is a general crisis of confidence in many areas of science [@baker2016]. Statistical (and other) explanations have been offered [@simmons2011] for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their own papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers [@miyakawa2020].
 
 Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility [@patil2019]. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. Unfortunately, some authors use these two terms interchangeably and fail to make any distinction between them. I encourage you to make the distinction and the use the terms consist with use suggested by [@patil2019].
 
 It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) [guidelines](https://www.cos.io/our-services/top-guidelines
 ). These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the [TOP Factor](https://topfactor.org).
 
-The idea is not that open science articles are  more trustworthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business some people don't like the idea of make it possible for other to audit their work. The problems reported at Molecular Brain (doubtless is common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the numbers in the articles are uploaded prior to publication. 
+The idea is not that open science articles are  more trustworthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business some people don't like the idea of make it possible for others to audit their work. The problems reported at Molecular Brain (doubtless is common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the numbers in the articles are uploaded prior to publication. 
 
 The TOP open science guidelines have made an impact and some newer journals, such as Meta Psychology, have fully embraced open science. Figure \@ref(fig:metapsychology) shows the header from an [article](https://open.lnu.se/index.php/metapsychology/article/view/1630/2266) in Meta Psychology that clearly delineates the open science attributes of the article that used computer simulations (instead of participant data). Take note that the header even specifies who checked that the analyses in the article were reproducible.
 
@@ -44,7 +54,7 @@ The TOP open science guidelines have made an impact and some newer journals, suc
 knitr::include_graphics("ch_score_items/images/screenshot_metapsychology.png")
 ```
 
-In Canada, the majority of university research is funded by the Federal Government's Tri-Agency (i.e., NSERC, SSHRC, CIHR). The agency has a new draft [Data Management Policy](https://www.ic.gc.ca/eic/site/063.nsf/eng/h_83F7624E.html) in which they state that "*The agencies believe that research data collected with the use of public funds belong, to the fullest extent possible, in the public domain and available for reuse by others.*" This perspective of the funding agency differs from that of some researchers who incorrectly believe "they own their data". In Canada at least, the government makes it clear that tax payers fund the research so the data is public property. Additionally the Tri-Agency Data Management policy clearly indicates the responsibilities of funded researchers:
+In Canada, the majority of university research is funded by the Federal Government's Tri-Agency (i.e., NSERC, SSHRC, CIHR). The agency has a new draft [Data Management Policy](https://www.ic.gc.ca/eic/site/063.nsf/eng/h_83F7624E.html) in which they state that "*The agencies believe that research data collected with the use of public funds belong, to the fullest extent possible, in the public domain and available for reuse by others.*" The perspective of the funding agency on data ownership differs substantially from that of some researchers who incorrectly believe "they own their data". In Canada at least, the government makes it clear that when tax payers fund research (through the Tri-Agency) the research data is public property. Additionally the Tri-Agency Data Management policy clearly indicates the responsibilities of funded researchers:
 
 "Responsibilities of researchers include:
 
@@ -54,14 +64,14 @@ In Canada, the majority of university research is funded by the Federal Governme
 - acknowledging and citing data sets that contribute to their research; and
 - staying abreast of standards and expectations of their disciplinary community."
 
-As a result of this perspective on data, it's important that you think about structuring your data for reuse by yourself and others before you collect it. Toward this end, you will see documentation of your data file via data code books is critical.
+As a result of this perspective on data, it's important that you think about structuring your data for reuse by yourself and others before you collect it. Toward this end, properly documenting your data file and analysis scripts is critical.
 
 
 ## Begin with the end in mind
 
-In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze,  analytic data, via preprocessing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data the data the has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, combining multiple items measuring the same thing into scale scale scores, among other tasks.
+In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze (analytic data) via pre-processing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data is the data that has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, averaging multiple items into a scale scale scores, and other tasks.
 
-It's critical that you don't think of analysis of your results as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
+It's critical that you don't think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
 
 
 ```{r pipeline, echo = FALSE, out.width="85%", fig.cap = "Data science pipeline by Roger Peng."}
@@ -81,7 +91,7 @@ When conducting analyses in R it is typically necessary to have data in a format
 
 The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format.  When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadsheet is used to represent a variable.
 
-**Between participant data**. Consider Table \@ref(tab:betweenex) which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the variable and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
+**Between participant data**. Consider Table \@ref(tab:betweenex) which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five_km_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
 
 
 ```{r betweenex, echo = FALSE}
@@ -94,7 +104,8 @@ knitr::kable(
 ```
 
 
-**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The id is the variable and there is one observation per row - so the id column conforms to tidy data specification. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing the levels of a single variable. That is the within subject variable is occasion and the levels of that variable are march, june, and july. The march column contains the times for participants in March. The may column contains the times for participants in May. The july column contains the times for participants in July, These three columns are not in a tidy data format. 
+**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse_timne is not in a tidy data format. Moreover, it's not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labelled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.
+
 
 
 ```{r withinex, echo = FALSE}
@@ -123,7 +134,7 @@ knitr::kable(
 ```
 
 
-The problem with the format of the data in Table \@ref(tab:withinex) is that march, may, and july are levels of single variable, occasion, that is not represented in the data. Nowhere in the Table \@ref(tab:withinex) can you see the label occasion. This single variable is presented over three columns - a very confusing situation. Moreover, due to the way the columns are labeled it's not clear what is being measured. Nowhere in  Table \@ref(tab:withinex) can you see the variable elapsed_time. Thus with the format used in \@ref(tab:withinex) you don't know what the predictor (occasion) is nor do you know the dependent variable (elapsed_time.). Thus, a major problem with entering data in this format is that there are hidden variables in the data and you need insider knowledge to know the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
+Thus, a major problem with entering repeated measures data in the one row per person format is that there are hidden variables in the data and you need insider knowledge to know what the columns represent. That said, this is not necessarily a terrible way to enter your data as long as you have all of this missing information documented in a data code book.
 
 
 | Disadvantages one row per participant  | Advantages one row per participant | 
@@ -134,16 +145,16 @@ The problem with the format of the data in Table \@ref(tab:withinex) is that mar
 | 4) Unclear that *elapsed_time* is the measurement in each month column | |
 
 
-Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot_long() command that we will learn about later in the chapter. Thus, we can enter the data in the easy to enter format of Table \@ref(tab:withinex) but then later convert it to a tidy data format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex). For elapsed_time variable this data is now in the tidy data format. Each row corresponds to a single elapsed_time observed. Each column corresponds to a single variable. Somewhat problematically, however, sex is repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense. Importantly, there is an id column for each participant so R knows that this information is repeated for each participant and is not confused by the repeating the sex designation over three rows. In directly, this illustrates the importance of having an id column to indicate each unique participant.
+Fortunately, the problems with Table \@ref(tab:withinex) can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot_long() command that we will learn about later in this chapter. Thus, we can enter the data in the format of Table \@ref(tab:withinex) and later convert it to a tidy data format. After this conversion the data will be appear as in Table \@ref(tab:withintidyex). For elapsed_time variable this data is now in the tidy data format. Each row corresponds to a single elapsed_time observed. Each column corresponds to a single variable. Somewhat problematically, however, sex is repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense. Importantly, there is an id column for each participant so R knows that this information is repeated for each participant and is not confused by repeating the sex designation over three rows. In directly, this illustrates the importance of having an id column to indicate each unique participant.
 
-Why did we walk you through this technical treatment of structuring data within the computer at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in the rest of this chapter around the naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \@ref(tab:withinex) to the data in Figure \@ref(tab:withintidyex) by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
+Why did we walk you through this technical treatment of structuring data at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in this chapter around naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \@ref(tab:withinex) to the data in Figure \@ref(tab:withintidyex) by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
 
 
 ## Data collection considerations 
 
 Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.). 
 
-Regardless of the approach it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the survey to using appropriate variable names PRIOR to data collection - so the exported file has desirable variable names. For spreadsheet users, this means setting up the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct. 
+Regardless of the approach it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the software to use appropriate variable names PRIOR to data collection - so the exported file has desirable column names. For spreadsheet users, this means setting up the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct. 
 
 Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
@@ -158,9 +169,9 @@ To make your life easier down the road, it is critical you set up your spreadshe
 
 * Avoid short uncontextualized variable names like q1, q2, q3, etc.
 
-* Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start_with() in that you don't accidentally get additionally columns you don't want - that have a similar prefix. See Likert-type item section below for details.
+* Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start_with() such that you don't accidentally get additionally columns you don't want - that have a similar prefix. See the Likert-type item section below for additional details.
 
-* If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.
+* If you have a column name that represents the levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.
 
 ### Likert-type items
 
@@ -168,7 +179,7 @@ A Likert-type item is typically composed of a statement that participants are as
 
 * **Enter numeric responses not the labels**. You should enter the numeric value for each item response (e.g., 5) into your data - not the label (e.g., Strongly Agree). The labels associated with each value can be applied later in a script, if needed.
 
-* **High numbers should be associated with more of the construct being measured.** When designing your survey or data collection tools, it is important that you set of the response options appropriately. If you scale measures job satisfaction, it is important that you collect data in a manner that ensures high numbers on the job satisfaction scale indicate high levels of job satisfaction. Therefore, assigning numbers make sense using the 5-point scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. With this approach high response numbers indicate more job satisfaction. However, using the opposite scale would not make sense: 1 - Strongly Agree, 2 - Moderately Agree, 3 - Neutral, 4, Moderately Disagree, 5 - Strongly Disagree. With this opposite scale high numbers on a job satisfaction scale would indicate lower levels of job satisfaction - a very confusing situation. Avoid this situation, assign numbers so that higher numbers are associated with more of the construct being measured. 
+* **High numbers should be associated with more of the construct being measured.** When designing your survey or data collection tools, it is important that you set of the response options appropriately. If your scale measures job satisfaction, it is important that you collect data in a manner that ensures high numbers on the job satisfaction scale indicate high levels of job satisfaction. Therefore, assigning numbers makes sense using the 5-point scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. With this approach high response numbers indicate more job satisfaction. However, using the opposite scale would not make sense: 1 - Strongly Agree, 2 - Moderately Agree, 3 - Neutral, 4, Moderately Disagree, 5 - Strongly Disagree. With this opposite scale high numbers on a job satisfaction scale would indicate lower levels of job satisfaction - a very confusing situation. Avoid this situation, assign numbers so that higher numbers are associated with more of the construct being measured. 
 
 * **Use appropriate item names.** As described in the naming convention section, use moderate length names with different labels for each subscale.
 
@@ -183,39 +194,44 @@ A Likert-type item is typically composed of a statement that participants are as
 
 ### ANOVA between
 
-Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent sex. Use male and female in your spreadsheet - likewise in your survey program. Likewise, for between participant variables drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be better.s
+Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarily, for between participant variables like drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be even better than the word "drug."
 
 
 ### ANOVA within
 
-If you have a study that involves a within-participant ANOVA. 
+If you have a study that involves within-participant predictors naming conventions can become exomplex. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that varible over multiple columns (e.g., march, may, july).
 
-One-way repeated measure predictor.  == See example above with run times.
-
-Multi-way repeated measures predictors. If you have a column name that represents levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. For example, if imagine you are a food researcher interested in taste ratings as a dependent various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables.
-
-### Other information
-education, income, etc
-
+When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of mutiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.
 
 ## Following the examples
 
-Below we present example scripts transforming raw data to analytic data for various study designs (experimental and survey). These scripts illustrate the value of using the naming conventations outlined previously. Follow along with the projects by placing the data in your R Studio project folder and typing your own script. Resist the urge to cut and paste from this document. After learning and teaching scripting for years, there we've found there is substantial bennefit to the process of simply typing the script yourself.
+Below we present example scripts transforming raw data to analytic data for various study designs (experimental and survey). These examples illustrate the value of using the naming conventions outlined previously. Don't just read the example - follow along with the projects by creating a separate script for each example.  Resist the urge to cut and paste from this document - type the script yourself.
 
-Setup an R Studio project using one of these approaches:
+When first learning iPhone/Mac software development, I did so by taking a course at [Big Nerd Ranch](https://www.bignerdranch.com) - yes, that's a real place. They advised in their material (and now book) the following: "We have learned that “going through the motions” is much more important than it sounds. Many times we will ask you to start typing in code before you understand it. We realize that you may feel like a trained monkey typing in a bunch of code that you do not fully grasp. But the best way to learn coding is to find and fix your typos. Far from being a drag, this basic debugging is where you really learn the ins and outs of the code. That is why we encourage you to type in the code yourself. You could just download it, but copying and pasting is not programming. We want better for you and your skills.", p. xiv, [@keur2020]. This is excellent advice for a beginning statistician or data scientist as well. And as an aside: if you want to learn iPhone programming you can't go wrong the Big Nerd Ranch guide!
 
-R Studio in the Cloud Assignment
-1. The data should be in the assignment project automatically. Just start the assignment.
+As you work through this chapter, create your own new script for each example. In light of the above advice, avoid copying and pasting code - type it out; you will be the better for it. 
 
-R Studio in the Cloud, custom project
+
+Getting started:
+
+**R Studio in the Cloud Assignment: The Class**
+1. The data should be in the assignment project automatically. Just start the assignment. 
+
+For everyone in the class, that's it.
+
+For those of you reading this work not in the class, see the two options below:
+
+**R Studio in the Cloud, custom project**
+
 1. Create a new Project using the web interface
 
-2. Upload your data files in using the upload button in the Files pane
+2. Upload your data files in using the upload button in the Files pane. The data files need are listed at the beginning of this chapter.
 
-R Studio Local Computer, custom project
+**R Studio Local Computer, custom project**
+
 1. Create a folder on your computer for the analysis
 
-2. Place your data files in that folder
+2. Place your data files in that folder. The data files need are listed at the beginning of this chapter.
 
 3. Use the menu item File > New Project... to start the project
 
@@ -225,15 +241,13 @@ R Studio Local Computer, custom project
 
 6. Press the Create Project Button
 
-Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. Using Projects.
+Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. 
 
-As you read each of these example scripts pay attention to the redundancy. Regardless of the of the type of data you analyze there is a great deal of consistency in terms of how all of the scripts start.
-
-Also as you follow along on your computer, be sure to used read_csv when you load data not read.csv (the base R appoach). Also note how in the N-way repeated measures design we were forced to deal with a situation where the research assistant indicated male and female using numbers instead of words when entering the data.
+We ancticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength  - because readers will see the commonalities across differ types of designs.
 
 ## Entering data into spreadsheets
 
-The first example uses a data file data_ex_between.csv that corresponds to an example where we recorded the run times for a number of male and female participants. How did we create this data file. We used a spreadsheet to enter the data, as illustrated in Figure  \@ref(fig:spreadsheetbetween). Programs like Microsoft Excel and Google Sheets are good options for entering data. 
+The first example uses a data file data_ex_between.csv that corresponds to a ficticous example where we recorded the run times for a number of male and female participants. How did we create this data file? We used a spreadsheet to enter the data, as illustrated in Figure  \@ref(fig:spreadsheetbetween). Programs like Microsoft Excel and Google Sheets are good options for entering data. 
 
 ```{r spreadsheetbetween, echo = FALSE, out.width="40%", fig.cap = "Spreadsheet entry of running data"}
 knitr::include_graphics("ch_score_items/images/screenshot_data_between.png")
@@ -245,7 +259,7 @@ The key to using these types of programs is to the save the data as a .csv file 
 knitr::include_graphics("ch_score_items/images/screenshot_csv_between.png")
 ```
 
-There are many ways to save data, but the CSV data is one of the better ones because it is a non-proprietary format. Some software, such as SPSS, using a proprietary format (e.g., .sav for SPSS) the make it challenging to access that data if you don't have that (often expensive software). One of our goals as scientists is to make it easy for others to audit our work - so that science can be self-correcting. Therefore, choose an open format for your data like .csv.
+There are many ways to save data, but the CSV data is one of the better ones because it is a non-proprietary format. Some software, such as SPSS, uses a proprietary format (e.g., .sav for SPSS) this makes it challenging to access that data if you don't have that (often expensive) software. One of our goals as scientists is to make it easy for others to audit our work - that allows science to be self-correcting. Therefore, choose an open format for your data like .csv.
 
 
 ## Experiment: Between 
@@ -866,7 +880,7 @@ Look the items in the first scale, self-esteem. Possible items responses for thi
 ```{r, eval=FALSE}
 analytic_data_survey %>%
   select(starts_with("esteem")) %>%
-  skim_without_charts()
+  skim()
 ```
 ```{r, echo=FALSE}
 outdf <- analytic_data_survey %>%
@@ -1145,7 +1159,7 @@ Start by examining the range of non-scale items. In this case it's only age. Exa
 library(skimr)
 analytic_data_occasions %>%
   select(age) %>%
-  skim_without_charts()
+  skim()
 ```
 ```{r, echo=FALSE}
 library(skimr)
@@ -1172,12 +1186,12 @@ Look the items in the first scale, self-esteem. Possible items responses for thi
 
 ```{r, eval=FALSE}
 analytic_data_occasions %>%
-  select(starts_with("esteem")) %>%
-  skim_without_charts()
+  select(starts_with("t1_esteem")) %>%
+  skim()
 ```
 ```{r, echo=FALSE}
 outdf <- analytic_data_occasions %>%
-  select(starts_with("esteem")) %>%
+  select(starts_with("t1_esteem")) %>%
   skim_without_charts() %>%
   as_tibble() %>%
   select(-skim_type) %>%
@@ -1193,30 +1207,7 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Follow the same process for the job satisfaction items. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
-
-```{r, eval=FALSE}
-analytic_data_occasions %>%
-  select(starts_with("jobsat")) %>%
-  skim_without_charts()
-```
-```{r, echo=FALSE}
-outdf <- analytic_data_occasions %>%
-  select(starts_with("jobsat")) %>%
-  skim_without_charts() %>%
-  as_tibble() %>%
-  select(-skim_type) %>%
-    rename_with(.fn = str_remove,
-              .cols = everything(),
-              pattern = "numeric.") %>%
-  select(-p25, -complete_rate, -p75) %>%
-  as.data.frame()
-
-outdf$mean = round(outdf$mean,2)
-outdf$sd = round(outdf$sd,2)
-
-outdf
-```
+Follow the same process t2_esteem items, t1_jobsat items, and t2_jobsat items. Possible items responses for these scale ranges from 1 to 5, make sure all responses are all in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 ### Scale scores
 
@@ -1233,9 +1224,8 @@ The code below:
 * renames the column by removing "_rev15" because the reverse coding is complete.
 
 ```{r}
-
 # Reverse code items
-analytic_data_survey <- analytic_data_survey %>% 
+analytic_data_occasions <- analytic_data_occasions %>% 
   mutate(6 - across(.cols = ends_with("_rev15")) ) %>% 
   rename_with(.fn = str_remove,
               .cols = ends_with("_rev15"),
@@ -1244,10 +1234,26 @@ analytic_data_survey <- analytic_data_survey %>%
 
 #### Creating scores
 
+The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process we it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_items. We will need to use this backup later to compute the reliability of the scales we are creating.
+
+```{r}
+analytic_occasions_items <- analytic_data_occasions
+```
+
+We want to make a self_esteem scale and plan to select items using starts_with("esteem"). But prior to doing this we make sure the start_with() command only gives us the items we want - and not additional unwanted items. The output below confirms there are not problems associated with using starts_with("esteem").
+
+```{r}
+analytic_data_occasions %>%
+  select(starts_with("t1_esteem")) %>%
+  glimpse()
+```
+
+Repeat this set of commands using t2_esteem, t1_jobsat, and t2_jobsat. Make sure that those terms select only the relevant items and not others.
+
 
 
 ```{r}
-analytic_data_survey <- analytic_data_survey %>% 
+analytic_data_occasions <- analytic_data_occasions %>% 
   rowwise() %>% 
   mutate(esteem_t1 = mean(c_across(starts_with("t1_esteem")),
                                na.rm = TRUE)) %>%
@@ -1266,7 +1272,7 @@ analytic_data_survey <- analytic_data_survey %>%
 ```
 
 ```{r}
-glimpse(analytic_data_survey)
+glimpse(analytic_data_occasions)
 ```
 
 ### Pivot to tidy data
@@ -1275,43 +1281,43 @@ glimpse(analytic_data_survey)
 But now comes the complicated point wher eyou need to pivot the data to longer.
 
 ```{r}
-print(analytic_data_survey)
+print(analytic_data_occasions)
 ```
 
 The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is excuted it creates a tidy version of data set stored in analytic_survey_tidy.
 
 
 ```{r}
-analytic_survey_tidy <- analytic_data_survey %>%
+analytic_occasion_tidy <- analytic_data_occasions %>%
   pivot_longer(esteem_t1:jobsat_t2,
                names_to = c(".value", "time"),
                names_sep = "_")
 ```
 
-You can see the new data with the print() command. Notice that each particpant has multiple rows associated with them.
+You can see the new data with the print() command. Notice that each participant has multiple rows associated with them.
 
 ```{r}
-print(analytic_survey_tidy)
+print(analytic_occasion_tidy)
 ```
 
-These data are ready for analysis.
+You now have three data sets The data analytic_occasion_tidy is appropriate for conducting a repeated measures ANOVA. The data analytic_data_occasions is appropriate for calculating descriptive statistics and correlations. The data analytic_occasions_items is appropriate for calculating the reliability of the scales you constructed. These data are ready for analysis.
 
 
 ## Basic descriptive statistics
 
 
 ### skim()
-One approach is the skim() command from the skimr package. This quickly provides the basic descriptive statistics. In the output for this command there are also several columns that beging with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The median is the 50th percentile. The interquartile range is the range between p25 and p75. Notice that we run this command on the "wide" version of the data (analytic_data_survey) rather than tidy version of the data (analytic_survey_tidy).
+One approach is the skim() command from the skimr package. This quickly provides the basic descriptive statistics. In the output for this command there are also several columns that beging with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The median is the 50th percentile. The interquartile range is the range between p25 and p75. Notice that we run this command on the "wide" version of the data (analytic_data_occasions) rather than tidy version of the data (analytic_occasion_tidy).
 
 ```{r, eval = FALSE}
 library(skimr)
-skim(analytic_data_survey)
+skim(analytic_data_occasions)
 ```
 
 ```{r, echo=FALSE}
 library(tidyverse)
 
-outdf <- analytic_data_survey %>%
+outdf <- analytic_data_occasions %>%
   select(where(is.numeric)) %>%
   skim_without_charts() %>%
   as_tibble() %>%
@@ -1330,7 +1336,7 @@ outdf
 
 ### apa.cor.table()
 
-Another approach is the apa.cor.table() command from the apaTables package. This quickly provides the basic descriptive statistics as well as correlations among variable. As well, it will even create a Word document with this information, see Figure \@ref(fig:descapa). Notice that we run this command on the "wide" version of the data (analytic_data_survey) rather than tidy version of the data (analytic_survey_tidy).
+Another approach is the apa.cor.table() command from the apaTables package. This quickly provides the basic descriptive statistics as well as correlations among variable. As well, it will even create a Word document with this information, see Figure \@ref(fig:descapa). Notice that we run this command on the "wide" version of the data (analytic_data_occasions) rather than tidy version of the data (analytic_occasion_tidy).
 
 ```{r, eval = FALSE}
 library(apaTables)
@@ -1345,7 +1351,7 @@ knitr::include_graphics("ch_score_items/images/desc_apa.png")
 
 ### tidyverse
 
-A final approach uses tidyverse commands. This approach is oddly long - and we won't describe how it works in detail. But, based on the information in the previous chapter you should be able to work out how this code works. Even though this code is long - it provide the ultimate in flexibility. If a new statistics is development that you want to use, you can simply include the command for it in the desired_descriptives list and it will be included in your table.
+A final approach uses tidyverse commands. This approach is oddly long - and we won't describe how it works in detail. But, based on the information in the previous chapter you should be able to work out how this code works. Even though this code is long - it provide the ultimate in flexibility. If a new statistics is development that you want to use, you can simply include the command for it in the desired_descriptives list and it will be included in your table. Notice that we run this command on the "wide" version of the data (analytic_data_occasions) rather than tidy version of the data (analytic_occasion_tidy).
 
 ```{r}
 library(tidyverse)
@@ -1362,7 +1368,7 @@ desired_descriptives <- list(
   n = ~sum(!is.na(.x))
 )
 
-row_sum <- analytic_data_survey %>% 
+row_sum <- analytic_data_occasions %>% 
   summarise(across(.cols = where(is.numeric),
                    .fns =  desired_descriptives,
                    .names = "{col}___{fn}"))
@@ -1399,8 +1405,8 @@ analytic_data_items %>%
 We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of varibilty in observed scores that is due to actual differences among participants (rather than measurement error).
 
 ```{r, eval = TRUE}
-rxx_alpha <- analytic_data_items %>%
-  select(starts_with("esteem")) %>%
+rxx_alpha <- analytic_occasions_items %>%
+  select(starts_with("t1_esteem")) %>%
   psych::alpha()
 
 print(rxx_alpha$total)
