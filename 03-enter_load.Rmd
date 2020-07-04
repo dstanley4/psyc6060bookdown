@@ -964,7 +964,7 @@ Start by examining the range of non-scale items. In this case it's only age. Exa
 library(skimr)
 analytic_data_survey %>%
   select(age) %>%
-  skim_without_charts()
+  skim()
 ```
 ```{r, echo=FALSE}
 library(skimr)
@@ -1022,7 +1022,7 @@ Possible items responses for the job satisfaction scale range from 1 to 5, make 
 ```{r, eval=FALSE}
 analytic_data_survey %>%
   select(starts_with("jobsat")) %>%
-  skim_without_charts()
+  skim()
 ```
 ```{r, echo=FALSE}
 outdf <- analytic_data_survey %>%
@@ -1462,14 +1462,15 @@ glimpse(analytic_data_occasions)
 
 ### Pivot to tidy data
 
+The analytic data in its current for does not conform to the the tidy data specification. Inspect the data with the print() command.
+Notice that a single column is not used to represent esteem, jobsat, or time. Rather, there are four columns that are a mix of these variables. The consequence of this is that there are two esteem ratings/observations on each row and two jobsat ratings/observations on each row. Tidy data is structured so that each varible is represented in a single column and each observation has its own row.
 
-But now comes the complicated point where you need to pivot the data to longer.
 
 ```{r}
 print(analytic_data_occasions)
 ```
 
-The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is executed it creates a tidy version of data set stored in analytic_survey_tidy.
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name (e.g., esteem) contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is executed it creates a tidy version of data set stored in analytic_survey_tidy.
 
 
 ```{r}
@@ -1485,13 +1486,14 @@ You can see the new data with the print() command. Notice that each participant 
 print(analytic_occasion_tidy)
 ```
 
-You now have three data sets The data analytic_occasion_tidy is appropriate for conducting a repeated measures ANOVA. The data analytic_data_occasions is appropriate for calculating descriptive statistics and correlations. The data analytic_occasions_items is appropriate for calculating the reliability of the scales you constructed. These data are ready for analysis.
+You now have three data sets The data analytic_occasion_tidy is appropriate for conducting a repeated measures ANOVA or more complicated analyses. The data analytic_data_occasions is appropriate for calculating descriptive statistics and correlations. The data analytic_occasions_items is appropriate for calculating the reliability of the scales you constructed. These data are ready for analysis.
 
 
 ## Basic descriptive statistics
 
 
 ### skim()
+
 One approach is the skim() command from the skimr package. The skim() command quickly provides the basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75. Notice that we run this command on the "wide" version of the data (analytic_data_occasions) rather than tidy version of the data (analytic_occasion_tidy).
 
 ```{r, eval = FALSE}
