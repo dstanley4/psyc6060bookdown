@@ -333,7 +333,6 @@ glimpse(analytic_data_between)
 You can quickly convert all character columns to factors using the code below. In this case, this just converts the sex column to a factor. Because there is only one column (sex) being converted to a factor, we could have treated it the same was as the id column below. However, we use this code because of its broad applicability to many scripts.
 
 ```{r}
-# Turn all columns that are of type character into factors
 analytic_data_between <- analytic_data_between %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
@@ -358,7 +357,7 @@ This example is so small it's clear you didn't miss converting any columns to fa
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -371,7 +370,6 @@ analytic_data_between %>%
 The order of the levels influences how graphs are generated. In these data, the sex column has two levels: male and female in that order. The code below adjusts the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
 
 ```{r}
-# Custom reordering of factor levels
 analytic_data_between <- analytic_data_between %>%
   mutate(sex = fct_relevel(sex,
                            "female",
@@ -464,17 +462,18 @@ glimpse(analytic_data_within)
 
 ### Creating factors
 
-Following initial cleaning, we identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect the glimpse() output - if you followed our data entry naming conventions, categorical variables should be of the type character. We have one variable, sex, that is a categorical variable of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
+Following initial cleaning, we identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect the glimpse() output - if you followed our data entry naming conventions, categorical variables should be of the type character. 
 
 
 ```{r}
 glimpse(analytic_data_within)
 ```
 
+We have one variable, sex, that is a categorical variable of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column.
+
 You can quickly convert all character columns to factors using the code below. In this case, this just converts the sex column to a factor. Because there is only one column (sex) being converted to a factor, we could have treated it the same was as the id column below. However, we use this code because of its broad applicability to many scripts.
 
 ```{r}
-# Turn all columns that are of type character into factors
 analytic_data_within <- analytic_data_within %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
@@ -499,7 +498,7 @@ This example is so small it's clear you didn't miss converting any columns to fa
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -511,7 +510,6 @@ analytic_data_within %>%
 The order of the levels influences how graphs are generated. In these data, the sex column has two levels: male and female in that order. The code below adjusts the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
 
 ```{r}
-# Custom reordering of factor levels
 analytic_data_within <- analytic_data_within %>%
   mutate(sex = fct_relevel(sex,
                            "female",
@@ -705,7 +703,7 @@ analytic_data_within_nway <- analytic_data_within_nway %>%
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -717,7 +715,6 @@ analytic_data_within_nway %>%
 The order of the levels influences how graphs are generated. In these data, the sex column has two levels: male and female in that order. The code below adjusts the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male. 
 
 ```{r}
-# Custom reordering of factor levels
 analytic_data_within_nway <- analytic_data_within_nway %>%
   mutate(sex = fct_relevel(sex,
                            "female",
@@ -857,7 +854,11 @@ my_missing_value_codes <- c("-999", "", "NA")
 
 raw_data_survey <- read_csv(file = "data_item_scoring.csv",
                      na = my_missing_value_codes)
+```
 
+We load the initial data into a raw_data_survey but immediately make a copy we will work with called analytic_data_survey. It's good to keep a copy of the raw data for reference if you encounter problems.
+
+```{r}
 analytic_data_survey <- raw_data_survey
 
 ```
@@ -882,17 +883,16 @@ glimpse(analytic_data_survey)
 
 ### Creating factors
 
-Following initial cleaning, identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect glimpse() output - if you followed our data entry naming conventions categorical variables should be of the type character
+Following initial cleaning, we identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect the glimpse() output - if you followed our data entry naming conventions, categorical variables should be of the type character. 
 
 
 ```{r}
 glimpse(analytic_data_survey)
 ```
 
-You can quickly convert all character columns to factors using the code below:
+We have two variables, sex and eye_color, that are categorical variable of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column. You can quickly convert all character columns to factors using the code below:
 
 ```{r}
-# Turn all columns that are of type character into factors
 analytic_data_survey <- analytic_data_survey %>%
   mutate(across(.cols = where(is.character),
                 .fns = as_factor))
@@ -917,7 +917,7 @@ Inspect the output of the glimpse() command and make sure you have converted all
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_survey %>%
@@ -929,7 +929,6 @@ analytic_data_survey %>%
 Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male.
 
 ```{r}
-# Custom reordering of factor levels
 analytic_data_survey <- analytic_data_survey %>%
   mutate(sex = fct_relevel(sex,
                            "intersex",
@@ -938,8 +937,8 @@ analytic_data_survey <- analytic_data_survey %>%
 ```
 
 For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
+
 ```{r}
-#  Reordering factor levels by frequency
 analytic_data_survey <- analytic_data_survey %>%
   mutate(eye_color = fct_infreq(eye_color))
 ```
@@ -1122,7 +1121,6 @@ analytic_data_items <- analytic_data_survey
 We want to make a self_esteem scale and plan to select items using starts_with("esteem"). But prior to doing this we make sure the start_with() command only gives us the items we want - and not additional unwanted items. The output below confirms there are not problems associated with using starts_with("esteem").
 
 ```{r}
-# confirm select will select the columns you want (and not others)
 analytic_data_survey %>%
   select(starts_with("esteem")) %>%
   glimpse()
@@ -1131,7 +1129,6 @@ analytic_data_survey %>%
 Likewise, we want to make a job_sat scale and plan to select items using starts_with("jobsat"). The code and output below using starts_with("jobsat") only returns the items we are interested in.
 
 ```{r}
-# confirm select will select the columns you want (and not others)
 analytic_data_survey %>%
   select(starts_with("jobsat")) %>%
   glimpse()
@@ -1221,7 +1218,7 @@ Inspect the output of the glimpse() command and make sure you have converted all
 
 ### Screening factors
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_occasions %>%
@@ -1232,7 +1229,6 @@ analytic_data_occasions %>%
 Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male.
 
 ```{r}
-# Custom reordering of factor levels for sex
 analytic_data_occasions <- analytic_data_occasions %>%
   mutate(sex = fct_relevel(sex,
                            "intersex",
@@ -1244,7 +1240,6 @@ analytic_data_occasions <- analytic_data_occasions %>%
 For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
 
 ```{r}
-#  Reordering factor levels by frequency
 analytic_data_occasions <- analytic_data_occasions %>%
   mutate(eye_color = fct_infreq(eye_color))
 ```
@@ -1344,7 +1339,6 @@ The code below:
 * renames the column by removing "_rev15" because the reverse coding is complete.
 
 ```{r}
-# Reverse code items
 analytic_data_occasions <- analytic_data_occasions %>% 
   mutate(6 - across(.cols = ends_with("_rev15")) ) %>% 
   rename_with(.fn = str_remove,
