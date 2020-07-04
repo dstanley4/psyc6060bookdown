@@ -35,7 +35,7 @@ The files are available at: https://github.com/dstanley4/psyc6060bookdown
 
 ## Objective
 
-In this chatper we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not "right" - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it's shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention sytem.
+In this chapter we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not "right" - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it's shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention system.
 
 ## Context
 
@@ -71,7 +71,7 @@ As a result of this perspective on data, it's important that you think about str
 
 In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze (analytic data) via pre-processing scripts. These steps are outlined in Figure \@ref(fig:pipeline). This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data is the data that has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, averaging multiple items into a scale scale scores, and other tasks.
 
-It's critical that you don't think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
+It's critical that you don't think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the pre-processing script that will convert your raw data to analytic data. The mantra of this chapter is *begin with the end in mind*.
 
 
 ```{r pipeline, echo = FALSE, out.width="85%", fig.cap = "Data science pipeline by Roger Peng."}
@@ -104,7 +104,7 @@ knitr::kable(
 ```
 
 
-**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse_timne is not in a tidy data format. Moreover, it's not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labelled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.
+**Within participant data**. Consider  Table \@ref(tab:withinex) which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse_time is not in a tidy data format. Moreover, it's not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labeled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.
 
 
 
@@ -167,7 +167,7 @@ To make your life easier down the road, it is critical you set up your spreadshe
 
 * If two word column names are necessary, only use the underscore ("_") character to separate words in the name.
 
-* Avoid short uncontextualized variable names like q1, q2, q3, etc.
+* Avoid short decontextualized variable names like q1, q2, q3, etc.
 
 * Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start_with() such that you don't accidentally get additionally columns you don't want - that have a similar prefix. See the Likert-type item section below for additional details.
 
@@ -194,14 +194,14 @@ A Likert-type item is typically composed of a statement that participants are as
 
 ### ANOVA between
 
-Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarily, for between participant variables like drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be even better than the word "drug."
+Avoid numerical representation of categorical variables. Don't use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarly, for between participant variables like drug_condition don't use 1 or 2 use "drug" and "placebo" but the actually drug name would be even better than the word "drug."
 
 
 ### ANOVA within
 
-If you have a study that involves within-participant predictors naming conventions can become exomplex. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that variable over multiple columns (e.g., march, may, july).
+If you have a study that involves within-participant predictors naming conventions can become examples. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that variable over multiple columns (e.g., march, may, july).
 
-When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of mutiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.
+When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of multiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.
 
 ## Following the examples
 
@@ -244,7 +244,7 @@ For those of you reading this work not in the class, see the two options below:
 
 Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. 
 
-We ancticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength  - because readers will see the commonalities across differ types of designs.
+We anticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength  - because readers will see the commonalities across differ types of designs.
 
 As you make a script for each example:
 
@@ -255,7 +255,7 @@ As you make a script for each example:
 
 ## Entering data into spreadsheets
 
-The first example uses a data file data_ex_between.csv that corresponds to a ficticous example where we recorded the run times for a number of male and female participants. How did we create this data file? We used a spreadsheet to enter the data, as illustrated in Figure  \@ref(fig:spreadsheetbetween). Programs like Microsoft Excel and Google Sheets are good options for entering data. 
+The first example uses a data file data_ex_between.csv that corresponds to a fictitious example where we recorded the run times for a number of male and female participants. How did we create this data file? We used a spreadsheet to enter the data, as illustrated in Figure  \@ref(fig:spreadsheetbetween). Programs like Microsoft Excel and Google Sheets are good options for entering data. 
 
 ```{r spreadsheetbetween, echo = FALSE, out.width="40%", fig.cap = "Spreadsheet entry of running data"}
 knitr::include_graphics("ch_score_items/images/screenshot_data_between.png")
@@ -272,7 +272,7 @@ There are many ways to save data, but the CSV data is one of the better ones bec
 
 ## Experiment: Between 
 
-This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-particpants ANOVA.
+This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-participants ANOVA.
 
 To Begin:
 
@@ -296,7 +296,7 @@ raw_data_beween <- read_csv(file = "data_ex_between.csv",
                      na = my_missing_value_codes)
 ```
 
-We load the intial data into a raw_data_beween but immediately make a copy we will work with called analytic_data_between. It's good to keep a copy of the raw data for reference if you encounter problems.
+We load the initial data into a raw_data_between but immediately make a copy we will work with called analytic_data_between. It's good to keep a copy of the raw data for reference if you encounter problems.
 
 ```{r}
 analytic_data_between <- raw_data_beween
@@ -340,7 +340,7 @@ analytic_data_between <- analytic_data_between %>%
 
 ```
 
-The participant identification number in the id column is a numeric column, so it was not coverted by the above code. The id column is coverted to a factor with the code below.
+The participant identification number in the id column is a numeric column, so it was not converted by the above code. The id column is converted to a factor with the code below.
 
 ```{r}
 analytic_data_between <- analytic_data_between %>%
@@ -353,12 +353,12 @@ You can ensure both the sex and id columns are now factors using the glimpse() c
 glimpse(analytic_data_between)
 ```
 
-This example is so small it's clear you didn't miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+This example is so small it's clear you didn't miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -437,7 +437,7 @@ raw_data_within <- read_csv(file = "data_ex_within.csv",
                      na = my_missing_value_codes)
 ```
 
-We load the intial data into a raw_data_within but immediately make a copy we will work with called analytic_data_within. It's good to keep a copy of the raw data for reference if you encounter problems.
+We load the initial data into a raw_data_within but immediately make a copy we will work with called analytic_data_within. It's good to keep a copy of the raw data for reference if you encounter problems.
 
 ```{r}
 analytic_data_within <- raw_data_within
@@ -481,7 +481,7 @@ analytic_data_within <- analytic_data_within %>%
 
 ```
 
-The participant identification number in the id column is a numeric column, so it was not coverted by the above code. The id column is coverted to a factor with the code below.
+The participant identification number in the id column is a numeric column, so it was not converted by the above code. The id column is converted to a factor with the code below.
 
 ```{r}
 analytic_data_within <- analytic_data_within %>%
@@ -494,12 +494,12 @@ You can ensure both the sex and id columns are now factors using the glimpse() c
 glimpse(analytic_data_within)
 ```
 
-This example is so small it's clear you didn't miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+This example is so small it's clear you didn't miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -694,7 +694,7 @@ You can ensure all of these columns are now factors using the glimpse() command.
 glimpse(analytic_data_within_nway)
 ```
 
-Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors. As noted in the previous examples, its common to have additional columns that are categorical predictors but appear in the glimpse() output as being of the type character. That is not the case in these data, but if it were the command below would turn them into factors:
+Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors. As noted in the previous examples, its common to have additional columns that are categorical predictors but appear in the glimpse() output as being of the type character. That is not the case in these data, but if it were the command below would turn them into factors:
 
 ```{r, eval = FALSE}
 analytic_data_within_nway <- analytic_data_within_nway %>%
@@ -705,7 +705,7 @@ analytic_data_within_nway <- analytic_data_within_nway %>%
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -797,7 +797,7 @@ The analytic data in it's current for does not conform to the the tidy data spec
 print(analytic_data_within)
 ```
 
-We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clealy label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
+We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
 
 In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
 
@@ -912,12 +912,12 @@ You can ensure all of these columns are now factors using the glimpse() command.
 glimpse(analytic_data_survey)
 ```
 
-Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_survey %>%
@@ -937,7 +937,7 @@ analytic_data_survey <- analytic_data_survey %>%
                            "male"))
 ```
 
-For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:
+For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
 ```{r}
 #  Reordering factor levels by frequency
 analytic_data_survey <- analytic_data_survey %>%
@@ -955,7 +955,7 @@ analytic_data_survey %>%
 
 For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.
 
-One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.
+One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to interpret.
 
 ```{r, eval = FALSE}
 analytic_data_survey %>%
@@ -963,10 +963,10 @@ analytic_data_survey %>%
   summary()
 ```
 
-With larger numers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
+With larger numbers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
 
 
-Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
+Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonable. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
 
 ```{r, eval = FALSE}
 library(skimr)
@@ -994,7 +994,7 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonable (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 
 ```{r, eval=FALSE}
@@ -1064,7 +1064,7 @@ analytic_data_survey %>%
   glimpse()
 ```
 
-To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obaiin the recoded value.
+To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
 
 |  Original value | Math  | Recoded value |
 |             :-: |  :-:  | :-:           |
@@ -1138,7 +1138,7 @@ analytic_data_survey %>%
 ```
 
 
-We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate comand calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.
+We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate command calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.
 
 
 ```{r}
@@ -1195,7 +1195,7 @@ Following initial cleaning, identify categorical variables as factors. If you pl
 glimpse(analytic_data_occasions)
 ```
 
-You can quickly convert all character columns to factors using the code below. In this case, that will convert the sex and eye_colour columns to factors.
+You can quickly convert all character columns to factors using the code below. In this case, that will convert the sex and eye_color columns to factors.
 
 ```{r}
 analytic_data_occasions <- analytic_data_occasions %>%
@@ -1217,11 +1217,11 @@ You can ensure all of these columns are now factors using the glimpse() command.
 glimpse(analytic_data_occasions)
 ```
 
-Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.
+Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
 ### Screening factors
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_occasions %>%
@@ -1241,7 +1241,7 @@ analytic_data_occasions <- analytic_data_occasions %>%
 
 ```
 
-For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:
+For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
 
 ```{r}
 #  Reordering factor levels by frequency
@@ -1262,7 +1262,7 @@ analytic_data_occasions %>%
 
 For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.
 
-One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.
+One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to interpret.
 
 ```{r, eval = FALSE}
 analytic_data_occasions %>%
@@ -1270,10 +1270,10 @@ analytic_data_occasions %>%
   summary()
 ```
 
-With larger numers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
+With larger numbers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
 
 
-Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
+Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonable. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
 
 ```{r, eval = FALSE}
 library(skimr)
@@ -1301,7 +1301,7 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonable (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 
 ```{r, eval=FALSE}
@@ -1336,7 +1336,7 @@ Follow the same process t2_esteem items, t1_jobsat items, and t2_jobsat items. P
 Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items, as described previously. The logic of the math behind this correction is described previously in Surveys: Single occasion. 
 
 
-In these data, the items use a 1 to 5 response scale so we use the reverse item correction for response scales that beging with 1.  See Surveys: Single occasion for how to handle a response format that begins with zero - the math is different.
+In these data, the items use a 1 to 5 response scale so we use the reverse item correction for response scales that begin with 1.  See Surveys: Single occasion for how to handle a response format that begins with zero - the math is different.
 
 The code below:
 * selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
@@ -1398,13 +1398,13 @@ glimpse(analytic_data_occasions)
 ### Pivot to tidy data
 
 
-But now comes the complicated point wher eyou need to pivot the data to longer.
+But now comes the complicated point where you need to pivot the data to longer.
 
 ```{r}
 print(analytic_data_occasions)
 ```
 
-The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is excuted it creates a tidy version of data set stored in analytic_survey_tidy.
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format "variable_time" (e.g., esteem_t1). The code names_to = c(".value", "time") explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as ".value"). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is executed it creates a tidy version of data set stored in analytic_survey_tidy.
 
 
 ```{r}
@@ -1522,7 +1522,7 @@ analytic_data_items %>%
 ```
 
 
-We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of varibilty in observed scores that is due to actual differences among participants (rather than measurement error).
+We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of variability in observed scores that is due to actual differences among participants (rather than measurement error).
 
 ```{r, eval = TRUE}
 rxx_alpha <- analytic_occasions_items %>%

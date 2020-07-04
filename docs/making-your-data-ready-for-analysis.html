@@ -335,7 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="objective-1" class="section level2">
 <h2><span class="header-section-number">3.2</span> Objective</h2>
-<p>In this chatper we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not “right” - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it’s shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention sytem.</p>
+<p>In this chapter we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not “right” - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it’s shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention system.</p>
 </div>
 <div id="context" class="section level2">
 <h2><span class="header-section-number">3.3</span> Context</h2>
@@ -364,7 +364,7 @@ FIGURE 3.1: Open science in an article header
 <div id="begin-with-the-end-in-mind" class="section level2">
 <h2><span class="header-section-number">3.4</span> Begin with the end in mind</h2>
 <p>In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze (analytic data) via pre-processing scripts. These steps are outlined in Figure <a href="making-your-data-ready-for-analysis.html#fig:pipeline">3.2</a>. This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data is the data that has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, averaging multiple items into a scale scale scores, and other tasks.</p>
-<p>It’s critical that you don’t think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the preprocessing script that will convert your raw data to analytic data. The mantra of this chapter is <em>begin with the end in mind</em>.</p>
+<p>It’s critical that you don’t think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the pre-processing script that will convert your raw data to analytic data. The mantra of this chapter is <em>begin with the end in mind</em>.</p>
 <div class="figure"><span id="fig:pipeline"></span>
 <img src="ch_enter_load/images/pipeline.png" alt="Data science pipeline by Roger Peng." width="85%" />
 <p class="caption">
@@ -423,7 +423,7 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 </tr>
 </tbody>
 </table>
-<p><strong>Within participant data</strong>. Consider Table <a href="making-your-data-ready-for-analysis.html#tab:withinex">3.2</a> which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse_timne is not in a tidy data format. Moreover, it’s not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labelled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.</p>
+<p><strong>Within participant data</strong>. Consider Table <a href="making-your-data-ready-for-analysis.html#tab:withinex">3.2</a> which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse_time is not in a tidy data format. Moreover, it’s not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labeled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.</p>
 <table>
 <caption><span id="tab:withinex">TABLE 3.2: </span>Within participant data entered one row per participant</caption>
 <thead>
@@ -647,7 +647,7 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 <ul>
 <li><p>Lowercase letters only</p></li>
 <li><p>If two word column names are necessary, only use the underscore ("_") character to separate words in the name.</p></li>
-<li><p>Avoid short uncontextualized variable names like q1, q2, q3, etc.</p></li>
+<li><p>Avoid short decontextualized variable names like q1, q2, q3, etc.</p></li>
 <li><p>Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start_with() such that you don’t accidentally get additionally columns you don’t want - that have a similar prefix. See the Likert-type item section below for additional details.</p></li>
 <li><p>If you have a column name that represents the levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.</p></li>
 </ul>
@@ -667,12 +667,12 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 </div>
 <div id="anova-between" class="section level3">
 <h3><span class="header-section-number">3.5.3</span> ANOVA between</h3>
-<p>Avoid numerical representation of categorical variables. Don’t use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarily, for between participant variables like drug_condition don’t use 1 or 2 use “drug” and “placebo” but the actually drug name would be even better than the word “drug.”</p>
+<p>Avoid numerical representation of categorical variables. Don’t use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarly, for between participant variables like drug_condition don’t use 1 or 2 use “drug” and “placebo” but the actually drug name would be even better than the word “drug.”</p>
 </div>
 <div id="anova-within" class="section level3">
 <h3><span class="header-section-number">3.5.4</span> ANOVA within</h3>
-<p>If you have a study that involves within-participant predictors naming conventions can become exomplex. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that variable over multiple columns (e.g., march, may, july).</p>
-<p>When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of mutiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like “italian_pizza_hot” you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.</p>
+<p>If you have a study that involves within-participant predictors naming conventions can become examples. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that variable over multiple columns (e.g., march, may, july).</p>
+<p>When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of multiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like “italian_pizza_hot” you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.</p>
 </div>
 </div>
 <div id="following-the-examples" class="section level2">
@@ -702,7 +702,7 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 <li><p>Press the Create Project Button</p></li>
 </ol>
 <p>Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it.</p>
-<p>We ancticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength - because readers will see the commonalities across differ types of designs.</p>
+<p>We anticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength - because readers will see the commonalities across differ types of designs.</p>
 <p>As you make a script for each example:</p>
 <ul>
 <li><p>Recall the instruction from Chapter 1 about putting the date and your name in the script via comments.</p></li>
@@ -711,7 +711,7 @@ FIGURE 3.2: Data science pipeline by Roger Peng.
 </div>
 <div id="entering-data-into-spreadsheets" class="section level2">
 <h2><span class="header-section-number">3.7</span> Entering data into spreadsheets</h2>
-<p>The first example uses a data file data_ex_between.csv that corresponds to a ficticous example where we recorded the run times for a number of male and female participants. How did we create this data file? We used a spreadsheet to enter the data, as illustrated in Figure <a href="making-your-data-ready-for-analysis.html#fig:spreadsheetbetween">3.3</a>. Programs like Microsoft Excel and Google Sheets are good options for entering data.</p>
+<p>The first example uses a data file data_ex_between.csv that corresponds to a fictitious example where we recorded the run times for a number of male and female participants. How did we create this data file? We used a spreadsheet to enter the data, as illustrated in Figure <a href="making-your-data-ready-for-analysis.html#fig:spreadsheetbetween">3.3</a>. Programs like Microsoft Excel and Google Sheets are good options for entering data.</p>
 <div class="figure"><span id="fig:spreadsheetbetween"></span>
 <img src="ch_score_items/images/screenshot_data_between.png" alt="Spreadsheet entry of running data" width="40%" />
 <p class="caption">
@@ -729,7 +729,7 @@ FIGURE 3.4: Text view of CSV data
 </div>
 <div id="experiment-between" class="section level2">
 <h2><span class="header-section-number">3.8</span> Experiment: Between</h2>
-<p>This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-particpants ANOVA.</p>
+<p>This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-participants ANOVA.</p>
 <p>To Begin:</p>
 <ul>
 <li><p>Use the Files tab to confirm you have the data: data_ex_between.csv</p></li>
@@ -747,7 +747,7 @@ FIGURE 3.4: Text view of CSV data
 <span id="cb148-9"><a href="making-your-data-ready-for-analysis.html#cb148-9"></a></span>
 <span id="cb148-10"><a href="making-your-data-ready-for-analysis.html#cb148-10"></a>raw_data_beween &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data_ex_between.csv&quot;</span>,</span>
 <span id="cb148-11"><a href="making-your-data-ready-for-analysis.html#cb148-11"></a>                     <span class="dt">na =</span> my_missing_value_codes)</span></code></pre></div>
-<p>We load the intial data into a raw_data_beween but immediately make a copy we will work with called analytic_data_between. It’s good to keep a copy of the raw data for reference if you encounter problems.</p>
+<p>We load the initial data into a raw_data_between but immediately make a copy we will work with called analytic_data_between. It’s good to keep a copy of the raw data for reference if you encounter problems.</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="making-your-data-ready-for-analysis.html#cb149-1"></a>analytic_data_between &lt;-<span class="st"> </span>raw_data_beween</span></code></pre></div>
 <p>After loading the data we do initial cleaning to remove empty row/columns and ensure proper naming for columns:</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="making-your-data-ready-for-analysis.html#cb150-1"></a><span class="kw">library</span>(janitor)</span>
@@ -778,7 +778,7 @@ FIGURE 3.4: Text view of CSV data
 <span id="cb155-2"><a href="making-your-data-ready-for-analysis.html#cb155-2"></a>analytic_data_between &lt;-<span class="st"> </span>analytic_data_between <span class="op">%&gt;%</span></span>
 <span id="cb155-3"><a href="making-your-data-ready-for-analysis.html#cb155-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
 <span id="cb155-4"><a href="making-your-data-ready-for-analysis.html#cb155-4"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
-<p>The participant identification number in the id column is a numeric column, so it was not coverted by the above code. The id column is coverted to a factor with the code below.</p>
+<p>The participant identification number in the id column is a numeric column, so it was not converted by the above code. The id column is converted to a factor with the code below.</p>
 <div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="making-your-data-ready-for-analysis.html#cb156-1"></a>analytic_data_between &lt;-<span class="st"> </span>analytic_data_between <span class="op">%&gt;%</span></span>
 <span id="cb156-2"><a href="making-your-data-ready-for-analysis.html#cb156-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">as_factor</span>(id))</span></code></pre></div>
 <p>You can ensure both the sex and id columns are now factors using the glimpse() command.</p>
@@ -788,11 +788,11 @@ FIGURE 3.4: Text view of CSV data
 ## $ id           &lt;fct&gt; 1, 2, 3, 4, 5, 6
 ## $ sex          &lt;fct&gt; male, female, male, female, male, fe…
 ## $ elapsed_time &lt;dbl&gt; 40, 35, 38, 33, 42, 36</code></pre>
-<p>This example is so small it’s clear you didn’t miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.</p>
+<p>This example is so small it’s clear you didn’t miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.</p>
 </div>
 <div id="factor-screening" class="section level3">
 <h3><span class="header-section-number">3.8.2</span> Factor screening</h3>
-<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:</p>
+<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="making-your-data-ready-for-analysis.html#cb159-1"></a>analytic_data_between <span class="op">%&gt;%</span></span>
 <span id="cb159-2"><a href="making-your-data-ready-for-analysis.html#cb159-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.factor)) <span class="op">%&gt;%</span></span>
 <span id="cb159-3"><a href="making-your-data-ready-for-analysis.html#cb159-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
@@ -871,7 +871,7 @@ FIGURE 3.4: Text view of CSV data
 ##   may = col_double(),
 ##   july = col_double()
 ## )</code></pre>
-<p>We load the intial data into a raw_data_within but immediately make a copy we will work with called analytic_data_within. It’s good to keep a copy of the raw data for reference if you encounter problems.</p>
+<p>We load the initial data into a raw_data_within but immediately make a copy we will work with called analytic_data_within. It’s good to keep a copy of the raw data for reference if you encounter problems.</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="making-your-data-ready-for-analysis.html#cb169-1"></a>analytic_data_within &lt;-<span class="st"> </span>raw_data_within</span></code></pre></div>
 <p>After loading the data we do initial cleaning to remove empty row/columns and ensure proper naming for columns:</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="making-your-data-ready-for-analysis.html#cb170-1"></a><span class="kw">library</span>(janitor)</span>
@@ -906,7 +906,7 @@ FIGURE 3.4: Text view of CSV data
 <span id="cb175-2"><a href="making-your-data-ready-for-analysis.html#cb175-2"></a>analytic_data_within &lt;-<span class="st"> </span>analytic_data_within <span class="op">%&gt;%</span></span>
 <span id="cb175-3"><a href="making-your-data-ready-for-analysis.html#cb175-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
 <span id="cb175-4"><a href="making-your-data-ready-for-analysis.html#cb175-4"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
-<p>The participant identification number in the id column is a numeric column, so it was not coverted by the above code. The id column is coverted to a factor with the code below.</p>
+<p>The participant identification number in the id column is a numeric column, so it was not converted by the above code. The id column is converted to a factor with the code below.</p>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="making-your-data-ready-for-analysis.html#cb176-1"></a>analytic_data_within &lt;-<span class="st"> </span>analytic_data_within <span class="op">%&gt;%</span></span>
 <span id="cb176-2"><a href="making-your-data-ready-for-analysis.html#cb176-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="kw">as_factor</span>(id))</span></code></pre></div>
 <p>You can ensure both the sex and id columns are now factors using the glimpse() command.</p>
@@ -918,11 +918,11 @@ FIGURE 3.4: Text view of CSV data
 ## $ march &lt;dbl&gt; 40, 35, 38, 33, 42, 36
 ## $ may   &lt;dbl&gt; 37, 32, 35, 30, 39, 33
 ## $ july  &lt;dbl&gt; 35, 30, 33, 28, 37, 31</code></pre>
-<p>This example is so small it’s clear you didn’t miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.</p>
+<p>This example is so small it’s clear you didn’t miss converting any columns to factors. In general, however, at this point you should inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.</p>
 </div>
 <div id="factor-screening-1" class="section level3">
 <h3><span class="header-section-number">3.9.2</span> Factor screening</h3>
-<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:</p>
+<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="making-your-data-ready-for-analysis.html#cb179-1"></a>analytic_data_within <span class="op">%&gt;%</span></span>
 <span id="cb179-2"><a href="making-your-data-ready-for-analysis.html#cb179-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.factor)) <span class="op">%&gt;%</span></span>
 <span id="cb179-3"><a href="making-your-data-ready-for-analysis.html#cb179-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
@@ -1199,14 +1199,14 @@ FIGURE 3.4: Text view of CSV data
 ## $ steak_cold  &lt;dbl&gt; 3, 3, 4, 5, 7, 8
 ## $ burger_hot  &lt;dbl&gt; 7, 8, 7, 8, 7, 8
 ## $ burger_cold &lt;dbl&gt; 4, 3, 3, 3, 2, 5</code></pre>
-<p>Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors. As noted in the previous examples, its common to have additional columns that are categorical predictors but appear in the glimpse() output as being of the type character. That is not the case in these data, but if it were the command below would turn them into factors:</p>
+<p>Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors. As noted in the previous examples, its common to have additional columns that are categorical predictors but appear in the glimpse() output as being of the type character. That is not the case in these data, but if it were the command below would turn them into factors:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="making-your-data-ready-for-analysis.html#cb206-1"></a>analytic_data_within_nway &lt;-<span class="st"> </span>analytic_data_within_nway <span class="op">%&gt;%</span></span>
 <span id="cb206-2"><a href="making-your-data-ready-for-analysis.html#cb206-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
 <span id="cb206-3"><a href="making-your-data-ready-for-analysis.html#cb206-3"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
 </div>
 <div id="factor-screening-2" class="section level3">
 <h3><span class="header-section-number">3.10.2</span> Factor screening</h3>
-<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for eronious factor levels. The code below displays the factor levels:</p>
+<p>Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:</p>
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="making-your-data-ready-for-analysis.html#cb207-1"></a>analytic_data_within_nway <span class="op">%&gt;%</span></span>
 <span id="cb207-2"><a href="making-your-data-ready-for-analysis.html#cb207-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.factor)) <span class="op">%&gt;%</span></span>
 <span id="cb207-3"><a href="making-your-data-ready-for-analysis.html#cb207-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
@@ -1413,7 +1413,7 @@ FIGURE 3.4: Text view of CSV data
 ## 4 4     female    33    30    28
 ## 5 5     male      42    39    37
 ## 6 6     female    36    33    31</code></pre>
-<p>We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clealy label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format.</p>
+<p>We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format.</p>
 <p>In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="making-your-data-ready-for-analysis.html#cb217-1"></a>analytic_data_nway_tidy &lt;-<span class="st"> </span>analytic_data_within_nway <span class="op">%&gt;%</span></span>
 <span id="cb217-2"><a href="making-your-data-ready-for-analysis.html#cb217-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> pizza_hot<span class="op">:</span>burger_cold,</span>
@@ -1563,11 +1563,11 @@ FIGURE 3.4: Text view of CSV data
 ## $ jobsat3       &lt;dbl&gt; 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3…
 ## $ jobsat4       &lt;dbl&gt; NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA,…
 ## $ jobsat5       &lt;dbl&gt; 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, N…</code></pre>
-<p>Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.</p>
+<p>Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.</p>
 </div>
 <div id="factor-screening-3" class="section level3">
 <h3><span class="header-section-number">3.11.2</span> Factor screening</h3>
-<p>Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:</p>
+<p>Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="making-your-data-ready-for-analysis.html#cb235-1"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb235-2"><a href="making-your-data-ready-for-analysis.html#cb235-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.factor)) <span class="op">%&gt;%</span></span>
 <span id="cb235-3"><a href="making-your-data-ready-for-analysis.html#cb235-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
@@ -1586,7 +1586,7 @@ FIGURE 3.4: Text view of CSV data
 <span id="cb237-4"><a href="making-your-data-ready-for-analysis.html#cb237-4"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
 <span id="cb237-5"><a href="making-your-data-ready-for-analysis.html#cb237-5"></a>                           <span class="st">&quot;female&quot;</span>,</span>
 <span id="cb237-6"><a href="making-your-data-ready-for-analysis.html#cb237-6"></a>                           <span class="st">&quot;male&quot;</span>))</span></code></pre></div>
-<p>For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:</p>
+<p>For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="making-your-data-ready-for-analysis.html#cb238-1"></a><span class="co">#  Reordering factor levels by frequency</span></span>
 <span id="cb238-2"><a href="making-your-data-ready-for-analysis.html#cb238-2"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb238-3"><a href="making-your-data-ready-for-analysis.html#cb238-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_infreq</span>(eye_color))</span></code></pre></div>
@@ -1606,19 +1606,19 @@ FIGURE 3.4: Text view of CSV data
 <div id="numeric-screening-3" class="section level3">
 <h3><span class="header-section-number">3.11.3</span> Numeric screening</h3>
 <p>For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.</p>
-<p>One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.</p>
+<p>One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to interpret.</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="making-your-data-ready-for-analysis.html#cb241-1"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb241-2"><a href="making-your-data-ready-for-analysis.html#cb241-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span></span>
 <span id="cb241-3"><a href="making-your-data-ready-for-analysis.html#cb241-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
-<p>With larger numers of variables, it’s a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.</p>
-<p>Start by examining the range of non-scale items. In this case it’s only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.</p>
+<p>With larger numbers of variables, it’s a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.</p>
+<p>Start by examining the range of non-scale items. In this case it’s only age. Examine the output to see if any of the age values are unreasonable. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="making-your-data-ready-for-analysis.html#cb242-1"></a><span class="kw">library</span>(skimr)</span>
 <span id="cb242-2"><a href="making-your-data-ready-for-analysis.html#cb242-2"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb242-3"><a href="making-your-data-ready-for-analysis.html#cb242-3"></a><span class="st">  </span><span class="kw">select</span>(age) <span class="op">%&gt;%</span></span>
 <span id="cb242-4"><a href="making-your-data-ready-for-analysis.html#cb242-4"></a><span class="st">  </span><span class="kw">skim_without_charts</span>()</span></code></pre></div>
 <pre><code>##   skim_variable n_missing  mean   sd p0 p50 p100
 ## 1           age         3 20.52 2.05 17  20   24</code></pre>
-<p>Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.</p>
+<p>Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonable (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.</p>
 <div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="making-your-data-ready-for-analysis.html#cb244-1"></a>analytic_data_survey <span class="op">%&gt;%</span></span>
 <span id="cb244-2"><a href="making-your-data-ready-for-analysis.html#cb244-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb244-3"><a href="making-your-data-ready-for-analysis.html#cb244-3"></a><span class="st">  </span><span class="kw">skim</span>()</span></code></pre></div>
@@ -1654,7 +1654,7 @@ FIGURE 3.4: Text view of CSV data
 ## Columns: 2
 ## $ esteem5_rev15 &lt;dbl&gt; 2, 2, 2, 2, 2, NA, NA, 2, 2, 2, 3, …
 ## $ jobsat2_rev15 &lt;dbl&gt; 1, 1, 1, NA, 1, 1, 2, 1, 2, 2, 3, 1…</code></pre>
-<p>To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obaiin the recoded value.</p>
+<p>To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.</p>
 <table>
 <thead>
 <tr class="header">
@@ -1791,7 +1791,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 ## $ jobsat3 &lt;dbl&gt; 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2…
 ## $ jobsat4 &lt;dbl&gt; NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5, 4,…
 ## $ jobsat5 &lt;dbl&gt; 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA, 4, …</code></pre>
-<p>We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate comand calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.</p>
+<p>We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate command calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.</p>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="making-your-data-ready-for-analysis.html#cb258-1"></a>analytic_data_survey &lt;-<span class="st"> </span>analytic_data_survey <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb258-2"><a href="making-your-data-ready-for-analysis.html#cb258-2"></a><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb258-3"><a href="making-your-data-ready-for-analysis.html#cb258-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">self_esteem =</span> <span class="kw">mean</span>(<span class="kw">c_across</span>(<span class="kw">starts_with</span>(<span class="st">&quot;esteem&quot;</span>)),</span>
@@ -1879,7 +1879,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 ## $ t2_jobsat3       &lt;dbl&gt; 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4,…
 ## $ t2_jobsat4       &lt;dbl&gt; 3, 6, 6, 5, 5, 5, 5, 6, 3, 5, 3,…
 ## $ t2_jobsat5       &lt;dbl&gt; 6, 3, 6, 5, NA, 5, 5, 6, 6, 6, 5…</code></pre>
-<p>You can quickly convert all character columns to factors using the code below. In this case, that will convert the sex and eye_colour columns to factors.</p>
+<p>You can quickly convert all character columns to factors using the code below. In this case, that will convert the sex and eye_color columns to factors.</p>
 <div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="making-your-data-ready-for-analysis.html#cb266-1"></a>analytic_data_occasions &lt;-<span class="st"> </span>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb266-2"><a href="making-your-data-ready-for-analysis.html#cb266-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.character),</span>
 <span id="cb266-3"><a href="making-your-data-ready-for-analysis.html#cb266-3"></a>                <span class="dt">.fns =</span> as_factor))</span></code></pre></div>
@@ -1914,11 +1914,11 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 ## $ t2_jobsat3       &lt;dbl&gt; 4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4,…
 ## $ t2_jobsat4       &lt;dbl&gt; 3, 6, 6, 5, 5, 5, 5, 6, 3, 5, 3,…
 ## $ t2_jobsat5       &lt;dbl&gt; 6, 3, 6, 5, NA, 5, 5, 6, 6, 6, 5…</code></pre>
-<p>Inspect the output of the glimpse() command and make sure you have coverted all categorical variables to factors - especially those you will use as predictors.</p>
+<p>Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.</p>
 </div>
 <div id="screening-factors" class="section level3">
 <h3><span class="header-section-number">3.12.2</span> Screening factors</h3>
-<p>Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for eronious factor levels. The code below displays the factor levels:</p>
+<p>Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:</p>
 <div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="making-your-data-ready-for-analysis.html#cb270-1"></a>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb270-2"><a href="making-your-data-ready-for-analysis.html#cb270-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.factor)) <span class="op">%&gt;%</span></span>
 <span id="cb270-3"><a href="making-your-data-ready-for-analysis.html#cb270-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
@@ -1937,7 +1937,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 <span id="cb272-4"><a href="making-your-data-ready-for-analysis.html#cb272-4"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
 <span id="cb272-5"><a href="making-your-data-ready-for-analysis.html#cb272-5"></a>                           <span class="st">&quot;female&quot;</span>,</span>
 <span id="cb272-6"><a href="making-your-data-ready-for-analysis.html#cb272-6"></a>                           <span class="st">&quot;male&quot;</span>))</span></code></pre></div>
-<p>For eye color, we want to future graph to be have the most commmon eye colors on the left so we reorder the factor levels:</p>
+<p>For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:</p>
 <div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="making-your-data-ready-for-analysis.html#cb273-1"></a><span class="co">#  Reordering factor levels by frequency</span></span>
 <span id="cb273-2"><a href="making-your-data-ready-for-analysis.html#cb273-2"></a>analytic_data_occasions &lt;-<span class="st"> </span>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb273-3"><a href="making-your-data-ready-for-analysis.html#cb273-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">eye_color =</span> <span class="kw">fct_infreq</span>(eye_color))</span></code></pre></div>
@@ -1957,19 +1957,19 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 <div id="numeric-screening-4" class="section level3">
 <h3><span class="header-section-number">3.12.3</span> Numeric screening</h3>
 <p>For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.</p>
-<p>One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to intrepret.</p>
+<p>One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to interpret.</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="making-your-data-ready-for-analysis.html#cb276-1"></a>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb276-2"><a href="making-your-data-ready-for-analysis.html#cb276-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">where</span>(is.numeric)) <span class="op">%&gt;%</span></span>
 <span id="cb276-3"><a href="making-your-data-ready-for-analysis.html#cb276-3"></a><span class="st">  </span><span class="kw">summary</span>()</span></code></pre></div>
-<p>With larger numers of variables, it’s a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.</p>
-<p>Start by examining the range of non-scale items. In this case it’s only age. Examine the output to see if any of the age values are unreasonble. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.</p>
+<p>With larger numbers of variables, it’s a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.</p>
+<p>Start by examining the range of non-scale items. In this case it’s only age. Examine the output to see if any of the age values are unreasonable. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="making-your-data-ready-for-analysis.html#cb277-1"></a><span class="kw">library</span>(skimr)</span>
 <span id="cb277-2"><a href="making-your-data-ready-for-analysis.html#cb277-2"></a>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb277-3"><a href="making-your-data-ready-for-analysis.html#cb277-3"></a><span class="st">  </span><span class="kw">select</span>(age) <span class="op">%&gt;%</span></span>
 <span id="cb277-4"><a href="making-your-data-ready-for-analysis.html#cb277-4"></a><span class="st">  </span><span class="kw">skim</span>()</span></code></pre></div>
 <pre><code>##   skim_variable n_missing  mean   sd p0 p50 p100
 ## 1           age         3 20.52 2.05 17  20   24</code></pre>
-<p>Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonble (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.</p>
+<p>Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonable (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.</p>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="making-your-data-ready-for-analysis.html#cb279-1"></a>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb279-2"><a href="making-your-data-ready-for-analysis.html#cb279-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb279-3"><a href="making-your-data-ready-for-analysis.html#cb279-3"></a><span class="st">  </span><span class="kw">skim</span>()</span></code></pre></div>
@@ -1986,7 +1986,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 <div id="reverse-key-items-1" class="section level4">
 <h4><span class="header-section-number">3.12.4.1</span> Reverse key items</h4>
 <p>Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items, as described previously. The logic of the math behind this correction is described previously in Surveys: Single occasion.</p>
-<p>In these data, the items use a 1 to 5 response scale so we use the reverse item correction for response scales that beging with 1. See Surveys: Single occasion for how to handle a response format that begins with zero - the math is different.</p>
+<p>In these data, the items use a 1 to 5 response scale so we use the reverse item correction for response scales that begin with 1. See Surveys: Single occasion for how to handle a response format that begins with zero - the math is different.</p>
 <p>The code below:
 * selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
 * subtracts each value in that column from 6
@@ -2044,7 +2044,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 </div>
 <div id="pivot-to-tidy-data-2" class="section level3">
 <h3><span class="header-section-number">3.12.5</span> Pivot to tidy data</h3>
-<p>But now comes the complicated point wher eyou need to pivot the data to longer.</p>
+<p>But now comes the complicated point where you need to pivot the data to longer.</p>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="making-your-data-ready-for-analysis.html#cb288-1"></a><span class="kw">print</span>(analytic_data_occasions)</span></code></pre></div>
 <pre><code>## # A tibble: 300 x 8
 ##    id      age sex   eye_color esteem_t1 esteem_t2 jobsat_t1
@@ -2061,7 +2061,7 @@ mutate(4 - across(.cols = ends_with("_rev15")) )
 ## 10 10       NA fema… blue            3.6       4.2      3.8 
 ## # … with 290 more rows, and 1 more variable:
 ## #   jobsat_t2 &lt;dbl&gt;</code></pre>
-<p>The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format “variable_time” (e.g., esteem_t1). The code names_to = c(“.value”, “time”) explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as “.value”). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is excuted it creates a tidy version of data set stored in analytic_survey_tidy.</p>
+<p>The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns with data by using esteem_t1:jobsat_t2, this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format “variable_time” (e.g., esteem_t1). The code names_to = c(“.value”, “time”) explains this format to R. It indicates first part of the column name contains the name of the variable (expressed in the code as “.value”). It also indicates that the second part of the column name represents time. The line names_sep = "_" tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is executed it creates a tidy version of data set stored in analytic_survey_tidy.</p>
 <div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="making-your-data-ready-for-analysis.html#cb290-1"></a>analytic_occasion_tidy &lt;-<span class="st"> </span>analytic_data_occasions <span class="op">%&gt;%</span></span>
 <span id="cb290-2"><a href="making-your-data-ready-for-analysis.html#cb290-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(esteem_t1<span class="op">:</span>jobsat_t2,</span>
 <span id="cb290-3"><a href="making-your-data-ready-for-analysis.html#cb290-3"></a>               <span class="dt">names_to =</span> <span class="kw">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;time&quot;</span>),</span>
@@ -2180,7 +2180,7 @@ FIGURE 3.5: Word document created by apa.cor.table
 ## $ jobsat3   &lt;dbl&gt; 3, NA, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,…
 ## $ jobsat4   &lt;dbl&gt; NA, 5, 5, 4, 4, 4, 4, 5, NA, 4, NA, 5, …
 ## $ jobsat5   &lt;dbl&gt; 5, NA, 5, 4, 5, 4, 4, 5, 5, 5, 4, NA, 4…</code></pre>
-<p>We calculated reliability using psych::alpha() command. Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach’s alpha is an estimate of the proportion of varibilty in observed scores that is due to actual differences among participants (rather than measurement error).</p>
+<p>We calculated reliability using psych::alpha() command. Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach’s alpha is an estimate of the proportion of variability in observed scores that is due to actual differences among participants (rather than measurement error).</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="making-your-data-ready-for-analysis.html#cb300-1"></a>rxx_alpha &lt;-<span class="st"> </span>analytic_occasions_items <span class="op">%&gt;%</span></span>
 <span id="cb300-2"><a href="making-your-data-ready-for-analysis.html#cb300-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t1_esteem&quot;</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb300-3"><a href="making-your-data-ready-for-analysis.html#cb300-3"></a><span class="st">  </span>psych<span class="op">::</span><span class="kw">alpha</span>()</span>
