@@ -950,22 +950,14 @@ analytic_data_survey %>%
   summary()
 ```
 
+
 ### Numeric screening
 
-For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible or so large they appear to be data entry errors.
+For numeric variables, it's important find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (e.g., outside the 1 to 5 point rating scale for Likert items) or clearly data entry errors.
 
-One options for doing so is the summary command again. This time, however, we use “is.numeric” in the where() command. However, when a survey has a large number of variables this type of output can become challenging to interpret.
+Because we have several numeric columns that we are screening, we use the skim() command from the skimr package. The skim() command quickly provides basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75.
 
-```{r, eval = FALSE}
-analytic_data_survey %>%
-  select(where(is.numeric)) %>%
-  summary()
-```
-
-With larger numbers of variables, it's a good idea to use the skimr package. Additionally, it makes sense to look at sets of items rather than all of the variables at once. This is because sometime items and different response formats. For example, for one measure this responses may range from 1 to 5 whereas for another measure responses could range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it makes sense to look at items in sets.
-
-
-Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonable. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the min an max values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
+Start by examining the range of non-scale items. In this case it's only age. Examine the output to see if any of the age values are unreasonable. As noted, in the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum and maximum values for the variable. Check to make sure none of the age values are unreasonably low or high. If they are, you may need to check the original data source or replace them with missing values.
 
 ```{r, eval = FALSE}
 library(skimr)
@@ -993,7 +985,9 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Look the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. In the output p0 and p100 indicate the 0th percentile and the 100th percentile; that is the minimum an maximum values for the variable in these data. Examine the output to see if any of the esteem values are unreasonable (i.e., fall outside the 1 to 5 range). If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+With respect to the multi-item scale, it makes sense to look at sets of items rather than all of the items at once. This is because sometime items from different scales use response ranges. For example, for one measure might use a response scale with a range from 1 to 5 whereas for another measure might use a response scale with a range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it your data - look at the scale items separately to make it easy to see out of range values.
+
+We begin by looking at the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 
 ```{r, eval=FALSE}
@@ -1019,7 +1013,10 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Follow the same process for the job satisfaction items. Possible items responses for this scale range from 1 to 5, make sure they are all in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+Follow the same process for the job satisfaction items. Write that code on your own now. 
+
+Possible items responses for the job satisfaction scale range from 1 to 5, make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+
 
 ```{r, eval=FALSE}
 analytic_data_survey %>%
@@ -1047,15 +1044,15 @@ outdf
 
 ### Scale scores
 
-Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items, as described previously.
+Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items.
 
 #### Reverse key items
 
-The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. In this example, we scored the data using the 1 to 5 system. So we'll use that. Later I'll show you how to deal with the other scoring system (0 to 4).
+The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. The mathematical approach you use to correcting reverse-keyed items depends upon whether the scale starts with 1 or 0.
 
-We need to take items that were reversed-key when the participant wrote them and recode those responses. We do that with using the *mutate* command.
+In this example, we scored the data using the 1 to 5 system. So that is the approach illustrated here. See the extra information box for details on how to fixed reverse-keyed items where the scale begins with zero.
 
-In this data file all the reverse-keyed were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse-keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - both on difference scales.
+In this data file all the reverse-keyed were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse-keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
 
 ```{r}
 analytic_data_survey %>%
@@ -1063,7 +1060,7 @@ analytic_data_survey %>%
   glimpse()
 ```
 
-To correct a reverse-keyed items that ranges where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
+To correct a reverse-keyed items where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
 
 |  Original value | Math  | Recoded value |
 |             :-: |  :-:  | :-:           |
@@ -1075,9 +1072,10 @@ To correct a reverse-keyed items that ranges where the lowest possible rating va
 
 
 The code below:
+
 * selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
 * subtracts each value in that column from 6
-* renames the column by removing "_rev15" because the reverse coding is complete.
+* renames the column by removing "_rev15" from the name because the reverse coding is complete.
 
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -1112,10 +1110,10 @@ Thus the mutate command would instead be:
 
 #### Creating scores
 
-The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process we it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_items. We will need to use this backup later to compute the reliability of the scales we are creating.
+The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process because it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_survey_items. We will need to use this backup later to compute the reliability of the scales we are creating.
 
 ```{r}
-analytic_data_items <- analytic_data_survey
+analytic_data_survey_items <- analytic_data_survey
 ```
 
 We want to make a self_esteem scale and plan to select items using starts_with("esteem"). But prior to doing this we make sure the start_with() command only gives us the items we want - and not additional unwanted items. The output below confirms there are not problems associated with using starts_with("esteem").
@@ -1135,7 +1133,10 @@ analytic_data_survey %>%
 ```
 
 
-We computer the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to that the mean() command will work across columns rather than within columns. The mutate command calculates the scale score for each person. The c_across() command combined with the starts_with() command ensure the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by remove the item-level data from the data set.
+We calculate the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to make the mean() command  work across columns (within participants) rather than within columns. The mutate command calculates the scale score for each person. The c_across() command combined with the starts_with() command ensures the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by removing the item-level data from the data set.
+
+**Important:** Take note of how we names the scale variables (self_esteem, job_sat) using a slightly different convention than our items. That is, these scale scores were picked so that they would *not* be selected by a starts_with("esteem") or starts_with("jobsat"). Why? Because we later use those commands to remove the item-level data. We would want the command designed to remove the item-level data to also remove the scale we just calculated! This example illustrates how carefully you need to think about your naming conventions.
+
 
 
 ```{r}
@@ -1151,13 +1152,13 @@ analytic_data_survey <- analytic_data_survey %>%
   
 ```
 
-We can see our data now has the self esteem column, a job_sat column, and that all of the item level data has been removed.
+We can see our data now has the self_esteem column, a job_sat column, and that all of the item level data has been removed.
 
 ```{r}
 glimpse(analytic_data_survey)
 ```
 
-These data are ready for analysis.
+You now have two data sets analytic_data_survey and analytic_data_survey_items. You can calculate descriptive statistics, correlations and most analyses using the analytic_data_survey. To obtain the reliability of the scales you just created though you will need to use the analytic_data_survey_items. Both sets of data are ready for analysis.
 
 
 ## Surveys: Multiple Occasions
@@ -1348,7 +1349,7 @@ analytic_data_occasions <- analytic_data_occasions %>%
 
 #### Creating scores
 
-The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process we it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_items. We will need to use this backup later to compute the reliability of the scales we are creating.
+The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process we it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_survey_items. We will need to use this backup later to compute the reliability of the scales we are creating.
 
 ```{r}
 analytic_occasions_items <- analytic_data_occasions
@@ -1508,10 +1509,10 @@ print(summary_table_rounded)
 
 ### Cronbach’s alpha
 
-If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_items. The glimpse() command illustrates this file has all the original items (after reverse-coding has been fixed).
+If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_survey_items. The glimpse() command illustrates this file has all the original items (after reverse-coding has been fixed).
 
 ```{r}
-analytic_data_items %>%
+analytic_data_survey_items %>%
   glimpse()
 ```
 
