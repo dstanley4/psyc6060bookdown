@@ -414,7 +414,7 @@ Once you are done numeric screening, the data is ready for analysis.
 
 ## Experiment: Within one-way
 
-This section outlines a workflow appropriate for when you have a repeated measures design with a single repeated measurs predictor. The data corresponds to a design where the researcher is interested in comparing run times (elapsed_time) across three different occasions (march/may/june).
+This section outlines a workflow appropriate for when you have a repeated measures design with a single repeated measures predictor. The data corresponds to a design where the researcher is interested in comparing run times (elapsed_time) across three different occasions (march/may/june).
 
 To Begin:
 
@@ -576,13 +576,13 @@ analytic_data_within <- analytic_data_within  %>%
 
 ### Pivot to tidy data
 
-The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion. The levels of occasion are spread across three columns. Correspondingly, elapsed time is spread across multiple columns (march, may, july) in the same row and is not labeled as elaped time. We need to restructure the data into the tidy data format so that we have a single elapsed time observation per row and a single column per variable.
+The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion (with levels march/may/july). Instead, there are three columns each of which represents a level of occasion. The levels of occasion are spread across three columns called march, may, and july. Each of these columns contains elapsed time for participants in that month. 
 
 ```{r}
 print(analytic_data_within)
 ```
 
-The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument selects the march column, the july column, and all the columns in between. Each column represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument selects the march column, the july column, and all the columns in between. Each column contains elapsed times at level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july columns.
 
 ```{r}
 analytic_data_within_tidy <- analytic_data_within %>%
@@ -614,7 +614,7 @@ You now have two data sets analytic_data_within and analytic_data_within_tidy. Y
 
 ## Experiment: Within N-way
 
-This section outlines a workflow appropriate for when you have a repeated measures design with multiple repeated measurs predictors. The data corresponds to a designs where the researcher is interested in assessing the taste of food as a function of food type (pizza/steak/burger) and temperature (hot/cold).
+This section outlines a workflow appropriate for when you have a repeated measures design with multiple repeated measures predictors. The data corresponds to a design where the researcher is interested in assessing the taste of food as a function of food type (pizza/steak/burger) and temperature (hot/cold).
 
 To Begin:
 
@@ -790,19 +790,22 @@ analytic_data_within_nway <- analytic_data_within_nway  %>%
 
 ### Pivot to tidy data
 
+The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice there are not columns for temperature (with levels hot/cold) or food type (with levels pizza/steak/burger). Instead, there are six columns that are combinations of the levels of these variables (i.e., pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold). Each of these columns contains taste ratings on a 1 to 10 point scale.
 
-The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion. The levels of occasion are spread across three columns. Correspondingly, elapsed time is spread across multiple columns in the same row and is not labeled as elaped time. We need to restructure the data into the tidy data format so that we have a single elapsed time observation per row and a single column per variable.
 
 ```{r}
-print(analytic_data_within_nway)
+print(analytic_data_within)
 ```
 
-The pivot_long() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument indicates to the computer to use the march column and the july column and all the columns in between. Each column name represents a level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july column.
+We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clealy label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
+
+In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
+
 
 ```{r}
 analytic_data_nway_tidy <- analytic_data_within_nway %>%
-  pivot_longer(pizza_hot:burger_cold,
-               names_to = c("food", "temperature"),
+  pivot_longer(cols = pizza_hot:burger_cold,
+               names_to = c("food_type", "temperature"),
                names_sep = "_",
                values_to = "taste"
   )
@@ -818,7 +821,7 @@ But notice that the new column occasion is of the type character. We need it to 
 
 ```{r}
 analytic_data_nway_tidy <-analytic_data_nway_tidy %>%
-  mutate(food = as_factor(food),
+  mutate(food = as_factor(food_type),
          temperature = as_factor(temperature))
 ```
 
