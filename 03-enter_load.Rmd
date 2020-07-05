@@ -1494,6 +1494,7 @@ You now have three data sets The data analytic_occasion_tidy is appropriate for 
 
 ## Basic descriptive statistics
 
+Regardless of the design of the study, most researchers want to see descriptive statistics for the variables in their study. We offer three approaches for obtaining descriptive statistics below. For convenience we use the recent data set analytic_data_occasions. But recognize the commands below can be used with all the analytic data sets we created for the various designs.
 
 ### skim()
 
@@ -1584,7 +1585,7 @@ print(summary_table_rounded)
 
 ### Cronbach’s alpha
 
-If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of, called analytic_data_survey_items. The glimpse() command illustrates this file has all the original items (after reverse-coding has been fixed).
+If you want Cronbach’s alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of called analytic_data_survey_items. The glimpse() command illustrates this data set has all the original items (after reverse-coding has been fixed).
 
 ```{r}
 analytic_data_survey_items %>%
@@ -1592,7 +1593,7 @@ analytic_data_survey_items %>%
 ```
 
 
-We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of variability in observed scores that is due to actual differences among participants (rather than measurement error).
+We calculated reliability using psych::alpha() command.  Cronbach’s alpha is labeled “raw alpha” in the output. Cronbach's alpha is an estimate of the proportion of variability in observed scores that is due to actual differences among participants (rather than measurement error). Remember, never use library(psych), it will break the tidyverse packages. Instead, precede all psych package commands with psych:: as we do below with psych::alpha().
 
 ```{r, eval = TRUE}
 rxx_alpha <- analytic_data_occasions_items %>%
