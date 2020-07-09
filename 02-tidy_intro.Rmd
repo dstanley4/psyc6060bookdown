@@ -115,6 +115,15 @@ okcupid_profiles %>%
             age_sd = sd(age, na.rm = TRUE))
 ```
 
+Often this process does too much rounding. We can get more exact results by adding an as.data.frame() to the end of the commands.
+
+```{r}
+okcupid_profiles %>% 
+  summarise(age_mean = mean(age, na.rm = TRUE),
+            age_sd = sd(age, na.rm = TRUE)) %>%
+  as.data.frame()
+```
+
 
 ### filter()
 
@@ -332,13 +341,14 @@ If a future chapter you will see how we can select factors using where(is.factor
 
 The summarise() command can summarise multiple columns when combined with starts_with(), ends_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
 
-If we want to obtain the mean of all the columns that start with "t1" we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data.
+If we want to obtain the mean of all the columns that start with "t1" we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data. We add as.data.frame() to get a larger number of decimals.
 
 ```{r}
 data_exp %>%
   summarise(across(.cols = starts_with("t1"), 
                    .fns = mean,
-                   na.rm = TRUE))
+                   na.rm = TRUE)) %>%
+  as.data.frame()
 ```
 
 If you want to get fancy, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "_mean".
@@ -348,7 +358,8 @@ data_exp %>%
   summarise(across(.cols = starts_with("t1"), 
                    .fns = mean,
                    na.rm = TRUE,
-                   .names = "{col}_mean"))
+                   .names = "{col}_mean"))  %>%
+  as.data.frame()
 ```
 
 
@@ -368,7 +379,8 @@ Once you have created the list of descriptive statistics you want you can run th
 ```{r}
 data_exp %>%
   summarise(across(.cols = starts_with("t1"), 
-                   .fns = desired_descriptives))
+                   .fns = desired_descriptives)) %>%
+  as.data.frame()
 ```
 
 Consequently, we add the t() command (i.e., transpose command) to the end of the summarise request to get a more readable list of statistics:
@@ -382,7 +394,8 @@ desired_descriptives <- list(
 data_exp %>%
   summarise(across(.cols = starts_with("t1"), 
                    .fns = desired_descriptives)) %>%
-  t()
+  as.data.frame() %>%
+  t() 
 ```
 
 Note that in the across command above we could also have used: ends_with(), contains(), matches(), or where().
