@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-07" />
+<meta name="date" content="2020-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -254,6 +254,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="populations-and-samples.html"><a href="populations-and-samples.html#required-packages-1"><i class="fa fa-check"></i><b>4.1</b> Required Packages</a></li>
 <li class="chapter" data-level="4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#objective-2"><i class="fa fa-check"></i><b>4.2</b> Objective</a></li>
 <li class="chapter" data-level="4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#notation"><i class="fa fa-check"></i><b>4.3</b> Notation</a></li>
+<li class="chapter" data-level="4.4" data-path="populations-and-samples.html"><a href="populations-and-samples.html#population-vs-samples"><i class="fa fa-check"></i><b>4.4</b> Population vs samples</a></li>
+<li class="chapter" data-level="4.5" data-path="populations-and-samples.html"><a href="populations-and-samples.html#describing-populations"><i class="fa fa-check"></i><b>4.5</b> Describing populations</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="more-to-say.html"><a href="more-to-say.html"><i class="fa fa-check"></i><b>A</b> More to Say</a></li>
@@ -380,6 +382,71 @@ FIGURE 4.1: Data for understanding summation notation
 &amp;= 200
 \end{aligned} 
 \]</span></p>
+</div>
+<div id="population-vs-samples" class="section level2">
+<h2><span class="header-section-number">4.4</span> Population vs samples</h2>
+<p>As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A populations is the complete set of people/animals about which we want to make conclusions. Samples are a subset of the total number of people/animals in the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample.</p>
+<p>Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conlusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific indiviudals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.</p>
+<p>Statistic tests are means of helping researchers use sample data to make conclusions at the population level. When we calculate numbers based on all of the people/animals in the population we refer to those numbers as <strong>parameters</strong>. We calculate numbers based on the people/animals in the sample we refer to those numbers as <strong>statistics</strong>. In general, statistics are used to estimate parameters.</p>
+</div>
+<div id="describing-populations" class="section level2">
+<h2><span class="header-section-number">4.5</span> Describing populations</h2>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="populations-and-samples.html#cb310-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb310-2"><a href="populations-and-samples.html#cb310-2"></a><span class="kw">library</span>(learnSampling)</span>
+<span id="cb310-3"><a href="populations-and-samples.html#cb310-3"></a></span>
+<span id="cb310-4"><a href="populations-and-samples.html#cb310-4"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="populations-and-samples.html#cb311-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb311-2"><a href="populations-and-samples.html#cb311-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb311-3"><a href="populations-and-samples.html#cb311-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<pre><code>##   pop_mean
+## 1    172.5</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="populations-and-samples.html#cb313-1"></a><span class="co"># set.seed ensures you get the same random samples</span></span>
+<span id="cb313-2"><a href="populations-and-samples.html#cb313-2"></a><span class="kw">set.seed</span>(<span class="dv">1</span>) </span>
+<span id="cb313-3"><a href="populations-and-samples.html#cb313-3"></a></span>
+<span id="cb313-4"><a href="populations-and-samples.html#cb313-4"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
+<span id="cb313-5"><a href="populations-and-samples.html#cb313-5"></a>                              <span class="dt">data.column.name =</span> height,</span>
+<span id="cb313-6"><a href="populations-and-samples.html#cb313-6"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb313-7"><a href="populations-and-samples.html#cb313-7"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p>The many_sample data set contains the results for all of the random samples we specified. Use head() to see the data. Each row corresponds to a random sample.
+In that row the sample number, sample size, population mean, and sample mean are provided (along with a few other numbers.</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="populations-and-samples.html#cb314-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
+<pre><code>##   sample.number  n pop.M sample.M pop.var sample.var.n
+## 1             1 10 172.5    175.5   157.5       189.85
+## 2             2 10 172.5    169.6   157.5       196.64
+## 3             3 10 172.5    161.7   157.5        92.61
+## 4             4 10 172.5    178.4   157.5       102.04
+## 5             5 10 172.5    174.7   157.5       350.81
+## 6             6 10 172.5    166.0   157.5       236.00
+##   sample.var.n_1
+## 1          210.9
+## 2          218.5
+## 3          102.9
+## 4          113.4
+## 5          389.8
+## 6          262.2</code></pre>
+<p>We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="populations-and-samples.html#cb316-1"></a><span class="kw">glimpse</span>(many_samples)</span></code></pre></div>
+<pre><code>## Rows: 1,000
+## Columns: 7
+## $ sample.number  &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,…
+## $ n              &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10…
+## $ pop.M          &lt;dbl&gt; 172.5, 172.5, 172.5, 172.5, 172.5,…
+## $ sample.M       &lt;dbl&gt; 175.5, 169.6, 161.7, 178.4, 174.7,…
+## $ pop.var        &lt;dbl&gt; 157.5, 157.5, 157.5, 157.5, 157.5,…
+## $ sample.var.n   &lt;dbl&gt; 189.85, 196.64, 92.61, 102.04, 350…
+## $ sample.var.n_1 &lt;dbl&gt; 210.94, 218.49, 102.90, 113.38, 38…</code></pre>
+<p>Sampling variability</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="populations-and-samples.html#cb318-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> many_samples,</span>
+<span id="cb318-2"><a href="populations-and-samples.html#cb318-2"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> sample.M)) <span class="op">+</span></span>
+<span id="cb318-3"><a href="populations-and-samples.html#cb318-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
+## `binwidth`.</code></pre>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
+<p>Although any</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="populations-and-samples.html#cb320-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb320-2"><a href="populations-and-samples.html#cb320-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_means =</span> <span class="kw">mean</span>(sample.M))</span></code></pre></div>
+<pre><code>##   mean_of_means
+## 1         172.6</code></pre>
 
 
 </div>

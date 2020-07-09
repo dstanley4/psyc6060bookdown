@@ -106,4 +106,69 @@ $$
 $$
 
 
+## Population vs samples
+
+As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A populations is the complete set of people/animals about which we want to make conclusions. Samples are a subset of the total number of people/animals in the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample. 
+
+Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conlusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific indiviudals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.
+
+Statistic tests are means of helping researchers use sample data to make conclusions at the population level. When we calculate numbers based on all of the people/animals in the population we refer to those numbers as **parameters**. We calculate numbers based on the people/animals in the sample we refer to those numbers as **statistics**. In general, statistics are used to estimate parameters. 
+
+## Describing populations
+
+
+```{r}
+library(tidyverse)
+library(learnSampling)
+
+pop_data <- get_height_population() 
+```
+
+
+```{r}
+pop_data %>%
+  summarise(pop_mean = mean(height)) %>%
+  as.data.frame()
+```
+
+
+
+```{r}
+
+# set.seed ensures you get the same random samples
+set.seed(1) 
+
+many_samples <- get_M_samples(pop.data = pop_data, 
+                              data.column.name = height,
+                              n = 10,
+                              number.of.samples = 1000)
+```
+
+The many_sample data set contains the results for all of the random samples we specified. Use head() to see the data. Each row corresponds to a random sample.
+In that row the sample number, sample size, population mean, and sample mean are provided (along with a few other numbers.
+
+```{r}
+head(many_samples)
+```
+
+We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.
+
+```{r}
+glimpse(many_samples)
+```
+
+Sampling variability
+```{r}
+ggplot(data = many_samples,
+       mapping = aes(x = sample.M)) +
+  geom_histogram()
+
+```
+
+
+Although any
+```{r}
+many_samples %>%
+  summarise(mean_of_means = mean(sample.M))
+```
 
