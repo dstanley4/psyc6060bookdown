@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-09" />
+<meta name="date" content="2020-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,10 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="populations-and-samples.html"><a href="populations-and-samples.html"><i class="fa fa-check"></i><b>4</b> Populations and samples</a><ul>
 <li class="chapter" data-level="4.1" data-path="populations-and-samples.html"><a href="populations-and-samples.html#required-packages-1"><i class="fa fa-check"></i><b>4.1</b> Required Packages</a></li>
-<li class="chapter" data-level="4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#objective-2"><i class="fa fa-check"></i><b>4.2</b> Objective</a></li>
-<li class="chapter" data-level="4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#notation"><i class="fa fa-check"></i><b>4.3</b> Notation</a></li>
-<li class="chapter" data-level="4.4" data-path="populations-and-samples.html"><a href="populations-and-samples.html#population-vs-samples"><i class="fa fa-check"></i><b>4.4</b> Population vs samples</a></li>
-<li class="chapter" data-level="4.5" data-path="populations-and-samples.html"><a href="populations-and-samples.html#describing-populations"><i class="fa fa-check"></i><b>4.5</b> Describing populations</a></li>
+<li class="chapter" data-level="4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#notation"><i class="fa fa-check"></i><b>4.2</b> Notation</a></li>
+<li class="chapter" data-level="4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#population-vs-samples"><i class="fa fa-check"></i><b>4.3</b> Population vs samples</a></li>
+<li class="chapter" data-level="4.4" data-path="populations-and-samples.html"><a href="populations-and-samples.html#describing-populations"><i class="fa fa-check"></i><b>4.4</b> Describing populations</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="populations-and-samples.html"><a href="populations-and-samples.html#mean"><i class="fa fa-check"></i><b>4.4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#variance"><i class="fa fa-check"></i><b>4.4.2</b> Variance</a></li>
+<li class="chapter" data-level="4.4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#standard-deviation"><i class="fa fa-check"></i><b>4.4.3</b> Standard Deviation</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="more-to-say.html"><a href="more-to-say.html"><i class="fa fa-check"></i><b>A</b> More to Say</a></li>
@@ -297,28 +300,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>The following data files are used in this chapter:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Required Data</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>data_ex_between.csv</td>
-</tr>
-</tbody>
-</table>
-<p>The files are available at: <a href="https://github.com/dstanley4/psyc6060bookdown" class="uri">https://github.com/dstanley4/psyc6060bookdown</a></p>
-</div>
-<div id="objective-2" class="section level2">
-<h2><span class="header-section-number">4.2</span> Objective</h2>
 </div>
 <div id="notation" class="section level2">
-<h2><span class="header-section-number">4.3</span> Notation</h2>
-<p>In this chapter we will use summation notation in the formulas describing population. If you are not familiar with summation notation, we present a brief overview here.</p>
-<p>Consider a scenario where we have the IQ data for three participants We use the N symbol to represent sample size. Because we have three participants N = 3. The data for these participants is illustrated in Figure <a href="populations-and-samples.html#fig:notationdata">4.1</a>.</p>
+<h2><span class="header-section-number">4.2</span> Notation</h2>
+<p>In this chapter we will use summation notation. If you are not familiar with summation notation, we present a brief overview here.</p>
+<p>Consider a scenario where we have the IQ data for three participants We use the N symbol to represent the number of participants. Because we have three participants N = 3. The data for these participants is illustrated in Figure <a href="populations-and-samples.html#fig:notationdata">4.1</a>.</p>
 <p>Notice how each person in the data set can be represent by the variable X. The first person by X_1, the second by X2, and the third by X_3. Often we refer to individuals in a data set by using the variable X accompanied by a subscript (e.g., 1, 2, 3, etc.).</p>
 <div class="figure"><span id="fig:notationdata"></span>
 <img src="ch_populations/images/screenshot_data_n6.png" alt="Data for understanding summation notation" width="55%" />
@@ -326,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 FIGURE 4.1: Data for understanding summation notation
 </p>
 </div>
-<p>Referring to participants using the variable X and subscript is valuable because it can be used in conjunction with the sigma (i.e., <span class="math inline">\(\Sigma\)</span>) symbol for summation. Consider the example below in which we use the summation notation to indicate that we want to add all the X values (representing IQ) for the participants. We use a lower case i to represent all possible subscript values. The notation below the <span class="math inline">\(\Sigma\)</span>, i = 1, indicates that we should start with participant 1. The notation below the <span class="math inline">\(\Sigma\)</span>, N, indicates that we should iterate i up to the value indicated by N; in this case 3, because there are three participants.</p>
+<p>Referring to participants using the variable X and subscript is valuable because it can be used in conjunction with the sigma (i.e., <span class="math inline">\(\Sigma\)</span>) symbol for summation. Consider the example below in which we use the summation notation to indicate that we want to add all the X values (representing IQ) for the participants. We use a lower case <span class="math inline">\(i\)</span> to represent all possible subscript values. The notation below the <span class="math inline">\(\Sigma\)</span>, <span class="math inline">\(i\)</span> = 1, indicates that we should start with participant 1. The notation below the <span class="math inline">\(\Sigma\)</span>, N, indicates that we should iterate <span class="math inline">\(i\)</span> up to the value indicated by N; in this case 3, because there are three participants.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sum_{i=1}^{N} X_i &amp;=  X_1 + X_2 + X_3\\ 
@@ -334,7 +320,7 @@ FIGURE 4.1: Data for understanding summation notation
 &amp;= 330
 \end{aligned} 
 \]</span></p>
-<p>Sometime to simplify the notation, the numbers above and below the <span class="math inline">\(Sigma\)</span> symbol are omitted. Likewise, the i subscript is omitted. There is a general understanding that we these components of the notation are omitted that the version of the notation above is implied.</p>
+<p>Sometimes, to simplify the notation, the numbers above and below the <span class="math inline">\(\Sigma\)</span> symbol are omitted. Likewise, the <span class="math inline">\(i\)</span> subscript is omitted. There is a general understanding that these components of the notation are omitted that the version of the notation above is implied.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sum{X} &amp;= X_1 + X_2 + X_3\\ 
@@ -384,71 +370,162 @@ FIGURE 4.1: Data for understanding summation notation
 \]</span></p>
 </div>
 <div id="population-vs-samples" class="section level2">
-<h2><span class="header-section-number">4.4</span> Population vs samples</h2>
+<h2><span class="header-section-number">4.3</span> Population vs samples</h2>
 <p>As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A populations is the complete set of people/animals about which we want to make conclusions. Samples are a subset of the total number of people/animals in the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample.</p>
-<p>Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conlusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific indiviudals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.</p>
+<p>Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.</p>
 <p>Statistic tests are means of helping researchers use sample data to make conclusions at the population level. When we calculate numbers based on all of the people/animals in the population we refer to those numbers as <strong>parameters</strong>. We calculate numbers based on the people/animals in the sample we refer to those numbers as <strong>statistics</strong>. In general, statistics are used to estimate parameters.</p>
 </div>
 <div id="describing-populations" class="section level2">
-<h2><span class="header-section-number">4.5</span> Describing populations</h2>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="populations-and-samples.html#cb310-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb310-2"><a href="populations-and-samples.html#cb310-2"></a><span class="kw">library</span>(learnSampling)</span>
-<span id="cb310-3"><a href="populations-and-samples.html#cb310-3"></a></span>
-<span id="cb310-4"><a href="populations-and-samples.html#cb310-4"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="populations-and-samples.html#cb311-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb311-2"><a href="populations-and-samples.html#cb311-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb311-3"><a href="populations-and-samples.html#cb311-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   pop_mean
-## 1    172.5</code></pre>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="populations-and-samples.html#cb313-1"></a><span class="co"># set.seed ensures you get the same random samples</span></span>
-<span id="cb313-2"><a href="populations-and-samples.html#cb313-2"></a><span class="kw">set.seed</span>(<span class="dv">1</span>) </span>
-<span id="cb313-3"><a href="populations-and-samples.html#cb313-3"></a></span>
-<span id="cb313-4"><a href="populations-and-samples.html#cb313-4"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
-<span id="cb313-5"><a href="populations-and-samples.html#cb313-5"></a>                              <span class="dt">data.column.name =</span> height,</span>
-<span id="cb313-6"><a href="populations-and-samples.html#cb313-6"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
-<span id="cb313-7"><a href="populations-and-samples.html#cb313-7"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">1000</span>)</span></code></pre></div>
-<p>The many_sample data set contains the results for all of the random samples we specified. Use head() to see the data. Each row corresponds to a random sample.
-In that row the sample number, sample size, population mean, and sample mean are provided (along with a few other numbers.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="populations-and-samples.html#cb314-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
-<pre><code>##   sample.number  n pop.M sample.M pop.var sample.var.n
-## 1             1 10 172.5    175.5   157.5       189.85
-## 2             2 10 172.5    169.6   157.5       196.64
-## 3             3 10 172.5    161.7   157.5        92.61
-## 4             4 10 172.5    178.4   157.5       102.04
-## 5             5 10 172.5    174.7   157.5       350.81
-## 6             6 10 172.5    166.0   157.5       236.00
-##   sample.var.n_1
-## 1          210.9
-## 2          218.5
-## 3          102.9
-## 4          113.4
-## 5          389.8
-## 6          262.2</code></pre>
-<p>We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="populations-and-samples.html#cb316-1"></a><span class="kw">glimpse</span>(many_samples)</span></code></pre></div>
-<pre><code>## Rows: 1,000
-## Columns: 7
-## $ sample.number  &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,…
-## $ n              &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10…
-## $ pop.M          &lt;dbl&gt; 172.5, 172.5, 172.5, 172.5, 172.5,…
-## $ sample.M       &lt;dbl&gt; 175.5, 169.6, 161.7, 178.4, 174.7,…
-## $ pop.var        &lt;dbl&gt; 157.5, 157.5, 157.5, 157.5, 157.5,…
-## $ sample.var.n   &lt;dbl&gt; 189.85, 196.64, 92.61, 102.04, 350…
-## $ sample.var.n_1 &lt;dbl&gt; 210.94, 218.49, 102.90, 113.38, 38…</code></pre>
-<p>Sampling variability</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="populations-and-samples.html#cb318-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> many_samples,</span>
-<span id="cb318-2"><a href="populations-and-samples.html#cb318-2"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> sample.M)) <span class="op">+</span></span>
-<span id="cb318-3"><a href="populations-and-samples.html#cb318-3"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with
-## `binwidth`.</code></pre>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
-<p>Although any</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="populations-and-samples.html#cb320-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb320-2"><a href="populations-and-samples.html#cb320-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_means =</span> <span class="kw">mean</span>(sample.M))</span></code></pre></div>
-<pre><code>##   mean_of_means
-## 1         172.6</code></pre>
+<h2><span class="header-section-number">4.4</span> Describing populations</h2>
+<p>Populations are typically quite large, but, for the purpose or reviewing how we typically describe populations we focus on a population of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
+<div id="mean" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Mean</h3>
+<p>It can be helpful to create a model of our data such that each observation represents a deviation from a model describing the entire set of observations. That is we can think of our three cookies using the approach:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+X_i &amp;= model + error_i \\
+\end{aligned} 
+\]</span></p>
+<p>We can create a model for our data using many different approaches. A simple model for our data is the mean:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\bar{X} &amp;= \frac{\sum{X}}{N} \\
+&amp;= \frac{X_1 + X_2 + X_3}{3}\\ 
+&amp;= \frac{8 + 10 + 12}{3}\\
+&amp;= \frac{30}{3}\\
+&amp;= 10\\
+\end{aligned} 
+\]</span></p>
+<p>Then we can think of this “mean cookie” our model as:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+X_i &amp;= \bar{X} + error_i \\
+\end{aligned} 
+\]</span></p>
+<p>The model, above is just concise way of describing the following:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+X_1 &amp;= \bar{X} + error_1 \\
+X_2 &amp;= \bar{X} + error_2 \\
+X_3 &amp;= \bar{X} + error_3 \\
+\end{aligned} 
+\]</span></p>
+<p>That is the weights of the three cookies (<span class="math inline">\(X_1 = 8\)</span>, <span class="math inline">\(X_2 = 10\)</span>, and <span class="math inline">\(X_3 = 12\)</span>) can be conceptualized as:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+X_1 &amp;= 10 + (-2) \\
+X_2 &amp;= 10 + 0 \\
+X_3 &amp;= 10 + 2 \\
+\end{aligned} 
+\]</span></p>
+<p>The mean of the population, <span class="math inline">\(\bar{X} = 10\)</span>, is a parameter that serves as model for the data. When we calculate a model for our data, it’s helpful to have an index of how well the model fits the data.</p>
+</div>
+<div id="variance" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Variance</h3>
+<p>Variance is a simple way of calculating how well the model fits our data. We can think of there being a conceptual “mean cookie” that describes our data. Then we want to see the extent to which the data differs from our “mean cookie” model.</p>
+<div class="figure"><span id="fig:meancookie"></span>
+<img src="ch_populations/images/cookie.png" alt="Variance as a fit index for the mean" width="60%" />
+<p class="caption">
+FIGURE 4.2: Variance as a fit index for the mean
+</p>
+</div>
+<p>Variance is a simple approach to assessing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure <a href="populations-and-samples.html#fig:meancookie">4.2</a>. The deviation between each data point and the model is referred to as error.</p>
+<p>Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., <span class="math inline">\((8 - 10)^2 = 4\)</span>). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., <span class="math inline">\((8 - 10) = -2\)</span>) or take the absolute difference (e.g., <span class="math inline">\(|8 - 10|= 2\)</span>)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that minimize error. When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, complex statistical reasons, we use squared differs to index error rather than other approaches.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Cookie Mass</th>
+<th align="center">Model</th>
+<th align="center">Error = Squared Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(X_1 = 8\)</span></td>
+<td align="center"><span class="math inline">\(\bar{X} = 10\)</span></td>
+<td align="center"><span class="math inline">\((X_1 - \bar{X})^2 =(8 - 10)^2= 4\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(X_2 = 10\)</span></td>
+<td align="center"><span class="math inline">\(\bar{X} = 10\)</span></td>
+<td align="center"><span class="math inline">\((X_2 - \bar{X})^2 =(10 - 10)^2= 0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(X_3 = 12\)</span></td>
+<td align="center"><span class="math inline">\(\bar{X} = 10\)</span></td>
+<td align="center"><span class="math inline">\((X_3 - \bar{X})^2 =(12 - 10)^2= 4\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>You can see in the table above that we can calculate the squared difference for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, <span class="math inline">\((4 + 0 + 4)/3 = 2.67\)</span>, tell us the average of the squared deviations from the model is 2.67 grams<span class="math inline">\(^2\)</span>. We refer to the this value as variance.</p>
+<p>Recall the formula for calculating an average:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\bar{X} &amp;= \frac{\sum{X}}{N} \\
+\end{aligned} 
+\]</span></p>
+<p>You can see from the formula for variance below that variance is just an average. The average of the squared errors.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+var(X) &amp;= \frac{\sum{(X - \bar{X})^2}}{N}\\
+&amp;= \frac{(X_1-\bar{X})^2 + (X_2-\bar{X})^2 + (X_3-\bar{X})^2}{N}  \\ 
+&amp;= \frac{(8-10)^2 + (10-10)^2 + (12-10)^2}{3}\\
+&amp;= \frac{(-2)^2 + (0)^2 (2)^2}{3} \\
+&amp;= \frac{4 + 0 + 4}{3} \\
+&amp;= \frac{8}{3} \\
+&amp;= 2.67 grams^2 \\
+\end{aligned} 
+\]</span></p>
+<p><strong>Variance by any other name</strong>. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other name. Some of those names are listed below.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Variance synonyms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Mean Squared Error</td>
+</tr>
+<tr class="even">
+<td align="center">MSE</td>
+</tr>
+<tr class="odd">
+<td align="center">Pooled variance</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(s_{pooled}^2\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(s_{p}^2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(s_{residual}^2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="standard-deviation" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Standard Deviation</h3>
+<p>Variance is easy to interpret as a the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams<span class="math inline">\(2\)</span>). Consequently, some people prefer to take the square root of this value and call it standard deviation.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+sd(X) &amp;= \sqrt{var(X)} \\
+&amp;= \sqrt{2.67} \\
+&amp;= 1.63 grams\\
+\end{aligned} 
+\]</span></p>
+<p>Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. Standard deviation can be thought of as the sum of the absolute deviations from the mean divided by the square root of the number of observations. Standard deviation is not an average - because you are dividing by the square root of N instead of just N. As a result, it’s much harder to describe what standard deviation means.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+sd(X) &amp;= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
+ &amp;= \frac{\sum{|X - \bar{X}|}}{\sqrt{N}}\\
+\end{aligned} 
+\]</span></p>
+<p>We encourage you to think in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straight forward. Additionally, variance if the foundational to the language used to describe regression and analysis of variance.</p>
 
 
+</div>
 </div>
 </div>
 

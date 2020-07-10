@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-09" />
+<meta name="date" content="2020-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,10 +252,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="populations-and-samples.html"><a href="populations-and-samples.html"><i class="fa fa-check"></i><b>4</b> Populations and samples</a><ul>
 <li class="chapter" data-level="4.1" data-path="populations-and-samples.html"><a href="populations-and-samples.html#required-packages-1"><i class="fa fa-check"></i><b>4.1</b> Required Packages</a></li>
-<li class="chapter" data-level="4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#objective-2"><i class="fa fa-check"></i><b>4.2</b> Objective</a></li>
-<li class="chapter" data-level="4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#notation"><i class="fa fa-check"></i><b>4.3</b> Notation</a></li>
-<li class="chapter" data-level="4.4" data-path="populations-and-samples.html"><a href="populations-and-samples.html#population-vs-samples"><i class="fa fa-check"></i><b>4.4</b> Population vs samples</a></li>
-<li class="chapter" data-level="4.5" data-path="populations-and-samples.html"><a href="populations-and-samples.html#describing-populations"><i class="fa fa-check"></i><b>4.5</b> Describing populations</a></li>
+<li class="chapter" data-level="4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#notation"><i class="fa fa-check"></i><b>4.2</b> Notation</a></li>
+<li class="chapter" data-level="4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#population-vs-samples"><i class="fa fa-check"></i><b>4.3</b> Population vs samples</a></li>
+<li class="chapter" data-level="4.4" data-path="populations-and-samples.html"><a href="populations-and-samples.html#describing-populations"><i class="fa fa-check"></i><b>4.4</b> Describing populations</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="populations-and-samples.html"><a href="populations-and-samples.html#mean"><i class="fa fa-check"></i><b>4.4.1</b> Mean</a></li>
+<li class="chapter" data-level="4.4.2" data-path="populations-and-samples.html"><a href="populations-and-samples.html#variance"><i class="fa fa-check"></i><b>4.4.2</b> Variance</a></li>
+<li class="chapter" data-level="4.4.3" data-path="populations-and-samples.html"><a href="populations-and-samples.html#standard-deviation"><i class="fa fa-check"></i><b>4.4.3</b> Standard Deviation</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="more-to-say.html"><a href="more-to-say.html"><i class="fa fa-check"></i><b>A</b> More to Say</a></li>
@@ -1978,13 +1981,14 @@ FIGURE 3.5: Word document created by apa.cor.table
 <span id="cb304-27"><a href="making-your-data-ready-for-analysis.html#cb304-27"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> stat,</span>
 <span id="cb304-28"><a href="making-your-data-ready-for-analysis.html#cb304-28"></a>              <span class="dt">values_from =</span> value)</span>
 <span id="cb304-29"><a href="making-your-data-ready-for-analysis.html#cb304-29"></a></span>
-<span id="cb304-30"><a href="making-your-data-ready-for-analysis.html#cb304-30"></a>summary_table_rounded &lt;-<span class="st"> </span>summary_table <span class="op">%&gt;%</span></span>
-<span id="cb304-31"><a href="making-your-data-ready-for-analysis.html#cb304-31"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.numeric),</span>
-<span id="cb304-32"><a href="making-your-data-ready-for-analysis.html#cb304-32"></a>                <span class="dt">.fns=</span> round,</span>
-<span id="cb304-33"><a href="making-your-data-ready-for-analysis.html#cb304-33"></a>                <span class="dt">digits =</span> <span class="dv">3</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb304-34"><a href="making-your-data-ready-for-analysis.html#cb304-34"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span>
-<span id="cb304-35"><a href="making-your-data-ready-for-analysis.html#cb304-35"></a></span>
-<span id="cb304-36"><a href="making-your-data-ready-for-analysis.html#cb304-36"></a><span class="kw">print</span>(summary_table_rounded)</span></code></pre></div>
+<span id="cb304-30"><a href="making-your-data-ready-for-analysis.html#cb304-30"></a><span class="co"># round to 3 decimals</span></span>
+<span id="cb304-31"><a href="making-your-data-ready-for-analysis.html#cb304-31"></a>summary_table_rounded &lt;-<span class="st"> </span>summary_table <span class="op">%&gt;%</span></span>
+<span id="cb304-32"><a href="making-your-data-ready-for-analysis.html#cb304-32"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="kw">across</span>(<span class="dt">.cols =</span> <span class="kw">where</span>(is.numeric),</span>
+<span id="cb304-33"><a href="making-your-data-ready-for-analysis.html#cb304-33"></a>                <span class="dt">.fns=</span> round,</span>
+<span id="cb304-34"><a href="making-your-data-ready-for-analysis.html#cb304-34"></a>                <span class="dt">digits =</span> <span class="dv">3</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb304-35"><a href="making-your-data-ready-for-analysis.html#cb304-35"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span>
+<span id="cb304-36"><a href="making-your-data-ready-for-analysis.html#cb304-36"></a></span>
+<span id="cb304-37"><a href="making-your-data-ready-for-analysis.html#cb304-37"></a><span class="kw">print</span>(summary_table_rounded)</span></code></pre></div>
 <pre><code>##         var   mean CI95_LL CI95_UL    sd  min   max   n
 ## 1       age 20.522  20.288  20.756 2.048 17.0 24.00 297
 ## 2 esteem_t1  3.403   3.366   3.440 0.324  2.5  4.25 300
