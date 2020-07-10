@@ -35,7 +35,7 @@ Notice how each person in the data set can be represent by the variable X. The f
 knitr::include_graphics("ch_populations/images/screenshot_data_n6.png")
 ```
 
-Referring to participants using the variable X and subscript is valuable because it can be used in conjunction with the sigma (i.e., $\Sigma$) symbol for summation. Consider the example below in which we use the summation notation to indicate that we want to add all the X values (representing IQ) for the participants. We use a lower case i to represent all possible subscript values. The notation below the $\Sigma$, i = 1, indicates that we should start with participant 1. The notation below the $\Sigma$,  N, indicates that we should iterate i up to the value indicated by N; in this case 3, because there are three participants.
+Referring to participants using the variable X and subscript is valuable because it can be used in conjunction with the sigma (i.e., $\Sigma$) symbol for summation. Consider the example below in which we use the summation notation to indicate that we want to add all the X values (representing IQ) for the participants. We use a lower case $i$ to represent all possible subscript values. The notation below the $\Sigma$, $i$ = 1, indicates that we should start with participant 1. The notation below the $\Sigma$,  N, indicates that we should iterate $i$ up to the value indicated by N; in this case 3, because there are three participants.
 
 $$
 \begin{aligned} 
@@ -45,7 +45,7 @@ $$
 \end{aligned} 
 $$
 
-Sometime to simplify the notation, the numbers above and below the $Sigma$ symbol are omitted. Likewise, the i subscript is omitted. There is a general understanding that we these components of the notation are omitted that the version of the notation above is implied.
+Sometimes, to simplify the notation, the numbers above and below the $\Sigma$ symbol are omitted. Likewise, the $i$ subscript is omitted. There is a general understanding that these components of the notation are omitted that the version of the notation above is implied.
 
 $$
 \begin{aligned} 
@@ -116,59 +116,122 @@ Statistic tests are means of helping researchers use sample data to make conclus
 
 ## Describing populations
 
+Populations are typically quite large, but, for the purpose or reviewing how we typically describe populations we focus on a population of just three chocolate chip cookies. We refer to the three cookies as $X_1$, $X_2$, and $X_3$. The cookies have the weights of 8, 10, and 12 grams, respectively. 
 
-```{r}
-library(tidyverse)
-library(learnSampling)
+### Mean
 
-pop_data <- get_height_population() 
+It can be helpful to create a model of our data such that each oberservation represents a deviation from a model describing the entire set of observiations. That is we can think of our three cookies using the approach:
+
+$$
+\begin{aligned} 
+X_i &= model + error_i \\
+\end{aligned} 
+$$
+
+
+
+We can create a model for our data using many different approaches. A simple model for our data is the mean:
+
+$$
+\begin{aligned} 
+\bar{X} &= \frac{\sum{X}}{N} \\
+&= \frac{X_1 + X_2 + X_3}{3}\\ 
+&= \frac{8 + 10 + 12}{3}\\
+&= \frac{30}{3}\\
+&= 10\\
+\end{aligned} 
+$$
+
+
+Then we can think of this "mean cookie" our model as:
+
+$$
+\begin{aligned} 
+X_i &= \bar{X} + error_i \\
+\end{aligned} 
+$$
+
+The model, above is just concise way of describing the following:
+
+$$
+\begin{aligned} 
+X_1 &= \bar{X} + error_1 \\
+X_2 &= \bar{X} + error_2 \\
+X_3 &= \bar{X} + error_3 \\
+\end{aligned} 
+$$
+
+That is the weights of the three cookies ($X_1 = 8$, $X_2 = 10$, and $X_3 = 12$) can be conceptualized as:
+
+
+$$
+\begin{aligned} 
+X_1 &= 10 + (-2) \\
+X_2 &= 10 + 0 \\
+X_3 &= 10 + 2 \\
+\end{aligned} 
+$$
+
+
+The mean of the population, $\bar{X} = 10$, is a parameter that serves as model for the data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. 
+
+### Variance
+
+
+Variance is a simple way of calculating how well the model fits our data. We can think of there being a conceptual "mean cookie" that describes our data. Then we want to see the extent to which the data differs from our "mean cookie" model.
+
+
+```{r meancookie, echo=FALSE, out.width="60%", fig.cap="Variance as a fit index for the mean"}
+knitr::include_graphics("ch_populations/images/cookie.png")
 ```
 
 
-```{r}
-pop_data %>%
-  summarise(pop_mean = mean(height)) %>%
-  as.data.frame()
-```
+
+Variance is a simple approach to assesing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error. 
+
+Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that minimize error. When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, complex statisical reasons, we use squared differs to index error rather than other approaches.
 
 
 
-```{r}
+| Cookie Mass |  Model | Error = Squared Difference | 
+| :-:         |  :-:   |  :-:             |
+| $X_1 = 8$  |  $\bar{X} = 10$ |  $(X_1 - \bar{X})^2 =(8 - 10)^2= 4$ |
+| $X_2 = 10$  |  $\bar{X} = 10$ |  $(X_2 - \bar{X})^2 =(10 - 10)^2= 0$ |
+| $X_3 = 12$  |  $\bar{X} = 10$ |  $(X_3 - \bar{X})^2 =(12 - 10)^2= 4$ |
 
-# set.seed ensures you get the same random samples
-set.seed(1) 
+You can see in the table above that we can calculate the squared difference for data points 1 through 3. The squared differences are 4, 0, and 4 respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
 
-many_samples <- get_M_samples(pop.data = pop_data, 
-                              data.column.name = height,
-                              n = 10,
-                              number.of.samples = 1000)
-```
+Recall the formula for calculating an average:
 
-The many_sample data set contains the results for all of the random samples we specified. Use head() to see the data. Each row corresponds to a random sample.
-In that row the sample number, sample size, population mean, and sample mean are provided (along with a few other numbers.
+$$
+\begin{aligned} 
+\bar{X} &= \frac{\sum{X}}{N} \\
+\end{aligned} 
+$$
 
-```{r}
-head(many_samples)
-```
+You can see from the formuila for variance below that variance is just an average. The average of the squared errors.
 
-We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.
+$$
+\begin{aligned} 
+var(X) &= \frac{\sum{(X - \bar{X})^2}}{N}\\
+&= \frac{(X_1-\bar{X})^2 + (X_2-\bar{X})^2 + (X_3-\bar{X})^2}{N}  \\ 
+&= \frac{(8-10)^2 + (10-10)^2 + (12-10)^2}{3}\\
+&= \frac{(-2)^2 + (0)^2 (2)^2}{3} \\
+&= \frac{4 + 0 + 4}{3} \\
+&= \frac{8}{3} \\
+&= 2.67 grams^2
+\end{aligned} 
+$$
 
-```{r}
-glimpse(many_samples)
-```
+$$
+\begin{aligned} 
+sd(X) &= \sqrt{var(X)} \\
+&= \sqrt{var(X)} \\
+\end{aligned} 
+$$
+### Standard Deviation
 
-Sampling variability
-```{r}
-ggplot(data = many_samples,
-       mapping = aes(x = sample.M)) +
-  geom_histogram()
-
-```
+Variance is easy to interpret as a the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams$2$). Consequently, some people prefer to take the square root of this value and call it standard deviation.
 
 
-Although any
-```{r}
-many_samples %>%
-  summarise(mean_of_means = mean(sample.M))
-```
-
+'

@@ -1575,6 +1575,7 @@ summary_table <- long_summary %>%
   pivot_wider(names_from = stat,
               values_from = value)
 
+# round to 3 decimals
 summary_table_rounded <- summary_table %>%
   mutate(across(.cols = where(is.numeric),
                 .fns= round,
