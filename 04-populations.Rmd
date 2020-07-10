@@ -12,22 +12,12 @@ The following packages must be installed before starting this chapter.
 |-------------------|
 |tidyverse          |
 
-The following data files are used in this chapter:
-
-| Required Data |
-|-------------------|
-|data_ex_between.csv |
-
-The files are available at: https://github.com/dstanley4/psyc6060bookdown
-
-
-## Objective
 
 ## Notation
 
-In this chapter we will use summation notation in the formulas describing population. If you are not familiar with summation notation, we present a brief overview here.
+In this chapter we will use summation notation. If you are not familiar with summation notation, we present a brief overview here.
 
-Consider a scenario where we have the IQ data for three participants We use the N symbol to represent sample size. Because we have three participants N = 3. The data for these participants is illustrated in Figure \@ref(fig:notationdata).
+Consider a scenario where we have the IQ data for three participants We use the N symbol to represent the number of participants. Because we have three participants N = 3. The data for these participants is illustrated in Figure \@ref(fig:notationdata).
 
 Notice how each person in the data set can be represent by the variable X. The first person by X_1, the second by X2, and the third by X_3. Often we refer to individuals in a data set by using the variable X accompanied by a subscript (e.g., 1, 2, 3, etc.).
 
@@ -110,7 +100,7 @@ $$
 
 As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A populations is the complete set of people/animals about which we want to make conclusions. Samples are a subset of the total number of people/animals in the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample. 
 
-Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conlusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific indiviudals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.
+Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a team of researchers creates a vaccine that they hope creates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal with if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.
 
 Statistic tests are means of helping researchers use sample data to make conclusions at the population level. When we calculate numbers based on all of the people/animals in the population we refer to those numbers as **parameters**. We calculate numbers based on the people/animals in the sample we refer to those numbers as **statistics**. In general, statistics are used to estimate parameters. 
 
@@ -120,7 +110,7 @@ Populations are typically quite large, but, for the purpose or reviewing how we 
 
 ### Mean
 
-It can be helpful to create a model of our data such that each oberservation represents a deviation from a model describing the entire set of observiations. That is we can think of our three cookies using the approach:
+It can be helpful to create a model of our data such that each observation represents a deviation from a model describing the entire set of observations. That is we can think of our three cookies using the approach:
 
 $$
 \begin{aligned} 
@@ -187,9 +177,9 @@ knitr::include_graphics("ch_populations/images/cookie.png")
 
 
 
-Variance is a simple approach to assesing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error. 
+Variance is a simple approach to assessing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error. 
 
-Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that minimize error. When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, complex statisical reasons, we use squared differs to index error rather than other approaches.
+Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that minimize error. When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, complex statistical reasons, we use squared differs to index error rather than other approaches.
 
 
 
@@ -199,7 +189,7 @@ Error, the extent to the data deviates from the model, is calculated using squar
 | $X_2 = 10$  |  $\bar{X} = 10$ |  $(X_2 - \bar{X})^2 =(10 - 10)^2= 0$ |
 | $X_3 = 12$  |  $\bar{X} = 10$ |  $(X_3 - \bar{X})^2 =(12 - 10)^2= 4$ |
 
-You can see in the table above that we can calculate the squared difference for data points 1 through 3. The squared differences are 4, 0, and 4 respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
+You can see in the table above that we can calculate the squared difference for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
 
 Recall the formula for calculating an average:
 
@@ -209,7 +199,7 @@ $$
 \end{aligned} 
 $$
 
-You can see from the formuila for variance below that variance is just an average. The average of the squared errors.
+You can see from the formula for variance below that variance is just an average. The average of the squared errors.
 
 $$
 \begin{aligned} 
