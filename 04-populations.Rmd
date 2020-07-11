@@ -12,7 +12,7 @@ Consider a scenario where we have the IQ data for three participants We use the 
 
 Notice how each person in the data set can be represent by the variable X. The first person by X_1, the second by X2, and the third by X_3. Often we refer to individuals in a data set by using the variable X accompanied by a subscript (e.g., 1, 2, 3, etc.).
 
-```{r notationdata, echo = FALSE, out.width="55%", fig.cap = "Data for understanding summation notation"}
+```{r notationdata, echo = FALSE, out.width="35%", fig.cap = "Data for understanding summation notation"}
 knitr::include_graphics("ch_populations/images/screenshot_data_n6.png")
 ```
 
@@ -700,7 +700,7 @@ $$
 $$
 
 
-### $d$-value units
+### Cohen's $d$ units
 
 Because the metric for the standardized mean difference is the standard deviation  it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report difference between populations in both the original units (cm) and standardized umnits ($\delta$). Figure \@ref(fig:dex1) illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see as the difference between the population means increases in raw units - it does the same in $\delta$ (i.e., Cohen's $d$) units. In raw units (i.e., cm), the difference the between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50  standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen's d-values are 0.50, 1.0, and 2.0 for scenarios A through C.
 
@@ -708,7 +708,7 @@ Because the metric for the standardized mean difference is the standard deviatio
 knitr::include_graphics("ch_populations/images/dvalue_ex1.png")
 ```
 
-### $d$-value advantages
+### Cohen's $d$ advantages
 
 The standardized mean difference takes into account the variability of heights around each population mean. This means that the same difference between two population means can produce different standardized mean difference values if the population standard deviation varies. In the scenarios depicted in Figure \@ref(fig:dex2) the population standard deviation becomes increasing small - resulting in larger standaredized mean difference values (i.e., $\delta$). This larger $\delta$ value corresponds to progressively less overlap between the two populations. Thus, taking into account the standard deviation of the populations can be viewed as a strength of using the standardized mean difference.
 
@@ -716,7 +716,7 @@ The standardized mean difference takes into account the variability of heights a
 knitr::include_graphics("ch_populations/images/dvalue_ex2.png")
 ```
 
-### $d$-value caveats
+### Cohen's $d$ caveats
 
 It is important to also look at the original units when intepreting results - not just the standardized mean difference. Exmaine the scenarios in Figure \@ref(fig:dex3). Notice how the $\delta$ value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen's $d$) provide important interpretational information - dont' rely on just one of them.
 
@@ -726,10 +726,15 @@ knitr::include_graphics("ch_populations/images/dvalue_ex3.png")
 
 ### Benchmarks
 
+[@cohen1988] suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively. These effect sizes are illustrated in Figure \@ref(fig:dex4). As described in this interesting  [blog post](https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/) these benchmark values came from reviewing a single issue (61) of the *Journal of Abnormal and Social Psychology*. This was a relatively small number of studies - that were prone to publication bias. A recent investigation [see @schafer2019meaningfulness] of effectsizes in pre-registered studies suggest substantially lower benchmark values.
+
+
 ```{r dex4, fig.cap="Cohen's (1988) effect size benchmarks.", echo = FALSE, out.width="100%"}
 knitr::include_graphics("ch_populations/images/dvalue_ex4.png")
 ```
 
+
+You can investigate the look of any $\delta$ value (i.e., population $d$-value) using the rpsychologist [website](https://rpsychologist.com/d3/cohend/). This website also provides a number of interesting statistics sush as the percentage of overlaping values in a two popualtions for a given $\delta$/d value.
 
 ## Key points
 
@@ -738,10 +743,6 @@ knitr::include_graphics("ch_populations/images/dvalue_ex4.png")
 * Commonly used parameters include mean ($\mu$ or $\bar{X}$), variance ($\sigma^2$), or standard deviation ($\sigma$). Population-level parameters are often represented using Greek letter.
 
 * Population differences can be described in original raw units or standardized units called the standardized mean difference (SMD).
-
-* SMD is an effect size.
-
-* SMD is a useful for comparing means.
 
 * SMD is based on the premise that the two population being compared have the same standard deviation
 
