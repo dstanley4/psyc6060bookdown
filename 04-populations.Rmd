@@ -104,7 +104,7 @@ Researchers, and consumers of research, typically have little interest in making
 
 Statistic tests are means of helping researchers use sample data to make conclusions at the population level. When we calculate numbers based on all of the people/animals in the population we refer to those numbers as **parameters**. We calculate numbers based on the people/animals in the sample we refer to those numbers as **statistics**. In general, statistics are used to estimate parameters. 
 
-## Describing populations
+## A small population
 
 Populations are typically quite large, but, for the purpose or reviewing how we typically describe populations we focus on a population of just three chocolate chip cookies. We refer to the three cookies as $X_1$, $X_2$, and $X_3$. The cookies have the weights of 8, 10, and 12 grams, respectively. 
 
@@ -184,7 +184,7 @@ Error, the extent to the data deviates from the model, is calculated using squar
 
 
 | Cookie Mass |  Model | Error = Squared Difference | 
-| :-:         |  :-:   |  :-:             |
+| ---         |  ---   |  ---             |
 | $X_1 = 8$  |  $\bar{X} = 10$ |  $(X_1 - \bar{X})^2 =(8 - 10)^2= 4$ |
 | $X_2 = 10$  |  $\bar{X} = 10$ |  $(X_2 - \bar{X})^2 =(10 - 10)^2= 0$ |
 | $X_3 = 12$  |  $\bar{X} = 10$ |  $(X_3 - \bar{X})^2 =(12 - 10)^2= 4$ |
@@ -217,7 +217,7 @@ $$
 **Variance by any other name**. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other name. Some of those names are listed below.
 
 | Variance synonyms |
-| :-: |
+| - |
 | Mean Squared Error |
 | MSE |
 | Pooled variance |
@@ -248,5 +248,428 @@ sd(X) &= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
 \end{aligned} 
 $$
 
-We encourage you to think in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straight forward. Additionally, variance if the foundational to the language used to describe regression and analysis of variance.
+
+We encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.
+
+
+
+
+
+```{r, include = FALSE}
+library(learnSampling)
+library(tidyverse)
+
+# varible means, d-value of 0.5
+hdata1 <- get_height_population(mdiff = 5, std = 10)
+hdata1$sex <- as.factor(hdata1$sex)
+hdata1$dvalue <- 0.5
+
+# varible means, d-value of 1.0
+hdata2 <- get_height_population(mdiff = 10, std = 10)
+hdata2$sex <- as.factor(hdata2$sex)
+hdata2$dvalue <- 1.0
+
+# varible means, d-value of 2.0
+hdata3 <- get_height_population(mdiff = 20, std = 10)
+hdata3$sex <- as.factor(hdata3$sex)
+hdata3$dvalue <- 2.0
+
+textMean1 <- expression(Delta~"M" == 5)
+textMean2 <- expression(Delta~"M" == 10)
+textMean3 <- expression(Delta~"M" == 20)
+textd1 <- expression(delta == 0.50)
+textd2 <- expression(delta == 1.00)
+textd3 <- expression(delta == 2.00)
+textfemale1 <- expression("Female"~mu == 165)
+textfemale2 <- expression("Female"~mu == 165)
+textfemale3 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 170)
+textmale2 <- expression("Male"~mu == 175)
+textmale3 <- expression("Male"~mu == 185)
+texts1 <- expression(sigma == 10)
+texts2 <- expression(sigma == 10)
+texts3 <- expression(sigma == 10)
+
+
+g1 <- ggplot(data = hdata1,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts1), hjust = 0) +
+  theme_light() +
+  labs(tag = "A.")
+
+g2 <- ggplot(data = hdata2,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean2)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd2)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale2), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale2), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts1), hjust = 0) +
+  theme_light() +
+  labs(tag = "B.")
+
+g3 <- ggplot(data = hdata3,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean3)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd3)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale3), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale3), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts1), hjust = 0) +
+  theme_light() +
+  labs(tag = "C.")
+
+png(file = "ch_populations/images/dvalue_ex1.png", res = 300, width = 8*300, height = 8*300)
+gridExtra::grid.arrange(g1, g2, g3, nrow =3)
+dev.off()
+```
+
+
+```{r, include = FALSE}
+library(learnSampling)
+library(tidyverse)
+
+# fixed means, d-value of 0.5
+hdata1 <- get_height_population(std = 30)
+hdata1$sex <- as.factor(hdata1$sex)
+hdata1$dvalue <- 0.5
+
+# fixed means, d-value of 1.0
+hdata2 <- get_height_population(std = 15)
+hdata2$sex <- as.factor(hdata2$sex)
+hdata2$dvalue <- 1.0
+
+# same means, d-value of 2.0
+hdata3 <- get_height_population(std = 7.5)
+hdata3$sex <- as.factor(hdata3$sex)
+hdata3$dvalue <- 2.0
+
+textMean1 <- expression(Delta~"M" == 15)
+textMean2 <- expression(Delta~"M" == 15)
+textMean3 <- expression(Delta~"M" == 15)
+textd1 <- expression(delta == 0.50)
+textd2 <- expression(delta == 1.00)
+textd3 <- expression(delta == 2.00)
+textfemale1 <- expression("Female"~mu == 165)
+textfemale2 <- expression("Female"~mu == 165)
+textfemale3 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 180)
+textmale2 <- expression("Male"~mu == 180)
+textmale3 <- expression("Male"~mu == 180)
+texts1 <- expression(sigma == 30)
+texts2 <- expression(sigma == 15)
+texts3 <- expression(sigma == 7.5)
+
+
+g1 <- ggplot(data = hdata1,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .01, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = .0075, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = .0075, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = .0050, 
+           parse = T, label = as.character(texts1), hjust = 0) +
+  theme_light() +
+  labs(tag = "A.")
+
+g2 <- ggplot(data = hdata2,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textMean2)) +
+  annotate("text", x = 230, y = .015, 
+           parse = T, label = as.character(textd2)) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textfemale2), hjust = 0) +
+  annotate("text", x = 90, y = .015, 
+           parse = T, label = as.character(textmale2), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts2), hjust = 0) +
+  theme_light() +
+  labs(tag = "B.")
+
+g3 <- ggplot(data = hdata3,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .04, 
+           parse = T, label = as.character(textMean3)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textd3)) +
+  annotate("text", x = 90, y = .04, 
+           parse = T, label = as.character(textfemale3), hjust = 0) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textmale3), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(texts3), hjust = 0) +
+  theme_light() +
+  labs(tag = "C.")
+
+png(file = "ch_populations/images/dvalue_ex2.png", res = 300, width = 8*300, height = 8*300)
+gridExtra::grid.arrange(g1, g2, g3, nrow =3)
+dev.off()
+
+```
+
+
+
+
+```{r, include = FALSE}
+library(learnSampling)
+library(tidyverse)
+
+# varible means, d-value of 1.0
+hdata1 <- get_height_population(mdiff = 5, std = 5)
+hdata1$sex <- as.factor(hdata1$sex)
+hdata1$dvalue <- 1
+
+# varible means, d-value of 1.0
+hdata2 <- get_height_population(mdiff = 10, std = 10)
+hdata2$sex <- as.factor(hdata2$sex)
+hdata2$dvalue <- 1
+
+# varible means, d-value of 2.0
+hdata3 <- get_height_population(mdiff = 20, std = 20)
+hdata3$sex <- as.factor(hdata3$sex)
+hdata3$dvalue <- 1
+
+textMean1 <- expression(Delta~"M" == "5 cm")
+textMean2 <- expression(Delta~"M" == "10 cm")
+textMean3 <- expression(Delta~"M" == "20 cm")
+textd1 <- expression(delta == 1)
+textd2 <- expression(delta == 1)
+textd3 <- expression(delta == 1)
+textfemale1 <- expression("Female"~mu == 165)
+textfemale2 <- expression("Female"~mu == 165)
+textfemale3 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 170)
+textmale2 <- expression("Male"~mu == 175)
+textmale3 <- expression("Male"~mu == 185)
+texts1 <- expression(sigma == 5)
+texts2 <- expression(sigma == 10)
+texts3 <- expression(sigma == 20)
+
+
+g1 <- ggplot(data = hdata1,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .064, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = .048, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = .064, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = .048, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = .032, 
+           parse = T, label = as.character(texts1), hjust = 0) +
+  theme_light() +
+  labs(tag = "A.")
+
+g2 <- ggplot(data = hdata2,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .032 , 
+           parse = T, label = as.character(textMean2)) +
+  annotate("text", x = 230, y = .024, 
+           parse = T, label = as.character(textd2)) +
+  annotate("text", x = 90, y = .032, 
+           parse = T, label = as.character(textfemale2), hjust = 0) +
+  annotate("text", x = 90, y = .024, 
+           parse = T, label = as.character(textmale2), hjust = 0) +
+  annotate("text", x = 90, y = .016, 
+           parse = T, label = as.character(texts2), hjust = 0) +
+  theme_light() +
+  labs(tag = "B.")
+
+g3 <- ggplot(data = hdata3,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .016, 
+           parse = T, label = as.character(textMean3)) +
+  annotate("text", x = 230, y = .012, 
+           parse = T, label = as.character(textd3)) +
+  annotate("text", x = 90, y = .016, 
+           parse = T, label = as.character(textfemale3), hjust = 0) +
+  annotate("text", x = 90, y = .012, 
+           parse = T, label = as.character(textmale3), hjust = 0) +
+  annotate("text", x = 90, y = .008, 
+           parse = T, label = as.character(texts3), hjust = 0) +
+  theme_light() +
+  labs(tag = "C.")
+
+png(file = "ch_populations/images/dvalue_ex3.png", res = 300, width = 8*300, height = 8*300)
+gridExtra::grid.arrange(g1, g2, g3, nrow =3)
+dev.off()
+
+
+```
+
+
+
+
+```{r, include = FALSE}
+library(learnSampling)
+library(tidyverse)
+
+# varible means, d-value of 0.5
+hdata1 <- get_height_population(mdiff = 2, std = 10)
+hdata1$sex <- as.factor(hdata1$sex)
+hdata1$dvalue <- 0.5
+
+# varible means, d-value of 1.0
+hdata2 <- get_height_population(mdiff = 5, std = 10)
+hdata2$sex <- as.factor(hdata2$sex)
+hdata2$dvalue <- 1.0
+
+# varible means, d-value of 2.0
+hdata3 <- get_height_population(mdiff = 8, std = 10)
+hdata3$sex <- as.factor(hdata3$sex)
+hdata3$dvalue <- 2.0
+
+textMean1 <- expression(Delta~"M" == 2)
+textMean2 <- expression(Delta~"M" == 5)
+textMean3 <- expression(Delta~"M" == 8)
+textd1 <- expression(delta == 0.20)
+textd2 <- expression(delta == 0.50)
+textd3 <- expression(delta == 0.80)
+textfemale1 <- expression("Female"~mu == 165)
+textfemale2 <- expression("Female"~mu == 165)
+textfemale3 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 167)
+textmale2 <- expression("Male"~mu == 170)
+textmale3 <- expression("Male"~mu == 173)
+texts1 <- expression(sigma == 10)
+texts2 <- expression(sigma == 10)
+texts3 <- expression(sigma == 10)
+
+
+g1 <- ggplot(data = hdata1,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts2), hjust = 0) +
+  theme_light() +
+  labs(tag = "A.",subtitle = "'Small' effect")
+
+g2 <- ggplot(data = hdata2,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean2)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd2)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale2), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale2), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts2), hjust = 0) +
+  theme_light() +
+  labs(tag = "B.",subtitle = "'Medium' effect")
+
+g3 <- ggplot(data = hdata3,
+       mapping = aes(x = height, linetype = sex)) +
+  geom_density(position = "identity", alpha = .50, adjust = 2) +
+  coord_cartesian(xlim = c(90, 250)) +
+  scale_x_continuous(breaks = seq(90, 250, by = 10)) +
+  annotate("text", x = 230, y = .03, 
+           parse = T, label = as.character(textMean3)) +
+  annotate("text", x = 230, y = .02, 
+           parse = T, label = as.character(textd3)) +
+  annotate("text", x = 90, y = .03, 
+           parse = T, label = as.character(textfemale3), hjust = 0) +
+  annotate("text", x = 90, y = .02, 
+           parse = T, label = as.character(textmale3), hjust = 0) +
+  annotate("text", x = 90, y = .01, 
+           parse = T, label = as.character(texts3), hjust = 0) +
+  theme_light() +
+  labs(tag = "C.",subtitle = "'Large' effect")
+
+png(file = "ch_populations/images/dvalue_ex4.png", res = 300, width = 8*300, height = 8*300)
+gridExtra::grid.arrange(g1, g2, g3, nrow =3)
+dev.off()
+```
+
+## Comparing populations
+
+Here is a bunch of text comparing population. For this text see Figure \@ref(fig:dex1).
+
+```{r dex1, fig.cap="The difference between two population means can be expressed in the original units as indicated by $\\Delta M$. Alternatively, the difference can be expressed using a Standardized Mean Difference (SMD). The SMD index is also know as the population-level $d$-value and is represented by the symbol $\\delta$. The SMD is a way of expressing the difference between population means without using the original units. ", echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_populations/images/dvalue_ex1.png")
+```
+
+Here is a bunch of text comparing population. For this text see Figure \@ref(fig:dex2).
+
+```{r dex2, fig.cap="An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., $\\delta$) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only looked the difference in the original units (i.e., $\\Delta M$) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by $\\delta$ - the population $d$-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C.", echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_populations/images/dvalue_ex2.png")
+```
+
+
+Here is a bunch of text comparing population. For this text see Figure \@ref(fig:dex3).
+
+```{r dex3, fig.cap="The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\\Delta M$) between the population means. This constant SMD occurs because the standard deviations also changes across the three scenarios.", echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_populations/images/dvalue_ex3.png")
+```
+
+
+
+```{r dex4, fig.cap="Cohen's (1988) effect size benchmarks.", echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_populations/images/dvalue_ex4.png")
+```
+
 
