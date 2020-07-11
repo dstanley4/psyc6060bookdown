@@ -4665,7 +4665,7 @@ Consider a scenario where we have the IQ data for three participants We use the 
 Notice how each person in the data set can be represent by the variable X. The first person by X\_1, the second by X2, and the third by X\_3. Often we refer to individuals in a data set by using the variable X accompanied by a subscript (e.g., 1, 2, 3, etc.).
 
 \begin{figure}
-\includegraphics[width=0.55\linewidth]{ch_populations/images/screenshot_data_n6} \caption{Data for understanding summation notation}\label{fig:notationdata}
+\includegraphics[width=0.35\linewidth]{ch_populations/images/screenshot_data_n6} \caption{Data for understanding summation notation}\label{fig:notationdata}
 \end{figure}
 
 Referring to participants using the variable X and subscript is valuable because it can be used in conjunction with the sigma (i.e., \(\Sigma\)) symbol for summation. Consider the example below in which we use the summation notation to indicate that we want to add all the X values (representing IQ) for the participants. We use a lower case \(i\) to represent all possible subscript values. The notation below the \(\Sigma\), \(i\) = 1, indicates that we should start with participant 1. The notation below the \(\Sigma\), N, indicates that we should iterate \(i\) up to the value indicated by N; in this case 3, because there are three participants.
@@ -4905,31 +4905,84 @@ Three different ways
   density curve
 \end{itemize}
 
-\hypertarget{comparing-populations}{%
-\section{Comparing populations}\label{comparing-populations}}
+\hypertarget{population-comparisons}{%
+\section{Population comparisons}\label{population-comparisons}}
 
-\hypertarget{d-value-units}{%
-\subsection{\texorpdfstring{\(d\)-value units}{d-value units}}\label{d-value-units}}
+To faciliate comparing two populations we use the example the heights of males and females - measured in centimeters. There is variability in the heights of both males and females. However, on average, males are taller than females. That is, the mean of the male population is higher than the mean of the female population.
 
-Here is a bunch of text comparing population. For this text see Figure \ref{fig:dex1}.
+In this section we present a large number of hypothetical populations representing the heights of males and females. Each of the following figures contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
+
+\hypertarget{standardized-units}{%
+\subsection{Standardized units}\label{standardized-units}}
+
+\hypertarget{individual-scores}{%
+\subsubsection{Individual scores}\label{individual-scores}}
+
+Often when we compare two means we use the original meteric - in the case of the male and female heights that metric is centimeters. The original units are a useful way to convey information about the difference between two populations.
+
+In addition to the original unit metric, however, it is also possible - and sometimes desirable to use the standardized mean difference. The word \emph{standardized} is used to indicate that the comparison is relative to the standard deviation.
+
+Imagine a population male heights (\(\mu = 170\),\(\sigma = 10\)) from which we have obtained a single individual, Ian, who's height is 185 cm.
+
+\[
+X_{Ian} = 185cm
+\]
+
+The raw meteric is useful for describing Ian's height but it doesn't tell use about his height relative to the other people in the population. We have to know the mean and standard deviation of the population to know if Ian is shorter or taller than the average height - and by how much.
+
+\[
+\begin{aligned} 
+z_{Ian} &=  \frac{X_{Ian} - \mu_{males}}{\sigma_{males}}\\ 
+&=  \frac{185 - 170}{10}\\
+&=  \frac{15}{10}\\
+&= 1.5
+\end{aligned} 
+\]
+
+The above calculation is a ratio. Ratios are used to compare two numbers. The numerator (number on the top) is compared to the denominator (number on bottom) through division. The resulting number tells you how much larger the numerator is than the denominator.
+
+In this case, the numerator is the extent to which Ian is taller than the mean height for males (\(X_{Ian} - \mu_{males}\)). This numerator is compared to the denominator -- which is the standard deviation for males (\sigma\_\{males\}). The resulting number is 1.50 which indicates the numerator is 1.50 times larger than the denominator. In other words, Ian is 1.50 standard deviations taller than the average male. This is a standardized score for Ian's height - it expresses the difference between his height and the mean height in standard deviation units.
+
+\hypertarget{population-means}{%
+\subsubsection{Population means}\label{population-means}}
+
+The same approach to generating standardized scores can be applied to population means. Consider a situation where we have population of male heights (\(\mu = 170\),\(\sigma = 10\)) and a population of female heights (\(\mu = 165\),\(\sigma = 10\)). Notice that both populations have the same standard deviation.
+
+We can calculated a standardized value to compare these heights. This standardized value is called the standardized mean difference (SMD). Alternative, it is also known as Cohen's \(d\) which is represented at the population level with the symbol \(\delta\). Calculation of the standardized mean difference is based on the premise that both populations have the same standard deviation.
+
+In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations. The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is halve as larger as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; \(\delta = 0.50\):
+
+\[
+\begin{aligned} 
+\delta &=  \frac{\mu_{males} - \mu_{males}}{\sigma}\\ 
+&=  \frac{170 - 165}{10}\\
+&=  \frac{5}{10}\\
+&= 0.50
+\end{aligned} 
+\]
+
+\hypertarget{cohens-d-units}{%
+\subsection{\texorpdfstring{Cohen's \(d\) units}{Cohen's d units}}\label{cohens-d-units}}
+
+Because the metric for the standardized mean difference is the standard deviation it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report difference between populations in both the original units (cm) and standardized umnits (\(\delta\)). Figure \ref{fig:dex1} illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see as the difference between the population means increases in raw units - it does the same in \(\delta\) (i.e., Cohen's \(d\)) units. In raw units (i.e., cm), the difference the between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50 standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen's d-values are 0.50, 1.0, and 2.0 for scenarios A through C.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex1} \caption{The difference between two population means can be expressed in the original units as indicated by $\Delta M$. Alternatively, the difference can be expressed using a Standardized Mean Difference (SMD). The SMD index is also know as the population-level $d$-value and is represented by the symbol $\delta$. The SMD is a way of expressing the difference between population means without using the original units. }\label{fig:dex1}
 \end{figure}
 
-\hypertarget{d-value-advantages}{%
-\subsection{\texorpdfstring{\(d\)-value advantages}{d-value advantages}}\label{d-value-advantages}}
+\hypertarget{cohens-d-advantages}{%
+\subsection{\texorpdfstring{Cohen's \(d\) advantages}{Cohen's d advantages}}\label{cohens-d-advantages}}
 
-Here is a bunch of text comparing population. For this text see Figure \ref{fig:dex2}.
+The standardized mean difference takes into account the variability of heights around each population mean. This means that the same difference between two population means can produce different standardized mean difference values if the population standard deviation varies. In the scenarios depicted in Figure \ref{fig:dex2} the population standard deviation becomes increasing small - resulting in larger standaredized mean difference values (i.e., \(\delta\)). This larger \(\delta\) value corresponds to progressively less overlap between the two populations. Thus, taking into account the standard deviation of the populations can be viewed as a strength of using the standardized mean difference.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex2} \caption{An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., $\delta$) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only looked the difference in the original units (i.e., $\Delta M$) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by $\delta$ - the population $d$-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C.}\label{fig:dex2}
 \end{figure}
 
-\hypertarget{d-value-caveats}{%
-\subsection{\texorpdfstring{\(d\)-value caveats}{d-value caveats}}\label{d-value-caveats}}
+\hypertarget{cohens-d-caveats}{%
+\subsection{\texorpdfstring{Cohen's \(d\) caveats}{Cohen's d caveats}}\label{cohens-d-caveats}}
 
-Here is a bunch of text comparing population. For this text see Figure \ref{fig:dex3}.
+It is important to also look at the original units when intepreting results - not just the standardized mean difference. Exmaine the scenarios in Figure \ref{fig:dex3}. Notice how the \(\delta\) value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen's \(d\)) provide important interpretational information - dont' rely on just one of them.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex3} \caption{The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This constant SMD occurs because the standard deviations also changes across the three scenarios.}\label{fig:dex3}
@@ -4938,9 +4991,13 @@ Here is a bunch of text comparing population. For this text see Figure \ref{fig:
 \hypertarget{benchmarks}{%
 \subsection{Benchmarks}\label{benchmarks}}
 
+\citep{cohen1988} suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively. These effect sizes are illustrated in Figure \ref{fig:dex4}. As described in this interesting \href{https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/}{blog post} these benchmark values came from reviewing a single issue (61) of the \emph{Journal of Abnormal and Social Psychology}. This was a relatively small number of studies - that were prone to publication bias. A recent investigation \citep[see][]{schafer2019meaningfulness} of effectsizes in pre-registered studies suggest substantially lower benchmark values.
+
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex4} \caption{Cohen's (1988) effect size benchmarks.}\label{fig:dex4}
 \end{figure}
+
+You can investigate the look of any \(\delta\) value (i.e., population \(d\)-value) using the rpsychologist \href{https://rpsychologist.com/d3/cohend/}{website}. This website also provides a number of interesting statistics sush as the percentage of overlaping values in a two popualtions for a given \(\delta\)/d value.
 
 \hypertarget{key-points}{%
 \section{Key points}\label{key-points}}
@@ -4952,10 +5009,6 @@ Here is a bunch of text comparing population. For this text see Figure \ref{fig:
   Commonly used parameters include mean (\(\mu\) or \(\bar{X}\)), variance (\(\sigma^2\)), or standard deviation (\(\sigma\)). Population-level parameters are often represented using Greek letter.
 \item
   Population differences can be described in original raw units or standardized units called the standardized mean difference (SMD).
-\item
-  SMD is an effect size.
-\item
-  SMD is a useful for comparing means.
 \item
   SMD is based on the premise that the two population being compared have the same standard deviation
 \item
