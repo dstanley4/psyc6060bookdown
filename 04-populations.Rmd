@@ -124,7 +124,7 @@ $$
 $$
 
 
-Then we can think of this "mean cookie" our model:
+Then we can think of this "mean cookie",$\bar{X}$, our model:
 
 $$
 \begin{aligned} 
@@ -158,20 +158,16 @@ The mean of the population, $\bar{X} = 10$, is a parameter that serves as model 
 
 ### Variance
 
-
-Variance is a simple way of calculating how well the model fits our data. We can think of there being a conceptual "mean cookie" that describes our data. Then we want to see the extent to which the data differs from our "mean cookie" model.
+Variance is a simple way of calculating how well the model fits our data. We can think of there being a conceptual "mean cookie" that describes our data. 
 
 
 ```{r meancookie, echo=FALSE, out.width="60%", fig.cap="Variance as a fit index for the mean"}
 knitr::include_graphics("ch_populations/images/cookie.png")
 ```
 
+We want to index the extent to which the model fits our data -- that is, we want to see the extent to which the data differs from our "mean cookie" model. Variance is a simple approach to assessing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error.
 
-
-Variance is a simple approach to assessing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error. 
-
-**Why use squared errors?** Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that minimize error. When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, complex statistical reasons, we use squared differs to index error rather than other approaches.
-
+**Why use squared errors?** Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.
 
 
 | Cookie Mass |  Model | Error = Squared Difference | 
@@ -180,9 +176,9 @@ Variance is a simple approach to assessing the fit of the model. With this appro
 | $X_2 = 10$  |  $\bar{X} = 10$ |  $(X_2 - \bar{X})^2 =(10 - 10)^2= 0$ |
 | $X_3 = 12$  |  $\bar{X} = 10$ |  $(X_3 - \bar{X})^2 =(12 - 10)^2= 4$ |
 
-You can see in the table above that we can calculate the squared difference for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
+You can see in the table above that we can calculate the squared differences for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
 
-Recall the formula for calculating an average:
+Recall the formula for calculating a mean:
 
 $$
 \begin{aligned} 
@@ -190,7 +186,7 @@ $$
 \end{aligned} 
 $$
 
-You can see from the formula for variance below that variance is just an average. The average of the squared errors.
+You can see from the formula for variance below that variance is just an mean. Variance is the average of the squared errors.
 
 $$
 \begin{aligned} 
@@ -205,7 +201,7 @@ var(X) &= \frac{\sum{(X - \bar{X})^2}}{N}\\
 $$
 
 
-**Variance by any other name**. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other name. Some of those names are listed below.
+**Variance by any other name**. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other names. Some of those names are listed below.
 
 | Variance synonyms |
 | - |
@@ -241,9 +237,6 @@ $$
 
 
 We encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.
-
-
-
 
 
 ```{r, include = FALSE}
