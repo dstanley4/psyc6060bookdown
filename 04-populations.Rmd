@@ -12,7 +12,7 @@ Consider a scenario where we have the IQ data for three participants We use the 
 
 Notice how each person in the data set can be represented by the variable X: the first person by $X_1$, the second by $X_2$, and the third by $X_3$. Often we refer to individuals in a data set by using the variable X accompanied by a subscript (e.g., 1, 2, 3, etc.).
 
-```{r notationdata, echo = FALSE, out.width="35%", fig.cap = "Data for understanding summation notation"}
+```{r notationdata, echo = FALSE, out.width="40%", fig.cap = "Data for understanding summation notation"}
 knitr::include_graphics("ch_populations/images/screenshot_data_n6.png")
 ```
 
@@ -37,7 +37,7 @@ $$
 $$
 
 
-**Calculating a mean**. The full version of the notation can be used to indicate how a mean is calculated.
+**Calculating a mean**. The full version of the notation can be used to indicate how anb= average/mean is calculated.
 
 
 $$
@@ -50,7 +50,7 @@ $$
 \end{aligned} 
 $$
 
-Likewise, the concise version of the notation can be used to indicate how a mean is calculated.
+Likewise, the concise version of the notation can be used to indicate how an average/mean is calculated.
 
 $$
 \begin{aligned} 
@@ -100,7 +100,7 @@ Statistic tests are a means of helping researchers use sample data to make concl
 
 Populations are typically quite large, but, for the purpose of reviewing how we typically describe populations we focus on a population of just three chocolate chip cookies. We refer to the three cookies as $X_1$, $X_2$, and $X_3$. The cookies have the weights of 8, 10, and 12 grams, respectively. 
 
-### Mean
+### Mean ($\mu$)
 
 It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly. Each participant will differ to some extent from the model. The  difference between each participant and the model is called error.
 
@@ -113,11 +113,11 @@ X_i &= model + error_i \\
 $$
 
 
-We can create a model for our data using many different approaches. A simple model for our data is the mean, $\bar{X}$:
+We can create a model for our data using many different approaches. A simple model for our data is the mean, $\mu$:
 
 $$
 \begin{aligned} 
-\bar{X} &= \frac{\sum{X}}{N} \\
+\mu &= \frac{\sum{X}}{N} \\
 &= \frac{X_1 + X_2 + X_3}{3}\\ 
 &= \frac{8 + 10 + 12}{3}\\
 &= \frac{30}{3}\\
@@ -126,21 +126,21 @@ $$
 $$
 
 
-Then we can think of this "mean cookie",$\bar{X}$, our model:
+Then we can think of this "mean cookie", $\mu$, our model:
 
 $$
 \begin{aligned} 
-X_i &= \bar{X} + error_i \\
+X_i &= \mu + error_i \\
 \end{aligned} 
 $$
 
-The model, above is just concise way of describing the following:
+The model, above is just a concise way of describing the following:
 
 $$
 \begin{aligned} 
-X_1 &= \bar{X} + error_1 \\
-X_2 &= \bar{X} + error_2 \\
-X_3 &= \bar{X} + error_3 \\
+X_1 &= \mu + error_1 \\
+X_2 &= \mu + error_2 \\
+X_3 &= \mu + error_3 \\
 \end{aligned} 
 $$
 
@@ -156,31 +156,30 @@ X_3 &= 10 + 2 \\
 $$
 
 
-The mean of the population, $\bar{X} = 10$, is a parameter that serves as model for the data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. 
+The mean of the population, $\mu = 10$, is a parameter that serves as model for the data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. 
 
-### Variance
+### Variance ($\sigma^2$)
 
-Variance is a simple way of calculating how well the model fits our data. We can think of there being a conceptual "mean cookie" that describes our data. 
-
+Variance is a simple way of calculating how well the model fits our data. It is represented by the symbol $\sigma^2$.
 
 ```{r meancookie, echo=FALSE, out.width="60%", fig.cap="Variance as a fit index for the mean"}
 knitr::include_graphics("ch_populations/images/cookie.png")
 ```
 
-We want to index the extent to which the model fits our data -- that is, we want to see the extent to which the data differs from our "mean cookie" model. Variance is a simple approach to assessing the fit of the model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error.
+We want to index the extent to which the model fits our data -- that is, we want to see the extent to which the data differs from our "mean cookie" model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \@ref(fig:meancookie). The deviation between each data point and the model is referred to as error.
 
-**Why use squared errors?** Error, the extent to the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.
+**Why use squared errors?** Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.
 
 
 | Cookie Mass |  Model | Error = Squared Difference | 
 | ---         |  ---   |  ---             |
-| $X_1 = 8$  |  $\bar{X} = 10$ |  $(X_1 - \bar{X})^2 =(8 - 10)^2= 4$ |
-| $X_2 = 10$  |  $\bar{X} = 10$ |  $(X_2 - \bar{X})^2 =(10 - 10)^2= 0$ |
-| $X_3 = 12$  |  $\bar{X} = 10$ |  $(X_3 - \bar{X})^2 =(12 - 10)^2= 4$ |
+| $X_1 = 8$  |  $\mu = 10$ |  $(X_1 - \mu)^2 =(8 - 10)^2= 4$ |
+| $X_2 = 10$  |  $\mu = 10$ |  $(X_2 - \mu)^2 =(10 - 10)^2= 0$ |
+| $X_3 = 12$  |  $\mu = 10$ |  $(X_3 - \mu)^2 =(12 - 10)^2= 4$ |
 
-You can see in the table above that we can calculate the squared differences for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tell us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to the this value as variance. 
+You can see in the table above that we can calculate the squared differences for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tells us the average of the squared deviations from the model is 2.67 grams$^2$. We refer to this value as variance. 
 
-Recall the formula for calculating a mean:
+Recall the formula for calculating an avearge:
 
 $$
 \begin{aligned} 
@@ -188,11 +187,11 @@ $$
 \end{aligned} 
 $$
 
-You can see from the formula for variance below that variance is just an mean. Variance is the average of the squared errors.
+You can see from the formula for variance below that variance is just an average. Variance is the average of the squared errors.
 
 $$
 \begin{aligned} 
-var(X) &= \frac{\sum{(X - \bar{X})^2}}{N}\\
+\sigma^2 &= \frac{\sum{(X - \bar{X})^2}}{N}\\
 &= \frac{(X_1-\bar{X})^2 + (X_2-\bar{X})^2 + (X_3-\bar{X})^2}{N}  \\ 
 &= \frac{(8-10)^2 + (10-10)^2 + (12-10)^2}{3}\\
 &= \frac{(-2)^2 + (0)^2 (2)^2}{3} \\
@@ -202,27 +201,17 @@ var(X) &= \frac{\sum{(X - \bar{X})^2}}{N}\\
 \end{aligned} 
 $$
 
+*Note*: Because we squared the differences the units for variance are also squared. In this case, that means the units for variance are grams$^2$ not grams.
 
-**Variance by any other name**. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other names. Some of those names are listed below.
+**Interpretation**. A variance of zero indicates that the model fits the data perfectly. In this case, if the variance was zero, that would indicate that all the cookie had the same mass, exactly 10 grams. To the extent that the variance is larger than zero it implies that the model is not a perfect fit for the data. A large variance indicate that many of the of the data points fall far from the model (i.e., the mean). By implication, the larger variance indicates the larger the differences among the observations (e.g., cookies).
 
-| Variance synonyms |
-| - |
-| Mean Squared Error |
-| MSE |
-| Pooled variance |
-| $s_{pooled}^2$ |
-| $s_{p}^2$ |
-| $s_{residual}^2$ |
+### Standard Deviation ($\sigma$)
 
-
-
-### Standard Deviation
-
-Variance is easy to interpret as a the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams$2$). Consequently, some people prefer to take the square root of this value and call it standard deviation.
+Variance is easy to interpret as the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams$^2$). Consequently, some people prefer to take the square root of this value and call it standard deviation; representing it with the symbol $\sigma$.
 
 $$
 \begin{aligned} 
-sd(X) &= \sqrt{var(X)} \\
+\sigma &= \sqrt{var(X)} \\
 &= \sqrt{2.67} \\
 &= 1.63 grams\\
 \end{aligned} 
@@ -642,7 +631,7 @@ Three different ways
 
 ## Population comparisons
 
-To facilitate comparing two populations we use the example the heights of males and females - measured in centimeters. There is variability in the heights of both males and females. However, on average, males are taller than females. That is, the mean of the male population is higher than the mean of the female population.
+To facilitate comparing two populations we use the heights of males and females, measured in centimeters, as an example. There is variability in the heights of both males and females. However, on average, males are taller than females. That is, the mean of the male population is higher than the mean of the female population.
 
 In this section we present a large number of hypothetical populations representing the heights of males and females. Each of the following figures contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
 
@@ -651,12 +640,12 @@ In this section we present a large number of hypothetical populations representi
 
 #### Individual scores
 
-Often when we compare two means we use the original metric - in the case of the male and female heights that metric is centimeters. The original units are a useful way to convey information about the difference between two populations.
+Often when we compare two means we use the original metric.  In the case of the male and female heights that metric is centimeters. The original units are a useful way to convey information about the difference between two populations.
 
-In addition to the original unit metric, however, it is also possible - and sometimes desirable to use the standardized mean difference. The word *standardized* is used to indicate that the comparison is relative to the standard deviation.
+In addition to the original unit metric it is also possible, and sometimes desirable, to use the standardized mean difference. The word *standardized* is used to indicate that the comparison is relative to the standard deviation.
 
 
-Imagine a population male heights ($\mu = 170$,$\sigma = 10$) from which we have obtained a single individual, Ian, who's height is 185 cm.
+Imagine a population of male heights ($\mu = 170$, $\sigma = 10$) from which we have obtained a single individual, Ian, whose height is 185 cm.
 
 $$
 X_{Ian} = 185cm
@@ -675,15 +664,15 @@ $$
 
 The above calculation is a ratio. Ratios are used to compare two numbers. The numerator (number on the top) is compared to the denominator (number on bottom)  through division. The resulting number tells you how much larger the numerator is than the denominator.
 
-In this case, the numerator is the extent to which Ian is taller than the mean height for males ($X_{Ian} - \mu_{males}$). This numerator is compared to the denominator -- which is the standard deviation for males (\sigma_{males}). The resulting number is 1.50 which indicates the numerator is 1.50 times larger than the denominator. In other words, Ian is 1.50 standard deviations taller than the average male. This is a standardized score for Ian's height - it expresses the difference between his height and the mean height in standard deviation units.
+In this case, the numerator is the extent to which Ian is taller than the mean height for males ($X_{Ian} - \mu_{males}$). This numerator is compared to the denominator -- which is the standard deviation for males ($\sigma_{males}$). The resulting number is 1.50 which indicates the numerator is 1.50 times larger than the denominator. In other words, Ian is 1.50 standard deviations taller than the average male. This is a standardized score for Ian's height - it expresses the difference between his height and the mean height in standard deviation units.
 
 #### Population means
 
-The same approach to generating standardized scores can be applied to population means. Consider a situation where we have population of male heights ($\mu = 170$,$\sigma = 10$) and a population of female heights ($\mu = 165$,$\sigma = 10$). Notice that both populations have the same standard deviation.
+The same approach to generating standardized scores can be applied to population means. Consider a situation where we have population of male heights ($\mu = 170$, $\sigma = 10$) and a population of female heights ($\mu = 165$, $\sigma = 10$). Notice that both populations have the same standard deviation.
 
-We can calculated a standardized value to compare these heights. This standardized value is called the standardized mean difference (SMD). Alternative, it is also known as Cohen's $d$ which is represented at the population level with the symbol $\delta$. Calculation of the standardized mean difference is based on the premise that both populations have the same standard deviation. 
+We can calculate a standardized value to compare these heights. This standardized value is called the standardized mean difference (SMD). Alternatively, it is also known as Cohen's $d$ which is represented at the population level with the symbol $\delta$. Calculation of the standardized mean difference is based on the premise that both populations have the same standard deviation. 
 
-In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations. The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is halve as larger as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; $\delta = 0.50$:
+In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations. The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is half as large as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; $\delta = 0.50$:
 
 $$
 \begin{aligned} 
@@ -697,9 +686,9 @@ $$
 
 ### Cohen's $d$ units
 
-Because the metric for the standardized mean difference is the standard deviation  it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report difference between populations in both the original units (cm) and standardized units ($\delta$). Figure \@ref(fig:dex1) illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see as the difference between the population means increases in raw units - it does the same in $\delta$ (i.e., Cohen's $d$) units. In raw units (i.e., cm), the difference the between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50  standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen's d-values are 0.50, 1.0, and 2.0 for scenarios A through C.
+Because the metric for the standardized mean difference is the standard deviation  it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report difference between populations in both the original units (cm) and standardized units ($\delta$). Figure \@ref(fig:dex1) illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see that as the difference between the population means increases in raw units - it does the same in $\delta$ (i.e., Cohen's $d$) units. In raw units (i.e., cm), the difference between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50  standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen's $d$-values are 0.50, 1.0, and 2.0 for scenarios A through C.
 
-```{r dex1, fig.cap="The difference between two population means can be expressed in the original units as indicated by $\\Delta M$. Alternatively, the difference can be expressed using a Standardized Mean Difference (SMD). The SMD index is also know as the population-level $d$-value and is represented by the symbol $\\delta$. The SMD is a way of expressing the difference between population means without using the original units. ", echo = FALSE, out.width="100%"}
+```{r dex1, fig.cap="The difference between two population means can be expressed in the original units as indicated by $\\Delta M$. Alternatively, the difference can be expressed using a Standardized Mean Difference (SMD). The SMD index is also known as the population-level $d$-value and is represented by the symbol $\\delta$. The SMD is a way of expressing the difference between population means without using the original units. ", echo = FALSE, out.width="100%"}
 knitr::include_graphics("ch_populations/images/dvalue_ex1.png")
 ```
 
@@ -721,7 +710,7 @@ knitr::include_graphics("ch_populations/images/dvalue_ex3.png")
 
 ### Benchmarks
 
-[@cohen1988] suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively. These effect sizes are illustrated in Figure \@ref(fig:dex4). As described in this interesting  [blog post](https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/) these benchmark values came from reviewing a single issue of the *Journal of Abnormal and Social Psychology*. This was a relatively small number of studies - that were prone to publication bias. A recent investigation [see @schafer2019meaningfulness] of effect sizes in pre-registered studies, with no publication bias, suggest substantially lower benchmark values.
+Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively [@cohen1988]. These effect sizes are illustrated in Figure \@ref(fig:dex4). As described in an interesting  [blog post](https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/), these benchmark values came from reviewing a single issue of the *Journal of Abnormal and Social Psychology*. This was a relatively small number of studies - that were prone to publication bias. A recent investigation [see @schafer2019meaningfulness] of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.
 
 
 ```{r dex4, fig.cap="Cohen's (1988) effect size benchmarks.", echo = FALSE, out.width="100%"}
