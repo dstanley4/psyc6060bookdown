@@ -60,27 +60,40 @@ In that row the sample number, sample size, population mean, and sample mean are
                                                                                            
                                                                                            ```{r}
                                                                                            head(many_samples)
-                                                                                           ```
                                                                                            
-                                                                                           We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.
-                                                                                           
-                                                                                           ```{r}
-                                                                                           glimpse(many_samples)
-                                                                                           ```
-                                                                                           
-                                                                                           Sampling variability
-                                                                                           ```{r}
-                                                                                           many_samples %>%
-                                                                                             pull(sample.M) %>%
-                                                                                             hist(main = "Histogram of Sample Means")
-                                                                                           ```
-                                                                                           
-                                                                                           
-                                                                                           Although any
-                                                                                           ```{r}
-                                                                                           many_samples %>%
-                                                                                             summarise(mean_of_means = mean(sample.M))
-                                                                                           ```
-                                                                                           
-                                                                                           
-                                                                                           
+**Variance by any other name**. Variance is used in many places in inferential statistics. Unfortunately, it often goes by other names. Some of those names are listed below.
+
+| Variance synonyms |
+| - |
+| $\sigma^2$ |
+| Mean Squared Error |
+| MSE |
+| Pooled variance |
+| $s_{pooled}^2$ |
+| $s_{p}^2$ |
+| $s_{residual}^2$ |
+   
+   ```
+ 
+ We can glimpse() the many_sample data to confirm the total number of rows is that same as we requested.
+ 
+ ```{r}
+ glimpse(many_samples)
+ ```
+ 
+ Sampling variability
+ ```{r}
+ many_samples %>%
+   pull(sample.M) %>%
+   hist(main = "Histogram of Sample Means")
+ ```
+ 
+ 
+ Although any
+ ```{r}
+ many_samples %>%
+   summarise(mean_of_means = mean(sample.M))
+ ```
+ 
+ 
+ 
