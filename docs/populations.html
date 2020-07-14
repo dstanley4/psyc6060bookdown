@@ -373,7 +373,7 @@ FIGURE 4.1: Data for understanding summation notation
 <div id="mean-mu" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Mean (<span class="math inline">\(\mu\)</span>)</h3>
 <p>It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.</p>
-<p><strong>Model:</strong> To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. The weight of each cookie is designated <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>, respectively. A simple model for our data is the mean, <span class="math inline">\(\mu\)</span>.</p>
+<p><strong>Model:</strong> To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights the three cookies are designated by <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. A simple model for our cookie weight data is the mean, <span class="math inline">\(\mu\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \mu &amp;= \frac{\sum{X}}{N} \\
@@ -383,7 +383,13 @@ FIGURE 4.1: Data for understanding summation notation
 &amp;= 10\\
 \end{aligned} 
 \]</span></p>
-<p>We can think of the “mean cookie” as our model, see Figure XX. The “mean cookie” is represented by <span class="math inline">\(\mu\)</span>.</p>
+<p>We can think of the “mean cookie” as our model for our cookie weight data, see Figure <a href="populations.html#fig:meancookie">4.2</a>. The “mean cookie” is represented by <span class="math inline">\(\mu\)</span> in equations.</p>
+<div class="figure"><span id="fig:meancookie"></span>
+<img src="ch_populations/images/cookie.png" alt="Variance as a fit index for the mean" width="60%" />
+<p class="caption">
+FIGURE 4.2: Variance as a fit index for the mean
+</p>
+</div>
 <p><strong>Error:</strong> As mentioned previously, each participant (i.e., cookie) differs to some extent from our model (“mean cookie”). In general this can be conceptualized as:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -412,19 +418,13 @@ X_2 &amp;= 10 + 0 \\
 X_3 &amp;= 10 + 2 \\
 \end{aligned} 
 \]</span></p>
-<p>The mean of the population, <span class="math inline">\(\mu = 10\)</span>, is a parameter that serves as model for the data. When we calculate a model for our data, it’s helpful to have an index of how well the model fits the data. Or perhaps more accurately, it’s helpful to have a single number that indicates extent to which the data (e.g., cookie weights) differs from the model.</p>
+<p>The mean of the population, <span class="math inline">\(\mu = 10\)</span>, is a parameter that serves as model for the cookie weight data. When we calculate a model for our data, it’s helpful to have an index of how well the model fits the data. Or perhaps more accurately, it’s helpful to have a single number that indicates extent to which the data (e.g., cookie weights) differs from the model.</p>
 </div>
 <div id="variance-sigma2" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Variance (<span class="math inline">\(\sigma^2\)</span>)</h3>
-<p>Variance is a simple way of calculating how well data differs from the model. It is represented by the symbol <span class="math inline">\(\sigma^2\)</span>.</p>
-<div class="figure"><span id="fig:meancookie"></span>
-<img src="ch_populations/images/cookie.png" alt="Variance as a fit index for the mean" width="60%" />
-<p class="caption">
-FIGURE 4.2: Variance as a fit index for the mean
-</p>
-</div>
+<p>Variance is a simple way of calculating how data differs from the model. It is represented by the symbol <span class="math inline">\(\sigma^2\)</span>.</p>
 <p>We want to index the extent to which the data differs from the model – that is, we want to see the extent to which the cookie weights differ from our “mean cookie” model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model.</p>
-<p><strong>Why use squared errors?</strong> Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., <span class="math inline">\((8 - 10)^2 = 4\)</span>). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., <span class="math inline">\((8 - 10) = -2\)</span>) or take the absolute difference (e.g., <span class="math inline">\(|8 - 10|= 2\)</span>)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.</p>
+<p><strong>Why use squared errors?</strong> Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., <span class="math inline">\((8 - 10)^2 = 4\)</span>). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., <span class="math inline">\((8 - 10) = -2\)</span>) or take the absolute difference (e.g., <span class="math inline">\(|8 - 10|= 2\)</span>)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing errors). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.</p>
 <table>
 <thead>
 <tr class="header">
@@ -451,7 +451,7 @@ FIGURE 4.2: Variance as a fit index for the mean
 </tr>
 </tbody>
 </table>
-<p>You can see in the table above that we can calculate the squared differences for data points 1 through 3. The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, <span class="math inline">\((4 + 0 + 4)/3 = 2.67\)</span>, tells us the average of the squared deviations from the model is 2.67 grams<span class="math inline">\(^2\)</span>. We refer to this value as variance.</p>
+<p>You can see in the table above that we can calculate the squared differences for data points 1 through 3 (i.e., cookie weights 1 through 3). The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, <span class="math inline">\((4 + 0 + 4)/3 = 2.67\)</span>, tells us the average of the squared deviations from the model is 2.67 grams<span class="math inline">\(^2\)</span>. Because we squared the differences the units are also squared; in this case grams<span class="math inline">\(^2\)</span>. .We refer to 2.67 grams<span class="math inline">\(^2\)</span> as the variance.</p>
 <p>Recall the formula for calculating an avearge:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -470,8 +470,7 @@ FIGURE 4.2: Variance as a fit index for the mean
 &amp;= 2.67 grams^2 \\
 \end{aligned} 
 \]</span></p>
-<p><em>Note</em>: Because we squared the differences the units for variance are also squared. In this case, that means the units for variance are grams<span class="math inline">\(^2\)</span> not grams.</p>
-<p><strong>Interpretation</strong>. A variance of zero indicates that the model fits the data perfectly. In this case, if the variance was zero, that would indicate that all the cookie had the same mass, exactly 10 grams. To the extent that the variance is larger than zero it implies that the model is not a perfect fit for the data. A large variance indicate that many of the of the data points fall far from the model (i.e., the mean). By implication, the larger variance indicates the larger the differences among the observations (e.g., cookies).</p>
+<p><strong>Interpretation</strong>. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same mass as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to similar to the model – and each other. In contrast, when the variance is large, cookie weights tend to different from the model – and each other.</p>
 </div>
 <div id="standard-deviation-sigma" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Standard Deviation (<span class="math inline">\(\sigma\)</span>)</h3>
