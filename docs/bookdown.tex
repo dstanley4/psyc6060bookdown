@@ -202,7 +202,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-07-12}
+\date{2020-07-14}
 
 \begin{document}
 \maketitle
@@ -4752,17 +4752,9 @@ Populations are typically quite large but, for the purpose of reviewing how we t
 \hypertarget{mean-mu}{%
 \subsection{\texorpdfstring{Mean (\(\mu\))}{Mean (\textbackslash mu)}}\label{mean-mu}}
 
-It can be helpful to create a model that describes our data. Of course, the model won't describe every participant perfectly. Each participant will differ to some extent from the model. The difference between each participant and the model is called error.
+It can be helpful to create a model that describes our data. Of course, the model won't describe every participant perfectly and each participant will differ to some extent from the model.
 
-Consider a model for our three cookies. The weight of a specific cookie is indicated by \(X_i\). An estimate of that cookie's weight is indicated by the ``model''. The difference between the model of the cookie's weight and actual cookie's weight is indicated by \(error_i\).
-
-\[
-\begin{aligned} 
-X_i &= model + error_i \\
-\end{aligned} 
-\]
-
-We can create a model for our data using many different approaches. A simple model for our data is the mean, \(\mu\):
+\textbf{Model:} To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. The weight of each cookie is designated \(X_1\), \(X_2\), and \(X_3\), respectively. A simple model for our data is the mean, \(\mu\).
 
 \[
 \begin{aligned} 
@@ -4774,7 +4766,17 @@ We can create a model for our data using many different approaches. A simple mod
 \end{aligned} 
 \]
 
-Then we can think of this ``mean cookie'', \(\mu\), our model:
+We can think of the ``mean cookie'' as our model, see Figure XX. The ``mean cookie'' is represented by \(\mu\).
+
+\textbf{Error:} As mentioned previously, each participant (i.e., cookie) differs to some extent from our model (``mean cookie''). In general this can be conceptualized as:
+
+\[
+\begin{aligned} 
+X_i &= model + error_i \\
+\end{aligned} 
+\]
+
+More specifically, the difference between the weight of any individual cookie (\(X_i\)) and the model (\(\mu\)) is indicated by \(error_i\) as shown below.
 
 \[
 \begin{aligned} 
@@ -4802,18 +4804,18 @@ X_3 &= 10 + 2 \\
 \end{aligned} 
 \]
 
-The mean of the population, \(\mu = 10\), is a parameter that serves as model for the data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data.
+The mean of the population, \(\mu = 10\), is a parameter that serves as model for the data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. Or perhaps more accurately, it's helpful to have a single number that indicates extent to which the data (e.g., cookie weights) differs from the model.
 
 \hypertarget{variance-sigma2}{%
 \subsection{\texorpdfstring{Variance (\(\sigma^2\))}{Variance (\textbackslash sigma\^{}2)}}\label{variance-sigma2}}
 
-Variance is a simple way of calculating how well the model fits our data. It is represented by the symbol \(\sigma^2\).
+Variance is a simple way of calculating how well data differs from the model. It is represented by the symbol \(\sigma^2\).
 
 \begin{figure}
 \includegraphics[width=0.6\linewidth]{ch_populations/images/cookie} \caption{Variance as a fit index for the mean}\label{fig:meancookie}
 \end{figure}
 
-We want to index the extent to which the model fits our data -- that is, we want to see the extent to which the data differs from our ``mean cookie'' model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure \ref{fig:meancookie}. The deviation between each data point and the model is referred to as error.
+We want to index the extent to which the data differs from the model -- that is, we want to see the extent to which the cookie weights differ from our ``mean cookie'' model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model.
 
 \textbf{Why use squared errors?} Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., \((8 - 10)^2 = 4\)). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., \((8 - 10) = -2\)) or take the absolute difference (e.g., \(|8 - 10|= 2\))? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.
 

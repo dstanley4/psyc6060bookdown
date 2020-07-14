@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-12" />
+<meta name="date" content="2020-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -372,14 +372,8 @@ FIGURE 4.1: Data for understanding summation notation
 <p>Populations are typically quite large but, for the purpose of reviewing how we typically describe populations, we focus on a population of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
 <div id="mean-mu" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Mean (<span class="math inline">\(\mu\)</span>)</h3>
-<p>It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly. Each participant will differ to some extent from the model. The difference between each participant and the model is called error.</p>
-<p>Consider a model for our three cookies. The weight of a specific cookie is indicated by <span class="math inline">\(X_i\)</span>. An estimate of that cookie’s weight is indicated by the “model”. The difference between the model of the cookie’s weight and actual cookie’s weight is indicated by <span class="math inline">\(error_i\)</span>.</p>
-<p><span class="math display">\[
-\begin{aligned} 
-X_i &amp;= model + error_i \\
-\end{aligned} 
-\]</span></p>
-<p>We can create a model for our data using many different approaches. A simple model for our data is the mean, <span class="math inline">\(\mu\)</span>:</p>
+<p>It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.</p>
+<p><strong>Model:</strong> To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. The weight of each cookie is designated <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>, respectively. A simple model for our data is the mean, <span class="math inline">\(\mu\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \mu &amp;= \frac{\sum{X}}{N} \\
@@ -389,7 +383,14 @@ X_i &amp;= model + error_i \\
 &amp;= 10\\
 \end{aligned} 
 \]</span></p>
-<p>Then we can think of this “mean cookie”, <span class="math inline">\(\mu\)</span>, our model:</p>
+<p>We can think of the “mean cookie” as our model, see Figure XX. The “mean cookie” is represented by <span class="math inline">\(\mu\)</span>.</p>
+<p><strong>Error:</strong> As mentioned previously, each participant (i.e., cookie) differs to some extent from our model (“mean cookie”). In general this can be conceptualized as:</p>
+<p><span class="math display">\[
+\begin{aligned} 
+X_i &amp;= model + error_i \\
+\end{aligned} 
+\]</span></p>
+<p>More specifically, the difference between the weight of any individual cookie (<span class="math inline">\(X_i\)</span>) and the model (<span class="math inline">\(\mu\)</span>) is indicated by <span class="math inline">\(error_i\)</span> as shown below.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 X_i &amp;= \mu + error_i \\
@@ -411,18 +412,18 @@ X_2 &amp;= 10 + 0 \\
 X_3 &amp;= 10 + 2 \\
 \end{aligned} 
 \]</span></p>
-<p>The mean of the population, <span class="math inline">\(\mu = 10\)</span>, is a parameter that serves as model for the data. When we calculate a model for our data, it’s helpful to have an index of how well the model fits the data.</p>
+<p>The mean of the population, <span class="math inline">\(\mu = 10\)</span>, is a parameter that serves as model for the data. When we calculate a model for our data, it’s helpful to have an index of how well the model fits the data. Or perhaps more accurately, it’s helpful to have a single number that indicates extent to which the data (e.g., cookie weights) differs from the model.</p>
 </div>
 <div id="variance-sigma2" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Variance (<span class="math inline">\(\sigma^2\)</span>)</h3>
-<p>Variance is a simple way of calculating how well the model fits our data. It is represented by the symbol <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Variance is a simple way of calculating how well data differs from the model. It is represented by the symbol <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="figure"><span id="fig:meancookie"></span>
 <img src="ch_populations/images/cookie.png" alt="Variance as a fit index for the mean" width="60%" />
 <p class="caption">
 FIGURE 4.2: Variance as a fit index for the mean
 </p>
 </div>
-<p>We want to index the extent to which the model fits our data – that is, we want to see the extent to which the data differs from our “mean cookie” model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model. With this approach we determine the extent to which data point deviates from our model (our mean cookie), see Figure <a href="populations.html#fig:meancookie">4.2</a>. The deviation between each data point and the model is referred to as error.</p>
+<p>We want to index the extent to which the data differs from the model – that is, we want to see the extent to which the cookie weights differ from our “mean cookie” model. Variance is a simple approach to assessing the fit of the model - or more accurately the lack of fit of our model.</p>
 <p><strong>Why use squared errors?</strong> Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., <span class="math inline">\((8 - 10)^2 = 4\)</span>). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., <span class="math inline">\((8 - 10) = -2\)</span>) or take the absolute difference (e.g., <span class="math inline">\(|8 - 10|= 2\)</span>)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing error). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.</p>
 <table>
 <thead>
