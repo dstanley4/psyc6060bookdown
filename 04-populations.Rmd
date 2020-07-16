@@ -164,24 +164,41 @@ X_3 &= 10 + 2 \\
 $$
 
 
-The mean of the population, $\mu = 10$, is a parameter that serves as model for the cookie weight data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. Or perhaps more accurately, it's helpful to have a single number that indicates extent to which the data (e.g., cookie weights) differs from the model.
+The mean of the population, $\mu = 10$, is a parameter that serves as model for the cookie weight data. When we calculate a model for our data, it's helpful to have an index of how well the model fits the data. Or perhaps more accurately, it's helpful to have a single number that indicates the extent to which the data (e.g., cookie weights) differ from the model.
 
 ### Variance ($\sigma^2$)
 
-Variance is a simple way of calculating how data differs from the model. It is represented by the symbol $\sigma^2$.
+Variance is a simple way of calculating a single number to represent how data differ from a model. It is represented by the symbol $\sigma^2$.
 
-We want to index the extent to which the data differs from the model -- that is, we want to see the extent to which the cookie weights differ from our "mean cookie" model. Variance is a simple approach to assessing the fit of a model - or more accurately the lack of fit of a model. 
+Recall, how we expressed difference/deviation from a model with an error term previously:
 
-**Why use squared errors?** Error, the extent to which the data deviates from the model, is calculated using squared differences. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just take the difference (e.g., $(8 - 10) = -2$) or take the absolute difference (e.g., $|8 - 10|= 2$)? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing errors). When we use error as the squared difference it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex statistical reasons, we use squared differences to index error rather than other approaches.
+$$
+\begin{aligned} 
+X_1 &= \mu + error_1 \\
+\end{aligned} 
+$$
+
+With values:
+
+$$
+\begin{aligned} 
+X_1 &= 10 + (-2) \\
+\end{aligned} 
+$$
 
 
-| Cookie Mass |  Model | Error = Squared Difference | 
+Variance is a single number that indicate the extent to which the data differ from the model. That is, we want to index the extent to which the cookie weights differ from our "mean cookie" model. Variance is a simple approach to assessing the fit of a model - or more accurately the lack of fit of a model. 
+
+Errors, the extent to which the data differ from the model, are squared when calculating variance. That is, take each data point, subtract the model value, and then square the resulting number (e.g., $(8 - 10)^2 = 4$). You can see this done for all of the cookie weights:
+
+| Cookie Weight |  Model | Error = Squared Difference | 
 | ---         |  ---   |  ---             |
 | $X_1 = 8$  |  $\mu = 10$ |  $(X_1 - \mu)^2 =(8 - 10)^2= 4$ |
 | $X_2 = 10$  |  $\mu = 10$ |  $(X_2 - \mu)^2 =(10 - 10)^2= 0$ |
 | $X_3 = 12$  |  $\mu = 10$ |  $(X_3 - \mu)^2 =(12 - 10)^2= 4$ |
 
-You can see in the table above that we can calculate the squared differences for data points 1 through 3 (i.e., cookie weights 1 through 3). The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average. This calculation, $(4 + 0 + 4)/3 = 2.67$, tells us the average of the squared deviations from the model is 2.67 grams$^2$. Because we squared the differences the units  are also squared; in this case grams$^2$. We refer to 2.67 grams$^2$ as the variance. 
+
+You can see in the table above that we can calculate the squared differences, also refered to as squared deviations, for cookies 1 through 3 (i.e., cookie weights 1 through 3). The squared differences are 4, 0, and 4, respectively. We combine these numbers into a single index by taking an average of the three squared errors. This calculation, $(4 + 0 + 4)/3 = 2.67$, tells us the average of the squared differences from the model is 2.67 grams$^2$. Because we squared the differences the units are also squared; in this case grams become grams$^2$. We refer to 2.67 grams$^2$ as the variance. 
 
 Recall the formula for calculating an average:
 
@@ -206,7 +223,9 @@ $$
 $$
 
 
-**Interpretation**. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same mass as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger  differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to similar to the model -- and each other. In contrast, when the variance is large, cookie weights tend to different from the model -- and each other.
+It probably strikes you as an odd choice to square the difference between each data point and the model. Why not  use just the difference (e.g., $(8 - 10) = -2$) when calculating variance? Why not use the absolute difference (e.g., $|8 - 10|= 2$) when calculating variance? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing errors). When we squared errors it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex mathematical reasons, we use squared errors when calculating the fit (or lack of fit) of a model.
+
+**Interpretation**. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger  differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to be similar to the model -- and each other. In contrast, when the variance is large, cookie weights tend to be different from the model -- and each other.
 
 ### Standard Deviation ($\sigma$)
 
@@ -220,7 +239,7 @@ $$
 \end{aligned} 
 $$
 
-Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. Standard deviation can be thought of as the sum of the absolute deviations from the mean divided by the square root of the number of observations. Standard deviation is not an average - because you are dividing by the square root of N instead of just N. As a result, it's much harder to describe what standard deviation means.
+Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. Standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations. Standard deviation is not an average - because you are dividing by the square root of N instead of just N. As a result, it's much harder to describe what standard deviation means.
 
 $$
 \begin{aligned} 
