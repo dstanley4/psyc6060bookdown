@@ -214,7 +214,10 @@ It probably strikes you as an odd choice to square the difference between each d
 
 ### Standard Deviation ($\sigma$)
 
-Variance is easy to interpret as the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams$^2$). Consequently, some people prefer to take the square root of this value and call it standard deviation; representing it with the symbol $\sigma$.
+Variance is a single number that index how data differ from a model. The interpretation of variance is straight forward. It is the average of the squared differences between the data and the model. 
+
+An alternative index for how data differ from the mean/model is the standard deviation. Standard deviation is represented by the symbol $\sigma$ and can be calculated as the square root of variance:
+
 
 $$
 \begin{aligned} 
@@ -224,7 +227,9 @@ $$
 \end{aligned} 
 $$
 
-Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below: 
+One reason that people like standard deviation is that  variance presents the difference betweeeen the data and the model in squared units (e.g., 2.67 grams$^2$). In contrast, standard deviation presents the difference betweeeen the data and the model in the original unit (e.g., grams). Consequently, some people prefer standard deviation.
+
+**Interpretation**. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below: 
 
 $$
 \begin{aligned} 
@@ -233,9 +238,11 @@ $$
 \end{aligned} 
 $$
 
-As illustrated above, standard deviation is not an average. It's not an average because you are dividing by the square root of N instead of just N. As a result, it's much harder to describe how to interpret standard deviation.
+As illustrated above, standard deviation is not an average. It's not an average because you are dividing by the square root of N instead of just N. Because standard deviation is not an average, it's much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has straight forward interpretation.
 
-We encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.
+Therefore, we encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.
+
+Overall, the rules for interpreting standard deviation are similar to those for variance; but the standard deviation values are smaller than variance values. In the cookie case, if the standard deviation was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the standard deviation is larger than zero it implies the data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger standard deviation indicates larger differences among the observations (e.g., cookie weights). That is, when the standard deviation is small, cookie weights tend to be similar to the model -- and each other. In contrast, when the standard deviation is large, cookie weights tend to be different from the model -- and each other.
 
 
 ```{r, include = FALSE}

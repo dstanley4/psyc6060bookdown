@@ -369,11 +369,11 @@ FIGURE 4.1: Data for understanding summation notation
 </div>
 <div id="a-small-population" class="section level2">
 <h2><span class="header-section-number">4.3</span> A small population</h2>
-<p>In this section we review how to calculate three commonly used population parameters. Populations are typically quite large but for simplicity we focus on a population of composed of the weights of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
+<p>In this section we review how to calculate three commonly used population parameters. Populations are typically quite large but for simplicity we focus on a population composed of the weights of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
 <div id="mean-mu" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Mean (<span class="math inline">\(\mu\)</span>)</h3>
 <p>It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.</p>
-<p><strong>Model:</strong> To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights the three cookies are designated by <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol <span class="math inline">\(\mu\)</span>; at the sample level a different notation is used.</p>
+<p><strong>Model:</strong> To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights of the three cookies are designated by <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol <span class="math inline">\(\mu\)</span>; at the sample level a different notation is used.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \mu &amp;= \frac{\sum{X}}{N} \\
@@ -476,11 +476,12 @@ X_1 &amp;= 10 + (-2) \\
 \end{aligned} 
 \]</span></p>
 <p>It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just use the difference (e.g., <span class="math inline">\((8 - 10) = -2\)</span>) when calculating variance? Why not use the absolute difference (e.g., <span class="math inline">\(|8 - 10|= 2\)</span>) when calculating variance? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing errors). When we use squared errors it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex mathematical reasons, we use squared errors when calculating the fit (or lack of fit) of a model.</p>
-<p><strong>Interpretation</strong>. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to be similar to the model – and each other. In contrast, when the variance is large, cookie weights tend to be different from the model – and each other.</p>
+<p><strong>Interpretation</strong>. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies the data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to be similar to the model – and each other. In contrast, when the variance is large, cookie weights tend to be different from the model – and each other.</p>
 </div>
 <div id="standard-deviation-sigma" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Standard Deviation (<span class="math inline">\(\sigma\)</span>)</h3>
-<p>Variance is easy to interpret as the average of the squared differences between the model and the data. However, variance presents an answer in squared units (e.g., 2.67 grams<span class="math inline">\(^2\)</span>). Consequently, some people prefer to take the square root of this value and call it standard deviation; representing it with the symbol <span class="math inline">\(\sigma\)</span>.</p>
+<p>Variance is a single number that index how data differ from a model. The interpretation of variance is straight forward. It is the average of the squared differences between the data and the model.</p>
+<p>An alternative index for how data differ from the mean/model is the standard deviation. Standard deviation is represented by the symbol <span class="math inline">\(\sigma\)</span> and can be calculated as the square root of variance:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sigma &amp;= \sqrt{var(X)} \\
@@ -488,15 +489,17 @@ X_1 &amp;= 10 + (-2) \\
 &amp;= 1.63 grams\\
 \end{aligned} 
 \]</span></p>
-<p>Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below:</p>
+<p>One reason that people like standard deviation is that variance presents the difference betweeeen the data and the model in squared units (e.g., 2.67 grams<span class="math inline">\(^2\)</span>). In contrast, standard deviation presents the difference betweeeen the data and the model in the original unit (e.g., grams). Consequently, some people prefer standard deviation.</p>
+<p><strong>Interpretation</strong>. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below:</p>
 <p><span class="math display">\[
 \begin{aligned} 
-sd(X) &amp;= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
+\sigma &amp;= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
  &amp;= \frac{\sum{|X - \bar{X}|}}{\sqrt{N}}\\
 \end{aligned} 
 \]</span></p>
-<p>As illustrated above, standard deviation is not an average. It’s not an average because you are dividing by the square root of N instead of just N. As a result, it’s much harder to describe how to interpret standard deviation.</p>
-<p>We encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.</p>
+<p>As illustrated above, standard deviation is not an average. It’s not an average because you are dividing by the square root of N instead of just N. Because standard deviation is not an average, it’s much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has straight forward interpretation.</p>
+<p>Therefore, we encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.</p>
+<p>Overall, the rules for interpreting standard deviation are similar to those for variance; but the standard deviation values are smaller than variance values. In the cookie case, if the standard deviation was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the standard deviation is larger than zero it implies the data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger standard deviation indicates larger differences among the observations (e.g., cookie weights). That is, when the standard deviation is small, cookie weights tend to be similar to the model – and each other. In contrast, when the standard deviation is large, cookie weights tend to be different from the model – and each other.</p>
 </div>
 </div>
 <div id="visualizing-populations" class="section level2">
