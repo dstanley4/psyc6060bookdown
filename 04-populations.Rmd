@@ -98,13 +98,13 @@ Statistic tests are a means of helping researchers use sample data to make concl
 
 ## A small population
 
-In this section we review how to calculate three commonly used population parameters. Populations are typically quite large but for simplicity we focus on a population of composed of the weights of just three chocolate chip cookies. We refer to the three cookies as $X_1$, $X_2$, and $X_3$. The cookies have the weights of 8, 10, and 12 grams, respectively. 
+In this section we review how to calculate three commonly used population parameters. Populations are typically quite large but for simplicity we focus on a population composed of the weights of just three chocolate chip cookies. We refer to the three cookies as $X_1$, $X_2$, and $X_3$. The cookies have the weights of 8, 10, and 12 grams, respectively. 
 
 ### Mean ($\mu$)
 
 It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.
 
-**Model:** To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights the three cookies are designated by $X_1$, $X_2$, and $X_3$. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol $\mu$; at the sample level a different notation is used.
+**Model:** To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights of the three cookies are designated by $X_1$, $X_2$, and $X_3$. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol $\mu$; at the sample level a different notation is used.
 
 
 $$
@@ -123,8 +123,6 @@ We can think of the “mean cookie" as our model for our cookie weight data, see
 ```{r meancookie, echo=FALSE, out.width="60%", fig.cap="Variance as a fit index for the mean"}
 knitr::include_graphics("ch_populations/images/cookie.png")
 ```
-
-
 
 **Error:**  As mentioned previously, each participant (i.e., cookie) differs to some extent from our model (“mean cookie"). In general this can be conceptualized as:
 
@@ -212,7 +210,7 @@ $$
 
 It probably strikes you as an odd choice to square the difference between each data point and the model. Why not just use the difference (e.g., $(8 - 10) = -2$) when calculating variance? Why not use the absolute difference (e.g., $|8 - 10|= 2$) when calculating variance? The answer is somewhat complex, but it relates to the more general situation in statistics of trying to find models that best fit the data (which occurs by minimizing errors). When we use squared errors it is easier to apply calculus, via derivatives, to calculate a model that minimizes the errors (i.e., obtains the best fit). Long story short, for complex mathematical reasons, we use squared errors when calculating the fit (or lack of fit) of a model.
 
-**Interpretation**. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to be similar to the model -- and each other. In contrast, when the variance is large, cookie weights tend to be different from the model -- and each other.
+**Interpretation**. A variance of zero indicates that the model fits the data perfectly. In the cookie case, if the variance was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the variance is larger than zero it implies the data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger variance indicates larger differences among the observations (e.g., cookie weights). That is, when the variance is small, cookie weights tend to be similar to the model -- and each other. In contrast, when the variance is large, cookie weights tend to be different from the model -- and each other.
 
 ### Standard Deviation ($\sigma$)
 
@@ -230,7 +228,7 @@ Unfortunately, although variance has a straight forward interpretation, standard
 
 $$
 \begin{aligned} 
-sd(X) &= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
+\sigma &= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
  &= \frac{\sum{|X - \bar{X}|}}{\sqrt{N}}\\
 \end{aligned} 
 $$
