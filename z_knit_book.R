@@ -1,5 +1,6 @@
 
 # Reminder: restart R first
+
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", output_format = "bookdown::pdf_book")
 bookdown::render_book("index.Rmd", output_format = "bookdown::epub_book")
