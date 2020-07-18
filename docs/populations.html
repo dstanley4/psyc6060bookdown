@@ -369,7 +369,7 @@ FIGURE 4.1: Data for understanding summation notation
 </div>
 <div id="a-small-population" class="section level2">
 <h2><span class="header-section-number">4.3</span> A small population</h2>
-<p>In this section we review how to calculate three commonly used population parameters. Populations are typically quite large but for simplicity we focus on a population composed of the weights of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
+<p>In this section we review how to calculate three commonly used population parameters (mean, variance, and standard deviation). Populations are typically quite large but for simplicity we focus on a population composed of the weights of just three chocolate chip cookies. We refer to the three cookies as <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_3\)</span>. The cookies have the weights of 8, 10, and 12 grams, respectively.</p>
 <div id="mean-mu" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Mean (<span class="math inline">\(\mu\)</span>)</h3>
 <p>It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.</p>
@@ -480,8 +480,8 @@ X_1 &amp;= 10 + (-2) \\
 </div>
 <div id="standard-deviation-sigma" class="section level3">
 <h3><span class="header-section-number">4.3.3</span> Standard Deviation (<span class="math inline">\(\sigma\)</span>)</h3>
-<p>Variance is a single number that index how data differ from a model. The interpretation of variance is straight forward. It is the average of the squared differences between the data and the model.</p>
-<p>An alternative index for how data differ from the mean/model is the standard deviation. Standard deviation is represented by the symbol <span class="math inline">\(\sigma\)</span> and can be calculated as the square root of variance:</p>
+<p>An alternative index for how data differ from the mean/model is the standard deviation. To understand standard deviation you have to understand varince. Variance is a single number that indexes how data differ from a model. The interpretation of variance is straight forward. It is the average of the squared differences between the data and the model.</p>
+<p>Standard deviation is represented by the symbol <span class="math inline">\(\sigma\)</span> and can be calculated as the square root of variance:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sigma &amp;= \sqrt{var(X)} \\
@@ -489,7 +489,7 @@ X_1 &amp;= 10 + (-2) \\
 &amp;= 1.63 grams\\
 \end{aligned} 
 \]</span></p>
-<p>One reason that people like standard deviation is that variance presents the difference betweeeen the data and the model in squared units (e.g., 2.67 grams<span class="math inline">\(^2\)</span>). In contrast, standard deviation presents the difference betweeeen the data and the model in the original unit (e.g., grams). Consequently, some people prefer standard deviation.</p>
+<p>One reason that people like standard deviation is presents the difference betweeeen the data and the model in the original units (e.g., grams). This is in contrast to variance which presents the difference betweeen the data and the model in squared units (e.g., 2.67 grams<span class="math inline">\(^2\)</span>).</p>
 <p><strong>Interpretation</strong>. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -520,12 +520,12 @@ X_1 &amp;= 10 + (-2) \\
 <div id="individual-scores" class="section level4">
 <h4><span class="header-section-number">4.5.1.1</span> Individual scores</h4>
 <p>Often when we compare two means we use the original metric. In the case of the male and female heights that metric is centimeters. The original units are a useful way to convey information about the difference between two populations.</p>
-<p>In addition to the original unit metric it is also possible, and sometimes desirable, to use the standardized mean difference. The word <em>standardized</em> is used to indicate that the comparison is relative to the standard deviation.</p>
+<p>In addition to the original unit it is also possible, and sometimes desirable, to use the standardized mean difference. The word <em>standardized</em> is used to indicate that the comparison is relative to the standard deviation.</p>
 <p>Imagine a population of male heights (<span class="math inline">\(\mu = 170\)</span>, <span class="math inline">\(\sigma = 10\)</span>) from which we have obtained a single individual, Ian, whose height is 185 cm.</p>
 <p><span class="math display">\[
 X_{Ian} = 185cm
 \]</span></p>
-<p>The raw metric is useful for describing Ian’s height but it doesn’t tell use about his height relative to the other people in the population. We have to know the mean and standard deviation of the population to know if Ian is shorter or taller than the average height - and by how much.</p>
+<p>The original units are useful for describing Ian’s height but it doesn’t tell us about his height relative to the other people in the population. We have to know the mean and standard deviation of the population to know if Ian is shorter or taller than the average height - and by how much. We use a <span class="math inline">\(z\)</span>-score calculation for this purpose:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 z_{Ian} &amp;=  \frac{X_{Ian} - \mu_{males}}{\sigma_{males}}\\ 
@@ -544,7 +544,7 @@ z_{Ian} &amp;=  \frac{X_{Ian} - \mu_{males}}{\sigma_{males}}\\
 <p>In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations. The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is half as large as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; <span class="math inline">\(\delta = 0.50\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned} 
-\delta &amp;=  \frac{\mu_{males} - \mu_{males}}{\sigma}\\ 
+\delta &amp;=  \frac{\mu_{males} - \mu_{females}}{\sigma}\\ 
 &amp;=  \frac{170 - 165}{10}\\
 &amp;=  \frac{5}{10}\\
 &amp;= 0.50
@@ -554,7 +554,7 @@ z_{Ian} &amp;=  \frac{X_{Ian} - \mu_{males}}{\sigma_{males}}\\
 </div>
 <div id="cohens-d-units" class="section level3">
 <h3><span class="header-section-number">4.5.2</span> Cohen’s <span class="math inline">\(d\)</span> units</h3>
-<p>Because the metric for the standardized mean difference is the standard deviation it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report difference between populations in both the original units (cm) and standardized units (<span class="math inline">\(\delta\)</span>). Figure <a href="populations.html#fig:dex1">4.3</a> illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see that as the difference between the population means increases in raw units - it does the same in <span class="math inline">\(\delta\)</span> (i.e., Cohen’s <span class="math inline">\(d\)</span>) units. In raw units (i.e., cm), the difference between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50 standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen’s <span class="math inline">\(d\)</span>-values are 0.50, 1.0, and 2.0 for scenarios A through C.</p>
+<p>Because the unit for the standardized mean difference is the standard deviation it can be easy to interpret if you are unfamiliar with the original units. It is usually a good idea to report the difference between populations in both the original units (cm) and standardized units (<span class="math inline">\(\delta\)</span>). Figure <a href="populations.html#fig:dex1">4.3</a> illustrates three different population difference scenarios (A through C). The population standard deviation is held constant across the three scenarios. You can see that as the difference between the population means increases in raw units - it does the same in <span class="math inline">\(\delta\)</span> (i.e., Cohen’s <span class="math inline">\(d\)</span>) units. In raw units (i.e., cm), the difference between the population means for scenarios A through C are 5 cm, 10 cm, and 20 cm, respectively. In standardized units (i.e., standard deviations), the difference the between the population means for scenarios A through C are 0.50 standard deviations, 1.0 standard deviations, and 2.0 standard deviations, respectively. In other words, the population-level Cohen’s <span class="math inline">\(d\)</span>-values are 0.50, 1.0, and 2.0 for scenarios A through C.</p>
 <div class="figure"><span id="fig:dex1"></span>
 <img src="ch_populations/images/dvalue_ex1.png" alt="The difference between two population means can be expressed in the original units as indicated by $\Delta M$. Alternatively, the difference can be expressed using a Standardized Mean Difference (SMD). The SMD index is also known as the population-level $d$-value and is represented by the symbol $\delta$. The SMD is a way of expressing the difference between population means without using the original units. " width="100%" />
 <p class="caption">
@@ -566,9 +566,9 @@ FIGURE 4.3: The difference between two population means can be expressed in the 
 <h3><span class="header-section-number">4.5.3</span> Cohen’s <span class="math inline">\(d\)</span> advantages</h3>
 <p>The standardized mean difference takes into account the variability of heights around each population mean. This means that the same difference between two population means can produce different standardized mean difference values if the population standard deviation varies. In the scenarios depicted in Figure <a href="populations.html#fig:dex2">4.4</a> the population standard deviation becomes increasing small - resulting in larger standardized mean difference values (i.e., <span class="math inline">\(\delta\)</span>). This larger <span class="math inline">\(\delta\)</span> value corresponds to progressively less overlap between the two populations. Thus, taking into account the standard deviation of the populations can be viewed as a strength of using the standardized mean difference.</p>
 <div class="figure"><span id="fig:dex2"></span>
-<img src="ch_populations/images/dvalue_ex2.png" alt="An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., $\delta$) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only looked the difference in the original units (i.e., $\Delta M$) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by $\delta$ - the population $d$-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C." width="100%" />
+<img src="ch_populations/images/dvalue_ex2.png" alt="An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., $\delta$) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only examined the difference in the original units (i.e., $\Delta M$) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by $\delta$ - the population $d$-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C." width="100%" />
 <p class="caption">
-FIGURE 4.4: An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., <span class="math inline">\(\delta\)</span>) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only looked the difference in the original units (i.e., <span class="math inline">\(\Delta M\)</span>) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by <span class="math inline">\(\delta\)</span> - the population <span class="math inline">\(d\)</span>-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C.
+FIGURE 4.4: An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., <span class="math inline">\(\delta\)</span>) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only examined the difference in the original units (i.e., <span class="math inline">\(\Delta M\)</span>) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by <span class="math inline">\(\delta\)</span> - the population <span class="math inline">\(d\)</span>-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C.
 </p>
 </div>
 </div>
@@ -576,29 +576,30 @@ FIGURE 4.4: An advantage of using the Standardized Mean Difference (SMD) to inde
 <h3><span class="header-section-number">4.5.4</span> Cohen’s <span class="math inline">\(d\)</span> caveats</h3>
 <p>It is important to also look at the original units when interpreting results - not just the standardized mean difference. Examine the scenarios in Figure <a href="populations.html#fig:dex3">4.5</a>. Notice how the <span class="math inline">\(\delta\)</span> value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen’s <span class="math inline">\(d\)</span>) provide important interpretational information - don’t rely on just one of them.</p>
 <div class="figure"><span id="fig:dex3"></span>
-<img src="ch_populations/images/dvalue_ex3.png" alt="The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This constant SMD occurs because the standard deviations also changes across the three scenarios." width="100%" />
+<img src="ch_populations/images/dvalue_ex3.png" alt="The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original; this occurs because the standard deviations also changes across the three scenarios." width="100%" />
 <p class="caption">
-FIGURE 4.5: The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population <span class="math inline">\(d\)</span>-value or <span class="math inline">\(\delta\)</span>) can remain constant across scenarios when there is a change in the raw difference (i.e., <span class="math inline">\(\Delta M\)</span>) between the population means. This constant SMD occurs because the standard deviations also changes across the three scenarios.
+FIGURE 4.5: The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population <span class="math inline">\(d\)</span>-value or <span class="math inline">\(\delta\)</span>) can remain constant across scenarios when there is a change in the raw difference (i.e., <span class="math inline">\(\Delta M\)</span>) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original; this occurs because the standard deviations also changes across the three scenarios.
 </p>
 </div>
 </div>
 <div id="benchmarks" class="section level3">
 <h3><span class="header-section-number">4.5.5</span> Benchmarks</h3>
-<p>Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively <span class="citation">(Cohen <a href="#ref-cohen1988" role="doc-biblioref">1988</a>)</span>. These effect sizes are illustrated in Figure <a href="populations.html#fig:dex4">4.6</a>. As described in an interesting <a href="https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/">blog post</a>, these benchmark values came from reviewing a single issue of the <em>Journal of Abnormal and Social Psychology</em>. This was a relatively small number of studies - that were prone to publication bias. A recent investigation <span class="citation">(see Schäfer and Schwarz <a href="#ref-schafer2019meaningfulness" role="doc-biblioref">2019</a>)</span> of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.</p>
+<p>Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively <span class="citation">(Cohen <a href="#ref-cohen1988" role="doc-biblioref">1988</a>)</span>. These effect sizes are illustrated in Figure <a href="populations.html#fig:dex4">4.6</a>. As described in an interesting <a href="https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/">blog post</a>, these benchmark values came from reviewing a single issue of the <em>Journal of Abnormal and Social Psychology</em>. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation <span class="citation">(see Schäfer and Schwarz <a href="#ref-schafer2019meaningfulness" role="doc-biblioref">2019</a>)</span> of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.</p>
 <div class="figure"><span id="fig:dex4"></span>
 <img src="ch_populations/images/dvalue_ex4.png" alt="Cohen's (1988) effect size benchmarks." width="100%" />
 <p class="caption">
 FIGURE 4.6: Cohen’s (1988) effect size benchmarks.
 </p>
 </div>
-<p>You can investigate the look of any <span class="math inline">\(\delta\)</span> value (i.e., population <span class="math inline">\(d\)</span>-value) using the rpsychologist <a href="https://rpsychologist.com/d3/cohend/">website</a>. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given <span class="math inline">\(\delta\)</span>/d value.</p>
+<p>You can visualize any <span class="math inline">\(\delta\)</span> value (i.e., population <span class="math inline">\(d\)</span>-value) using the rpsychologist <a href="https://rpsychologist.com/d3/cohend/">website</a>. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given <span class="math inline">\(\delta\)</span>/d value.</p>
 </div>
 </div>
 <div id="key-points" class="section level2">
 <h2><span class="header-section-number">4.6</span> Key points</h2>
-<ul>
+<ol style="list-style-type: decimal">
 <li><p>Populations are described using numbers called parameters.</p></li>
-<li><p>Commonly used parameters include mean (<span class="math inline">\(\mu\)</span> or <span class="math inline">\(\bar{X}\)</span>), variance (<span class="math inline">\(\sigma^2\)</span>), or standard deviation (<span class="math inline">\(\sigma\)</span>). Population-level parameters are often represented using Greek letter.</p></li>
+<li><p>Population-level parameters are often represented using Greek letter.</p></li>
+<li><p>Commonly used parameters include mean (<span class="math inline">\(\mu\)</span> or <span class="math inline">\(\bar{X}\)</span>), variance (<span class="math inline">\(\sigma^2\)</span>), or standard deviation (<span class="math inline">\(\sigma\)</span>).</p></li>
 <li><p>Individual scores can be expressed in standardized units.</p></li>
 <li><p>Population differences can be described in original raw units or standardized units called the standardized mean difference (SMD).</p></li>
 <li><p>SMD is based on the premise that the two population being compared have the same standard deviation.</p></li>
@@ -606,7 +607,7 @@ FIGURE 4.6: Cohen’s (1988) effect size benchmarks.
 <li><p>Make sure you understand what is represented by both the numerator and denominator in the SMD ratio.</p></li>
 <li><p>SMD (i.e,. Cohen’s d) represents the number of standard deviations between two population means. Recall both populations have the same standard deviation.</p></li>
 <li><p>SMD is indicated at the population level using the Greek letter delta (<span class="math inline">\(\delta\)</span>). At the sample level we tend to use the term “<span class="math inline">\(d\)</span>-value” or “Cohen’s <span class="math inline">\(d\)</span>”.</p></li>
-</ul>
+</ol>
 
 
 </div>
