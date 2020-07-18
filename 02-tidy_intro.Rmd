@@ -58,17 +58,16 @@ But it's also helpful just to see a list of the columns in the data with the gli
 glimpse(okcupid_profiles)
 ```
 
-The glimpse() command is useful but is quickly allows you to see all of the columns. Moreover, it allows you to see the type for each column. Types were briefly discussed in the last chapter. Notice in the output beside each column name some columns are labeled <dbl> which is short for double -- a type of numeric column. Other columns columns are labeled <chr> which is short for character - meaning the columns contain characters. These designations will become important in the next chapter as we prepare data for analysis.
+The glimpse() command is useful because it quickly allows you to see all of the columns. Moreover, it allows you to see the type for each column. Types were briefly discussed in the last chapter. Notice in the output beside each column name that some columns are labeled "dbl" which is short for double -- a type of numeric column. Other columns are labeled "chr" which is short for character - meaning the columns contain characters. These designations will become important in the next chapter as we prepare data for analysis.
 
 ### select()
 
-The select() command allows you to obtain a subset of the columns in your data. The commands below can be used to obtain the age and height columns. You can read the command as: take the okcupid_profiles data and then select the age and height columns. The "%>%" symbol can be read as "and then". You can see that this code prints out the data with just the age and height columns. Remember, use SHIFT-ENTER or SHIFT-RETURN to move he next line in the block of code.
+The select() command allows you to obtain a subset of the columns in your data. The commands below can be used to obtain the age and height columns. You can read the command as: take the okcupid_profiles data and then select the age and height columns. The "%>%" symbol can be read as "and then". You can see that this code prints out the data with just the age and height columns. Remember, use SHIFT-ENTER or SHIFT-RETURN to move to the next line in the block of code.
 
 ```{r}
 okcupid_profiles %>% 
   select(age, height)
 ```
-
 
 Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data. In the command below we store the resulting data in a new data set called new_data.
 
@@ -100,7 +99,7 @@ glimpse(new_data)
 
 The summarise() command can be used to generate descriptive statistics for a specified column. You can easily calculate column descriptive statistics using the corresponding commands for mean(), sd(), min(), max(), among others. In the example below we calculate the mean for the age column.
 
-In code below mean(age, na.rm = TRUE) indicates to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking: "Should we remove missing values when calculating the mean?" The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is placed into a variable labelled age_mean, though we could have used any label we wanted instead of age_mean. We see that the mean of the age column is, with rounding, `r round(mean(okcupid_profiles$age, na.rm = TRUE),1)`.
+In the code below, mean(age, na.rm = TRUE), indicates to R that it should calculate the mean of the age column. The na.rm indicates how missing values should be handled. The na stands for not available; in R missing values are classified as Not Available or NA. The rm stands for remove. Consequently, na.rm is asking: "Should we remove missing values when calculating the mean?" The TRUE indicates that yes, missing values should be removed when calculating the mean. The result of this calculation is placed into a variable labelled age_mean, though we could have used any label we wanted instead of age_mean. We see that the mean of the age column is, with rounding, `r round(mean(okcupid_profiles$age, na.rm = TRUE),1)`.
 
 ```{r}
 okcupid_profiles %>% 
@@ -135,7 +134,7 @@ Notice the structure of the original data below in the glimpse() output. There i
 glimpse(okcupid_profiles)
 ```
 
-We use the the filter command to select a subset of the rows based on the contents of any column. In this case the sex column. Notice the double equals sign is used to indicate "equal to". The reason a double equals sign is used here (instead of a single equals sign) is to distinguish it from the use of the single equals sign in the summarise command above. In the summarise command above, the single equal sign was used to indicate "assign to". That is assign to age_mean the mean of the column age after it is calculated calculated. A single equals sign indicates "assign to" whereas a double equals sign indicates "is equal to".
+We use the filter command to select a subset of the rows based on the content of any column. In this case the sex column is used to obtain a subset of the rows; the rows with the value "m" are obtained. Notice the double equals sign is used to indicate "equal to". The reason a double equals sign is used here (instead of a single equals sign) is to distinguish it from the use of the single equals sign in the summarise command above. In the summarise command above, the single equal sign was used to indicate "assign to". That is, assign to age_mean the mean of the column age after it is calculated. A single equals sign indicates "assign to" whereas a double equals sign indicates "is equal to".
 
 ```{r}
 okcupid_males <- okcupid_profiles %>%
@@ -147,13 +146,13 @@ okcupid_females <- okcupid_profiles %>%
   filter(sex == "f")
 ```
 
-We use glimpse() to inspect these all male data. Notice that only the letter m is in the sex column - indicating only males are in the data set. Also notice that there are `r dim(okcupid_males)[1]` rows in the okcupid_males data; fewer people because males are a subset of the total number of rows.
+We use glimpse() to inspect these all male data. Notice that only the letter m is in the sex column - indicating only males are in the data set. Also notice that there are `r dim(okcupid_males)[1]` rows in the okcupid_males data - fewer people because males are a subset of the total number of rows.
 
 ```{r}
 glimpse(okcupid_males)
 ```
 
-The filter command can be commbined with the summarise command to get the descriptive statistics for males without the hassle of creating a new data. This is again done using the %>% "and then" operator.
+The filter command can be combined with the summarise command to get the descriptive statistics for males without the hassle of creating new data. This is again done using the %>% "and then" operator.
 
 ```{r}
 okcupid_profiles %>%
@@ -186,7 +185,7 @@ okcupid_profiles %>%
             age_sd = sd(age, na.rm = TRUE)) 
 ```
 
-Fortunately, it's possible to use more than one grouping varible with the group_by() command. In the code below we group by sex and status (i.e., dating status). 
+Fortunately, it's possible to use more than one grouping variable with the group_by() command. In the code below we group by sex and status (i.e., dating status). 
 
 ```{r}
 okcupid_profiles %>%
@@ -200,7 +199,7 @@ The resulting output provide for age the mean and standard deviation for every c
 
 ### mutate()
 
-The mutate() command can be used to calculate a new column in a data.  In the example below we calculate a new column called age_centered which is the new version of the age_column where the mean of the column has been removed from every value. This is merely an example of the many different types of calculations can can perform to create a new column using mutate().
+The mutate() command can be used to calculate a new column in a data.  In the example below we calculate a new column called age_centered which is the new version of the age_column where the mean of the column has been removed from every value. This is merely an example of the many different types of calculations we can perform to create a new column using mutate().
 
 ```{r}
 okcupid_profiles <- okcupid_profiles %>%
@@ -228,7 +227,7 @@ data_exp <- read_csv("data_experiment.csv")
 
 ```
 
-The glimpse() command reveals that this is a small data where every row represents one rat. The sex of the rat is recorded as well as, for each of two time points, a rating of vomiting and aggression.
+The glimpse() command reveals that this is a small data set where every row represents one rat. The sex of the rat is recorded as well as, for each of two time points, a rating of vomiting and aggression.
 
 
 ```{r}
