@@ -201,13 +201,13 @@ Avoid numerical representation of categorical variables. Don't use 1 or 2 to rep
 
 If you have a study that involves within-participant predictors naming conventions can become examples. When you have a single repeated measures predictor like occasion in the previous running example, it is often necessary to spread the level of that variable over multiple columns (e.g., march, may, july).
 
-When you have multiple repeated measures predictor the situation is even more complicated. In this case, each column name needs to represent the levels of multiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have food type (i.e., food_type) as a predictor with three levels (pizza, steak, burger). You have a second predictor temperature with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores an name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated levels variables instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.
+When you have multiple repeated-measures predictors the situation is even more complicated. In this case, each column name needs to represent the levels of multiple repeated measures predictors at the time of data entry. For example, imagine you are a food researcher interested in taste ratings (the dependent variable) for various foods and contexts. You have a predictor, food type (i.e., food_type), with three levels (pizza, steak, burger). You have a second predictor, temperature, with two levels (hot, cold). All participants taste all foods at all temperatures. Thus, six columns are required to record taste rating for each participant: pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold. Notice how each name contains one level of each predictor variable. The levels by the two predictor variables are separated by a single underscore. This should be the only underscore in the variable name because that underscore will be used by the computer when changing the data to the tidy format. If you had two underscores in a name like "italian_pizza_hot" you would confuse the pivot_longer() command when it attempts to create a tidy version of the data. The computer would think there were three repeated-measures predictors instead of two. Thus, when dealing with repeated measures predictors, only use underscores to separate levels of predictor variables in column names.
 
 ## Following the examples
 
 Below we present example scripts transforming raw data to analytic data for various study designs (experimental and survey). These examples illustrate the value of using the naming conventions outlined previously. Don't just read the example - follow along with the projects by creating a separate script for each example.  Resist the urge to cut and paste from this document - type the script yourself.
 
-When first learning iPhone/Mac software development, I did so by taking a course at [Big Nerd Ranch](https://www.bignerdranch.com) - yes, that's a real place. They advised in their material (and now book) the following: "We have learned that “going through the motions” is much more important than it sounds. Many times we will ask you to start typing in code before you understand it. We realize that you may feel like a trained monkey typing in a bunch of code that you do not fully grasp. But the best way to learn coding is to find and fix your typos. Far from being a drag, this basic debugging is where you really learn the ins and outs of the code. That is why we encourage you to type in the code yourself. You could just download it, but copying and pasting is not programming. We want better for you and your skills.", p. xiv, [@keur2020]. This is excellent advice for a beginning statistician or data scientist as well. And as an aside: if you want to learn iPhone programming you can't go wrong the Big Nerd Ranch guide!
+When first learning iPhone/Mac software development, I did so by taking a course at [Big Nerd Ranch](https://www.bignerdranch.com) - yes, that's a real place. They advised in their material (and now book) the following: "We have learned that “going through the motions” is much more important than it sounds. Many times we will ask you to start typing in code before you understand it. We realize that you may feel like a trained monkey typing in a bunch of code that you do not fully grasp. But the best way to learn coding is to find and fix your typos. Far from being a drag, this basic debugging is where you really learn the ins and outs of the code. That is why we encourage you to type in the code yourself. You could just download it, but copying and pasting is not programming. We want better for you and your skills.", p. xiv, [@keur2020]. This is excellent advice for a beginning statistician or data scientist as well. And as an aside: if you want to learn iPhone programming you can't go wrong with the Big Nerd Ranch guide!
 
 As you work through this chapter, create your own new script for each example. In light of the above advice, avoid copying and pasting code - type it out; you will be the better for it. 
 
@@ -220,19 +220,19 @@ Getting started:
 
 For everyone in the class, that's it.
 
-For those of you reading this work not in the class, see the two options below:
+For those of you not in the class, and reading this work, see the two options below:
 
 **R Studio Cloud, custom project**
 
 1. Create a new Project using the web interface
 
-2. Upload all the example data files in to the project. The data files need are listed at the beginning of this chapter. The upload button can be found on the Files tab.
+2. Upload all the example data files into the project. The data files needed are listed at the beginning of this chapter. The upload button can be found on the Files tab.
 
 **R Studio Computer, custom project**
 
 1. Create a folder on your computer for the example
 
-2. Place all the example data files in that folder. The data files need are listed at the beginning of this chapter.
+2. Place all the example data files in that folder. The data files needed are listed at the beginning of this chapter.
 
 3. Use the menu item File > New Project... to start the project
 
@@ -242,9 +242,9 @@ For those of you reading this work not in the class, see the two options below:
 
 6. Press the Create Project Button
 
-Regardless of whether your are working from the cloud or locally you should now have an R Studio project with your data files in it. 
+Regardless of whether your are working from the cloud, or locally, you should now have an R Studio project with your data files in it. 
 
-We anticipate many people will doubtless want to refer back to an encapsulated set of instructions for each design. There for the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across example. We see this a strength  - because readers will see the commonalities across differ types of designs.
+We anticipate that many people will doubtless want to refer back to an encapsulated set of instructions for each design. Therefore the example for each design is written in a way that it stands alone. A consequence of this approach is that there is some redundancy in the code across examples. We see this a strength  - because readers will see the commonalities across differ types of designs.
 
 As you make a script for each example:
 
@@ -254,7 +254,7 @@ As you make a script for each example:
 
 * After you type each new block of code in an example, save your script.
 
-* After you type each new block of code in an example do two additional things: 1) Session Restart R, 2) Run your script using Source with Echo.
+* After you type each new block of code in an example, do two additional things: 1) Session Restart R, 2) Run your script using Source with Echo.
 
 ## Entering data into spreadsheets
 
@@ -264,7 +264,7 @@ The first example uses a data file data_ex_between.csv that corresponds to a fic
 knitr::include_graphics("ch_enter_load/images/screenshot_data_between.png")
 ```
 
-The key to using these types of programs is to the save the data as a .csv file when you are done. CSV is short for Comma Separated Values. After entering the data in Figure \@ref(fig:spreadsheetbetween) we saved it as data_ex_between.csv. There is no need to do so, but if you were to open this file in a text editor (such as TextEdit on a Mac or Notepad on Windows) you would see the information displayed in Figure   \@ref(fig:csvsheetbetween). You can see there is one row per person and the columns are created by separating each values by a comma; hence, comma separated values. 
+The key to using these types of programs is to save the data as a .csv file when you are done. CSV is short for Comma Separated Values. After entering the data in Figure \@ref(fig:spreadsheetbetween) we saved it as data_ex_between.csv. There is no need to do so, but if you were to open this file in a text editor (such as TextEdit on a Mac or Notepad on Windows) you would see the information displayed in Figure   \@ref(fig:csvsheetbetween). You can see there is one row per person and the columns are created by separating each values by a comma; hence, comma separated values. 
 
 ```{r csvsheetbetween, echo = FALSE, out.width="25%", fig.cap = "Text view of CSV data"}
 knitr::include_graphics("ch_enter_load/images/screenshot_csv_between.png")
@@ -275,7 +275,7 @@ There are many ways to save data, but the CSV data is one of the better ones bec
 
 ## Experiment: Between 
 
-This section outlines a workflow appropriate for when you plan to conduct independent groups t-tests or a between-participants ANOVA.
+This section outlines a workflow appropriate for when you plan to a conduct independent-groups t-test or a between-participants ANOVA.
 
 To Begin:
 
@@ -299,7 +299,7 @@ raw_data_beween <- read_csv(file = "data_ex_between.csv",
                      na = my_missing_value_codes)
 ```
 
-We load the initial data into a raw_data_between but immediately make a copy we will work with called analytic_data_between. It's good to keep a copy of the raw data for reference if you encounter problems.
+We load the initial data into a raw_data_between data set but immediately make a copy that we will work with called analytic_data_between. It's good to keep a copy of the raw data for reference in the event that you encounter problems.
 
 ```{r}
 analytic_data_between <- raw_data_beween
@@ -333,7 +333,7 @@ Following initial cleaning, we identify categorical variables as factors. If you
 glimpse(analytic_data_between)
 ```
 
-You can quickly convert all character columns to factors using the code below. In this case, this just converts the sex column to a factor. Because there is only one column (sex) being converted to a factor, we could have treated it the same was as the id column below. However, we use this code because of its broad applicability to many scripts.
+You can quickly convert all character columns to factors using the code below. In this case, the code just converts the sex column to a factor. Because there is only one column (sex) being converted to a factor, we could have treated it the same way as the id column below. However, we use this code because of its broad applicability to many scripts.
 
 ```{r}
 analytic_data_between <- analytic_data_between %>%
@@ -360,7 +360,7 @@ This example is so small it's clear you didn't miss converting any columns to fa
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -390,9 +390,7 @@ analytic_data_between %>%
 
 ### Numeric screening
 
-For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure non of the elapsed_times are impossible or so large they appear to be data entry errors.
-
-One option for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
+For numeric variables, you should search for impossible values. For example, in the context of this example you want to ensure that none of the elapsed_times are impossible, or so large they appear to be data entry errors. One option for doing so is the summary command again. This time, however, we use "is.numeric" in the where() command.
 
 ```{r}
 analytic_data_between %>%
@@ -400,9 +398,9 @@ analytic_data_between %>%
   summary()
 ```
 
-Scan the min and max values to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). 
+Scan the min and max values to ensure there are not any impossible values. If necessary, go back to the original data source and fix these impossible values. Alternatively, you might need to change them to missing values (i.e., NA values). 
 
-In this example all the values are reasonable values. However, if we discovered an out of range value (or values) for elapsed time we could convert those values to missing values with the code below. This code changes (i.e., mutates) a value in the elapsed_time column to become NA (not available or missing) if that value is less than zero. If the value is greater than or equal to zero, it stays the same. Note that when using this command we have to be very specific in terms of specifying our missing value. It usually needs to be one of NA_real_ or NA_character_. For numeric columns use NA_real_ and for character columns use NA_character_. 
+In this example all the values are reasonable values. However, if we discovered an out of range value (or values) for elapsed time, we could convert those values to missing values with the code below. This code changes (i.e., mutates) a value in the elapsed_time column to become NA (not available or missing) if that value is less than zero. If the value is greater than, or equal to zero, it stays the same. Note that when using this command we have to be very specific in terms of specifying our missing value. It usually needs to be one of NA_real_ or NA_character_. For numeric columns use NA_real_ and for character columns use NA_character_. 
 
 ```{r, eval = FALSE}
 analytic_data_between <- analytic_data_between  %>% 
@@ -415,7 +413,7 @@ Once you are done numeric screening, the data is ready for analysis.
 
 ## Experiment: Within one-way
 
-This section outlines a workflow appropriate for when you have a repeated measures design with a single repeated measures predictor. The data corresponds to a design where the researcher is interested in comparing run times (elapsed_time) across three different occasions (march/may/june).
+This section outlines a workflow appropriate for when you have a repeated measures design with a single repeated measures predictor. The data corresponds to a design where the researcher is interested in comparing run times (elapsed_time) across three different occasions (march/may/july).
 
 To Begin:
 
@@ -438,7 +436,7 @@ raw_data_within <- read_csv(file = "data_ex_within.csv",
                      na = my_missing_value_codes)
 ```
 
-We load the initial data into a raw_data_within but immediately make a copy we will work with called analytic_data_within. It's good to keep a copy of the raw data for reference if you encounter problems.
+We load the initial data into raw_data_within but immediately make a copy that we will work with called analytic_data_within. It's good to keep a copy of the raw data for reference if you encounter problems.
 
 ```{r}
 analytic_data_within <- raw_data_within
@@ -501,8 +499,7 @@ This example is so small it's clear you didn't miss converting any columns to fa
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
-
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_within %>%
@@ -530,7 +527,7 @@ analytic_data_within %>%
 
 ### Numeric screening
 
-For numeric variables, it's important find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (i.e., negative) or clearly data entry errors.
+For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (i.e., negative) or clearly data entry errors.
 
 Because we have several numeric columns that we are screening, we use the skim() command from the skimr package. The skim() command quickly provides basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75.
 
@@ -564,7 +561,7 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Scan the minimum and maximum values (p0 and p100) to ensure there are not any impossible values. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). 
+Scan the minimum and maximum values (p0 and p100) to ensure there are not any impossible values. If necessary, go back to the original data source and fix these impossible values. Alternatively, you might need to change them to missing values (i.e., NA values). 
 
 In this example all the values are reasonable values. However, if we discovered an out of range value (or values) for elapsed time we could convert those values to missing values with the code below. This code changes (i.e., mutates) a value in the march column to become NA (not available or missing) if that value is less than zero. If the value is greater than or equal to zero, it stays the same. Note that when using this command we have to be very specific in terms of specifying our missing value. It usually needs to be one of NA_real_ or NA_character_. For numeric columns use NA_real_ and for character columns use NA_character_. 
 
@@ -578,13 +575,13 @@ analytic_data_within <- analytic_data_within  %>%
 
 ### Pivot to tidy data
 
-The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice the there is not column for occasion (with levels march/may/july). Instead, there are three columns each of which represents a level of occasion. The levels of occasion are spread across three columns called march, may, and july. Each of these columns contains elapsed time for participants in that month. 
+The analytic data in it's current form does not conform to the the tidy data specification. Inspect the data with the print() command. Notice thatthere is not a column for occasion (with levels march/may/july). Instead, there are three columns each of which represents a level of occasion. The levels of occasion are spread across three columns called march, may, and july. Each of these columns contains elapsed time for participants in that month. 
 
 ```{r}
 print(analytic_data_within)
 ```
 
-The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument selects the march column, the july column, and all the columns in between. Each column contains elapsed times at level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july columns.
+The pivot_longer() command below coverts our data to the tidy data format. In this command we specify the the columns march, may, and july are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code march:july after the cols argument selects the march column, the july column, and all the columns in-between. Each column contains elapsed times at level of the variable occasion. The names_to argument is used to indicate that a new column called occasion should be created to hold the different months. The value_to argument is used to indicate that a new column called elapsed_time should created to hold all the values from the march, may, and july columns.
 
 ```{r}
 analytic_data_within_tidy <- analytic_data_within %>%
@@ -599,7 +596,7 @@ You can see the data in the new format below.
 print(analytic_data_within_tidy)
 ```
 
-But notice that the new column occasion is of the type character. We need it to be a factor. So use the code below to do so:
+Notice that the new column occasion is of the type character. We need it to be a factor. So use the code below to do so:
 
 ```{r}
 analytic_data_within_tidy <- analytic_data_within_tidy %>%
@@ -800,7 +797,7 @@ print(analytic_data_within)
 
 We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
 
-In this command we specify the the columns march, may, and june are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
+In this command we specify the the columns march, may, and july are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
 
 
 ```{r}
