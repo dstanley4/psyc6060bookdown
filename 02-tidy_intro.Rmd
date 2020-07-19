@@ -284,7 +284,7 @@ glimpse(new_data)
 
 ##### matches()
 
-It's also possible to use *regex* (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. But the example below selects any column with and underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
+It's also possible to use *regex* (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. Nonetheless the example below uses regex to select any column with an underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
 
 ```{r}
 data_matched<- data_exp %>% 
@@ -299,12 +299,12 @@ You can see the columns selected using regex:
 glimpse(data_matched)
 ```
 
-You can learn about regex at [RegexOne](https://regexone.com) and test your regex specification at [Regex101](https://regex101.com). Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently considered that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user \@ThatJenPerson noted "Regex is like tequila: use it to try to solve a problem and now you have two problems." Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
+You can learn about regex at [RegexOne](https://regexone.com) and test your regex specification at [Regex101](https://regex101.com). Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently thoughtful that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user \@ThatJenPerson noted "Regex is like tequila: use it to try to solve a problem and now you have two problems." Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
 
 
 #### select() using column type
 
-If many cases we will want to select or perform on action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively).  We will learn more about factors later in this chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
+If many cases we will want to select or perform an action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively).  We will learn more about factors later in this chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
 
 We can select numeric columns using where() and is.numeric:
 
@@ -338,7 +338,7 @@ If a future chapter you will see how we can select factors using where(is.factor
 
 ### summarise()
 
-The summarise() command can summarise multiple columns when combined with starts_with(), ends_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
+The summarise() command can summarise multiple columns when combined with starts_with(), ends_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need the help of the across() command (i.e., across multiple columns).
 
 If we want to obtain the mean of all the columns that start with "t1" we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data. We add as.data.frame() to get a larger number of decimals.
 
@@ -350,7 +350,7 @@ data_exp %>%
   as.data.frame()
 ```
 
-If you want to get fancy, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "_mean".
+If you want to get more sophisticated, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "_mean".
 
 ```{r}
 data_exp %>%
@@ -401,7 +401,7 @@ Note that in the across command above we could also have used: ends_with(), cont
 
 ### mutate()
 
-The mutate command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make_centered. This custom function takes the values in a column an subtracts the column mean from each value in the column. This is the same task we did the mutate() command in the basic tidyverse section above.
+The mutate() command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make_centered. This custom function takes the values in a column and subtracts the column mean from each value in the column. This is the same task we did previous using the mutate() command in the basic tidyverse section.
 
 ```{r}
 
@@ -417,7 +417,7 @@ The glimpse() command shows us all the column names. Also notice the values in t
 glimpse(data_exp)
 ```
 
-We combine the mutate() command with the across() command and our custom make_centered() command below. The command "centers" or subtracts the mean from any column that ends with "aggression".
+We combine the mutate() command, with the across() command, and our custom make_centered() command below. The command "centers" or subtracts the mean from any column that ends with "aggression".
 
 ```{r}
 data_exp <- data_exp %>% 
@@ -432,13 +432,13 @@ You can see via the glimpse() output that the contents of all the columns that e
 glimpse(data_exp)
 ```
 
-Note that in the across command above we could also have used: starts_with(), contains(), matches(), or where().
+Note that in the across() command above, we could also have used: starts_with(), contains(), matches(), or where().
 
 #### mutate() across rows
 
-Researchers often want to average within rows and across columns to create a new column. That is for each participant (i.e., rat in the current data) we might want to calculate a vomit score that is the average of the two time points (that we will call vomit_avg).
+Researchers often want to average within rows and across columns to create a new column. That is, for each participant (i.e., rat in the current data) we might want to calculate a vomit score that is the average of the two time points (that we will call vomit_avg).
 
-To average within rows (and across columns) we use the rowwise() command to inform R of our intent. After we do the necessary calculations though we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c_across() instead of across(). The commands below creates a new column called vomit_avg which the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
+To average within rows (and across columns) we use the rowwise() command to inform R of our intent. However, after we do the necessary calculations we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c_across() instead of across(). The commands below create a new column called vomit_avg which is the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
 
 ```{r}
 data_exp <- data_exp %>% 
@@ -454,13 +454,13 @@ You can see the new column we created with the glimpse() command:
 glimpse(data_exp)
 ```
 
-The print() command could make it easier to see the new column is the average of the other two, but if we used the command below it wouldn't work. Why? There are too many columns in the data set so only the first few columns are show.
+The print() command could make it easier to see that the new column is the average of the other two, but if we use the print() command below it wouldn't work. Why? There are too many columns in the data set, so only the first few columns are shown.
 
 ```{r, eval = FALSE}
 print(data_exp)
 ```
 
-To see how the new column, vomit_avg, is the average of the other vomit columns we use the select command before print(). This prints only the relvant columns. When this is done, it's easy to see how the values in the vomit_avg column are the mean of the other two columns.
+To see that the new column, vomit_avg, is the average of the other vomit columns we use the select command before print(). This prints only the relvant columns. When this is done, it's easy to see how the values in the vomit_avg column are the mean of the other two columns.
 
 ```{r}
 data_exp %>%
@@ -471,15 +471,15 @@ data_exp %>%
 
 #### mutate() for factors
 
-In R it it is critical that you identify categorical variable as categorical variables. In R categorical variables are referred to as factors. For humans, a factor like sex has three possible levels: female, male, intersex. 
+It is critical that you indicate to R that categorical variables are in fact categorical variables. In R, categorical variables are referred to as factors. For humans, a factor like sex has three possible levels: female, male, intersex. 
 
-An inspection of the glimpse() command output reveals that the sex column has the type character - as indicated by <chr>. Also notice as you inspect this output that we use words (e.g., female) to indicate the sex in the column rather than a number represent a female participant (e.g., 2). This is the preferred but less common approach to entering data.
+An inspection of the glimpse() command output reveals that the sex column has the type character - as indicated by "chr". Also notice, as you inspect this output, that we use words (e.g., female) to indicate the sex in the column rather than a number to represent a female participant (e.g., 2). This is the preferred, but less common, approach to entering data.
 
 ```{r}
 glimpse(data_exp)
 ```
 
-We need to convert the sex column to a factor in order for R to handle it appropriately in analyses. Failure to indicate column is a factor could result in R conducting all the analyses and presenting the incorrect results. Consequently, it is critical that we covert the column to a factor. Fortunately, that is easily done using the as_factor() command (there is also an as.factor command if as_factor won't work for some reason).
+We need to convert the sex column to a factor in order for R to handle it appropriately in analyses. Failure to indicate the column is a factor could result in R conducting all the analyses and presenting incorrect results. Consequently, it is critical that we covert the column to a factor. Fortunately, that is easily done using the as_factor() command (there is also an as.factor command if as_factor won't work for some reason).
 
 We convert the sex column to a factor with this code:
 
@@ -494,7 +494,7 @@ You can confirm this worked with the glimpse() command:
 glimpse(data_exp)
 ```
 
-If you entered your data using words for each level of sex (e.g., male, female) you're done at this point. However, if you used numbers to represent each level of sex in your data there is one more step. Imagine your data was entered in a poorly advised manner, such that 1 was used to indicate male, 2 was used to indicate female, and 3 was used to indicate intersex. If this was the case, you need to indicate to R what each of those value represents. We do that with the code below.
+If you entered your data using words for each level of sex (e.g., male, female) you're done at this point. However, if you used numbers to represent each level of sex in your data, there is one more step. Imagine your data was entered in a poorly advised manner, such that 1 was used to indicate male, 2 was used to indicate female, and 3 was used to indicate intersex. If this was the case, you need to indicate to R what each of those values represent. We do that with the code below.
 
 ```{r, eval = FALSE}
 data_exp <- data_exp %>%
@@ -506,16 +506,16 @@ data_exp <- data_exp %>%
 
 ## Using help
 
-In order to become an efficient at analyzing data using R, you will need to become adapt at reading and understanding the help files associated with each command. After you have activated a package using the library command (e.g., library(tidyverse)) you can access the help page for every command in that package. To access the help page simply type a question mark followed by the command you want to know how to use (no space between them). The code below bring up the help page for the select() command. Notice I put the library() command first - just an reminder that this needs to be done prior to using help for that package. Try the commands below in the Console:
+In order to become efficient at analyzing data using R, you will need to become adapt at reading and understanding the help files associated with each command. After you have activated a package using the library command (e.g., library(tidyverse)) you can access the help page for every command in that package. To access the help page simply type a question mark followed by the command you want to know how to use (no space between them). The code below brings up the help page for the select() command. Notice that we put the library() command first - just a reminder that this needs to be done prior to using help for that package. Try the commands below in the Console:
 
 ```{r, eval = FALSE}
 library(tidyverse)
 ?select
 ```
 
-Examine the page that appears on the Help tab in the panel in the lower right of your screen. Read through the help file comparing what you read there to what we have learned about the select command. Notice how the help file tells you about the argument you send into the select() command and also what the select command returns when it receives those commands. Pay particular attention to the examples near the bottom of the help page. At the very bottom of the help page you will see [Package dplyr version 1.0.0 Index]. This tell you the select() command is from the dplyr package (part of the tidyverse). Notice that the word Index is underlined. Click on the word Index. You will be presented with list of other commands in the dplyr package.
+Examine the page that appears on the Help tab in the panel in the lower right of your screen. Read through the help file comparing what you read there to what we have learned about the select command. Notice how the help file tells you about the argument that you sent into the select() command, and also what the select() command returns when it receives those commands. Pay particular attention to the examples near the bottom of the help page. At the very bottom of the help page you will see [Package dplyr version 1.0.0 Index]. This tells you the select() command is from the dplyr package (part of the tidyverse). Notice that the word "Index" is underlined. Click on the word Index. You will be presented with list of other commands in the dplyr package.
 
-As you become more experienced with R help pages how you will learn to use new commands. Examine the help pages for the commands below by typing a question mark into the Console followed by the command name. Note that for filter and starts_with you will be presented with a menu instead of help page. This typically occurs because the command is in more than one package. If this does occur, read through the options you are presented with to try and figure out which one you wanted Typically, you want the first option. If you're not sure, try one. It's it's not what you want use the back arrow in the Help panel to go back and pick another one.
+As you become more experienced with R help pages, this is how you will learn to use new commands. Examine the help pages for the commands below by typing a question mark into the Console followed by the command name. Note that for filter and starts_with you will be presented with a menu instead of help page. This typically occurs because the command is in more than one package. If this does occur, read through the options you are presented with to try and figure out which one you wanted. Typically, you want the first option. If you're not sure, try one. IF it's not what you want, use the back arrow in the Help panel to go back and pick another one.
 
 * mutate
 * filter
@@ -530,18 +530,18 @@ Sometimes students have problems with their code when they mix and match these a
 
 ### Tibbles vs. data frames
 
-When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame. This contrasts with the newer tidyverse approach to representing data in the computer called a tibble - which is just an newer more advanced version of the data frame.
+When you load data into R, it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv(), your data is loaded into a data frame in the computer. That is, your data is represented in the memory of the computer in a particular format and structure called a data frame. This contrasts with the newer tidyverse approach to representing data in the computer called a tibble - which is just a newer more advanced version of the data frame.
 
-### read.csv and data frames
+### read.csv() and data frames
 
-When you read data into R using the command read.csv (with a period) you load the data into a data frame (base R).
+When you read data into R using the command read.csv() (with a period) you load the data into a data frame (base R).
 
 ```{r}
 my_dataframe <- read.csv(file = "data_okcupid.csv")
 
 ```
 
-Notice that when you print a data frame it does not show you the number of rows or columns above the data like our example did with the okcupid_profiles data. Likewise, it does not show you the type of data in each column (e..g, dbl, fct, chr. But, it also list all of your data rather than just the first few rows (as the tibble does). As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console with a data frame (too much to show here).
+Notice that when you print a data frame it does not show you the number of rows or columns above the data like our example did with the okcupid_profiles data. Likewise, it does not show you the type of data in each column (e.g., dbl, fct, chr). It also presents all of your data rather than just the first few rows (as the tibble does). As a result, in the output below, we show only the first 10 rows of the output - because all the rows are printed in your Console with a data frame (too much to show here).
 
 ```{r, eval = FALSE}
 print(my_dataframe)
@@ -551,8 +551,8 @@ print(my_dataframe)
 print(my_dataframe[1:10, ])
 ```
 
-### read_csv and tibbles
-When you read data into R using the command read_csv (with an underscore) you load the data into a tibble (tidyverse).
+### read_csv() and tibbles
+When you read data into R using the command read_csv() (with an underscore) you load the data into a tibble (tidyverse).
 
 ```{r}
 my_tibble <- read_csv(file = "data_okcupid.csv")
@@ -566,7 +566,7 @@ The tibble is modern version of the data frame. Notice that when you print a tib
 print(my_tibble)
 ```
 
-In short you should always use tibbles (i.e., use read_csv not read.csv). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you in the next.
+In short, you should always use tibbles (i.e., use read_csv() not read.csv()). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you when they occur.
 
 
 ```{r}
