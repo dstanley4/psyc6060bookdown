@@ -202,7 +202,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-07-18}
+\date{2020-07-19}
 
 \begin{document}
 \maketitle
@@ -1655,7 +1655,7 @@ contains() allows us to select columns based on the contents of the column name.
 \hypertarget{matches}{%
 \paragraph{matches()}\label{matches}}
 
-It's also possible to use \emph{regex} (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. But the example below selects any column with and underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
+It's also possible to use \emph{regex} (regular expressiona) to select columns. Regex is a powerful way to specify search/matching requirements for text - in this case the text of column names. An explanation of regex is beyond the scope of this chapter. Nonetheless the example below uses regex to select any column with an underscore in the column name followed by any character. The result is the same as the above for the contains() command. However, the matches() command is more flexible than the contains() command and can take into account substantially more complicated situations.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1681,12 +1681,12 @@ You can see the columns selected using regex:
 ## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
 \end{verbatim}
 
-You can learn about regex at \href{https://regexone.com}{RegexOne} and test your regex specification at \href{https://regex101.com}{Regex101}. Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently considered that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user @ThatJenPerson noted ``Regex is like tequila: use it to try to solve a problem and now you have two problems.'' Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
+You can learn about regex at \href{https://regexone.com}{RegexOne} and test your regex specification at \href{https://regex101.com}{Regex101}. Ideally though, as we discuss in the next chapter, you can use naming conventions that are sufficiently thoughtful that you don't need regex, or only rarely. The reason for this is that regex can be challenging to use. As Twitter user @ThatJenPerson noted ``Regex is like tequila: use it to try to solve a problem and now you have two problems.'' Nonetheless, at one or two points in the future we will use regex to solve a problem (but not tequila).
 
 \hypertarget{select-using-column-type}{%
 \subsubsection{select() using column type}\label{select-using-column-type}}
 
-If many cases we will want to select or perform on action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively). We will learn more about factors later in this chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
+If many cases we will want to select or perform an action on a column based on whether the column is a numeric, character, or factor column (indicated in glimpse output as dbl, chr, and fct, respectively). We will learn more about factors later in this chapter. Each of these column types can be selected by using is.numeric, is.character, or is.factor, respectively, in combination with the where() command.
 
 We can select numeric columns using where() and is.numeric:
 
@@ -1743,7 +1743,7 @@ If a future chapter you will see how we can select factors using where(is.factor
 \hypertarget{summarise-1}{%
 \subsection{summarise()}\label{summarise-1}}
 
-The summarise() command can summarise multiple columns when combined with starts\_with(), ends\_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need to help of the across command (i.e., across multiple columns).
+The summarise() command can summarise multiple columns when combined with starts\_with(), ends\_with(), contains(), matches(), and where(). However, to use these powerful tools for indicating columns with the summarise command we need the help of the across() command (i.e., across multiple columns).
 
 If we want to obtain the mean of all the columns that start with ``t1'' we use the commands below. The across command requires that we indicate the columns we want via the .cols argument and the command/function we want to run on those columns via the .fns argument. In the example below, we also add na.rm = TRUE at the end; this is something we send to the mean command to let it know how we want to handle missing data. We add as.data.frame() to get a larger number of decimals.
 
@@ -1762,7 +1762,7 @@ If we want to obtain the mean of all the columns that start with ``t1'' we use t
 ## 1    1.833           5.5
 \end{verbatim}
 
-If you want to get fancy, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "\_mean".
+If you want to get more sophisticated, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "\_mean".
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1841,7 +1841,7 @@ Note that in the across command above we could also have used: ends\_with(), con
 \hypertarget{mutate-1}{%
 \subsection{mutate()}\label{mutate-1}}
 
-The mutate command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make\_centered. This custom function takes the values in a column an subtracts the column mean from each value in the column. This is the same task we did the mutate() command in the basic tidyverse section above.
+The mutate() command can also be applied to multiple columns using the across() command. However, sometimes we need to embed our calculation in a custom function. Below is a custom function called make\_centered. This custom function takes the values in a column and subtracts the column mean from each value in the column. This is the same task we did previous using the mutate() command in the basic tidyverse section.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1871,7 +1871,7 @@ The glimpse() command shows us all the column names. Also notice the values in t
 ## $ t2_aggression <dbl> 6, 7, 6, 7, 5, 8
 \end{verbatim}
 
-We combine the mutate() command with the across() command and our custom make\_centered() command below. The command ``centers'' or subtracts the mean from any column that ends with ``aggression''.
+We combine the mutate() command, with the across() command, and our custom make\_centered() command below. The command ``centers'' or subtracts the mean from any column that ends with ``aggression''.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1900,14 +1900,14 @@ You can see via the glimpse() output that the contents of all the columns that e
 ## $ t2_aggression <dbl> -0.5, 0.5, -0.5, 0.5, -1.5, 1.5
 \end{verbatim}
 
-Note that in the across command above we could also have used: starts\_with(), contains(), matches(), or where().
+Note that in the across() command above, we could also have used: starts\_with(), contains(), matches(), or where().
 
 \hypertarget{mutate-across-rows}{%
 \subsubsection{mutate() across rows}\label{mutate-across-rows}}
 
-Researchers often want to average within rows and across columns to create a new column. That is for each participant (i.e., rat in the current data) we might want to calculate a vomit score that is the average of the two time points (that we will call vomit\_avg).
+Researchers often want to average within rows and across columns to create a new column. That is, for each participant (i.e., rat in the current data) we might want to calculate a vomit score that is the average of the two time points (that we will call vomit\_avg).
 
-To average within rows (and across columns) we use the rowwise() command to inform R of our intent. After we do the necessary calculations though we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c\_across() instead of across(). The commands below creates a new column called vomit\_avg which the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
+To average within rows (and across columns) we use the rowwise() command to inform R of our intent. However, after we do the necessary calculations we have to shut off the rowwise() calculation state by using the ungroup() command. As well, when we are averaging within rows we have to use c\_across() instead of across(). The commands below create a new column called vomit\_avg which is the average of the vomit ratings across both times. As before, we also include na.rm = TRUE so the computer drops missing values (if present) when calculating the mean.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1939,7 +1939,7 @@ You can see the new column we created with the glimpse() command:
 ## $ vomit_avg     <dbl> 2.5, 1.5, 0.5, 2.5, 1.5, 1.5
 \end{verbatim}
 
-The print() command could make it easier to see the new column is the average of the other two, but if we used the command below it wouldn't work. Why? There are too many columns in the data set so only the first few columns are show.
+The print() command could make it easier to see that the new column is the average of the other two, but if we use the print() command below it wouldn't work. Why? There are too many columns in the data set, so only the first few columns are shown.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1947,7 +1947,7 @@ The print() command could make it easier to see the new column is the average of
 \end{Highlighting}
 \end{Shaded}
 
-To see how the new column, vomit\_avg, is the average of the other vomit columns we use the select command before print(). This prints only the relvant columns. When this is done, it's easy to see how the values in the vomit\_avg column are the mean of the other two columns.
+To see that the new column, vomit\_avg, is the average of the other vomit columns we use the select command before print(). This prints only the relvant columns. When this is done, it's easy to see how the values in the vomit\_avg column are the mean of the other two columns.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1972,9 +1972,9 @@ To see how the new column, vomit\_avg, is the average of the other vomit columns
 \hypertarget{mutate-for-factors}{%
 \subsubsection{mutate() for factors}\label{mutate-for-factors}}
 
-In R it it is critical that you identify categorical variable as categorical variables. In R categorical variables are referred to as factors. For humans, a factor like sex has three possible levels: female, male, intersex.
+It is critical that you indicate to R that categorical variables are in fact categorical variables. In R, categorical variables are referred to as factors. For humans, a factor like sex has three possible levels: female, male, intersex.
 
-An inspection of the glimpse() command output reveals that the sex column has the type character - as indicated by . Also notice as you inspect this output that we use words (e.g., female) to indicate the sex in the column rather than a number represent a female participant (e.g., 2). This is the preferred but less common approach to entering data.
+An inspection of the glimpse() command output reveals that the sex column has the type character - as indicated by ``chr''. Also notice, as you inspect this output, that we use words (e.g., female) to indicate the sex in the column rather than a number to represent a female participant (e.g., 2). This is the preferred, but less common, approach to entering data.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1994,7 +1994,7 @@ An inspection of the glimpse() command output reveals that the sex column has th
 ## $ vomit_avg     <dbl> 2.5, 1.5, 0.5, 2.5, 1.5, 1.5
 \end{verbatim}
 
-We need to convert the sex column to a factor in order for R to handle it appropriately in analyses. Failure to indicate column is a factor could result in R conducting all the analyses and presenting the incorrect results. Consequently, it is critical that we covert the column to a factor. Fortunately, that is easily done using the as\_factor() command (there is also an as.factor command if as\_factor won't work for some reason).
+We need to convert the sex column to a factor in order for R to handle it appropriately in analyses. Failure to indicate the column is a factor could result in R conducting all the analyses and presenting incorrect results. Consequently, it is critical that we covert the column to a factor. Fortunately, that is easily done using the as\_factor() command (there is also an as.factor command if as\_factor won't work for some reason).
 
 We convert the sex column to a factor with this code:
 
@@ -2025,7 +2025,7 @@ You can confirm this worked with the glimpse() command:
 ## $ vomit_avg     <dbl> 2.5, 1.5, 0.5, 2.5, 1.5, 1.5
 \end{verbatim}
 
-If you entered your data using words for each level of sex (e.g., male, female) you're done at this point. However, if you used numbers to represent each level of sex in your data there is one more step. Imagine your data was entered in a poorly advised manner, such that 1 was used to indicate male, 2 was used to indicate female, and 3 was used to indicate intersex. If this was the case, you need to indicate to R what each of those value represents. We do that with the code below.
+If you entered your data using words for each level of sex (e.g., male, female) you're done at this point. However, if you used numbers to represent each level of sex in your data, there is one more step. Imagine your data was entered in a poorly advised manner, such that 1 was used to indicate male, 2 was used to indicate female, and 3 was used to indicate intersex. If this was the case, you need to indicate to R what each of those values represent. We do that with the code below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2040,7 +2040,7 @@ If you entered your data using words for each level of sex (e.g., male, female) 
 \hypertarget{using-help}{%
 \section{Using help}\label{using-help}}
 
-In order to become an efficient at analyzing data using R, you will need to become adapt at reading and understanding the help files associated with each command. After you have activated a package using the library command (e.g., library(tidyverse)) you can access the help page for every command in that package. To access the help page simply type a question mark followed by the command you want to know how to use (no space between them). The code below bring up the help page for the select() command. Notice I put the library() command first - just an reminder that this needs to be done prior to using help for that package. Try the commands below in the Console:
+In order to become efficient at analyzing data using R, you will need to become adapt at reading and understanding the help files associated with each command. After you have activated a package using the library command (e.g., library(tidyverse)) you can access the help page for every command in that package. To access the help page simply type a question mark followed by the command you want to know how to use (no space between them). The code below brings up the help page for the select() command. Notice that we put the library() command first - just a reminder that this needs to be done prior to using help for that package. Try the commands below in the Console:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2049,9 +2049,9 @@ In order to become an efficient at analyzing data using R, you will need to beco
 \end{Highlighting}
 \end{Shaded}
 
-Examine the page that appears on the Help tab in the panel in the lower right of your screen. Read through the help file comparing what you read there to what we have learned about the select command. Notice how the help file tells you about the argument you send into the select() command and also what the select command returns when it receives those commands. Pay particular attention to the examples near the bottom of the help page. At the very bottom of the help page you will see {[}Package dplyr version 1.0.0 Index{]}. This tell you the select() command is from the dplyr package (part of the tidyverse). Notice that the word Index is underlined. Click on the word Index. You will be presented with list of other commands in the dplyr package.
+Examine the page that appears on the Help tab in the panel in the lower right of your screen. Read through the help file comparing what you read there to what we have learned about the select command. Notice how the help file tells you about the argument that you sent into the select() command, and also what the select() command returns when it receives those commands. Pay particular attention to the examples near the bottom of the help page. At the very bottom of the help page you will see {[}Package dplyr version 1.0.0 Index{]}. This tells you the select() command is from the dplyr package (part of the tidyverse). Notice that the word ``Index'' is underlined. Click on the word Index. You will be presented with list of other commands in the dplyr package.
 
-As you become more experienced with R help pages how you will learn to use new commands. Examine the help pages for the commands below by typing a question mark into the Console followed by the command name. Note that for filter and starts\_with you will be presented with a menu instead of help page. This typically occurs because the command is in more than one package. If this does occur, read through the options you are presented with to try and figure out which one you wanted Typically, you want the first option. If you're not sure, try one. It's it's not what you want use the back arrow in the Help panel to go back and pick another one.
+As you become more experienced with R help pages, this is how you will learn to use new commands. Examine the help pages for the commands below by typing a question mark into the Console followed by the command name. Note that for filter and starts\_with you will be presented with a menu instead of help page. This typically occurs because the command is in more than one package. If this does occur, read through the options you are presented with to try and figure out which one you wanted. Typically, you want the first option. If you're not sure, try one. IF it's not what you want, use the back arrow in the Help panel to go back and pick another one.
 
 \begin{itemize}
 \tightlist
@@ -2073,12 +2073,12 @@ Sometimes students have problems with their code when they mix and match these a
 \hypertarget{tibbles-vs.-data-frames}{%
 \subsection{Tibbles vs.~data frames}\label{tibbles-vs.-data-frames}}
 
-When you load data into R it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv your data is loaded into a data frame in the computer. That is your data is represented in the memory of the computer in particular format and structure called a data frame. This contrasts with the newer tidyverse approach to representing data in the computer called a tibble - which is just an newer more advanced version of the data frame.
+When you load data into R, it is typically represented in one of two formats inside the computer - depending on the command you used. The original format for representing a data set in R is the data frame. You will see this term used frequently when you read about R. When you load data using read.csv(), your data is loaded into a data frame in the computer. That is, your data is represented in the memory of the computer in a particular format and structure called a data frame. This contrasts with the newer tidyverse approach to representing data in the computer called a tibble - which is just a newer more advanced version of the data frame.
 
 \hypertarget{read.csv-and-data-frames}{%
-\subsection{read.csv and data frames}\label{read.csv-and-data-frames}}
+\subsection{read.csv() and data frames}\label{read.csv-and-data-frames}}
 
-When you read data into R using the command read.csv (with a period) you load the data into a data frame (base R).
+When you read data into R using the command read.csv() (with a period) you load the data into a data frame (base R).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2086,7 +2086,7 @@ When you read data into R using the command read.csv (with a period) you load th
 \end{Highlighting}
 \end{Shaded}
 
-Notice that when you print a data frame it does not show you the number of rows or columns above the data like our example did with the okcupid\_profiles data. Likewise, it does not show you the type of data in each column (e..g, dbl, fct, chr. But, it also list all of your data rather than just the first few rows (as the tibble does). As a result in the output below I show only the first 10 rows of the output - because all the rows are printed in your Console with a data frame (too much to show here).
+Notice that when you print a data frame it does not show you the number of rows or columns above the data like our example did with the okcupid\_profiles data. Likewise, it does not show you the type of data in each column (e.g., dbl, fct, chr). It also presents all of your data rather than just the first few rows (as the tibble does). As a result, in the output below, we show only the first 10 rows of the output - because all the rows are printed in your Console with a data frame (too much to show here).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2120,9 +2120,9 @@ Notice that when you print a data frame it does not show you the number of rows 
 \end{verbatim}
 
 \hypertarget{read_csv-and-tibbles}{%
-\subsection{read\_csv and tibbles}\label{read_csv-and-tibbles}}
+\subsection{read\_csv() and tibbles}\label{read_csv-and-tibbles}}
 
-When you read data into R using the command read\_csv (with an underscore) you load the data into a tibble (tidyverse).
+When you read data into R using the command read\_csv() (with an underscore) you load the data into a tibble (tidyverse).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2167,7 +2167,7 @@ The tibble is modern version of the data frame. Notice that when you print a tib
 ## # ... with 59,936 more rows
 \end{verbatim}
 
-In short you should always use tibbles (i.e., use read\_csv not read.csv). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you in the next.
+In short, you should always use tibbles (i.e., use read\_csv() not read.csv()). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you when they occur.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2198,7 +2198,7 @@ tidyverse\tabularnewline
 \bottomrule
 \end{longtable}
 
-\textbf{Important Note:} that you should NOT use library(psych) at any point. There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
+\textbf{Important Note:} You should NOT use library(psych) at any point! There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
 
 The following data files are used in this chapter:
 
@@ -2220,20 +2220,20 @@ The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
 \hypertarget{objective-1}{%
 \section{Objective}\label{objective-1}}
 
-In this chapter we strongly advocate for you using a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse command. I must stress though that although the naming convention I advocate is based on the tidyverse style guide, it is not ``right'' - there are other naming conventions you can use. And any naming convention is better than no naming convention. The naming convention we advocate for here will solve many problems for you. I encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly it's shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention system.
+In this chapter we strongly advocate that you use a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse commands. However, we must stress that although the naming convention we advocate is based on the tidyverse style guide, it is not ``right'' or ``correct'' - there are other naming conventions you can use. Any naming convention is better than no naming convention. The naming convention we advocate here will solve many problems. We encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly its shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention system.
 
 \hypertarget{context}{%
 \section{Context}\label{context}}
 
-Due to a number of high profile failure to replicate study results \citep{cos2015} it's become increasingly clear that there is a general crisis of confidence in many areas of science \citep{baker2016}. Statistical (and other) explanations have been offered \citep{simmons2011} for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their own papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers \citep{miyakawa2020}.
+Due to a number of high profile failures to replicate study results \citep{cos2015} it's become increasingly clear that there is a general crisis of confidence in many areas of science \citep{baker2016}. Statistical (and other) explanations have been offered \citep{simmons2011} for why it's hard to replicate results across different sets of data. However, scientists are also finding it challenging to recreate the numbers in their own papers using their own data. Indeed, the editor of Molecular Brain asked authors to submit the data used to create the numbers in published papers and found that the wrong data was submitted for 40 out of 41 papers \citep{miyakawa2020}.
 
 Consequently, some researchers have suggested that it is critical to distinguish between replication and reproducibility \citep{patil2019}. Replication refers to trying to obtain the same result from a different data sets. Reproducibility refers to trying to obtain the same results from the same data set. Unfortunately, some authors use these two terms interchangeably and fail to make any distinction between them. I encourage you to make the distinction and the use the terms consist with use suggested by \citep{patil2019}.
 
-It may seem that reproducibility should be given - but it's not. Correspondingly, there a trend is for journals and authors to adopt Transparency and Openness Promotion (TOP) \href{https://www.cos.io/our-services/top-guidelines}{guidelines}. These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the \href{https://topfactor.org}{TOP Factor}.
+It may seem that reproducibility should be a given - but it's not. Correspondingly, there is a trend for journals and authors to adopt Transparency and Openness Promotion (TOP) \href{https://www.cos.io/our-services/top-guidelines}{guidelines}. These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the \href{https://topfactor.org}{TOP Factor}.
 
-The idea is not that open science articles are more trustworthy that other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business some people don't like the idea of make it possible for others to audit their work. The problems reported at Molecular Brain (doubtless is common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the numbers in the articles are uploaded prior to publication.
+The idea is not that open science articles are more trustworthy than other types of articles -- the idea is that trust doesn't play a role. Anyone can inspect the data using the scripts and data provided by authors. It's really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business, some people don't like the idea of making it possible for others to audit their work. The problems reported in Molecular Brain (doubtless common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the statistics in the articles are uploaded prior to publication.
 
-The TOP open science guidelines have made an impact and some newer journals, such as Meta Psychology, have fully embraced open science. Figure \ref{fig:metapsychology} shows the header from an \href{https://open.lnu.se/index.php/metapsychology/article/view/1630/2266}{article} in Meta Psychology that clearly delineates the open science attributes of the article that used computer simulations (instead of participant data). Take note that the header even specifies who checked that the analyses in the article were reproducible.
+The TOP open science guidelines have made an impact and some newer journals, such as Meta Psychology, have fully embraced open science. Figure \ref{fig:metapsychology} shows the header from an \href{https://open.lnu.se/index.php/metapsychology/article/view/1630/2266}{article} in Meta Psychology that clearly delineates the open science attributes of the article that used computer simulations (instead of participant data). Take note that the header even indicates who verified that the analyses in the article were reproducible.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_enter_load/images/screenshot_metapsychology} \caption{Open science in an article header}\label{fig:metapsychology}
@@ -2270,12 +2270,12 @@ It's critical that you don't think of the analysis of your data as being complet
 \includegraphics[width=0.85\linewidth]{ch_enter_load/images/pipeline} \caption{Data science pipeline by Roger Peng.}\label{fig:pipeline}
 \end{figure}
 
-It's difficult to being with the end in mind when you haven't read later chapters. So here we will be provide you with some general thoughts around different approaches to structuring data files and the naming conventions you use when creating those data files.
+It's difficult to being with the end in mind when you haven't read later chapters. So, here we will be provide you with some general thoughts around different approaches to structuring data files and the naming conventions you can use when creating those data files.
 
 \hypertarget{structuring-data-obtaining-tidy-data}{%
 \subsection{Structuring data: Obtaining tidy data}\label{structuring-data-obtaining-tidy-data}}
 
-When conducting analyses in R it is typically necessary to have data in a format called tidy data \citep{tidy-data}. \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{tidy data} as defined by Hadley involves (among other requirements) that:
+When conducting analyses in R it is typically necessary to have data in a format called tidy data \citep{tidy-data}. \href{https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html}{Tidy data}, as defined by Hadley, involves (among other requirements) that:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2285,7 +2285,7 @@ When conducting analyses in R it is typically necessary to have data in a format
   Each observation forms a row.
 \end{enumerate}
 
-The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in manner that makes it easy to later convert data to a tidy data format. When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadsheet is used to represent a variable.
+The tidy data format can be initially challenging for some researchers to understand because it is based on thinking about, and structuring data, in terms of observations/measurements instead of participants. In this section we will describe common approaches to entering animal and human participant data and how they can be done keeping the tidy data requirement in mind. It's not essential that data be entered in a tidy data format but it is essential that you enter data in a manner that makes it easy to later convert data to a tidy data format. When dealing with animal or human participant data it's common to enter data into a spreadsheet. Each row of the spreadsheet is typically used to represent a single participant and each column of the spreadsheet is used to represent a variable.
 
 \textbf{Between participant data}. Consider Table \ref{tab:betweenex} which illustrates between participant data for six human participants running 5 kilometers. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Finally, there is a last column five\_km\_time which is a variable with one observation per row -- also conforming to tidy data specification. Thus, single occasion between subject data like this conforms to the tidy data specification. There is usually nothing you need to do to convert between participant data (or cross-sectional data) to be in a tidy data format.
 
@@ -2307,7 +2307,7 @@ id & sex & elapsed\_time\\
 \end{tabular}
 \end{table}
 
-\textbf{Within participant data}. Consider Table \ref{tab:withinex} which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) representing each of which contains and elapsed\_time for the runner in a different month. Elapsed run times are spread out over three columns so elapse\_time is not in a tidy data format. Moreover, it's not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed\_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labeled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.
+\textbf{Within participant data}. Consider Table \ref{tab:withinex} which illustrates within participant data for six human participants running 5 kilometers - but on three different occasions. The first column is id, which indicates there are six unique participants and provides and identification number for each of them. The second column is sex, which is a variable, and there is one observation per for row, so sex also conforms to the tidy data specification. Next, there are three different columns (march, may, july) each of which contains elapsed time (in minutes) for the runner in a different month. Elapsed run times are spread out over three columns so elapse\_time is not in a tidy data format. Moreover, it's not clear from the data file that march, may, and july are levels of a variable called occasion. Nor is it clear that elapsed\_times are recorded in each of those columns (i.e., the dependent variable is unknown/not labeled). Although this format is fine as a data entry format it clearly has problems associated with it when it comes time to analyze your data.
 
 \begin{table}
 
@@ -2396,23 +2396,25 @@ Advantages one row per participant\strut
 \bottomrule
 \end{longtable}
 
-Fortunately, the problems with Table \ref{tab:withinex} can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot\_long() command that we will learn about later in this chapter. Thus, we can enter the data in the format of Table \ref{tab:withinex} and later convert it to a tidy data format. After this conversion the data will be appear as in Table \ref{tab:withintidyex}. For elapsed\_time variable this data is now in the tidy data format. Each row corresponds to a single elapsed\_time observed. Each column corresponds to a single variable. Somewhat problematically, however, sex is repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense. Importantly, there is an id column for each participant so R knows that this information is repeated for each participant and is not confused by repeating the sex designation over three rows. In directly, this illustrates the importance of having an id column to indicate each unique participant.
+\newpage
 
-Why did we walk you through this technical treatment of structuring data at this point in time? So that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon you following the advice in this chapter around naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \ref{tab:withinex} to the data in Figure \ref{tab:withintidyex} by hand. You want to be able to automate that process and others - which is made substantially easier if you following the forthcoming advice about naming conventions in the tidyverse.
+Fortunately, the problems with Table \ref{tab:withinex} can be largely resolved by converting the data to the a tidy data format. This can be done with the pivot\_long() command that we will learn about later in this chapter. Thus, we can enter the data in the format of Table \ref{tab:withinex} and later convert it to a tidy data format. After this conversion the data will be appear as in Table \ref{tab:withintidyex}. For elapsed\_time variable this data is now in the tidy data format. Each row corresponds to a single elapsed\_time observed. Each column corresponds to a single variable. Somewhat problematically, however, sex is repeated three times for each person (i.e., over the three rows) - and this can be confusing. However, if the focus in on analyzing elapsed time this tidy data format makes sense. Importantly, there is an id column for each participant so R knows that this information is repeated for each participant and is not confused by repeating the sex designation over three rows. Indirectly, this illustrates the importance of having an id column to indicate each unique participant.
+
+Why did we walk you through this technical treatment of structuring data at this point in time - so that you pay attention to the advice the follows. You can see at this point that you may well need to restructure your data for certain analyses. The ability to do so quickly and easily depends upon following the advice in this chapter around naming conventions for variables and other aspects of your analyses. You can imagine the challenges for converting the data in Figure \ref{tab:withinex} to the data in Figure \ref{tab:withintidyex} by hand. You want to be able to automate that process and others - which is made substantially easier if you follow the forthcoming advice about naming conventions in the tidyverse.
 
 \hypertarget{data-collection-considerations}{%
 \section{Data collection considerations}\label{data-collection-considerations}}
 
-Data can be collected in a wide variety of way. Regardless of the methods of location researchers typically come to data in one of two way: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.).
+Data can be collected in a wide variety of ways. Regardless of the method of data collection researchers typically come to data in one of two ways: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.).
 
-Regardless of the approach it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the software to use appropriate variable names PRIOR to data collection - so the exported file has desirable column names. For spreadsheet users, this means setting up the spreadsheet the data will be recorded in with column names that are amenable to the future analyses you want to conduct.
+Regardless of the approach, it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the software to use appropriate variable names PRIOR to data collection - so the exported file has desirable column names. For spreadsheet users, this means setting up the spreadsheet in which the data will be recorded with column names that are amenable to the future analyses you want to conduct.
 
-Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to following the naming conventions we espouse here where you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
+Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to follow the naming conventions we espouse here when you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
 \hypertarget{naming-conventions}{%
 \subsection{Naming conventions}\label{naming-conventions}}
 
-To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that is uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse \href{https://style.tidyverse.org}{style guide}.
+To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that it uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse \href{https://style.tidyverse.org}{style guide}.
 
 \begin{itemize}
 \item
@@ -2422,7 +2424,7 @@ To make your life easier down the road, it is critical you set up your spreadshe
 \item
   Avoid short decontextualized variable names like q1, q2, q3, etc.
 \item
-  Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts\_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Use moderate length unique item prefixes so that it will easy to select with those columns using start\_with() such that you don't accidentally get additionally columns you don't want - that have a similar prefix. See the Likert-type item section below for additional details.
+  Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts\_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Instead, use unique moderate length item prefixes so that it will easy to select those columns using start\_with() such that you don't accidentally get additionally columns you don't want - that have a similar prefix. See the Likert-type item section below for additional details.
 \item
   If you have a column name that represents the levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.
 \end{itemize}
@@ -2430,23 +2432,27 @@ To make your life easier down the road, it is critical you set up your spreadshe
 \hypertarget{likert-type-items}{%
 \subsection{Likert-type items}\label{likert-type-items}}
 
-A Likert-type item is typically composed of a statement that participants are asked to agree or disagree with. For example, participants could be asked to indicate the extent to which they agree a number of statements such as ``I like my job''. They would then be presented with response scale such as: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. A common question is how should I enter the data?
+A Likert-type item is typically composed of a statement with which participants are asked to agree or disagree. For example, participants could be asked to indicate the extent to which they agree with a number of statements such as ``I like my job''. Then tey would be presented with response scale such as: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. A common question is, how should I enter the data?
 
 \begin{itemize}
 \item
-  \textbf{Enter numeric responses not the labels}. You should enter the numeric value for each item response (e.g., 5) into your data - not the label (e.g., Strongly Agree). The labels associated with each value can be applied later in a script, if needed.
+  \textbf{Enter numeric responses not labels}. You should enter the numeric value for each item response (e.g., 5) into your data - not the label (e.g., Strongly Agree). The labels associated with each value can be applied later in a script, if needed.
 \item
-  \textbf{High numbers should be associated with more of the construct being measured.} When designing your survey or data collection tools, it is important that you set of the response options appropriately. If your scale measures job satisfaction, it is important that you collect data in a manner that ensures high numbers on the job satisfaction scale indicate high levels of job satisfaction. Therefore, assigning numbers makes sense using the 5-point scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. With this approach high response numbers indicate more job satisfaction. However, using the opposite scale would not make sense: 1 - Strongly Agree, 2 - Moderately Agree, 3 - Neutral, 4, Moderately Disagree, 5 - Strongly Disagree. With this opposite scale high numbers on a job satisfaction scale would indicate lower levels of job satisfaction - a very confusing situation. Avoid this situation, assign numbers so that higher numbers are associated with more of the construct being measured.
+  \textbf{High numbers should be associated with more of the construct being measured.} When designing your survey or data collection tools, it is important that you set the response options appropriately. If your scale measures job satisfaction, it is important that you collect data in a manner that ensures high numbers on the job satisfaction scale indicate high levels of job satisfaction. Therefore, assigning numbers makes sense using the 5-point scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. With this approach high response numbers indicate more job satisfaction. However, using the opposite scale would not make sense: 1 - Strongly Agree, 2 - Moderately Agree, 3 - Neutral, 4, Moderately Disagree, 5 - Strongly Disagree. With this opposite scale high numbers on a job satisfaction scale would indicate lower levels of job satisfaction - a very confusing situation. Avoid this situation, assign numbers so that higher numbers are associated with more of the construct being measured.
 \item
   \textbf{Use appropriate item names.} As described in the naming convention section, use moderate length names with different labels for each subscale.
 \item
-  \textbf{Use moderate length column names unique to each subscale}. Imagine you have a survey with an 18-item commitment scale \citep{meyer1993commitment} composed of three 6-item subscales: affective, normative, and continuance commitment. It would be a poor choice to prefix the labels of all 18 columns in your data with ``commit'' such that the names would be commit1, commit2, commit3, etc. The problem with this approach is that it fails to distinguishing between the three subscales in naming convention; making it impossible to select the items for a single subscale using starts\_with(). A better, but still poor choice for a naming convention would be use use a two letter prefix for the three scale such ac, nc, and cc. This would result in names for the columns like ac1, ac2, ac3, etc. This is an improvement because you could apparently (but likely not) select the columns using starts\_with(``ac''). The problem with these short names is that there could be many columns in data set that start with ``ac'' beside the affective commitment items. You might want to select the affective commitment items using starts\_with(``ac''); but you would get all the affective commitment item columns but also all the columns measuring other variables that also start with ``ac''. Therefore, it's a good idea to use a moderate length unique prefix for column names. For example, you might use prefixes like affectcom, normcom, and contincom for the three subscales. This would create column names like affectcom1, affectcom2, affectcom3, etc. These column prefixes are unlikely to be duplicated in other places in your column name conventions making it easy to select those columns using a command like starts\_with(``affectcom'').
+  \textbf{Use moderate length column names unique to each subscale}. Imagine you have a survey with an 18-item commitment scale \citep{meyer1993commitment} composed of three 6-item subscales: affective, normative, and continuance commitment. It would be a poor choice to prefix the labels of all 18 columns in your data with ``commit'' such that the names would be commit1, commit2, commit3, etc. The problem with this approach is that it fails to distinguish among the three subscales in naming convention; making it impossible to select the items for a single subscale using starts\_with(). A better, but still poor choice for a naming convention would be use use a two letter prefix for the three scale such ac, nc, and cc. This would result in names for the columns like ac1, ac2, ac3, etc. This is an improvement because you could apparently (but likely not) select the columns using starts\_with(``ac''). The problem with these short names is that there could be many columns in data set that start with ``ac'' beside the affective commitment items. You might want to select the affective commitment items using starts\_with(``ac''); but you would get all the affective commitment item columns; but also all the columns measuring other variables that also start with ``ac''. Therefore, it's a good idea to use a moderate length unique prefix for column names. For example, you might use prefixes like affectcom, normcom, and contincom for the three subscales. This would create column names like affectcom1, affectcom2, affectcom3, etc. These column prefixes are unlikely to be duplicated in other places in your column name conventions making it easy to select those columns using a command like starts\_with(``affectcom'').
+\end{itemize}
+
+\textbf{Indicate in the item name if the item is reversed keyed. } Sometimes with Likert-type items, an item is reverse keyed. For example, on a job satisfaction scale, participants will typically respond to items that reflect job satisfaction using the scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. Higher numbers indicate more job satisfaction. Sometimes, however, some items will use the same 1 to 5 response scale but be worded in the opposite manner such as ``I hate my job''. Responding with a 5 to this item would indicate high job \emph{dissatisfaction}. But the columns for job satisfaction items should have high values indicate job satisfaction not job dissatifaction. Consequently, we flag the names of columns with reversed responses (i.e., reverse-key items) so that we know to treat those column differently later. Columns with reverse-keyed items need to be processed by a script so that the values are flipped and scored in the right direction. The procedure for doing so is outlined in the next point.
+
+\textbf{Indicate in the item name the range for reverse-key items.} If an item is reverse keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scales are common, any number of points are possible. The process for correcting a reverse-key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 versus from 0 to 4. Both are 5-point scales but your correction process will be different. Therefore, for reverse-key items add a suffix at the end of each item name that indicates an item is reverse keyed and the range of the item. For example, if the third job satisfaction item was reversed keyed on scale using a 1 to 5 response format you might name the item: jobsat3\_rev15. The suffix "\_rev15" indicates the item is reverse keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
+
+\begin{itemize}
+\tightlist
 \item
-  \textbf{Indicate in the item name if the item is reversed keyed } Sometimes with Likert-type items, an item is reverse-keyed. For example, on a job satisfaction scale participants will typically respond to items that reflect job satisfaction using the scale: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. Higher numbers indicate more job satisfaction. Sometimes however, some items will use the same 1 to 5 response scale but be worded ``I hate my job''. Responding with a 5 to this item would indicate high job dissatisfaction not high job satisfaction - to the response will need to be flipped in your analysis script after data collection (i.e., 1 need to become a 5 and vice versa). To make it easier to do so, you should indicate if an item is reverse-keyed in the item name. The procedure for doing so is outlined in the next point.
-\item
-  \textbf{Indicate in the item name the range for reverse key items. } If an item is reverse-keyed, the process for the flipping the scores depends upon the range of a scale. Although 5-point scale are common, any number of points are possible. The process for correcting a reverse key item depends upon: 1) the number of points on the scale, and 2) the range of the points on the scale. The reverse-key item correction process is different for an item that uses a 5-point scale ranging from 1 to 5 and from 0 to 4. Both are 5-point scale but your correction process will be different. Therefore, for reverse key items add as suffix at the end of each item name that indicates an item is reverse-keyed and the range of the item. For example, if the third job satisfaction item was reversed keyed on scale using a 1 to 5 response format you might name the item: jobsat3\_rev15. The suffix "\_rev15" indicates the item is reverse-keyed and the range of responses used on the item is 1 to 5. Be sure to set up your survey with this naming convention when you collect your data.
-\item
-  If you collect items over multiple time points use a prefix with a short code to indicate the time followed by and underscore. For example, if you had a multi-item self-esteem scale you might call the column for the firs time ``t1\_esteem1\_rev15''. This indicate that you have for time 1 (t1), the first self-esteem item (esteem1) and that item is reverse-keyed on a 1 to 5 scale.
+  If you collect items over multiple time points use a prefix with a short code to indicate the time followed by an underscore. For example, if you had a multi-item self-esteem scale you might call the column for the first time ``t1\_esteem1\_rev15''. This indicate that you have for time 1 (t1), the first self-esteem item (esteem1) and that item is reverse keyed on a 1 to 5 scale.
 \end{itemize}
 
 \hypertarget{anova-between}{%
@@ -3756,13 +3762,13 @@ Possible items responses for the job satisfaction scale range from 1 to 5, make 
 Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items.
 
 \hypertarget{reverse-key-items}{%
-\subsubsection{Reverse key items}\label{reverse-key-items}}
+\subsubsection{Reverse-key items}\label{reverse-key-items}}
 
 The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. The mathematical approach you use to correcting reverse-keyed items depends upon whether the scale starts with 1 or 0.
 
 In this example, we scored the data using the 1 to 5 system. So that is the approach illustrated here. See the extra information box for details on how to fixed reverse-keyed items where the scale begins with zero.
 
-In this data file all the reverse-keyed were identified with the suffix "\_rev15" in the column names. This suffix indicates the item was reverse-keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
+In this data file all the reverse-keyed were identified with the suffix "\_rev15" in the column names. This suffix indicates the item was reverse keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3816,7 +3822,7 @@ The code below:
 \end{Highlighting}
 \end{Shaded}
 
-You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse-keyed.
+You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4308,13 +4314,13 @@ Follow the same process for the job satisfaction items. Possible items responses
 Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items.
 
 \hypertarget{reverse-key-items-1}{%
-\subsubsection{Reverse key items}\label{reverse-key-items-1}}
+\subsubsection{Reverse-key items}\label{reverse-key-items-1}}
 
 The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. The mathematical approach you use to correcting reverse-keyed items depends upon whether the scale starts with 1 or 0.
 
 In this example, we scored the data using the 1 to 5 system. So use the correct approach for scales that being with 1. The preceding section, Surveys: Single occasion, describes how the math differs when the response scale starts with 0. I encourage you to read that section before going further if you have not done so already.
 
-In this data file all the reverse-keyed were identified with the suffix "\_rev15" in the column names. This suffix indicates the item was reverse-keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
+In this data file all the reverse-keyed items were identified with the suffix "\_rev15" in the column names. This suffix indicates the item was reverse keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4329,7 +4335,7 @@ In this data file all the reverse-keyed were identified with the suffix "\_rev15
 ## Columns: 0
 \end{verbatim}
 
-To correct a reverse-keyed items where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest possible rating (i.e., 6).
+To correct reverse-keyed items where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest possible rating (i.e., 6).
 
 The code below:
 
@@ -4353,7 +4359,7 @@ The code below:
 \end{Highlighting}
 \end{Shaded}
 
-You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse-keyed.
+You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
 
 \hypertarget{creating-scores-1}{%
 \subsubsection{Creating scores}\label{creating-scores-1}}
@@ -4604,7 +4610,7 @@ A final approach uses tidyverse commands. This approach is oddly long - and we w
 \hypertarget{cronbachs-alpha}{%
 \subsection{Cronbach's alpha}\label{cronbachs-alpha}}
 
-If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of called analytic\_data\_survey\_items. The glimpse() command illustrates this data set has all the original items (after reverse-coding has been fixed).
+If you want Cronbach's alpha to estimate the reliability of the scale, you can use the alpha command from the psych package with the code below. Note we have to use the item level data we created a copy of called analytic\_data\_survey\_items. The glimpse() command illustrates this data set has all the original items (after reverse-key coding has been fixed).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4990,7 +4996,7 @@ The standardized mean difference takes into account the variability of heights a
 It is important to also look at the original units when interpreting results - not just the standardized mean difference. Examine the scenarios in Figure \ref{fig:dex3}. Notice how the \(\delta\) value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen's \(d\)) provide important interpretational information - don't rely on just one of them.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex3} \caption{The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original; this occurs because the standard deviations also changes across the three scenarios.}\label{fig:dex3}
+\includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex3} \caption{The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios.}\label{fig:dex3}
 \end{figure}
 
 \hypertarget{benchmarks}{%
@@ -5030,6 +5036,9 @@ You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the 
 \item
   SMD is indicated at the population level using the Greek letter delta (\(\delta\)). At the sample level we tend to use the term ``\(d\)-value'' or ``Cohen's \(d\)''.
 \end{enumerate}
+
+\hypertarget{samples}{%
+\chapter{Samples}\label{samples}}
 
 \cleardoublepage
 
