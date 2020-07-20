@@ -1054,7 +1054,7 @@ The way you deal with reverse-keyed items depends on how you scored them. Imagin
 
 In this example, we scored the data using the value 1 to 5; so that is the approach illustrated here. See the extra information box for details on how to fixed reverse-keyed items when the scale begins with zero.
 
-In this data file all the reverse-keyed were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
+In this data file all the reverse-keyed items were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
 
 ```{r}
 analytic_data_survey %>%
@@ -1062,7 +1062,7 @@ analytic_data_survey %>%
   glimpse()
 ```
 
-To correct a reverse-keyed items where the lowest possible rating value is a 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest possible rating. For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
+To correct a reverse-keyed item where the lowest possible rating is 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest point possible on the scale (i.e., one more than 5). For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
 
 |  Original value | Math  | Recoded value |
 |             :-: |  :-:  | :-:           |
@@ -1075,9 +1075,9 @@ To correct a reverse-keyed items where the lowest possible rating value is a 1 (
 
 The code below:
 
-* selects each column that ends with "_rev15" (i.e., both esteem and jobsat scales)
-* subtracts each value in that column from 6
-* renames the column by removing "_rev15" from the name because the reverse coding is complete.
+* selects columns that end with "_rev15" (i.e., both esteem and jobsat scales)
+* subtracts the values in those columns from 6
+* renames the columns by removing "_rev15" from the name because the reverse coding is complete
 
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -1087,7 +1087,7 @@ analytic_data_survey <- analytic_data_survey %>%
               pattern = "_rev15")
 ```
 
-You can use the glimpse() command to see the result of your work. If you compare this to values from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
+You can use the glimpse() command to see the result of your work. If you compare these new values to those obtained from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
 
 ```{r,echo=TRUE,eval=TRUE}
 glimpse(analytic_data_survey)
@@ -1105,14 +1105,14 @@ For each item you would use subtract values from the highest possible point (i.e
 | 3               | 4 - 3 | 1             |
 | 4               | 4 - 4 | 0             |
 
-Thus the mutate command would instead be:
+Thus, the mutate command would instead be:
 
   mutate(4 - across(.cols = ends_with("_rev15")) )
 ```
 
 #### Creating scores
 
-The process we use for creating scale scores deletes item level data from analytic_data_survey. This is a desirable aspect of the process because it removes information we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_survey_items. We will need to use this backup later to compute the reliability of the scales we are creating.
+The process we use for creating scale scores deletes item-level data from analytic_data_survey. This is a desirable aspect of the process because it removes information that we are no longer interested in from our analytic data. That said, before we create scale score, we create a backup on the item level data called analytic_data_survey_items. We will need to use this backup later to compute the reliability of the scales we are creating.
 
 ```{r}
 analytic_data_survey_items <- analytic_data_survey
@@ -1137,7 +1137,7 @@ analytic_data_survey %>%
 
 We calculate the scale scores using the rowwise() command. The mean() command provides the mean of columns by default - not people. We use the rowwise() command in the code below to make the mean() command  work across columns (within participants) rather than within columns. The mutate command calculates the scale score for each person. The c_across() command combined with the starts_with() command ensures the items we want averaged together are the items that are averaged together. Notice there is a separate mutate line for each scale. The ungroup() command turns off the rowwise() command. We end the code block by removing the item-level data from the data set.
 
-**Important:** Take note of how we names the scale variables (e.g., self_esteem, job_sat) use a slightly different convention than our items. That is, these scale labels were picked so that they would *not* be selected by a starts_with("esteem") or starts_with("jobsat"). Why? Because we later use those commands to remove the item-level data. We would want the command designed to remove the item-level data to also remove the scale we just calculated! This example illustrates how carefully you need to think about your naming conventions.
+**Important:** Take note of how we name the scale variables (e.g., self_esteem, job_sat). We use a slightly different convention than our items. That is, these scale labels were picked so that they would *not* be selected by a starts_with("esteem") or starts_with("jobsat"). Why - because we later use those commands to remove the item-level data. We would want the command designed to remove the item-level data to also remove the scale we just calculated! This example illustrates how carefully you need to think about your naming conventions.
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -1194,7 +1194,7 @@ analytic_data_occasions <- raw_data_occasions
 
 ```
 
-Remove empty row and columns from your data using the remove_empty_cols() and remove_empty_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions. 
+Remove empty rows and columns from your data using the remove_empty("rows") and remove_empty("cols"), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions. 
 
 ```{r, results = "hide"}
 library(janitor)
@@ -1231,7 +1231,7 @@ analytic_data_occasions <- analytic_data_occasions %>%
 
 ```
 
-The participant identification number in the id column is a numeric column, so we have handle that column on it's own. 
+The participant identification number in the id column is numeric, so we have to handle that column on its own. 
 
 ```{r}
 analytic_data_occasions <- analytic_data_occasions %>%
@@ -1246,11 +1246,11 @@ glimpse(analytic_data_occasions)
 
 Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
-**Note:** f you have factors like sex that have numeric data in the column (e.g, 1 and 2) instead of male/female you need to handle the situation differently. The preceding section, Experiment: Within N-way, illustrates how to handle this scenario.
+**Note:** If you have factors like sex that have numeric data in the column (e.g, 1 and 2) instead of male/female you need to handle the situation differently. The preceding section, Experiment: Within N-way, illustrates how to handle this scenario.
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_occasions %>%
@@ -1269,7 +1269,7 @@ analytic_data_occasions <- analytic_data_occasions %>%
                            "male"))
 ```
 
-For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
+For eye color, we want a future graph to have the most common eye colors on the left so we reorder the factor levels:
 
 ```{r}
 analytic_data_occasions <- analytic_data_occasions %>%
@@ -1286,7 +1286,7 @@ analytic_data_occasions %>%
 
 ### Numeric screening
 
-For numeric variables, it's important find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (e.g., outside the 1 to 5 point rating scale for Likert items) or clearly data entry errors.
+For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the Likert responses are impossible (e.g., outside the 1- to 5-point rating scale) or clearly data entry errors.
 
 Because we have several numeric columns that we are screening, we use the skim() command from the skimr package. The skim() command quickly provides basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75.
 
