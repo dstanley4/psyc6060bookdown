@@ -13,44 +13,49 @@ In the formulas below, when we refer the population, we use uppercase letters wh
 
 ## Estimating the mean
 
-We begin with the simple case of using a sample mean to estimate population mean. This is a simple case because the same formula can be use at both the sample and population levels.
+We are interested in sample means ($\bar{x}$) to the extent that they provide an estimate of the population mean ($\mu$). 
 
-The population mean, $\mu$, is a parameter calculated using the formula below:
+The population mean, $\mu$, is a parameter calculated using Formula \@ref(eq:popmeanch5)
 
-$$
-\begin{aligned} 
-\mu &= \frac{\sum{X}}{N} \\
-\end{aligned} 
-$$
+\begin{equation} 
+\mu = \frac{\sum{X}}{N}
+      (\#eq:popmeanch5)
+\end{equation} 
 
-The sample mean, $\bar{x}$, is a statistic calculated using the formula below. The bar of above the $x$, indicates that it is a mean.
+The sample mean, $\bar{x}$, is a statistic calculated using the using Formula \@ref(eq:samplemeanch5). The bar of above the $x$, indicates that it is a mean. Notice that the two formulas are the same - even though they use different notation.
 
-$$
-\begin{aligned} 
-\bar{x} &= \frac{\sum{x}}{n} \\
-\end{aligned} 
-$$
 
-A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter).  This difference between the sample mean and the population mean could potentially be concerning.  Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.
+\begin{equation} 
+\bar{x} = \frac{\sum{x}}{n}
+      (\#eq:samplemeanch5)
+\end{equation} 
 
-###  Bias
-One way of assessing the quality of the sample mean as an estimate of the population mean is by examining bias. If the average of many sample means corresponds is equal to the population mean, then we consider the sample mean an unbiased estimator.
+A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter).  This difference between the sample mean and the population mean could potentially be concerning.  Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Keep this point in mind when conducting your own research.
 
-The fact that the sample mean provides an unbiased estimate of the population mean can be illustrated with a computer simulation. 
+One way of assessing the quality of the sample mean as an estimate of the population mean is by examining bias. If the average of many sample means is equal to the population mean, then we consider the sample mean to be an unbiased estimator of the population mean.
+
+Fortunately, the average of many sample means does equal the population mean - so the sample mean is an unbiased estimator of the population mean. This fact can be illustrated with a computer simulation. 
+
+We begin by activating the required packages:
 
 ```{r, include=FALSE}
 library(tidyverse)
 library(learnSampling)
 ```
 
-
 ```{r}
 library(tidyverse)
 library(learnSampling)
+```
 
+Next, we create a large population with 100,000 people using the get_height_population() command:
+
+```{r}
 pop_data <- get_height_population() 
 ```
 
+
+We can use tidyverse commands to determine the mean of the population ($\mu$):
 
 ```{r}
 pop_data %>%
@@ -58,7 +63,9 @@ pop_data %>%
   as.data.frame()
 ```
 
-We can illustrate how random sampling works, with respect to estimating the population mean, by taking a large number of samples from the population. In the code below, we use the get_M_samples() command to obtain 5000 samples, each composed of 10 people. For each of these 5000 samples we calculate a variety of statistics and place themm in the many_samples data frame.
+We see that the mean of the population is $\mu = 172.48$. We can illustrate how random sampling works, with respect to estimating this population mean, by taking a large number of samples from the population.
+
+In the code below, we use the get_M_samples() command to obtain 5000 samples, each composed of 10 people. For each of these 5000 samples we calculate a variety of statistics and place themm in the many_samples data frame. Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic or the population parameter the statistic is estimating.
 
 
 ```{r}
@@ -78,8 +85,7 @@ We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 sam
 head(many_samples, 10)
 ```
 
-You can see the for each sample we indicate n (the sample size), pop.M (the mean of the population), sample.M (the mean of the sample), and a few other statistics. Because all the sample came from the same population you can that the population mean (pop.M) is constant across rows/samples. In contrast, the sample mean (sample.M) varies across samples due to random sampling error.
-
+You can see the for each sample we indicate n (the sample size), pop.M (the mean of the population), sample.M (the mean of the sample), and a few other statistics. Because all the samples came from the same population you can that the population mean (pop.M) is constant across rows/samples. In contrast, the sample mean (sample.M) varies across samples due to random sampling error.
 
 You can see the full extent to which the sample means vary by creating a graph with the code below. In this code, we use the pull() command to extract the value from the sample.M column and then we send them to the base R hisogram command, hist().
 
@@ -90,7 +96,7 @@ many_samples %>%
 ```
  
  
-You can see the 5000 sample means plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantialy from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.
+You can see the 5000 sample means plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.
 
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample deviates from the popualtion mean. That said, statisticians are very concerned whether the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. 
 
@@ -101,25 +107,25 @@ many_samples %>%
  summarise(mean_of_sample.M = mean(sample.M))
 ```
 
-We find that the average of the 5000 sample mean is 172.55 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean.
+We find that the average of the 5000 sample means is 172.47 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be "wrong".
+
 
 ## Estimating variance
 
-Now we move to the more complex case of estimating the population variance using sample data. The population variance, $\sigma^2$, is a parameter calculated using the formula below:
+We are interested in sample variances ($s^2$) to the extent that they provide an estimate of the population mean ($\sigma^2$). Recall, the population variance, $\sigma^2$, is a parameter calculated using Formula \@ref(eq:popvarch5).
 
-$$
-\begin{aligned} 
-\sigma^2 &= \frac{\sum{(X - \mu)^2}}{N}\\
-\end{aligned} 
-$$
+\begin{equation} 
+\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}
+      (\#eq:popvarch5)
+\end{equation} 
 
-The sample variance, $s^2$, is a statistic calculated using the formula below. The formula is the same as at the population level but we use a different notation because it is a sample.
 
-$$
-\begin{aligned} 
-s^2 &= \frac{\sum{(x - \bar{x})^2}}{n}\\
-\end{aligned} 
-$$
+The sample variance, $s^2$, is a statistic calculated using Formula \@ref(eq:samplevarnch5). The formula is the same as at the population level but we use a different notation because it is a sample.
+
+\begin{equation} 
+s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
+      (\#eq:samplevarnch5)
+\end{equation} 
 
 
 Examine the output for 5000 samples we created using the head() command. Notice in this output we see the population variance is 157.46 (see the pop.var column):
@@ -137,13 +143,44 @@ many_samples %>%
  summarise(mean_of_var.n = mean(sample.var.n))
 ```
 
-We see from the output above that the average of the sample.var.n column is 141.86; which differs from the population variance of 157.46. Thus, the average of the sample variances is lower (141.86) than the actual population variance (157.46). This finding indicates that the sample variance, when calculated with $n$ in the denominator, is a biased estimate of the population variance. That means, that if we try to estimate the population variance with the sample variance that we will, on average, be wrong.
+We find that the average of the 5000 sample variances is 141.86 which is not close to the population variance of 157.46. Note that when we did this, we used the same formula to calculate the sample variance as we did the population variance.
 
+The average of the sample variances (141.86) was different from the population variancee (157.46). The average of the sample variance was much smaller than the population variance. Consequently, the sample variance provides a biased estimate of the population variance. If we try to estimate the population variance with a sample variance we will, on average, be wrong.
 
-Fortunately, there is a way around the fact that the sample variance provides a biased estimate of the population variance. We can use a mathematical proof, see Hayes, to show than we can use sample data to estimate the population variance in an unbiased way. The results of the math is rather straightforward. We simply divide by $n - 1$ instead of $n$ when calcualting 
+Fortunately, there is a way around the fact that the sample variance provides a biased estimate of the population variance. We can derive a formula at the sample level that estimate the population variance that is not biased (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
+\begin{equation} 
+s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
+      (\#eq:samplevarn1ch5)
+\end{equation} 
+
+The column sample.var.n_1 contains an estimate of the population variance using $n-1$ in the denominator. Check out this column using the head() command:
+
+```{r}
+head(many_samples, 10)
+```
+
+We can evaluate the quality of this new variance formula, using $n-1$, by averaging over values in the sample.var.n_1 column.
 
 ```{r}
 many_samples %>%
  summarise(mean_of_var.n_1 = mean(sample.var.n_1))
 ```
+
+We see that the average of the 5000 values using $n-1$ in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
+
+You may wonder at this point, when I use $n-1$ in the denominator of the sample variance, can I still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors in the population.
+
+## Estimating standard deviation
+
+Due to the above findings for variance, we tend to estimate the population standard deviation using Formula \@ref(eq:samplesd1ch5).
+
+\begin{equation} 
+s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
+      (\#eq:samplesd1ch5)
+\end{equation} 
+
+
+## Estimating SMD
+
+
