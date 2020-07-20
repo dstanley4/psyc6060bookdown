@@ -121,18 +121,27 @@ s^2 &= \frac{\sum{(x - \bar{x})^2}}{n}\\
 \end{aligned} 
 $$
 
-A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter).  This difference between the sample mean and the population mean could potentially be concerning.  Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.
+
+Examine the output for 5000 samples we created using the head() command. Notice in this output we see the population variance is 157.46 (see the pop.var column):
 
 ```{r}
-many_samples %>%
- pull(sample.var.n) %>%
- hist(main = "Histogram of Sample Variance using n")
+head(many_samples, 10)
 ```
+
+Now inspect the sample.var.n column. In this column we present the sample variance calculated, using the above formula, with $n$ in the denominator. That is, in this column we have calculated sample variance using the same formula (but with different notation) as we used at the population level. Notice the values in the sample.var.n column vary due to random sampling.
+
+As we did with the mean, we can take the average of the 5000 sample variances (each using $n$ in the denominator) to determine if the sample variance provides a biased or unbiased estimate of the population variance.
 
 ```{r}
 many_samples %>%
  summarise(mean_of_var.n = mean(sample.var.n))
 ```
+
+We see from the output above that the average of the sample.var.n column is 141.86; which differs from the population variance of 157.46. Thus, the average of the sample variances is lower (141.86) than the actual population variance (157.46). This finding indicates that the sample variance, when calculated with $n$ in the denominator, is a biased estimate of the population variance. That means, that if we try to estimate the population variance with the sample variance that we will, on average, be wrong.
+
+
+Fortunately, there is a way around the fact that the sample variance provides a biased estimate of the population variance. We can use a mathematical proof, see Hayes, to show than we can use sample data to estimate the population variance in an unbiased way. The results of the math is rather straightforward. We simply divide by $n - 1$ instead of $n$ when calcualting 
+
 
 ```{r}
 many_samples %>%
