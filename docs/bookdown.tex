@@ -5047,12 +5047,17 @@ Sample statistics, however, often differ from population parameters. The differe
 
 Further complicating matter is the fact that the formula used for a sample statistic may or may not be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is usually not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as your would with the population data.
 
+\hypertarget{notation-1}{%
+\section{Notation}\label{notation-1}}
+
+In the formulas below, when we refer the population, we use uppercase letters when indicating members (\(X\)) or the size (\(N\)). In contrast, when we refer to the sample, we use lowercsae letters when indicating members (\(x\)) or the size (\(n\)).
+
 \hypertarget{estimating-the-mean}{%
 \section{Estimating the mean}\label{estimating-the-mean}}
 
 We begin with the simple case of using a sample mean to estimate population mean. This is a simple case because the same formula can be use at both the sample and population levels.
 
-The population mean, \(mu\), is a parameter calculated using the formula below:
+The population mean, \(\mu\), is a parameter calculated using the formula below:
 
 \[
 \begin{aligned} 
@@ -5060,11 +5065,11 @@ The population mean, \(mu\), is a parameter calculated using the formula below:
 \end{aligned} 
 \]
 
-The sample mean, \(\bar{x}\), is a statistic calculated using the formula below. The bar of above the \(x\),indicates that it is a mean.
+The sample mean, \(\bar{x}\), is a statistic calculated using the formula below. The bar of above the \(x\), indicates that it is a mean.
 
 \[
 \begin{aligned} 
-\bar{x} &= \frac{\sum{X}}{N} \\
+\bar{x} &= \frac{\sum{x}}{n} \\
 \end{aligned} 
 \]
 
@@ -5109,7 +5114,7 @@ We can illustrate how random sampling works, with respect to estimating the popu
 \NormalTok{many_samples <-}\StringTok{ }\KeywordTok{get_M_samples}\NormalTok{(}\DataTypeTok{pop.data =}\NormalTok{ pop_data, }
                               \DataTypeTok{data.column.name =}\NormalTok{ height,}
                               \DataTypeTok{n =} \DecValTok{10}\NormalTok{,}
-                              \DataTypeTok{number.of.samples =} \DecValTok{1000}\NormalTok{)}
+                              \DataTypeTok{number.of.samples =} \DecValTok{5000}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5158,7 +5163,7 @@ You can see the full extent to which the sample means vary by creating a graph w
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-211-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-212-1.pdf}
 
 You can see the 1000 sample means plotted in this graph. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantialy from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.
 
@@ -5175,7 +5180,7 @@ In the code below we calculate the average of the 1000 sample means to determine
 
 \begin{verbatim}
 ##   mean_of_sample.M
-## 1            172.6
+## 1            172.5
 \end{verbatim}
 
 We find that the average of the 1000 sample mean is 172.55 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean.
@@ -5191,7 +5196,7 @@ Now we move to the more complex case of estimating the population variance using
 \end{aligned} 
 \]
 
-The sample variance, \(s^2\), is a statistic calculated using the formula below.
+The sample variance, \(s^2\), is a statistic calculated using the formula below. The formula is the same as at the population level but we use a different notation because it is a sample.
 
 \[
 \begin{aligned} 
@@ -5200,6 +5205,40 @@ s^2 &= \frac{\sum{(x - \bar{x})^2}}{n}\\
 \]
 
 A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter). This difference between the sample mean and the population mean could potentially be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{pull}\NormalTok{(sample.var.n_}\DecValTok{1}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{hist}\NormalTok{(}\DataTypeTok{main =} \StringTok{"Histogram of Sample Variance using n"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-214-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var.n =} \KeywordTok{mean}\NormalTok{(sample.var.n))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean_of_var.n
+## 1         141.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples }\OperatorTok{%>%}
+\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var.n_1 =} \KeywordTok{mean}\NormalTok{(sample.var.n_}\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean_of_var.n_1
+## 1           157.6
+\end{verbatim}
 
 \cleardoublepage
 

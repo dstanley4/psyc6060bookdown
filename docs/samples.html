@@ -269,10 +269,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6" data-path="populations.html"><a href="populations.html#key-points"><i class="fa fa-check"></i><b>4.6</b> Key points</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="samples.html"><a href="samples.html"><i class="fa fa-check"></i><b>5</b> Samples</a><ul>
-<li class="chapter" data-level="5.1" data-path="samples.html"><a href="samples.html#estimating-the-mean"><i class="fa fa-check"></i><b>5.1</b> Estimating the mean</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="samples.html"><a href="samples.html#bias"><i class="fa fa-check"></i><b>5.1.1</b> Bias</a></li>
+<li class="chapter" data-level="5.1" data-path="samples.html"><a href="samples.html#notation-1"><i class="fa fa-check"></i><b>5.1</b> Notation</a></li>
+<li class="chapter" data-level="5.2" data-path="samples.html"><a href="samples.html#estimating-the-mean"><i class="fa fa-check"></i><b>5.2</b> Estimating the mean</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="samples.html"><a href="samples.html#bias"><i class="fa fa-check"></i><b>5.2.1</b> Bias</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="samples.html"><a href="samples.html#estimating-variance"><i class="fa fa-check"></i><b>5.2</b> Estimating variance</a></li>
+<li class="chapter" data-level="5.3" data-path="samples.html"><a href="samples.html#estimating-variance"><i class="fa fa-check"></i><b>5.3</b> Estimating variance</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="more-to-say.html"><a href="more-to-say.html"><i class="fa fa-check"></i><b>A</b> More to Say</a></li>
@@ -302,24 +303,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Researchers are usually interested in the describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.</p>
 <p>Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly few observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.</p>
 <p>Further complicating matter is the fact that the formula used for a sample statistic may or may not be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is usually not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as your would with the population data.</p>
+<div id="notation-1" class="section level2">
+<h2><span class="header-section-number">5.1</span> Notation</h2>
+<p>In the formulas below, when we refer the population, we use uppercase letters when indicating members (<span class="math inline">\(X\)</span>) or the size (<span class="math inline">\(N\)</span>). In contrast, when we refer to the sample, we use lowercsae letters when indicating members (<span class="math inline">\(x\)</span>) or the size (<span class="math inline">\(n\)</span>).</p>
+</div>
 <div id="estimating-the-mean" class="section level2">
-<h2><span class="header-section-number">5.1</span> Estimating the mean</h2>
+<h2><span class="header-section-number">5.2</span> Estimating the mean</h2>
 <p>We begin with the simple case of using a sample mean to estimate population mean. This is a simple case because the same formula can be use at both the sample and population levels.</p>
-<p>The population mean, <span class="math inline">\(mu\)</span>, is a parameter calculated using the formula below:</p>
+<p>The population mean, <span class="math inline">\(\mu\)</span>, is a parameter calculated using the formula below:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \mu &amp;= \frac{\sum{X}}{N} \\
 \end{aligned} 
 \]</span></p>
-<p>The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the formula below. The bar of above the <span class="math inline">\(x\)</span>,indicates that it is a mean.</p>
+<p>The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the formula below. The bar of above the <span class="math inline">\(x\)</span>, indicates that it is a mean.</p>
 <p><span class="math display">\[
 \begin{aligned} 
-\bar{x} &amp;= \frac{\sum{X}}{N} \\
+\bar{x} &amp;= \frac{\sum{x}}{n} \\
 \end{aligned} 
 \]</span></p>
 <p>A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter). This difference between the sample mean and the population mean could potentially be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.</p>
 <div id="bias" class="section level3">
-<h3><span class="header-section-number">5.1.1</span> Bias</h3>
+<h3><span class="header-section-number">5.2.1</span> Bias</h3>
 <p>One way of assessing the quality of the sample mean as an estimate of the population mean is by examining bias. If the average of many sample means corresponds is equal to the population mean, then we consider the sample mean an unbiased estimator.</p>
 <p>The fact that the sample mean provides an unbiased estimate of the population mean can be illustrated with a computer simulation.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="samples.html#cb310-1"></a><span class="kw">library</span>(tidyverse)</span>
@@ -338,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb313-4"><a href="samples.html#cb313-4"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
 <span id="cb313-5"><a href="samples.html#cb313-5"></a>                              <span class="dt">data.column.name =</span> height,</span>
 <span id="cb313-6"><a href="samples.html#cb313-6"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
-<span id="cb313-7"><a href="samples.html#cb313-7"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<span id="cb313-7"><a href="samples.html#cb313-7"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">5000</span>)</span></code></pre></div>
 <p>We use the head() command to see the first 10 rows (i.e., 10 samples of 1000 samples):</p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="samples.html#cb314-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    sample.number  n pop.M sample.M pop.var sample.var.n
@@ -368,32 +373,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="samples.html#cb316-1"></a>many_samples <span class="op">%&gt;%</span></span>
 <span id="cb316-2"><a href="samples.html#cb316-2"></a><span class="st"> </span><span class="kw">pull</span>(sample.M) <span class="op">%&gt;%</span></span>
 <span id="cb316-3"><a href="samples.html#cb316-3"></a><span class="st"> </span><span class="kw">hist</span>(<span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
 <p>You can see the 1000 sample means plotted in this graph. Recall the population mean for heights is <span class="math inline">\(\mu = 172.48\)</span> cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (<span class="math inline">\(\bar{x}\)</span>) may differ substantialy from the population mean (<span class="math inline">\(\mu = 172.48\)</span>). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.</p>
 <p>Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample deviates from the popualtion mean. That said, statisticians are very concerned whether the results of a large number of studies are correct – on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator.</p>
 <p>In the code below we calculate the average of the 1000 sample means to determine if the sample mean is an unbiased estimator.</p>
 <div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="samples.html#cb317-1"></a>many_samples <span class="op">%&gt;%</span></span>
 <span id="cb317-2"><a href="samples.html#cb317-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample.M =</span> <span class="kw">mean</span>(sample.M))</span></code></pre></div>
 <pre><code>##   mean_of_sample.M
-## 1            172.6</code></pre>
+## 1            172.5</code></pre>
 <p>We find that the average of the 1000 sample mean is 172.55 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean.</p>
 </div>
 </div>
 <div id="estimating-variance" class="section level2">
-<h2><span class="header-section-number">5.2</span> Estimating variance</h2>
+<h2><span class="header-section-number">5.3</span> Estimating variance</h2>
 <p>Now we move to the more complex case of estimating the population variance using sample data. The population variance, <span class="math inline">\(\sigma^2\)</span>, is a parameter calculated using the formula below:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sigma^2 &amp;= \frac{\sum{(X - \mu)^2}}{N}\\
 \end{aligned} 
 \]</span></p>
-<p>The sample variance, <span class="math inline">\(s^2\)</span>, is a statistic calculated using the formula below.</p>
+<p>The sample variance, <span class="math inline">\(s^2\)</span>, is a statistic calculated using the formula below. The formula is the same as at the population level but we use a different notation because it is a sample.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s^2 &amp;= \frac{\sum{(x - \bar{x})^2}}{n}\\
 \end{aligned} 
 \]</span></p>
 <p>A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter). This difference between the sample mean and the population mean could potentially be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="samples.html#cb319-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb319-2"><a href="samples.html#cb319-2"></a><span class="st"> </span><span class="kw">pull</span>(sample.var.n_<span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb319-3"><a href="samples.html#cb319-3"></a><span class="st"> </span><span class="kw">hist</span>(<span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Variance using n&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-214-1.png" width="672" /></p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="samples.html#cb320-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb320-2"><a href="samples.html#cb320-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n =</span> <span class="kw">mean</span>(sample.var.n))</span></code></pre></div>
+<pre><code>##   mean_of_var.n
+## 1         141.9</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="samples.html#cb322-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb322-2"><a href="samples.html#cb322-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n_1 =</span> <span class="kw">mean</span>(sample.var.n_<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>##   mean_of_var.n_1
+## 1           157.6</code></pre>
 
 
 </div>
