@@ -1,15 +1,14 @@
 # Samples
 
-Researchers are usually interested in the describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population.  Unfortunately,  it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
+Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population.  Unfortunately,  it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
 
-Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly few observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter.  Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.
+Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter.  Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.
 
-Further complicating matter is  the fact that the formula used for a sample statistic may or may not be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is usually not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as your would with the population data.
+Further complicating matters is  the fact that the formula used for a sample statistic may or may not be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
 ## Notation
 
-In the formulas below, when we refer the population, we use uppercase letters when indicating members ($X$) or the size ($N$). In contrast, when we refer to the sample, we use lowercsae letters when indicating members ($x$) or the size ($n$).
-
+In the formulas below, when we refer the population, we use uppercase letters when indicating members ($X$) or the size ($N$). In contrast, when we refer to the sample, we use lowercsae letters when indicating members ($x$) or the size ($n$). Make sure you notice the similarities between population and sample formulas even when the notation differs.
 
 ## Estimating the mean
 
@@ -30,7 +29,7 @@ The sample mean, $\bar{x}$, is a statistic calculated using the using Formula \@
       (\#eq:samplemeanch5)
 \end{equation} 
 
-A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter).  This difference between the sample mean and the population mean could potentially be concerning.  Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Keep this point in mind when conducting your own research.
+A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful form a single study, the fact that sample means differ from the popualtion mean could potentially be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.
 
 One way of assessing the quality of the sample mean as an estimate of the population mean is by examining bias. If the average of many sample means is equal to the population mean, then we consider the sample mean to be an unbiased estimator of the population mean.
 
@@ -54,6 +53,17 @@ Next, we create a large population with 100,000 people using the get_height_popu
 pop_data <- get_height_population() 
 ```
 
+The glimpse() command can be used to confirm that the population contains 100,000 people.
+
+```{r}
+glimpse(pop_data)
+```
+
+We can use the head() command to illustrate that each row in pop_data represents a single person.
+
+```{r}
+head(pop_data, 10)
+```
 
 We can use tidyverse commands to determine the mean of the population ($\mu$):
 
@@ -128,13 +138,13 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{equation} 
 
 
-Examine the output for 5000 samples we created using the head() command. Notice in this output we see the population variance is 157.46 (see the pop.var column):
+Examine the output for 5000 samples we created using the head() command. Notice in this output we see the population variance is 157.46 (see the pop.var column). The values in this column were calculated, based on everyone in the poulation, using Formula \@ref(eq:popvarch5). 
 
 ```{r}
 head(many_samples, 10)
 ```
 
-Now inspect the sample.var.n column. In this column we present the sample variance calculated, using the above formula, with $n$ in the denominator. That is, in this column we have calculated sample variance using the same formula (but with different notation) as we used at the population level. Notice the values in the sample.var.n column vary due to random sampling.
+Now inspect the sample.var.n column the values in this column were calculated based on sample data using Formula \@ref(eq:samplevarnch5). In this column we present the sample variance calculated, using the above formula, with $n$ in the denominator. That is, in this column we have calculated sample variance using the same formula (but with different notation) as we used at the population level. Notice the values in the sample.var.n column vary due to random sampling.
 
 As we did with the mean, we can take the average of the 5000 sample variances (each using $n$ in the denominator) to determine if the sample variance provides a biased or unbiased estimate of the population variance.
 
@@ -154,13 +164,14 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       (\#eq:samplevarn1ch5)
 \end{equation} 
 
-The column sample.var.n_1 contains an estimate of the population variance using $n-1$ in the denominator. Check out this column using the head() command:
+
+The values in the sample.var.n_1 column  were calculated, based on sample data, using Formula \@ref(eq:samplevarn1ch5). Check out this column using the head() command:
 
 ```{r}
 head(many_samples, 10)
 ```
 
-We can evaluate the quality of this new variance formula, using $n-1$, by averaging over values in the sample.var.n_1 column.
+We can evaluate the quality of Formula \@ref(eq:samplevarn1ch5), using $n-1$, by averaging over values in the sample.var.n_1 column.
 
 ```{r}
 many_samples %>%
@@ -169,7 +180,7 @@ many_samples %>%
 
 We see that the average of the 5000 values using $n-1$ in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
 
-You may wonder at this point, when I use $n-1$ in the denominator of the sample variance, can I still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors in the population.
+You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors in the population. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
 
 ## Estimating standard deviation
 
@@ -183,4 +194,147 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 
 ## Estimating SMD
 
+```{r}
+female_pop_data <- pop_data %>% filter(sex == "female")
+male_pop_data <- pop_data %>% filter(sex == "male")
+```
+
+For females:
+
+$$
+\begin{aligned} 
+\mu_{female} &= 165 \\
+\sigma_{female} &= 10\\
+\end{aligned} 
+$$
+
+
+For males:
+
+$$
+\begin{aligned} 
+\mu_{male} &= 180 \\
+\sigma_{male} &= 10\\
+\end{aligned} 
+$$
+
+
+```{r, out.height="80%", echo = F}
+textMean1 <- expression(Delta~"M" == 15)
+textd1 <- expression(delta == 1.50)
+textfemale1 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 180)
+texts1 <- expression(sigma == 10)
+
+
+
+twopop <- ggplot(data = pop_data,
+       mapping = aes(x = height,
+                     alpha = sex)) +
+  geom_histogram(position = "identity",
+                 boundary = 0,
+                 binwidth = 5,
+                 fill = "black",
+                 color =  "black") +
+  theme_classic() +
+  scale_alpha_manual(values = c(.30, .50)) +
+  facet_wrap(~sex, nrow = 2) +
+  scale_x_continuous(breaks = seq(100, 250, by = 10)) +
+  geom_vline(xintercept = 165, size = 2) +
+  geom_vline(xintercept = 180, size = 2) +
+  labs(x = "Height (cm)", y = "Count", alpha = "Sex") +
+  annotate("text", x = 230, y = 9000, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = 7000, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = 9000, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = 7000, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = 5000, 
+           parse = T, label = as.character(texts1), hjust = 0)
+
+ggsave(filename = "ch_samples/images/sex_pops.png", dpi = 300, width = 8, height = 6)
+```
+
+```{r sexpop, echo=FALSE, out.width="95%", fig.cap="Illustration of the standardized mean difference of 1.50 for height between males and females. The solid black vertical lines indicates the means ($\\mu$) for the two populations."}
+knitr::include_graphics("ch_samples/images/sex_pops.png")
+```
+
+
+### Population SMD
+
+In original units:
+$$
+\begin{aligned} 
+\Delta M &= (\mu_{male} - \mu_{female}) \\
+&= (180 - 165) \\
+&= 15 \\
+\end{aligned} 
+$$
+
+
+Formula \@ref(eq:popsmdch5) below illustrates....
+
+\begin{equation} 
+\delta  = \frac{(\mu_{male} - \mu_{female})}{\sigma} 
+      (\#eq:popsmdch5)
+\end{equation} 
+
+
+Calculation:
+
+$$
+\begin{aligned} 
+\delta  &= \frac{(\mu_{male} - \mu_{female})}{\sigma} \\
+&= \frac{(180 - 165)}{10} \\
+&= \frac{15}{10} \\
+&= 1.50 \\
+\end{aligned} 
+$$
+
+### Sample SMD
+
+Formula \@ref(eq:samplesmdch5) below illustrates....
+
+\begin{equation} 
+d  = \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}} 
+      (\#eq:samplesmdch5)
+\end{equation} 
+
+#### Estimating means
+
+#### Estimating variance
+
+```{r pool1, echo=FALSE, out.width="95%", fig.cap="The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. "}
+knitr::include_graphics("ch_samples/images/pool1.png")
+```
+
+
+```{r pool2, echo=FALSE, out.width="95%", fig.cap="We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance."}
+knitr::include_graphics("ch_samples/images/pool2.png")
+```
+
+
+```{r pool3, echo=FALSE, out.width="95%", fig.cap="We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal, we need to use a more sophisticated formula to obtain the pooled variance."}
+knitr::include_graphics("ch_samples/images/pool3.png")
+```
+
+#### Combining everything
+
+$$
+\begin{aligned} 
+d  &= \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}} \\
+\end{aligned} 
+$$
+
+
+## Overview
+
+| Parameter  | Estimated by this statistic | 
+| ---         |  ---   |
+|$\mu = \frac{\sum{X}}{N}$ | $\bar{x} = \frac{\sum{x}}{n}$|
+|$\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}$  | $s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}$ |
+|$\sigma = \sqrt{\frac{\sum{(X - \mu)^2}}{N}}$  | $s =\sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}$ |
+|$\delta= \frac{\mu_{1} - \mu_{2}}{\sigma}$ | $d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}$    |
 
