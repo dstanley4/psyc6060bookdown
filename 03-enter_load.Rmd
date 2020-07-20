@@ -527,7 +527,7 @@ analytic_data_within %>%
 
 ### Numeric screening
 
-For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (i.e., negative) or clearly data entry errors.
+For numeric variables, it is important to find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (i.e., negative) or clearly data entry errors.
 
 Because we have several numeric columns that we are screening, we use the skim() command from the skimr package. The skim() command quickly provides basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75.
 
@@ -636,7 +636,7 @@ raw_data_within_nway <- read_csv(file = "data_food.csv",
                      na = my_missing_value_codes)
 ```
 
-We load the initial data into a raw_data_within_nway but immediately make a copy we will work with called analytic_data_within_nway. It's good to keep a copy of the raw data for reference if you encounter problems.
+We load the initial data into raw_data_within_nway but immediately make a copy that we will work with called analytic_data_within_nway. It's good to keep a copy of the raw data for reference if you encounter problems.
 
 ```{r}
 analytic_data_within_nway <- raw_data_within_nway
@@ -704,7 +704,7 @@ analytic_data_within_nway <- analytic_data_within_nway %>%
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels for a factor that are incorrect. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously,  mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 
 ```{r}
@@ -766,9 +766,9 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-Scan the minimum and maximum values (p0 and p100) to ensure there are not any impossible values. That is values outside the 1 to 10 range in this example. If necessary, got back to the original data source and fix these impossible value. Alternatively, you might need to change them to missing values (i.e., NA values). 
+Scan the minimum and maximum values (p0 and p100) to ensure there are not any impossible values. That is, ensure all values are inside the 1 to 10 range for the dependent variable. If necessary, get back to the original data source and fix these impossible values. Alternatively, you might need to change them to missing values (i.e., NA values). 
 
-In this example all the values are reasonable values. However, if we discovered an out of range value (or values) for elapsed time we could convert those values to missing values with the code below. This code changes (i.e., mutates) a value in the pizza_hot column to become NA (not available or missing) if that value is outside the 1 to 10 range of the rating scale. Note that when using this command we have to be very specific in terms of specifying our missing value. It usually needs to be one of NA_real_ or NA_character_. For numeric columns use NA_real_ and for character columns use NA_character_. 
+In this example all the values are reasonable values. However, if we discovered an out-of-range value (or values) for elapsed time we could convert those values to missing values with the code below. This code changes (i.e., mutates) a value in the pizza_hot column to become NA (not available or missing) if that value is outside the 1 to 10 range of the rating scale. Note that when using this command we have to be very specific in terms of specifying our missing value. It usually needs to be one of NA_real_ or NA_character_. For numeric columns use NA_real_ and for character columns use NA_character_. 
 
 ```{r, eval = FALSE}
 # Values lower than 1 are converted to missing values
@@ -788,16 +788,16 @@ analytic_data_within_nway <- analytic_data_within_nway  %>%
 
 ### Pivot to tidy data
 
-The analytic data in it's current for does not conform to the the tidy data specification. Inspect the data with the print() command. Notice there are not columns for temperature (with levels hot/cold) or food type (with levels pizza/steak/burger). Instead, there are six columns that are combinations of the levels of these variables (i.e., pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold). Each of these columns contains taste ratings on a 1 to 10 point scale.
+The analytic data in its current form does not conform to the the tidy data specification. Inspect the data with the print() command. Notice that columns do not exist for temperature (with levels hot/cold) or food type (with levels pizza/steak/burger). Instead, there are six columns that are combinations of the levels of these variables (i.e., pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold). Each of these columns contains taste ratings on a 1 to 10 point scale.
 
 
 ```{r}
 print(analytic_data_within)
 ```
 
-We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly label taste. Doing all of these things will ensure we have one variable per column and one observation per so - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
+We need to restructure the data into the tidy data format so that we have a food_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly labeled taste. Doing all of these things will ensure we have one variable per column and one observation per row - consistent with the requirements of tidy data. The pivot_longer() command below coverts our data to the tidy data format. 
 
-In this command we specify the the columns march, may, and july are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at combination of the levels of the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
+In this command we specify the the columns march, may, and july are all levels of a single variable called occasion. We specify the columns involved with the cols argument. The code pizza_hot:burger_cold after the cols argument selects the pizza_hot column, the burger_cold column, and all the columns in between. Each column contains taste ratings at a combination of the levels for the variables food_type and temperature. The names_to argument is used to indicate that two new columns should be created to represent food and temperature. Notice the order food then temperature. This is consistent with our naming convention; in the column name pizza_hot the food_type is specified before temperature. The value_to argument is used to indicate that a new column called taste should created to hold all the values from the pizza_hot, pizza_cold, steak_hot, steak_cold, burger_hot, and burger_cold columns.
 
 
 ```{r}
@@ -815,7 +815,7 @@ You can see the data in the new format below.
 print(analytic_data_nway_tidy)
 ```
 
-But notice that the new column occasion is of the type character. We need it to be a factor. So use the code below to do so:
+Notice that the new column occasion is of the type character. We need it to be a factor. Use the code below to do so:
 
 ```{r}
 analytic_data_nway_tidy <- analytic_data_nway_tidy %>%
@@ -834,7 +834,7 @@ You now have two data sets analytic_data_within_nway and analytic_data_nway_tidy
 
 ## Surveys: Single Occassion
 
-This section outlines a workflow appropriate for when you have cross-sectional single occasion survey data. The data corresponds to a design where the researcher has measured, age, sex, eye color, self-esteem, and job satisfaction. Two these, self-esteem and job satisfaction, were measured with multi-item scales with reverse-keyed items.
+This section outlines a workflow appropriate for when you have cross-sectional single occasion survey data. The data corresponds to a design where the researcher has measured, age, sex, eye color, self-esteem, and job satisfaction. Two of these, self-esteem and job satisfaction, were measured with multi-item scales with reverse-keyed items.
 
 To Begin:
 
@@ -900,7 +900,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ```
 
-The participant identification number in the id column is a numeric column, so we have handle that column on it's own. 
+The participant identification number in the id column is a numeric column, so we have to handle that column on its own. 
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>%
@@ -919,7 +919,7 @@ Inspect the output of the glimpse() command and make sure you have converted all
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure that there not any levels present that are incorrect. For example, you wouldn’t want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factor in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
 
 ```{r}
 analytic_data_survey %>%
@@ -938,7 +938,7 @@ analytic_data_survey <- analytic_data_survey %>%
                            "male"))
 ```
 
-For eye color, we want to future graph to be have the most common eye colors on the left so we reorder the factor levels:
+For eye color, we want a future graph to have the most common eye colors on the left so we reorder the factor levels:
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>%
@@ -955,7 +955,7 @@ analytic_data_survey %>%
 
 ### Numeric screening
 
-For numeric variables, it's important find and remove impossible values. For example, in the context of this example you want to ensure none of the elapsed_times are impossible (e.g., outside the 1 to 5 point rating scale for Likert items) or clearly data entry errors.
+For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the Likert responses are impossible (e.g., outside the 1- to 5-point rating scale) or clearly data entry errors.
 
 Because we have several numeric columns that we are screening, we use the skim() command from the skimr package. The skim() command quickly provides basic descriptive statistics. In the output for this command there are also several columns that begin with p: p0, p25, p50, p75, and p100 (p25 and p75 omitted in output due to space). These columns correspond to the 0th, 25th, 50th, 75th, and 100th percentiles, respectively. The minimum and maximum values for the data column are indicated under the p0 and p100 labels. The median is the 50th percentile (p50). The interquartile range is the range between p25 and p75.
 
@@ -987,9 +987,9 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-With respect to the multi-item scales, it makes sense to look at sets of items rather than all of the items at once. This is because sometime items from different scales use response ranges. For example, for one measure might use a response scale with a range from 1 to 5 whereas for another measure might use a response scale with a range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but it if happens it your data - look at the scale items separately to make it easy to see out of range values.
+With respect to the multi-item scales, it makes sense to look at sets of items rather than all of the items at once. This is because sometimes items from different scales use response ranges. For example, one measure might use a response scale with a range from 1 to 5; whereas another measure might use a response scale with a range from 1 to 7. This is undesirable from a psychometric point of view, as discussed previously, but if it happens in your data - look at the scale items separately to make it easy to see out of range values.
 
-We begin by looking at the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5, make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+We begin by looking at the items in the first scale, self-esteem. Possible items responses for this scale range from 1 to 5; make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 
 ```{r, eval=FALSE}
@@ -1017,7 +1017,7 @@ outdf
 
 Follow the same process for the job satisfaction items. Write that code on your own now. 
 
-Possible items responses for the job satisfaction scale range from 1 to 5, make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
+Possible item responses for the job satisfaction scale range from 1 to 5, make sure all responses are in this range. If any values fall outside this range, you may need to check the original data source or replace them with missing values - as described previously.
 
 
 ```{r, eval=FALSE}
@@ -1046,13 +1046,13 @@ outdf
 
 ### Scale scores
 
-Scale scores involve averaging, for each person, their score over several items to create an overall scale score. The first step in the creation of scales if correcting the values of any reverse-keyed items.
+For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.
 
 #### Reverse-key items
 
 The way you deal with reverse-keyed items depends on how you scored them. Imagine you had a 5-point scale. You could have scored the scale with the values 1, 2, 3, 4, and 5. Alternatively, you could have scored the scale with the values 0, 1, 2, 3, and 4. The mathematical approach you use to correcting reverse-keyed items depends upon whether the scale starts with 1 or 0.
 
-In this example, we scored the data using the 1 to 5 system. So that is the approach illustrated here. See the extra information box for details on how to fixed reverse-keyed items where the scale begins with zero.
+In this example, we scored the data using the value 1 to 5; so that is the approach illustrated here. See the extra information box for details on how to fixed reverse-keyed items when the scale begins with zero.
 
 In this data file all the reverse-keyed were identified with the suffix "_rev15" in the column names. This suffix indicates the item was reverse keyed and that the original scale used the response points 1 to 5. We can see those items with the glimpse() command below. Notice that there are two reverse-keyed items - each on difference scales.
 
