@@ -6,11 +6,16 @@ Sample statistics, however, often differ from population parameters. The differe
 
 Further complicating matter is  the fact that the formula used for a sample statistic may or may not be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is usually not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as your would with the population data.
 
+## Notation
+
+In the formulas below, when we refer the population, we use uppercase letters when indicating members ($X$) or the size ($N$). In contrast, when we refer to the sample, we use lowercsae letters when indicating members ($x$) or the size ($n$).
+
+
 ## Estimating the mean
 
 We begin with the simple case of using a sample mean to estimate population mean. This is a simple case because the same formula can be use at both the sample and population levels.
 
-The population mean, $mu$, is a parameter calculated using the formula below:
+The population mean, $\mu$, is a parameter calculated using the formula below:
 
 $$
 \begin{aligned} 
@@ -18,11 +23,11 @@ $$
 \end{aligned} 
 $$
 
-The sample mean, $\bar{x}$, is a statistic calculated using the formula below. The bar of above the $x$,indicates that it is a mean.
+The sample mean, $\bar{x}$, is a statistic calculated using the formula below. The bar of above the $x$, indicates that it is a mean.
 
 $$
 \begin{aligned} 
-\bar{x} &= \frac{\sum{X}}{N} \\
+\bar{x} &= \frac{\sum{x}}{n} \\
 \end{aligned} 
 $$
 
@@ -32,6 +37,11 @@ A sample mean is calculated using sample data which is a random subset of the po
 One way of assessing the quality of the sample mean as an estimate of the population mean is by examining bias. If the average of many sample means corresponds is equal to the population mean, then we consider the sample mean an unbiased estimator.
 
 The fact that the sample mean provides an unbiased estimate of the population mean can be illustrated with a computer simulation. 
+
+```{r, include=FALSE}
+library(tidyverse)
+library(learnSampling)
+```
 
 
 ```{r}
@@ -59,7 +69,7 @@ set.seed(1)
 many_samples <- get_M_samples(pop.data = pop_data, 
                               data.column.name = height,
                               n = 10,
-                              number.of.samples = 1000)
+                              number.of.samples = 5000)
 ```
 
 We use the head() command to see the first 10 rows (i.e., 10 samples of 1000 samples):
@@ -103,7 +113,7 @@ $$
 \end{aligned} 
 $$
 
-The sample variance, $s^2$, is a statistic calculated using the formula below.
+The sample variance, $s^2$, is a statistic calculated using the formula below. The formula is the same as at the population level but we use a different notation because it is a sample.
 
 $$
 \begin{aligned} 
@@ -113,5 +123,18 @@ $$
 
 A sample mean is calculated using sample data which is a random subset of the population. Consequently, the sample mean (a statistic) is likely to differ the population mean (a parameter).  This difference between the sample mean and the population mean could potentially be concerning.  Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies.
 
+```{r}
+many_samples %>%
+ pull(sample.var.n_1) %>%
+ hist(main = "Histogram of Sample Variance using n")
+```
 
+```{r}
+many_samples %>%
+ summarise(mean_of_var.n = mean(sample.var.n))
+```
 
+```{r}
+many_samples %>%
+ summarise(mean_of_var.n_1 = mean(sample.var.n_1))
+```
