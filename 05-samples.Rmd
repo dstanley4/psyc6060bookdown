@@ -58,7 +58,7 @@ pop_data %>%
   as.data.frame()
 ```
 
-We can illustrate how random sampling works, with respect to estimating the population mean, by taking a large number of samples from the population. In the code below, we use the get_M_samples() command to obtain 1000 samples, each composed of 10 people. For each of these 1000 samples we calculate a variety of statistics and place themm in the many_samples data frame.
+We can illustrate how random sampling works, with respect to estimating the population mean, by taking a large number of samples from the population. In the code below, we use the get_M_samples() command to obtain 5000 samples, each composed of 10 people. For each of these 5000 samples we calculate a variety of statistics and place themm in the many_samples data frame.
 
 
 ```{r}
@@ -72,7 +72,7 @@ many_samples <- get_M_samples(pop.data = pop_data,
                               number.of.samples = 5000)
 ```
 
-We use the head() command to see the first 10 rows (i.e., 10 samples of 1000 samples):
+We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 samples):
 
 ```{r}
 head(many_samples, 10)
@@ -90,18 +90,18 @@ many_samples %>%
 ```
  
  
-You can see the 1000 sample means plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantialy from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.
+You can see the 5000 sample means plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantialy from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size.
 
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample deviates from the popualtion mean. That said, statisticians are very concerned whether the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. 
 
-In the code below we calculate the average of the 1000 sample means to determine if the sample mean is an unbiased estimator.
+In the code below we calculate the average of the 5000 sample means to determine if the sample mean is an unbiased estimator.
 
 ```{r}
 many_samples %>%
  summarise(mean_of_sample.M = mean(sample.M))
 ```
 
-We find that the average of the 1000 sample mean is 172.55 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean.
+We find that the average of the 5000 sample mean is 172.55 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean as we did the population mean. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean.
 
 ## Estimating variance
 
@@ -125,7 +125,7 @@ A sample mean is calculated using sample data which is a random subset of the po
 
 ```{r}
 many_samples %>%
- pull(sample.var.n_1) %>%
+ pull(sample.var.n) %>%
  hist(main = "Histogram of Sample Variance using n")
 ```
 

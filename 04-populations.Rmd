@@ -229,16 +229,19 @@ $$
 
 One reason that people like standard deviation is presents the difference betweeeen the data and the model in the original units (e.g., grams). This is in contrast to variance which presents the difference betweeen the data and the model in squared units (e.g., 2.67 grams$^2$).
 
-**Interpretation**. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below: 
+**Interpretation**. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Sometimes standard deviation is, incorrectly, described as how much data points differ on average from the mean. A quick calculation of the average difference reveals a number (1.33) that does not correspond to the standard deviation (1.63):
 
 $$
 \begin{aligned} 
-\sigma &= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
- &= \frac{\sum{|X - \bar{X}|}}{\sqrt{N}}\\
+\overline{diff} &= \frac{\sum{|X - \mu|}}{N}\\
+&= \frac{|8-10| + |10-10| + |12 - 10|}{3}\\
+&= \frac{2 + 0 + 2}{3}\\
+&= \frac{4}{3}\\
+&= 1.33\\
 \end{aligned} 
 $$
 
-As illustrated above, standard deviation is not an average. It's not an average because you are dividing by the square root of N instead of just N. Because standard deviation is not an average, it's much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has straight forward interpretation.
+As illustrated above, standard deviation is not equal to the average of the deviations from the mean. Because standard deviation is not an average, it's much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has a straight forward interpretation.
 
 Therefore, we encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.
 

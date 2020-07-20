@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-19" />
+<meta name="date" content="2020-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -497,14 +497,17 @@ X_1 &amp;= 10 + (-2) \\
 \end{aligned} 
 \]</span></p>
 <p>One reason that people like standard deviation is presents the difference betweeeen the data and the model in the original units (e.g., grams). This is in contrast to variance which presents the difference betweeen the data and the model in squared units (e.g., 2.67 grams<span class="math inline">\(^2\)</span>).</p>
-<p><strong>Interpretation</strong>. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Consider what happens when you take the square root of variance. When this is done standard deviation can be thought of as the sum of the absolute differences from the mean divided by the square root of the number of observations, as illustrated below:</p>
+<p><strong>Interpretation</strong>. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Sometimes standard deviation is, incorrectly, described as how much data points differ on average from the mean. A quick calculation of the average difference reveals a number (1.33) that does not correspond to the standard deviation (1.63):</p>
 <p><span class="math display">\[
 \begin{aligned} 
-\sigma &amp;= \sqrt{\frac{\sum{(X - \bar{X})^2}}{N}}\\
- &amp;= \frac{\sum{|X - \bar{X}|}}{\sqrt{N}}\\
+\overline{diff} &amp;= \frac{\sum{|X - \mu|}}{N}\\
+&amp;= \frac{|8-10| + |10-10| + |12 - 10|}{3}\\
+&amp;= \frac{2 + 0 + 2}{3}\\
+&amp;= \frac{4}{3}\\
+&amp;= 1.33\\
 \end{aligned} 
 \]</span></p>
-<p>As illustrated above, standard deviation is not an average. It’s not an average because you are dividing by the square root of N instead of just N. Because standard deviation is not an average, it’s much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has straight forward interpretation.</p>
+<p>As illustrated above, standard deviation is not equal to the average of the deviations from the mean. Because standard deviation is not an average, it’s much harder to describe how to interpret it. In our view, the best way to think of standard deviation is simply as the square root of variance; because variance has a straight forward interpretation.</p>
 <p>Therefore, we encourage you to think primarily in terms of variance rather than standard deviation due to the fact the interpretation of variance is more straightforward. Additionally, variance is foundational in the language used to describe regression and analysis of variance. That said, standard deviation is used in the calculation of some standardized effect sizes - so it is important to know and understand both indices.</p>
 <p>Overall, the rules for interpreting standard deviation are similar to those for variance; but the standard deviation values are smaller than variance values. In the cookie case, if the standard deviation was zero, that would indicate that all the cookies had the same weight as the model, exactly 10 grams. To the extent that the standard deviation is larger than zero it implies the data points (i.e., cookie weights) differ from the model (i.e., the mean cookie). By implication, a larger standard deviation indicates larger differences among the observations (e.g., cookie weights). That is, when the standard deviation is small, cookie weights tend to be similar to the model – and each other. In contrast, when the standard deviation is large, cookie weights tend to be different from the model – and each other.</p>
 </div>
