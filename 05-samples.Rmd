@@ -47,7 +47,7 @@ In the formulas below, when we refer the population, we use uppercase letters wh
 
 ## Estimating the mean
 
-We are interested in sample means ($\bar{x}$) to the extent that they provide an estimate of the population mean ($\mu$). The population mean is calculated using Formula \@ref(eq:popmeanch5):
+We are interested in the sample mean ($\bar{x}$) to the extent that it provides an estimate of the population mean ($\mu$). The population mean is calculated using Formula \@ref(eq:popmeanch5):
 
 \begin{equation} 
 \mu = \frac{\sum{X}}{N}
@@ -115,7 +115,7 @@ We find that the average of the 5000 sample means is 172.41 which is very close 
 ## Estimating variance
 
 
-We are interested in sample variances ($s^2$) to the extent that they provide an estimate of the population variance ($\sigma^2$). The population variance is calculated using Formula \@ref(eq:popvarch5):
+We are interested in the sample variance ($s^2$) to the extent that it provides an estimate of the population variance ($\sigma^2$). The population variance is calculated using Formula \@ref(eq:popvarch5):
 
 \begin{equation} 
 \sigma^2 = \frac{\sum{(X - \mu)^2}}{N}
@@ -131,109 +131,34 @@ pop_data %>%
   as.data.frame()
 ```
 
-Because we rarely has access to data from an entire population we want to estimate the population variance using the sample data. However, for variance, estimating the population parameter from a statistic, is more complicated than it was for the mean.
-
-we use the sample mean as an estimate of the population mean. The sample mean, $\bar{x}$, is a statistic calculated using the using Formula \@ref(eq:samplemeanch5). The bar of above the $x$, indicates that it is a mean. Notice that Formula \@ref(eq:popmeanch5) and Formula \@ref(eq:samplemeanch5) are the same - even though they use different notation.
+Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by $n$. This formula is the same as the population variance formula, Formula \@ref(eq:popvarch5), but adapted to use sample-level notation.
 
 
-\begin{equation} 
-\bar{x} = \frac{\sum{x}}{n}
-      (\#eq:samplemeanch5)
-\end{equation} 
+$$
+\begin{aligned} 
+s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
+\end{aligned} 
+$$
+
+The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of sample.var.n. The output reveals
 
 Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.
-
-```{r}
-many_samples <- get_M_samples(pop.data = pop_data, 
-                              pop.column.name = height,
-                              n = 10,
-                              number.of.samples = 5000)
-```
-
-We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 samples):
-
-```{r}
-head(many_samples, 10)
-```
-
-
-Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see the for each sample/row we indicate n (the sample size) and sample.mean (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows. You can see the full extent to which the sample means vary by creating a graph with the code below. In this code, we use the pull() command to extract the value from the sample.mean column and then we send them to the base R hisogram command, hist().
-
-```{r}
-many_samples %>%
- pull(sample.mean) %>%
- hist(main = "Histogram of Sample Means")
-```
- 
- 
-You can see the 5000 sample means, from the sample.mean column, plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
-
-Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned whether the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. 
-
-In the code below we calculate the average of the 5000 sample means to determine if the sample mean is an unbiased estimator.
-
-```{r}
-many_samples %>%
-  summarise(mean_of_sample.mean = mean(sample.mean)) %>%
-  as.data.frame()
-```
-
-We find that the average of the 5000 sample means is 172.41 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula \@ref(eq:samplemeanch5)) as we did the population mean (Formula \@ref(eq:popmeanch5)), although the notation differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be "wrong".
-
-
-
-## start
-
-We are interested in sample variances ($s^2$) to the extent that they provide an estimate of the population mean ($\sigma^2$). Recall, the population variance, $\sigma^2$, is a parameter calculated using Formula \@ref(eq:popvarch5).
-
-\begin{equation} 
-\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}
-      (\#eq:popvarch5)
-\end{equation} 
-
-
-The sample variance, $s^2$, is a statistic calculated using Formula \@ref(eq:samplevarnch5). The formula is the same as at the population level but we use a different notation because it is a sample.
-
-\begin{equation} 
-s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
-      (\#eq:samplevarnch5)
-\end{equation} 
-
-
-Examine the output for 5000 samples we created using the head() command. Notice in this output we see the population variance is 157.46 (see the pop.var column). The values in this column were calculated, based on everyone in the poulation, using Formula \@ref(eq:popvarch5). 
-
-```{r}
-head(many_samples, 10)
-```
-
-Now inspect the sample.var.n column the values in this column were calculated based on sample data using Formula \@ref(eq:samplevarnch5). In this column we present the sample variance calculated, using the above formula, with $n$ in the denominator. That is, in this column we have calculated sample variance using the same formula (but with different notation) as we used at the population level. Notice the values in the sample.var.n column vary due to random sampling.
-
-As we did with the mean, we can take the average of the 5000 sample variances (each using $n$ in the denominator) to determine if the sample variance provides a biased or unbiased estimate of the population variance.
 
 ```{r}
 many_samples %>%
  summarise(mean_of_var.n = mean(sample.var.n))
 ```
 
-We find that the average of the 5000 sample variances is 141.86 which is not close to the population variance of 157.46. Note that when we did this, we used the same formula to calculate the sample variance as we did the population variance.
+The average of the sample variances (141.86), using $n$ in the denominator, was different from the population variancee (157.46). The average of sample.var.n was much smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n$ in the denominator, we will, on average, be wrong.
 
-The average of the sample variances (141.86) was different from the population variancee (157.46). The average of the sample variance was much smaller than the population variance. Consequently, the sample variance provides a biased estimate of the population variance. If we try to estimate the population variance with a sample variance we will, on average, be wrong.
-
-Fortunately, there is a way around the fact that the sample variance provides a biased estimate of the population variance. We can derive a formula at the sample level that estimate the population variance that is not biased (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
+Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
 \begin{equation} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       (\#eq:samplevarn1ch5)
 \end{equation} 
 
-
-The values in the sample.var.n_1 column  were calculated, based on sample data, using Formula \@ref(eq:samplevarn1ch5). Check out this column using the head() command:
-
-```{r}
-head(many_samples, 10)
-```
-
-We can evaluate the quality of Formula \@ref(eq:samplevarn1ch5), using $n-1$, by averaging over values in the sample.var.n_1 column.
+In the many_samples data, the column sample.var.n_1 was generated using Formula \@ref(eq:samplevarn1ch5). We can evaluate the quality of Formula \@ref(eq:samplevarn1ch5), using $n-1$, by averaging over values in the sample.var.n_1 column.
 
 ```{r}
 many_samples %>%
