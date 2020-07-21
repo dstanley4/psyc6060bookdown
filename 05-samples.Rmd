@@ -140,16 +140,14 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 $$
 
-The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of sample.var.n. The output reveals
-
-Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.
+The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of the sample.var.n column. If this average equals the population variance of 157.46 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
 
 ```{r}
 many_samples %>%
  summarise(mean_of_var.n = mean(sample.var.n))
 ```
 
-The average of the sample variances (141.86), using $n$ in the denominator, was different from the population variancee (157.46). The average of sample.var.n was much smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n$ in the denominator, we will, on average, be wrong.
+The average of sample.var.n column (141.86) was much smaller than the population variance (157.46). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
@@ -167,7 +165,7 @@ many_samples %>%
 
 We see that the average of the 5000 values using $n-1$ in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
 
-You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors in the population. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
+You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors *in the population*. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
 
 ## Estimating standard deviation
 

@@ -312,19 +312,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-for-the-chapter" class="section level2">
 <h2><span class="header-section-number">5.1</span> Data for the chapter</h2>
 <p>We begin by activating the required packages:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="samples.html#cb310-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb310-2"><a href="samples.html#cb310-2"></a><span class="kw">library</span>(learnSampling)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="samples.html#cb313-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb313-2"><a href="samples.html#cb313-2"></a><span class="kw">library</span>(learnSampling)</span></code></pre></div>
 <p>Next, we create a large population with 100,000 people using the get_height_population() command:</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="samples.html#cb311-1"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="samples.html#cb314-1"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
 <p>The glimpse() command can be used to confirm that the population contains 100,000 people.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="samples.html#cb312-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="samples.html#cb315-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
 <pre><code>## Rows: 100,000
 ## Columns: 3
 ## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
 ## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;…
 ## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 17…</code></pre>
 <p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="samples.html#cb314-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="samples.html#cb317-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##       id sex    height
 ##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
@@ -351,9 +351,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       \tag{5.1}
 \end{equation}\]</span></p>
 <p>We can calculate the population mean for the height column of pop_data using the summarise() and mean() commands. The mean() command uses Formula <a href="samples.html#eq:popmeanch5">(5.1)</a>. We see in the output that the population mean is 172.48 (<span class="math inline">\(\mu = 172.48\)</span>).</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="samples.html#cb316-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb316-2"><a href="samples.html#cb316-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb316-3"><a href="samples.html#cb316-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="samples.html#cb319-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb319-2"><a href="samples.html#cb319-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb319-3"><a href="samples.html#cb319-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   pop_mean
 ## 1    172.5</code></pre>
 <p>As noted previously, we rarely has access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the using Formula <a href="samples.html#eq:samplemeanch5">(5.2)</a>. The bar of above the <span class="math inline">\(x\)</span>, indicates that it is a mean. Notice that Formula <a href="samples.html#eq:popmeanch5">(5.1)</a> and Formula <a href="samples.html#eq:samplemeanch5">(5.2)</a> are the same - even though they use different notation.</p>
@@ -362,45 +362,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       \tag{5.2}
 \end{equation}\]</span></p>
 <p>Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="samples.html#cb318-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
-<span id="cb318-2"><a href="samples.html#cb318-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
-<span id="cb318-3"><a href="samples.html#cb318-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
-<span id="cb318-4"><a href="samples.html#cb318-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">5000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="samples.html#cb321-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
+<span id="cb321-2"><a href="samples.html#cb321-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
+<span id="cb321-3"><a href="samples.html#cb321-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb321-4"><a href="samples.html#cb321-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">5000</span>)</span></code></pre></div>
 <p>We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 samples):</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="samples.html#cb319-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##     n pop.mean sample.mean pop.var sample.var.n
-## 1  10    172.5       174.3   157.5        27.81
-## 2  10    172.5       161.8   157.5        83.36
-## 3  10    172.5       173.2   157.5       139.16
-## 4  10    172.5       180.0   157.5       321.80
-## 5  10    172.5       172.8   157.5       160.96
-## 6  10    172.5       172.0   157.5       159.60
-## 7  10    172.5       166.5   157.5        86.45
-## 8  10    172.5       173.5   157.5       139.45
-## 9  10    172.5       177.7   157.5       167.01
-## 10 10    172.5       168.5   157.5       262.65
-##    sample.var.n_1
-## 1           30.90
-## 2           92.62
-## 3          154.62
-## 4          357.56
-## 5          178.84
-## 6          177.33
-## 7           96.06
-## 8          154.94
-## 9          185.57
-## 10         291.83</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="samples.html#cb322-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##     n sample.mean sample.var.n sample.var.n_1
+## 1  10       174.3        27.81          30.90
+## 2  10       161.8        83.36          92.62
+## 3  10       173.2       139.16         154.62
+## 4  10       180.0       321.80         357.56
+## 5  10       172.8       160.96         178.84
+## 6  10       172.0       159.60         177.33
+## 7  10       166.5        86.45          96.06
+## 8  10       173.5       139.45         154.94
+## 9  10       177.7       167.01         185.57
+## 10 10       168.5       262.65         291.83</code></pre>
 <p>Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see the for each sample/row we indicate n (the sample size) and sample.mean (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows. You can see the full extent to which the sample means vary by creating a graph with the code below. In this code, we use the pull() command to extract the value from the sample.mean column and then we send them to the base R hisogram command, hist().</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="samples.html#cb321-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb321-2"><a href="samples.html#cb321-2"></a><span class="st"> </span><span class="kw">pull</span>(sample.mean) <span class="op">%&gt;%</span></span>
-<span id="cb321-3"><a href="samples.html#cb321-3"></a><span class="st"> </span><span class="kw">hist</span>(<span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="samples.html#cb324-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb324-2"><a href="samples.html#cb324-2"></a><span class="st"> </span><span class="kw">pull</span>(sample.mean) <span class="op">%&gt;%</span></span>
+<span id="cb324-3"><a href="samples.html#cb324-3"></a><span class="st"> </span><span class="kw">hist</span>(<span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-215-1.png" width="672" /></p>
 <p>You can see the 5000 sample means, from the sample.mean column, plotted in this graph. Recall the population mean for heights is <span class="math inline">\(\mu = 172.48\)</span> cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (<span class="math inline">\(\bar{x}\)</span>) may differ substantially from the population mean (<span class="math inline">\(\mu = 172.48\)</span>). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.</p>
 <p>Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned whether the results of a large number of studies are correct – on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator.</p>
 <p>In the code below we calculate the average of the 5000 sample means to determine if the sample mean is an unbiased estimator.</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="samples.html#cb322-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb322-2"><a href="samples.html#cb322-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample.mean =</span> <span class="kw">mean</span>(sample.mean)) <span class="op">%&gt;%</span></span>
-<span id="cb322-3"><a href="samples.html#cb322-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="samples.html#cb325-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb325-2"><a href="samples.html#cb325-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample.mean =</span> <span class="kw">mean</span>(sample.mean)) <span class="op">%&gt;%</span></span>
+<span id="cb325-3"><a href="samples.html#cb325-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   mean_of_sample.mean
 ## 1               172.4</code></pre>
 <p>We find that the average of the 5000 sample means is 172.41 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula <a href="samples.html#eq:samplemeanch5">(5.2)</a>) as we did the population mean (Formula <a href="samples.html#eq:popmeanch5">(5.1)</a>), although the notation differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be “wrong”.</p>
@@ -413,9 +402,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       \tag{5.3}
 \end{equation}\]</span></p>
 <p>We can calculate the population variance for the height column of pop_data using the summarise() and var.pop() commands. The var.pop() command uses Formula <a href="samples.html#eq:popvarch5">(5.3)</a>. We see in the output that the population variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>).</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="samples.html#cb324-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb324-2"><a href="samples.html#cb324-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb324-3"><a href="samples.html#cb324-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="samples.html#cb327-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb327-2"><a href="samples.html#cb327-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb327-3"><a href="samples.html#cb327-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   pop_var
 ## 1   157.5</code></pre>
 <p>Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by <span class="math inline">\(n\)</span>. This formula is the same as the population variance formula, Formula <a href="samples.html#eq:popvarch5">(5.3)</a>, but adapted to use sample-level notation.</p>
@@ -424,25 +413,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 \]</span></p>
-<p>The formula for sample variance with an <span class="math inline">\(n\)</span> in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of sample.var.n. The output reveals</p>
-<p>Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be concerning. Statisticians know, however, that you can rarely learn anything from a single study or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="samples.html#cb326-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb326-2"><a href="samples.html#cb326-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n =</span> <span class="kw">mean</span>(sample.var.n))</span></code></pre></div>
+<p>The formula for sample variance with an <span class="math inline">\(n\)</span> in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of the sample.var.n column. If this average equals the population variance of 157.46 then variance, using <span class="math inline">\(n\)</span> in the denominator, is an unbiased estimator of the population variance.</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="samples.html#cb329-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb329-2"><a href="samples.html#cb329-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n =</span> <span class="kw">mean</span>(sample.var.n))</span></code></pre></div>
 <pre><code>##   mean_of_var.n
 ## 1         141.1</code></pre>
-<p>The average of the sample variances (141.86), using <span class="math inline">\(n\)</span> in the denominator, was different from the population variancee (157.46). The average of sample.var.n was much smaller than the population variance. Consequently, sample variance, using <span class="math inline">\(n\)</span> in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with a sample variance, using <span class="math inline">\(n\)</span> in the denominator, we will, on average, be wrong.</p>
+<p>The average of sample.var.n column (141.86) was much smaller than the population variance (157.46). That is, the average of the sample variances, using <span class="math inline">\(n\)</span> in the denominator, was smaller than the population variance. Consequently, sample variance, using <span class="math inline">\(n\)</span> in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using <span class="math inline">\(n\)</span> in the denominator, we will, on average, be wrong.</p>
 <p>Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span>. The unbiased estimate is calculated using Formula <a href="samples.html#eq:samplevarn1ch5">(5.4)</a>.</p>
 <p><span class="math display" id="eq:samplevarn1ch5">\[\begin{equation} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       \tag{5.4}
 \end{equation}\]</span></p>
 <p>In the many_samples data, the column sample.var.n_1 was generated using Formula <a href="samples.html#eq:samplevarn1ch5">(5.4)</a>. We can evaluate the quality of Formula <a href="samples.html#eq:samplevarn1ch5">(5.4)</a>, using <span class="math inline">\(n-1\)</span>, by averaging over values in the sample.var.n_1 column.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="samples.html#cb328-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb328-2"><a href="samples.html#cb328-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n_1 =</span> <span class="kw">mean</span>(sample.var.n_<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="samples.html#cb331-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb331-2"><a href="samples.html#cb331-2"></a><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n_1 =</span> <span class="kw">mean</span>(sample.var.n_<span class="dv">1</span>))</span></code></pre></div>
 <pre><code>##   mean_of_var.n_1
 ## 1           156.7</code></pre>
 <p>We see that the average of the 5000 values using <span class="math inline">\(n-1\)</span> in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use <span class="math inline">\(n-1\)</span> in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using <span class="math inline">\(n-1\)</span> in the denominator, we will, on average, be right.</p>
-<p>You may wonder at this point, when we use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared errors in the population. That is, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared differences between each person in the population and the population mean.</p>
+<p>You may wonder at this point, when we use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared errors <em>in the population</em>. That is, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared differences between each person in the population and the population mean.</p>
 </div>
 <div id="estimating-standard-deviation" class="section level2">
 <h2><span class="header-section-number">5.5</span> Estimating standard deviation</h2>
@@ -454,8 +442,8 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 </div>
 <div id="estimating-smd" class="section level2">
 <h2><span class="header-section-number">5.6</span> Estimating SMD</h2>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="samples.html#cb330-1"></a>female_pop_data &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>)</span>
-<span id="cb330-2"><a href="samples.html#cb330-2"></a>male_pop_data &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="samples.html#cb333-1"></a>female_pop_data &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>)</span>
+<span id="cb333-2"><a href="samples.html#cb333-2"></a>male_pop_data &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>)</span></code></pre></div>
 <p>For females:</p>
 <p><span class="math display">\[
 \begin{aligned} 
