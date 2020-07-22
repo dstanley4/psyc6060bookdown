@@ -180,36 +180,52 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 ## Estimating SMD
 
 ```{r}
-female_pop_data <- pop_data %>% filter(sex == "female")
-male_pop_data <- pop_data %>% filter(sex == "male")
+pop_data %>% 
+  group_by(sex) %>%
+  summarise(mean = mean(height),
+            sd = sd.pop(height))
 ```
 
-For females:
+From this output we see the population parameters are:
 
 $$
 \begin{aligned} 
 \mu_{female} &= 165 \\
-\sigma_{female} &= 10\\
+\mu_{male} &= 180 \\
+\sigma = \sigma_{female} = \sigma_{male} &= 10.1\\
 \end{aligned} 
 $$
 
+Notice that the population standard deviation is the same for both populations, so there is only one population standard deviation.
 
-For males:
+### Population SMD
+
+The population-level standardized mean difference (i.e., Cohen's $d$ or $\delta$) is calculated using  Formula \@ref(eq:popsmdch5).
+
+\begin{equation} 
+\delta  = \frac{(\mu_{male} - \mu_{female})}{\sigma} 
+      (\#eq:popsmdch5)
+\end{equation} 
+
+We use the previously obtained population parameters in Formula \@ref(eq:popsmdch5) and find that the standardized mean difference is 1.49 (i.e., $\delta = 1.49$). This population-level difference is illustrated in Figure \@ref(fig:sexpop).
 
 $$
 \begin{aligned} 
-\mu_{male} &= 180 \\
-\sigma_{male} &= 10\\
+\delta  &= \frac{(\mu_{male} - \mu_{female})}{\sigma} \\
+&= \frac{(180 - 165)}{10.1} \\
+&= \frac{15}{10.1} \\
+&= 1.49 \\
 \end{aligned} 
 $$
+
 
 
 ```{r, out.height="80%", echo = F}
 textMean1 <- expression(Delta~"M" == 15)
-textd1 <- expression(delta == 1.50)
+textd1 <- expression(delta == 1.49)
 textfemale1 <- expression("Female"~mu == 165)
 textmale1 <- expression("Male"~mu == 180)
-texts1 <- expression(sigma == 10)
+texts1 <- expression(sigma == 10.1)
 
 
 
@@ -242,41 +258,9 @@ twopop <- ggplot(data = pop_data,
 ggsave(filename = "ch_samples/images/sex_pops.png", dpi = 300, width = 8, height = 6)
 ```
 
-```{r sexpop, echo=FALSE, out.width="95%", fig.cap="Illustration of the standardized mean difference of 1.50 for height between males and females. The solid black vertical lines indicates the means ($\\mu$) for the two populations."}
+```{r sexpop, echo=FALSE, out.width="95%", fig.cap="Illustration of the standardized mean difference of 1.49 for height between males and females. The solid black vertical lines indicates the means ($\\mu$) for the two populations."}
 knitr::include_graphics("ch_samples/images/sex_pops.png")
 ```
-
-
-### Population SMD
-
-In original units:
-$$
-\begin{aligned} 
-\Delta M &= (\mu_{male} - \mu_{female}) \\
-&= (180 - 165) \\
-&= 15 \\
-\end{aligned} 
-$$
-
-
-Formula \@ref(eq:popsmdch5) below illustrates....
-
-\begin{equation} 
-\delta  = \frac{(\mu_{male} - \mu_{female})}{\sigma} 
-      (\#eq:popsmdch5)
-\end{equation} 
-
-
-Calculation:
-
-$$
-\begin{aligned} 
-\delta  &= \frac{(\mu_{male} - \mu_{female})}{\sigma} \\
-&= \frac{(180 - 165)}{10} \\
-&= \frac{15}{10} \\
-&= 1.50 \\
-\end{aligned} 
-$$
 
 ### Sample SMD
 
@@ -290,6 +274,25 @@ d  = \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}}
 #### Estimating means
 
 #### Estimating variance
+
+\begin{equation} 
+s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
+      (\#eq:poolvarch5)
+\end{equation} 
+
+
+\begin{equation} 
+s_{pooled}^2  = \frac{s_{1}^2 + s_{2}^2}{2} \\
+      (\#eq:poolvarequalch5)
+\end{equation} 
+
+
+$$
+\begin{aligned} 
+s_{pooled}^2  &= \frac{s_{male}^2 + s_{female}^2}{2} \\
+\end{aligned} 
+$$
+
 
 ```{r pool1, echo=FALSE, out.width="95%", fig.cap="The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. "}
 knitr::include_graphics("ch_samples/images/pool1.png")
@@ -328,7 +331,9 @@ $$
 | ---   | ---         |  ---   |
 | Mean |$\mu = \frac{\sum{X}}{N}$ | $\bar{x} = \frac{\sum{x}}{n}$|
 | Variance |$\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}$  | $s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}$ |
+|          |     |  $s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}$|
 | Standard deviation |$\sigma = \sqrt{\frac{\sum{(X - \mu)^2}}{N}}$  | $s =\sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}$ |
+|          |     |  $s_{pooled}  = \sqrt{\frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}}$|
 | Cohen's $d$ or SMD|$\delta= \frac{\mu_{1} - \mu_{2}}{\sigma}$ | $d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}$    |
 
 
