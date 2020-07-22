@@ -140,14 +140,15 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 $$
 
-The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code obtain, over the 5000 samples, the average of the sample.var.n column. If this average equals the population variance of 157.46 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
+The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. In the many_samples data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample.var.n column over the 5000 samples. If this average equals the population variance of 157.5 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
 
 ```{r}
 many_samples %>%
- summarise(mean_of_var.n = mean(sample.var.n))
+  summarise(mean_of_var.n = mean(sample.var.n)) %>%
+  as.data.frame()
 ```
 
-The average of sample.var.n column (141.86) was much smaller than the population variance (157.46). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
+The average of sample.var.n column (141.86) was much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
@@ -160,7 +161,8 @@ In the many_samples data, the column sample.var.n_1 was generated using Formula 
 
 ```{r}
 many_samples %>%
- summarise(mean_of_var.n_1 = mean(sample.var.n_1))
+  summarise(mean_of_var.n_1 = mean(sample.var.n_1)) %>%
+  as.data.frame()
 ```
 
 We see that the average of the 5000 values using $n-1$ in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
@@ -179,14 +181,19 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 
 ## Estimating SMD
 
+So far we have considered people's heights as a single population. You may have noticed, however, that we have column indicating the sex of each person. Consequently, we could think of there being two populations - a population of heights of males and a population of heights for females. When you have two populations often it is desirable to express the differences between the two populations as a standardized mean difference (SMD) also known as Cohen's $d$.
+
+We begin be determining the mean and standard deviation of each population with the code below:
+
 ```{r}
 pop_data %>% 
   group_by(sex) %>%
   summarise(mean = mean(height),
-            sd = sd.pop(height))
+            sd = sd.pop(height)) %>%
+  as.data.frame()
 ```
 
-From this output we see the population parameters are:
+From this output we see the population parameters for males and females. The mean of the male population heights is 180 ($\mu_{male} = 180$) whereas the mean of the female population heights is 165 ($\mu_{male} = 165$). Both populations have a standard deviation of 10.1 ($\sigma = \sigma_{female} = \sigma_{male} = 10.1$):
 
 $$
 \begin{aligned} 
@@ -196,14 +203,12 @@ $$
 \end{aligned} 
 $$
 
-Notice that the population standard deviation is the same for both populations, so there is only one population standard deviation.
-
 ### Population SMD
 
 The population-level standardized mean difference (i.e., Cohen's $d$ or $\delta$) is calculated using  Formula \@ref(eq:popsmdch5).
 
 \begin{equation} 
-\delta  = \frac{(\mu_{male} - \mu_{female})}{\sigma} 
+\delta  = \frac{\mu_{1} - \mu_{2}}{\sigma} 
       (\#eq:popsmdch5)
 \end{equation} 
 
@@ -211,8 +216,8 @@ We use the previously obtained population parameters in Formula \@ref(eq:popsmdc
 
 $$
 \begin{aligned} 
-\delta  &= \frac{(\mu_{male} - \mu_{female})}{\sigma} \\
-&= \frac{(180 - 165)}{10.1} \\
+\delta  &= \frac{\mu_{male} - \mu_{female}}{\sigma} \\
+&= \frac{180 - 165}{10.1} \\
 &= \frac{15}{10.1} \\
 &= 1.49 \\
 \end{aligned} 
@@ -264,12 +269,6 @@ knitr::include_graphics("ch_samples/images/sex_pops.png")
 
 ### Sample SMD
 
-Formula \@ref(eq:samplesmdch5) below illustrates....
-
-\begin{equation} 
-d  = \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}} 
-      (\#eq:samplesmdch5)
-\end{equation} 
 
 #### Estimating means
 
@@ -282,7 +281,7 @@ s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
 
 
 \begin{equation} 
-s_{pooled}^2  = \frac{s_{1}^2 + s_{2}^2}{2} \\
+s_{pooled}^2  = \frac{s_{1}^2 + s_{2}^2}{2} 
       (\#eq:poolvarequalch5)
 \end{equation} 
 
@@ -294,30 +293,90 @@ s_{pooled}^2  &= \frac{s_{male}^2 + s_{female}^2}{2} \\
 $$
 
 
-```{r pool1, echo=FALSE, out.width="95%", fig.cap="The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. "}
+```{r pool1, echo=FALSE, out.width="80%", fig.cap="The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. "}
 knitr::include_graphics("ch_samples/images/pool1.png")
 ```
 
 
-```{r pool2, echo=FALSE, out.width="95%", fig.cap="We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance."}
+```{r pool2, echo=FALSE, out.width="80%", fig.cap="We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance."}
 knitr::include_graphics("ch_samples/images/pool2.png")
 ```
 
 
-```{r pool3, echo=FALSE, out.width="95%", fig.cap="We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal, we need to use a more sophisticated formula to obtain the pooled variance."}
+```{r pool3, echo=FALSE, out.width="80%", fig.cap="We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal (i.e., different numbers of males and females), we need to use a more sophisticated formula to obtain the pooled variance."}
 knitr::include_graphics("ch_samples/images/pool3.png")
 ```
 
-#### Combining everything
+### Combining Everything
+
+When calculating the standardized mean difference we rarely have access to the entire population. Consequently, we need to estimate the population-level standardized mean difference using sample data. The sample-level approach to calculating SMD is presented below in Formula \@ref(eq:samplesmdch5). This value is known by many other names: $d$, Cohen's $d$, and Hedges $g$.
+
+\begin{equation} 
+d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
+      (\#eq:samplesmdch5)
+\end{equation} 
+
+
+\begin{equation} 
+d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
+      (\#eq:samplesmdunbiasedch5)
+\end{equation} 
 
 $$
 \begin{aligned} 
-d  &= \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}} \\
+d_{unbiased}  &= d  \times [1 - \frac{3}{4(n_1 + n_2)-9}] \\
+\end{aligned} 
+$$
+
+$$
+\begin{aligned} 
+d  &= \frac{\bar{x}_{male} - \bar{x}_{female}}{s_{pooled}} \\
+\end{aligned} 
+$$
+
+$$
+\begin{aligned} 
+d_{unbiased}  &= d  \times [1 - \frac{3}{4(n_1 + n_2)-9}] \\
 \end{aligned} 
 $$
 
 
-\newpage
+```{r}
+male_population_heights <- pop_data %>% 
+  filter(sex == "male") %>%
+  pull(height)
+
+female_population_heights <- pop_data %>% 
+  filter(sex == "female") %>%
+  pull(height)
+```
+
+
+```{r}
+many_samples<-  get_d_samples_from_population_data(pop1 = male_population_heights,
+                                   pop2 = female_population_heights,
+                                   cell.n = 10,
+                                   number.of.samples = 5000)
+```
+
+```{r}
+head(many_samples, 10)
+```
+
+
+
+```{r}
+many_samples %>%
+  summarise(mean_of_d = mean(sample.d)) %>%
+  as.data.frame()
+```
+
+```{r}
+many_samples %>%
+  summarise(mean_of_d_unbiased = mean(sample.d.unbiased)) %>%
+  as.data.frame()
+```
+
 
 ## Meta-analysis
 
@@ -332,9 +391,9 @@ $$
 | Mean |$\mu = \frac{\sum{X}}{N}$ | $\bar{x} = \frac{\sum{x}}{n}$|
 | Variance |$\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}$  | $s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}$ |
 |          |     |  $s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}$|
+|          |     |  $MSE = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}$|
 | Standard deviation |$\sigma = \sqrt{\frac{\sum{(X - \mu)^2}}{N}}$  | $s =\sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}$ |
 |          |     |  $s_{pooled}  = \sqrt{\frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}}$|
 | Cohen's $d$ or SMD|$\delta= \frac{\mu_{1} - \mu_{2}}{\sigma}$ | $d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}$    |
-
-
+|          |     | $d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}  \times [1 - \frac{3}{4(n_1 + n_2)-9}]$ |
 \singlespacing
