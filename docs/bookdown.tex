@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-07-22}
+\date{2020-07-23}
 
 \begin{document}
 \maketitle
@@ -5045,6 +5045,8 @@ You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the 
 \hypertarget{samples}{%
 \chapter{Samples}\label{samples}}
 
+packages required etc.
+
 Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it's rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
 
 Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data --- with correspondingly fewer observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.
@@ -5303,31 +5305,58 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 \hypertarget{estimating-smd}{%
 \section{Estimating SMD}\label{estimating-smd}}
 
-So far we have considered people's heights as a single population. You may have noticed, however, that we have column indicating the sex of each person. Consequently, we could think of there being two populations - a population of heights of males and a population of heights for females. When you have two populations often it is desirable to express the differences between the two populations as a standardized mean difference (SMD) also known as Cohen's \(d\).
+We are interested in the sample standardized mean difference (\(d\)) to the extent that it provides an estimate of the population standardized mean difference (\(\delta\)). The population standardized mean difference is calculated using Formula \eqref{eq:popsmdch5}:
 
-We begin be determining the mean and standard deviation of each population with the code below:
+\begin{equation} 
+\delta  = \frac{\mu_{1} - \mu_{2}}{\sigma} 
+      \label{eq:popsmdch5}
+\end{equation}
+
+We can calculate the population standardized mean difference for men and women once we have the respective population means and standard deviations. Recall the initial data mixed males and females. We begin by creating separate data sets for males and females:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pop_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sex) }\OperatorTok{%>%}
+\NormalTok{male_population_heights <-}\StringTok{ }\NormalTok{pop_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "male"}\NormalTok{) }
+
+\NormalTok{female_population_heights <-}\StringTok{ }\NormalTok{pop_data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "female"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Next, we calculate the mean and standard deviation of each population:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{male_population_heights }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean =} \KeywordTok{mean}\NormalTok{(height),}
-            \DataTypeTok{sd =} \KeywordTok{sd.pop}\NormalTok{(height)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
+            \DataTypeTok{sd =} \KeywordTok{sd.pop}\NormalTok{(height))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## `summarise()` ungrouping output (override with `.groups` argument)
+## # A tibble: 1 x 2
+##    mean    sd
+##   <dbl> <dbl>
+## 1  180.  10.1
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{female_population_heights }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean =} \KeywordTok{mean}\NormalTok{(height),}
+            \DataTypeTok{sd =} \KeywordTok{sd.pop}\NormalTok{(height))}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
-##      sex mean    sd
-## 1 female  165 10.06
-## 2   male  180 10.06
+## # A tibble: 1 x 2
+##    mean    sd
+##   <dbl> <dbl>
+## 1  165.  10.1
 \end{verbatim}
 
-From this output we see the population parameters for males and females. The mean of the male population heights is 180 (\(\mu_{male} = 180\)) whereas the mean of the female population heights is 165 (\(\mu_{male} = 165\)). Both populations have a standard deviation of 10.1 (\(\sigma = \sigma_{female} = \sigma_{male} = 10.1\)):
+This reveals the population parameters are:
 
 \[
 \begin{aligned} 
@@ -5337,22 +5366,12 @@ From this output we see the population parameters for males and females. The mea
 \end{aligned} 
 \]
 
-\hypertarget{population-smd}{%
-\subsection{Population SMD}\label{population-smd}}
-
-The population-level standardized mean difference (i.e., Cohen's \(d\) or \(\delta\)) is calculated using Formula \eqref{eq:popsmdch5}.
-
-\begin{equation} 
-\delta  = \frac{(\mu_{male} - \mu_{female})}{\sigma} 
-      \label{eq:popsmdch5}
-\end{equation}
-
-We use the previously obtained population parameters in Formula \eqref{eq:popsmdch5} and find that the standardized mean difference is 1.49 (i.e., \(\delta = 1.49\)). This population-level difference is illustrated in Figure \ref{fig:sexpop}.
+Likewise, the population-level standardized mean difference (\(\delta\)) is 1.49. We can see this population-level difference illustrated in Figure \ref{fig:sexpop}.
 
 \[
 \begin{aligned} 
-\delta  &= \frac{(\mu_{male} - \mu_{female})}{\sigma} \\
-&= \frac{(180 - 165)}{10.1} \\
+\delta  &= \frac{\mu_{male} - \mu_{female}}{\sigma} \\
+&= \frac{180 - 165}{10.1} \\
 &= \frac{15}{10.1} \\
 &= 1.49 \\
 \end{aligned} 
@@ -5362,105 +5381,244 @@ We use the previously obtained population parameters in Formula \eqref{eq:popsmd
 \includegraphics[width=0.95\linewidth]{ch_samples/images/sex_pops} \caption{Illustration of the standardized mean difference of 1.49 for height between males and females. The solid black vertical lines indicates the means ($\mu$) for the two populations.}\label{fig:sexpop}
 \end{figure}
 
-\hypertarget{sample-smd}{%
-\subsection{Sample SMD}\label{sample-smd}}
-
-When calculating the standardized mean difference we rarely have access to the entire population. Consequently, we need to estimate the population-level standardized mean difference using sample data. The sample-level approach to calculating SMD is presented below in Formula \eqref{eq:samplesmdch5}. This value is known by many other names: \(d\), Cohen's \(d\), and Hedges \(g\).
+We typical need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \eqref{eq:samplesmdch5} below. This value is known by many other names: \(d\), Cohen's \(d\), and Hedges \(g\). Notice that the sample-level formula, Formula \eqref{eq:samplesmdch5}, below, is the same as the population-level formula, Formula \eqref{eq:popsmdch5}, above, only the notation differs.
 
 \begin{equation} 
-d  = \frac{(\bar{x}_{male} - \bar{x}_{female})}{s_{pooled}} 
+d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
       \label{eq:samplesmdch5}
 \end{equation}
 
-A notable difference
+Unfortunately, Formula \eqref{eq:samplesmdch5} provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \eqref{eq:samplesmdch5}, provides \(d\)-values that overestimate the size of the population standardize mean difference (\(\delta\)).
 
-\hypertarget{estimating-means}{%
-\subsubsection{Estimating means}\label{estimating-means}}
-
-\hypertarget{estimating-variance-1}{%
-\subsubsection{Estimating variance}\label{estimating-variance-1}}
+Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \eqref{eq:samplesmdunbiasedch5}.
 
 \begin{equation} 
-s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
-      \label{eq:poolvarch5}
+d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
+      \label{eq:samplesmdunbiasedch5}
 \end{equation}
+
+If we try to apply either \(d\)-value formula (\eqref{eq:samplesmdch5} or \eqref{eq:samplesmdunbiasedch5}) to real data we quickly encounter a problem. We don't have the pooled standard deviation, \(s_{pooled}\)
+
+\hypertarget{pooled-standard-deviation}{%
+\subsection{Pooled standard deviation}\label{pooled-standard-deviation}}
+
+When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \eqref{eq:popsmdch5}, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact the both population have the same standard deviation.
+
+Let's consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations -- one for males and one for females. Moreover, these two sample-level standard deviation (using \(n\)-1) are not the same - they are different from each other. This initially seems problematicm - calculation of standardized mean difference requires that population standard deviaitons are identical. Fortunately, this is sample-level data and not population-level data.
+
+\[
+\begin{aligned} 
+\bar{x}_{males} &= 187.2 \\
+s_{males}^2 &= 92.2 \\
+s_{males} &= 9.6 \\
+\end{aligned} 
+\]
+
+And females:
+
+\[
+\begin{aligned} 
+\bar{x}_{females} &= 160.1 \\
+s_{females}^2 &= 66.8 \\
+s_{females} &= 8.2 \\
+\end{aligned} 
+\]
+
+We need to recognize that the sample-level standard deviations are likely to differ from the population-level standard deviation due to sampling error. Consequently, we are likely to get two different sample=level standard deviations even if the population-level standard deviations are identical for males and females.
+
+How do we resolve this situation of having two sample-level standard deviations? The first step is to switch to thinking in terms of variance rather than standard deviation. Due to the way the math works, life becomes very complicated, very quickly, if we continue to think in terms of standard deviations. Therefore, we reframe the problem into a variance problem. Variances are preferable to standard deviations because we can add and subtract variances - but not standard deviations.
+
+We have a sample variance for males () and a sample variance for females (). We view each of these sample variances as an estimate of the respective population variances (see Figure \ref{fig:pool1}). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also \textbf{assume} that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of a single population variance (see Figure \ref{fig:pool2}). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) simple average them to obtain a better estimate of that single population variance. When we combine the two variances together to get a better estimate of the single population variance we can that new variance the pooled variance and represent it with the symbol \(s_{pooled}^2\).
+
+\newpage
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/pool1} \caption[Estimating population variance with sample variances]{The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. }\label{fig:pool1}
+\end{figure}
+
+\vspace{25mm}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/pool2} \caption[Sample variances of estimates of the sample population variance.]{We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance.}\label{fig:pool2}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption[Pooled variance estimates population variance]{We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal (i.e., different numbers of males and females), we need to use a more sophisticated formula to obtain the pooled variance.}\label{fig:pool3}
+\end{figure}
+
+When the sample sizes for males and females are the same (i.e., \(n_{males} =n_{females}\)) we can use the Formula \eqref{eq:poolvarequalch5} below to calculate the pooled variance.
 
 \begin{equation} 
 s_{pooled}^2  = \frac{s_{1}^2 + s_{2}^2}{2} 
       \label{eq:poolvarequalch5}
 \end{equation}
 
-\[
-\begin{aligned} 
-s_{pooled}^2  &= \frac{s_{male}^2 + s_{female}^2}{2} \\
-\end{aligned} 
-\]
+When the sample sizes for males and females are the different (i.e., \(n_{males} \ne n_{females}\)) we can use the Formula \eqref{eq:poolvarch5} below to calculate the pooled variance. This formula can be used all of the time. We only show Formula \eqref{eq:poolvarequalch5}, above, to make it clear that Formula \eqref{eq:poolvarch5} below is basically just averaging the variances in a way that takes sample size into account.
 
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/pool1} \caption{The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. }\label{fig:pool1}
-\end{figure}
+\begin{equation} 
+s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
+      \label{eq:poolvarch5}
+\end{equation}
 
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/pool2} \caption{We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance.}\label{fig:pool2}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption{We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal (i.e., different numbers of males and females), we need to use a more sophisticated formula to obtain the pooled variance.}\label{fig:pool3}
-\end{figure}
-
-\hypertarget{combining-everything}{%
-\subsubsection{Combining everything}\label{combining-everything}}
+We get the single standard deviation we need, \(s_{pooled}\), by taking the square root of the variance, \(s_{pooled}^2\).
 
 \[
 \begin{aligned} 
-d  &= \frac{\bar{x}_{male} - \bar{x}_{female}}{s_{pooled}} \\
+s_{pooled}  &= \sqrt{s_{pooled}^2} \\
 \end{aligned} 
 \]
+
+If we apply the pooled standard variance, Formula \eqref{eq:poolvarch5}, to the sample data:
+
+\[
+\begin{aligned}
+s_{pooled}^2 &= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{male} + n_{female}-2} \\
+&= \frac{(10 -1)92.2 + (10 -1)66.8}{10 + 10 -2} \\
+&= 79.5
+\end{aligned}
+\]
+
+And then we obtain the pooled standard deviation we need, below, for the standardized mean difference formula.
 
 \[
 \begin{aligned} 
-d_{unbiased}  &= d  \times [1 - \frac{3}{4(n_1 + n_2)-9}] \\
+s_{pooled}  &= \sqrt{79.5} \\
+&= 8.9\\
 \end{aligned} 
 \]
 
-\newpage
+\hypertarget{calculating-d}{%
+\subsection{\texorpdfstring{Calculating \(d\)}{Calculating d}}\label{calculating-d}}
 
-\hypertarget{bias}{%
-\section{Bias}\label{bias}}
+Now that we the pooled standard deviation, \(s_{pooled}\), we can calculated the standardized mean difference. We do so below using unbiased formula, Formula \eqref{eq:samplesmdunbiasedch5}.
+
+\[
+\begin{aligned}
+d_{unbiased}  &= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
+&= \frac{\bar{x}_{males} - \bar{x}_{females}}{s_{pooled}} \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
+&= \frac{187.2 - 160.1}{8.9} \times [1 - \frac{3}{4(10 + 10)-9}] \\
+&= 3.0 \times 0.96\\
+&= 2.9\\
+\end{aligned}
+\]
+
+\hypertarget{asessing-bias}{%
+\subsection{Asessing bias}\label{asessing-bias}}
+
+We can use our population-level data and sample from it to see the range of sample-level d-values that can occur.
+
+First, we remove the scores from the male and female columns and place them into male\_heights and female\_heights, respectively.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{male_population_heights <-}\StringTok{ }\NormalTok{pop_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "male"}\NormalTok{) }\OperatorTok{%>%}
+\NormalTok{male_heights <-}\StringTok{ }\NormalTok{male_population_heights }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{pull}\NormalTok{(height)}
 
-\NormalTok{female_population_heights <-}\StringTok{ }\NormalTok{pop_data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(sex }\OperatorTok{==}\StringTok{ "female"}\NormalTok{) }\OperatorTok{%>%}
+\NormalTok{female_heights <-}\StringTok{ }\NormalTok{female_population_heights }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{pull}\NormalTok{(height)}
 \end{Highlighting}
 \end{Shaded}
 
+Next we obtain a large number of samples from each population and place them in many\_samples.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{many_samples<-}\StringTok{  }\KeywordTok{get_d_samples_from_population_data}\NormalTok{(}\DataTypeTok{pop1 =}\NormalTok{ male_population_heights,}
-                                   \DataTypeTok{pop2 =}\NormalTok{ female_population_heights,}
+\NormalTok{many_samples<-}\StringTok{  }\KeywordTok{get_d_samples_from_population_data}\NormalTok{(}\DataTypeTok{pop1 =}\NormalTok{ male_heights,}
+                                   \DataTypeTok{pop2 =}\NormalTok{ female_heights,}
                                    \DataTypeTok{cell.n =} \DecValTok{10}\NormalTok{,}
                                    \DataTypeTok{number.of.samples =} \DecValTok{5000}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{meta-analysis}{%
-\section{Meta-analysis}\label{meta-analysis}}
+We can example the contents of many\_samples using the head() command. Each row of many\_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calcualte the \(d\) and \(d_{unbiased}\) for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(many_samples, }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    study group.n    m1    m2    v1    v2 s2.1 s2.2   d
+## 1      1      10 187.2 160.1  92.2  66.8 80.4 58.9 3.0
+## 2      2      10 183.0 166.0 107.3  77.8 80.4 58.9 1.8
+## 3      3      10 181.0 168.8  39.8 144.2 80.4 58.9 1.3
+## 4      4      10 175.4 162.5  80.3  89.4 80.4 58.9 1.4
+## 5      5      10 184.1 163.6  91.0  28.9 80.4 58.9 2.6
+## 6      6      10 181.8 165.6  96.4 106.3 80.4 58.9 1.6
+## 7      7      10 176.6 167.0  97.2 161.6 80.4 58.9 0.8
+## 8      8      10 188.0 160.8 211.6 204.6 80.4 58.9 1.9
+## 9      9      10 185.3 165.8  54.7  91.5 80.4 58.9 2.3
+## 10    10      10 179.3 161.9  69.3  55.4 80.4 58.9 2.2
+##    d.unbiased
+## 1         2.9
+## 2         1.7
+## 3         1.2
+## 4         1.3
+## 5         2.5
+## 6         1.5
+## 7         0.8
+## 8         1.8
+## 9         2.2
+## 10        2.1
+\end{verbatim}
+
+Recall the population level standardized mean difference, \(\delta\), was 1.49. We can see the extent to which the average the \(d\) and \(d_{unbiased}\) compare to this population-level values.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_d =} \KeywordTok{mean}\NormalTok{(d),}
+            \DataTypeTok{mean_d_unbiased =} \KeywordTok{mean}\NormalTok{(d.unbiased))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   mean_d mean_d_unbiased
+## 1  1.564           1.498
+\end{verbatim}
+
+You can see the mean of the \(d\) values is 1.56 which is higher than the population-level standardize mean difference (\(\delta\)). In contrast, you can see the mean of the \(d_{unbiased}\) values is 1.498 which closely corresponds to the population-level standardize mean difference (\(\delta\)) - it would have exactly corresponded with more samples.
+
+\hypertarget{illustrating-variability}{%
+\subsection{Illustrating variability}\label{illustrating-variability}}
+
+An inspection of the first few rows of the the of many\_samples data above illustrated that many of the \(d_{unbiased}\) values differed from the population-level standardized mean difference of \(\delta = 1.49\). We can see the variability in sample-level \(d_{unbiased}\) values in the histogram below.
+
+\begin{figure}
+\includegraphics[width=0.95\linewidth]{ch_samples/images/d_dist} \caption{Illustration of the range of sample unbiased d-values for a single population $\delta = 1.49$}\label{fig:ddist}
+\end{figure}
+
+We can calculate the full range of sample-level \(d_{unbiased}\) values with the commands below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{d_min =} \KeywordTok{min}\NormalTok{(d.unbiased),}
+            \DataTypeTok{d_max =} \KeywordTok{max}\NormalTok{(d.unbiased))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   d_min d_max
+## 1  -0.2   5.2
+\end{verbatim}
+
+We see from the output that \(d_{unbiased}\) values were as small as -.20 and as large as 5.2. All of these values are estimates of the population level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value. Indeed, \ldots{}
 
 \hypertarget{overview}{%
 \section{Overview}\label{overview}}
+
+In this chapter we have illustrated how a number of population parameter can be estimated by sample statistics. These are summarised below.
 
 \doublespacing
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
 \begin{minipage}[b]{0.30\columnwidth}\raggedright
-Name\strut
+\strut
 \end{minipage} & \begin{minipage}[b]{0.30\columnwidth}\raggedright
 Parameter\strut
 \end{minipage} & \begin{minipage}[b]{0.30\columnwidth}\raggedright
@@ -5528,6 +5686,27 @@ Cohen's \(d\) or SMD\strut
 \end{longtable}
 
 \singlespacing
+
+\hypertarget{meta-analysis}{%
+\section{Meta-analysis}\label{meta-analysis}}
+
+\hypertarget{key-points-1}{%
+\section{Key Points}\label{key-points-1}}
+
+\begin{itemize}
+\item
+  Sample are of interest because the help use estimate attribute of the population
+\item
+  Sample statistics estimate population parameters
+\item
+  Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that informational value of a single study is typically quite low.
+\item
+  A statistic is unbiased if the average of the sample statistics, over many thousand of samples, equals the population parameter.
+\item
+  To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter
+\item
+  We used simulations to but they were like a meta-analysis.
+\end{itemize}
 
 \cleardoublepage
 

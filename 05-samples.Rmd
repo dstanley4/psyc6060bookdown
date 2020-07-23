@@ -212,15 +212,73 @@ female_population_heights %>%
             sd = sd.pop(height))
 ```
 
+This reveals the population parameters are:
 
-INSERT CHART SUMMING UP PARAMETERS
+$$
+\begin{aligned} 
+\mu_{female} &= 165 \\
+\mu_{male} &= 180 \\
+\sigma = \sigma_{female} = \sigma_{male} &= 10.1\\
+\end{aligned} 
+$$
 
-CALCULATE POP SMD
+
+Likewise, the population-level standardized mean difference ($\delta$) is 1.49. We can see this population-level difference illustrated in Figure \@ref(fig:sexpop).
+
+$$
+\begin{aligned} 
+\delta  &= \frac{\mu_{male} - \mu_{female}}{\sigma} \\
+&= \frac{180 - 165}{10.1} \\
+&= \frac{15}{10.1} \\
+&= 1.49 \\
+\end{aligned} 
+$$
+
+
+```{r, out.height="80%", echo = F}
+textMean1 <- expression(Delta~"M" == 15)
+textd1 <- expression(delta == 1.49)
+textfemale1 <- expression("Female"~mu == 165)
+textmale1 <- expression("Male"~mu == 180)
+texts1 <- expression(sigma == 10.1)
 
 
 
+twopop <- ggplot(data = pop_data,
+       mapping = aes(x = height,
+                     alpha = sex)) +
+  geom_histogram(position = "identity",
+                 boundary = 0,
+                 binwidth = 5,
+                 fill = "black",
+                 color =  "black") +
+  theme_classic() +
+  scale_alpha_manual(values = c(.20, .50)) +
+  facet_wrap(~sex, nrow = 2) +
+  scale_x_continuous(breaks = seq(100, 250, by = 10)) +
+  geom_vline(xintercept = 165, size = 2) +
+  geom_vline(xintercept = 180, size = 2) +
+  labs(x = "Height (cm)", y = "Count", alpha = "Sex") +
+  annotate("text", x = 230, y = 9000, 
+           parse = T, label = as.character(textMean1)) +
+  annotate("text", x = 230, y = 7000, 
+           parse = T, label = as.character(textd1)) +
+  annotate("text", x = 90, y = 9000, 
+           parse = T, label = as.character(textfemale1), hjust = 0) +
+  annotate("text", x = 90, y = 7000, 
+           parse = T, label = as.character(textmale1), hjust = 0) +
+  annotate("text", x = 90, y = 5000, 
+           parse = T, label = as.character(texts1), hjust = 0)
 
-Because we rarely have access to data for an entire population we typically want to estimate the population standardized mean difference using sample data. Many researcher esimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below. This value is known by many other names: $d$, Cohen's $d$, and Hedges $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
+ggsave(filename = "ch_samples/images/sex_pops.png", dpi = 300, width = 8, height = 6)
+```
+
+```{r sexpop, echo=FALSE, out.width="95%", fig.cap="Illustration of the standardized mean difference of 1.49 for height between males and females. The solid black vertical lines indicates the means ($\\mu$) for the two populations."}
+knitr::include_graphics("ch_samples/images/sex_pops.png")
+```
+
+
+We typical need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below. This value is known by many other names: $d$, Cohen's $d$, and Hedges $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
 
 \begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
@@ -239,7 +297,7 @@ d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3
 
 If we try to apply either $d$-value formula (\@ref(eq:samplesmdch5) or \@ref(eq:samplesmdunbiasedch5)) to real data we quickly encounter a problem.  We don't have the pooled standard deviation, $s_{pooled}$
 
-## Pooled standard deviation
+### Pooled standard deviation
 
 When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \@ref(eq:popsmdch5), has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact the both population have the same standard deviation.
 
@@ -248,9 +306,9 @@ Let's consider hypothetical sample data to make the situation clear. More specif
 
 $$
 \begin{aligned} 
-\bar{x}_{males} &= 100 \\
-s_{males}^2 &= 10 \\
-s_{males} &= 10 \\
+\bar{x}_{males} &= 187.2 \\
+s_{males}^2 &= 92.2 \\
+s_{males} &= 9.6 \\
 \end{aligned} 
 $$
 
@@ -259,9 +317,9 @@ And females:
 
 $$
 \begin{aligned} 
-\bar{x}_{females} &= 100 \\
-s_{females}^2 &= 10 \\
-s_{females} &= 10 \\
+\bar{x}_{females} &= 160.1 \\
+s_{females}^2 &= 66.8 \\
+s_{females} &= 8.2 \\
 \end{aligned} 
 $$
 
@@ -317,8 +375,8 @@ If we apply the pooled standard variance, Formula \@ref(eq:poolvarch5), to the s
 $$
 \begin{aligned}
 s_{pooled}^2 &= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{male} + n_{female}-2} \\
-&= \frac{(10 -1)s_{male}^2 + (10 -1)s_{female}^2}{10 + 10 -2} \\
-&= -999
+&= \frac{(10 -1)92.2 + (10 -1)66.8}{10 + 10 -2} \\
+&= 79.5
 \end{aligned}
 $$
 
@@ -326,30 +384,107 @@ And then we obtain the pooled standard deviation we need, below, for the standar
 
 $$
 \begin{aligned} 
-s_{pooled}  &= \sqrt{-999} \\
+s_{pooled}  &= \sqrt{79.5} \\
+&= 8.9\\
 \end{aligned} 
 $$
 
+### Calculating $d$
 
-We calculate an unbiased estimate of the population standardized mean difference using Formula \@ref(eq:samplesmdunbiasedch5).
+Now that we the pooled standard deviation, $s_{pooled}$, we can calculated the standardized mean difference. We do so below using unbiased formula, Formula \@ref(eq:samplesmdunbiasedch5).
 
 $$
 \begin{aligned}
-d_{unbiased}  &= \frac{\bar{x}_{males} - \bar{x}_{females}}{s_{pooled}} \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
-&= \frac{\bar{x}_{males} - \bar{x}_{females}}{-999} \times [1 - \frac{3}{4(10 + 10)-9}] \\
+d_{unbiased}  &= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
+&= \frac{\bar{x}_{males} - \bar{x}_{females}}{s_{pooled}} \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
+&= \frac{187.2 - 160.1}{8.9} \times [1 - \frac{3}{4(10 + 10)-9}] \\
+&= 3.0 \times 0.96\\
+&= 2.9\\
 \end{aligned}
 $$
 
 
-# Variability in $d$-values
+### Asessing bias  
 
-* bias check using average
+We can use our population-level data and sample from it to see the range of sample-level d-values that can occur.
 
-* histogram showing enormous range of d-vaoues
+First, we remove the scores from the male and female columns and place them into male_heights and female_heights, respectively.
 
-* min max of d showing interpretational problems
+```{r}
+male_heights <- male_population_heights %>% 
+  pull(height)
+
+female_heights <- female_population_heights %>% 
+  pull(height)
+```
+
+Next we obtain a large number of samples from each population and place them in many_samples.
+
+```{r}
+many_samples<-  get_d_samples_from_population_data(pop1 = male_heights,
+                                   pop2 = female_heights,
+                                   cell.n = 10,
+                                   number.of.samples = 5000)
+```
+
+We can example the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calcualte the $d$ and $d_{unbiased}$ for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
+
+```{r}
+head(many_samples, 10)
+```
+
+Recall the population level standardized mean difference, $\delta$, was 1.49. We can see the extent to which the average the $d$ and $d_{unbiased}$ compare to this population-level values.
+
+```{r}
+many_samples %>%
+  summarise(mean_d = mean(d),
+            mean_d_unbiased = mean(d.unbiased))
+```
+
+You can see the mean of the $d$ values is 1.56 which is higher than the population-level standardize mean difference ($\delta$). In contrast, you can see the mean of the $d_{unbiased}$ values is 1.498 which closely corresponds to the population-level standardize mean difference ($\delta$) - it would have exactly corresponded with more samples.
 
 
+### Illustrating variability
+
+An inspection of the first few rows of the the of many_samples data above illustrated that many of the $d_{unbiased}$ values differed from the population-level standardized mean difference of $\delta = 1.49$. We can see the variability in sample-level $d_{unbiased}$ values in the histogram below.
+
+
+
+```{r, out.height="80%", echo = F}
+
+
+d_dist <- ggplot(data = many_samples,
+       mapping = aes(x = d.unbiased)) +
+  geom_histogram(position = "identity",
+                 boundary = 0,
+                 binwidth = .25,
+                 fill = "black",
+                 color =  "black",
+                 alpha = .50) +
+  theme_classic() +
+  scale_x_continuous(breaks = seq(-1, 4, by = .5)) +
+  coord_cartesian(xlim = c(-1,4)) +
+  geom_vline(xintercept = 1.49, size = 2) +
+  labs(x = "Unbiased sample d-value", y = "Count") +
+
+ggsave(filename = "ch_samples/images/d_dist.png", dpi = 300, width = 8, height = 6)
+```
+
+```{r ddist, echo=FALSE, out.width="95%", fig.cap="Illustration of the range of sample unbiased d-values for a single population $\\delta = 1.49$"}
+knitr::include_graphics("ch_samples/images/d_dist.png")
+```
+
+
+
+We can calculate the full range of sample-level $d_{unbiased}$ values with the commands below:
+
+```{r}
+many_samples %>%
+  summarise(d_min = min(d.unbiased),
+            d_max = max(d.unbiased))
+```
+
+We see from the output that $d_{unbiased}$ values were as small as -.20 and as large as 5.2. All of these values are estimates of the population level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. Indeed, 
 
 
 
