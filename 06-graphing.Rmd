@@ -1,4 +1,5 @@
 # Graphing
+
 ## Required
 
 The following data files below are used in this chapter. The files are available at: https://github.com/dstanley4/psyc6060bookdown
@@ -15,6 +16,18 @@ The following packages CRAN must be installed:
 |tidyverse          |
 
 
+The following GitHub packages must be installed:
+
+| Required GitHub Packages |
+|--------------------------|
+|dill/emoGG |
+
+
+A GitHub package can be installed using the code below:
+
+```{r, eval = FALSE}
+remotes::install_github("dill/emoGG")
+```
 
 ```{r, include = FALSE}
 library(tidyverse)
@@ -23,9 +36,9 @@ library(tidyverse)
 
 ## Data 
 
-To learn about making graphs using the tidyverse we use movie data rating and box office data obtained at the time of writing. Movie ratings were obtained from the [IMDB](https://www.imdb.com) and [RottenTomatoes](https://www.rottentomatoes.com) at the time of writing. Box office data (in millions of dollars) was obtained from [Box Office Mojo](https://www.boxofficemojo.com). If you enjoy learning about movies these are all excellent sites. 
+To learn about making graphs using the tidyverse we use movie ratings and box office data obtained at the time of writing. Movie ratings were obtained from the [IMDB](https://www.imdb.com) and [RottenTomatoes](https://www.rottentomatoes.com). Box office data (in millions of dollars) was obtained from [Box Office Mojo](https://www.boxofficemojo.com). If you enjoy learning about movies these are all excellent sites. 
 
-We begin by loading data_movies.csv  using read_csv(), not read.csv():
+We begin by loading data_movies.csv using read_csv(), not read.csv():
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -36,11 +49,19 @@ movie_data <- read_csv("data_movies.csv")
 movie_data <- read_csv("data_movies.csv")
 ```
 
-Next we inspect movie_data using the print() command. We see that each row of the data corresponds to a superhero movie. The title for each movie is provided in both long form and short form by the columns title and short_title, respectively. Additional column provide the IMDB rating, Rotten Tomatoes Audience rating, and Box Office Mojo revenue estimates. Finally, the last column indicates the studio that made the movie (Marvel or DC).
+Next we inspect movie_data using the print() command. We see that each row of the data set corresponds to a superhero movie. 
 
 ```{r}
 print(movie_data)
 ```
+
+Next we use glimpse() to see the columns.
+
+```{r}
+glimpse(movie_data)
+```
+
+The title and short_title columns provide the full title and short title for each movie. Additionally the IMDB rating, Rotten Tomatoes Audience rating, and Box Office Mojo revenue are provided in the imdb, tomatoes_aud, and boxoffice columns, respectively. Finally, the last column, studio,  indicates the studio that made the movie (Marvel or DC).
 
 It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as_factor command. The as_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variables using as_factor. 
 
@@ -51,17 +72,17 @@ movie_data <- movie_data %>%
 ```
 
 
-We can confirm the column type has changed by using the print() command again and examing the type under the column name.
+We can confirm the column type has changed by using the glimpse() command again and examing the column types:
 
 
 ```{r}
-print(movie_data)
+glimpse(movie_data)
 ```
 
 
 ## Graph basics 
 
-In this section we teach you how to make a graph from "first principles" to form a foundation for understanding how the tidyverse graphing command ggplot works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later we will make graphs in a more efficient manner.
+In this section we teach you how to make a graph from first principles to form a foundation for understanding how the tidyverse graphing command ggplot() works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later, in the Efficient graphs section,  we will make graphs in a typical manner.
 
 We start a graph using the ggplot() command. The ggplot() command creates an empty template for the graph. After creating the template we have to add content (like bars) to the graph using the geom_col() command. We can also add text using the geom_text() command.
 
@@ -71,7 +92,7 @@ Additionally, graphing commands, such as geom_col(), must know the columns/varia
 
 In the examples that follow we tell each command (geom_col, geom_text) that data set and the columns to use via the **data** and **mapping** arguments.
 
-Use *geom_col* to put each boxoffice column value into a bar.
+Use geom_col() to put each boxoffice column value into a bar.
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot() +
@@ -83,7 +104,8 @@ print(my_graph)
 ```
 
 
-Use *geom_text* to put text above each column with the value 
+Next, we want to put the boxoffice revenue about each bar so it eaiser to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:
+
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot() +
@@ -118,11 +140,9 @@ print(my_graph)
 
 ## Graphing efficiently 
 
-You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom_text, geom_col). Fortunately, we can use a shortcut and specify the data and mapping once only in the ggplot command. After that, we only need to specify the data and mapping if we want to use values different than those in the ggplot command.
+You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom_text, geom_col). Fortunately, we can use a shortcut and specify the data and mapping once only in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom_col, geom_text). In this way, we only have to specify the data and the mapping once. 
 
-Examine the code below and compare it to the code above. Notice how in the geom_col() command we don't have anything specified -- the data and mapping from the ggplot command are used.
-
-Likewise, notice how in the geom_text() command we only specify the arguments we need that are different than those in the ggplot command. In this cases, that means simply adding the nudge_y = 150 to the geom_text command.
+Examine the code below and compare it to the code above. Notice how in the geom_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom_text() command we only specify the arguments we need that are different than those in the ggplot command. In this cases, that means simply adding the nudge_y = 150 to the geom_text command.
 
 
 ```{r, fig.width = 6, fig.height= 3}
@@ -136,22 +156,20 @@ my_graph <- ggplot(data = movie_data,
 print(my_graph)
 ```
 
-## aes()
+## Aesthetics
 
-### Inside the black box
-
-What happens when we put the data and mapping in the ggplot command instead of the specific commands? When we put data and the mapping arguments in the ggplot() command we set those attributes for the entire graph. To understand this, you need to know that ggplot uses an internal data set that I will call the "black box" data set (i.e., inside the [black box](https://en.wikipedia.org/wiki/Black_box) of ggpplot). To create a graph ggplot maps/copies columns from you data set (e.g., movie_data) to an internal data set. This internal data set is then used to create the graph. The diagram below illustrates what is happening "inside the black box" when you create the graph using the code above.
+Exactly how does that aesthetic, aes(), command work? What happens when we put the data and mapping in the ggplot() command instead of the specific commands such as geom_col()? When we put data and the mapping arguments in the ggplot() command we set those attributes for the entire graph. To understand this, you need to know that ggplot uses an internal data set that I will call the "black box" data set (i.e., inside the [black box](https://en.wikipedia.org/wiki/Black_box) of ggpplot). To create a graph ggplot maps/copies columns from you data set (e.g., movie_data) to an internal data set. This internal data set is then used to create the graph. Figure \@ref(fig:showmap) below illustrates what is happening "inside the black box" when you create the graph using the code above.
 
 
-```{r, echo = FALSE, out.width = "80%", fig.cap="ggplot()'s internal data."}
+```{r, showmap, echo = FALSE, out.width = "70%", fig.cap="ggplot()'s internal data."}
 knitr::include_graphics("ch_graphing/images/mapping.png")
 ```
 
 
 
-### Bar colors
+### Fill color
 
-You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That's easy to do with the aes() command. We simply tell aes() that the **fill** of any object in the graph should be determined by the studio column. Simply adding "fill = studio" to the aes() command changes the colors of the bars. 
+You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That's easy to do with the aes() command. We simply tell aes() that the **fill** color of any object in the graph should be determined by the studio column. Simply adding "fill = studio" to the aes() command changes the colors of the bars -- any any other object we had to the graph for which fill would be relevant. The internal workings are illustrated in Figure \@ref(fig:addfill).
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot(data = movie_data,
@@ -165,17 +183,17 @@ my_graph <- ggplot(data = movie_data,
 print(my_graph)
 ```
 
-```{r, echo = FALSE}
+```{r, addfill,echo = FALSE, out.width = "70%", fig.cap="Adding a fill column to the internal data."}
 knitr::include_graphics("ch_graphing/images/mapping_fill.png")
 ```
 
 ### Overriding aes()
 
-Just because you specify something in the ggplot() command doesn't mean that you are stuck with it for all your subsequent commands. Recall how at the start of this exercise we specified the data and the mapping for each geom_col() and geom_text() individually. We can still do that. 
+Just because you specify something in the ggplot() command doesn't mean that you are "stuck with it" for all your subsequent commands. Recall how at the start of this exercise we specified the data and the mapping for each geom_col() and geom_text() individually. We can still do that. 
 
 Now we want to add the Rotten Tomatoes audience score for each movie above the box office revenue. But if we just use geom_text() like we did before it plot the same information boxoffice information because of the  "label = boxoffice" aes() specification in the ggpplot() command. We want the new gome_text() command to plot plot different text; that is, we want it to use "label = tomatoes_aud". 
 
-Fortunately, if we simply put "mapping = aes(label = tomatoes_aud)" within the new geom_text() command we get the desired information in the graph. The mapping/aes commands within geom_text() overrides the mapping/aes commands within ggplot() used to create the internal data set. Or more accurately, the next geom_text() command creates it's own version of the internal data set in which the label column is filled with information from tomatoes_aud.
+Fortunately, if we simply put "mapping = aes(label = tomatoes_aud)" within the new geom_text() command we get the desired information on the graph. The mapping/aes argumentrs within geom_text() overrides the mapping/aes argumentrs within ggplot(). Or more accurately, the new geom_text() command creates it's own version of the internal data set in which the label column is filled with information from tomatoes_aud.
 
 ```{r, fig.width = 6, fig.height= 4}
 my_graph <- ggplot(data = movie_data,
@@ -189,7 +207,7 @@ my_graph <- ggplot(data = movie_data,
 print(my_graph)
 ```
 
-Notice that we have the same problem as before with the text being difficult to read. We add "nudge_y = 400" to move the text higher than the boxoffice text/label. Don't forget the units used by nudge_y are the units on the y-axis.
+Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add "nudge_y = 400" to move the text higher than the boxoffice text/label. Don't forget the units used by nudge_y are the units on the y-axis.
 
 ```{r, fig.width = 6, fig.height= 4}
 my_graph <- ggplot(data = movie_data,
@@ -207,7 +225,7 @@ print(my_graph)
 
 ## APA style
 
-Use theme_classic to make the graph look APA style. We use theme_classic(12) to make the graph roughly APA style with a 12-point font below.
+Use theme_classic() to make the graph apear in APA style. We use theme_classic(12) to make the graph APA style with a 12-point font:
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot(data = movie_data,
@@ -225,12 +243,11 @@ print(my_graph)
 ```
 
 
-
 ## Axes
 
 ### Range 
 
-Use *coord_cartesian* to adjust range of axes. In the code below we use coord_cartesian() to make the y-axis range from 0 to 3500.
+We use the coord_cartesian() command to adjust range of axes. In the code below we use coord_cartesian() to make the y-axis range from 0 to 3500.
 
 
 ```{r, fig.width = 6, fig.height= 3}
@@ -261,7 +278,7 @@ coord_cartesian(ylim = c(0, 3500),
 
 ### Ticks 
 
-Use *scale_y_continuous* to adjust the ticks on the y-axis. We set the tick on the y-axis to range from 0 to 3500 in 500 tick increments using the scale_y_continuous command below:
+We use the scale_y_continuous() command to adjust the ticks on the y-axis. We set the ticks on the y-axis to range from 0 to 3500 in 500 tick increments using the scale_y_continuous command below via the breaks argument:
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot(data = movie_data,
@@ -288,7 +305,7 @@ scale_x_continuous(breaks = seq(0, 3500, by = 500))
 
 ### Labels 
 
-Use *labs* to label the x- and y-axes.
+We use the labs() command to set the labels forthe x- and y-axes:
 
 ```{r, fig.width = 6, fig.height= 3}
 my_graph <- ggplot(data = movie_data,
@@ -309,15 +326,13 @@ print(my_graph)
 ```
 
 
-
-
 ## Axis values
 
 ### Text
 
 What if we want to use full movie title rather than short version on the x-axis of the graph? Two methods are presented below. 
 
-#### Method 1 
+#### Method 1: Recoding labels 
 
 Our data file contains a column with the long/full version of the movie names. But many times you won't have the additional/longer labels you want to use available in this manner. In this, you use the scale_x_discrete() command to relabel our factor when we make the labels on x-axis. The code is below - notice the problem we have with the labels overlapping though. On the next page, we'll use a easier approach though - since we have an extra column with the full titles.
 
@@ -349,7 +364,7 @@ print(my_graph)
 ```
 
 
-#### Method 2
+#### Method 2: Longer label columns 
 
 With our movie data we don't need to use **scale_x_discrete** because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the **mapping** for x from short_title to title. Notice we still have the problem with overlapping labels on the x-axis!
 
@@ -375,7 +390,7 @@ print(my_graph)
 
 ### Angle 
 
-Use *theme* to adjust angle of x-axis labels. We can use the theme command to adjust the angle of the text on the x-axis. However, notice how the longer titles are centered on each point on the x-axis. In the next section we fix this problem.
+Use theme() to adjust angle of x-axis labels. We can use the theme command to adjust the angle of the text on the x-axis. However, notice how the longer titles are centered on each point on the x-axis. In the next section we fix this problem.
 
 **Important**: The theme command must come after the theme_classic command. Otherwise, theme_classic will undo the work done by the theme_command if it appears after the theme command.
 
@@ -402,7 +417,7 @@ print(my_graph)
 
 ### Alignment
 
-Use *theme* and *hjust* to adjust the alignment of the x-axis labels. To make the titles look correct on the x-axis we need them at an angle, but we also need them right justified against the x-axis. We do that with the the hjust argument (1 means right justify). See the result below.
+Use theme() and the hjust argument to adjust the alignment of the x-axis labels. To make the titles look correct on the x-axis we need them at an angle, but we also need them right justified against the x-axis. We do that with the the hjust argument (1 means right justify). See the code below:
 
 ```{r, fig.width = 6, fig.height= 5}
 my_graph <- ggplot(data = movie_data,
@@ -425,16 +440,16 @@ print(my_graph)
 ```
 
 
-
 ### Order
 
 #### Increasing order
 
-We can make the movie bars go left to right from lowest to highest box office receipts by changing the factor order prior to creating the graph. We do so with the **mutate**  and **fct_reorder** commands. The default order is ascending values even though we don't specify it. 
+We can make the movie bars go left to right from lowest to highest box office receipts by changing the factor order prior to creating the graph. We do so with the mutate()  and fct_reorder() commands. The default order is ascending values even though we don't specify it. 
 
 ```{r}
-movie_data <- movie_data %>% mutate(title = fct_reorder(title,
-                                  boxoffice))
+movie_data <- movie_data %>% 
+  mutate(title = fct_reorder(title,
+                             boxoffice))
 ```
 
 
@@ -461,7 +476,7 @@ print(my_graph)
 
 #### Decreasing order  
 
-We can make the movie bars go left to right from highest to lowest box office receipts by changing the factor order prior to creating the graph. We use the same code as before but add the **desc** (descending) command around boxoffice in the **fct_reorder** call:
+We can make the movie bars go left to right from highest to lowest box office receipts by changing the factor order prior to creating the graph. We use the same code as before but add the desc() command (i.e.,descending)  around boxoffice in the fct_reorder() call:
 
 ```{r}
 movie_data <- movie_data %>% mutate(title = fct_reorder(title,
@@ -493,7 +508,7 @@ print(my_graph)
 
 #### Custom order  
 
-We can make the movie bars go left to right from in an order of our chooseing with the fct_relevel command. Here I manually indicate an order that places the movies highest to lowest within movie studio (Marvel or DC).
+We can make the movie bars go left to right from in an order of our chooseing with the fct_relevel() command. Here I manually indicate an order that places the movies highest to lowest within movie studio (Marvel or DC).
 
 ```{r}
 movie_data <- movie_data %>% 
@@ -527,7 +542,7 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1))  
 
 ```
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/custom_order.png", width = 5, height = 4, dpi = "print")
 knitr::include_graphics("ch_graphing/images/custom_order.png")
 ```
@@ -564,7 +579,7 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1))  
 
 ```
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/custom_order2.png", width = 5, height = 4, dpi = "print")
 knitr::include_graphics("ch_graphing/images/custom_order2.png")
 ```
@@ -597,21 +612,18 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1)) +
   scale_fill_manual(values = c("red", "blue"))
 ```
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/base_color_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/base_color_graph.png")
 ```
 
-
-
-
 ### Hex colours
 
-If you are a really big geek (like me) you might look at the previous graph and think "Those aren't the real colours of the Marvel and DC logos - lame!" You do some internet research and determine that Marvel red is #ed1d24 and DC blue is #0476F2 using hex colour codes. You can use those precise colours as per below.  Note the difference is subtle - the correct colours are somewhat more muted.
+If you are a really big geek (like me) you might look at the previous graph and think "Those aren't the proper colours for the Marvel and DC - lame!" So... you do some internet research and determine that you can specify colours using hexidecimal numbers. More specifically, you find Marvel red is #ed1d24 and DC blue is #0476F2 using hex colour codes. You can use those precise colours via the scale_fill_manual() command below. 
 
 ```{r, fig.width = 5, fig.height= 4}
 
@@ -634,12 +646,12 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/logo_color_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/logo_color_graph.png")
 ```
 
@@ -648,31 +660,21 @@ knitr::include_graphics("ch_graphing/images/logo_color_graph.png")
 
 ### Installation
 
-Make the graph more fun with the emoGG package. You might like to make the graph more fun by putting tomatoes on the graph to indicate what the extra numbers mean. We can do that with the emoGG package. You can install the emoGG package with the commands below:
+Make the graph more fun with the emoGG package. You might like to make the graph more fun by putting tomatoes on the graph to indicate what the extra numbers mean. We can do that with the emoGG package. This installation instruction for this package are at the start of this chapter; note, that it is installed via GitHub rather than the CRAN. Course R Studio Cloud users - the installation has already been done.
 
-```{r, eval = FALSE}
-install.packages("devtools", dep = TRUE) # if you haven't done this already
-devtools::install_github("dill/emoGG")
-```
-
-Activate the emoGG package:
+After installation you need to activate the emoGG package:
 ```{r}
 library(emoGG)
 ```
 
-### Codes for emoji
 
-Visit this link to check out the codes for emoji: https://apps.timwhitlock.info/emoji/tables/unicode
+Visit this link to check out the codes for emoji:  https://apps.timwhitlock.info/emoji/tables/unicode
 
-If you scroll down to section 5 Uncategorized on this page you will find the code for a tomato is 1f345.
-
-Note that the code below will only work with an internet connection. The command geom_emoji needs internet to retrieve the emoji graphic requested.
+If you scroll down to section 5 Uncategorized on this page you will find the code for a tomato is 1f345. Note that the code below will only work with an internet connection. The command geom_emoji() needs internet access to retrieve the emoji graphic requested.
 
 ```{r, echo = FALSE, out.width  = "90%"}
 knitr::include_graphics("ch_graphing/images/emoji_table.png")
 ```
-
-
 
 ```{r, fig.width = 5, fig.height= 4}
 my_graph <- ggplot(data = movie_data,
@@ -698,12 +700,12 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "60%", echo = FALSE}
+```{r, out.width= "85%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph.png")
 ```
 

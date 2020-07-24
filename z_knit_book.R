@@ -1,16 +1,13 @@
 
-# Reminder: restart R first
+# Reminder!!!!!!
+# Restart R first or it won't render right
 
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", output_format = "bookdown::pdf_book")
 bookdown::render_book("index.Rmd", output_format = "bookdown::epub_book")
 
 #bookdown::serve_book(dir = ".", output_dir = "_book", preview = TRUE, in_session = TRUE, quiet = FALSE)
-#bookdown::serve_book(dir = ".", output_dir = "_book", preview = TRUE, in_session = TRUE, quiet = FALSE)
 
-# To stop the server, run servr::daemon_stop(1) or restart your R session
-
-### A larger population
 
 
 
