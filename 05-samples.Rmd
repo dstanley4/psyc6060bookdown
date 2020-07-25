@@ -306,9 +306,7 @@ d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}
       (\#eq:samplesmdch5)
 \end{equation} 
 
-Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardize mean difference ($\delta$).
-
-Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5).
+Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardize mean difference ($\delta$). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5).
 
 \begin{equation} 
 d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
@@ -495,8 +493,6 @@ ggsave(filename = "ch_samples/images/d_dist.png", dpi = 300, width = 8, height =
 knitr::include_graphics("ch_samples/images/d_dist.png")
 ```
 
-
-
 We can calculate the full range of sample-level $d_{unbiased}$ values with the commands below:
 
 ```{r}
@@ -525,6 +521,8 @@ In this chapter we have illustrated how a number of population parameter can be 
 \singlespacing
 
 ## Meta-analysis
+
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging over all of the studies on that topic.
 
 
 ## Key Points

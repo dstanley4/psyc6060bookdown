@@ -640,13 +640,56 @@ dev.off()
 ```
 ## Visualizing populations
 
-Three different ways
+Populations are typically quite large in nature and it's often imposssible to pratically list all of the members of the population. Consequently, it helps to have ways to visual the entire population. In Figure \@ref(fig:popvisual3) we present three ways of visualizing a population. In all three graphs (A, B, C) in this figure the x-axis represents heights in centimeter and the y-axis is used to indicate which values on the x-axis are more common. In Figure \@ref(fig:popvisual3)A we use a large number of X's to indicate the members of the population. Because X's are also used in formulas to represent individual participants a strength of this graph is that it reminds you that it is a graph reflecting a large number of individuals. In Figure \@ref(fig:popvisual3)B we present a standard histogram that illustrate the distribution of heights. In Figure \@ref(fig:popvisual3)C we present a density curve that illustrate the distribution of heights. All three approaches are useful for illustrating that most people have heights around 170 cm.
 
-* histotext
+```{r, include=FALSE}
+library(learnSampling)
+library(tidyverse)
+ 
+# variable means, d-value of 0.5
+largepop <- get_height_population(mdiff = 5, std = 10)
 
-* histogram
+gp1 <- ggplot(data = largepop,
+              mapping = aes(x = height)) +
+  stat_histotext(label = "X", breaks = seq(100, 220, by = 5)) +
+  coord_cartesian(xlim = c(130, 200)) +
+  scale_x_continuous(breaks = seq(100, 220, by = 10)) +
+  labs(x = "Height", y = "", tag = "A.") +
+  theme_classic()
+  
+print(gp1)
 
-* density curve
+gp2 <- ggplot(data = largepop,
+              mapping = aes(x = height)) +
+  geom_histogram(breaks = seq(100, 220, by = 5), fill = "black", alpha = .5) +
+  coord_cartesian(xlim = c(130, 200)) +
+  scale_x_continuous(breaks = seq(100, 220, by = 10)) +
+  labs(x = "Height", y = "", tag = "B.") +
+  theme_classic()
+  
+print(gp2)
+
+
+gp3 <- ggplot(data = largepop,
+              mapping = aes(x = height)) +
+  geom_density() +
+  coord_cartesian(xlim = c(130, 200)) +
+  scale_x_continuous(breaks = seq(100, 220, by = 10)) +
+  labs(x = "Height", y = "", tag = "C.") +
+  theme_classic()
+  
+print(gp3)
+
+png(file = "ch_populations/images/popvisual.png", res = 300, width = 6*300, height = 12*300)
+gridExtra::grid.arrange(gp1, gp2, gp3, nrow =3)
+dev.off()
+
+```
+
+
+```{r popvisual3, fig.cap  = "Three ways of visualizing a population distribution", echo = FALSE, out.height="80%", out.extra="80%"}
+knitr::include_graphics("ch_populations/images/popvisual.png")
+```
 
 ## Population comparisons
 
