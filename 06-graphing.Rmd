@@ -61,7 +61,7 @@ Next we use glimpse() to see the columns.
 glimpse(movie_data)
 ```
 
-The title and short_title columns provide the full title and short title for each movie. Additionally the IMDB rating, Rotten Tomatoes Audience rating, and Box Office Mojo revenue are provided in the imdb, tomatoes_aud, and boxoffice columns, respectively. Finally, the last column, studio,  indicates the studio that made the movie (Marvel or DC).
+The title and short_title columns provide the full title and short title for each movie. Additionally, the IMDB rating, the Rotten Tomatoes Audience rating, and the Box Office Mojo revenue numbers are provided in the imdb, tomatoes_aud, and boxoffice columns, respectively. Finally, the last column, studio,  indicates the studio that made the movie (Marvel or DC).
 
 It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as_factor command. The as_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variables using as_factor. 
 
@@ -82,15 +82,15 @@ glimpse(movie_data)
 
 ## Graph basics 
 
-In this section we teach you how to make a graph from first principles to form a foundation for understanding how the tidyverse graphing command ggplot() works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later, in the Efficient graphs section,  we will make graphs in a typical manner.
+In this section we teach you how to make a graph from first principles to form a foundation for understanding how the tidyverse graphing command ggplot() works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later we will make graphs in a typical, and more efficient, manner.
 
 We start a graph using the ggplot() command. The ggplot() command creates an empty template for the graph. After creating the template we have to add content (like bars) to the graph using the geom_col() command. We can also add text using the geom_text() command.
 
-Commands that plot information on the graph, such as geom_col(), need to know what data set to use to create the graph. We can do so in the command using the **data** argument. For example, we use "data = movie_data" to tell a command which data set to use.
+Commands that plot information on the graph, such as geom_col(), need to know what data set to use to create the graph. We specify the data set to use via the **data** argument. For example, we use "data = movie_data" to tell a command which data set to use.
 
-Additionally, graphing commands, such as geom_col(), must know the columns/variables to use within that data set when plotting the graph. Specifically, what variable/column will vary over the x- and y-axes. We can do so in the command using the **mapping** argument. For example, we use "mapping = aes(x = short_title, y = boxoffice)" to tell ggplot that we should use the column short_title along the x-axis and the column boxoffice when determining heights for the y-axis. This information is nested within the aes() command which is short for aesthetic. You use are telling ggplot about the aesthetics for the graph (i.e., which columns to use for the x- and y-axes) using the aes() command. There are a larger number of aesthetics you can specify within the aes() command (e.g., color, fill, linetype, etc.).
+Additionally, graphing commands, such as geom_col(), must know the columns/variables to use within that data set when plotting the graph. Specifically, commands need to know which variable/column will vary over the x- and y-axes. We can indicate these columns via the **mapping** argument. For example, we use "mapping = aes(x = short_title, y = boxoffice)" to tell ggplot() that we should use the column short_title along the x-axis and the column boxoffice when determining heights on the y-axis. This information is nested within the aes() command which is short for aesthetic. You are telling ggplot() about the aesthetics for the graph (i.e., which columns to use for the x- and y-axes) using the aes() command. There are a larger number of aesthetics that you can specify within the aes() command (e.g., color, fill, linetype, etc.).
 
-In the examples that follow we tell each command (geom_col, geom_text) that data set and the columns to use via the **data** and **mapping** arguments.
+In the examples that follow we tell each command (geom_col, geom_text) which data set and columns to use via the **data** and **mapping** arguments.
 
 Use geom_col() to put each boxoffice column value into a bar.
 
@@ -104,7 +104,7 @@ print(my_graph)
 ```
 
 
-Next, we want to put the boxoffice revenue about each bar so it eaiser to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:
+Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:
 
 
 ```{r, fig.width = 6, fig.height= 3}
@@ -140,9 +140,9 @@ print(my_graph)
 
 ## Graphing efficiently 
 
-You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom_text, geom_col). Fortunately, we can use a shortcut and specify the data and mapping once only in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom_col, geom_text). In this way, we only have to specify the data and the mapping once. 
+You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom_text, geom_col). Fortunately, we can use a shortcut and specify the data and mapping only once in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom_col, geom_text). In this way, we only have to specify the data and the mapping once. 
 
-Examine the code below and compare it to the code above. Notice how in the geom_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom_text() command we only specify the arguments we need that are different than those in the ggplot command. In this cases, that means simply adding the nudge_y = 150 to the geom_text command.
+Examine the code below and compare it to the code above. Notice how in the geom_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom_text() command we only specify the arguments we need that are different from those in the ggplot command. In this case, that means simply adding the nudge_y = 150 to the geom_text command.
 
 
 ```{r, fig.width = 6, fig.height= 3}
