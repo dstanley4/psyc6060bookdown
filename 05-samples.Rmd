@@ -1,4 +1,4 @@
-# Samples
+# Sampling Accuracy
 
 The following CRAN packages must be installed:
 
@@ -368,7 +368,7 @@ knitr::include_graphics("ch_samples/images/pool2.png")
 
 \newpage
 
-```{r pool3, echo=FALSE, out.width="80%", fig.scap="Pooled variance estimates population variance", fig.cap="Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal (i.e., different numbers of males and females), we need to use a more sophisticated formula to obtain the pooled variance."}
+```{r pool3, echo=FALSE, out.width="80%", fig.scap="Pooled variance estimates population variance", fig.cap="Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance."}
 knitr::include_graphics("ch_samples/images/pool3.png")
 ```
 
@@ -386,7 +386,7 @@ s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
       (\#eq:poolvarch5)
 \end{equation} 
 
-We get the single standard deviation we need, $s_{pooled}$, by taking the square root of the variance, $s_{pooled}^2$.
+We get the single standard deviation, $s_{pooled}$, by taking the square root of the variance, $s_{pooled}^2$.
 
 $$
 \begin{aligned} 
@@ -404,7 +404,7 @@ s_{pooled}^2 &= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{
 \end{aligned}
 $$
 
-And then we obtain the pooled standard deviation we need, below, for the standardized mean difference formula.
+And then we obtain the pooled standard deviation, below, for the standardized mean difference formula.
 
 $$
 \begin{aligned} 
@@ -415,7 +415,7 @@ $$
 
 ### Calculating $d$
 
-Now that we the pooled standard deviation, $s_{pooled}$, we can calculated the standardized mean difference. We do so below using unbiased formula, Formula \@ref(eq:samplesmdunbiasedch5).
+Now that we have the pooled standard deviation, $s_{pooled}$, we can calculate the standardized mean difference. We do so below using unbiased formula, Formula \@ref(eq:samplesmdunbiasedch5) below.
 
 $$
 \begin{aligned}
@@ -442,7 +442,7 @@ female_heights <- female_population_heights %>%
   pull(height)
 ```
 
-Next we obtain a large number of samples from each population and place them in many_samples.
+Next, we obtain a large number of samples from each population and place them in many_samples.
 
 ```{r}
 many_samples<-  get_d_samples_from_population_data(pop1 = male_heights,
@@ -451,13 +451,13 @@ many_samples<-  get_d_samples_from_population_data(pop1 = male_heights,
                                    number.of.samples = 5000)
 ```
 
-We can example the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calcualte the $d$ and $d_{unbiased}$ for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
+We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the $d$ and $d_{unbiased}$ for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
 
 ```{r}
 head(many_samples, 10)
 ```
 
-Recall the population level standardized mean difference, $\delta$, was 1.49. We can see the extent to which the average the $d$ and $d_{unbiased}$ compare to this population-level values.
+Recall the population-level standardized mean difference, $\delta$, was 1.49. We can see the extent to which the average of the sample-level $d$ and $d_{unbiased}$ values compare to this population-level value.
 
 ```{r}
 many_samples %>%
@@ -465,13 +465,12 @@ many_samples %>%
             mean_d_unbiased = mean(d.unbiased))
 ```
 
-You can see the mean of the $d$ values is 1.56 which is higher than the population-level standardize mean difference ($\delta$). In contrast, you can see the mean of the $d_{unbiased}$ values is 1.498 which closely corresponds to the population-level standardize mean difference ($\delta$) - it would have exactly corresponded with more samples.
+You can see that the mean of the sample-level $d$ values is 1.56 which is higher than the population-level standardized mean difference ($\delta$ = 1.49). In contrast, you can see that the mean of the sample-level $d_{unbiased}$ values is 1.498 which closely corresponds to the population-level standardized mean difference ($\delta$ = 1.49) - it would have corresponded exactly with more samples.
 
 
 ### Illustrating variability
 
-An inspection of the first few rows of the the of many_samples data above illustrated that many of the $d_{unbiased}$ values differed from the population-level standardized mean difference of $\delta = 1.49$. We can see the variability in sample-level $d_{unbiased}$ values in the histogram below.
-
+An inspection of the first few rows of the many_samples data, above, illustrates that many of the $d_{unbiased}$ values differed from the population-level standardized mean difference of $\delta = 1.49$. We can see the variability in sample-level $d_{unbiased}$ values in the histogram below.
 
 
 ```{r, out.height="80%", echo = F}
@@ -506,11 +505,12 @@ many_samples %>%
             d_max = max(d.unbiased))
 ```
 
-We see from the output that $d_{unbiased}$ values were as small as -.20 and as large as 5.2. All of these values are estimates of the population level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. Indeed, 
+We see from the output that $d_{unbiased}$ values were as small as -0.20 and as large as 5.2. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value.
+The negative $d$-value (i.e., the minumum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
 
 ## Overview
 
-In this chapter we have illustrated how a number of population parameter can be estimated by sample statistics. These are summarised below.
+In this chapter we have illustrated how population parameters can be estimated by sample statistics; these are summarised below:
 
 \doublespacing
 
@@ -527,20 +527,20 @@ In this chapter we have illustrated how a number of population parameter can be 
 
 ## Meta-analysis
 
-It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging over all of the studies on that topic.
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging all of the studies on that topic.
 
 
 ## Key Points
 
-* Sample are of interest because the help use estimate attribute of the population
+* Samples are of interest because they help us estimate attributes of a population.
 
-* Sample statistics estimate population parameters
+* Sample statistics estimate population parameters.
 
 * Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that informational value of a single study is typically quite low.
 
 * A statistic is unbiased if the average of the sample statistics, over many thousand of samples, equals the population parameter.
 
-* To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter
+* To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter.
 
-* We used simulations to  but they were like a meta-analysis.
+* Meta-analyses are used in the "real world" the way we used simulations in this chapter.
 
