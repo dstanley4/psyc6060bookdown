@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-07-25}
+\date{2020-07-26}
 
 \begin{document}
 \maketitle
@@ -1062,7 +1062,7 @@ Congratulations! You've reached the end of the introduction to R. Take a break, 
 \hypertarget{required}{%
 \section{Required}\label{required}}
 
-The following data files below used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
+The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -2131,7 +2131,7 @@ In short, you should always use tibbles (i.e., use read\_csv() not read.csv()). 
 \hypertarget{required-packages}{%
 \section{Required Packages}\label{required-packages}}
 
-The following data files below used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
+The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -4982,8 +4982,8 @@ You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the 
   SMD is indicated at the population level using the Greek letter delta (\(\delta\)). At the sample level we tend to use the term ``\(d\)-value'' or ``Cohen's \(d\)''.
 \end{enumerate}
 
-\hypertarget{samples}{%
-\chapter{Samples}\label{samples}}
+\hypertarget{sampling-accuracy}{%
+\chapter{Sampling Accuracy}\label{sampling-accuracy}}
 
 The following CRAN packages must be installed:
 
@@ -5422,7 +5422,7 @@ We have a sample variance for males (92.2) and a sample variance for females (66
 \newpage
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption[Pooled variance estimates population variance]{Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1). When the sample sizes are unequal (i.e., different numbers of males and females), we need to use a more sophisticated formula to obtain the pooled variance.}\label{fig:pool3}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption[Pooled variance estimates population variance]{Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance.}\label{fig:pool3}
 \end{figure}
 
 When the sample sizes for males and females are the same (i.e., \(n_{males} =n_{females}\)) we can use the Formula \eqref{eq:poolvarequalch5} below to calculate the pooled variance.
@@ -5439,7 +5439,7 @@ s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
       \label{eq:poolvarch5}
 \end{equation}
 
-We get the single standard deviation we need, \(s_{pooled}\), by taking the square root of the variance, \(s_{pooled}^2\).
+We get the single standard deviation, \(s_{pooled}\), by taking the square root of the variance, \(s_{pooled}^2\).
 
 \[
 \begin{aligned} 
@@ -5457,7 +5457,7 @@ s_{pooled}^2 &= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{
 \end{aligned}
 \]
 
-And then we obtain the pooled standard deviation we need, below, for the standardized mean difference formula.
+And then we obtain the pooled standard deviation, below, for the standardized mean difference formula.
 
 \[
 \begin{aligned} 
@@ -5469,7 +5469,7 @@ s_{pooled}  &= \sqrt{79.5} \\
 \hypertarget{calculating-d}{%
 \subsection{\texorpdfstring{Calculating \(d\)}{Calculating d}}\label{calculating-d}}
 
-Now that we the pooled standard deviation, \(s_{pooled}\), we can calculated the standardized mean difference. We do so below using unbiased formula, Formula \eqref{eq:samplesmdunbiasedch5}.
+Now that we have the pooled standard deviation, \(s_{pooled}\), we can calculate the standardized mean difference. We do so below using unbiased formula, Formula \eqref{eq:samplesmdunbiasedch5} below.
 
 \[
 \begin{aligned}
@@ -5498,7 +5498,7 @@ First, we remove the scores from the male and female columns and place them into
 \end{Highlighting}
 \end{Shaded}
 
-Next we obtain a large number of samples from each population and place them in many\_samples.
+Next, we obtain a large number of samples from each population and place them in many\_samples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5509,7 +5509,7 @@ Next we obtain a large number of samples from each population and place them in 
 \end{Highlighting}
 \end{Shaded}
 
-We can example the contents of many\_samples using the head() command. Each row of many\_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calcualte the \(d\) and \(d_{unbiased}\) for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
+We can examine the contents of many\_samples using the head() command. Each row of many\_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the \(d\) and \(d_{unbiased}\) for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5542,7 +5542,7 @@ We can example the contents of many\_samples using the head() command. Each row 
 ## 10       2.11
 \end{verbatim}
 
-Recall the population level standardized mean difference, \(\delta\), was 1.49. We can see the extent to which the average the \(d\) and \(d_{unbiased}\) compare to this population-level values.
+Recall the population-level standardized mean difference, \(\delta\), was 1.49. We can see the extent to which the average of the sample-level \(d\) and \(d_{unbiased}\) values compare to this population-level value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5557,12 +5557,12 @@ Recall the population level standardized mean difference, \(\delta\), was 1.49. 
 ## 1  1.564           1.498
 \end{verbatim}
 
-You can see the mean of the \(d\) values is 1.56 which is higher than the population-level standardize mean difference (\(\delta\)). In contrast, you can see the mean of the \(d_{unbiased}\) values is 1.498 which closely corresponds to the population-level standardize mean difference (\(\delta\)) - it would have exactly corresponded with more samples.
+You can see that the mean of the sample-level \(d\) values is 1.56 which is higher than the population-level standardized mean difference (\(\delta\) = 1.49). In contrast, you can see that the mean of the sample-level \(d_{unbiased}\) values is 1.498 which closely corresponds to the population-level standardized mean difference (\(\delta\) = 1.49) - it would have corresponded exactly with more samples.
 
 \hypertarget{illustrating-variability}{%
 \subsection{Illustrating variability}\label{illustrating-variability}}
 
-An inspection of the first few rows of the the of many\_samples data above illustrated that many of the \(d_{unbiased}\) values differed from the population-level standardized mean difference of \(\delta = 1.49\). We can see the variability in sample-level \(d_{unbiased}\) values in the histogram below.
+An inspection of the first few rows of the many\_samples data, above, illustrates that many of the \(d_{unbiased}\) values differed from the population-level standardized mean difference of \(\delta = 1.49\). We can see the variability in sample-level \(d_{unbiased}\) values in the histogram below.
 
 \begin{figure}
 \includegraphics[width=0.95\linewidth]{ch_samples/images/d_dist} \caption{Histogram of $d_{unbiased}$ when $\delta = 1.49$}\label{fig:ddist}
@@ -5583,12 +5583,13 @@ We can calculate the full range of sample-level \(d_{unbiased}\) values with the
 ## 1 -0.16  5.15
 \end{verbatim}
 
-We see from the output that \(d_{unbiased}\) values were as small as -.20 and as large as 5.2. All of these values are estimates of the population level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value. Indeed,
+We see from the output that \(d_{unbiased}\) values were as small as -0.20 and as large as 5.2. All of these values are estimates of the population-level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value.
+The negative \(d\)-value (i.e., the minumum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.
 
 \hypertarget{overview-1}{%
 \section{Overview}\label{overview-1}}
 
-In this chapter we have illustrated how a number of population parameter can be estimated by sample statistics. These are summarised below.
+In this chapter we have illustrated how population parameters can be estimated by sample statistics; these are summarised below:
 
 \doublespacing
 
@@ -5660,24 +5661,24 @@ Cohen's \(d\) or SMD\strut
 \hypertarget{meta-analysis}{%
 \section{Meta-analysis}\label{meta-analysis}}
 
-It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that ``in the real world''. In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds ``the truth'' of what is happening at the population level by averaging over all of the studies on that topic.
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that ``in the real world''. In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds ``the truth'' of what is happening at the population level by averaging all of the studies on that topic.
 
 \hypertarget{key-points-1}{%
 \section{Key Points}\label{key-points-1}}
 
 \begin{itemize}
 \item
-  Sample are of interest because the help use estimate attribute of the population
+  Samples are of interest because they help us estimate attributes of a population.
 \item
-  Sample statistics estimate population parameters
+  Sample statistics estimate population parameters.
 \item
   Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that informational value of a single study is typically quite low.
 \item
   A statistic is unbiased if the average of the sample statistics, over many thousand of samples, equals the population parameter.
 \item
-  To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter
+  To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter.
 \item
-  We used simulations to but they were like a meta-analysis.
+  Meta-analyses are used in the ``real world'' the way we used simulations in this chapter.
 \end{itemize}
 
 \hypertarget{graphing}{%
@@ -5686,7 +5687,7 @@ It may seem odd that we used so many simulations to investigate the properties o
 \hypertarget{required-1}{%
 \section{Required}\label{required-1}}
 
-The following data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
+The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -5783,7 +5784,7 @@ Next we use glimpse() to see the columns.
 ## $ studio       <chr> "Marvel", "Marvel", "Marvel", "Mar...
 \end{verbatim}
 
-The title and short\_title columns provide the full title and short title for each movie. Additionally the IMDB rating, Rotten Tomatoes Audience rating, and Box Office Mojo revenue are provided in the imdb, tomatoes\_aud, and boxoffice columns, respectively. Finally, the last column, studio, indicates the studio that made the movie (Marvel or DC).
+The title and short\_title columns provide the full title and short title for each movie. Additionally, the IMDB rating, the Rotten Tomatoes Audience rating, and the Box Office Mojo revenue numbers are provided in the imdb, tomatoes\_aud, and boxoffice columns, respectively. Finally, the last column, studio, indicates the studio that made the movie (Marvel or DC).
 
 It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as\_factor command. The as\_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variables using as\_factor.
 
@@ -5818,15 +5819,15 @@ We can confirm the column type has changed by using the glimpse() command again 
 \hypertarget{graph-basics}{%
 \section{Graph basics}\label{graph-basics}}
 
-In this section we teach you how to make a graph from first principles to form a foundation for understanding how the tidyverse graphing command ggplot() works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later, in the Efficient graphs section, we will make graphs in a typical manner.
+In this section we teach you how to make a graph from first principles to form a foundation for understanding how the tidyverse graphing command ggplot() works. Note, however, that the approach used for creating a graph in this section is for teaching purposes only. Later we will make graphs in a typical, and more efficient, manner.
 
 We start a graph using the ggplot() command. The ggplot() command creates an empty template for the graph. After creating the template we have to add content (like bars) to the graph using the geom\_col() command. We can also add text using the geom\_text() command.
 
-Commands that plot information on the graph, such as geom\_col(), need to know what data set to use to create the graph. We can do so in the command using the \textbf{data} argument. For example, we use ``data = movie\_data'' to tell a command which data set to use.
+Commands that plot information on the graph, such as geom\_col(), need to know what data set to use to create the graph. We specify the data set to use via the \textbf{data} argument. For example, we use ``data = movie\_data'' to tell a command which data set to use.
 
-Additionally, graphing commands, such as geom\_col(), must know the columns/variables to use within that data set when plotting the graph. Specifically, what variable/column will vary over the x- and y-axes. We can do so in the command using the \textbf{mapping} argument. For example, we use ``mapping = aes(x = short\_title, y = boxoffice)'' to tell ggplot that we should use the column short\_title along the x-axis and the column boxoffice when determining heights for the y-axis. This information is nested within the aes() command which is short for aesthetic. You use are telling ggplot about the aesthetics for the graph (i.e., which columns to use for the x- and y-axes) using the aes() command. There are a larger number of aesthetics you can specify within the aes() command (e.g., color, fill, linetype, etc.).
+Additionally, graphing commands, such as geom\_col(), must know the columns/variables to use within that data set when plotting the graph. Specifically, commands need to know which variable/column will vary over the x- and y-axes. We can indicate these columns via the \textbf{mapping} argument. For example, we use ``mapping = aes(x = short\_title, y = boxoffice)'' to tell ggplot() that we should use the column short\_title along the x-axis and the column boxoffice when determining heights on the y-axis. This information is nested within the aes() command which is short for aesthetic. You are telling ggplot() about the aesthetics for the graph (i.e., which columns to use for the x- and y-axes) using the aes() command. There are a larger number of aesthetics that you can specify within the aes() command (e.g., color, fill, linetype, etc.).
 
-In the examples that follow we tell each command (geom\_col, geom\_text) that data set and the columns to use via the \textbf{data} and \textbf{mapping} arguments.
+In the examples that follow we tell each command (geom\_col, geom\_text) which data set and columns to use via the \textbf{data} and \textbf{mapping} arguments.
 
 Use geom\_col() to put each boxoffice column value into a bar.
 
@@ -5843,7 +5844,7 @@ Use geom\_col() to put each boxoffice column value into a bar.
 
 \includegraphics{bookdown_files/figure-latex/unnamed-chunk-239-1.pdf}
 
-Next, we want to put the boxoffice revenue about each bar so it eaiser to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
+Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5886,9 +5887,9 @@ We can nudge each label higher on the y-axis using the \emph{nudge\_y} command. 
 \hypertarget{graphing-efficiently}{%
 \section{Graphing efficiently}\label{graphing-efficiently}}
 
-You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom\_text, geom\_col). Fortunately, we can use a shortcut and specify the data and mapping once only in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom\_col, geom\_text). In this way, we only have to specify the data and the mapping once.
+You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom\_text, geom\_col). Fortunately, we can use a shortcut and specify the data and mapping only once in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom\_col, geom\_text). In this way, we only have to specify the data and the mapping once.
 
-Examine the code below and compare it to the code above. Notice how in the geom\_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom\_text() command we only specify the arguments we need that are different than those in the ggplot command. In this cases, that means simply adding the nudge\_y = 150 to the geom\_text command.
+Examine the code below and compare it to the code above. Notice how in the geom\_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom\_text() command we only specify the arguments we need that are different from those in the ggplot command. In this case, that means simply adding the nudge\_y = 150 to the geom\_text command.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5908,7 +5909,7 @@ Examine the code below and compare it to the code above. Notice how in the geom\
 \hypertarget{aesthetics}{%
 \section{Aesthetics}\label{aesthetics}}
 
-Exactly how does that aesthetic, aes(), command work? What happens when we put the data and mapping in the ggplot() command instead of the specific commands such as geom\_col()? When we put data and the mapping arguments in the ggplot() command we set those attributes for the entire graph. To understand this, you need to know that ggplot uses an internal data set that I will call the ``black box'' data set (i.e., inside the \href{https://en.wikipedia.org/wiki/Black_box}{black box} of ggpplot). To create a graph ggplot maps/copies columns from you data set (e.g., movie\_data) to an internal data set. This internal data set is then used to create the graph. Figure \ref{fig:showmap} below illustrates what is happening ``inside the black box'' when you create the graph using the code above.
+Exactly how does that aesthetic, aes(), command work? What happens when we put the data and mapping in the ggplot() command instead of the specific commands such as geom\_col()? When we put data and the mapping arguments in the ggplot() command we set those attributes for the entire graph. To understand this, you need to know that ggplot uses an internal data set that we will call the ``black box'' data set (i.e., inside the \href{https://en.wikipedia.org/wiki/Black_box}{black box} of ggplot). To create a graph ggplot maps/copies columns from your data set (e.g., movie\_data) to an internal data set. This internal data set is then used to create the graph. Figure \ref{fig:showmap} below illustrates what is happening ``inside the black box'' when you create the graph using the code above.
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{ch_graphing/images/mapping} \caption{Internal data structure for ggplot}\label{fig:showmap}
@@ -5917,7 +5918,7 @@ Exactly how does that aesthetic, aes(), command work? What happens when we put t
 \hypertarget{fill-color}{%
 \subsection{Fill color}\label{fill-color}}
 
-You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That's easy to do with the aes() command. We simply tell aes() that the \textbf{fill} color of any object in the graph should be determined by the studio column. Simply adding ``fill = studio'' to the aes() command changes the colors of the bars -- any any other object we had to the graph for which fill would be relevant. The internal workings are illustrated in Figure \ref{fig:addfill}.
+You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That's easy to do with the aes() command. We simply tell aes() that the \textbf{fill} color of any object in the graph should be determined by the studio column. Simply adding ``fill = studio'' to the aes() command changes the colors of the bars -- and any other object on the graph for which fill would be relevant. The internal workings are illustrated in Figure \ref{fig:addfill}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5944,9 +5945,9 @@ You might want to influence the color of the bars in the graph such that the bar
 
 Just because you specify something in the ggplot() command doesn't mean that you are ``stuck with it'' for all your subsequent commands. Recall how at the start of this exercise we specified the data and the mapping for each geom\_col() and geom\_text() individually. We can still do that.
 
-Now we want to add the Rotten Tomatoes audience score for each movie above the box office revenue. But if we just use geom\_text() like we did before it plot the same information boxoffice information because of the ``label = boxoffice'' aes() specification in the ggpplot() command. We want the new gome\_text() command to plot plot different text; that is, we want it to use ``label = tomatoes\_aud''.
+Now we want to add the Rotten Tomatoes Audience score for each movie above the box office revenue. But if we use geom\_text(), like we did before, it will plot the same boxoffice information because of ``label = boxoffice'' in the aes() specification within ggplot(). We want the new geom\_text() command to plot different text; that is, we want it to use ``label = tomatoes\_aud''.
 
-Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within the new geom\_text() command we get the desired information on the graph. The mapping/aes argumentrs within geom\_text() overrides the mapping/aes argumentrs within ggplot(). Or more accurately, the new geom\_text() command creates it's own version of the internal data set in which the label column is filled with information from tomatoes\_aud.
+Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within the new geom\_text() command we get the desired information on the graph. The mapping/aes arguments within geom\_text() override the mapping/aes arguments within ggplot(). Or more accurately, the new geom\_text() command creates its own version of the internal data set in which the label column is filled with information from tomatoes\_aud.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6036,7 +6037,7 @@ We use the coord\_cartesian() command to adjust range of axes. In the code below
 
 \includegraphics{bookdown_files/figure-latex/unnamed-chunk-247-1.pdf}
 
-Note that if you had a continuous variable on the x-axis also (we do not in this example), you could set the range of both the x- and y-axes like this:
+Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6071,7 +6072,7 @@ We use the scale\_y\_continuous() command to adjust the ticks on the y-axis. We 
 
 \includegraphics{bookdown_files/figure-latex/unnamed-chunk-249-1.pdf}
 
-Note that if you had a continuous variable on the x-axis also (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
+Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6082,7 +6083,7 @@ Note that if you had a continuous variable on the x-axis also (we do not in this
 \hypertarget{labels}{%
 \subsection{Labels}\label{labels}}
 
-We use the labs() command to set the labels forthe x- and y-axes:
+We use the labs() command to set the labels for the x- and y-axes:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6114,12 +6115,14 @@ We use the labs() command to set the labels forthe x- and y-axes:
 \hypertarget{text}{%
 \subsection{Text}\label{text}}
 
-What if we want to use full movie title rather than short version on the x-axis of the graph? Two methods are presented below.
+What if we want to use the full movie title rather than the short version on the x-axis of the graph? That is, you want to change the values along the x-axis. Two methods are presented below.
 
-\hypertarget{method-1-recoding-labels}{%
-\subsubsection{Method 1: Recoding labels}\label{method-1-recoding-labels}}
+\hypertarget{method-1-recoding-axis-values}{%
+\subsubsection{Method 1: Recoding axis values}\label{method-1-recoding-axis-values}}
 
-Our data file contains a column with the long/full version of the movie names. But many times you won't have the additional/longer labels you want to use available in this manner. In this, you use the scale\_x\_discrete() command to relabel our factor when we make the labels on x-axis. The code is below - notice the problem we have with the labels overlapping though. On the next page, we'll use a easier approach though - since we have an extra column with the full titles.
+Our data file contains a column with the long/full version of the movie names. But many times you won't have the additional/longer labels available in this manner. In this situation, you use the scale\_x\_discrete() command to change the values along the x-axis.
+
+The values along the x-axis come from the short\_title column which is a factor. The levels of that factor correspond to the short titles for the movies (Iron, Thor, etc.). We need to relabel the levels of the short\_title factor to get a graph with full titles. We relabel the levels of the short\_title factor using the scale\_x\_discrete() command. The graph code with scale\_x\_discrete() command is below - notice the problem we have with the labels overlapping though. On the next page, we'll use an easier approach though - since we have an extra column with the full titles.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6157,7 +6160,7 @@ Our data file contains a column with the long/full version of the movie names. B
 \hypertarget{method-2-longer-label-columns}{%
 \subsubsection{Method 2: Longer label columns}\label{method-2-longer-label-columns}}
 
-With our movie data we don't need to use \textbf{scale\_x\_discrete} because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the \textbf{mapping} for x from short\_title to title. Notice we still have the problem with overlapping labels on the x-axis!
+With our movie data we don't need to use scale\_x\_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the \emph{mapping}for x from short\_title to title. Notice that we still have the problem with overlapping labels on the x-axis!
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6187,7 +6190,7 @@ With our movie data we don't need to use \textbf{scale\_x\_discrete} because we 
 \hypertarget{angle}{%
 \subsection{Angle}\label{angle}}
 
-Use theme() to adjust angle of x-axis labels. We can use the theme command to adjust the angle of the text on the x-axis. However, notice how the longer titles are centered on each point on the x-axis. In the next section we fix this problem.
+Use theme() to adjust the angle of x-axis labels. Notice, however, that the longer titles are vertically centered on each point on the x-axis. In the next section we fix this problem.
 
 \textbf{Important}: The theme command must come after the theme\_classic command. Otherwise, theme\_classic will undo the work done by the theme\_command if it appears after the theme command.
 
@@ -6253,7 +6256,7 @@ Use theme() and the hjust argument to adjust the alignment of the x-axis labels.
 \hypertarget{increasing-order}{%
 \subsubsection{Increasing order}\label{increasing-order}}
 
-We can make the movie bars go left to right from lowest to highest box office receipts by changing the factor order prior to creating the graph. We do so with the mutate() and fct\_reorder() commands. The default order is ascending values even though we don't specify it.
+We can make the movie bars go left to right in lowest to highest box office receipt order by changing the factor order prior to creating the graph. We do so with the mutate() and fct\_reorder() commands. The default order is ascending values even though we don't specify it.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6292,7 +6295,7 @@ We can make the movie bars go left to right from lowest to highest box office re
 \hypertarget{decreasing-order}{%
 \subsubsection{Decreasing order}\label{decreasing-order}}
 
-We can make the movie bars go left to right from highest to lowest box office receipts by changing the factor order prior to creating the graph. We use the same code as before but add the desc() command (i.e.,descending) around boxoffice in the fct\_reorder() call:
+We can make the movie bars go left to right in highest to lowest box office receipt order by changing the factor order prior to creating the graph. We use the same code as before but add the desc() command (i.e.,descending) around boxoffice in the fct\_reorder() call:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6330,7 +6333,7 @@ We can make the movie bars go left to right from highest to lowest box office re
 \hypertarget{custom-order}{%
 \subsubsection{Custom order}\label{custom-order}}
 
-We can make the movie bars go left to right from in an order of our chooseing with the fct\_relevel() command. Here I manually indicate an order that places the movies highest to lowest within movie studio (Marvel or DC).
+We can make the movie bars go left to right in a custom order by changing the factor order prior to creating the graph. Because we want a custom order of the factor levels we use fct\_relevel(), instead of the the fct\_reorder() command from the previous two examples. Below I use this approach to manually order movies highest to lowest boxoffice within movie studio (Marvel or DC).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6477,10 +6480,7 @@ If you are a really big geek (like me) you might look at the previous graph and 
 \hypertarget{emoji}{%
 \section{Emoji}\label{emoji}}
 
-\hypertarget{installation}{%
-\subsection{Installation}\label{installation}}
-
-Make the graph more fun with the emoGG package. You might like to make the graph more fun by putting tomatoes on the graph to indicate what the extra numbers mean. We can do that with the emoGG package. This installation instruction for this package are at the start of this chapter; note, that it is installed via GitHub rather than the CRAN. Course R Studio Cloud users - the installation has already been done.
+Make the graph more fun with the emoGG package. You might like to make the graph more fun by putting tomatoes on the graph to indicate what the extra numbers mean. We can do that with the emoGG package. The installation instructions for this package are at the start of this chapter; note, that it is installed via GitHub rather than the CRAN. Course R Studio Cloud users - the installation has already been done.
 
 After installation you need to activate the emoGG package:
 
