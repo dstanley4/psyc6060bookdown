@@ -95,7 +95,7 @@ In the examples that follow we tell each command (geom_col, geom_text) which dat
 
 Use geom_col() to put each boxoffice column value into a bar.
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot() +
   geom_col(data = movie_data,
            mapping = aes(x = short_title, 
@@ -108,7 +108,7 @@ print(my_graph)
 Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:
 
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot() +
   geom_col(data = movie_data,
            mapping = aes(x = short_title, 
@@ -124,7 +124,7 @@ Unfortunately, when we position the text at the exact height of each column it o
 
 We can nudge each label higher on the y-axis using the *nudge_y* command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot() +
   geom_col(data = movie_data,
            mapping = aes(x = short_title, 
@@ -146,7 +146,7 @@ You may have noticed that creating the graphs the way we did above required repe
 Examine the code below and compare it to the code above. Notice how in the geom_col() command we don't have anything specified -- the data and mapping from the ggplot command are used. Likewise, notice how in the geom_text() command we only specify the arguments we need that are different from those in the ggplot command. In this case, that means simply adding the nudge_y = 150 to the geom_text command.
 
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -172,7 +172,7 @@ knitr::include_graphics("ch_graphing/images/mapping.png")
 
 You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That's easy to do with the aes() command. We simply tell aes() that the **fill** color of any object in the graph should be determined by the studio column. Simply adding "fill = studio" to the aes() command changes the colors of the bars -- and any other object on the graph for which fill would be relevant. The internal workings are illustrated in Figure \@ref(fig:addfill).
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -196,7 +196,7 @@ Now we want to add the Rotten Tomatoes Audience score for each movie above the b
 
 Fortunately, if we simply put "mapping = aes(label = tomatoes_aud)" within the new geom_text() command we get the desired information on the graph. The mapping/aes arguments within geom_text() override the mapping/aes arguments within ggplot(). Or more accurately, the new geom_text() command creates its own version of the internal data set in which the label column is filled with information from tomatoes_aud.
 
-```{r, fig.width = 6, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -210,7 +210,7 @@ print(my_graph)
 
 Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add "nudge_y = 400" to move the text higher than the boxoffice text/label. Don't forget the units used by nudge_y are the units on the y-axis.
 
-```{r, fig.width = 6, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -223,12 +223,13 @@ my_graph <- ggplot(data = movie_data,
 print(my_graph)
 ```
 
+\newpage
 
 ## APA style
 
 Use theme_classic() to make the graph apear in APA style. We use theme_classic(12) to make the graph APA style with a 12-point font:
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -251,7 +252,7 @@ print(my_graph)
 We use the coord_cartesian() command to adjust range of axes. In the code below we use coord_cartesian() to make the y-axis range from 0 to 3500.
 
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -281,7 +282,7 @@ coord_cartesian(ylim = c(0, 3500),
 
 We use the scale_y_continuous() command to adjust the ticks on the y-axis. We set the ticks on the y-axis to range from 0 to 3500 in 500 tick increments using the scale_y_continuous command below via the breaks argument:
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -308,7 +309,7 @@ scale_x_continuous(breaks = seq(0, 3500, by = 500))
 
 We use the labs() command to set the labels for the x- and y-axes:
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -341,7 +342,7 @@ Our data file contains a column with the long/full version of the movie names. B
 
 The values along the x-axis come from the short_title column which is a factor. The levels of that factor correspond to the short titles for the movies (Iron, Thor, etc.). We need to relabel the levels of the short_title factor to get a graph with full titles. We relabel the levels of the short_title factor using the scale_x_discrete() command. The graph code with scale_x_discrete() command is below - notice the problem we have with the labels overlapping though. On the next page, we'll use an easier approach though - since we have an extra column with the full titles.
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = short_title,
                          y = boxoffice,
@@ -375,7 +376,7 @@ print(my_graph)
 
 With our movie data we don't need to use scale_x_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the *mapping*for x from short_title to title. Notice that we still have the problem with overlapping labels on the x-axis!
 
-```{r, fig.width = 6, fig.height= 3}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -403,7 +404,7 @@ Use theme() to adjust the angle of x-axis labels. Notice, however, that the long
 
 **Important**: The theme command must come after the theme_classic command. Otherwise, theme_classic will undo the work done by the theme_command if it appears after the theme command.
 
-```{r, fig.width = 6, fig.height= 5}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -429,7 +430,7 @@ print(my_graph)
 
 Use theme() and the hjust argument to adjust the alignment of the x-axis labels. To make the titles look correct on the x-axis we need them at an angle, but we also need them right justified against the x-axis. We do that with the the hjust argument (1 means right justify). See the code below:
 
-```{r, fig.width = 6, fig.height= 5}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -465,7 +466,7 @@ movie_data <- movie_data %>%
 ```
 
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -498,7 +499,7 @@ movie_data <- movie_data %>% mutate(title = fct_reorder(title,
 ```
 
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -539,7 +540,7 @@ movie_data <- movie_data %>%
 ```
 
 
-```{r,}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -559,7 +560,7 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1))  
 
 ```
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/custom_order.png", width = 5, height = 4, dpi = "print")
 knitr::include_graphics("ch_graphing/images/custom_order.png")
 ```
@@ -578,7 +579,7 @@ movie_data <- movie_data %>%
 ```
 
 
-```{r,}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -598,7 +599,7 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1))  
 
 ```
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/custom_order2.png", width = 5, height = 4, dpi = "print")
 knitr::include_graphics("ch_graphing/images/custom_order2.png")
 ```
@@ -612,7 +613,7 @@ You might look at the previous graph and think "Marvel should be red and DC shou
 
 R colour names/pictures can be found here: http://sape.inf.usi.ch/quick-reference/ggplot2/colour
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
@@ -633,12 +634,12 @@ my_graph <- ggplot(data = movie_data,
                                    hjust = 1)) +
   scale_fill_manual(values = c("red", "blue"))
 ```
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/base_color_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/base_color_graph.png")
 ```
 
@@ -646,7 +647,7 @@ knitr::include_graphics("ch_graphing/images/base_color_graph.png")
 
 If you are a really big geek (like me) you might look at the previous graph and think "Those aren't the proper colours for the Marvel and DC - lame!" So... you do some internet research and determine that you can specify colours using hexidecimal numbers. More specifically, you find Marvel red is #ed1d24 and DC blue is #0476F2 using hex colour codes. You can use those precise colours via the scale_fill_manual() command below. 
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
@@ -669,12 +670,12 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/logo_color_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/logo_color_graph.png")
 ```
 
@@ -697,7 +698,7 @@ If you scroll down to section 5 Uncategorized on this page you will find the cod
 knitr::include_graphics("ch_graphing/images/emoji_table.png")
 ```
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -723,12 +724,12 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph.png", width = 6, height = 6, dpi = "print")
 ```
 
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph.png")
 ```
 
@@ -738,7 +739,7 @@ The current version of the graph is much improved from where we started at the b
 
 Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs [see @margulis2005photoshop].  
 
-```{r colorcomparison, out.width= "85%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from current graph"}
+```{r colorcomparison, out.width= "75%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from current graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison.png")
 ```
 
@@ -805,7 +806,7 @@ knitr::include_graphics("ch_graphing/images/colors_3.png")
 
 We can use a color palette by specifying its name within scale_fill_brewer(). We want to use the "Paired" palette in Figure \@ref(fig:colorspalthree) so we use the code: scale_fill_brewer(palette = "Paired"), as illustrated below:
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -829,11 +830,11 @@ my_graph <- ggplot(data = movie_data,
   scale_fill_brewer(palette = "Paired")
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph4.png", width = 6, height = 6, dpi = "print")
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph4.png")
 ```
 
@@ -854,7 +855,7 @@ knitr::include_graphics("ch_graphing/images/pairedpalette.png")
 
 We can put the two colors we want (#1F78B4 and #B2DF8A) on the graph by using the scale_fill_manual() command - instead of the scale_fill_brewer() command. We can see this in the code below:
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -878,27 +879,25 @@ my_graph <- ggplot(data = movie_data,
   scale_fill_manual(values = c("#1F78B4", "#B2DF8A"))
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph5.png", width = 6, height = 6, dpi = "print")
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph5.png")
 ```
 
-Now that we have used a color-blind accessible palette in the graph we can look at the graph without the color component. In Figure \@ref(fig:colorcomparison2)B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \@ref(fig:colorcomparison2)B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
+Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure \@ref(fig:colorcomparison2)B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \@ref(fig:colorcomparison2)B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
 
-```{r colorcomparison2, out.width= "85%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from new color-blind accessible graph"}
+```{r colorcomparison2, out.width= "75%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from new color-blind accessible graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison2.png")
 ```
 
-\newpage
-
 ### Avoid color
 
-When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values "#ffffff" (white) and ""#000000" (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white back ground you can see this resulted in the Marvel bars disappearing.
+When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values "#ffffff" (white) and ""#000000" (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white background you can see this resulted in the Marvel bars disappearing.
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -925,21 +924,20 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph2.png", width = 6, height = 6, dpi = "print")
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph2.png")
 ```
 
-\newpage
 
 How do get around the Marvel bars disappearing when we use white?
 
-**Color vs. fill.** The ggplot packages makes a distinction between **fill** and **color**. The term fill is used to refer to the inside color of bars. In contrast, **color** is used to the refer to the lines that outline the shape of each bar.  In the prevous code we did not specify color. In the code below, we modify the geom_col() command to geom_col(color = "black"). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
+**Color vs. fill.** The ggplot packages makes a distinction between **fill** and **color**. The term fill is used to refer to the inside color of bars. In contrast, **color** is used to the refer to the lines that outline the shape of each bar.  In the prevous code we used fill to change the colors of the bars but we did not use the "color" argrument in a command. In the code below, we modify the geom_col() command to use the "color" argument. Specifically, we change geom_col() to geom_col(color = "black"). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
 
-```{r, fig.width = 5, fig.height= 4}
+```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
            mapping = aes(x = title,
                          y = boxoffice,
@@ -966,11 +964,11 @@ my_graph <- ggplot(data = movie_data,
 
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph3.png", width = 6, height = 6, dpi = "print")
 ```
 
-```{r, out.width= "85%", echo = FALSE}
+```{r, out.width= "65%", echo = FALSE}
 knitr::include_graphics("ch_graphing/images/emoji_graph3.png")
 ```
 

@@ -455,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb356-4"><a href="graphing.html#cb356-4"></a>                         <span class="dt">y =</span> boxoffice))</span>
 <span id="cb356-5"><a href="graphing.html#cb356-5"></a></span>
 <span id="cb356-6"><a href="graphing.html#cb356-6"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-239-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-239-1.png" width="65%" /></p>
 <p>Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:</p>
 <div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="graphing.html#cb357-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb357-2"><a href="graphing.html#cb357-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">data =</span> movie_data,</span>
@@ -466,7 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb357-7"><a href="graphing.html#cb357-7"></a>                         <span class="dt">y =</span> boxoffice, </span>
 <span id="cb357-8"><a href="graphing.html#cb357-8"></a>                         <span class="dt">label =</span> boxoffice))</span>
 <span id="cb357-9"><a href="graphing.html#cb357-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-240-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-240-1.png" width="65%" /></p>
 <p>Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge_y.</p>
 <p>We can nudge each label higher on the y-axis using the <em>nudge_y</em> command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.</p>
 <div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="graphing.html#cb358-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
@@ -480,7 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb358-9"><a href="graphing.html#cb358-9"></a>           <span class="dt">nudge_y =</span> <span class="dv">150</span>)</span>
 <span id="cb358-10"><a href="graphing.html#cb358-10"></a></span>
 <span id="cb358-11"><a href="graphing.html#cb358-11"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-241-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-241-1.png" width="65%" /></p>
 </div>
 <div id="graphing-efficiently" class="section level2">
 <h2><span class="header-section-number">6.4</span> Graphing efficiently</h2>
@@ -494,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb359-6"><a href="graphing.html#cb359-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb359-7"><a href="graphing.html#cb359-7"></a></span>
 <span id="cb359-8"><a href="graphing.html#cb359-8"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-242-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-242-1.png" width="65%" /></p>
 </div>
 <div id="aesthetics" class="section level2">
 <h2><span class="header-section-number">6.5</span> Aesthetics</h2>
@@ -517,7 +517,7 @@ FIGURE 6.1: Internal data structure for ggplot
 <span id="cb360-7"><a href="graphing.html#cb360-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb360-8"><a href="graphing.html#cb360-8"></a></span>
 <span id="cb360-9"><a href="graphing.html#cb360-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-243-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-243-1.png" width="65%" /></p>
 <div class="figure"><span id="fig:addfill"></span>
 <img src="ch_graphing/images/mapping_fill.png" alt="Adding a fill column to the internal data" width="70%" />
 <p class="caption">
@@ -539,7 +539,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb361-7"><a href="graphing.html#cb361-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
 <span id="cb361-8"><a href="graphing.html#cb361-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud)) </span>
 <span id="cb361-9"><a href="graphing.html#cb361-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-244-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-244-1.png" width="65%" /></p>
 <p>Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add “nudge_y = 400” to move the text higher than the boxoffice text/label. Don’t forget the units used by nudge_y are the units on the y-axis.</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="graphing.html#cb362-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
 <span id="cb362-2"><a href="graphing.html#cb362-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> short_title,</span>
@@ -551,7 +551,8 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb362-8"><a href="graphing.html#cb362-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
 <span id="cb362-9"><a href="graphing.html#cb362-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">400</span>) </span>
 <span id="cb362-10"><a href="graphing.html#cb362-10"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-245-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-245-1.png" width="65%" /></p>
+<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div id="apa-style" class="section level2">
@@ -569,7 +570,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb363-10"><a href="graphing.html#cb363-10"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb363-11"><a href="graphing.html#cb363-11"></a></span>
 <span id="cb363-12"><a href="graphing.html#cb363-12"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-246-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-246-1.png" width="65%" /></p>
 </div>
 <div id="axes" class="section level2">
 <h2><span class="header-section-number">6.7</span> Axes</h2>
@@ -590,7 +591,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb364-12"><a href="graphing.html#cb364-12"></a></span>
 <span id="cb364-13"><a href="graphing.html#cb364-13"></a></span>
 <span id="cb364-14"><a href="graphing.html#cb364-14"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-247-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-247-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="graphing.html#cb365-1"></a><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
 <span id="cb365-2"><a href="graphing.html#cb365-2"></a>                <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>))</span></code></pre></div>
@@ -612,7 +613,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb366-12"><a href="graphing.html#cb366-12"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb366-13"><a href="graphing.html#cb366-13"></a></span>
 <span id="cb366-14"><a href="graphing.html#cb366-14"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-249-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-249-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale_x_continuous:</p>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="graphing.html#cb367-1"></a><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>))</span></code></pre></div>
 </div>
@@ -636,7 +637,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb368-15"><a href="graphing.html#cb368-15"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb368-16"><a href="graphing.html#cb368-16"></a></span>
 <span id="cb368-17"><a href="graphing.html#cb368-17"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-251-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-251-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="axis-values" class="section level2">
@@ -674,7 +675,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb369-24"><a href="graphing.html#cb369-24"></a>  </span>
 <span id="cb369-25"><a href="graphing.html#cb369-25"></a></span>
 <span id="cb369-26"><a href="graphing.html#cb369-26"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-252-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-252-1.png" width="65%" /></p>
 </div>
 <div id="method-2-longer-label-columns" class="section level4">
 <h4><span class="header-section-number">6.8.1.2</span> Method 2: Longer label columns</h4>
@@ -697,7 +698,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb370-16"><a href="graphing.html#cb370-16"></a>  </span>
 <span id="cb370-17"><a href="graphing.html#cb370-17"></a></span>
 <span id="cb370-18"><a href="graphing.html#cb370-18"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-253-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-253-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="angle" class="section level3">
@@ -722,7 +723,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb371-16"><a href="graphing.html#cb371-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>))</span>
 <span id="cb371-17"><a href="graphing.html#cb371-17"></a></span>
 <span id="cb371-18"><a href="graphing.html#cb371-18"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-254-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-254-1.png" width="65%" /></p>
 </div>
 <div id="alignment" class="section level3">
 <h3><span class="header-section-number">6.8.3</span> Alignment</h3>
@@ -746,7 +747,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb372-17"><a href="graphing.html#cb372-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb372-18"><a href="graphing.html#cb372-18"></a></span>
 <span id="cb372-19"><a href="graphing.html#cb372-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-255-1.png" width="576" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-255-1.png" width="65%" /></p>
 </div>
 <div id="order" class="section level3">
 <h3><span class="header-section-number">6.8.4</span> Order</h3>
@@ -775,7 +776,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb374-17"><a href="graphing.html#cb374-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb374-18"><a href="graphing.html#cb374-18"></a></span>
 <span id="cb374-19"><a href="graphing.html#cb374-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-257-1.png" width="480" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-257-1.png" width="65%" /></p>
 </div>
 <div id="decreasing-order" class="section level4">
 <h4><span class="header-section-number">6.8.4.2</span> Decreasing order</h4>
@@ -801,7 +802,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb376-17"><a href="graphing.html#cb376-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb376-18"><a href="graphing.html#cb376-18"></a></span>
 <span id="cb376-19"><a href="graphing.html#cb376-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-259-1.png" width="480" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-259-1.png" width="65%" /></p>
 </div>
 <div id="custom-order" class="section level4">
 <h4><span class="header-section-number">6.8.4.3</span> Custom order</h4>
@@ -833,7 +834,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb378-15"><a href="graphing.html#cb378-15"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
 <span id="cb378-16"><a href="graphing.html#cb378-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb378-17"><a href="graphing.html#cb378-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
-<p><img src="ch_graphing/images/custom_order.png" width="85%" /></p>
+<p><img src="ch_graphing/images/custom_order.png" width="65%" /></p>
 </div>
 </div>
 <div id="legend-order" class="section level3">
@@ -860,7 +861,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb380-15"><a href="graphing.html#cb380-15"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
 <span id="cb380-16"><a href="graphing.html#cb380-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb380-17"><a href="graphing.html#cb380-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
-<p><img src="ch_graphing/images/custom_order2.png" width="85%" /></p>
+<p><img src="ch_graphing/images/custom_order2.png" width="65%" /></p>
 </div>
 </div>
 <div id="custom-colours" class="section level2">
@@ -887,7 +888,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb381-16"><a href="graphing.html#cb381-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb381-17"><a href="graphing.html#cb381-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb381-18"><a href="graphing.html#cb381-18"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/base_color_graph.png" width="85%" /></p>
+<p><img src="ch_graphing/images/base_color_graph.png" width="65%" /></p>
 </div>
 <div id="hex-colours" class="section level3">
 <h3><span class="header-section-number">6.9.2</span> Hex colours</h3>
@@ -910,7 +911,7 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb382-16"><a href="graphing.html#cb382-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb382-17"><a href="graphing.html#cb382-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb382-18"><a href="graphing.html#cb382-18"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/logo_color_graph.png" width="85%" /></p>
+<p><img src="ch_graphing/images/logo_color_graph.png" width="65%" /></p>
 </div>
 </div>
 <div id="emoji" class="section level2">
@@ -942,14 +943,14 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb384-19"><a href="graphing.html#cb384-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb384-20"><a href="graphing.html#cb384-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb384-21"><a href="graphing.html#cb384-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph.png" width="85%" /></p>
+<p><img src="ch_graphing/images/emoji_graph.png" width="65%" /></p>
 </div>
 <div id="accessible-colors" class="section level2">
 <h2><span class="header-section-number">6.11</span> Accessible Colors</h2>
 <p>The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the “proper” colors for the Marvel and DC studios. Although using these colors was aethetically pleasing a major consideration for all the graphs you make should ensuring they are accessible to a wide audience.</p>
 <p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs <span class="citation">(see Margulis <a href="#ref-margulis2005photoshop" role="doc-biblioref">2005</a>)</span>.</p>
 <div class="figure"><span id="fig:colorcomparison"></span>
-<img src="ch_graphing/images/nocolorcomparison.png" alt="Color information (i.e., hue) removed from current graph" width="85%" />
+<img src="ch_graphing/images/nocolorcomparison.png" alt="Color information (i.e., hue) removed from current graph" width="75%" />
 <p class="caption">
 FIGURE 6.3: Color information (i.e., hue) removed from current graph
 </p>
@@ -1005,7 +1006,7 @@ FIGURE 6.5: Narrow range color palette (color-blind accessible)
 <span id="cb387-19"><a href="graphing.html#cb387-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb387-20"><a href="graphing.html#cb387-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb387-21"><a href="graphing.html#cb387-21"></a><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph4.png" width="85%" /></p>
+<p><img src="ch_graphing/images/emoji_graph4.png" width="65%" /></p>
 </div>
 <div id="palette-subsets" class="section level4">
 <h4><span class="header-section-number">6.11.1.3</span> Palette subsets</h4>
@@ -1041,20 +1042,19 @@ FIGURE 6.6: Paired palette colors with hex numbers
 <span id="cb390-19"><a href="graphing.html#cb390-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb390-20"><a href="graphing.html#cb390-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb390-21"><a href="graphing.html#cb390-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#1F78B4&quot;</span>, <span class="st">&quot;#B2DF8A&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph5.png" width="85%" /></p>
-<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the color component. In Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
+<p><img src="ch_graphing/images/emoji_graph5.png" width="65%" /></p>
+<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
 <div class="figure"><span id="fig:colorcomparison2"></span>
-<img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="85%" />
+<img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="75%" />
 <p class="caption">
 FIGURE 6.7: Color information (i.e., hue) removed from new color-blind accessible graph
 </p>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div id="avoid-color" class="section level3">
 <h3><span class="header-section-number">6.11.2</span> Avoid color</h3>
-<p>When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values “#ffffff” (white) and "“#000000” (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white back ground you can see this resulted in the Marvel bars disappearing.</p>
+<p>When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values “#ffffff” (white) and "“#000000” (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white background you can see this resulted in the Marvel bars disappearing.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="graphing.html#cb391-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
 <span id="cb391-2"><a href="graphing.html#cb391-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
 <span id="cb391-3"><a href="graphing.html#cb391-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
@@ -1076,10 +1076,9 @@ FIGURE 6.7: Color information (i.e., hue) removed from new color-blind accessibl
 <span id="cb391-19"><a href="graphing.html#cb391-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb391-20"><a href="graphing.html#cb391-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb391-21"><a href="graphing.html#cb391-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph2.png" width="85%" /></p>
-<div style="page-break-after: always;"></div>
+<p><img src="ch_graphing/images/emoji_graph2.png" width="65%" /></p>
 <p>How do get around the Marvel bars disappearing when we use white?</p>
-<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term fill is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the prevous code we did not specify color. In the code below, we modify the geom_col() command to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
+<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term fill is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the prevous code we used fill to change the colors of the bars but we did not use the “color” argrument in a command. In the code below, we modify the geom_col() command to use the “color” argument. Specifically, we change geom_col() to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="graphing.html#cb392-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
 <span id="cb392-2"><a href="graphing.html#cb392-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
 <span id="cb392-3"><a href="graphing.html#cb392-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
@@ -1101,7 +1100,7 @@ FIGURE 6.7: Color information (i.e., hue) removed from new color-blind accessibl
 <span id="cb392-19"><a href="graphing.html#cb392-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb392-20"><a href="graphing.html#cb392-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb392-21"><a href="graphing.html#cb392-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph3.png" width="85%" /></p>
+<p><img src="ch_graphing/images/emoji_graph3.png" width="65%" /></p>
 </div>
 </div>
 <div id="saving" class="section level2">
