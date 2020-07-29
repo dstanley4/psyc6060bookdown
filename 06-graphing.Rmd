@@ -14,6 +14,7 @@ The following packages CRAN must be installed:
 | Required CRAN Packages |
 |-------------------|
 |tidyverse          |
+|RColorBrewer       |
 
 
 The following GitHub packages must be installed:
@@ -731,6 +732,241 @@ ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph.png", width =
 knitr::include_graphics("ch_graphing/images/emoji_graph.png")
 ```
 
+## Accessible Colors
+
+The current version of the graph is much improved from where we started at the begining of the chapter. In many respects using the "proper" colors for the Marvel and DC studios is aesthetically pleasing. That said, a major consideration for all the graphs you make should be making them accessible and interpretable by a wide audience.
+
+Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of the current discussion. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hu component. Together these two components work together to create the image that we see. This distinction between lightness and hue is relevant to all images [see @margulis2005photoshop].  
+
+```{r colorcomparison, out.width= "85%", echo = FALSE, fig.cap = "Color information removed from current graph"}
+knitr::include_graphics("ch_graphing/images/nocolorcomparison.png")
+```
+
+Figure \@ref(fig:colorcomparison)A presents our current graph whereas Figure \@ref(fig:colorcomparison)B presents the same graph with the hue component removed. You can see that when the hue component is removed that the distinction between the Marvel and DC bars is also removed. The particular colors used to represent Marvel/DC differ in terms of hue but not lightness. Consequently, when we remove the hue component we are left with a graph, \@ref(fig:colorcomparison)B, that does not differentiate between the two studios. In order for a color graph to be accessible to people with color blindness we need to pick colors that vary in terms of lightness as well as hue. We can do that with the help of the RColorBrewer package.
+
+### RColorBrewer
+
+#### Picking a palette
+
+The RColorBrewer package can be used to generate color palettes for graphs that are accessible to people with color blindness. You can see the color-blind friendly palettes, along with their respective names, by using the command below. This presents a wide range of color blind safe palettes with a large number of colors - as illustrated in Figure \@ref(fig:colorpal).
+
+```{r, include = FALSE}
+library(RColorBrewer)
+```
+
+```{r, eval = FALSE}
+library(RColorBrewer)
+display.brewer.all(n = NULL, colorblindFriendly = TRUE)
+```
+
+```{r, include=FALSE, eval = FALSE}
+library(RColorBrewer)
+
+png("ch_graphing/images/colors_all.png", 
+    width = 7*300, 
+    height = 12*300,
+    res = 300)
+display.brewer.all(n = NULL, colorblindFriendly = TRUE)
+dev.off()
+
+png("ch_graphing/images/colors_3.png", 
+    width = 7*300, 
+    height = 12*300,
+    res = 300)
+display.brewer.all(n = 3,colorblindFriendly = TRUE)
+dev.off()
+
+```
+
+
+```{r colorpal, out.height= "70%", out.width= "70%", echo = FALSE, fig.cap = "Wide range color palette (color-blind safe)"}
+knitr::include_graphics("ch_graphing/images/colors_all.png")
+```
+
+\newpage
+
+In Figure \@ref(fig:colorpal), above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a smaller palette (to ensure maximium contrast between colors). For example, if you only want to see palettes with three colors you use the code below which generate Figure \@ref(fig:colorspalthree).
+
+```{r colorspalthree, out.height= "70%", out.width= "70%", echo = FALSE,fig.cap = "Narrow range color palette (color-blind safe)"}
+knitr::include_graphics("ch_graphing/images/colors_3.png")
+```
+
+\newpage
+
+#### Using a palette
+
+We can use the color palette by specifying it's name within scale_fill_brewer(). We want to use the Paired palette in Figure \@ref(fig:colorspalthree) so we use the code: scale_fill_brewer(palette = "Paired"), as illustrated below:
+
+```{r, fig.width = 5, fig.height= 4}
+my_graph <- ggplot(data = movie_data,
+           mapping = aes(x = title,
+                         y = boxoffice,
+                         label = boxoffice, 
+                         fill = studio)) +
+  geom_col() +
+  geom_text(nudge_y = 150)  +
+  geom_text(mapping = aes(label = tomatoes_aud), 
+            nudge_y = 600, 
+            colour = "red") +
+  geom_emoji(mapping = aes(y = boxoffice + 400),
+             emoji="1f345") +
+  coord_cartesian(ylim = c(0, 3500)) +
+  scale_y_continuous(breaks = seq(0, 3500, by = 500)) +
+  labs(x = "Movie",
+       y = "Box office (millions)",
+       fill = "Studio") +
+  theme_classic(12) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  scale_fill_brewer(palette = "Paired")
+```
+
+```{r, out.width= "85%", echo = FALSE}
+ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph4.png", width = 6, height = 6, dpi = "print")
+```
+
+```{r, out.width= "85%", echo = FALSE}
+knitr::include_graphics("ch_graphing/images/emoji_graph4.png")
+```
+
+#### Palette subsets
+
+The palette above use the first two colors of a three color palette. What if you wanted the second two colors in the palette? If so, we obtain the colors for each level of the color palette with the command below:
+
+```{r}
+brewer.pal(n = 3, name = "Paired")
+```
+
+These numbers correspond to values representing the three colors of the Paired palette. If we want the last two colors in the palette for our graph that means we want the colors: #1F78B4 and #B2DF8A.
+
+
+```{r, out.width= "75%", echo = FALSE}
+knitr::include_graphics("ch_graphing/images/pairedpalette.png")
+```
+
+We can put the two colors we want (#1F78B4 and #B2DF8A) on the graph by once again using the scale_fill_manual() command - instead of the scale_fill_brewer() command. We can see this in the code below:
+
+```{r, fig.width = 5, fig.height= 4}
+my_graph <- ggplot(data = movie_data,
+           mapping = aes(x = title,
+                         y = boxoffice,
+                         label = boxoffice, 
+                         fill = studio)) +
+  geom_col() +
+  geom_text(nudge_y = 150)  +
+  geom_text(mapping = aes(label = tomatoes_aud), 
+            nudge_y = 600, 
+            colour = "red") +
+  geom_emoji(mapping = aes(y = boxoffice + 400),
+             emoji="1f345") +
+  coord_cartesian(ylim = c(0, 3500)) +
+  scale_y_continuous(breaks = seq(0, 3500, by = 500)) +
+  labs(x = "Movie",
+       y = "Box office (millions)",
+       fill = "Studio") +
+  theme_classic(12) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  scale_fill_manual(values = c("#1F78B4", "#B2DF8A"))
+```
+
+```{r, out.width= "85%", echo = FALSE}
+ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph5.png", width = 6, height = 6, dpi = "print")
+```
+
+```{r, out.width= "85%", echo = FALSE}
+knitr::include_graphics("ch_graphing/images/emoji_graph5.png")
+```
+
+
+Now that we have used a color-blind palette we can look at the graph without the color component again. We see in Figure \@ref(fig:colorcomparison2)B, below, that when we examine bars based on lightness we now have contrast. The new color-blind safe color vary in term of hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable -- and safe for color-blind individuals.
+
+```{r colorcomparison2, out.width= "85%", echo = FALSE, fig.cap = "Color information removed from new color-safe graph"}
+knitr::include_graphics("ch_graphing/images/nocolorcomparison2.png")
+```
+
+### Avoid color
+
+
+
+
+```{r, fig.width = 5, fig.height= 4}
+my_graph <- ggplot(data = movie_data,
+           mapping = aes(x = title,
+                         y = boxoffice,
+                         label = boxoffice, 
+                         fill = studio)) +
+  geom_col() +
+  geom_text(nudge_y = 150)  +
+  geom_text(mapping = aes(label = tomatoes_aud), 
+            nudge_y = 600, 
+            colour = "red") +
+  geom_emoji(mapping = aes(y = boxoffice + 400),
+             emoji="1f345") +
+  coord_cartesian(ylim = c(0, 3500)) +
+  scale_y_continuous(breaks = seq(0, 3500, by = 500)) +
+  labs(x = "Movie",
+       y = "Box office (millions)",
+       fill = "Studio") +
+  theme_classic(12) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  scale_fill_manual(values = c("#ffffff", "#000000"))
+  
+
+
+```
+
+```{r, out.width= "85%", echo = FALSE}
+ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph2.png", width = 6, height = 6, dpi = "print")
+```
+
+```{r, out.width= "85%", echo = FALSE}
+knitr::include_graphics("ch_graphing/images/emoji_graph2.png")
+```
+
+
+
+```{r, fig.width = 5, fig.height= 4}
+my_graph <- ggplot(data = movie_data,
+           mapping = aes(x = title,
+                         y = boxoffice,
+                         label = boxoffice, 
+                         fill = studio)) +
+  geom_col(color = "black") +
+  geom_text(nudge_y = 150)  +
+  geom_text(mapping = aes(label = tomatoes_aud), 
+            nudge_y = 600, 
+            colour = "red") +
+  geom_emoji(mapping = aes(y = boxoffice + 400),
+             emoji="1f345") +
+  coord_cartesian(ylim = c(0, 3500)) +
+  scale_y_continuous(breaks = seq(0, 3500, by = 500)) +
+  labs(x = "Movie",
+       y = "Box office (millions)",
+       fill = "Studio") +
+  theme_classic(12) +
+  theme(axis.text.x = element_text(angle = 60, 
+                                   hjust = 1)) +
+  scale_fill_manual(values = c("#ffffff", "#000000"))
+  
+
+
+```
+
+```{r, out.width= "85%", echo = FALSE}
+ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph3.png", width = 6, height = 6, dpi = "print")
+```
+
+```{r, out.width= "85%", echo = FALSE}
+knitr::include_graphics("ch_graphing/images/emoji_graph3.png")
+```
+
+
+
+
+
+
 
 
 ## Saving
@@ -751,10 +987,9 @@ ggsave(plot = my_graph,
 
 ### PC or MAC
 
-If you have a PC it's hard to put a PDF into MSWord. Therefore save the graph as a jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
+If you have a PC it's hard to put a PDF into MSWord. Therefore save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
 
-With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord.
-With a MAC you can just drag and drop the PDF file into your MSWord document.
+With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.
 
 ```{r, eval = FALSE}
 ggsave(plot = my_graph, 
