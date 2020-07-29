@@ -312,9 +312,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.9.2" data-path="graphing.html"><a href="graphing.html#hex-colours"><i class="fa fa-check"></i><b>6.9.2</b> Hex colours</a></li>
 </ul></li>
 <li class="chapter" data-level="6.10" data-path="graphing.html"><a href="graphing.html#emoji"><i class="fa fa-check"></i><b>6.10</b> Emoji</a></li>
-<li class="chapter" data-level="6.11" data-path="graphing.html"><a href="graphing.html#saving"><i class="fa fa-check"></i><b>6.11</b> Saving</a><ul>
-<li class="chapter" data-level="6.11.1" data-path="graphing.html"><a href="graphing.html#mac"><i class="fa fa-check"></i><b>6.11.1</b> MAC</a></li>
-<li class="chapter" data-level="6.11.2" data-path="graphing.html"><a href="graphing.html#pc-or-mac"><i class="fa fa-check"></i><b>6.11.2</b> PC or MAC</a></li>
+<li class="chapter" data-level="6.11" data-path="graphing.html"><a href="graphing.html#accessible-colors"><i class="fa fa-check"></i><b>6.11</b> Accessible Colors</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="graphing.html"><a href="graphing.html#rcolorbrewer"><i class="fa fa-check"></i><b>6.11.1</b> RColorBrewer</a></li>
+<li class="chapter" data-level="6.11.2" data-path="graphing.html"><a href="graphing.html#avoid-color"><i class="fa fa-check"></i><b>6.11.2</b> Avoid color</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="graphing.html"><a href="graphing.html#saving"><i class="fa fa-check"></i><b>6.12</b> Saving</a><ul>
+<li class="chapter" data-level="6.12.1" data-path="graphing.html"><a href="graphing.html#mac"><i class="fa fa-check"></i><b>6.12.1</b> MAC</a></li>
+<li class="chapter" data-level="6.12.2" data-path="graphing.html"><a href="graphing.html#pc-or-mac"><i class="fa fa-check"></i><b>6.12.2</b> PC or MAC</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="hypotheses.html"><a href="hypotheses.html"><i class="fa fa-check"></i><b>7</b> Hypotheses</a></li>
@@ -368,6 +372,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td>tidyverse</td>
+</tr>
+<tr class="even">
+<td>RColorBrewer</td>
 </tr>
 </tbody>
 </table>
@@ -937,29 +944,181 @@ FIGURE 6.2: Adding a fill column to the internal data
 <span id="cb384-21"><a href="graphing.html#cb384-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph.png" width="85%" /></p>
 </div>
+<div id="accessible-colors" class="section level2">
+<h2><span class="header-section-number">6.11</span> Accessible Colors</h2>
+<p>The current version of the graph is much improved from where we started at the begining of the chapter. In many respects using the “proper” colors for the Marvel and DC studios is aesthetically pleasing. That said, a major consideration for all the graphs you make should be making them accessible and interpretable by a wide audience.</p>
+<p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of the current discussion. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hu component. Together these two components work together to create the image that we see. This distinction between lightness and hue is relevant to all images <span class="citation">(see Margulis <a href="#ref-margulis2005photoshop" role="doc-biblioref">2005</a>)</span>.</p>
+<div class="figure"><span id="fig:colorcomparison"></span>
+<img src="ch_graphing/images/nocolorcomparison.png" alt="Color information (i.e., hue) removed from current graph" width="85%" />
+<p class="caption">
+FIGURE 6.3: Color information (i.e., hue) removed from current graph
+</p>
+</div>
+<p>Figure <a href="graphing.html#fig:colorcomparison">6.3</a>A presents our current graph whereas Figure <a href="graphing.html#fig:colorcomparison">6.3</a>B presents the same graph with the hue component removed. You can see that when the hue component is removed that the distinction between the Marvel and DC bars is also removed. The particular colors used to represent Marvel/DC differ in terms of hue but not lightness. Consequently, when we remove the hue component we are left with a graph, <a href="graphing.html#fig:colorcomparison">6.3</a>B, that does not differentiate between the two studios. In order for a color graph to be accessible to people with color blindness we need to pick colors that vary in terms of lightness as well as hue. We can do that with the help of the RColorBrewer package.</p>
+<div id="rcolorbrewer" class="section level3">
+<h3><span class="header-section-number">6.11.1</span> RColorBrewer</h3>
+<div id="picking-a-palette" class="section level4">
+<h4><span class="header-section-number">6.11.1.1</span> Picking a palette</h4>
+<p>The RColorBrewer package can be used to generate color palettes for graphs that are accessible to people with color blindness. You can see the color-blind friendly palettes, along with their respective names, by using the command below. This presents a wide range of color blind accessible palettes with a large number of colors - as illustrated in Figure <a href="graphing.html#fig:colorpal">6.4</a>.</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="graphing.html#cb385-1"></a><span class="kw">library</span>(RColorBrewer)</span>
+<span id="cb385-2"><a href="graphing.html#cb385-2"></a><span class="kw">display.brewer.all</span>(<span class="dt">n =</span> <span class="ot">NULL</span>, <span class="dt">colorblindFriendly =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:colorpal"></span>
+<img src="ch_graphing/images/colors_all.png" alt="Wide range color palette (color-blind accessible)" width="70%" height="70%" />
+<p class="caption">
+FIGURE 6.4: Wide range color palette (color-blind accessible)
+</p>
+</div>
+<div style="page-break-after: always;"></div>
+<p>In Figure <a href="graphing.html#fig:colorpal">6.4</a>, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a smaller palette (to ensure maximium contrast between colors). For example, if you only want to see palettes with three colors you use the code below which generate Figure <a href="graphing.html#fig:colorspalthree">6.5</a>.</p>
+<div class="figure"><span id="fig:colorspalthree"></span>
+<img src="ch_graphing/images/colors_3.png" alt="Narrow range color palette (color-blind accessible)" width="70%" height="70%" />
+<p class="caption">
+FIGURE 6.5: Narrow range color palette (color-blind accessible)
+</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="using-a-palette" class="section level4">
+<h4><span class="header-section-number">6.11.1.2</span> Using a palette</h4>
+<p>We can use the color palette by specifying it’s name within scale_fill_brewer(). We want to use the Paired palette in Figure <a href="graphing.html#fig:colorspalthree">6.5</a> so we use the code: scale_fill_brewer(palette = “Paired”), as illustrated below:</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="graphing.html#cb386-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
+<span id="cb386-2"><a href="graphing.html#cb386-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
+<span id="cb386-3"><a href="graphing.html#cb386-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
+<span id="cb386-4"><a href="graphing.html#cb386-4"></a>                         <span class="dt">label =</span> boxoffice, </span>
+<span id="cb386-5"><a href="graphing.html#cb386-5"></a>                         <span class="dt">fill =</span> studio)) <span class="op">+</span></span>
+<span id="cb386-6"><a href="graphing.html#cb386-6"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb386-7"><a href="graphing.html#cb386-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
+<span id="cb386-8"><a href="graphing.html#cb386-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
+<span id="cb386-9"><a href="graphing.html#cb386-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb386-10"><a href="graphing.html#cb386-10"></a>            <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb386-11"><a href="graphing.html#cb386-11"></a><span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">y =</span> boxoffice <span class="op">+</span><span class="st"> </span><span class="dv">400</span>),</span>
+<span id="cb386-12"><a href="graphing.html#cb386-12"></a>             <span class="dt">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="op">+</span></span>
+<span id="cb386-13"><a href="graphing.html#cb386-13"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="op">+</span></span>
+<span id="cb386-14"><a href="graphing.html#cb386-14"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>)) <span class="op">+</span></span>
+<span id="cb386-15"><a href="graphing.html#cb386-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb386-16"><a href="graphing.html#cb386-16"></a>       <span class="dt">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb386-17"><a href="graphing.html#cb386-17"></a>       <span class="dt">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="op">+</span></span>
+<span id="cb386-18"><a href="graphing.html#cb386-18"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
+<span id="cb386-19"><a href="graphing.html#cb386-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb386-20"><a href="graphing.html#cb386-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb386-21"><a href="graphing.html#cb386-21"></a><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph4.png" width="85%" /></p>
+</div>
+<div id="palette-subsets" class="section level4">
+<h4><span class="header-section-number">6.11.1.3</span> Palette subsets</h4>
+<p>The palette above use the first two colors of a three color palette. What if you wanted the second two colors in the palette? If so, we obtain the colors for each level of the color palette with the command below:</p>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="graphing.html#cb387-1"></a><span class="kw">brewer.pal</span>(<span class="dt">n =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;#A6CEE3&quot; &quot;#1F78B4&quot; &quot;#B2DF8A&quot;</code></pre>
+<p>These numbers correspond to values representing the three colors of the Paired palette. If we want the last two colors in the palette for our graph that means we want the colors: #1F78B4 and #B2DF8A.</p>
+<p><img src="ch_graphing/images/pairedpalette.png" width="75%" /></p>
+<p>We can put the two colors we want (#1F78B4 and #B2DF8A) on the graph by once again using the scale_fill_manual() command - instead of the scale_fill_brewer() command. We can see this in the code below:</p>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="graphing.html#cb389-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
+<span id="cb389-2"><a href="graphing.html#cb389-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
+<span id="cb389-3"><a href="graphing.html#cb389-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
+<span id="cb389-4"><a href="graphing.html#cb389-4"></a>                         <span class="dt">label =</span> boxoffice, </span>
+<span id="cb389-5"><a href="graphing.html#cb389-5"></a>                         <span class="dt">fill =</span> studio)) <span class="op">+</span></span>
+<span id="cb389-6"><a href="graphing.html#cb389-6"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb389-7"><a href="graphing.html#cb389-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
+<span id="cb389-8"><a href="graphing.html#cb389-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
+<span id="cb389-9"><a href="graphing.html#cb389-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb389-10"><a href="graphing.html#cb389-10"></a>            <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb389-11"><a href="graphing.html#cb389-11"></a><span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">y =</span> boxoffice <span class="op">+</span><span class="st"> </span><span class="dv">400</span>),</span>
+<span id="cb389-12"><a href="graphing.html#cb389-12"></a>             <span class="dt">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="op">+</span></span>
+<span id="cb389-13"><a href="graphing.html#cb389-13"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="op">+</span></span>
+<span id="cb389-14"><a href="graphing.html#cb389-14"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>)) <span class="op">+</span></span>
+<span id="cb389-15"><a href="graphing.html#cb389-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb389-16"><a href="graphing.html#cb389-16"></a>       <span class="dt">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb389-17"><a href="graphing.html#cb389-17"></a>       <span class="dt">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="op">+</span></span>
+<span id="cb389-18"><a href="graphing.html#cb389-18"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
+<span id="cb389-19"><a href="graphing.html#cb389-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb389-20"><a href="graphing.html#cb389-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb389-21"><a href="graphing.html#cb389-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#1F78B4&quot;</span>, <span class="st">&quot;#B2DF8A&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph5.png" width="85%" /></p>
+<p>Now that we have used a color-blind paccessible alette we can look at the graph without the color component. We see in Figure <a href="graphing.html#fig:colorcomparison2">6.6</a>B, below, that when we examine bars based on lightness alone (with hue removed) we have contrast. The new color-blind accessible colors vary in term of hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable color-blind individuals.</p>
+<div class="figure"><span id="fig:colorcomparison2"></span>
+<img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="85%" />
+<p class="caption">
+FIGURE 6.6: Color information (i.e., hue) removed from new color-blind accessible graph
+</p>
+</div>
+</div>
+</div>
+<div id="avoid-color" class="section level3">
+<h3><span class="header-section-number">6.11.2</span> Avoid color</h3>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="graphing.html#cb390-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
+<span id="cb390-2"><a href="graphing.html#cb390-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
+<span id="cb390-3"><a href="graphing.html#cb390-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
+<span id="cb390-4"><a href="graphing.html#cb390-4"></a>                         <span class="dt">label =</span> boxoffice, </span>
+<span id="cb390-5"><a href="graphing.html#cb390-5"></a>                         <span class="dt">fill =</span> studio)) <span class="op">+</span></span>
+<span id="cb390-6"><a href="graphing.html#cb390-6"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb390-7"><a href="graphing.html#cb390-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
+<span id="cb390-8"><a href="graphing.html#cb390-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
+<span id="cb390-9"><a href="graphing.html#cb390-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb390-10"><a href="graphing.html#cb390-10"></a>            <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb390-11"><a href="graphing.html#cb390-11"></a><span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">y =</span> boxoffice <span class="op">+</span><span class="st"> </span><span class="dv">400</span>),</span>
+<span id="cb390-12"><a href="graphing.html#cb390-12"></a>             <span class="dt">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="op">+</span></span>
+<span id="cb390-13"><a href="graphing.html#cb390-13"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="op">+</span></span>
+<span id="cb390-14"><a href="graphing.html#cb390-14"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>)) <span class="op">+</span></span>
+<span id="cb390-15"><a href="graphing.html#cb390-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb390-16"><a href="graphing.html#cb390-16"></a>       <span class="dt">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb390-17"><a href="graphing.html#cb390-17"></a>       <span class="dt">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="op">+</span></span>
+<span id="cb390-18"><a href="graphing.html#cb390-18"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
+<span id="cb390-19"><a href="graphing.html#cb390-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb390-20"><a href="graphing.html#cb390-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb390-21"><a href="graphing.html#cb390-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph2.png" width="85%" /></p>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="graphing.html#cb391-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
+<span id="cb391-2"><a href="graphing.html#cb391-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
+<span id="cb391-3"><a href="graphing.html#cb391-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
+<span id="cb391-4"><a href="graphing.html#cb391-4"></a>                         <span class="dt">label =</span> boxoffice, </span>
+<span id="cb391-5"><a href="graphing.html#cb391-5"></a>                         <span class="dt">fill =</span> studio)) <span class="op">+</span></span>
+<span id="cb391-6"><a href="graphing.html#cb391-6"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb391-7"><a href="graphing.html#cb391-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
+<span id="cb391-8"><a href="graphing.html#cb391-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
+<span id="cb391-9"><a href="graphing.html#cb391-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb391-10"><a href="graphing.html#cb391-10"></a>            <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb391-11"><a href="graphing.html#cb391-11"></a><span class="st">  </span><span class="kw">geom_emoji</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">y =</span> boxoffice <span class="op">+</span><span class="st"> </span><span class="dv">400</span>),</span>
+<span id="cb391-12"><a href="graphing.html#cb391-12"></a>             <span class="dt">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="op">+</span></span>
+<span id="cb391-13"><a href="graphing.html#cb391-13"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="op">+</span></span>
+<span id="cb391-14"><a href="graphing.html#cb391-14"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>)) <span class="op">+</span></span>
+<span id="cb391-15"><a href="graphing.html#cb391-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb391-16"><a href="graphing.html#cb391-16"></a>       <span class="dt">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb391-17"><a href="graphing.html#cb391-17"></a>       <span class="dt">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="op">+</span></span>
+<span id="cb391-18"><a href="graphing.html#cb391-18"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>) <span class="op">+</span></span>
+<span id="cb391-19"><a href="graphing.html#cb391-19"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb391-20"><a href="graphing.html#cb391-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb391-21"><a href="graphing.html#cb391-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph3.png" width="85%" /></p>
+</div>
+</div>
 <div id="saving" class="section level2">
-<h2><span class="header-section-number">6.11</span> Saving</h2>
+<h2><span class="header-section-number">6.12</span> Saving</h2>
 <p>If you have a Mac it is easy to drag and drop a PDF file into MS Word - so making a PDF file is the best bet for saving your graph. You can do so with the code below which creates a 6 inch by 6 inch graph.</p>
 <div id="mac" class="section level3">
-<h3><span class="header-section-number">6.11.1</span> MAC</h3>
+<h3><span class="header-section-number">6.12.1</span> MAC</h3>
 <p>If you are able to use PDFs in your workflow that’s often the best option for saving. PDFs are mathematical in nature and therefore can be printed at any size at high quality. With a MAC you can just drag and drop the PDF file into your MSWord document.</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="graphing.html#cb385-1"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_graph, </span>
-<span id="cb385-2"><a href="graphing.html#cb385-2"></a>       <span class="dt">filename =</span> <span class="st">&quot;emoji_graph.pdf&quot;</span>, </span>
-<span id="cb385-3"><a href="graphing.html#cb385-3"></a>       <span class="dt">width =</span> <span class="dv">6</span>, </span>
-<span id="cb385-4"><a href="graphing.html#cb385-4"></a>       <span class="dt">height =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="graphing.html#cb392-1"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_graph, </span>
+<span id="cb392-2"><a href="graphing.html#cb392-2"></a>       <span class="dt">filename =</span> <span class="st">&quot;emoji_graph.pdf&quot;</span>, </span>
+<span id="cb392-3"><a href="graphing.html#cb392-3"></a>       <span class="dt">width =</span> <span class="dv">6</span>, </span>
+<span id="cb392-4"><a href="graphing.html#cb392-4"></a>       <span class="dt">height =</span> <span class="dv">6</span>)</span></code></pre></div>
 </div>
 <div id="pc-or-mac" class="section level3">
-<h3><span class="header-section-number">6.11.2</span> PC or MAC</h3>
-<p>If you have a PC it’s hard to put a PDF into MSWord. Therefore save the graph as a jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.</p>
-<p>With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord.
-With a MAC you can just drag and drop the PDF file into your MSWord document.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="graphing.html#cb386-1"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_graph, </span>
-<span id="cb386-2"><a href="graphing.html#cb386-2"></a>       <span class="dt">filename =</span> <span class="st">&quot;emoji_graph.jpg&quot;</span>, </span>
-<span id="cb386-3"><a href="graphing.html#cb386-3"></a>       <span class="dt">width =</span> <span class="dv">6</span>, </span>
-<span id="cb386-4"><a href="graphing.html#cb386-4"></a>       <span class="dt">height =</span> <span class="dv">6</span>, </span>
-<span id="cb386-5"><a href="graphing.html#cb386-5"></a>       <span class="dt">dpi =</span> <span class="st">&quot;print&quot;</span>)</span></code></pre></div>
+<h3><span class="header-section-number">6.12.2</span> PC or MAC</h3>
+<p>If you have a PC it’s hard to put a PDF into MSWord. Therefore save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.</p>
+<p>With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="graphing.html#cb393-1"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_graph, </span>
+<span id="cb393-2"><a href="graphing.html#cb393-2"></a>       <span class="dt">filename =</span> <span class="st">&quot;emoji_graph.jpg&quot;</span>, </span>
+<span id="cb393-3"><a href="graphing.html#cb393-3"></a>       <span class="dt">width =</span> <span class="dv">6</span>, </span>
+<span id="cb393-4"><a href="graphing.html#cb393-4"></a>       <span class="dt">height =</span> <span class="dv">6</span>, </span>
+<span id="cb393-5"><a href="graphing.html#cb393-5"></a>       <span class="dt">dpi =</span> <span class="st">&quot;print&quot;</span>)</span></code></pre></div>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-margulis2005photoshop">
+<p>Margulis, Dan. 2005. <em>Photoshop Lab Color: The Canyon Conundrum and Other Adventures in the Most Powerful Colorspace</em>. Peachpit Press.</p>
 </div>
 </div>
             </section>

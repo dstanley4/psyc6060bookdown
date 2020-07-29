@@ -738,7 +738,7 @@ The current version of the graph is much improved from where we started at the b
 
 Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of the current discussion. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hu component. Together these two components work together to create the image that we see. This distinction between lightness and hue is relevant to all images [see @margulis2005photoshop].  
 
-```{r colorcomparison, out.width= "85%", echo = FALSE, fig.cap = "Color information removed from current graph"}
+```{r colorcomparison, out.width= "85%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from current graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison.png")
 ```
 
@@ -748,7 +748,7 @@ Figure \@ref(fig:colorcomparison)A presents our current graph whereas Figure \@r
 
 #### Picking a palette
 
-The RColorBrewer package can be used to generate color palettes for graphs that are accessible to people with color blindness. You can see the color-blind friendly palettes, along with their respective names, by using the command below. This presents a wide range of color blind safe palettes with a large number of colors - as illustrated in Figure \@ref(fig:colorpal).
+The RColorBrewer package can be used to generate color palettes for graphs that are accessible to people with color blindness. You can see the color-blind friendly palettes, along with their respective names, by using the command below. This presents a wide range of color blind accessible palettes with a large number of colors - as illustrated in Figure \@ref(fig:colorpal).
 
 ```{r, include = FALSE}
 library(RColorBrewer)
@@ -779,7 +779,7 @@ dev.off()
 ```
 
 
-```{r colorpal, out.height= "70%", out.width= "70%", echo = FALSE, fig.cap = "Wide range color palette (color-blind safe)"}
+```{r colorpal, out.height= "70%", out.width= "70%", echo = FALSE, fig.cap = "Wide range color palette (color-blind accessible)"}
 knitr::include_graphics("ch_graphing/images/colors_all.png")
 ```
 
@@ -787,7 +787,7 @@ knitr::include_graphics("ch_graphing/images/colors_all.png")
 
 In Figure \@ref(fig:colorpal), above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a smaller palette (to ensure maximium contrast between colors). For example, if you only want to see palettes with three colors you use the code below which generate Figure \@ref(fig:colorspalthree).
 
-```{r colorspalthree, out.height= "70%", out.width= "70%", echo = FALSE,fig.cap = "Narrow range color palette (color-blind safe)"}
+```{r colorspalthree, out.height= "70%", out.width= "70%", echo = FALSE,fig.cap = "Narrow range color palette (color-blind accessible)"}
 knitr::include_graphics("ch_graphing/images/colors_3.png")
 ```
 
@@ -879,9 +879,9 @@ knitr::include_graphics("ch_graphing/images/emoji_graph5.png")
 ```
 
 
-Now that we have used a color-blind palette we can look at the graph without the color component again. We see in Figure \@ref(fig:colorcomparison2)B, below, that when we examine bars based on lightness we now have contrast. The new color-blind safe color vary in term of hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable -- and safe for color-blind individuals.
+Now that we have used a color-blind paccessible alette we can look at the graph without the color component. We see in Figure \@ref(fig:colorcomparison2)B, below, that when we examine bars based on lightness alone (with hue removed) we have contrast. The new color-blind accessible colors vary in term of hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable color-blind individuals.
 
-```{r colorcomparison2, out.width= "85%", echo = FALSE, fig.cap = "Color information removed from new color-safe graph"}
+```{r colorcomparison2, out.width= "85%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from new color-blind accessible graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison2.png")
 ```
 
