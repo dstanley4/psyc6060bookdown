@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-29" />
+<meta name="date" content="2020-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -272,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
 <li class="chapter" data-level="5.2" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#data-for-the-chapter"><i class="fa fa-check"></i><b>5.2</b> Data for the chapter</a></li>
 <li class="chapter" data-level="5.3" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#notation-1"><i class="fa fa-check"></i><b>5.3</b> Notation</a></li>
-<li class="chapter" data-level="5.4" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-the-mean"><i class="fa fa-check"></i><b>5.4</b> Estimating the mean</a></li>
+<li class="chapter" data-level="5.4" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#assessing-accuracy"><i class="fa fa-check"></i><b>5.4</b> Assessing accuracy</a></li>
 <li class="chapter" data-level="5.5" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-variance"><i class="fa fa-check"></i><b>5.5</b> Estimating variance</a></li>
 <li class="chapter" data-level="5.6" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-standard-deviation"><i class="fa fa-check"></i><b>5.6</b> Estimating standard deviation</a></li>
 <li class="chapter" data-level="5.7" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-smd"><i class="fa fa-check"></i><b>5.7</b> Estimating SMD</a><ul>
@@ -382,11 +382,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.1</span> Overview</h2>
 <p>Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.</p>
 <p>Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.</p>
+<p>Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased.</p>
 <p>Further complicating matters is the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.</p>
 </div>
 <div id="data-for-the-chapter" class="section level2">
 <h2><span class="header-section-number">5.2</span> Data for the chapter</h2>
-<p>We begin by activating the required packages:</p>
+<p>In this chapter we will use a population of heights to learn about random sampling. To engage in the learning activities you need to activate the required packages:</p>
 <div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="sampling-accuracy.html#cb314-1"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb314-2"><a href="sampling-accuracy.html#cb314-2"></a><span class="kw">library</span>(learnSampling)</span></code></pre></div>
 <p>Next, we create a large population with 100,000 people using the get_height_population() command:</p>
@@ -398,7 +399,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
 ## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;…
 ## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 17…</code></pre>
-<p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person.</p>
+<p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the heights for everyone in the population.</p>
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="sampling-accuracy.html#cb318-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##       id sex    height
@@ -416,11 +417,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="notation-1" class="section level2">
 <h2><span class="header-section-number">5.3</span> Notation</h2>
-<p>In the formulas below, when we refer the population, we use uppercase letters to indicate members (<span class="math inline">\(X\)</span>) or the size (<span class="math inline">\(N\)</span>). In contrast, when we refer to the sample, we use lowercase letters to indicate members (<span class="math inline">\(x\)</span>) or the size (<span class="math inline">\(n\)</span>). Make sure you notice the similarities between population and sample formulas even when the notation differs.</p>
+<p>In the formulas below, when we refer the population, we use uppercase letters to indicate members (<span class="math inline">\(X\)</span>) or the size (<span class="math inline">\(N\)</span>). The population mean is indicated by the symbol <span class="math inline">\(\mu\)</span>. In contrast, when we refer to the sample, we use lowercase letters to indicate members (<span class="math inline">\(x\)</span>) or the size (<span class="math inline">\(n\)</span>). The sample mean is indicated by the symbol <span class="math inline">\(\bar{x}\)</span>. A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate we represent this with the symbol <span class="math inline">\(\bar{\bar{x}}\)</span>. A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.</p>
 </div>
-<div id="estimating-the-mean" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimating the mean</h2>
-<p>We are interested in the sample mean (<span class="math inline">\(\bar{x}\)</span>) to the extent that it provides an estimate of the population mean (<span class="math inline">\(\mu\)</span>). The population mean is calculated using Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a>:</p>
+<div id="assessing-accuracy" class="section level2">
+<h2><span class="header-section-number">5.4</span> Assessing accuracy</h2>
+<p>We are interested in the sample mean (<span class="math inline">\(\bar{x}\)</span>) to the extent that it provides an accurate estimate of the population mean (<span class="math inline">\(\mu\)</span>). The population mean is calculated using Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a>. In this formula, the letter <span class="math inline">\(N\)</span> corresponds to the number of people in the population.</p>
 <p><span class="math display" id="eq:popmeanch5">\[\begin{equation} 
 \mu = \frac{\sum{X}}{N}
       \tag{5.1}
@@ -431,12 +432,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb320-3"><a href="sampling-accuracy.html#cb320-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   pop_mean
 ## 1    172.5</code></pre>
-<p>As noted previously, we rarely have access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the using Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> below. The bar of above the <span class="math inline">\(x\)</span>, indicates that it is a mean. Notice that Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a> and Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> are the same - even though they use different notation.</p>
+<p>As noted previously, we rarely have access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the using Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> below. The bar of above the <span class="math inline">\(x\)</span>, indicates that it is a mean. Notice that Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a> and Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> are the same - even though they use different notation. In this formula, the letter <span class="math inline">\(n\)</span> corresponds to the number of people in the sample.</p>
 <p><span class="math display" id="eq:samplemeanch5">\[\begin{equation} 
 \bar{x} = \frac{\sum{x}}{n}
       \tag{5.2}
 \end{equation}\]</span></p>
-<p>Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.</p>
+<p>Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which sample mean are right, on averaage. That is, they are interested in the extent to which the mean of many sample means (<span class="math inline">\(\bar{\bar{x}}\)</span>) corresponds to the population mean (<span class="math inline">\(\mu\)</span>). The mean of many sample means can be calculated using Formula <a href="sampling-accuracy.html#eq:samplemeanmeanch5">(5.3)</a> below. In this formula, the letter <span class="math inline">\(k\)</span> corresponds to the number of sample means.</p>
+<p><span class="math display" id="eq:samplemeanmeanch5">\[\begin{equation} 
+\bar{\bar{x}} = \frac{\sum{\bar{x}}}{k}
+      \tag{5.3}
+\end{equation}\]</span></p>
+<p>If the mean of the sample means, <span class="math inline">\(\bar{\bar{x}}\)</span>, equals the population mean, <span class="math inline">\(\mu\)</span>, then the sample mean is an unbiased (or accurate) estimate of the population mean. Figure <a href="sampling-accuracy.html#fig:showbias">5.1</a> illustrates the concept of accuracy/bias with a distribution of sample means (i.e., <span class="math inline">\(\bar{x}\)</span>). Accuracy/bias is an index of the extent to which the mean of many sample means, <span class="math inline">\(\bar{\bar{x}}\)</span>, deviates from the population mean, <span class="math inline">\(\mu\)</span>.</p>
+<div class="figure"><span id="fig:showbias"></span>
+<img src="ch_samples/images/sampling_accuracy.png" alt="Sampling accuracy and precision" width="80%" />
+<p class="caption">
+FIGURE 5.1: Sampling accuracy and precision
+</p>
+</div>
+<p>We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below.</p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="sampling-accuracy.html#cb322-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
 <span id="cb322-2"><a href="sampling-accuracy.html#cb322-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
 <span id="cb322-3"><a href="sampling-accuracy.html#cb322-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
@@ -454,14 +467,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8      8 10       173.5       139.45         154.94
 ## 9      9 10       177.7       167.01         185.57
 ## 10    10 10       168.5       262.65         291.83</code></pre>
-<p>Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate “n” (the sample size) and “sample.mean” (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows. You can see the full extent to which the sample means vary by creating a graph with the code below. In this code, we use the pull() command to extract the value from the sample.mean column and then we send them to the base R hisogram command, hist().</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="sampling-accuracy.html#cb325-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb325-2"><a href="sampling-accuracy.html#cb325-2"></a><span class="st"> </span><span class="kw">pull</span>(sample.mean) <span class="op">%&gt;%</span></span>
-<span id="cb325-3"><a href="sampling-accuracy.html#cb325-3"></a><span class="st"> </span><span class="kw">hist</span>(<span class="dt">main =</span> <span class="st">&quot;Histogram of Sample Means&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
-<p>You can see the 5000 sample means, from the sample.mean column, plotted in this graph. Recall the population mean for heights is <span class="math inline">\(\mu = 172.48\)</span> cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (<span class="math inline">\(\bar{x}\)</span>) may differ substantially from the population mean (<span class="math inline">\(\mu = 172.48\)</span>). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.</p>
-<p>Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct – on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator.</p>
-<p>In the code below we calculate the average of the 5000 sample means to determine if the sample mean is an unbiased estimator.</p>
+<p>Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate “n” (the sample size) and “sample.mean” (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows.</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="sampling-accuracy.html#cb325-1"></a>pg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> pop_data,</span>
+<span id="cb325-2"><a href="sampling-accuracy.html#cb325-2"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> height)) <span class="op">+</span></span>
+<span id="cb325-3"><a href="sampling-accuracy.html#cb325-3"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb325-4"><a href="sampling-accuracy.html#cb325-4"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">205</span>)) <span class="op">+</span></span>
+<span id="cb325-5"><a href="sampling-accuracy.html#cb325-5"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Heights of Individuals&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Probability&quot;</span>) <span class="op">+</span></span>
+<span id="cb325-6"><a href="sampling-accuracy.html#cb325-6"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">120</span>, <span class="dv">220</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb325-7"><a href="sampling-accuracy.html#cb325-7"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span>
+<span id="cb325-8"><a href="sampling-accuracy.html#cb325-8"></a></span>
+<span id="cb325-9"><a href="sampling-accuracy.html#cb325-9"></a></span>
+<span id="cb325-10"><a href="sampling-accuracy.html#cb325-10"></a>sdg &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> many_samples,</span>
+<span id="cb325-11"><a href="sampling-accuracy.html#cb325-11"></a>       <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> sample.mean)) <span class="op">+</span></span>
+<span id="cb325-12"><a href="sampling-accuracy.html#cb325-12"></a><span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">adjust =</span> <span class="fl">1.3</span>) <span class="op">+</span></span>
+<span id="cb325-13"><a href="sampling-accuracy.html#cb325-13"></a><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">140</span>, <span class="dv">205</span>)) <span class="op">+</span></span>
+<span id="cb325-14"><a href="sampling-accuracy.html#cb325-14"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Mean Height for each sample&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Probability&quot;</span>) <span class="op">+</span></span>
+<span id="cb325-15"><a href="sampling-accuracy.html#cb325-15"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">120</span>, <span class="dv">220</span>, <span class="dt">by =</span> <span class="dv">5</span>)) <span class="op">+</span></span>
+<span id="cb325-16"><a href="sampling-accuracy.html#cb325-16"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span>
+<span id="cb325-17"><a href="sampling-accuracy.html#cb325-17"></a></span>
+<span id="cb325-18"><a href="sampling-accuracy.html#cb325-18"></a><span class="kw">png</span>(<span class="dt">filename =</span> <span class="st">&quot;ch_samples/images/bothdist.png&quot;</span>, <span class="dt">width =</span> <span class="dv">12</span><span class="op">*</span><span class="dv">300</span>, <span class="dt">height =</span> <span class="dv">6</span><span class="op">*</span><span class="dv">300</span>, <span class="dt">res =</span> <span class="dv">300</span>)</span>
+<span id="cb325-19"><a href="sampling-accuracy.html#cb325-19"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(pg,sdg, <span class="dt">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb325-20"><a href="sampling-accuracy.html#cb325-20"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:bothdist"></span>
+<img src="ch_samples/images/sampling_dist.png" alt="Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you it is means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)." width="1058" />
+<p class="caption">
+FIGURE 5.2: Sampling distribution of the mean. The population of individuals is presented at the top and filled with X’s to remind you they are individuals. There are more individuals than X’s. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with <span class="math inline">\(\bar{x}\)</span>’s to remind you it is means being graphed. There are more means than <span class="math inline">\(\bar{x}\)</span>’s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).
+</p>
+</div>
+<p>Above, in Figure <a href="sampling-accuracy.html#fig:bothdist">5.2</a>, we present a graph comparing the population distribution to the distribution of sample means. The sample means plotted are the 5000 sample means, from the sample.mean column. Recall the population mean for heights is <span class="math inline">\(\mu = 172.48\)</span> cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (<span class="math inline">\(\bar{x}\)</span>) may differ substantially from the population mean (<span class="math inline">\(\mu = 172.48\)</span>). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.</p>
+<p>Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct – on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.</p>
 <div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sampling-accuracy.html#cb326-1"></a>many_samples <span class="op">%&gt;%</span></span>
 <span id="cb326-2"><a href="sampling-accuracy.html#cb326-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample.mean =</span> <span class="kw">mean</span>(sample.mean)) <span class="op">%&gt;%</span></span>
 <span id="cb326-3"><a href="sampling-accuracy.html#cb326-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
@@ -471,18 +505,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="estimating-variance" class="section level2">
 <h2><span class="header-section-number">5.5</span> Estimating variance</h2>
-<p>We are interested in the sample variance (<span class="math inline">\(s^2\)</span>) to the extent that it provides an estimate of the population variance (<span class="math inline">\(\sigma^2\)</span>). We begin by reviewing population variance. The population variance is calculated using Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.3)</a>:</p>
+<p>We are interested in the sample variance (<span class="math inline">\(s^2\)</span>) to the extent that it provides an estimate of the population variance (<span class="math inline">\(\sigma^2\)</span>). We begin by reviewing population variance. The population variance is calculated using Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.4)</a>:</p>
 <p><span class="math display" id="eq:popvarch5">\[\begin{equation} 
 \sigma^2 = \frac{\sum{(X - \mu)^2}}{N}
-      \tag{5.3}
+      \tag{5.4}
 \end{equation}\]</span></p>
-<p>We can calculate the population variance for the height column of pop_data using the summarise() and var.pop() commands. The var.pop() command uses Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.3)</a>. We see in the output that the population variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>).</p>
+<p>We can calculate the population variance for the height column of pop_data using the summarise() and var.pop() commands. The var.pop() command uses Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.4)</a>. We see in the output that the population variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>).</p>
 <div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sampling-accuracy.html#cb328-1"></a>pop_data <span class="op">%&gt;%</span></span>
 <span id="cb328-2"><a href="sampling-accuracy.html#cb328-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height)) <span class="op">%&gt;%</span></span>
 <span id="cb328-3"><a href="sampling-accuracy.html#cb328-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   pop_var
 ## 1   157.5</code></pre>
-<p>Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by <span class="math inline">\(n\)</span>. This formula is the same as the population variance formula, Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.3)</a>, but adapted to use sample-level notation.</p>
+<p>Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by <span class="math inline">\(n\)</span>. This formula is the same as the population variance formula, Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.4)</a>, but adapted to use sample-level notation.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
@@ -495,12 +529,12 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 <pre><code>##   mean_of_var.n
 ## 1         141.1</code></pre>
 <p>You can see the average of sample.var.n column (141.86) is much smaller than the population variance (157.5). That is, the average of the sample variances, using <span class="math inline">\(n\)</span> in the denominator, was smaller than the population variance. Consequently, sample variance, using <span class="math inline">\(n\)</span> in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using <span class="math inline">\(n\)</span> in the denominator, we will, on average, be wrong.</p>
-<p>Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span>. The unbiased estimate is calculated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.4)</a>.</p>
+<p>Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span>. The unbiased estimate is calculated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>.</p>
 <p><span class="math display" id="eq:samplevarn1ch5">\[\begin{equation} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
-      \tag{5.4}
+      \tag{5.5}
 \end{equation}\]</span></p>
-<p>In the many_samples data, the column sample.var.n_1 was generated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.4)</a>. We can evaluate the quality of Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.4)</a>, using <span class="math inline">\(n-1\)</span>, by averaging over values in the sample.var.n_1 column.</p>
+<p>In the many_samples data, the column sample.var.n_1 was generated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>. We can evaluate the quality of Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>, using <span class="math inline">\(n-1\)</span>, by averaging over values in the sample.var.n_1 column.</p>
 <div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sampling-accuracy.html#cb332-1"></a>many_samples <span class="op">%&gt;%</span></span>
 <span id="cb332-2"><a href="sampling-accuracy.html#cb332-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_var.n_1 =</span> <span class="kw">mean</span>(sample.var.n_<span class="dv">1</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb332-3"><a href="sampling-accuracy.html#cb332-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
@@ -511,23 +545,23 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
 </div>
 <div id="estimating-standard-deviation" class="section level2">
 <h2><span class="header-section-number">5.6</span> Estimating standard deviation</h2>
-<p>The population standard deviation is calculated using Formula <a href="sampling-accuracy.html#eq:popsdch5">(5.5)</a> below.</p>
+<p>The population standard deviation is calculated using Formula <a href="sampling-accuracy.html#eq:popsdch5">(5.6)</a> below.</p>
 <p><span class="math display" id="eq:popsdch5">\[\begin{equation} 
 \sigma = \sqrt{\frac{\sum{(X- \mu)^2}}{N}}
-      \tag{5.5}
+      \tag{5.6}
 \end{equation}\]</span></p>
-<p>Due to the above findings for variance, we estimate the population standard deviation using Formula <a href="sampling-accuracy.html#eq:samplesd1ch5">(5.6)</a> below.</p>
+<p>Due to the above findings for variance, we estimate the population standard deviation using Formula <a href="sampling-accuracy.html#eq:samplesd1ch5">(5.7)</a> below.</p>
 <p><span class="math display" id="eq:samplesd1ch5">\[\begin{equation} 
 s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
-      \tag{5.6}
+      \tag{5.7}
 \end{equation}\]</span></p>
 </div>
 <div id="estimating-smd" class="section level2">
 <h2><span class="header-section-number">5.7</span> Estimating SMD</h2>
-<p>We are interested in the sample standardized mean difference (<span class="math inline">\(d\)</span>) to the extent that it provides an estimate of the population standardized mean difference (<span class="math inline">\(\delta\)</span>). The population standardized mean difference is calculated using Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.7)</a>:</p>
+<p>We are interested in the sample standardized mean difference (<span class="math inline">\(d\)</span>) to the extent that it provides an estimate of the population standardized mean difference (<span class="math inline">\(\delta\)</span>). The population standardized mean difference is calculated using Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.8)</a>:</p>
 <p><span class="math display" id="eq:popsmdch5">\[\begin{equation} 
 \delta  = \frac{\mu_{1} - \mu_{2}}{\sigma} 
-      \tag{5.7}
+      \tag{5.8}
 \end{equation}\]</span></p>
 <p>We can calculate the population standardized mean difference for men and women once we have the respective population means and standard deviations. Recall the initial data mixed males and females. We begin by creating separate data sets for males and females:</p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sampling-accuracy.html#cb334-1"></a>male_population_heights &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -558,7 +592,7 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 \sigma = \sigma_{female} = \sigma_{male} &amp;= 10.1\\
 \end{aligned} 
 \]</span></p>
-<p>Likewise, the population-level standardized mean difference (<span class="math inline">\(\delta\)</span>) is 1.49. We can see this population-level difference illustrated in Figure <a href="sampling-accuracy.html#fig:sexpop">5.1</a>.</p>
+<p>Likewise, the population-level standardized mean difference (<span class="math inline">\(\delta\)</span>) is 1.49. We can see this population-level difference illustrated in Figure <a href="sampling-accuracy.html#fig:sexpop">5.3</a>.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \delta  &amp;= \frac{\mu_{male} - \mu_{female}}{\sigma} \\
@@ -570,23 +604,23 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 <div class="figure"><span id="fig:sexpop"></span>
 <img src="ch_samples/images/sex_pops.png" alt="Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males whereas the dotted vertical line indicates the mean for females." width="95%" />
 <p class="caption">
-FIGURE 5.1: Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males whereas the dotted vertical line indicates the mean for females.
+FIGURE 5.3: Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males whereas the dotted vertical line indicates the mean for females.
 </p>
 </div>
-<p>We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.8)</a> below. This value is known by many other names: <span class="math inline">\(d\)</span>, Cohen’s <span class="math inline">\(d\)</span>, and Hedges <span class="math inline">\(g\)</span>. Notice that the sample-level formula, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.8)</a>, below, is the same as the population-level formula, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.7)</a>, above, only the notation differs.</p>
+<p>We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a> below. This value is known by many other names: <span class="math inline">\(d\)</span>, Cohen’s <span class="math inline">\(d\)</span>, and Hedges <span class="math inline">\(g\)</span>. Notice that the sample-level formula, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a>, below, is the same as the population-level formula, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.8)</a>, above, only the notation differs.</p>
 <p><span class="math display" id="eq:samplesmdch5">\[\begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
-      \tag{5.8}
-\end{equation}\]</span></p>
-<p>Unfortunately, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.8)</a> provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.8)</a>, provides <span class="math inline">\(d\)</span>-values that overestimate the size of the population standardize mean difference (<span class="math inline">\(\delta\)</span>). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.9)</a>.</p>
-<p><span class="math display" id="eq:samplesmdunbiasedch5">\[\begin{equation} 
-d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
       \tag{5.9}
 \end{equation}\]</span></p>
-<p>If we try to apply either <span class="math inline">\(d\)</span>-value formula (<a href="sampling-accuracy.html#eq:samplesmdch5">(5.8)</a> or <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.9)</a>) to real data we quickly encounter a problem. We don’t have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span></p>
+<p>Unfortunately, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a> provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula <a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a>, provides <span class="math inline">\(d\)</span>-values that overestimate the size of the population standardize mean difference (<span class="math inline">\(\delta\)</span>). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a>.</p>
+<p><span class="math display" id="eq:samplesmdunbiasedch5">\[\begin{equation} 
+d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
+      \tag{5.10}
+\end{equation}\]</span></p>
+<p>If we try to apply either <span class="math inline">\(d\)</span>-value formula (<a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a> or <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a>) to real data we quickly encounter a problem. We don’t have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span></p>
 <div id="pooled-standard-deviation" class="section level3">
 <h3><span class="header-section-number">5.7.1</span> Pooled standard deviation</h3>
-<p>When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.7)</a>, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact the both population have the same standard deviation.</p>
+<p>When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.8)</a>, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact the both population have the same standard deviation.</p>
 <p>Let’s consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations – one for males and one for females. Moreover, these two sample-level standard deviation (using <span class="math inline">\(n\)</span>-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviaitons are identical. Fortunately, this is sample-level data and not population-level data.</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -605,37 +639,37 @@ s_{females} &amp;= 8.2 \\
 \]</span></p>
 <p>We need to recognize that the sample-level standard deviations are likely to differ from the population-level standard deviation due to sampling error. Consequently, we are likely to get two different sample-level standard deviations even if the population-level standard deviations are identical for males and females.</p>
 <p>How do we resolve this situation of having two sample-level standard deviations? The first step is to switch to thinking in terms of variance rather than standard deviation. Due to the way the math works, life becomes very complicated, very quickly, if we continue to think in terms of standard deviations. Therefore, we reframe the problem into a variance problem. Variances are preferable to standard deviations because we can add and subtract variances - but not standard deviations.</p>
-<p>We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure <a href="sampling-accuracy.html#fig:pool1">5.2</a>). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also <strong>assume</strong> that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of a single population variance (see Figure <a href="sampling-accuracy.html#fig:pool2">5.3</a>). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol <span class="math inline">\(s_{pooled}^2\)</span>.</p>
+<p>We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure <a href="sampling-accuracy.html#fig:pool1">5.4</a>). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also <strong>assume</strong> that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of a single population variance (see Figure <a href="sampling-accuracy.html#fig:pool2">5.5</a>). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol <span class="math inline">\(s_{pooled}^2\)</span>.</p>
 <div style="page-break-after: always;"></div>
 <div class="figure"><span id="fig:pool1"></span>
 <img src="ch_samples/images/pool1.png" alt="Estimating population variances with sample variances. The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance. " width="80%" />
 <p class="caption">
-FIGURE 5.2: Estimating population variances with sample variances. The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance.
+FIGURE 5.4: Estimating population variances with sample variances. The male sample variance (n-1) is an estimate of male population variance. Likewise, the female sample variance (n-1) is an estimate of the female population variance.
 </p>
 </div>
 
 <div class="figure"><span id="fig:pool2"></span>
 <img src="ch_samples/images/pool2.png" alt="Two estimates of a single population variance. We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance." width="80%" />
 <p class="caption">
-FIGURE 5.3: Two estimates of a single population variance. We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance.
+FIGURE 5.5: Two estimates of a single population variance. We assume the population variances are the same. Therefore, the male and female sample variances are both estimates of the same population variance.
 </p>
 </div>
 <div style="page-break-after: always;"></div>
 <div class="figure"><span id="fig:pool3"></span>
 <img src="ch_samples/images/pool3.png" alt="Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance." width="80%" />
 <p class="caption">
-FIGURE 5.4: Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance.
+FIGURE 5.6: Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance.
 </p>
 </div>
-<p>When the sample sizes for males and females are the same (i.e., <span class="math inline">\(n_{males} =n_{females}\)</span>) we can use the Formula <a href="sampling-accuracy.html#eq:poolvarequalch5">(5.10)</a> below to calculate the pooled variance.</p>
+<p>When the sample sizes for males and females are the same (i.e., <span class="math inline">\(n_{males} =n_{females}\)</span>) we can use the Formula <a href="sampling-accuracy.html#eq:poolvarequalch5">(5.11)</a> below to calculate the pooled variance.</p>
 <p><span class="math display" id="eq:poolvarequalch5">\[\begin{equation} 
 s_{pooled}^2  = \frac{s_{1}^2 + s_{2}^2}{2} 
-      \tag{5.10}
+      \tag{5.11}
 \end{equation}\]</span></p>
-<p>When the sample sizes for males and females are the different (i.e., <span class="math inline">\(n_{males} \ne n_{females}\)</span>) we can use the Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.11)</a> below to calculate the pooled variance. This formula can be used all of the time. We only show Formula <a href="sampling-accuracy.html#eq:poolvarequalch5">(5.10)</a>, above, to make it clear that Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.11)</a> below is basically just averaging the variances in a way that takes sample size into account.</p>
+<p>When the sample sizes for males and females are the different (i.e., <span class="math inline">\(n_{males} \ne n_{females}\)</span>) we can use the Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.12)</a> below to calculate the pooled variance. This formula can be used all of the time. We only show Formula <a href="sampling-accuracy.html#eq:poolvarequalch5">(5.11)</a>, above, to make it clear that Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.12)</a> below is basically just averaging the variances in a way that takes sample size into account.</p>
 <p><span class="math display" id="eq:poolvarch5">\[\begin{equation} 
 s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
-      \tag{5.11}
+      \tag{5.12}
 \end{equation}\]</span></p>
 <p>We get the single standard deviation, <span class="math inline">\(s_{pooled}\)</span>, by taking the square root of the variance, <span class="math inline">\(s_{pooled}^2\)</span>.</p>
 <p><span class="math display">\[
@@ -643,7 +677,7 @@ s_{pooled}^2  = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}
 s_{pooled}  &amp;= \sqrt{s_{pooled}^2} \\
 \end{aligned} 
 \]</span></p>
-<p>If we apply the pooled standard variance, Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.11)</a>, to the sample data:</p>
+<p>If we apply the pooled standard variance, Formula <a href="sampling-accuracy.html#eq:poolvarch5">(5.12)</a>, to the sample data:</p>
 <p><span class="math display">\[
 \begin{aligned}
 s_{pooled}^2 &amp;= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{male} + n_{female}-2} \\
@@ -661,7 +695,7 @@ s_{pooled}  &amp;= \sqrt{79.5} \\
 </div>
 <div id="calculating-d" class="section level3">
 <h3><span class="header-section-number">5.7.2</span> Calculating <span class="math inline">\(d\)</span></h3>
-<p>Now that we have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span>, we can calculate the standardized mean difference. We do so below using unbiased formula, Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.9)</a> below.</p>
+<p>Now that we have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span>, we can calculate the standardized mean difference. We do so below using unbiased formula, Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a> below.</p>
 <p><span class="math display">\[
 \begin{aligned}
 d_{unbiased}  &amp;= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
@@ -724,7 +758,7 @@ d_{unbiased}  &amp;= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
 <div class="figure"><span id="fig:ddist"></span>
 <img src="ch_samples/images/d_dist.png" alt="Histogram of $d_{unbiased}$ when $\delta = 1.49$" width="95%" />
 <p class="caption">
-FIGURE 5.5: Histogram of <span class="math inline">\(d_{unbiased}\)</span> when <span class="math inline">\(\delta = 1.49\)</span>
+FIGURE 5.7: Histogram of <span class="math inline">\(d_{unbiased}\)</span> when <span class="math inline">\(\delta = 1.49\)</span>
 </p>
 </div>
 <p>We can calculate the full range of sample-level <span class="math inline">\(d_{unbiased}\)</span> values with the commands below:</p>
