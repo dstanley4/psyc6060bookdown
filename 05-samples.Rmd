@@ -25,7 +25,9 @@ remotes::install_github("dstanley4/learnsampling")
 
 Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population.  Unfortunately,  it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
 
-Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter.  Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.
+Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. Sometimes the sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter.  Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly. 
+
+Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased. 
 
 Further complicating matters is  the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
@@ -66,11 +68,11 @@ head(pop_data, 10)
 
 ## Notation
 
-In the formulas below, when we refer the population, we use uppercase letters to indicate members ($X$) or the size ($N$). In contrast, when we refer to the sample, we use lowercase letters to indicate members ($x$) or the size ($n$). Make sure you notice the similarities between population and sample formulas even when the notation differs.
+In the formulas below, when we refer the population, we use uppercase letters to indicate members ($X$) or the size ($N$). The population mean is indicated by the symbol $\mu$. In contrast, when we refer to the sample, we use lowercase letters to indicate members ($x$) or the size ($n$). The sample mean is indicated by the symbol $\bar{x}$. A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate the "mean of the sample means" using the symbol $\bar{\bar{x}}$. A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
-## Estimating the mean
+## Assessing accuracy
 
-We are interested in the sample mean ($\bar{x}$) to the extent that it provides an estimate of the population mean ($\mu$). The population mean is calculated using Formula \@ref(eq:popmeanch5):
+We are interested in the sample mean ($\bar{x}$) to the extent that it provides an accurate estimate of the population mean ($\mu$). The population mean is calculated using Formula \@ref(eq:popmeanch5):
 
 \begin{equation} 
 \mu = \frac{\sum{X}}{N}
@@ -95,7 +97,23 @@ As noted previously, we rarely have access to data from an entire population. Co
       (\#eq:samplemeanch5)
 \end{equation} 
 
-Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in what is true, on average, over a large number of studies. Therefore, we simulate drawing a large number of samples from a population with the code below.
+Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which the mean of many sample means corresponds to the population mean. The mean of many sample means can be calculated using Formula \@ref(eq:samplemeanmeanch5) below. In this formula, the letter $k$ corresponds to the number of sample means.
+
+
+\begin{equation} 
+\bar{\bar{x}} = \frac{\sum{\bar{x}}}{k}
+      (\#eq:samplemeanmeanch5)
+\end{equation} 
+
+
+If the mean of the sample means, $\bar{\bar{x}}$, equals the population mean, $\mu$, then the sample mean is an unbiased (or accurate) estimate of the population mean. Figure \@ref(fig:showbias) illustrates the concepts of accuracy with a distribution of sample means (i.e., $\bar{x}$). Accuracy/bias is index by the extent to which the mean of many sample means, $\bar{\bar{x}}$, deviates from the population mean, $\mu$.
+
+```{r showbias, echo=FALSE, out.width = "80%", fig.cap = "Sampling accuracy and precision"}
+knitr::include_graphics("ch_samples/images/sampling_accuracy.png")
+```
+
+
+We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below.
 
 ```{r}
 many_samples <- get_M_samples(pop.data = pop_data, 
@@ -113,16 +131,18 @@ head(many_samples, 10)
 
 Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate "n" (the sample size) and "sample.mean" (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows. You can see the full extent to which the sample means vary by creating a graph with the code below. In this code, we use the pull() command to extract the value from the sample.mean column and then we send them to the base R hisogram command, hist().
 
-```{r}
-many_samples %>%
- pull(sample.mean) %>%
- hist(main = "Histogram of Sample Means")
+```{r, eval = FALSE}
+ggplot(data = many_samples,
+       mappings = aes(x = sample.mean)) +
+  geom_histogram()
 ```
  
  
 You can see the 5000 sample means, from the sample.mean column, plotted in this graph. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
 
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. 
+
+
 
 In the code below we calculate the average of the 5000 sample means to determine if the sample mean is an unbiased estimator.
 
