@@ -269,11 +269,11 @@ I used the \textbf{knitr}\index{knitr} package \citep{xie2015} and the \textbf{b
 ##   graphics_4.0.2  grDevices_4.0.2 highr_0.8      
 ##   htmltools_0.4.0 jsonlite_1.6.1  knitr_1.28     
 ##   magrittr_1.5    markdown_1.1    methods_4.0.2  
-##   mime_0.9        Rcpp_1.0.5      rlang_0.4.7    
-##   rmarkdown_2.2   rstudioapi_0.11 stats_4.0.2    
-##   stringi_1.4.6   stringr_1.4.0   tinytex_0.23   
-##   tools_4.0.2     utils_4.0.2     xfun_0.14      
-##   yaml_2.2.1
+##   mime_0.9        packrat_0.5.0   Rcpp_1.0.5     
+##   rlang_0.4.7     rmarkdown_2.2   rstudioapi_0.11
+##   stats_4.0.2     stringi_1.4.6   stringr_1.4.0  
+##   tinytex_0.23    tools_4.0.2     utils_4.0.2    
+##   xfun_0.14       yaml_2.2.1
 \end{verbatim}
 
 Package names are in bold text (e.g., \textbf{rmarkdown}), and inline code and filenames are formatted in a typewriter font (e.g., \texttt{knitr::knit(\textquotesingle{}foo.Rmd\textquotesingle{})}). Function names are followed by parentheses (e.g., \texttt{bookdown::render\_book()}).
@@ -5092,8 +5092,8 @@ We can use the head() command to see the first 10 rows of the 100,00 rows. We se
 
 In the formulas below, when we refer the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate we represent this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
-\hypertarget{assessing-accuracy}{%
-\section{Assessing accuracy}\label{assessing-accuracy}}
+\hypertarget{estimating-the-mean}{%
+\section{Estimating the mean}\label{estimating-the-mean}}
 
 We are interested in the sample mean (\(\bar{x}\)) to the extent that it provides an accurate estimate of the population mean (\(\mu\)). The population mean is calculated using Formula \eqref{eq:popmeanch5}. In this formula, the letter \(N\) corresponds to the number of people in the population.
 
@@ -5173,7 +5173,7 @@ We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 sam
 Each row of many\_samples represents a sample of 10 people. Each column of many\_samples indicates a sample statistic. You can see that for each sample/row we indicate ``n'' (the sample size) and ``sample.mean'' (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows.
 
 \begin{figure}
-\includegraphics[width=29.4in]{ch_samples/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you it is means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you it is means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist}
 \end{figure}
 
 Above, in Figure \ref{fig:bothdist}, we present a graph comparing the population distribution to the distribution of sample means. The sample means plotted are the 5000 sample means, from the sample.mean column. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantially from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
