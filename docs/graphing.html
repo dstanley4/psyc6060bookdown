@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-07-30" />
+<meta name="date" content="2020-08-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -949,12 +949,12 @@ FIGURE 6.2: Adding a fill column to the internal data
 </div>
 <div id="accessible-colors" class="section level2">
 <h2><span class="header-section-number">6.11</span> Accessible Colors</h2>
-<p>The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the “proper” colors for the Marvel and DC studios. Although using these colors was aethetically pleasing a major consideration for all the graphs you make should ensuring they are accessible to a wide audience.</p>
-<p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs <span class="citation">(see Margulis <a href="#ref-margulis2005photoshop" role="doc-biblioref">2005</a>)</span>.</p>
+<p>The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the “proper” colors for the Marvel and DC studios. Although using these colors was aethetically pleasing, a major consideration is ensuring your graphs are accessible to a wide audience.</p>
+<p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can think of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs <span class="citation">(see Margulis <a href="#ref-margulis2005photoshop" role="doc-biblioref">2005</a>)</span>.</p>
 <div class="figure"><span id="fig:colorcomparison"></span>
-<img src="ch_graphing/images/nocolorcomparison.png" alt="Color information (i.e., hue) removed from current graph" width="75%" />
+<img src="ch_graphing/images/nocolorcomparison.png" alt="Hue removed from current graph" width="75%" />
 <p class="caption">
-FIGURE 6.3: Color information (i.e., hue) removed from current graph
+FIGURE 6.3: Hue removed from current graph
 </p>
 </div>
 <p>Figure <a href="graphing.html#fig:colorcomparison">6.3</a>A presents our current graph whereas Figure <a href="graphing.html#fig:colorcomparison">6.3</a>B presents the same graph with the hue component removed. You can see that when the hue component is removed that the distinction between the Marvel and DC bars is also removed. The particular colors used to represent Marvel/DC differ in terms of hue but not lightness. Consequently, when we remove the hue component we are left with a graph, <a href="graphing.html#fig:colorcomparison">6.3</a>B, that does not differentiate between the two studios. In order for a color graph to be accessible to people with color blindness we need to pick colors that vary in terms of lightness as well as hue. We can do that with the help of the RColorBrewer package.</p>
@@ -972,7 +972,7 @@ FIGURE 6.4: Wide range color palette (color-blind accessible)
 </p>
 </div>
 <div style="page-break-after: always;"></div>
-<p>In Figure <a href="graphing.html#fig:colorpal">6.4</a>, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximium contrast between those colors). You can, for example, obtain palettes with only three colors using the code below.</p>
+<p>In Figure <a href="graphing.html#fig:colorpal">6.4</a>, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximum contrast between those colors). You can, for example, obtain palettes with only three colors using the code below.</p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="graphing.html#cb385-1"></a><span class="kw">library</span>(RColorBrewer)</span>
 <span id="cb385-2"><a href="graphing.html#cb385-2"></a><span class="kw">display.brewer.all</span>(<span class="dt">n =</span> <span class="dv">3</span>, <span class="dt">colorblindFriendly =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>The above code generates the three-color palettes presented in Figure <a href="graphing.html#fig:colorspalthree">6.5</a>.</p>
@@ -1012,7 +1012,7 @@ FIGURE 6.5: Narrow range color palette (color-blind accessible)
 </div>
 <div id="palette-subsets" class="section level4">
 <h4><span class="header-section-number">6.11.1.3</span> Palette subsets</h4>
-<p>Our graph had only two colors but the “Paired” palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like use used before via the scale_fill_manual(). But we want to do so using the colors from the “Paired” palette. We can obtain the color codes for the “Paired” palette with the code below:</p>
+<p>Our graph had only two colors but the “Paired” palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like we used before via the scale_fill_manual(). But we want to do so using the colors from the “Paired” palette. We can obtain the color codes for the “Paired” palette with the code below:</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="graphing.html#cb387-1"></a><span class="kw">brewer.pal</span>(<span class="dt">n =</span> <span class="dv">3</span>, <span class="dt">name =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;#A6CEE3&quot; &quot;#1F78B4&quot; &quot;#B2DF8A&quot;</code></pre>
 <p>The numbers in the output correspond to values representing the three colors of the “Paired” palette, see Figure <a href="graphing.html#fig:pairedpal">6.6</a>. If we want the last two colors in the palette for our graph that means we want the colors: #1F78B4 and #B2DF8A.</p>
@@ -1045,7 +1045,7 @@ FIGURE 6.6: Paired palette colors with hex numbers
 <span id="cb389-20"><a href="graphing.html#cb389-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb389-21"><a href="graphing.html#cb389-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#1F78B4&quot;</span>, <span class="st">&quot;#B2DF8A&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph5.png" width="65%" /></p>
-<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
+<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B, below, notice that the bars representing the two studios are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">6.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
 <div class="figure"><span id="fig:colorcomparison2"></span>
 <img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="75%" />
 <p class="caption">
@@ -1079,8 +1079,8 @@ FIGURE 6.7: Color information (i.e., hue) removed from new color-blind accessibl
 <span id="cb390-20"><a href="graphing.html#cb390-20"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>)) <span class="op">+</span></span>
 <span id="cb390-21"><a href="graphing.html#cb390-21"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph2.png" width="65%" /></p>
-<p>How do get around the Marvel bars disappearing when we use white?</p>
-<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term fill is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the prevous code we used fill to change the colors of the bars but we did not use the “color” argrument in a command. In the code below, we modify the geom_col() command to use the “color” argument. Specifically, we change geom_col() to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
+<p>How do we get around the Marvel bars disappearing when we use white?</p>
+<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term <strong>fill</strong> is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the previous code we used fill to change the colors of the bars but we did not use the “color” argument in a command. In the code below, we modify the geom_col() command to use the “color” argument. Specifically, we change geom_col() to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="graphing.html#cb391-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
 <span id="cb391-2"><a href="graphing.html#cb391-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> title,</span>
 <span id="cb391-3"><a href="graphing.html#cb391-3"></a>                         <span class="dt">y =</span> boxoffice,</span>
@@ -1118,7 +1118,7 @@ FIGURE 6.7: Color information (i.e., hue) removed from new color-blind accessibl
 </div>
 <div id="pc-or-mac" class="section level3">
 <h3><span class="header-section-number">6.12.2</span> PC or MAC</h3>
-<p>If you have a PC it’s hard to put a PDF into MSWord. Therefore save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.</p>
+<p>If you have a PC it’s hard to put a PDF into MSWord. Therefore, save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.</p>
 <p>With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.</p>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="graphing.html#cb393-1"></a><span class="kw">ggsave</span>(<span class="dt">plot =</span> my_graph, </span>
 <span id="cb393-2"><a href="graphing.html#cb393-2"></a>       <span class="dt">filename =</span> <span class="st">&quot;emoji_graph.jpg&quot;</span>, </span>

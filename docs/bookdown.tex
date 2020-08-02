@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-07-30}
+\date{2020-08-02}
 
 \begin{document}
 \maketitle
@@ -269,11 +269,11 @@ I used the \textbf{knitr}\index{knitr} package \citep{xie2015} and the \textbf{b
 ##   graphics_4.0.2  grDevices_4.0.2 highr_0.8      
 ##   htmltools_0.4.0 jsonlite_1.6.1  knitr_1.28     
 ##   magrittr_1.5    markdown_1.1    methods_4.0.2  
-##   mime_0.9        packrat_0.5.0   Rcpp_1.0.5     
-##   rlang_0.4.7     rmarkdown_2.2   rstudioapi_0.11
-##   stats_4.0.2     stringi_1.4.6   stringr_1.4.0  
-##   tinytex_0.23    tools_4.0.2     utils_4.0.2    
-##   xfun_0.14       yaml_2.2.1
+##   mime_0.9        Rcpp_1.0.5      rlang_0.4.7    
+##   rmarkdown_2.2   rstudioapi_0.11 stats_4.0.2    
+##   stringi_1.4.6   stringr_1.4.0   tinytex_0.23   
+##   tools_4.0.2     utils_4.0.2     xfun_0.14      
+##   yaml_2.2.1
 \end{verbatim}
 
 Package names are in bold text (e.g., \textbf{rmarkdown}), and inline code and filenames are formatted in a typewriter font (e.g., \texttt{knitr::knit(\textquotesingle{}foo.Rmd\textquotesingle{})}). Function names are followed by parentheses (e.g., \texttt{bookdown::render\_book()}).
@@ -5027,6 +5027,8 @@ Sample accuracy refers to the extent to which sample statistics correctly estima
 
 Further complicating matters is the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
+Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about the rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
+
 \hypertarget{data-for-the-chapter}{%
 \section{Data for the chapter}\label{data-for-the-chapter}}
 
@@ -5090,7 +5092,7 @@ We can use the head() command to see the first 10 rows of the 100,00 rows. We se
 \hypertarget{notation-1}{%
 \section{Notation}\label{notation-1}}
 
-In the formulas below, when we refer the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate we represent this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
+In the formulas below, when we refer the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
 \hypertarget{estimating-the-mean}{%
 \section{Estimating the mean}\label{estimating-the-mean}}
@@ -5117,14 +5119,14 @@ We can calculate the population mean for the height column of pop\_data using th
 ## 1    172.5
 \end{verbatim}
 
-As noted previously, we rarely have access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, \(\bar{x}\), is a statistic calculated using the using Formula \eqref{eq:samplemeanch5} below. The bar of above the \(x\), indicates that it is a mean. Notice that Formula \eqref{eq:popmeanch5} and Formula \eqref{eq:samplemeanch5} are the same - even though they use different notation. In this formula, the letter \(n\) corresponds to the number of people in the sample.
+As noted previously, we rarely have access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, \(\bar{x}\), is a statistic calculated using the using Formula \eqref{eq:samplemeanch5} below. The bar above the \(x\), indicates that it is a mean. Notice that Formula \eqref{eq:popmeanch5} and Formula \eqref{eq:samplemeanch5} are the same - even though they use different notation. In this formula, the letter \(n\) corresponds to the number of people in the sample.
 
 \begin{equation} 
 \bar{x} = \frac{\sum{x}}{n}
       \label{eq:samplemeanch5}
 \end{equation}
 
-Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which sample mean are right, on averaage. That is, they are interested in the extent to which the mean of many sample means (\(\bar{\bar{x}}\)) corresponds to the population mean (\(\mu\)). The mean of many sample means can be calculated using Formula \eqref{eq:samplemeanmeanch5} below. In this formula, the letter \(k\) corresponds to the number of sample means.
+Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which sample means are right, on average. That is, they are interested in the extent to which the mean of many sample means (\(\bar{\bar{x}}\)) corresponds to the population mean (\(\mu\)). The mean of many sample means can be calculated using Formula \eqref{eq:samplemeanmeanch5} below. In this formula, the letter \(k\) corresponds to the number of sample means.
 
 \begin{equation} 
 \bar{\bar{x}} = \frac{\sum{\bar{x}}}{k}
@@ -5137,7 +5139,7 @@ If the mean of the sample means, \(\bar{\bar{x}}\), equals the population mean, 
 \includegraphics[width=0.8\linewidth]{ch_samples/images/sampling_accuracy} \caption{Sampling accuracy and precision}\label{fig:showbias}
 \end{figure}
 
-We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below.
+We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 5000 samples to create an approximate sampling distribution of means. We use the code below to do so:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5173,12 +5175,12 @@ We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 sam
 Each row of many\_samples represents a sample of 10 people. Each column of many\_samples indicates a sample statistic. You can see that for each sample/row we indicate ``n'' (the sample size) and ``sample.mean'' (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you it is means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist}
 \end{figure}
 
-Above, in Figure \ref{fig:bothdist}, we present a graph comparing the population distribution to the distribution of sample means. The sample means plotted are the 5000 sample means, from the sample.mean column. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantially from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
+Above, in Figure \ref{fig:bothdist}, we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 5000 sample means, from the sample.mean column. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantially from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
 
-Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean. If, on average, the sample mean is accurate we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.
+Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean? If, on average, the sample mean does corresponds to the population mean, it is accurate and we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5193,7 +5195,7 @@ Statisticians, recognizing the limitations of a single study, are not particular
 ## 1               172.4
 \end{verbatim}
 
-We find that the average of the 5000 sample means is 172.41 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula \eqref{eq:samplemeanch5}) as we did the population mean (Formula \eqref{eq:popmeanch5}), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples. Consequently, the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be ``wrong''.
+We find that the average of the 5000 sample means is 172.41 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula \eqref{eq:samplemeanch5}) as we did the population mean (Formula \eqref{eq:popmeanch5}), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples (i.e., an infinite number of samples). Therefore, we conclude the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be ``wrong''.
 
 \hypertarget{estimating-variance}{%
 \section{Estimating variance}\label{estimating-variance}}
@@ -5267,7 +5269,7 @@ In the many\_samples data, the column sample.var.n\_1 was generated using Formul
 ## 1           156.7
 \end{verbatim}
 
-We see that the average of the 5000 values using \(n-1\) in the denominator is 157.62 which is very close to the population varaince of 157.46. Consequently, we when we use \(n-1\) in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using \(n-1\) in the denominator, we will, on average, be right.
+We see that the average of the 5000 values using \(n-1\) in the denominator is 157.62 which is very close to the population varaince of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use \(n-1\) in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using \(n-1\) in the denominator, we will, on average, be right.
 
 You may wonder at this point, when we use \(n-1\) in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use \(n-1\) in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared errors \emph{in the population}. That is, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared differences between each person in the population and the population mean.
 
@@ -5352,7 +5354,7 @@ This reveals the population parameters are:
 \end{aligned} 
 \]
 
-Likewise, the population-level standardized mean difference (\(\delta\)) is 1.49. We can see this population-level difference illustrated in Figure \ref{fig:sexpop}.
+Likewise, as calculated below, the population-level standardized mean difference (\(\delta\)) is 1.49. We can see this population-level difference illustrated in Figure \ref{fig:sexpop}.
 
 \[
 \begin{aligned} 
@@ -5364,7 +5366,7 @@ Likewise, the population-level standardized mean difference (\(\delta\)) is 1.49
 \]
 
 \begin{figure}
-\includegraphics[width=0.95\linewidth]{ch_samples/images/sex_pops} \caption[Illustration of standardized mean difference of $\delta =1.49$]{Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males whereas the dotted vertical line indicates the mean for females.}\label{fig:sexpop}
+\includegraphics[width=0.95\linewidth]{ch_samples/images/sex_pops} \caption[Illustration of standardized mean difference of $\delta =1.49$]{Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males; whereas the dotted vertical line indicates the mean for females.}\label{fig:sexpop}
 \end{figure}
 
 We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \eqref{eq:samplesmdch5} below. This value is known by many other names: \(d\), Cohen's \(d\), and Hedges \(g\). Notice that the sample-level formula, Formula \eqref{eq:samplesmdch5}, below, is the same as the population-level formula, Formula \eqref{eq:popsmdch5}, above, only the notation differs.
@@ -5386,9 +5388,9 @@ If we try to apply either \(d\)-value formula (\eqref{eq:samplesmdch5} or \eqref
 \hypertarget{pooled-standard-deviation}{%
 \subsection{Pooled standard deviation}\label{pooled-standard-deviation}}
 
-When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \eqref{eq:popsmdch5}, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact the both population have the same standard deviation.
+When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \eqref{eq:popsmdch5}, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact that both populations have the same standard deviation.
 
-Let's consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations -- one for males and one for females. Moreover, these two sample-level standard deviation (using \(n\)-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviaitons are identical. Fortunately, this is sample-level data and not population-level data.
+Let's consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations -- one for males and one for females. Moreover, these two sample-level standard deviations (using \(n\)-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviations are identical. Fortunately, this is sample-level data and not population-level data.
 
 \[
 \begin{aligned} 
@@ -5464,7 +5466,7 @@ s_{pooled}^2 &= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{
 \end{aligned}
 \]
 
-And then we obtain the pooled standard deviation, below, for the standardized mean difference formula.
+Then we obtain the pooled standard deviation, below, for the standardized mean difference formula.
 
 \[
 \begin{aligned} 
@@ -5491,9 +5493,9 @@ d_{unbiased}  &= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
 \hypertarget{assessing-bias}{%
 \subsection{Assessing bias}\label{assessing-bias}}
 
-We can use our population-level data and sample from it to see the range of sample-level d-values that can occur.
+We can use our population-level data and sample from it to see the range of sample-level \(d\)-values that can occur.
 
-First, we remove the scores from the male and female columns and place them into male\_heights and female\_heights, respectively.
+First, we remove the heights for males and females and place them into male\_heights and female\_heights, respectively.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5590,13 +5592,12 @@ We can calculate the full range of sample-level \(d_{unbiased}\) values with the
 ## 1 -0.16  5.15
 \end{verbatim}
 
-We see from the output that \(d_{unbiased}\) values were as small as -0.20 and as large as 5.2. All of these values are estimates of the population-level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value.
-The negative \(d\)-value (i.e., the minumum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.
+We see from the output that \(d_{unbiased}\) values were as small as -0.20 and as large as 5.2. All of these values are estimates of the population-level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value. The negative \(d\)-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.
 
 \hypertarget{overview-1}{%
 \section{Overview}\label{overview-1}}
 
-In this chapter we have illustrated how population parameters can be estimated by sample statistics; these are summarised below:
+In this chapter we have illustrated how population parameters can be estimated by sample statistics; these are summarized below:
 
 \doublespacing
 
@@ -5668,7 +5669,7 @@ Cohen's \(d\) or SMD\strut
 \hypertarget{meta-analysis}{%
 \section{Meta-analysis}\label{meta-analysis}}
 
-It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that ``in the real world''. In fact, researchers that are aware of the enormous impact of sampling error know single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds ``the truth'' of what is happening at the population level by averaging all of the studies on that topic.
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that ``in the real world''. In fact, researchers who are aware of the enormous impact of sampling error know that single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds ``the truth'' of what is happening at the population level by averaging all of the studies on that topic.
 
 \hypertarget{key-points-1}{%
 \section{Key Points}\label{key-points-1}}
@@ -6541,12 +6542,12 @@ If you scroll down to section 5 Uncategorized on this page you will find the cod
 \hypertarget{accessible-colors}{%
 \section{Accessible Colors}\label{accessible-colors}}
 
-The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the ``proper'' colors for the Marvel and DC studios. Although using these colors was aethetically pleasing a major consideration for all the graphs you make should ensuring they are accessible to a wide audience.
+The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the ``proper'' colors for the Marvel and DC studios. Although using these colors was aethetically pleasing, a major consideration is ensuring your graphs are accessible to a wide audience.
 
-Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can can there of there being a lightness (i.e., light vs.~dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs \citep[see][]{margulis2005photoshop}.
+Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can think of there being a lightness (i.e., light vs.~dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs \citep[see][]{margulis2005photoshop}.
 
 \begin{figure}
-\includegraphics[width=0.75\linewidth]{ch_graphing/images/nocolorcomparison} \caption{Color information (i.e., hue) removed from current graph}\label{fig:colorcomparison}
+\includegraphics[width=0.75\linewidth]{ch_graphing/images/nocolorcomparison} \caption{Hue removed from current graph}\label{fig:colorcomparison}
 \end{figure}
 
 Figure \ref{fig:colorcomparison}A presents our current graph whereas Figure \ref{fig:colorcomparison}B presents the same graph with the hue component removed. You can see that when the hue component is removed that the distinction between the Marvel and DC bars is also removed. The particular colors used to represent Marvel/DC differ in terms of hue but not lightness. Consequently, when we remove the hue component we are left with a graph, \ref{fig:colorcomparison}B, that does not differentiate between the two studios. In order for a color graph to be accessible to people with color blindness we need to pick colors that vary in terms of lightness as well as hue. We can do that with the help of the RColorBrewer package.
@@ -6572,7 +6573,7 @@ The RColorBrewer package can be used to generate color palettes for graphs that 
 
 \newpage
 
-In Figure \ref{fig:colorpal}, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximium contrast between those colors). You can, for example, obtain palettes with only three colors using the code below.
+In Figure \ref{fig:colorpal}, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximum contrast between those colors). You can, for example, obtain palettes with only three colors using the code below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6625,7 +6626,7 @@ We can use a color palette by specifying its name within scale\_fill\_brewer(). 
 \hypertarget{palette-subsets}{%
 \subsubsection{Palette subsets}\label{palette-subsets}}
 
-Our graph had only two colors but the ``Paired'' palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like use used before via the scale\_fill\_manual(). But we want to do so using the colors from the ``Paired'' palette. We can obtain the color codes for the ``Paired'' palette with the code below:
+Our graph had only two colors but the ``Paired'' palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like we used before via the scale\_fill\_manual(). But we want to do so using the colors from the ``Paired'' palette. We can obtain the color codes for the ``Paired'' palette with the code below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6673,7 +6674,7 @@ We can put the two colors we want (\#1F78B4 and \#B2DF8A) on the graph by using 
 
 \includegraphics[width=0.65\linewidth]{ch_graphing/images/emoji_graph5}
 
-Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure \ref{fig:colorcomparison2}B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \ref{fig:colorcomparison2}B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
+Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure \ref{fig:colorcomparison2}B, below, notice that the bars representing the two studios are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \ref{fig:colorcomparison2}B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
 
 \begin{figure}
 \includegraphics[width=0.75\linewidth]{ch_graphing/images/nocolorcomparison2} \caption{Color information (i.e., hue) removed from new color-blind accessible graph}\label{fig:colorcomparison2}
@@ -6712,9 +6713,9 @@ When you only have two colors on a graph another option for creating an accessib
 
 \includegraphics[width=0.65\linewidth]{ch_graphing/images/emoji_graph2}
 
-How do get around the Marvel bars disappearing when we use white?
+How do we get around the Marvel bars disappearing when we use white?
 
-\textbf{Color vs.~fill.} The ggplot packages makes a distinction between \textbf{fill} and \textbf{color}. The term fill is used to refer to the inside color of bars. In contrast, \textbf{color} is used to the refer to the lines that outline the shape of each bar. In the prevous code we used fill to change the colors of the bars but we did not use the ``color'' argrument in a command. In the code below, we modify the geom\_col() command to use the ``color'' argument. Specifically, we change geom\_col() to geom\_col(color = ``black''). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
+\textbf{Color vs.~fill.} The ggplot packages makes a distinction between \textbf{fill} and \textbf{color}. The term \textbf{fill} is used to refer to the inside color of bars. In contrast, \textbf{color} is used to the refer to the lines that outline the shape of each bar. In the previous code we used fill to change the colors of the bars but we did not use the ``color'' argument in a command. In the code below, we modify the geom\_col() command to use the ``color'' argument. Specifically, we change geom\_col() to geom\_col(color = ``black''). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6766,7 +6767,7 @@ If you are able to use PDFs in your workflow that's often the best option for sa
 \hypertarget{pc-or-mac}{%
 \subsection{PC or MAC}\label{pc-or-mac}}
 
-If you have a PC it's hard to put a PDF into MSWord. Therefore save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
+If you have a PC it's hard to put a PDF into MSWord. Therefore, save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
 
 With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.
 
