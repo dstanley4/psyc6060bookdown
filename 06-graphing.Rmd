@@ -741,11 +741,11 @@ knitr::include_graphics("ch_graphing/images/emoji_graph.png")
 
 ## Accessible Colors
 
-The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the "proper" colors for the Marvel and DC studios. Although using these colors was aethetically pleasing a major consideration for all the graphs you make should ensuring they are accessible to a wide audience.
+The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the "proper" colors for the Marvel and DC studios. Although using these colors was aethetically pleasing, a major consideration is ensuring your graphs are accessible to a wide audience.
 
-Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can can there of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs [see @margulis2005photoshop].  
+Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can think of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs [see @margulis2005photoshop].  
 
-```{r colorcomparison, out.width= "75%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from current graph"}
+```{r colorcomparison, out.width= "75%", echo = FALSE, fig.cap = "Hue removed from current graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison.png")
 ```
 
@@ -792,7 +792,7 @@ knitr::include_graphics("ch_graphing/images/colors_all.png")
 
 \newpage
 
-In Figure \@ref(fig:colorpal), above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximium contrast between those colors). You can, for example, obtain palettes with only three colors using the code below. 
+In Figure \@ref(fig:colorpal), above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximum contrast between those colors). You can, for example, obtain palettes with only three colors using the code below. 
 
 
 ```{r, eval = FALSE}
@@ -846,7 +846,7 @@ knitr::include_graphics("ch_graphing/images/emoji_graph4.png")
 
 #### Palette subsets
 
-Our graph had only two colors but the "Paired" palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like use used before via the scale_fill_manual(). But we want to do so using the colors from the "Paired" palette. We can obtain the color codes for the "Paired" palette with the code below:
+Our graph had only two colors but the "Paired" palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like we used before via the scale_fill_manual(). But we want to do so using the colors from the "Paired" palette. We can obtain the color codes for the "Paired" palette with the code below:
 
 ```{r}
 brewer.pal(n = 3, name = "Paired")
@@ -893,7 +893,7 @@ ggsave(plot = my_graph, filename = "ch_graphing/images/emoji_graph5.png", width 
 knitr::include_graphics("ch_graphing/images/emoji_graph5.png")
 ```
 
-Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure \@ref(fig:colorcomparison2)B, below, notice that the bars representing the two studio are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \@ref(fig:colorcomparison2)B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when the hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
+Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure \@ref(fig:colorcomparison2)B, below, notice that the bars representing the two studios are easily distinguishable based on lightness alone. That is, the lightness graph in Figure \@ref(fig:colorcomparison2)B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.
 
 ```{r colorcomparison2, out.width= "75%", echo = FALSE, fig.cap = "Color information (i.e., hue) removed from new color-blind accessible graph"}
 knitr::include_graphics("ch_graphing/images/nocolorcomparison2.png")
@@ -939,9 +939,9 @@ knitr::include_graphics("ch_graphing/images/emoji_graph2.png")
 ```
 
 
-How do get around the Marvel bars disappearing when we use white?
+How do we get around the Marvel bars disappearing when we use white?
 
-**Color vs. fill.** The ggplot packages makes a distinction between **fill** and **color**. The term fill is used to refer to the inside color of bars. In contrast, **color** is used to the refer to the lines that outline the shape of each bar.  In the prevous code we used fill to change the colors of the bars but we did not use the "color" argrument in a command. In the code below, we modify the geom_col() command to use the "color" argument. Specifically, we change geom_col() to geom_col(color = "black"). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
+**Color vs. fill.** The ggplot packages makes a distinction between **fill** and **color**. The term **fill** is used to refer to the inside color of bars. In contrast, **color** is used to the refer to the lines that outline the shape of each bar.  In the previous code we used fill to change the colors of the bars but we did not use the "color" argument in a command. In the code below, we modify the geom_col() command to use the "color" argument. Specifically, we change geom_col() to geom_col(color = "black"). This change adds a black outline around all the bars -- including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.
 
 ```{r, out.width="65%"}
 my_graph <- ggplot(data = movie_data,
@@ -996,7 +996,7 @@ ggsave(plot = my_graph,
 
 ### PC or MAC
 
-If you have a PC it's hard to put a PDF into MSWord. Therefore save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
+If you have a PC it's hard to put a PDF into MSWord. Therefore, save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.
 
 With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.
 
