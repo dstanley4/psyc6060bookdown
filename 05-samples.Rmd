@@ -114,16 +114,16 @@ If the mean of the sample means, $\bar{\bar{x}}$, equals the population mean, $\
 knitr::include_graphics("ch_samples/images/sampling_accuracy.png")
 ```
 
-We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 5000 samples to create an approximate sampling distribution of means. We use the code below to do so:
+We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 50000 samples to create an approximate sampling distribution of means. We use the code below to do so:
 
 ```{r}
 many_samples <- get_M_samples(pop.data = pop_data, 
                               pop.column.name = height,
                               n = 10,
-                              number.of.samples = 5000)
+                              number.of.samples = 50000)
 ```
 
-We use the head() command to see the first 10 rows (i.e., 10 samples of 5000 samples):
+We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 samples):
 
 ```{r}
 head(many_samples, 10)
@@ -162,7 +162,7 @@ knitr::include_graphics("ch_samples/images/sampling_dist.png")
 ```
  
  
-Above, in Figure \@ref(fig:bothdist), we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 5000 sample means, from the sample.mean column. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
+Above, in Figure \@ref(fig:bothdist), we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 50000 sample means, from the sample.mean column. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
 
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean? If, on average, the sample mean does corresponds to the population mean, it is accurate and we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.
 
@@ -172,7 +172,7 @@ many_samples %>%
   as.data.frame()
 ```
 
-We find that the average of the 5000 sample means is 172.41 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula \@ref(eq:samplemeanch5)) as we did the population mean (Formula \@ref(eq:popmeanch5)), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples (i.e., an infinite number of samples). Therefore, we conclude the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be "wrong".
+We find that the average of the 50000 sample means is 172.47 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula \@ref(eq:samplemeanch5)) as we did the population mean (Formula \@ref(eq:popmeanch5)), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples (i.e., an infinite number of samples). Therefore, we conclude the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be "wrong".
 
 
 ## Estimating variance
@@ -201,7 +201,7 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 $$
 
-The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an $n$ in the denominator. We can see that this is true by examining the many_samples data. In these data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample.var.n column over the 5000 samples. If this average equals the population variance of 157.5 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
+The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an $n$ in the denominator. We can see that this is true by examining the many_samples data. In these data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample.var.n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
 
 ```{r}
 many_samples %>%
@@ -209,7 +209,7 @@ many_samples %>%
   as.data.frame()
 ```
 
-You can see the average of sample.var.n column (141.86) is much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
+You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
@@ -226,7 +226,7 @@ many_samples %>%
   as.data.frame()
 ```
 
-We see that the average of the 5000 values using $n-1$ in the denominator is 157.62 which is very close to the population varaince of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
+We see that the average of the 50000 values using $n-1$ in the denominator is 157.27 which is very close to the population variance of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
 
 You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors *in the population*. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
 
@@ -323,8 +323,8 @@ gmale <- ggplot(data = male_pop_data,
   theme_classic() +
   scale_alpha_manual(values = c(.20, .50)) +
   scale_x_continuous(breaks = seq(100, 250, by = 10)) +
-  geom_segment(x = 165, xend = 165, y = 0, yend = 15000, size = 1, linetype = "dotted") +
-  geom_segment(x = 180, xend = 180, y = 0, yend = 15000, size = 1) +
+  geom_segment(x = 165, xend = 165, y = 0, yend = 150000, size = 1, linetype = "dotted") +
+  geom_segment(x = 180, xend = 180, y = 0, yend = 150000, size = 1) +
   geom_segment(x = 170, xend = 180, y = 13000, yend = 13000, size = .7, arrow = arrow(length = unit(0.1, "inches"))) +
   geom_segment(x = 175, xend = 165, y = 13000, yend = 13000, size = .7, arrow = arrow(length = unit(0.1, "inches"))) +
   labs(x = "Height (cm)", y = "Count", title = "A. Male Population") +
@@ -336,7 +336,7 @@ gmale <- ggplot(data = male_pop_data,
            parse = T, label = as.character(textmale1), hjust = 0) +
   annotate("text", x = 185, y = 12200, 
            parse = T, label = as.character(texts1), hjust = 0) + 
-  coord_cartesian(ylim = c(0, 15000), xlim = c(120, 220))
+  coord_cartesian(ylim = c(0, 150000), xlim = c(120, 220))
 
 gfemale <- ggplot(data = female_pop_data,
        mapping = aes(x = height)) +
@@ -349,8 +349,8 @@ gfemale <- ggplot(data = female_pop_data,
   theme_classic() +
   scale_alpha_manual(values = c(.20, .50)) +
   scale_x_continuous(breaks = seq(100, 250, by = 10)) +
-  geom_segment(x = 165, xend = 165, y = 0, yend = 15000, size = 1, linetype = "dotted") +
-  geom_segment(x = 180, xend = 180, y = 0, yend = 15000, size = 1) +
+  geom_segment(x = 165, xend = 165, y = 0, yend = 150000, size = 1, linetype = "dotted") +
+  geom_segment(x = 180, xend = 180, y = 0, yend = 150000, size = 1) +
   geom_segment(x = 170, xend = 180, y = 13000, yend = 13000, size = .7, arrow = arrow(length = unit(0.1, "inches"))) +
   geom_segment(x = 175, xend = 165, y = 13000, yend = 13000, size = .7, arrow = arrow(length = unit(0.1, "inches"))) +
   labs(x = "Height (cm)", y = "Count", title = "B. Female Population") +
@@ -362,7 +362,7 @@ gfemale <- ggplot(data = female_pop_data,
            parse = T, label = as.character(textfemale1), hjust = 1) +
   annotate("text", x = 160, y = 12200, 
            parse = T, label = as.character(texts1), hjust = 1) + 
-  coord_cartesian(ylim = c(0, 15000), xlim = c(120, 220))
+  coord_cartesian(ylim = c(0, 150000), xlim = c(120, 220))
 
 png(filename = "ch_samples/images/sex_pops.png", res = 300, width =8*300, height = 6*300)
 gridExtra::grid.arrange(gmale, gfemale, nrow = 2)
@@ -518,7 +518,7 @@ Next, we obtain a large number of samples from each population and place them in
 many_samples<-  get_d_samples_from_population_data(pop1 = male_heights,
                                    pop2 = female_heights,
                                    cell.n = 10,
-                                   number.of.samples = 5000)
+                                   number.of.samples = 50000)
 ```
 
 We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the $d$ and $d_{unbiased}$ for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
@@ -535,7 +535,7 @@ many_samples %>%
             mean_d_unbiased = mean(d.unbiased))
 ```
 
-You can see that the mean of the sample-level $d$ values is 1.56 which is higher than the population-level standardized mean difference ($\delta$ = 1.49). In contrast, you can see that the mean of the sample-level $d_{unbiased}$ values is 1.498 which closely corresponds to the population-level standardized mean difference ($\delta$ = 1.49) - it would have corresponded exactly with more samples.
+You can see that the mean of the sample-level $d$ values is 1.56 which is higher than the population-level standardized mean difference ($\delta$ = 1.49). In contrast, you can see that the mean of the sample-level $d_{unbiased}$ values is 1.49 which corresponds to the population-level standardized mean difference ($\delta$ = 1.49).
 
 
 ### Illustrating variability
@@ -575,7 +575,7 @@ many_samples %>%
             d_max = max(d.unbiased))
 ```
 
-We see from the output that $d_{unbiased}$ values were as small as -0.20 and as large as 5.2. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative $d$-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
+We see from the output that $d_{unbiased}$ values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative $d$-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
 
 ## Overview
 
@@ -596,7 +596,7 @@ In this chapter we have illustrated how population parameters can be estimated b
 
 ## Meta-analysis
 
-It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers who are aware of the enormous impact of sampling error know that single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is refered to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging all of the studies on that topic.
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers who are aware of the enormous impact of sampling error know that single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is referred to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging all of the studies on that topic.
 
 
 ## Key Points
