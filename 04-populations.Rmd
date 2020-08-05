@@ -105,7 +105,16 @@ In this section we review how to calculate three commonly used population parame
 
 It can be helpful to create a model that describes our data. Of course, the model won’t describe every participant perfectly and each participant will differ to some extent from the model.
 
-**Model:** To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights of the three cookies are designated by $X_1$, $X_2$, and $X_3$. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol $\mu$; at the sample level a different notation is used.
+**Model:** To create a model we first need data, which in this example will be the weight of three different chocolate chip cookies. As mentioned previously, the weights of the three cookies are designated by $X_1$, $X_2$, and $X_3$. A simple model for our cookie weight data is the mean. At the population level the mean is represented by the symbol $\mu$ see Formula \@ref(eq:popmeanch4) below. At the sample level a different notation is used.
+
+
+\begin{equation} 
+\mu = \frac{\sum{X}}{N}
+      (\#eq:popmeanch4)
+\end{equation} 
+
+
+Using that equation with values:
 
 
 $$
@@ -187,7 +196,14 @@ We want a number that indicates the quality of the cookie model. Specifically, w
 | $X_2 = 10$  |  $\mu = 10$ |  $(X_2 - \mu)^2 =(10 - 10)^2= 0$ |
 | $X_3 = 12$  |  $\mu = 10$ |  $(X_3 - \mu)^2 =(12 - 10)^2= 4$ |
 
-**Averaging Squared Errors.** To obtain variance we calculate the average of the squared errors.  This is shown below:
+**Averaging Squared Errors.** To obtain variance we calculate the average of the squared errors.  At the population level the variance is represented by the symbol $\sigma^2$ see Formula \@ref(eq:popvarch4) below. In this formula, $N$ refers to the number of people in the population.  At the sample level a different notation is used.
+
+\begin{equation} 
+\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}
+      (\#eq:popvarch4)
+\end{equation} 
+
+Using that equation with values:
 
 $$
 \begin{aligned} 
@@ -217,18 +233,26 @@ It probably strikes you as an odd choice to square the difference between each d
 
 An alternative index for how data differ from the mean/model is the standard deviation. To understand standard deviation you have to understand varince. Variance is a single number that indexes how data differ from a model. The interpretation of variance is straight forward. It is the average of the squared differences between the data and the model. 
 
-Standard deviation is represented by the symbol $\sigma$ and can be calculated as the square root of variance:
+Standard deviation is represented by the symbol $\sigma$ and can be calculated as the square root of variance as in Formula \@ref(eq:popsdch4) below.
 
+\begin{equation} 
+\sigma = \sqrt{\frac{\sum{(X - \mu)^2}}{N}}
+      (\#eq:popsdch4)
+\end{equation} 
+
+
+Using that equation with values:
 
 $$
 \begin{aligned} 
-\sigma &= \sqrt{\sigma^2} \\
+\sigma &= \sqrt{\frac{\sum{(X - \mu)^2}}{N}}\\
+&= \sqrt{\sigma^2} \\
 &= \sqrt{2.67} \\
 &= 1.63 grams\\
 \end{aligned} 
 $$
 
-One reason that people like standard deviation is presents the difference betweeeen the data and the model in the original units (e.g., grams). This is in contrast to variance which presents the difference betweeen the data and the model in squared units (e.g., 2.67 grams$^2$).
+One reason that people like standard deviation is presents the difference between the data and the model in the original units (e.g., grams). This is in contrast to variance which presents the difference betweeen the data and the model in squared units (e.g., 2.67 grams$^2$).
 
 **Interpretation**. Unfortunately, although variance has a straight forward interpretation, standard deviation does not. Sometimes standard deviation is, incorrectly, described as how much data points differ on average from the mean. A quick calculation of the average difference reveals a number (1.33) that does not correspond to the standard deviation (1.63):
 
@@ -734,7 +758,16 @@ The same approach to generating standardized scores can be applied to population
 
 We can calculate a standardized value to compare these heights. This standardized value is called the standardized mean difference (SMD). Alternatively, it is also known as Cohen's $d$ which is represented at the population level with the symbol $\delta$. Calculation of the standardized mean difference is based on the premise that both populations have the same standard deviation. 
 
-In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations. The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is half as large as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; $\delta = 0.50$:
+In this calculation the numerator represents the difference between the two population means. The denominator represents the population standard deviation - which is the same for both populations see Formula \@ref(eq:popsmdch4) below.
+
+
+\begin{equation} 
+\delta =  \frac{\mu_{1} - \mu_{2}}{\sigma}
+      (\#eq:popsmdch4)
+\end{equation} 
+
+
+Using that equation with values:
 
 $$
 \begin{aligned} 
@@ -745,6 +778,7 @@ $$
 \end{aligned} 
 $$
 
+The resulting division of this ratio reveals that the numerator is 0.50 times as large (i.e., half as large) as the denominator. That is, the difference between the populations is half as large as the standard deviation. Therefore, the population mean for males is 0.50 standard deviations larger than the population mean for female; $\delta = 0.50$:
 
 ### Cohen's $d$ units
 
