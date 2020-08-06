@@ -33,14 +33,14 @@
   
 <link rel="prev" href="sampling-accuracy.html"/>
 <link rel="next" href="graphing.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -364,19 +364,19 @@ FIGURE 6.1: Sampling accuracy and precision
 <div id="population-individuals" class="section level2">
 <h2><span class="header-section-number">6.1</span> Population / Individuals</h2>
 <p>As in the last chapter, we use a population of heights to learn about random sampling and the precision of sample estimates. We can obtain that population with the code below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sampling-precision.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="sampling-precision.html#cb1-2"></a><span class="kw">library</span>(learnSampling)</span>
-<span id="cb1-3"><a href="sampling-precision.html#cb1-3"></a></span>
-<span id="cb1-4"><a href="sampling-precision.html#cb1-4"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="sampling-precision.html#cb346-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb346-2"><a href="sampling-precision.html#cb346-2"></a><span class="kw">library</span>(learnSampling)</span>
+<span id="cb346-3"><a href="sampling-precision.html#cb346-3"></a></span>
+<span id="cb346-4"><a href="sampling-precision.html#cb346-4"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
 <p>The glimpse() command can be used to confirm that the population contains 100,000 people.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sampling-precision.html#cb2-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sampling-precision.html#cb347-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
 <pre><code>## Rows: 100,000
 ## Columns: 3
-## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
-## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, …
-## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 172, 193, 190, 181, 15…</code></pre>
+## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
+## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;…
+## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 17…</code></pre>
 <p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the heights for everyone in the population.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sampling-precision.html#cb4-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sampling-precision.html#cb349-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##       id sex    height
 ##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
@@ -391,13 +391,13 @@ FIGURE 6.1: Sampling accuracy and precision
 ##  9     9 female    172
 ## 10    10 male      193</code></pre>
 <p>We can calculate the descriptive statistics for the population with the code below:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sampling-precision.html#cb6-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb6-2"><a href="sampling-precision.html#cb6-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height),</span>
-<span id="cb6-3"><a href="sampling-precision.html#cb6-3"></a>            <span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height),</span>
-<span id="cb6-4"><a href="sampling-precision.html#cb6-4"></a>            <span class="dt">pop_sd =</span> <span class="kw">sd.pop</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb6-5"><a href="sampling-precision.html#cb6-5"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   pop_mean  pop_var   pop_sd
-## 1 172.4762 157.4611 12.54835</code></pre>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sampling-precision.html#cb351-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb351-2"><a href="sampling-precision.html#cb351-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height),</span>
+<span id="cb351-3"><a href="sampling-precision.html#cb351-3"></a>            <span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height),</span>
+<span id="cb351-4"><a href="sampling-precision.html#cb351-4"></a>            <span class="dt">pop_sd =</span> <span class="kw">sd.pop</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb351-5"><a href="sampling-precision.html#cb351-5"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<pre><code>##   pop_mean pop_var pop_sd
+## 1    172.5   157.5  12.55</code></pre>
 <p>We see the mean of the population of heights is 172.5 (<span class="math inline">\(\mu = 172.5\)</span>) and the variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>). Correspondingly, the standard deviation of the population of heights is 12.5 (<span class="math inline">\(\sigma = 12.5\)</span>); simply the square root of the variance. For clarity, we use the subscript X in notation below to make it clear we are referring the people (which are often represented by X’s).</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -410,23 +410,23 @@ FIGURE 6.1: Sampling accuracy and precision
 <div id="sampling-distribution-sample-means" class="section level2">
 <h2><span class="header-section-number">6.2</span> Sampling distribution / sample means</h2>
 <p>A sampling distribution is usually thought of as being composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This is a large numbers of samples that will lead us to largely the same conclusions as using a impractical infinite number of samples. As per the last chapter we obtain the 50000 samples with code below:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sampling-precision.html#cb8-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
-<span id="cb8-2"><a href="sampling-precision.html#cb8-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
-<span id="cb8-3"><a href="sampling-precision.html#cb8-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
-<span id="cb8-4"><a href="sampling-precision.html#cb8-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sampling-precision.html#cb353-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
+<span id="cb353-2"><a href="sampling-precision.html#cb353-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
+<span id="cb353-3"><a href="sampling-precision.html#cb353-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb353-4"><a href="sampling-precision.html#cb353-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
 <p>We can use the head() command to see the first few rows of many_samples. Every row represents a sample of 10 people. For each row we have the sample mean and variance (using n-1).</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="sampling-precision.html#cb9-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sampling-precision.html#cb354-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
 <pre><code>##   study  n sample.mean sample.var.n sample.var.n_1
-## 1     1 10       174.3       27.810          30.90
-## 2     2 10       161.8       83.358          92.62
-## 3     3 10       173.2      139.158         154.62
-## 4     4 10       180.0      321.804         357.56
-## 5     5 10       172.8      160.956         178.84
-## 6     6 10       172.0      159.597         177.33</code></pre>
+## 1     1 10       174.3        27.81          30.90
+## 2     2 10       161.8        83.36          92.62
+## 3     3 10       173.2       139.16         154.62
+## 4     4 10       180.0       321.80         357.56
+## 5     5 10       172.8       160.96         178.84
+## 6     6 10       172.0       159.60         177.33</code></pre>
 <p>We will study the precision of sample means as estimate of the population mean using the values in the sample.mean column. Each of the 50000 values in the sample.mean column is a sample mean (<span class="math inline">\(\bar{x}\)</span>), based on <span class="math inline">\(n\)</span> = 10. Each sample mean provides an estimate of the population mean (<span class="math inline">\(\mu = 172.5\)</span>). The sample means often overestimate or underestimate the population mean. We can see this using the code below which tells use the smallest sample mean is 155.6 (<span class="math inline">\(\bar{x} = 155.6\)</span>) and the largest sample mean is 188.8 (<span class="math inline">\(\bar{x} = 188.8\)</span>). Both are estimates of the population mean (<span class="math inline">\(\mu = 172.5\)</span>) but differ from that value due to sampling error (i.e., the fact sample means are based on a small subset of the population).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sampling-precision.html#cb11-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb11-2"><a href="sampling-precision.html#cb11-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">min_mean =</span> <span class="kw">min</span>(sample.mean),</span>
-<span id="cb11-3"><a href="sampling-precision.html#cb11-3"></a>             <span class="dt">max_mean =</span> <span class="kw">max</span>(sample.mean))</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sampling-precision.html#cb356-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb356-2"><a href="sampling-precision.html#cb356-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">min_mean =</span> <span class="kw">min</span>(sample.mean),</span>
+<span id="cb356-3"><a href="sampling-precision.html#cb356-3"></a>             <span class="dt">max_mean =</span> <span class="kw">max</span>(sample.mean))</span></code></pre></div>
 <pre><code>##   min_mean max_mean
 ## 1    155.6    188.8</code></pre>
 <p>The 50000 means in the sample.mean column form a sampling distribution; specifically, the sample distribution of the mean.</p>
@@ -454,17 +454,17 @@ FIGURE 6.2: Sampling distribution of the mean. The population of individuals is 
 <p>How do we interpret variance of sample means? Assuming the sample mean is an unbiased estimator of the population mean (i.e., <span class="math inline">\(\bar{\bar{x}} = \mu\)</span>), then the variance of the sample means is simply the average of the squared differences between sample means and the population mean. Standard error is simply the square root of the variance of sample means. Both are different ways of describing the same things - the extent to which sample means differ from the population mean.</p>
 <p>If the variance of sample means is large, it indicates sample means differ considerably (on average) from the population mean. If the variance of sample means is small, it indicates sample means differ only slightly (on average) from the population mean. If the variance of sample means is zero, all the sample means are exactly the same as the population mean.</p>
 <p>We can calculate the variance of sample means below:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sampling-precision.html#cb13-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb13-2"><a href="sampling-precision.html#cb13-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">var_of_means =</span> <span class="kw">var</span>(sample.mean)) <span class="op">%&gt;%</span></span>
-<span id="cb13-3"><a href="sampling-precision.html#cb13-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sampling-precision.html#cb358-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb358-2"><a href="sampling-precision.html#cb358-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">var_of_means =</span> <span class="kw">var</span>(sample.mean)) <span class="op">%&gt;%</span></span>
+<span id="cb358-3"><a href="sampling-precision.html#cb358-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   var_of_means
-## 1     15.73387</code></pre>
+## 1        15.73</code></pre>
 <p>The standard error of sample mean is just the square root of this value:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sampling-precision.html#cb15-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb15-2"><a href="sampling-precision.html#cb15-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">sd_of_means =</span> <span class="kw">sqrt</span>(<span class="kw">var</span>(sample.mean))) <span class="op">%&gt;%</span></span>
-<span id="cb15-3"><a href="sampling-precision.html#cb15-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="sampling-precision.html#cb360-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb360-2"><a href="sampling-precision.html#cb360-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">sd_of_means =</span> <span class="kw">sqrt</span>(<span class="kw">var</span>(sample.mean))) <span class="op">%&gt;%</span></span>
+<span id="cb360-3"><a href="sampling-precision.html#cb360-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   sd_of_means
-## 1    3.966594</code></pre>
+## 1       3.967</code></pre>
 <p>Thus, using symbols:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -489,7 +489,7 @@ FIGURE 6.2: Sampling distribution of the mean. The population of individuals is 
 \sigma_{\bar{x}}^2 = \frac{\sigma^2}{n}
       \tag{6.3}
 \end{equation}\]</span></p>
-<p>You can see that with this formula the variance of sample means, Formula <a href="#eq:eq:samplevar2chnext">(<strong>??</strong>)</a>, is simply the variance of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don’t have to have the full population, create thousands of sample, or go through any of that calculation work. All we need to know is the standard deviation of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the people’s height in the population is <span class="math inline">\(\sigma^2=157.5\)</span> and our sample size is <span class="math inline">\(n\)</span> = 10.</p>
+<p>You can see that with this formula the variance of sample means, Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a>, is simply the variance of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don’t have to have the full population, create thousands of sample, or go through any of that calculation work. All we need to know is the standard deviation of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the people’s height in the population is <span class="math inline">\(\sigma^2=157.5\)</span> and our sample size is <span class="math inline">\(n\)</span> = 10.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &amp;= \frac{\sigma^2}{n} \\
@@ -526,32 +526,20 @@ Formula</p>
 <div id="paste-here" class="section level2">
 <h2><span class="header-section-number">6.6</span> PASTE HERE</h2>
 <p>#VAR</p>
-<p><span class="math display" id="eq:samplevarchnext">\[\begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{k}
-      \tag{6.2}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:samplevar2chnext">\[\begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sigma^2}{n}
-      \tag{6.3}
-\end{equation}\]</span></p>
 <p><span class="math display" id="eq:samplevar2estchnext">\[\begin{equation} 
 s_{\bar{x}}^2 = \frac{s^2}{n}
       \tag{6.4}
 \end{equation}\]</span></p>
 <p>#SE</p>
-<p><span class="math display" id="eq:samplese2chnext">\[\begin{equation} 
-\sigma_{\bar{x}} = \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{{\sqrt{n}}}
-      \tag{6.5}
-\end{equation}\]</span></p>
 <p><span class="math display" id="eq:samplese2estchnext">\[\begin{equation} 
 s_{\bar{x}} = \sqrt{\frac{s^2}{n}} = \frac{s}{{\sqrt{n}}}
-      \tag{6.6}
+      \tag{6.5}
 \end{equation}\]</span></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sampling-precision.html#cb17-1"></a>many_samples &lt;-<span class="st"> </span>many_samples <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">est_se2 =</span> sample.var.n_<span class="dv">1</span><span class="op">/</span>n)</span>
-<span id="cb17-2"><a href="sampling-precision.html#cb17-2"></a></span>
-<span id="cb17-3"><a href="sampling-precision.html#cb17-3"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">avg.of.est_se2 =</span> <span class="kw">mean</span>(est_se2))</span></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="sampling-precision.html#cb362-1"></a>many_samples &lt;-<span class="st"> </span>many_samples <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">est_se2 =</span> sample.var.n_<span class="dv">1</span><span class="op">/</span>n)</span>
+<span id="cb362-2"><a href="sampling-precision.html#cb362-2"></a></span>
+<span id="cb362-3"><a href="sampling-precision.html#cb362-3"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">avg.of.est_se2 =</span> <span class="kw">mean</span>(est_se2))</span></code></pre></div>
 <pre><code>##   avg.of.est_se2
-## 1       15.72713</code></pre>
+## 1          15.73</code></pre>
 
 </div>
 </div>
@@ -564,15 +552,15 @@ s_{\bar{x}} = \sqrt{\frac{s^2}{n}} = \frac{s}{{\sqrt{n}}}
 <a href="graphing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
