@@ -118,11 +118,14 @@ knitr::include_graphics("ch_samples/images/sampling_accuracy.png")
 
 We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 50000 samples to create an approximate sampling distribution of means. We use the code below to do so:
 
-```{r}
+```{r, eval = FALSE}
 many_samples <- get_M_samples(pop.data = pop_data, 
                               pop.column.name = height,
                               n = 10,
                               number.of.samples = 50000)
+```
+```{r, echo=FALSE}
+many_samples <- readRDS("ch_samples/many_samples_n10.RDS")
 ```
 
 We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 samples):
