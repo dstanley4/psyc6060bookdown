@@ -1,7 +1,10 @@
 # Sampling Precision
 
+## Overview
 
-In the previous chapter we focussed on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong.  Sample statistics may overestimate or underestimate a population parameter - often substantially. Consequently, we learned to think about accuracy of sample statistics,  not in terms of a single study, but rather  in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \@ref(fig:showbias2)). When the average of many sample statistics (e.g., sample means) equal the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average). In this chapter we focus on examining, and estimating, the variability in sample statistics. That is, to what extent will sample statistics deviate from the population parameter? We use the term precision to refer to the variability created by sampling error, see Figure \@ref(fig:showbias2).
+In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong.  Sample statistics may overestimate or underestimate a population parameter - often substantially. Consequently, we learned to think about accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather  in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \@ref(fig:showbias2)). When the average of many sample statistics (e.g., sample means) equal the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average). 
+
+In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we move on to primarily focus on the precision of sample means as estimates of the population mean, see Figure \@ref(fig:showbias2). That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder how much does my sample mean differ from the population mean? That's the question we address in this chapter. When we conduct a single study we can't know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample mean differ from the population mean in general. We focus on two indices of precision -- variance of sample mean and standard error of sample means. By the end of the chapter will understand how to conceptualize these concepts with respect to a large number of samples/studies and estimate them a single study.
 
 
 ```{r showbias2, echo=FALSE, out.width = "80%", fig.cap = "Sampling accuracy and precision"}
@@ -11,7 +14,7 @@ knitr::include_graphics("ch_samples_precision/images/sampling_accuracy.png")
 
 ## Population / Individuals
 
-As in the last chapter, we use a population of heights to learn about random sampling and the precision of sample estimates. We can obtain that population with the code below: 
+We use a population of heights to learn about random sampling and the precision of sample estimates. We can obtain that population with the code below: 
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -48,7 +51,7 @@ pop_data %>%
   as.data.frame()
 ```
 
-We see the mean of the population of heights is 172.5 ($\mu = 172.5$) and the variance is 157.5 ($\sigma^2 = 157.5$). Correspondingly, the standard deviation of the population of heights is 12.5 ($\sigma = 12.5$); simply the square root of the variance. For clarity, we use the subscript X in notation below to make it clear we are referring the people (which are often represented by X’s).
+We see the mean of the population of heights is 172.5 ($\mu = 172.5$) and the variance is 157.5 ($\sigma^2 = 157.5$). Correspondingly, the standard deviation of the population of heights is 12.5 ($\sigma = 12.5$); simply the square root of the variance. 
 
 $$
 \begin{aligned} 
@@ -61,23 +64,23 @@ $$
 
 ## Sampling distribution / sample means
 
-A sampling distribution is usually thought of as being composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This is a large numbers of samples that will lead us to largely the same conclusions as using a  impractical infinite number of samples.  As per the last chapter we obtain the 50000 samples with code below:
+A sampling distribution is usually thought of as being composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This is a large number of samples that will lead us to roughly the same conclusions as using an  impractical infinite number of samples. We obtain 50000 samples with code below:
 
 ```{r}
 many_samples <- get_M_samples(pop.data = pop_data, 
                               pop.column.name = height,
                               n = 10,
-                              number.of.samples = 50000)
+                              number.of.samples = 500)
 ```
 
-We can use the head() command to see the first few rows of many_samples. Every row represents a sample of 10 people. For each row we have the sample mean and variance (using n-1).
+We can use the head() command to see the first few rows of many_samples. Every row represents a sample of 10 people, that is, a study with 10 participants where we examine their heights. For each row/study we have the sample mean and variance (using n-1).
 
 
 ```{r}
 head(many_samples)
 ```
 
-We will study the precision of sample means as estimate of the population mean using the values in the sample.mean column.  Each of the 50000 values in the sample.mean column is a sample mean ($\bar{x}$), based on $n$ = 10. Each sample mean provides an estimate of the population mean ($\mu = 172.5$). The sample means often overestimate or underestimate the population mean. We can see this using the code below which tells use the smallest sample mean is 155.6 ($\bar{x} = 155.6$) and the largest sample mean is 188.8 ($\bar{x} = 188.8$). Both are estimates of the population mean ($\mu = 172.5$) but differ from that value due to sampling error (i.e., the fact sample means are based on a small subset of the population).
+We will study the precision of sample means as estimate of the population mean using the values in the sample.mean column.  Each of the 50000 values in the sample.mean column is a sample mean ($\bar{x}$), based on $n$ = 10. Each sample mean provides an estimate of the population mean ($\mu = 172.5$). Sample means often overestimate or underestimate the population mean. We can see this using the code below which tells use the smallest sample mean is 155.6 ($\bar{x} = 155.6$) and the largest sample mean is 188.8 ($\bar{x} = 188.8$). Both are estimates of the population mean ($\mu = 172.5$) but differ from that value due to sampling error (i.e., the fact sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
 
 ```{r}
 many_samples %>%
@@ -85,17 +88,14 @@ many_samples %>%
              max_mean = max(sample.mean))
 ```
 
-The 50000 means in the sample.mean column form a sampling distribution; specifically, the sample distribution of the mean.
-
-
-## Precision Indices
-
-Examine Figure \@ref(fig:bothdist2) below. The top part of this figure illustrates the variability in the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people. The bottom part of this figure illustrates the variabilty in sample means - each based on 10 people. Each sample mean is an estimate of the population of mean of 172.5 cm. There are more sample means than $\bar{x}$’s; the $\bar{x}$’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the population mean we are usually refering to the width of the this distribution of means. 
+The 50000 means in the sample.mean column form a sampling distribution; specifically, the sample distribution of the mean. It's critical to distinguish the sampling distribution of the mean the distribution of people in the population. Examine Figure \@ref(fig:bothdist2) below. The top part of this figure illustrates the variability in the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the population of mean of 172.5 cm.  There are more sample means than $\bar{x}$’s; the $\bar{x}$’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the population mean we are usually refering to the width of the this distribution of means. 
 
 
 ```{r bothdist2, echo = FALSE, out.width = "80%", fig.scap = "Sampling distribution of the mean.", fig.cap = "Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)."}
 knitr::include_graphics("ch_samples/images/sampling_dist.png")
 ```
+
+## Precision Indices
 
 The most common way of referring to the width of this distribution of sample mean is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean with using Formula \@ref(eq:samplesechnext) below.  We use k in the formula to refer to the number of sample mean in the distribution.  
 
@@ -194,17 +194,55 @@ $$
 
 ## Estimates
 
-As wonderful as it is to have a short-cut formula for obtaining the variance of sample means (or standard error) there is a catch. The formula requires knowledge of the population variance  (or standard deviation), In research scenario we don’t the mean or standard deviation of the population. Consequently, we can’t calculate the variance of sample mean (or standard error).
+As wonderful as it is to have a short-cut formula for obtaining the variance of sample means (or standard error) there is a catch. The formula requires knowledge of the population variance  (or standard deviation), In research scenario we don’t the mean or standard deviation of the population. Consequently, we can’t directly calculate the variance of sample mean (or standard error).
 
-Fortunately, with just a single study we can estimate the variance of sample means when using a given sample size. To do so, we recall that the sample variance (with n-1 in the denominator) is an estimate of the population variance. Therefore, we can use an estimate of the population variance to calculate an estimate of the variance of sample mean (or an estimate of standard error). We can do do with the formulas below:
+Fortunately, with just a single study we can use the sample variance (with n-1 in the denominator) to obtain an estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e, the precision of sample means) using Formula \@ref(eq:samplevar2estchnext).
 
-Estimate variance of sample means:
-Formula
+Estimated variance sample means:
+ 
+\begin{equation} 
+s_{\bar{x}}^2 = \frac{s^2}{n}
+      (\#eq:samplevar2estchnext)
+\end{equation} 
 
-Estimated standard error (Standard deviation of sample means)
-Formula
+Estimated standard error for the mean:
 
-Consider a worked example below. If using sample data (n = 10) we have a sample variance of xxx. That is, xx = xxx is our estimate of the population variance. We can estimate the variance of sample means or estimate standard error.
+\begin{equation} 
+s_{\bar{x}} = \sqrt{\frac{s^2}{n}} = \frac{s}{{\sqrt{n}}}
+      (\#eq:samplese2estchnext)
+\end{equation} 
+
+## A worked example
+
+Consider a worked example below. Imagine a scenario where we do not anything about the population of heights. Therefore we conduct a study by taking a random sample of 10 people to estimate the average height of people in the population. The sample mean is 174.3cm and the sample variance is 30.90. Therefore, our best guess of the unknown population mean is 174.3cm. Because we used a sample (a small subset of the population) we know that 174.3cm is unlikely to be the actual mean height for the population. The mean height for the population might be higher or lower than 174.3cm. Nonetheless, at this point our best guess is that the mean of the population is 174.3cm; but we recognize that this is just an estimate of the population mean and is likely off by some amount.
+
+Wouldn't it be great to know the extent to which the sample mean might differ from the population mean? As budding statisticians, we know we can't know that for this particular sample, but we can try to figure out how much samples differ from the population mean on average (when using $n$ = 10) to help us understand the precision of our current sample estimate (174.3cm) of the population mean. This precision information is exactly what is conveyed by the variance of sample means, $\sigma_{\bar{x}}^2$, or standard error of sample means, $\sigma_{\bar{x}}$.
+
+We want to know the variance of sample means (or standard error of sample means) but we only have a single study. Therefore, we have to rely on the short-cut formula for determining the variability in sample means. Unfortunately, the short-cut formula for the variance of sample means formula requires the population variance which we don't know. We do, however, have an estimate of the population variance from our sample. The sample variance is 30.9cm$^2$. Therefore, our best guess of the unknown population variance is 30.9cm$^2$. Because we used a sample (a small subset of the population) we know that 30.9cm$^2$ is unlikely to be the actual variance for the population. The variance for the population might be higher or lower than 30.9cm$^2$. Nonetheless, at this point our best guess is that the variance of the population is 30.9cm$^2$; but we recognize that this is just an estimate of the population variance and is likely off by some amount. We can, however, use this information to estimate the variance of sample means:
+
+$$
+\begin{aligned} 
+s^2_{\bar{x}} &= \frac{s^2}{n} \\
+&= \frac{30.90}{10} \\
+&= 3.09 \\
+\end{aligned} 
+$$
+
+Or alternatively, estimate standard error:
+
+$$
+\begin{aligned} 
+s_{\bar{x}} &= \sqrt{\frac{s^2}{n}} \\
+&= \sqrt{\frac{30.90}{10}} \\
+&= \sqrt{3.09} \\
+&= 1.76 \\
+\end{aligned} 
+$$
+
+
+
+## Omniscient recap
+
 
 
 When every you calculate the variance of sample mean or standard error based on sample data it is ALWAYS just an estimate of the actual variance of sample mean or the actual standard error. This is evident when you imagine calculating this for many sample as we do below with R code. This code calculate a new column in the many sample data set s2xbar - the ESTIMATED variance of sample means.
