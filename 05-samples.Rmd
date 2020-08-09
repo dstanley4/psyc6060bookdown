@@ -5,7 +5,7 @@ The following CRAN packages must be installed:
 | Required CRAN Packages |
 |-------------------|
 |tidyverse          |
-|remotes          |
+|remotes            |
 
 The following GitHub packages must be installed:
 
@@ -23,17 +23,17 @@ remotes::install_github("dstanley4/learnsampling")
 
 ## Overview
 
-Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population.  Unfortunately,  it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
+Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
 
 Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. This difference is typically refered to as **sampling error**.
 
-Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly. 
+Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic and the population parameter will vary randomly. 
 
 Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased. 
 
 Further complicating matters is  the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
-Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about the rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
+Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
 
 
 ## Data for the chapter
@@ -72,7 +72,7 @@ head(pop_data, 10)
 
 ## Notation
 
-In the formulas below, when we refer the population, we use uppercase letters to indicate members ($X$) or the size ($N$). The population mean is indicated by the symbol $\mu$. In contrast, when we refer to the sample, we use lowercase letters to indicate members ($x$) or the size ($n$). The sample mean is indicated by the symbol $\bar{x}$. A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol $\bar{\bar{x}}$. A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
+In the formulas below, when we refer to the population, we use uppercase letters to indicate members ($X$) or the size ($N$). The population mean is indicated by the symbol $\mu$. In contrast, when we refer to the sample, we use lowercase letters to indicate members ($x$) or the size ($n$). The sample mean is indicated by the symbol $\bar{x}$. A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol $\bar{\bar{x}}$. A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
 ## Estimating the mean
 
@@ -197,7 +197,6 @@ pop_data %>%
   as.data.frame()
 ```
 
-Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by $n$. This formula is the same as the population variance formula, Formula \@ref(eq:popvarch5), but adapted to use sample-level notation.
 
 
 $$
@@ -214,7 +213,7 @@ many_samples %>%
   as.data.frame()
 ```
 
-You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance, using $n$ in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using $n$ in the denominator, we will, on average, be wrong.
+You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance (using $n$ in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using $n$ in the denominator) we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5).
 
@@ -223,7 +222,7 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       (\#eq:samplevarn1ch5)
 \end{equation} 
 
-In the many_samples data, the column sample.var.n_1 was generated using Formula \@ref(eq:samplevarn1ch5). We can evaluate the quality of Formula \@ref(eq:samplevarn1ch5), using $n-1$, by averaging over values in the sample.var.n_1 column.
+In the many_samples data, the column sample.var.n_1 was generated using Formula \@ref(eq:samplevarn1ch5). We can evaluate the quality of Formula \@ref(eq:samplevarn1ch5), using $n-1$, by averaging the values in the sample.var.n_1 column.
 
 ```{r}
 many_samples %>%
@@ -233,7 +232,7 @@ many_samples %>%
 
 We see that the average of the 50000 values using $n-1$ in the denominator is 157.27 which is very close to the population variance of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use $n-1$ in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using $n-1$ in the denominator, we will, on average, be right.
 
-You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared errors *in the population*. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
+You may wonder at this point, when we use $n-1$ in the denominator of the sample variance, can we still think of it as the average of the squared differences from the mean? The short answer is yes. When you use $n-1$ in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences/errors *in the population*. That is, it makes sense to think of sample variance, using $n-1$, as an estimate of the average of the squared differences between each person in the population and the population mean.
 
 ## Estimating standard deviation
 
@@ -379,7 +378,7 @@ knitr::include_graphics("ch_samples/images/sex_pops.png")
 ```
 
 
-We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below. This value is known by many other names: $d$, Cohen's $d$, and Hedges $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
+We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below. This value is known by many other names: $d$, Cohen's $d$, and Hedges' $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
 
 \begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
@@ -427,7 +426,7 @@ We need to recognize that the sample-level standard deviations are likely to dif
 
 How do we resolve this situation of having two sample-level standard deviations? The first step is to switch to thinking in terms of variance rather than standard deviation. Due to the way the math works, life becomes very complicated, very quickly, if we continue to think in terms of standard deviations. Therefore, we reframe the problem into a variance problem. Variances are preferable to standard deviations because we can add and subtract variances - but not standard deviations.
 
-We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure \@ref(fig:pool1)). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also **assume** that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of a single population variance (see Figure \@ref(fig:pool2)). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol $s_{pooled}^2$.
+We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure \@ref(fig:pool1)). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also **assume** that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of the same value (see Figure \@ref(fig:pool2)). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol $s_{pooled}^2$.
 
 \newpage
 
@@ -443,7 +442,7 @@ knitr::include_graphics("ch_samples/images/pool2.png")
 
 \newpage
 
-```{r pool3, echo=FALSE, out.width="80%", fig.scap="Pooled variance estimates population variance", fig.cap="Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance."}
+```{r pool3, echo=FALSE, out.width="80%", fig.scap="Pooled variance estimates population variance", fig.cap="Pooled variance from the samples estimates population variance. The population variance is estimated by averaging two sample variances into a single estimate called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the regular/simple average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated averaging formula to obtain the pooled variance."}
 knitr::include_graphics("ch_samples/images/pool3.png")
 ```
 
@@ -469,7 +468,7 @@ s_{pooled}  &= \sqrt{s_{pooled}^2} \\
 \end{aligned} 
 $$
 
-If we apply the pooled standard variance, Formula \@ref(eq:poolvarch5), to the sample data:
+We apply the pooled standard variance, Formula \@ref(eq:poolvarch5), to the sample data:
 
 $$
 \begin{aligned}
@@ -505,9 +504,9 @@ $$
 
 ### Assessing bias  
 
-We can use our population-level data and sample from it to see the range of sample-level $d$-values that can occur.
+Sample-level $d_{unbiased}$-values, calculated above, often differ from the population-level standardized mean difference (i.e., $\delta$) due to sampling error. We can confirm that $d_{unbiased}$-values are actually unbiased with a simulation. That is, we can confirm that the average of many $d_{unbiased}$-values equals the population standardized mean difference (i.e., $\delta$) using a simulation.
 
-First, we remove the heights for males and females and place them into male_heights and female_heights, respectively.
+First, we obtain the heights from the male and female populations and place them into male_heights and female_heights, respectively.
 
 ```{r}
 male_heights <- male_population_heights %>% 
@@ -580,7 +579,7 @@ many_samples %>%
             d_max = max(d.unbiased))
 ```
 
-We see from the output that $d_{unbiased}$ values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative $d$-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
+We see from the output that $d_{unbiased}$ values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative $d$-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that women are taller than men - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
 
 ## Overview
 
