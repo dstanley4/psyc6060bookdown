@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-08-08}
+\date{2020-08-09}
 
 \begin{document}
 \maketitle
@@ -5054,13 +5054,13 @@ Researchers are usually interested in describing the attributes of a population;
 
 Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data --- with correspondingly fewer observations. This difference is typically refered to as \textbf{sampling error}.
 
-Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic the population parameter will vary randomly.
+Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic and the population parameter will vary randomly.
 
 Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased.
 
 Further complicating matters is the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
-Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about the rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
+Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
 
 \hypertarget{data-for-the-chapter}{%
 \section{Data for the chapter}\label{data-for-the-chapter}}
@@ -5125,7 +5125,7 @@ We can use the head() command to see the first 10 rows of the 100,00 rows. We se
 \hypertarget{notation-1}{%
 \section{Notation}\label{notation-1}}
 
-In the formulas below, when we refer the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
+In the formulas below, when we refer to the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
 \hypertarget{estimating-the-mean}{%
 \section{Estimating the mean}\label{estimating-the-mean}}
@@ -5255,8 +5255,6 @@ We can calculate the population variance for the height column of pop\_data usin
 ## 1   157.5
 \end{verbatim}
 
-Because we rarely have access to data for an entire population we typically want to estimate the population variance using sample data. However, estimating the population parameter from a statistic, is more complicated for variance than it was for the mean. Initially, we might be tempted to use the formula below for sample variance, in which we divide by \(n\). This formula is the same as the population variance formula, Formula \eqref{eq:popvarch5}, but adapted to use sample-level notation.
-
 \[
 \begin{aligned} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
@@ -5278,7 +5276,7 @@ The formula for sample variance with an \(n\) in the denominator is, unfortunate
 ## 1         141.5
 \end{verbatim}
 
-You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using \(n\) in the denominator, was smaller than the population variance. Consequently, sample variance, using \(n\) in the denominator, provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance, using \(n\) in the denominator, we will, on average, be wrong.
+You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using \(n\) in the denominator, was smaller than the population variance. Consequently, sample variance (using \(n\) in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using \(n\) in the denominator) we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by \(n - 1\) instead of \(n\). The unbiased estimate is calculated using Formula \eqref{eq:samplevarn1ch5}.
 
@@ -5287,7 +5285,7 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       \label{eq:samplevarn1ch5}
 \end{equation}
 
-In the many\_samples data, the column sample.var.n\_1 was generated using Formula \eqref{eq:samplevarn1ch5}. We can evaluate the quality of Formula \eqref{eq:samplevarn1ch5}, using \(n-1\), by averaging over values in the sample.var.n\_1 column.
+In the many\_samples data, the column sample.var.n\_1 was generated using Formula \eqref{eq:samplevarn1ch5}. We can evaluate the quality of Formula \eqref{eq:samplevarn1ch5}, using \(n-1\), by averaging the values in the sample.var.n\_1 column.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5304,7 +5302,7 @@ In the many\_samples data, the column sample.var.n\_1 was generated using Formul
 
 We see that the average of the 50000 values using \(n-1\) in the denominator is 157.27 which is very close to the population variance of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use \(n-1\) in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using \(n-1\) in the denominator, we will, on average, be right.
 
-You may wonder at this point, when we use \(n-1\) in the denominator of the sample variance, can we still think of it as the average of the squared deviations from the mean. The short answer is yes. When you use \(n-1\) in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared errors \emph{in the population}. That is, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared differences between each person in the population and the population mean.
+You may wonder at this point, when we use \(n-1\) in the denominator of the sample variance, can we still think of it as the average of the squared differences from the mean? The short answer is yes. When you use \(n-1\) in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared differences/errors \emph{in the population}. That is, it makes sense to think of sample variance, using \(n-1\), as an estimate of the average of the squared differences between each person in the population and the population mean.
 
 \hypertarget{estimating-standard-deviation}{%
 \section{Estimating standard deviation}\label{estimating-standard-deviation}}
@@ -5402,7 +5400,7 @@ Likewise, as calculated below, the population-level standardized mean difference
 \includegraphics[width=0.95\linewidth]{ch_samples/images/sex_pops} \caption[Illustration of standardized mean difference of $\delta =1.49$]{Illustration of the standardized mean difference of 1.49 for male and female heights. The solid black vertical line indicates the mean for males; whereas the dotted vertical line indicates the mean for females.}\label{fig:sexpop}
 \end{figure}
 
-We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \eqref{eq:samplesmdch5} below. This value is known by many other names: \(d\), Cohen's \(d\), and Hedges \(g\). Notice that the sample-level formula, Formula \eqref{eq:samplesmdch5}, below, is the same as the population-level formula, Formula \eqref{eq:popsmdch5}, above, only the notation differs.
+We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \eqref{eq:samplesmdch5} below. This value is known by many other names: \(d\), Cohen's \(d\), and Hedges' \(g\). Notice that the sample-level formula, Formula \eqref{eq:samplesmdch5}, below, is the same as the population-level formula, Formula \eqref{eq:popsmdch5}, above, only the notation differs.
 
 \begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
@@ -5447,7 +5445,7 @@ We need to recognize that the sample-level standard deviations are likely to dif
 
 How do we resolve this situation of having two sample-level standard deviations? The first step is to switch to thinking in terms of variance rather than standard deviation. Due to the way the math works, life becomes very complicated, very quickly, if we continue to think in terms of standard deviations. Therefore, we reframe the problem into a variance problem. Variances are preferable to standard deviations because we can add and subtract variances - but not standard deviations.
 
-We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure \ref{fig:pool1}). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also \textbf{assume} that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of a single population variance (see Figure \ref{fig:pool2}). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol \(s_{pooled}^2\).
+We have a sample variance for males (92.2) and a sample variance for females (66.8). We view each of these sample variances as an estimate of the respective population variances (see Figure \ref{fig:pool1}). That is, the male sample variance is an estimate of the male population variance. Likewise, the female sample variance is an estimate of the female population variance. However, we also \textbf{assume} that the population variances for males and females are the same. Consequently, the male sample variance and the female sample variance are both estimates of the same value (see Figure \ref{fig:pool2}). Because the two sample variances are estimates of the same population variance, we can (when the sample sizes are equal) calculate a new variance by averaging them together. This new variance, the average of the sample variances, provides us with a better estimate of the single population variance. The logic behind this approach is similar to averaging two measurements of the same distance to reduce error. We call this new variance pooled variance; and represent it with the symbol \(s_{pooled}^2\).
 
 \newpage
 
@@ -5464,7 +5462,7 @@ We have a sample variance for males (92.2) and a sample variance for females (66
 \newpage
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption[Pooled variance estimates population variance]{Pooled variance estimates population variance. We create a single estimate of the population variance called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated formula to obtain the pooled variance.}\label{fig:pool3}
+\includegraphics[width=0.8\linewidth]{ch_samples/images/pool3} \caption[Pooled variance estimates population variance]{Pooled variance from the samples estimates population variance. The population variance is estimated by averaging two sample variances into a single estimate called pooled variance ($s_{pooled}^2$). When sample sizes are equal, the pooled variance is just the regular/simple average of the two sample variances (both using n-1 in the denominator). When the sample sizes are unequal (i.e., different numbers of males and females), however, we need to use a more sophisticated averaging formula to obtain the pooled variance.}\label{fig:pool3}
 \end{figure}
 
 When the sample sizes for males and females are the same (i.e., \(n_{males} =n_{females}\)) we can use the Formula \eqref{eq:poolvarequalch5} below to calculate the pooled variance.
@@ -5489,7 +5487,7 @@ s_{pooled}  &= \sqrt{s_{pooled}^2} \\
 \end{aligned} 
 \]
 
-If we apply the pooled standard variance, Formula \eqref{eq:poolvarch5}, to the sample data:
+We apply the pooled standard variance, Formula \eqref{eq:poolvarch5}, to the sample data:
 
 \[
 \begin{aligned}
@@ -5526,9 +5524,9 @@ d_{unbiased}  &= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
 \hypertarget{assessing-bias}{%
 \subsection{Assessing bias}\label{assessing-bias}}
 
-We can use our population-level data and sample from it to see the range of sample-level \(d\)-values that can occur.
+Sample-level \(d_{unbiased}\)-values, calculated above, often differ from the population-level standardized mean difference (i.e., \(\delta\)) due to sampling error. We can confirm that \(d_{unbiased}\)-values are actually unbiased with a simulation. That is, we can confirm that the average of many \(d_{unbiased}\)-values equals the population standardized mean difference (i.e., \(\delta\)) using a simulation.
 
-First, we remove the heights for males and females and place them into male\_heights and female\_heights, respectively.
+First, we obtain the heights from the male and female populations and place them into male\_heights and female\_heights, respectively.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5625,7 +5623,7 @@ We can calculate the full range of sample-level \(d_{unbiased}\) values with the
 ## 1 -0.38  5.15
 \end{verbatim}
 
-We see from the output that \(d_{unbiased}\) values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value. The negative \(d\)-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that woman are taller than man - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.
+We see from the output that \(d_{unbiased}\) values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of \(\delta = 1.49\). You can see that many of the sample-level estimates differed considerably from the population-level value. The negative \(d\)-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that women are taller than men - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.
 
 \hypertarget{overview-1}{%
 \section{Overview}\label{overview-1}}
@@ -5728,9 +5726,9 @@ It may seem odd that we used so many simulations to investigate the properties o
 \hypertarget{overview-2}{%
 \section{Overview}\label{overview-2}}
 
-In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong. Sample statistics may overestimate or underestimate a population parameter - often substantially. Consequently, we learned to think about accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \ref{fig:showbias2}). When the average of many sample statistics (e.g., sample means) equal the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average).
+In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong. Sample statistics may overestimate, or underestimate, a population parameter - often substantially. Consequently, we learned to think about the accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \ref{fig:showbias2}). When the average of many sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average).
 
-In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we focus now on the precision of sample means as estimates of the population mean, see Figure \ref{fig:showbias2}. That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder how much does my sample mean differ from the population mean? That's the question we address in this chapter. When we conduct a single study we can't know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample mean differ from the population mean in general. We focus on two indices of precision -- variance of sample mean and standard error of sample means. By the end of the chapter will understand how to conceptualize these indices with respect to a large number of samples/studies and estimate of them for a single study.
+In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we focus now on the precision of sample means as estimates of the population mean, see Figure \ref{fig:showbias2}. That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder, how much does my sample mean differ from the population mean? That's the question we address in this chapter. When we conduct a single study we can't know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample means differ from the population mean in general. We focus on two indices of precision -- variance of sample mean and standard error of sample means. By the end of the chapter you will understand how to a) conceptualize these indices with respect to a large number of samples/studies and b) estimate them for a single study.
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_accuracy} \caption{Sampling accuracy and precision}\label{fig:showbias2}
@@ -5761,9 +5759,9 @@ The glimpse() command can be used to confirm that the population contains 100,00
 \begin{verbatim}
 ## Rows: 100,000
 ## Columns: 3
-## $ id     <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1...
-## $ sex    <chr> "male", "female", "female", "male", "male", ...
-## $ height <dbl> 177, 150, 171, 157, 169, 187, 163, 173, 172,...
+## $ id     <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1...
+## $ sex    <chr> "male", "female", "female", "male", "mal...
+## $ height <dbl> 177, 150, 171, 157, 169, 187, 163, 173, ...
 \end{verbatim}
 
 We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop\_data represents a single person. There is a column called height that contains the height for everyone in the population.
@@ -5820,7 +5818,7 @@ We see the mean of the population of heights is 172.5 (\(\mu = 172.5\)) and the 
 \hypertarget{sampling-distribution}{%
 \section{Sampling distribution}\label{sampling-distribution}}
 
-A sampling distribution is usually thought of as being composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This large number of samples will lead us to roughly the same conclusions as using an infinite, but impractical, number of samples. We obtain 50000 samples with code below:
+A sampling distribution is composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This large number of samples will lead us to roughly the same conclusions as using an infinite, but impractical, number of samples. We obtain 50000 samples with code below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5849,7 +5847,7 @@ We can use the head() command to see the first few rows of many\_samples. Every 
 ## 6     6 10       172.0       159.60         177.33
 \end{verbatim}
 
-We will study the precision of sample means as estimate of the population mean using the values in the sample.mean column. Each of the 50000 values in the sample.mean column is a sample mean (\(\bar{x}\)), based on \(n\) = 10. Each sample mean provides an estimate of the population mean (\(\mu = 172.5\)). Sample means often overestimate or underestimate the population mean. We can see this using the code below which tells use the smallest sample mean is 155.6 (\(\bar{x} = 155.6\)) and the largest sample mean is 188.8 (\(\bar{x} = 188.8\)). Both are estimates of the population mean (\(\mu = 172.5\)) but differ from that value due to sampling error (i.e., the fact sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
+We will study the precision of sample means as estimates of the population mean using the values in the sample.mean column. Each of the 50000 values in the sample.mean column is a sample mean (\(\bar{x}\)), based on \(n\) = 10. Each sample mean provides an estimate of the population mean (\(\mu = 172.5\)). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 (\(\bar{x} = 155.6\)) and the largest sample mean is 188.8 (\(\bar{x} = 188.8\)). Both are estimates of the population mean (\(\mu = 172.5\)) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5864,16 +5862,16 @@ We will study the precision of sample means as estimate of the population mean u
 ## 1    155.6    188.8
 \end{verbatim}
 
-The 50000 means in the sample.mean column form a \textbf{sampling distribution}; specifically, the sampling distribution of the mean. It's critical to distinguish the sampling distribution of the mean from the distribution of people in the population. Examine Figure \ref{fig:bothdist2} below. The top part of this figure illustrates the variability in the 100,000 people (represented by X's). There are more people than X's; the X's are a reminder it is a distribution of people. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the population of mean of 172.5 cm. There are more sample means than \(\bar{x}\)'s; the \(\bar{x}\)'s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the population mean we are refering to the width of this distribution of means.
+The 50000 means in the sample.mean column form a \textbf{sampling distribution}; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \ref{fig:bothdist2} below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X's). There are more people than X's; the X's are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than \(\bar{x}\)'s; the \(\bar{x}\)'s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist2}
+\includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist2}
 \end{figure}
 
 \hypertarget{precision-indices}{%
 \section{Precision indices}\label{precision-indices}}
 
-The most common way of referring to the width of this distribution of sample mean is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean with using Formula \eqref{eq:samplesechnext} below. We use k in the formula to refer to the number of sample means in the distribution.
+The most common way of referring to the width of this distribution of sample means is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean using Formula \eqref{eq:samplesechnext} below. We use \(k\) in the formula to refer to the number of sample means in the distribution.
 
 \begin{equation} 
 \sigma_{\bar{x}} = \sqrt{\frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{k}}
@@ -5882,7 +5880,7 @@ The most common way of referring to the width of this distribution of sample mea
 
 Notice that the formula for standard error is actually just the formula for standard deviation but with notation adapted to reflect the fact we are examing sample means (i.e., \(\bar{x}\)'s) instead of people (i.e., X's).
 
-Often we will not talk about standard error but rather the variance of the distribution of sample means. When we do so, we are talking about the same thing - the variability in sample means - but using different units. You can see the formula for the variance in sample means, see Formula \eqref{eq:samplevarchnext} below, is the just a squared version of the standard error equation, Formula \eqref{eq:samplesechnext} above.
+Often we will not talk about standard error but rather the variance of the distribution of sample means. When we do so, we are talking about the same thing - the variability in sample means - but using different units. You can see that the formula for the variance of sample means, see Formula \eqref{eq:samplevarchnext} below, is just a squared version of the standard error equation, Formula \eqref{eq:samplesechnext} above.
 
 \begin{equation} 
 \sigma_{\bar{x}}^2 = \frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{k}
@@ -5923,7 +5921,7 @@ The standard error of sample mean is just the square root of this value:
 ## 1       3.967
 \end{verbatim}
 
-Thus, we can indicate the precision with which sample means (\(\bar{x}\)) estimate the population mean (\(\mu\)) using the notation below. We use \(\sigma_{\bar{x}}^2\) to refer to the variance of sample means and \(\sigma_{\bar{x}}\) to refer to the standard error of sample means. Again notice in the notation for both of these symbols there is a subscript with an \(\bar{x}\) to remind us we are talking about the variability of sample means (and not people).
+Thus, we can indicate the precision with which sample means (\(\bar{x}\)) estimate the population mean (\(\mu\)) using the notation below. We use \(\sigma_{\bar{x}}^2\) to refer to the variance of sample means and \(\sigma_{\bar{x}}\) to refer to the standard error of sample means. Again notice in the notation that for both of these symbols there is a subscript with an \(\bar{x}\) to remind us we are talking about the variability of sample means (and not people).
 
 \[
 \begin{aligned} 
@@ -5941,13 +5939,13 @@ In the previous section we used a computer simulation to calculate the variance 
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Obtaining the full population
+  Obtaining the entire population
 \item
   Creating 50000 samples (each n = 10) from the population
 \item
-  Calculating for each sample the mean
+  Calculating the mean for each of the 50000 samples
 \item
-  Calculating the variance of the 50000 sample mean as per Formula \eqref{eq:samplevarchnext}
+  Calculating the variance of the 50000 sample means as per Formula \eqref{eq:samplevarchnext}
 \end{enumerate}
 
 All those steps are a lot of work - and a lot of computer time. Interestingly, we don't need to go to all that work to determine the variance of sample means. There is a quicker way to obtain the variance of sample means. That is, there is a quicker way to determine the precision with which sample means estimate the population mean when we use a sample size of \(n\) = 10.
@@ -5961,7 +5959,7 @@ Variance sample means:
       \label{eq:samplevar2chnext}
 \end{equation}
 
-You can see that with this formula the variance of sample means, Formula \eqref{eq:samplevar2chnext}, is simply the variance of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don't have to have the full population, create thousands of sample, or go through any of that calculation work. All we need to know is the variance of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the variance of people's heights in the population is \(\sigma^2=157.5\) and our sample size is \(n\) = 10.
+You can see that with this formula the variance of sample means, Formula \eqref{eq:samplevar2chnext}, is simply the variance of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don't have to have the entire population, create thousands of samples, or go through any of the calculation work. All we need to know is the variance of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the variance of people's heights in the population is \(\sigma^2=157.5\) and our sample size is \(n\) = 10.
 
 \[
 \begin{aligned} 
@@ -5972,9 +5970,9 @@ You can see that with this formula the variance of sample means, Formula \eqref{
 \end{aligned} 
 \]
 
-We see the variance of the sample means from this short-cut approach is 15.75 (i.e., \(\sigma_{\bar{x}}^2\) = 15.75). Likewise, the variance of the sample means from our simulation was 15.73; incredibly close. If we had use many more samples in the simulation the 15.73 value would have been 15.75; making the two results identical. Thus, the short-cut formula gives us the variance of sample means without having to do all the simulation work.
+We see the variance of the sample means from this short-cut approach is 15.75 (i.e., \(\sigma_{\bar{x}}^2\) = 15.75). Likewise, the variance of the sample means from our simulation was 15.73; incredibly close. If we had used substantially more than 50000 samples in the simulation the 15.73 value would have been 15.75 -- making the two results identical. Thus, the short-cut formula gives us the variance of sample means without having to do all the simulation work.
 
-Of course, the variance of sample means in only one of the two ways we describe the precision of sample estimates of the population mean. Many people prefer to use standard error (i.e.~standard deviation of sample means) instead. The calculation for standard error is below:
+Of course, the variance of sample means is only one of the two ways we can describe the precision of sample estimates of the population mean. Many people prefer to use standard error (i.e.~standard deviation of sample means) instead. The calculation for standard error is below:
 
 \[
 \begin{aligned} 
@@ -5991,7 +5989,7 @@ Of course, the variance of sample means in only one of the two ways we describe 
 
 As wonderful as it is to have a short-cut formula for obtaining the variance of sample means (or standard error) there is a catch. The formula requires knowledge of the population variance (or standard deviation). In a research scenario we don't know the mean or standard deviation of the population - that's why we're conducting research. Consequently, we can't directly calculate the variance of sample mean (or standard error).
 
-Fortunately, with just a single study, we can use the sample variance (with n-1 in the denominator) to estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e, the precision of sample means) using Formula \eqref{eq:samplevar2estchnext} below.
+Fortunately, if we have only a single study, we can use the sample variance (with n-1 in the denominator) to estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e, the precision of sample means) using Formula \eqref{eq:samplevar2estchnext} below.
 
 Estimated variance sample means:
 
@@ -6012,11 +6010,11 @@ s_{\bar{x}} = \sqrt{\frac{s^2}{n}} = \frac{s}{{\sqrt{n}}}
 
 Consider a worked example below. Imagine a scenario where we do not know anything about the population of heights. Therefore we conduct a study by taking a random sample of 10 people to estimate the average height of people in the population. The sample mean is 174.3cm and the sample variance is 30.90. Therefore, our best guess of the unknown population mean is 174.3cm. Because we used a sample (a small subset of the population) we know that 174.3cm is unlikely to be the actual mean height for the population. The mean height for the population might be higher or lower than 174.3cm. Nonetheless, at this point our best guess is that the mean of the population is 174.3cm; but we recognize that this is just an estimate of the population mean and is likely off by some amount.
 
-Wouldn't it be great to know the extent to which the sample mean might differ from the population mean? As budding statisticians, we know we can't know that for this particular sample, but we can try to figure out how much samples differ from the population mean on average (when using \(n\) = 10) to help us understand the precision of our current sample estimate (174.3cm) of the population mean. This precision information is exactly what is conveyed by the variance of sample means, \(\sigma_{\bar{x}}^2\), or standard error of sample means, \(\sigma_{\bar{x}}\). We can't obtain these precision indices but we estimate them (via \(s_{\bar{x}}^2\) and \(s_{\bar{x}}\)).
+Wouldn't it be great to know the extent to which the sample mean might differ from the population mean? As budding statisticians, we know we can't know that for this particular sample, but we can try to figure out how much sample means differ from the population mean on average (when using \(n\) = 10) to help us understand the precision of our current sample estimate (174.3cm) of the population mean. This precision information is exactly what is conveyed by the variance of sample means, \(\sigma_{\bar{x}}^2\), or standard error of sample means, \(\sigma_{\bar{x}}\). We can't obtain these precision indices but we can estimate them (via \(s_{\bar{x}}^2\) and \(s_{\bar{x}}\)).
 
-We want to know the precision with which sample mean estimate the population mean. Said another way, we want to know the variance of sample means (or standard error of sample means) but we only have a single study. Therefore, we have to rely on the short-cut formula for determining the variability in sample means. Unfortunately, the short-cut formula for the variance of sample means formula requires the population variance which we don't know. We do, however, have an estimate of the population variance from our sample. The sample variance is 30.9cm\(^2\). Therefore, our best guess of the unknown population variance is 30.9cm\(^2\). Because we used a sample (a small subset of the population) we know that 30.9cm\(^2\) is unlikely to be different than the actual variance for the population. The variance for the population might be higher or lower than 30.9cm\(^2\). So even though our estimate of the population variance may be ``off'' in this single sample we are know it will be accurate in the long run averaging over many studies (see previous chapter).
+We want to know the precision with which sample means estimate the population mean. Said another way, we want to know the variance of sample means (or standard error of sample means) but we only have a single study. Therefore, we have to rely on the short-cut formula for determining the variability in sample means. Unfortunately, the short-cut formula for the variance of sample means formula requires the population variance which we don't know. We do, however, have an estimate of the population variance from our sample. The sample variance is 30.9cm\(^2\). Therefore, our best guess of the unknown population variance is 30.9cm\(^2\). Because we used a sample (a small subset of the population) we know that 30.9cm\(^2\) is likely to be different than the actual variance for the population. The variance for the population might be higher or lower than 30.9cm\(^2\). So even though our estimate of the population variance may be ``off'' in this single sample we are know it will be accurate in the long run averaging over many studies (see previous chapter).
 
-Nonetheless, at this point our best guess is that the variance of the population is 30.9cm\(^2\) and we use this information to estimate the variance of sample means:
+Nonetheless, at this point our best guess is that the variance of the population is 30.9cm\(^2\). We use this information to estimate the variance of sample means:
 
 \[
 \begin{aligned} 
@@ -6037,9 +6035,9 @@ s_{\bar{x}} &= \sqrt{\frac{s^2}{n}} \\
 \end{aligned} 
 \]
 
-At this point we don't know the precision of sample means (n = 10) as an estimate of population (i.e., we don't know \(\sigma_{\bar{x}}^2\) or \(\sigma_{\bar{x}}\)). We do have been able to estimate of the precision of sample mean (i.e., with via \(s_{\bar{x}}^2\) and \(s_{\bar{x}}\)). When every you calculate the variance of sample mean or standard error based on sample data it is ALWAYS just an estimate of the actual variance of sample mean or the actual standard error.
+At this point we don't know the precision of sample means when \(n\) = 10; that is we don't know \(\sigma_{\bar{x}}^2\) or \(\sigma_{\bar{x}}\). We do have an estimate of the precision of sample means (i.e., with via \(s_{\bar{x}}^2\) and \(s_{\bar{x}}\)). When ever you calculate the variance of sample means, or standard error, based on sample data it is ALWAYS just an estimate of the actual variance of sample means or the actual standard error.
 
-That fact that an estimate of the variance of sample mean is the best you can do with sample data is evident when we calculate the estimate for the many sample. We do that with the R code below:
+That fact that an estimate of the variance of sample means is the best you can do with sample data is evident when we calculate the estimate for the many samples. We do that with the R code below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6048,7 +6046,7 @@ That fact that an estimate of the variance of sample mean is the best you can do
 \end{Highlighting}
 \end{Shaded}
 
-The command above calculated the estimate variance of sample mean (est\_se2 or \(s_{\bar{x}}^2\)) for each off the 50000 samples. We can see the first few sample with the head() command.
+The command above calculated the estimate variance of sample means (est\_se2 or \(s_{\bar{x}}^2\)) for each of the 50000 samples. We can see the first few samples with the head() command.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6066,12 +6064,12 @@ The command above calculated the estimate variance of sample mean (est\_se2 or \
 ## 6     6 10       172.0       159.60         177.33  17.733
 \end{verbatim}
 
-Inspect the est\_se2 column. Notice how each of these values is an \(s_{\bar{x}}^2\) number that is an estimate of \(\sigma_{\bar{x}}^2\) = 15.75. The first estimate, \(s_{\bar{x}}^2\) = 3.09, is the one we did by hand above. This estimate of the variance of sample means (\(s_{\bar{x}}^2\) = 3.09) is much lower than the actual variance of sample means (\(\sigma_{\bar{x}}^2\) = 15.75). Notice how the other values in the est\_se2 column tend either overestimate or underestimate the variance of sample means. That is the other studies also overestimate or underestimate the precision with which a sample mean (\(n\) = 10) estimates the population mean.
+Inspect the est\_se2 column. Notice how each of these values is an \(s_{\bar{x}}^2\) number that is an estimate of \(\sigma_{\bar{x}}^2\) = 15.75. The first estimate, \(s_{\bar{x}}^2\) = 3.09, is the one we did by hand above. This estimate of the variance of sample means (\(s_{\bar{x}}^2\) = 3.09) is much lower than the actual variance of sample means (\(\sigma_{\bar{x}}^2\) = 15.75). Notice how the other values in the est\_se2 column tend either overestimate or underestimate the variance of sample means. That is, the other studies also overestimate or underestimate the precision with which a sample mean (\(n\) = 10) estimates the population mean.
 
 \hypertarget{bias-of-precision-estimates}{%
 \section{Bias of precision estimates}\label{bias-of-precision-estimates}}
 
-At this point, you might be a bit concerned about our ability to estimate to the variance of sample means ( \(\sigma_{\bar{x}}^2\) = 15.75). In the simulation above, we calculated an estimate of the variance of sample mean (\(s_{\bar{x}}^2\)) and placed those value in the est\_se2 column. We saw that the values in this column mostly differed from the actual variance of sample means (15.75). You might wonder if these estimate of the variance of sample means are themselves biased? The answer is no - they are not biased. Our estimate of the population variance (n-1 in the denominator) was not biased so there is no reason to suspect that the estimate of the variance of sample means are biased. But we can confirm this by averaging over the 50000 samples. If the average of the est\_est2 column is 15.75 (or very close) than \(s_{\bar{x}}^2\) is not a biased estimate of \(\sigma_{\bar{x}}^2\) = 15.75.
+At this point, you might be a bit concerned about our ability to estimate the variance of sample means ( \(\sigma_{\bar{x}}^2\) = 15.75). In the simulation above, we calculated an estimate of the variance of sample means (\(s_{\bar{x}}^2\)) and placed those values in the est\_se2 column. We saw that the values in this column mostly differed from the actual variance of sample means (15.75). You might wonder if these estimates of the variance of sample means are themselves biased? The answer is no - they are not biased. Our estimate of the population variance (n-1 in the denominator) was not biased so there is no reason to suspect that the estimate of the variance of sample means is biased. But we can confirm this by averaging over the 50000 samples. If the average of the est\_est2 column is 15.75 (or very close) than \(s_{\bar{x}}^2\) is not a biased estimate of \(\sigma_{\bar{x}}^2\) = 15.75.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6085,21 +6083,19 @@ At this point, you might be a bit concerned about our ability to estimate to the
 ## 1          15.73
 \end{verbatim}
 
-We see that the average of the 50000 estimate of the variance of sample mean (\(s_{\bar{x}}^2\)) is 15.73 very close to the actual value of \(\sigma_{\bar{x}}^2\) = 15.75. Therefore, even though any given estimate of the variance of sample means will be off somewhat due to sampling error; on average, estimate of the variance of sample means will be correct/accurate.
+We see that the average of the 50000 estimates of the variance of sample means (\(s_{\bar{x}}^2\)) is 15.73 which is very close to the actual value of \(\sigma_{\bar{x}}^2\) = 15.75. Any sample estimate of the variance of sample means will be off somewhat due to sampling error. But, on average, estimates of the variance of sample means will be unbiased/accurate.
 
 \hypertarget{where-are-we}{%
-\section{Where are we}\label{where-are-we}}
+\section{Where are we?}\label{where-are-we}}
 
-So where are we? We've learned that sample estimates of population means may be overestimates or underestimates. Over many studies, on average, sample means will approximate the population mean. In other words, on average, sample means are accurate. As well, we've learned that the variability in estimates of the population mean is referred to as precision. We can index the precision of sample means, for a given sample size, using two indices: variance of sample means and standard error of sample means (i.e., standard deviation of sample means). Both of these formulas require knowledge of the population variance - something we never have.
+So where are we? We've learned that sample means may overestimate, or underestimate, the population mean. Over many studies, on average, sample means will approximate the population mean. In other words, on average, sample means are accurate. As well, we've learned that the variability in estimates of the population mean is referred to as \textbf{precision}. We can index the precision of sample means, for a given sample size, using two indices: variance of sample means and standard error of sample means (i.e., standard deviation of sample means). Both of these formulas require knowledge of the population variance - something we never have.
 
-When we conduct a single study, we get a sample mean. We can estimate how precise that sample mean is via the variance of sample means / standard error of sample means formulas. But we use an estimate of the population variance in these formulas rather than the actual population variance. As a result, when we calculate variance of sample means (or standard error) using sample data we only obtain and estimates of those values. These estimates are themselves influenced by sampling error - but accurate when averaging over many studies.
+When we conduct a single study, we get a sample mean. We can estimate how precise that sample mean is via the variance of sample means / standard error of sample means formulas. But we use an estimate of the population variance in these formulas rather than the actual population variance. As a result, when we calculate variance of sample means (or standard error) using sample data we only obtain estimates of those values. These estimates are themselves influenced by sampling error - but accurate when averaged over many studies.
 
 \hypertarget{factors-influencing-precision}{%
 \section{Factors influencing precision}\label{factors-influencing-precision}}
 
-The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario, we don't ahve any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. We also show in Figure \ref{fig:threedist} the difference that increase the sample size make. The larger the sample size the less sample mean vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
-
-Additionally, a larger sample size makes the sample estimate of the population variance more precise. Consequently, it make the sample estimate of the variance of sample means more precision. Therefore, increasing the sample size increase the precision of the sample means and the precision of our estimate of the precision.
+The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario, we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. We also show in Figure \ref{fig:threedist} the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
 
 \[
 \begin{aligned} 
@@ -6112,6 +6108,8 @@ Additionally, a larger sample size makes the sample estimate of the population v
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_mdist} \caption[Two sampling distributions]{Two sampling distributions for the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. There are also two sampling distribution of means presented in the bottom part of the graph. Each sampling distribution contains 50000 means. The sampling distributions are filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. You can see that by using a larger sample size ($n = 50$) there is less variability in sample means than when using a smaller sample size ($n = 10$).}\label{fig:threedist}
 \end{figure}
+
+Additionally, a larger sample size makes the sample estimate (i.e., \(s^2\)) of the population variance more precise. Consequently, it makes the sample estimate (i.e., \(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)) of the variance of sample means more precise. Therefore, increasing the sample size increases the precision of a) sample means (i.e., \(\bar{x}\)) and b) precision estimates (i.e., \(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)).
 
 \hypertarget{precision-for-other-statistics}{%
 \section{Precision for other statistics}\label{precision-for-other-statistics}}
@@ -6192,16 +6190,17 @@ Next we inspect movie\_data using the print() command. We see that each row of t
 
 \begin{verbatim}
 ## # A tibble: 8 x 7
-##   title    short_title  year  imdb tomatoes_aud boxoffice studio
-##   <chr>    <chr>       <dbl> <dbl>        <dbl>     <dbl> <chr> 
-## 1 Iron Man Iron         2008   7.9           96       585 Marvel
-## 2 Thor Ra~ Thor         2017   7.9           93       854 Marvel
-## 3 Avenger~ AV3          2018   8.5           91      2048 Marvel
-## 4 Avenger~ AV4          2019   8.7           91      2744 Marvel
-## 5 Man of ~ Sup          2013   7.1           75       668 DC    
-## 6 Batman ~ BvS          2015   6.5           63       873 DC    
-## 7 Justice~ JL           2017   6.5           72       657 DC    
-## 8 Wonder ~ WW           2017   7.5           88       821 DC
+##   title short_title  year  imdb tomatoes_aud boxoffice
+##   <chr> <chr>       <dbl> <dbl>        <dbl>     <dbl>
+## 1 Iron~ Iron         2008   7.9           96       585
+## 2 Thor~ Thor         2017   7.9           93       854
+## 3 Aven~ AV3          2018   8.5           91      2048
+## 4 Aven~ AV4          2019   8.7           91      2744
+## 5 Man ~ Sup          2013   7.1           75       668
+## 6 Batm~ BvS          2015   6.5           63       873
+## 7 Just~ JL           2017   6.5           72       657
+## 8 Wond~ WW           2017   7.5           88       821
+## # ... with 1 more variable: studio <chr>
 \end{verbatim}
 
 Next we use glimpse() to see the columns.
@@ -6215,13 +6214,13 @@ Next we use glimpse() to see the columns.
 \begin{verbatim}
 ## Rows: 8
 ## Columns: 7
-## $ title        <chr> "Iron Man", "Thor Ragnarok", "Avengers...
-## $ short_title  <chr> "Iron", "Thor", "AV3", "AV4", "Sup", "...
-## $ year         <dbl> 2008, 2017, 2018, 2019, 2013, 2015, 20...
-## $ imdb         <dbl> 7.9, 7.9, 8.5, 8.7, 7.1, 6.5, 6.5, 7.5
+## $ title        <chr> "Iron Man", "Thor Ragnarok", "Aven...
+## $ short_title  <chr> "Iron", "Thor", "AV3", "AV4", "Sup...
+## $ year         <dbl> 2008, 2017, 2018, 2019, 2013, 2015...
+## $ imdb         <dbl> 7.9, 7.9, 8.5, 8.7, 7.1, 6.5, 6.5,...
 ## $ tomatoes_aud <dbl> 96, 93, 91, 91, 75, 63, 72, 88
-## $ boxoffice    <dbl> 585, 854, 2048, 2744, 668, 873, 657, 821
-## $ studio       <chr> "Marvel", "Marvel", "Marvel", "Marvel"...
+## $ boxoffice    <dbl> 585, 854, 2048, 2744, 668, 873, 65...
+## $ studio       <chr> "Marvel", "Marvel", "Marvel", "Mar...
 \end{verbatim}
 
 The title and short\_title columns provide the full title and short title for each movie. Additionally, the IMDB rating, the Rotten Tomatoes Audience rating, and the Box Office Mojo revenue numbers are provided in the imdb, tomatoes\_aud, and boxoffice columns, respectively. Finally, the last column, studio, indicates the studio that made the movie (Marvel or DC).
@@ -6247,13 +6246,13 @@ We can confirm the column type has changed by using the glimpse() command again 
 \begin{verbatim}
 ## Rows: 8
 ## Columns: 7
-## $ title        <fct> Iron Man, Thor Ragnarok, Avengers Infi...
-## $ short_title  <fct> Iron, Thor, AV3, AV4, Sup, BvS, JL, WW
-## $ year         <dbl> 2008, 2017, 2018, 2019, 2013, 2015, 20...
-## $ imdb         <dbl> 7.9, 7.9, 8.5, 8.7, 7.1, 6.5, 6.5, 7.5
+## $ title        <fct> Iron Man, Thor Ragnarok, Avengers ...
+## $ short_title  <fct> Iron, Thor, AV3, AV4, Sup, BvS, JL...
+## $ year         <dbl> 2008, 2017, 2018, 2019, 2013, 2015...
+## $ imdb         <dbl> 7.9, 7.9, 8.5, 8.7, 7.1, 6.5, 6.5,...
 ## $ tomatoes_aud <dbl> 96, 93, 91, 91, 75, 63, 72, 88
-## $ boxoffice    <dbl> 585, 854, 2048, 2744, 668, 873, 657, 821
-## $ studio       <fct> Marvel, Marvel, Marvel, Marvel, DC, DC...
+## $ boxoffice    <dbl> 585, 854, 2048, 2744, 668, 873, 65...
+## $ studio       <fct> Marvel, Marvel, Marvel, Marvel, DC...
 \end{verbatim}
 
 \hypertarget{graph-basics}{%
