@@ -83,15 +83,15 @@ We can use the head() command to see the first few rows of many_samples. Every r
 head(many_samples)
 ```
 
-We will study the precision of sample means as estimates of the population mean using the values in the sample.mean column.  Each of the 50000 values in the sample.mean column is a sample mean ($\bar{x}$), based on $n$ = 10. Each sample mean provides an estimate of the population mean ($\mu = 172.5$). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 ($\bar{x} = 155.6$) and the largest sample mean is 188.8 ($\bar{x} = 188.8$). Both are estimates of the population mean ($\mu = 172.5$) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
+We will study the precision of sample means as estimates of the population mean using the values in the sample_mean column.  Each of the 50000 values in the sample_mean column is a sample mean ($\bar{x}$), based on $n$ = 10. Each sample mean provides an estimate of the population mean ($\mu = 172.5$). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 ($\bar{x} = 155.6$) and the largest sample mean is 188.8 ($\bar{x} = 188.8$). Both are estimates of the population mean ($\mu = 172.5$) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
 
 ```{r}
 many_samples %>%
-   summarise(min_mean = min(sample.mean),
-             max_mean = max(sample.mean))
+   summarise(min_mean = min(sample_mean),
+             max_mean = max(sample_mean))
 ```
 
-The 50000 means in the sample.mean column form a **sampling distribution**; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \@ref(fig:bothdist2) below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than $\bar{x}$’s; the $\bar{x}$’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means. 
+The 50000 means in the sample_mean column form a **sampling distribution**; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \@ref(fig:bothdist2) below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than $\bar{x}$’s; the $\bar{x}$’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means. 
 
 
 ```{r bothdist2, echo = FALSE, out.width = "80%", fig.scap = "Sampling distribution of the mean.", fig.cap = "Sampling distribution of the mean. The population of individual height's is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)."}
@@ -124,7 +124,7 @@ We can calculate the variance of sample means below:
 
 ```{r}
 many_samples %>% 
-   summarise(var_of_means = var.pop(sample.mean)) %>%
+   summarise(var_of_means = var.pop(sample_mean)) %>%
    as.data.frame()
 
 ```
@@ -134,7 +134,7 @@ The standard error of sample mean is just the square root of this value:
 
 ```{r}
 many_samples %>% 
-   summarise(sd_of_means = sqrt(var.pop(sample.mean))) %>%
+   summarise(sd_of_means = sqrt(var.pop(sample_mean))) %>%
    as.data.frame()
 
 ```
@@ -251,7 +251,7 @@ That fact that an estimate of the variance of sample means is the best you can d
 
 ```{r}
 many_samples <- many_samples %>% 
-   mutate(est_se2 = sample.var.n_1/n)
+   mutate(est_se2 = sample_var_n_1/n)
 ```
 
 The command above calculated the estimate variance of sample means (est_se2 or $s_{\bar{x}}^2$) for each of the 50000 samples. We can see the first few samples with the head() command.
@@ -285,7 +285,7 @@ When we conduct a single study, we get a sample mean. We cannot estimate how pre
 
 ## Factors influencing precision
 
-The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. We also show in Figure \@ref(fig:threedist) the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
+The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. 
  
 
 $$
@@ -296,6 +296,7 @@ $$
 \end{aligned} 
 $$
 
+We also show in Figure \@ref(fig:threedist) the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
 
 ```{r, eval = FALSE, echo = FALSE}
 # n = 50
@@ -311,7 +312,7 @@ pg <- ggplot(data = pop_data,
 
 
 sdg <- ggplot(data = many_samples,
-       mapping = aes(x = sample.mean)) +
+       mapping = aes(x = sample_mean)) +
   geom_density(adjust = 1.3) +
   coord_cartesian(xlim = c(140, 205)) +
   labs(x = "Mean Height for each sample", y = "Probability") +
@@ -320,7 +321,7 @@ sdg <- ggplot(data = many_samples,
 
 
 sd2g <- ggplot(data = many_samples2,
-       mapping = aes(x = sample.mean)) +
+       mapping = aes(x = sample_mean)) +
   geom_density(adjust = 1.3) +
   coord_cartesian(xlim = c(140, 205)) +
   labs(x = "Mean Height for each sample", y = "Probability") +
@@ -336,7 +337,7 @@ dev.off()
 knitr::include_graphics("ch_samples_precision/images/sampling_mdist.png")
 ```
 
-Additionally, a larger sample size makes the sample estimate (i.e., $s^2$) of the population variance more precise. Consequently, it makes the sample estimate (i.e., $s_{\bar{x}}^2$ or $s_{\bar{x}}$) of the variance of sample means more precise. Therefore, increasing the sample size increases the precision of a) sample means (i.e., $\bar{x}$) and b) precision estimates (i.e., $s_{\bar{x}}^2$ or $s_{\bar{x}}$).
+Additionally, a larger sample size makes the sample estimate ($s^2$) of the population variance ($\sigma^2$) more precise. Consequently, it makes the sample estimate ($s_{\bar{x}}^2$ or $s_{\bar{x}}$) of the variance of sample means ($\sigma_{\bar{x}}^2$ or $\sigma_{\bar{x}}$) more precise. Therefore, increasing the sample size increases the precision of a) sample means ($\bar{x}$) and b) precision estimates ($s_{\bar{x}}^2$ or $s_{\bar{x}}$).
 
 ## Precision for other statistics
 
@@ -357,12 +358,12 @@ many_samples_d_10 <- readRDS("ch_samples_precision/many_samples_d_n10.RDS")
 many_samples_d_100 <- readRDS("ch_samples_precision/many_samples_d_n100.RDS")
 
 ggd10 <- ggplot(data = many_samples_d_10,
-                mapping = aes(x = d.unbiased)) +
+                mapping = aes(x = d_unbiased)) +
   geom_density() +
   coord_cartesian(xlim = c(-.25, 3.5), ylim = c(0, 1.2)) +
   theme_classic() +
   scale_x_continuous(breaks = seq(0, 3.5, by = .25)) +
-  labs(y = "Frequency", x = "sample d.unbiased", title = "Sampling distribution d.unbiased (n = 10)") +
+  labs(y = "Frequency", x = "sample d_unbiased", title = "Sampling distribution d_unbiased (n = 10)") +
   geom_segment(x = 1.49, xend = 1.49, y = 0, yend = 1, size = 2, color = "green") +
   annotate("text", x = 1.49, y = 1.1, parse = T, label = as.character(textd1)) 
 
@@ -370,12 +371,12 @@ ggd10 <- ggplot(data = many_samples_d_10,
 
 
 ggd100 <- ggplot(data = many_samples_d_100,
-                mapping = aes(x = d.unbiased)) +
+                mapping = aes(x = d_unbiased)) +
   geom_density() +
   coord_cartesian(xlim = c(-.25, 3.5), ylim = c(0, 3.3)) +
   theme_classic() +
   scale_x_continuous(breaks = seq(0, 3.5, by = .25)) +
-  labs(y = "Frequency", x = "sample d.unbiased", title = "Sampling distribution d.unbiased (n = 100)") +
+  labs(y = "Frequency", x = "sample d_unbiased", title = "Sampling distribution d_unbiased (n = 100)") +
   geom_segment(x = 1.49, xend = 1.49, y = 0, yend = 3, size = 2, color = "green") +
   annotate("text", x = 1.49, y = 3.2, parse = T, label = as.character(textd1)) 
 
@@ -417,6 +418,6 @@ dev.off()
 
 ```
 
-```{r ddistributions, echo=FALSE, out.width = "80%", fig.cap = "d.unbiased sampling distributions"}
+```{r ddistributions, echo=FALSE, out.width = "80%", fig.cap = "d_unbiased sampling distributions"}
 knitr::include_graphics("ch_samples_precision/images/d_distribs2.png")
 ```

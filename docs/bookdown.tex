@@ -269,11 +269,11 @@ I used the \textbf{knitr}\index{knitr} package \citep{xie2015} and the \textbf{b
 ##   graphics_4.0.2  grDevices_4.0.2 highr_0.8      
 ##   htmltools_0.4.0 jsonlite_1.6.1  knitr_1.28     
 ##   magrittr_1.5    markdown_1.1    methods_4.0.2  
-##   mime_0.9        Rcpp_1.0.5      rlang_0.4.7    
-##   rmarkdown_2.2   rstudioapi_0.11 stats_4.0.2    
-##   stringi_1.4.6   stringr_1.4.0   tinytex_0.23   
-##   tools_4.0.2     utils_4.0.2     xfun_0.14      
-##   yaml_2.2.1
+##   mime_0.9        packrat_0.5.0   Rcpp_1.0.5     
+##   rlang_0.4.7     rmarkdown_2.2   rstudioapi_0.11
+##   stats_4.0.2     stringi_1.4.6   stringr_1.4.0  
+##   tinytex_0.23    tools_4.0.2     utils_4.0.2    
+##   xfun_0.14       yaml_2.2.1
 \end{verbatim}
 
 Package names are in bold text (e.g., \textbf{rmarkdown}), and inline code and filenames are formatted in a typewriter font (e.g., \texttt{knitr::knit(\textquotesingle{}foo.Rmd\textquotesingle{})}). Function names are followed by parentheses (e.g., \texttt{bookdown::render\_book()}).
@@ -5183,6 +5183,12 @@ We can assess bias, as illustrated in the above figure by drawing a large number
 \end{Highlighting}
 \end{Shaded}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{many_samples <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\StringTok{"ch_samples/many_samples_n10.RDS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 samples):
 
 \begin{Shaded}
@@ -5192,7 +5198,7 @@ We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 sa
 \end{Shaded}
 
 \begin{verbatim}
-##    study  n sample.mean sample.var.n sample.var.n_1
+##    study  n sample_mean sample_var_n sample_var_n_1
 ## 1      1 10       174.3        27.81          30.90
 ## 2      2 10       161.8        83.36          92.62
 ## 3      3 10       173.2       139.16         154.62
@@ -5205,26 +5211,26 @@ We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 sa
 ## 10    10 10       168.5       262.65         291.83
 \end{verbatim}
 
-Each row of many\_samples represents a sample of 10 people. Each column of many\_samples indicates a sample statistic. You can see that for each sample/row we indicate ``n'' (the sample size) and ``sample.mean'' (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample.mean column vary across samples/rows.
+Each row of many\_samples represents a sample of 10 people. Each column of many\_samples indicates a sample statistic. You can see that for each sample/row we indicate ``n'' (the sample size) and ``sample\_mean'' (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample\_mean column vary across samples/rows.
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{ch_samples/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist}
 \end{figure}
 
-Above, in Figure \ref{fig:bothdist}, we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 50000 sample means, from the sample.mean column. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantially from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
+Above, in Figure \ref{fig:bothdist}, we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 50000 sample means, from the sample\_mean column. Recall the population mean for heights is \(\mu = 172.48\) cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean (\(\bar{x}\)) may differ substantially from the population mean (\(\mu = 172.48\)). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
 
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean? If, on average, the sample mean does corresponds to the population mean, it is accurate and we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_sample.mean =} \KeywordTok{mean}\NormalTok{(sample.mean)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_sample_mean =} \KeywordTok{mean}\NormalTok{(sample_mean)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   mean_of_sample.mean
+##   mean_of_sample_mean
 ## 1               172.5
 \end{verbatim}
 
@@ -5261,22 +5267,22 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 \]
 
-The formula for sample variance with an \(n\) in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an \(n\) in the denominator. We can see that this is true by examining the many\_samples data. In these data, the column sample.var.n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample.var.n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using \(n\) in the denominator, is an unbiased estimator of the population variance.
+The formula for sample variance with an \(n\) in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an \(n\) in the denominator. We can see that this is true by examining the many\_samples data. In these data, the column sample\_var\_n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample\_var\_n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using \(n\) in the denominator, is an unbiased estimator of the population variance.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var.n =} \KeywordTok{mean}\NormalTok{(sample.var.n)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var_n =} \KeywordTok{mean}\NormalTok{(sample_var_n)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   mean_of_var.n
+##   mean_of_var_n
 ## 1         141.5
 \end{verbatim}
 
-You can see the average of sample.var.n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using \(n\) in the denominator, was smaller than the population variance. Consequently, sample variance (using \(n\) in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using \(n\) in the denominator) we will, on average, be wrong.
+You can see the average of sample\_var\_n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using \(n\) in the denominator, was smaller than the population variance. Consequently, sample variance (using \(n\) in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using \(n\) in the denominator) we will, on average, be wrong.
 
 Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by \(n - 1\) instead of \(n\). The unbiased estimate is calculated using Formula \eqref{eq:samplevarn1ch5}.
 
@@ -5285,18 +5291,18 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       \label{eq:samplevarn1ch5}
 \end{equation}
 
-In the many\_samples data, the column sample.var.n\_1 was generated using Formula \eqref{eq:samplevarn1ch5}. We can evaluate the quality of Formula \eqref{eq:samplevarn1ch5}, using \(n-1\), by averaging the values in the sample.var.n\_1 column.
+In the many\_samples data, the column sample\_var\_n\_1 was generated using Formula \eqref{eq:samplevarn1ch5}. We can evaluate the quality of Formula \eqref{eq:samplevarn1ch5}, using \(n-1\), by averaging the values in the sample\_var\_n\_1 column.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var.n_1 =} \KeywordTok{mean}\NormalTok{(sample.var.n_}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_of_var_n_1 =} \KeywordTok{mean}\NormalTok{(sample_var_n_}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{as.data.frame}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   mean_of_var.n_1
+##   mean_of_var_n_1
 ## 1           157.3
 \end{verbatim}
 
@@ -5558,18 +5564,18 @@ We can examine the contents of many\_samples using the head() command. Each row 
 \end{Shaded}
 
 \begin{verbatim}
-##    study group.n    m1    m2     v1     v2  s2.1  s2.2    d
-## 1      1      10 187.2 160.1  92.18  66.77 140.5 55.21 3.04
-## 2      2      10 183.0 166.0 107.33  77.78 140.5 55.21 1.77
-## 3      3      10 181.0 168.8  39.78 144.18 140.5 55.21 1.27
-## 4      4      10 175.4 162.5  80.27  89.39 140.5 55.21 1.40
-## 5      5      10 184.1 163.6  90.99  28.93 140.5 55.21 2.65
-## 6      6      10 181.8 165.6  96.40 106.27 140.5 55.21 1.61
-## 7      7      10 176.6 167.0  97.16 161.56 140.5 55.21 0.84
-## 8      8      10 188.0 160.8 211.56 204.62 140.5 55.21 1.89
-## 9      9      10 185.3 165.8  54.68  91.51 140.5 55.21 2.28
-## 10    10      10 179.3 161.9  69.34  55.43 140.5 55.21 2.20
-##    d.unbiased
+##    study group_n mean1 var1_n_1 mean2 var2_n_1    d
+## 1      1      10 187.2    92.18 160.1    66.77 3.04
+## 2      2      10 183.0   107.33 166.0    77.78 1.77
+## 3      3      10 181.0    39.78 168.8   144.18 1.27
+## 4      4      10 175.4    80.27 162.5    89.39 1.40
+## 5      5      10 184.1    90.99 163.6    28.93 2.65
+## 6      6      10 181.8    96.40 165.6   106.27 1.61
+## 7      7      10 176.6    97.16 167.0   161.56 0.84
+## 8      8      10 188.0   211.56 160.8   204.62 1.89
+## 9      9      10 185.3    54.68 165.8    91.51 2.28
+## 10    10      10 179.3    69.34 161.9    55.43 2.20
+##    d_unbiased
 ## 1        2.91
 ## 2        1.69
 ## 3        1.22
@@ -5588,7 +5594,7 @@ Recall the population-level standardized mean difference, \(\delta\), was 1.49. 
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{mean_d =} \KeywordTok{mean}\NormalTok{(d),}
-            \DataTypeTok{mean_d_unbiased =} \KeywordTok{mean}\NormalTok{(d.unbiased))}
+            \DataTypeTok{mean_d_unbiased =} \KeywordTok{mean}\NormalTok{(d_unbiased))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5613,8 +5619,8 @@ We can calculate the full range of sample-level \(d_{unbiased}\) values with the
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{d_min =} \KeywordTok{min}\NormalTok{(d.unbiased),}
-            \DataTypeTok{d_max =} \KeywordTok{max}\NormalTok{(d.unbiased))}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{d_min =} \KeywordTok{min}\NormalTok{(d_unbiased),}
+            \DataTypeTok{d_max =} \KeywordTok{max}\NormalTok{(d_unbiased))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5838,7 +5844,7 @@ We can use the head() command to see the first few rows of many\_samples. Every 
 \end{Shaded}
 
 \begin{verbatim}
-##   study  n sample.mean sample.var.n sample.var.n_1
+##   study  n sample_mean sample_var_n sample_var_n_1
 ## 1     1 10       174.3        27.81          30.90
 ## 2     2 10       161.8        83.36          92.62
 ## 3     3 10       173.2       139.16         154.62
@@ -5847,13 +5853,13 @@ We can use the head() command to see the first few rows of many\_samples. Every 
 ## 6     6 10       172.0       159.60         177.33
 \end{verbatim}
 
-We will study the precision of sample means as estimates of the population mean using the values in the sample.mean column. Each of the 50000 values in the sample.mean column is a sample mean (\(\bar{x}\)), based on \(n\) = 10. Each sample mean provides an estimate of the population mean (\(\mu = 172.5\)). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 (\(\bar{x} = 155.6\)) and the largest sample mean is 188.8 (\(\bar{x} = 188.8\)). Both are estimates of the population mean (\(\mu = 172.5\)) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
+We will study the precision of sample means as estimates of the population mean using the values in the sample\_mean column. Each of the 50000 values in the sample\_mean column is a sample mean (\(\bar{x}\)), based on \(n\) = 10. Each sample mean provides an estimate of the population mean (\(\mu = 172.5\)). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 (\(\bar{x} = 155.6\)) and the largest sample mean is 188.8 (\(\bar{x} = 188.8\)). Both are estimates of the population mean (\(\mu = 172.5\)) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}
-\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{min_mean =} \KeywordTok{min}\NormalTok{(sample.mean),}
-             \DataTypeTok{max_mean =} \KeywordTok{max}\NormalTok{(sample.mean))}
+\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{min_mean =} \KeywordTok{min}\NormalTok{(sample_mean),}
+             \DataTypeTok{max_mean =} \KeywordTok{max}\NormalTok{(sample_mean))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5862,7 +5868,7 @@ We will study the precision of sample means as estimates of the population mean 
 ## 1    155.6    188.8
 \end{verbatim}
 
-The 50000 means in the sample.mean column form a \textbf{sampling distribution}; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \ref{fig:bothdist2} below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X's). There are more people than X's; the X's are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than \(\bar{x}\)'s; the \(\bar{x}\)'s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means.
+The 50000 means in the sample\_mean column form a \textbf{sampling distribution}; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \ref{fig:bothdist2} below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X's). There are more people than X's; the X's are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than \(\bar{x}\)'s; the \(\bar{x}\)'s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means.
 
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_dist} \caption[Sampling distribution of the mean.]{Sampling distribution of the mean. The population of individual height's is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).}\label{fig:bothdist2}
@@ -5896,7 +5902,7 @@ We can calculate the variance of sample means below:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}\StringTok{ }
-\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{var_of_means =} \KeywordTok{var.pop}\NormalTok{(sample.mean)) }\OperatorTok{%>%}
+\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{var_of_means =} \KeywordTok{var.pop}\NormalTok{(sample_mean)) }\OperatorTok{%>%}
 \StringTok{   }\KeywordTok{as.data.frame}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -5911,7 +5917,7 @@ The standard error of sample mean is just the square root of this value:
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples }\OperatorTok{%>%}\StringTok{ }
-\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sd_of_means =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var.pop}\NormalTok{(sample.mean))) }\OperatorTok{%>%}
+\StringTok{   }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{sd_of_means =} \KeywordTok{sqrt}\NormalTok{(}\KeywordTok{var.pop}\NormalTok{(sample_mean))) }\OperatorTok{%>%}
 \StringTok{   }\KeywordTok{as.data.frame}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -6042,7 +6048,7 @@ That fact that an estimate of the variance of sample means is the best you can d
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{many_samples <-}\StringTok{ }\NormalTok{many_samples }\OperatorTok{%>%}\StringTok{ }
-\StringTok{   }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{est_se2 =}\NormalTok{ sample.var.n_}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}
+\StringTok{   }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{est_se2 =}\NormalTok{ sample_var_n_}\DecValTok{1}\OperatorTok{/}\NormalTok{n)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6055,7 +6061,7 @@ The command above calculated the estimate variance of sample means (est\_se2 or 
 \end{Shaded}
 
 \begin{verbatim}
-##   study  n sample.mean sample.var.n sample.var.n_1 est_se2
+##   study  n sample_mean sample_var_n sample_var_n_1 est_se2
 ## 1     1 10       174.3        27.81          30.90   3.090
 ## 2     2 10       161.8        83.36          92.62   9.262
 ## 3     3 10       173.2       139.16         154.62  15.462
@@ -6095,7 +6101,7 @@ When we conduct a single study, we get a sample mean. We cannot estimate how pre
 \hypertarget{factors-influencing-precision}{%
 \section{Factors influencing precision}\label{factors-influencing-precision}}
 
-The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. We also show in Figure \ref{fig:threedist} the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
+The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below.
 
 \[
 \begin{aligned} 
@@ -6105,18 +6111,20 @@ The formula for variance of the sampling distribution for the mean reveals that 
 \end{aligned} 
 \]
 
+We also show in Figure \ref{fig:threedist} the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.
+
 \begin{figure}
 \includegraphics[width=0.8\linewidth]{ch_samples_precision/images/sampling_mdist} \caption[Two sampling distributions]{Two sampling distributions for the mean. The population of individuals' heights is presented at the top and filled with X's to remind you it is a graph of individuals. There are more individuals than X's. There are also two sampling distribution of means presented in the bottom part of the graph. Each sampling distribution contains 50000 means. The sampling distributions are filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. You can see that by using a larger sample size ($n = 50$) there is less variability in sample means than when using a smaller sample size ($n = 10$).}\label{fig:threedist}
 \end{figure}
 
-Additionally, a larger sample size makes the sample estimate (i.e., \(s^2\)) of the population variance more precise. Consequently, it makes the sample estimate (i.e., \(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)) of the variance of sample means more precise. Therefore, increasing the sample size increases the precision of a) sample means (i.e., \(\bar{x}\)) and b) precision estimates (i.e., \(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)).
+Additionally, a larger sample size makes the sample estimate (\(s^2\)) of the population variance (\(\sigma^2\)) more precise. Consequently, it makes the sample estimate (\(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)) of the variance of sample means (\(\sigma_{\bar{x}}^2\) or \(\sigma_{\bar{x}}\)) more precise. Therefore, increasing the sample size increases the precision of a) sample means (\(\bar{x}\)) and b) precision estimates (\(s_{\bar{x}}^2\) or \(s_{\bar{x}}\)).
 
 \hypertarget{precision-for-other-statistics}{%
 \section{Precision for other statistics}\label{precision-for-other-statistics}}
 
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{ch_samples_precision/images/d_distribs2} \caption{d.unbiased sampling distributions}\label{fig:ddistributions}
-\end{figure}
+\textbackslash begin\{figure\}
+\includegraphics[width=0.8\linewidth]{ch_samples_precision/images/d_distribs2} \textbackslash caption\{d\_unbiased sampling distributions\}\label{fig:ddistributions}
+\textbackslash end\{figure\}
 
 \hypertarget{probability-of-a-sample-mean}{%
 \chapter{Probability of a sample mean}\label{probability-of-a-sample-mean}}
@@ -6283,7 +6291,7 @@ Use geom\_col() to put each boxoffice column value into a bar.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-258-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-259-1}
 
 Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
 
@@ -6301,7 +6309,7 @@ Next, we want to put the boxoffice revenue above each bar so it easier to interp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-259-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-260-1}
 
 Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge\_y.
 
@@ -6323,7 +6331,7 @@ We can nudge each label higher on the y-axis using the \emph{nudge\_y} command. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-260-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
 
 \hypertarget{graphing-efficiently}{%
 \section{Graphing efficiently}\label{graphing-efficiently}}
@@ -6345,7 +6353,7 @@ Examine the code below and compare it to the code above. Notice how in the geom\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
 
 \hypertarget{aesthetics}{%
 \section{Aesthetics}\label{aesthetics}}
@@ -6375,7 +6383,7 @@ You might want to influence the color of the bars in the graph such that the bar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{ch_graphing/images/mapping_fill} \caption{Adding a fill column to the internal data}\label{fig:addfill}
@@ -6404,7 +6412,7 @@ Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
 
 Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add ``nudge\_y = 400'' to move the text higher than the boxoffice text/label. Don't forget the units used by nudge\_y are the units on the y-axis.
 
@@ -6423,7 +6431,7 @@ Notice that we have the same problem as before with the text being difficult to 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
 
 \newpage
 
@@ -6449,7 +6457,7 @@ Use theme\_classic() to make the graph apear in APA style. We use theme\_classic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
 
 \hypertarget{axes}{%
 \section{Axes}\label{axes}}
@@ -6478,7 +6486,7 @@ We use the coord\_cartesian() command to adjust range of axes. In the code below
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-267-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:
 
@@ -6513,7 +6521,7 @@ We use the scale\_y\_continuous() command to adjust the ticks on the y-axis. We 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-268-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-269-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
 
@@ -6554,7 +6562,7 @@ We use the labs() command to set the labels for the x- and y-axes:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-271-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-272-1}
 
 \hypertarget{axis-values}{%
 \section{Axis values}\label{axis-values}}
@@ -6602,7 +6610,7 @@ The values along the x-axis come from the short\_title column which is a factor.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-272-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-273-1}
 
 \hypertarget{method-2-longer-label-columns}{%
 \subsubsection{Method 2: Longer label columns}\label{method-2-longer-label-columns}}
@@ -6632,7 +6640,7 @@ With our movie data we don't need to use scale\_x\_discrete() because we have a 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-273-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
 
 \hypertarget{angle}{%
 \subsection{Angle}\label{angle}}
@@ -6664,7 +6672,7 @@ Use theme() to adjust the angle of x-axis labels. Notice, however, that the long
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
 
 \hypertarget{alignment}{%
 \subsection{Alignment}\label{alignment}}
@@ -6695,7 +6703,7 @@ Use theme() and the hjust argument to adjust the alignment of the x-axis labels.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-276-1}
 
 \hypertarget{order}{%
 \subsection{Order}\label{order}}
@@ -6737,7 +6745,7 @@ We can make the movie bars go left to right in lowest to highest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-277-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-278-1}
 
 \hypertarget{decreasing-order}{%
 \subsubsection{Decreasing order}\label{decreasing-order}}
@@ -6775,7 +6783,7 @@ We can make the movie bars go left to right in highest to lowest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-279-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-280-1}
 
 \hypertarget{custom-order}{%
 \subsubsection{Custom order}\label{custom-order}}
