@@ -816,6 +816,96 @@ knitr::include_graphics("ch_populations/images/dvalue_ex4.png")
 
 You can visualize any $\delta$ value (i.e., population $d$-value) using the rpsychologist [website](https://rpsychologist.com/d3/cohend/). This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given $\delta$/d value.
 
+## Population relations
+
+Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the relation between two variables.
+
+A population correlation is represented by the symbol $\rho$ (pronounced rho) and calculated using Formula \@ref(eq:poprho4) below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases.
+
+
+\begin{equation} 
+\rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
+      (\#eq:poprho4)
+\end{equation} 
+
+
+
+```{r, include=FALSE, eval=FALSE}
+sigma = diag(2)
+mu <- c(0,0)
+set.seed(1)
+n = 30000
+sigma[1,2] <- .7
+sigma[2,1] <- sigma[1,2] 
+rho70 <- MASS::mvrnorm(n = n, Sigma = sigma, mu = mu, empirical = TRUE)
+sigma[1,2] <- .3
+sigma[2,1] <- sigma[1,2] 
+rho30 <- MASS::mvrnorm(n = n, Sigma = sigma, mu = mu, empirical = TRUE)
+sigma[1,2] <- .5
+sigma[2,1] <- sigma[1,2] 
+rho50 <- MASS::mvrnorm(n = n, Sigma = sigma, mu = mu, empirical = TRUE)
+
+rho70[,1] <- rho70[,1]*15+140
+rho70[,2] <- rho70[,2]*15+170
+rho30[,1] <- rho30[,1]*15+140
+rho30[,2] <- rho30[,2]*15+170
+rho50[,1] <- rho50[,1]*15+140
+rho50[,2] <- rho50[,2]*15+170
+
+rho70 <- data.frame(round(rho70,1))
+rho30 <- data.frame(round(rho30,1))
+rho50 <- data.frame(round(rho50,1))
+names(rho70) <- c("weight", "height")
+names(rho30) <- c("weight", "height")
+names(rho50) <- c("weight", "height")
+
+rho3lab <- expression(rho == ".30")
+rho5lab <- expression(rho == ".50")
+rho7lab <- expression(rho == ".70")
+
+library(ggplot2)
+r70plot <- ggplot(data = rho70,
+                  mapping = aes(x = height, y = weight)) +
+  geom_point(alpha = .30) +
+  scale_x_continuous(breaks = seq(100, 250, by = 20)) +
+  scale_y_continuous(breaks = seq(70, 250, by = 20)) +
+  coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
+  annotate(geom = "text", x= 220, y = 90, label = rho7lab, parse = TRUE) +
+  theme_classic()
+
+r50plot <- ggplot(data = rho50,
+                  mapping = aes(x = height, y = weight)) +
+  geom_point(alpha = .30) +
+  scale_x_continuous(breaks = seq(100, 250, by = 20)) +
+  scale_y_continuous(breaks = seq(70, 250, by = 20)) +
+  coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
+  annotate(geom = "text", x= 220, y = 90, label = rho5lab, parse = TRUE) +
+  theme_classic()
+
+r30plot <- ggplot(data = rho30,
+                  mapping = aes(x = height, y = weight)) +
+  geom_point(alpha = .30) +
+  scale_x_continuous(breaks = seq(100, 250, by = 20)) +
+  scale_y_continuous(breaks = seq(70, 250, by = 20)) +
+  coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
+  annotate(geom = "text", x= 220, y = 90, label = rho3lab, parse = TRUE) +
+  theme_classic()
+
+png(filename = "ch_populations/images/rho_example.png",
+    width = 4*300,
+    height = 7*300,
+    res = 300)
+gridExtra::grid.arrange(r30plot, r50plot, r70plot)
+dev.off()
+
+```
+
+\newpage
+
+```{r rhoplot, fig.cap="Populations of various strengths.", echo = FALSE, out.height="80%"}
+knitr::include_graphics("ch_populations/images/rho_example.png")
+```
+
 \newpage
 
 ## Key points

@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-08-20}
+\date{2020-08-31}
 
 \begin{document}
 \maketitle
@@ -259,21 +259,20 @@ I used the \textbf{knitr}\index{knitr} package \citep{xie2015} and the \textbf{b
 \begin{verbatim}
 ## R version 4.0.2 (2020-06-22)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Catalina 10.15.6, RStudio 1.3.1056
+## Running under: macOS Catalina 10.15.6, RStudio 1.3.1073
 ## 
 ## Locale: en_CA.UTF-8 / en_CA.UTF-8 / en_CA.UTF-8 / C / en_CA.UTF-8 / en_CA.UTF-8
 ## 
 ## Package version:
-##   base64enc_0.1.3 bookdown_0.19.1 compiler_4.0.2 
-##   digest_0.6.25   evaluate_0.14   glue_1.4.1     
+##   base64enc_0.1.3 bookdown_0.20   compiler_4.0.2 
+##   digest_0.6.25   evaluate_0.14   glue_1.4.2     
 ##   graphics_4.0.2  grDevices_4.0.2 highr_0.8      
-##   htmltools_0.4.0 jsonlite_1.6.1  knitr_1.28     
+##   htmltools_0.5.0 jsonlite_1.7.0  knitr_1.29     
 ##   magrittr_1.5    markdown_1.1    methods_4.0.2  
-##   mime_0.9        packrat_0.5.0   Rcpp_1.0.5     
-##   rlang_0.4.7     rmarkdown_2.2   rstudioapi_0.11
-##   stats_4.0.2     stringi_1.4.6   stringr_1.4.0  
-##   tinytex_0.23    tools_4.0.2     utils_4.0.2    
-##   xfun_0.14       yaml_2.2.1
+##   mime_0.9        rlang_0.4.7     rmarkdown_2.3  
+##   rstudioapi_0.11 stats_4.0.2     stringi_1.4.6  
+##   stringr_1.4.0   tinytex_0.25    tools_4.0.2    
+##   utils_4.0.2     xfun_0.16       yaml_2.2.1
 \end{verbatim}
 
 Package names are in bold text (e.g., \textbf{rmarkdown}), and inline code and filenames are formatted in a typewriter font (e.g., \texttt{knitr::knit(\textquotesingle{}foo.Rmd\textquotesingle{})}). Function names are followed by parentheses (e.g., \texttt{bookdown::render\_book()}).
@@ -519,18 +518,18 @@ The tidyverse is now installed, so we need to activate it. We do that with the l
 Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this ``runs'' the selected text. After you click the Run button you should see text like the following the Console panel:
 
 \begin{verbatim}
-## -- Attaching packages ---------------------------------------------- tidyverse 1.3.0 --
+## -- Attaching packages ------------------- tidyverse 1.3.0 --
 \end{verbatim}
 
 \begin{verbatim}
 ## v ggplot2 3.3.2     v purrr   0.3.4
-## v tibble  3.0.3     v dplyr   1.0.0
-## v tidyr   1.1.0     v stringr 1.4.0
+## v tibble  3.0.3     v dplyr   1.0.2
+## v tidyr   1.1.1     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.5.0
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ---------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -790,11 +789,7 @@ So you should do the following EVERY time you run your script.
 This will clear potentially problematic previous stats, run the script commands, and display the output in the Console. Moving forward we will use this approach for running scripts. Once you have used Source wiht Echo once, you can just click the Source button and it will use Source with Echo automatically (without the need to use the pull down option for selecting Source with Echo).
 
 \begin{rmdcaution}
-\begin{rmdcaution}
-
 Using Restart R before you run a script, or R code in general, is a critical workflow tip.
-
-\end{rmdcaution}
 \end{rmdcaution}
 
 \hypertarget{trying-source-with-echo}{%
@@ -2164,8 +2159,8 @@ tidyverse\tabularnewline
 
 \textbf{Important Note:} You should NOT use library(psych) at any point! There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
 
-\hypertarget{objective-1}{%
-\section{Objective}\label{objective-1}}
+\hypertarget{objective}{%
+\section{Objective}\label{objective}}
 
 In this chapter we strongly advocate that you use a naming convention for file, variable, and column names. This convention will save you hours of hassles and permit easy application of certain tidyverse commands. However, we must stress that although the naming convention we advocate is based on the tidyverse style guide, it is not ``right'' or ``correct'' - there are other naming conventions you can use. Any naming convention is better than no naming convention. The naming convention we advocate here will solve many problems. We encourage to use this system for for weeks or months over many projects - until you see the benefits of this system, and correspondingly its shortcomings. After you are well versed in the strengths/weaknesses of the naming conventions used here you may choose to create your own naming convention system.
 
@@ -3795,8 +3790,6 @@ You can use the glimpse() command to see the result of your work. If you compare
 \end{verbatim}
 
 \begin{rmdcaution}
-\begin{rmdcaution}
-
 If your scale had used response options numbered 0 to 4 the math is different.
 For each item you would use subtract values from the highest possible point (i.e, 4) instead of one larger than the highest possible point.
 
@@ -3816,8 +3809,6 @@ Original value & Math & Recoded value\tabularnewline
 Thus, the mutate command would instead be:
 
 mutate(4 - across(.cols = ends\_with("\_rev15")) )
-
-\end{rmdcaution}
 \end{rmdcaution}
 
 \hypertarget{creating-scores}{%
@@ -4984,6 +4975,24 @@ Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 
 
 You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the rpsychologist \href{https://rpsychologist.com/d3/cohend/}{website}. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given \(\delta\)/d value.
 
+\hypertarget{population-relations}{%
+\section{Population relations}\label{population-relations}}
+
+Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the relation between two variables.
+
+A population correlation is represented by the symbol \(\rho\) (pronounced rho) and calculated using Formula \eqref{eq:poprho4} below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases.
+
+\begin{equation} 
+\rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
+      \label{eq:poprho4}
+\end{equation}
+
+\newpage
+
+\begin{figure}
+\includegraphics[width=16.67in,height=0.8\textheight]{ch_populations/images/rho_example} \caption{Populations of various strengths.}\label{fig:rhoplot}
+\end{figure}
+
 \newpage
 
 \hypertarget{key-points}{%
@@ -5122,8 +5131,8 @@ We can use the head() command to see the first 10 rows of the 100,00 rows. We se
 ## 10    10 male      193
 \end{verbatim}
 
-\hypertarget{notation-1}{%
-\section{Notation}\label{notation-1}}
+\hypertarget{notation}{%
+\section{Notation}\label{notation}}
 
 In the formulas below, when we refer to the population, we use uppercase letters to indicate members (\(X\)) or the size (\(N\)). The population mean is indicated by the symbol \(\mu\). In contrast, when we refer to the sample, we use lowercase letters to indicate members (\(x\)) or the size (\(n\)). The sample mean is indicated by the symbol \(\bar{x}\). A single bar above a letter indicates a mean. If we calculate the average of several sample means we indicate this with the symbol \(\bar{\bar{x}}\). A double bar above a letter indicates a mean of means. Make sure you notice the similarities between subsequent population and sample formulas even though the notation often differs.
 
@@ -5717,8 +5726,8 @@ Now that you understand the logic for assessing bias, we present an old statisti
 ``A physicist, a chemist, and a statistician go hunting. The physicist shoots at a deer and misses by 2 meters to the left. The chemist shoots and misses by 2 meters to the right. The statistician immediately yells''We got it!"
 \end{quote}
 
-\hypertarget{key-points-1}{%
-\section{Key Points}\label{key-points-1}}
+\hypertarget{key-points}{%
+\section{Key Points}\label{key-points}}
 
 \begin{itemize}
 \item
@@ -5738,8 +5747,8 @@ Now that you understand the logic for assessing bias, we present an old statisti
 \hypertarget{sampling-precision}{%
 \chapter{Sampling Precision}\label{sampling-precision}}
 
-\hypertarget{overview-2}{%
-\section{Overview}\label{overview-2}}
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
 
 In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong. Sample statistics may overestimate, or underestimate, a population parameter - often substantially. Consequently, we learned to think about the accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \ref{fig:showbias2}). When the average of many sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average).
 
@@ -6154,8 +6163,8 @@ These simulations illustrate a few important points. First, drawing any conclusi
 \hypertarget{graphing}{%
 \chapter{Graphing}\label{graphing}}
 
-\hypertarget{required-1}{%
-\section{Required}\label{required-1}}
+\hypertarget{required}{%
+\section{Required}\label{required}}
 
 The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
 
@@ -6313,7 +6322,7 @@ Use geom\_col() to put each boxoffice column value into a bar.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-259-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-260-1}
 
 Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
 
@@ -6331,7 +6340,7 @@ Next, we want to put the boxoffice revenue above each bar so it easier to interp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-260-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
 
 Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge\_y.
 
@@ -6353,7 +6362,7 @@ We can nudge each label higher on the y-axis using the \emph{nudge\_y} command. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
 
 \hypertarget{graphing-efficiently}{%
 \section{Graphing efficiently}\label{graphing-efficiently}}
@@ -6375,7 +6384,7 @@ Examine the code below and compare it to the code above. Notice how in the geom\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
 
 \hypertarget{aesthetics}{%
 \section{Aesthetics}\label{aesthetics}}
@@ -6405,7 +6414,7 @@ You might want to influence the color of the bars in the graph such that the bar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{ch_graphing/images/mapping_fill} \caption{Adding a fill column to the internal data}\label{fig:addfill}
@@ -6434,7 +6443,7 @@ Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
 
 Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add ``nudge\_y = 400'' to move the text higher than the boxoffice text/label. Don't forget the units used by nudge\_y are the units on the y-axis.
 
@@ -6453,7 +6462,7 @@ Notice that we have the same problem as before with the text being difficult to 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
 
 \newpage
 
@@ -6479,7 +6488,7 @@ Use theme\_classic() to make the graph apear in APA style. We use theme\_classic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-267-1}
 
 \hypertarget{axes}{%
 \section{Axes}\label{axes}}
@@ -6508,7 +6517,7 @@ We use the coord\_cartesian() command to adjust range of axes. In the code below
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-267-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-268-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:
 
@@ -6543,7 +6552,7 @@ We use the scale\_y\_continuous() command to adjust the ticks on the y-axis. We 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-269-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-270-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
 
@@ -6584,7 +6593,7 @@ We use the labs() command to set the labels for the x- and y-axes:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-272-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-273-1}
 
 \hypertarget{axis-values}{%
 \section{Axis values}\label{axis-values}}
@@ -6632,7 +6641,7 @@ The values along the x-axis come from the short\_title column which is a factor.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-273-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
 
 \hypertarget{method-2-longer-label-columns}{%
 \subsubsection{Method 2: Longer label columns}\label{method-2-longer-label-columns}}
@@ -6662,7 +6671,7 @@ With our movie data we don't need to use scale\_x\_discrete() because we have a 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
 
 \hypertarget{angle}{%
 \subsection{Angle}\label{angle}}
@@ -6694,7 +6703,7 @@ Use theme() to adjust the angle of x-axis labels. Notice, however, that the long
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-276-1}
 
 \hypertarget{alignment}{%
 \subsection{Alignment}\label{alignment}}
@@ -6725,7 +6734,7 @@ Use theme() and the hjust argument to adjust the alignment of the x-axis labels.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-276-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-277-1}
 
 \hypertarget{order}{%
 \subsection{Order}\label{order}}
@@ -6767,7 +6776,7 @@ We can make the movie bars go left to right in lowest to highest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-278-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-279-1}
 
 \hypertarget{decreasing-order}{%
 \subsubsection{Decreasing order}\label{decreasing-order}}
@@ -6805,7 +6814,7 @@ We can make the movie bars go left to right in highest to lowest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-280-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-281-1}
 
 \hypertarget{custom-order}{%
 \subsubsection{Custom order}\label{custom-order}}
@@ -7242,6 +7251,429 @@ With a PC you need to use the INSERT menu and insert the graph as a picture in M
        \DataTypeTok{dpi =} \StringTok{"print"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{effect-sizes-with-confidence-intervals-from-a-published-study}{%
+\chapter{Effect sizes with confidence intervals from a published study}\label{effect-sizes-with-confidence-intervals-from-a-published-study}}
+
+A key part of planning sample sizes for your current study is assessing effect sizes from past studies. Unfortunatley, studies often don't report effect sizes (e.g., \(d\)-values) or if they do, they don't report the confidence interval for that effect. In this chapter we focus on obtaining effect sizes with confidence intervals.
+
+\hypertarget{correlations}{%
+\section{Correlations}\label{correlations}}
+
+Correlations are frequently reported in the literature. Less common, however, is the reporting of confidence intervals for those correlations. A confidence interval for a reported correlations (e.g., \(r\) = .40) can be obtained if you also have the sample size (\(n\) = 200) with the command below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.cc}\NormalTok{(}\DataTypeTok{r =} \FloatTok{.40}\NormalTok{, }\DataTypeTok{n =} \DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Limit
+## [1] 0.2766
+## 
+## $Estimated.Correlation
+## [1] 0.4
+## 
+## $Upper.Limit
+## [1] 0.5104
+\end{verbatim}
+
+From this output you see that \(r\) = .30, 95\% CI {[}.28, .51{]}.
+
+\hypertarget{repeated-measures-d-values}{%
+\section{\texorpdfstring{Repeated Measures \(d\)-values}{Repeated Measures d-values}}\label{repeated-measures-d-values}}
+
+For a repeated measures design, different \(d\)-values can be report. Some authors (e.g., Cumming, 2011) suggest that \(d\)-values for independent group designs should reported for repeated measures designs -- and provide convincing arguments for this approach. That said, in our reading of the literature most people report and use repeated measures \(d\)-values, and corresponding confidence intervals, for repeated measures designs. Specifically, the use the formula below for repeated measures d-values. In this formula the symbol, \(\bar{x}_{diff}\), indicates the mean of the column of differences. Likewise, s\_\{diff\}, is used to indicate the standard deviation of the column of differences.
+
+\[
+\begin{aligned}
+d & = \frac{\bar{x}_{diff}}{s_{diff}}
+\end{aligned}
+\]
+
+In the repeated-measures calculations below we use the formula above.
+
+\hypertarget{reported-repeated-d-value-no-confidence-interval}{%
+\subsection{\texorpdfstring{Reported repeated \(d\)-value, no confidence interval}{Reported repeated d-value, no confidence interval}}\label{reported-repeated-d-value-no-confidence-interval}}
+
+Consider a scenario where a study reports a repeated-measures \(d\) = .50 and \(n\) = 150. The 95\% confidence interval for this \(d\)-value (i.e., standardized mean difference) can be obtain with the command below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.sm}\NormalTok{(}\DataTypeTok{sm =} \FloatTok{.50}\NormalTok{, }\DataTypeTok{N =} \DecValTok{150}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The 0.95 confidence limits for the standardized mean are given as:"
+\end{verbatim}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Standardized.Mean
+## [1] 0.3295
+## 
+## $Standardized.Mean
+## [1] 0.5
+## 
+## $Upper.Conf.Limit.Standardized.Mean
+## [1] 0.669
+\end{verbatim}
+
+From this output you see that \(d\) = 0.50, 95\% CI {[}0.33, 0.67{]}.
+
+\hypertarget{using-repeated-measures-mean-difference}{%
+\subsection{Using repeated measures mean difference}\label{using-repeated-measures-mean-difference}}
+
+In some scenarios, a study might not report the \(d\)-value but does report information about the change in sufficient detail that you can calculate a repeated-measures d-value. Consider a scenario of a weight loss program with 150 participants where weights are measured in pounds (i.e.~lbs). The participants ``weigh in'' at time 1. They diet for three months. Then they ``weight out'' at time 2. There are now two columns (time1, time2) with weight information. We can create a third column, called diff, by subtracting time 1 weight from time 2 weights. That is, diff = time 2 weight - time 1 weight. The new diff column indicates how the weights for each person have changed over the diet. The new diff column is used to calcualted the repeated-measures d-value. Specifically, mean of the diff column (\(bar{x}_{diff}\)) and the standard deviation of the diff column (\(s_{diff}\)) are used in the formula below:
+
+\[
+\begin{aligned}
+d & = \frac{\bar{x}_{diff}}{s_{diff}}
+\end{aligned}
+\]
+
+If the mean of the column of differences was \(\bar{x}_{diff} = -3.00lbs\) and the standard deviation of the column of differences is \(s_{diff} = 6.00lbs\). Then we can can calculate, see below, the a repeated measures \(d = 0.50\) (we ignore the minus sign).
+
+\[
+\begin{aligned}
+d & = \frac{\bar{x}_{diff}}{s_{diff}}
+&= \frac{-3.00}{6.00}
+&= -.50 
+\end{aligned}
+\]
+
+We can get a confidence interval around this value with the code below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.sm}\NormalTok{(}\DataTypeTok{sm =} \FloatTok{.5}\NormalTok{, }\DataTypeTok{N =}\DecValTok{150}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The 0.95 confidence limits for the standardized mean are given as:"
+\end{verbatim}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Standardized.Mean
+## [1] 0.3295
+## 
+## $Standardized.Mean
+## [1] 0.5
+## 
+## $Upper.Conf.Limit.Standardized.Mean
+## [1] 0.669
+\end{verbatim}
+
+Thus, in our repeated measures design participants lost weight, \(d = 0.50\), 95\% CI {[}0.33, 0.67{]}.
+
+\hypertarget{using-repeated-measures-cell-information}{%
+\subsection{Using repeated measures cell information}\label{using-repeated-measures-cell-information}}
+
+\[
+\begin{aligned}
+\bar{x}_{diff} & = \bar{x}_1 - \bar{x}_2
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+s_{diff} & = s_1^2 + s_2^2 - 2(s_1)(s_2)r_{12}
+\end{aligned}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.sm}\NormalTok{(}\DataTypeTok{sm =} \FloatTok{.8}\NormalTok{, }\DataTypeTok{N =}\DecValTok{100}\NormalTok{) }\CommentTok{# dvalues]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The 0.95 confidence limits for the standardized mean are given as:"
+\end{verbatim}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Standardized.Mean
+## [1] 0.5731
+## 
+## $Standardized.Mean
+## [1] 0.8
+## 
+## $Upper.Conf.Limit.Standardized.Mean
+## [1] 1.024
+\end{verbatim}
+
+\hypertarget{using-repeated-measures-t-value}{%
+\subsection{\texorpdfstring{Using repeated measures \(t\)-value}{Using repeated measures t-value}}\label{using-repeated-measures-t-value}}
+
+\[
+\begin{aligned}
+df &= n - 1
+&= 200 - 1
+&= 199
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+n  &= df + 1
+&= 199 + 1
+&= 200
+\end{aligned}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# t-value for repeated measures if }
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.sm}\NormalTok{(}\DataTypeTok{ncp =} \FloatTok{8.23}\NormalTok{, }\DataTypeTok{N =} \DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The 0.95 confidence limits for the standardized mean are given as:"
+\end{verbatim}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Standardized.Mean
+## [1] 0.4314
+## 
+## $Standardized.Mean
+## [1] 0.5819
+## 
+## $Upper.Conf.Limit.Standardized.Mean
+## [1] 0.7312
+\end{verbatim}
+
+\hypertarget{independent-groups-d-value-pooled-variance}{%
+\section{\texorpdfstring{Independent Groups \(d\)-value: Pooled Variance}{Independent Groups d-value: Pooled Variance}}\label{independent-groups-d-value-pooled-variance}}
+
+\hypertarget{reported-d-value-no-confidence-interval}{%
+\subsection{\texorpdfstring{Reported \(d\)-value no confidence interval}{Reported d-value no confidence interval}}\label{reported-d-value-no-confidence-interval}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd}\NormalTok{(}\DataTypeTok{sm =} \FloatTok{1.67}\NormalTok{, }\DataTypeTok{n.1 =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n.2 =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd
+## [1] 1.211
+## 
+## $smd
+## [1] 1.67
+## 
+## $Upper.Conf.Limit.smd
+## [1] 2.123
+\end{verbatim}
+
+\hypertarget{using-cell-means}{%
+\subsection{Using cell means}\label{using-cell-means}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{smd}\NormalTok{(}\DataTypeTok{Mean.1 =} \DecValTok{5}\NormalTok{,}
+    \DataTypeTok{s.1 =} \FloatTok{1.2}\NormalTok{, }
+    \DataTypeTok{n.1 =} \DecValTok{50}\NormalTok{, }
+    \DataTypeTok{Mean.2 =} \DecValTok{3}\NormalTok{, }
+    \DataTypeTok{s.2 =} \FloatTok{1.2}\NormalTok{, }
+    \DataTypeTok{n.2 =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.667
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd}\NormalTok{(}\DataTypeTok{sm =} \FloatTok{1.67}\NormalTok{, }\DataTypeTok{n.1 =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n.2 =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd
+## [1] 1.211
+## 
+## $smd
+## [1] 1.67
+## 
+## $Upper.Conf.Limit.smd
+## [1] 2.123
+\end{verbatim}
+
+\hypertarget{equal-group-sizes}{%
+\subsubsection{Equal group sizes}\label{equal-group-sizes}}
+
+t(98) = 8.30 and equal sized groups
+
+\[
+\begin{aligned}
+df &= n_1 + n_2 - 2
+&= 50 + 50 -2
+&= 98
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+n_{group} &= \frac{df + 2}{2}
+&= \frac{98 + 2}{2}
+&= \frac{100}{2}
+&= 50
+\end{aligned}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd}\NormalTok{(}\DataTypeTok{ncp =} \FloatTok{8.3}\NormalTok{, }\DataTypeTok{n.1 =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n.2 =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd
+## [1] 1.201
+## 
+## $smd
+## [1] 1.66
+## 
+## $Upper.Conf.Limit.smd
+## [1] 2.112
+\end{verbatim}
+
+\hypertarget{unequal-group-sizes}{%
+\subsubsection{Unequal group sizes}\label{unequal-group-sizes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd}\NormalTok{(}\DataTypeTok{ncp =} \FloatTok{8.3}\NormalTok{, }\DataTypeTok{n.1 =} \DecValTok{65}\NormalTok{, }\DataTypeTok{n.2 =} \DecValTok{35}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd
+## [1] 1.259
+## 
+## $smd
+## [1] 1.74
+## 
+## $Upper.Conf.Limit.smd
+## [1] 2.214
+\end{verbatim}
+
+\hypertarget{independent-groups-d-value-control-group-variance}{%
+\section{\texorpdfstring{Independent Groups \(d\)-value: Control Group Variance}{Independent Groups d-value: Control Group Variance}}\label{independent-groups-d-value-control-group-variance}}
+
+\hypertarget{reported-d-value-no-confidence-interval-1}{%
+\subsection{\texorpdfstring{Reported \(d\)-value no confidence interval}{Reported d-value no confidence interval}}\label{reported-d-value-no-confidence-interval-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd.c}\NormalTok{(}\DataTypeTok{smd.c =} \FloatTok{1.67}\NormalTok{, }\DataTypeTok{n.C =} \DecValTok{60}\NormalTok{, }\DataTypeTok{n.E =} \DecValTok{40}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd.c
+## [1] 1.165
+## 
+## $smd.c
+## [1] 1.67
+## 
+## $Upper.Conf.Limit.smd.c
+## [1] 2.166
+\end{verbatim}
+
+\hypertarget{using-cell-means-1}{%
+\subsection{Using cell means}\label{using-cell-means-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{smd.c}\NormalTok{(}\DataTypeTok{Mean.T =} \DecValTok{5}\NormalTok{,}
+    \DataTypeTok{Mean.C =} \DecValTok{3}\NormalTok{, }
+    \DataTypeTok{s.C =} \FloatTok{1.4}\NormalTok{, }
+    \DataTypeTok{n.C =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.429
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd.c}\NormalTok{(}\DataTypeTok{smd.c =} \FloatTok{1.43}\NormalTok{, }\DataTypeTok{n.E =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n.C =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd.c
+## [1] 0.942
+## 
+## $smd.c
+## [1] 1.43
+## 
+## $Upper.Conf.Limit.smd.c
+## [1] 1.908
+\end{verbatim}
+
+\hypertarget{equal-group-sizes-1}{%
+\subsubsection{Equal group sizes}\label{equal-group-sizes-1}}
+
+t(98) = 8.30 and equal sized groups
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd.c}\NormalTok{(}\DataTypeTok{ncp =} \FloatTok{8.3}\NormalTok{, }\DataTypeTok{n.E =} \DecValTok{50}\NormalTok{, }\DataTypeTok{n.C =} \DecValTok{50}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd.c
+## [1] 1.144
+## 
+## $smd.c
+## [1] 1.66
+## 
+## $Upper.Conf.Limit.smd.c
+## [1] 2.166
+\end{verbatim}
+
+\hypertarget{unequal-group-sizes-1}{%
+\subsubsection{Unequal group sizes}\label{unequal-group-sizes-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MBESS)}
+\KeywordTok{ci.smd.c}\NormalTok{(}\DataTypeTok{ncp =} \FloatTok{8.3}\NormalTok{, }\DataTypeTok{n.E =} \DecValTok{40}\NormalTok{, }\DataTypeTok{n.C =} \DecValTok{60}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.smd.c
+## [1] 1.187
+## 
+## $smd.c
+## [1] 1.383
+## 
+## $Upper.Conf.Limit.smd.c
+## [1] 2.193
+\end{verbatim}
 
 \cleardoublepage
 
