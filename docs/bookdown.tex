@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-08-31}
+\date{2020-09-02}
 
 \begin{document}
 \maketitle
@@ -4975,12 +4975,25 @@ Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 
 
 You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the rpsychologist \href{https://rpsychologist.com/d3/cohend/}{website}. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given \(\delta\)/d value.
 
+Cohen's benchmarks for standardized mean differences are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Cohen (1988) Label & Value\tabularnewline
+\midrule
+\endhead
+Small & \(\delta\) = .20\tabularnewline
+Medium & \(\delta\) = .50\tabularnewline
+Large & \(\delta\) = .80\tabularnewline
+\bottomrule
+\end{longtable}
+
 \hypertarget{population-relations}{%
 \section{Population relations}\label{population-relations}}
 
-Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the relation between two variables.
+Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the linear relation between two variables.
 
-A population correlation is represented by the symbol \(\rho\) (pronounced rho) and calculated using Formula \eqref{eq:poprho4} below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases.
+A population correlation is represented by the symbol \(\rho\) (pronounced rho) and calculated using Formula \eqref{eq:poprho4} below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations \citep[see][]{lee1988thirteen} but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
 
 \begin{equation} 
 \rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
@@ -4991,6 +5004,40 @@ A population correlation is represented by the symbol \(\rho\) (pronounced rho) 
 
 \begin{figure}
 \includegraphics[width=16.67in,height=0.8\textheight]{ch_populations/images/rho_example} \caption{Populations of various strengths.}\label{fig:rhoplot}
+\end{figure}
+
+Cohen's benchmarks for correlations (i.e., \(\rho\)) are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Cohen (1988) Label & Value\tabularnewline
+\midrule
+\endhead
+Small & \(\rho\) = .10\tabularnewline
+Medium & \(\rho\) = .30\tabularnewline
+Large & \(\rho\) = .50\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{linear-relations}{%
+\section{Linear relations}\label{linear-relations}}
+
+A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \ref{fig:datarex} The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
+
+\begin{itemize}
+\tightlist
+\item
+  The mean of X is 54.3 and the standard deviation is 16.8
+\item
+  The mean of Y is 47.8 and the standard deviation is 26.9
+\item
+  The correlation between X and Y is \(\rho\) = -.06
+\end{itemize}
+
+Therefore, make sure you ALWAYS graph your data.
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth,height=0.8\textheight]{ch_populations/images/datarex} \caption{Various data sets with the same correlation}\label{fig:datarex}
 \end{figure}
 
 \newpage
@@ -5020,6 +5067,19 @@ A population correlation is represented by the symbol \(\rho\) (pronounced rho) 
   SMD (i.e., Cohen's d) represents the number of standard deviations between two population means. Recall both populations have the same standard deviation.
 \item
   SMD is indicated at the population level using the Greek letter delta (\(\delta\)). At the sample level we tend to use the term ``\(d\)-value'' or ``Cohen's \(d\)''.
+\end{enumerate}
+
+\hypertarget{self-assessment}{%
+\section{Self Assessment}\label{self-assessment}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What is the difference between parameters and statistics?
+\item
+  Are the formulas (excluding notation differences) always the same for parameters and statistics? If not, explain why not?
+\item
+  Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, \(\delta\) = 0.30. How do you interpret this information with respect to standard deviations?
 \end{enumerate}
 
 \hypertarget{sampling-accuracy}{%
@@ -6322,7 +6382,7 @@ Use geom\_col() to put each boxoffice column value into a bar.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-260-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
 
 Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
 
@@ -6340,7 +6400,7 @@ Next, we want to put the boxoffice revenue above each bar so it easier to interp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-261-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
 
 Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge\_y.
 
@@ -6362,7 +6422,7 @@ We can nudge each label higher on the y-axis using the \emph{nudge\_y} command. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-262-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
 
 \hypertarget{graphing-efficiently}{%
 \section{Graphing efficiently}\label{graphing-efficiently}}
@@ -6384,7 +6444,7 @@ Examine the code below and compare it to the code above. Notice how in the geom\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-263-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
 
 \hypertarget{aesthetics}{%
 \section{Aesthetics}\label{aesthetics}}
@@ -6414,7 +6474,7 @@ You might want to influence the color of the bars in the graph such that the bar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-264-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{ch_graphing/images/mapping_fill} \caption{Adding a fill column to the internal data}\label{fig:addfill}
@@ -6443,7 +6503,7 @@ Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-265-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
 
 Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add ``nudge\_y = 400'' to move the text higher than the boxoffice text/label. Don't forget the units used by nudge\_y are the units on the y-axis.
 
@@ -6462,7 +6522,7 @@ Notice that we have the same problem as before with the text being difficult to 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-266-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-267-1}
 
 \newpage
 
@@ -6488,7 +6548,7 @@ Use theme\_classic() to make the graph apear in APA style. We use theme\_classic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-267-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-268-1}
 
 \hypertarget{axes}{%
 \section{Axes}\label{axes}}
@@ -6517,7 +6577,7 @@ We use the coord\_cartesian() command to adjust range of axes. In the code below
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-268-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-269-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:
 
@@ -6552,7 +6612,7 @@ We use the scale\_y\_continuous() command to adjust the ticks on the y-axis. We 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-270-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-271-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
 
@@ -6593,7 +6653,7 @@ We use the labs() command to set the labels for the x- and y-axes:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-273-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
 
 \hypertarget{axis-values}{%
 \section{Axis values}\label{axis-values}}
@@ -6641,7 +6701,7 @@ The values along the x-axis come from the short\_title column which is a factor.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-274-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
 
 \hypertarget{method-2-longer-label-columns}{%
 \subsubsection{Method 2: Longer label columns}\label{method-2-longer-label-columns}}
@@ -6671,7 +6731,7 @@ With our movie data we don't need to use scale\_x\_discrete() because we have a 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-275-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-276-1}
 
 \hypertarget{angle}{%
 \subsection{Angle}\label{angle}}
@@ -6703,7 +6763,7 @@ Use theme() to adjust the angle of x-axis labels. Notice, however, that the long
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-276-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-277-1}
 
 \hypertarget{alignment}{%
 \subsection{Alignment}\label{alignment}}
@@ -6734,7 +6794,7 @@ Use theme() and the hjust argument to adjust the alignment of the x-axis labels.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-277-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-278-1}
 
 \hypertarget{order}{%
 \subsection{Order}\label{order}}
@@ -6776,7 +6836,7 @@ We can make the movie bars go left to right in lowest to highest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-279-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-280-1}
 
 \hypertarget{decreasing-order}{%
 \subsubsection{Decreasing order}\label{decreasing-order}}
@@ -6814,7 +6874,7 @@ We can make the movie bars go left to right in highest to lowest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-281-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-282-1}
 
 \hypertarget{custom-order}{%
 \subsubsection{Custom order}\label{custom-order}}
@@ -7255,7 +7315,7 @@ With a PC you need to use the INSERT menu and insert the graph as a picture in M
 \hypertarget{effect-sizes-with-confidence-intervals-from-a-published-study}{%
 \chapter{Effect sizes with confidence intervals from a published study}\label{effect-sizes-with-confidence-intervals-from-a-published-study}}
 
-A key part of planning sample sizes for your current study is assessing effect sizes from past studies. Unfortunatley, studies often don't report effect sizes (e.g., \(d\)-values) or if they do, they don't report the confidence interval for that effect. In this chapter we focus on obtaining effect sizes with confidence intervals.
+A key part of planning sample sizes for your current study is assessing effect sizes from past studies. Unfortunately, studies often don't report effect sizes (e.g., \(d\)-values) or if they do, they don't report the confidence interval for that effect. In this chapter we focus on obtaining effect sizes with confidence intervals.
 
 \hypertarget{correlations}{%
 \section{Correlations}\label{correlations}}

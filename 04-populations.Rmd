@@ -828,10 +828,9 @@ Cohen's benchmarks for standardized mean differences are displayed in the table 
 
 ## Population relations
 
-Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the relation between two variables.
+Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the linear relation between two variables.
 
-A population correlation is represented by the symbol $\rho$ (pronounced rho) and calculated using Formula \@ref(eq:poprho4) below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases.
-
+A population correlation is represented by the symbol $\rho$ (pronounced rho) and calculated using Formula \@ref(eq:poprho4) below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations [see @lee1988thirteen] but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
 
 \begin{equation} 
 \rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
@@ -845,7 +844,7 @@ sigma = diag(2)
 mu <- c(0,0)
 set.seed(1)
 n = 30000
-sigma[1,2] <- .7
+sigma[1,2] <- .1
 sigma[2,1] <- sigma[1,2] 
 rho70 <- MASS::mvrnorm(n = n, Sigma = sigma, mu = mu, empirical = TRUE)
 sigma[1,2] <- .3
@@ -871,7 +870,7 @@ names(rho50) <- c("weight", "height")
 
 rho3lab <- expression(rho == ".30")
 rho5lab <- expression(rho == ".50")
-rho7lab <- expression(rho == ".70")
+rho7lab <- expression(rho == ".10")
 
 library(ggplot2)
 r70plot <- ggplot(data = rho70,
@@ -905,7 +904,7 @@ png(filename = "ch_populations/images/rho_example.png",
     width = 4*300,
     height = 7*300,
     res = 300)
-gridExtra::grid.arrange(r30plot, r50plot, r70plot)
+gridExtra::grid.arrange(r70plot, r30plot, r50plot)
 dev.off()
 
 ```
@@ -923,6 +922,38 @@ Cohen's benchmarks for correlations (i.e., $\rho$) are displayed in the table be
 | Small           | $\rho$ = .10 |
 | Medium          | $\rho$ = .30 |
 | Large           | $\rho$ = .50 |
+
+## Linear relations
+
+A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \@ref(fig:datarex) The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
+
+* The mean of X is 54.3 and the standard deviation is 16.8
+* The mean of Y is 47.8 and the standard deviation is 26.9
+* The correlation between X and Y is $\rho$ = -.06
+
+Therefore, make sure you ALWAYS graph your data.
+
+```{r, include=FALSE}
+library(datasauRus)
+datadozen <- datasaurus_dozen %>% filter(dataset != "dots")
+  
+rexgraph <- ggplot(datadozen, aes(x=x, y=y))+
+  geom_point()+
+  theme_void()+
+  theme(legend.position = "none")+
+  facet_wrap(~dataset, ncol=3)
+
+
+ggsave(plot = rexgraph, 
+       filename = "ch_populations/images/datarex.png", 
+       width = 6, height = 6, 
+       dpi = 300)
+
+```
+
+```{r datarex, fig.cap="Various data sets with the same correlation, same means, and same standard deviations", echo = FALSE, out.height="80%", out.width="80%"}
+knitr::include_graphics("ch_populations/images/datarex.png")
+```
 
 \newpage
 
@@ -953,7 +984,7 @@ Cohen's benchmarks for correlations (i.e., $\rho$) are displayed in the table be
 
 1. What is the difference between parameters and statistics?
 
-2. Are the formula (excluding notation differences) always the same for parameters and statistics? If not, explain why not? 
+2. Are the formulas (excluding notation differences) always the same for parameters and statistics? If not, explain why not? 
 
 3. Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, $\delta$ = 0.30. How do you interpret this information with respect to standard deviations?
 

@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-09-01" />
+<meta name="date" content="2020-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -204,7 +204,9 @@
 <li class="chapter" data-level="4.5.5" data-path="populations.html"><a href="populations.html#benchmarks"><i class="fa fa-check"></i><b>4.5.5</b> Benchmarks</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="populations.html"><a href="populations.html#population-relations"><i class="fa fa-check"></i><b>4.6</b> Population relations</a></li>
-<li class="chapter" data-level="4.7" data-path="populations.html"><a href="populations.html#key-points"><i class="fa fa-check"></i><b>4.7</b> Key points</a></li>
+<li class="chapter" data-level="4.7" data-path="populations.html"><a href="populations.html#linear-relations"><i class="fa fa-check"></i><b>4.7</b> Linear relations</a></li>
+<li class="chapter" data-level="4.8" data-path="populations.html"><a href="populations.html#key-points"><i class="fa fa-check"></i><b>4.8</b> Key points</a></li>
+<li class="chapter" data-level="4.9" data-path="populations.html"><a href="populations.html#self-assessment"><i class="fa fa-check"></i><b>4.9</b> Self Assessment</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html"><i class="fa fa-check"></i><b>5</b> Sampling Accuracy</a><ul>
 <li class="chapter" data-level="5.1" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
@@ -621,6 +623,28 @@ FIGURE 4.4: The difference between two population means can be expressed in the 
 FIGURE 4.5: An advantage of using the Standardized Mean Difference (SMD) to index the difference between two population means (i.e., <span class="math inline">\(\delta\)</span>) is that it takes the population standard deviation into account. In these three examples, the difference between the populations means is the same using the original/raw units of centimeters. However, the standard deviation of the populations varies across scenarios A, B, and C. The SMD illustrates that these three scenarios are different. If you only examined the difference in the original units (i.e., <span class="math inline">\(\Delta M\)</span>) you would conclude the effect is the same across the three scenarios. However, by using SMD, indexed by <span class="math inline">\(\delta\)</span> - the population <span class="math inline">\(d\)</span>-value, you see that the effect is progressively stronger from scenario A, to B, to C. This is illustrated by the fact that there is progressively less overlap between the distributions as you move from scenario A to C.
 </p>
 </div>
+</div>
+<div id="cohens-d-caveats" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Cohen’s <span class="math inline">\(d\)</span> caveats</h3>
+<p>It is important to also look at the original units when interpreting results - not just the standardized mean difference. Examine the scenarios in Figure <a href="populations.html#fig:dex3">4.6</a>. Notice how the <span class="math inline">\(\delta\)</span> value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen’s <span class="math inline">\(d\)</span>) provide important interpretational information - don’t rely on just one of them.</p>
+<div class="figure"><span id="fig:dex3"></span>
+<img src="ch_populations/images/dvalue_ex3.png" alt="The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios." width="100%" />
+<p class="caption">
+FIGURE 4.6: The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population <span class="math inline">\(d\)</span>-value or <span class="math inline">\(\delta\)</span>) can remain constant across scenarios when there is a change in the raw difference (i.e., <span class="math inline">\(\Delta M\)</span>) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios.
+</p>
+</div>
+</div>
+<div id="benchmarks" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Benchmarks</h3>
+<p>Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively <span class="citation">(Cohen <a href="#ref-cohen1988" role="doc-biblioref">1988</a>)</span>. These effect sizes are illustrated in Figure <a href="populations.html#fig:dex4">4.7</a>. As described in an interesting <a href="https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/">blog post</a>, these benchmark values came from reviewing a single issue of the <em>Journal of Abnormal and Social Psychology</em>. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation <span class="citation">(see Schäfer and Schwarz <a href="#ref-schafer2019meaningfulness" role="doc-biblioref">2019</a>)</span> of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.</p>
+<div class="figure"><span id="fig:dex4"></span>
+<img src="ch_populations/images/dvalue_ex4.png" alt="Cohen's (1988) effect size benchmarks" width="100%" />
+<p class="caption">
+FIGURE 4.7: Cohen’s (1988) effect size benchmarks
+</p>
+</div>
+<p>You can visualize any <span class="math inline">\(\delta\)</span> value (i.e., population <span class="math inline">\(d\)</span>-value) using the rpsychologist <a href="https://rpsychologist.com/d3/cohend/">website</a>. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given <span class="math inline">\(\delta\)</span>/d value.</p>
+<p>Cohen’s benchmarks for standardized mean differences are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.</p>
 <table>
 <thead>
 <tr class="header">
@@ -644,32 +668,11 @@ FIGURE 4.5: An advantage of using the Standardized Mean Difference (SMD) to inde
 </tbody>
 </table>
 </div>
-<div id="cohens-d-caveats" class="section level3">
-<h3><span class="header-section-number">4.5.4</span> Cohen’s <span class="math inline">\(d\)</span> caveats</h3>
-<p>It is important to also look at the original units when interpreting results - not just the standardized mean difference. Examine the scenarios in Figure <a href="populations.html#fig:dex3">4.6</a>. Notice how the <span class="math inline">\(\delta\)</span> value stays constant across scenarios - as does the overlap of the two distributions. However, inspect the shape of the curves and the original units to see how the scenarios vary. Both the original units and the standardized mean difference (i.e., Cohen’s <span class="math inline">\(d\)</span>) provide important interpretational information - don’t rely on just one of them.</p>
-<div class="figure"><span id="fig:dex3"></span>
-<img src="ch_populations/images/dvalue_ex3.png" alt="The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios." width="100%" />
-<p class="caption">
-FIGURE 4.6: The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population <span class="math inline">\(d\)</span>-value or <span class="math inline">\(\delta\)</span>) can remain constant across scenarios when there is a change in the raw difference (i.e., <span class="math inline">\(\Delta M\)</span>) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios.
-</p>
-</div>
-</div>
-<div id="benchmarks" class="section level3">
-<h3><span class="header-section-number">4.5.5</span> Benchmarks</h3>
-<p>Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively <span class="citation">(Cohen <a href="#ref-cohen1988" role="doc-biblioref">1988</a>)</span>. These effect sizes are illustrated in Figure <a href="populations.html#fig:dex4">4.7</a>. As described in an interesting <a href="https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/">blog post</a>, these benchmark values came from reviewing a single issue of the <em>Journal of Abnormal and Social Psychology</em>. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation <span class="citation">(see Schäfer and Schwarz <a href="#ref-schafer2019meaningfulness" role="doc-biblioref">2019</a>)</span> of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.</p>
-<div class="figure"><span id="fig:dex4"></span>
-<img src="ch_populations/images/dvalue_ex4.png" alt="Cohen's (1988) effect size benchmarks" width="100%" />
-<p class="caption">
-FIGURE 4.7: Cohen’s (1988) effect size benchmarks
-</p>
-</div>
-<p>You can visualize any <span class="math inline">\(\delta\)</span> value (i.e., population <span class="math inline">\(d\)</span>-value) using the rpsychologist <a href="https://rpsychologist.com/d3/cohend/">website</a>. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given <span class="math inline">\(\delta\)</span>/d value.</p>
-</div>
 </div>
 <div id="population-relations" class="section level2">
 <h2><span class="header-section-number">4.6</span> Population relations</h2>
-<p>Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the relation between two variables.</p>
-<p>A population correlation is represented by the symbol <span class="math inline">\(\rho\)</span> (pronounced rho) and calculated using Formula <a href="populations.html#eq:poprho4">(4.5)</a> below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases.</p>
+<p>Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the linear relation between two variables.</p>
+<p>A population correlation is represented by the symbol <span class="math inline">\(\rho\)</span> (pronounced rho) and calculated using Formula <a href="populations.html#eq:poprho4">(4.5)</a> below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations <span class="citation">(see Lee Rodgers and Nicewander <a href="#ref-lee1988thirteen" role="doc-biblioref">1988</a>)</span> but it’s easiest to think of it as an index of the extent to which the variables covary in a linear way.</p>
 <p><span class="math display" id="eq:poprho4">\[\begin{equation} 
 \rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
       \tag{4.5}
@@ -681,6 +684,7 @@ FIGURE 4.7: Cohen’s (1988) effect size benchmarks
 FIGURE 4.8: Populations of various strengths.
 </p>
 </div>
+<p>Cohen’s benchmarks for correlations (i.e., <span class="math inline">\(\rho\)</span>) are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.</p>
 <table>
 <thead>
 <tr class="header">
@@ -703,10 +707,26 @@ FIGURE 4.8: Populations of various strengths.
 </tr>
 </tbody>
 </table>
+</div>
+<div id="linear-relations" class="section level2">
+<h2><span class="header-section-number">4.7</span> Linear relations</h2>
+<p>A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure <a href="populations.html#fig:datarex">4.9</a> The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:</p>
+<ul>
+<li>The mean of X is 54.3 and the standard deviation is 16.8</li>
+<li>The mean of Y is 47.8 and the standard deviation is 26.9</li>
+<li>The correlation between X and Y is <span class="math inline">\(\rho\)</span> = -.06</li>
+</ul>
+<p>Therefore, make sure you ALWAYS graph your data.</p>
+<div class="figure"><span id="fig:datarex"></span>
+<img src="ch_populations/images/datarex.png" alt="Various data sets with the same correlation, same means, and same standard deviations" width="80%" height="80%" />
+<p class="caption">
+FIGURE 4.9: Various data sets with the same correlation, same means, and same standard deviations
+</p>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="key-points" class="section level2">
-<h2><span class="header-section-number">4.7</span> Key points</h2>
+<h2><span class="header-section-number">4.8</span> Key points</h2>
 <ol style="list-style-type: decimal">
 <li><p>Populations are described using numbers called parameters.</p></li>
 <li><p>Population-level parameters are often represented using Greek letter.</p></li>
@@ -719,6 +739,14 @@ FIGURE 4.8: Populations of various strengths.
 <li><p>SMD (i.e., Cohen’s d) represents the number of standard deviations between two population means. Recall both populations have the same standard deviation.</p></li>
 <li><p>SMD is indicated at the population level using the Greek letter delta (<span class="math inline">\(\delta\)</span>). At the sample level we tend to use the term “<span class="math inline">\(d\)</span>-value” or “Cohen’s <span class="math inline">\(d\)</span>”.</p></li>
 </ol>
+</div>
+<div id="self-assessment" class="section level2">
+<h2><span class="header-section-number">4.9</span> Self Assessment</h2>
+<ol style="list-style-type: decimal">
+<li><p>What is the difference between parameters and statistics?</p></li>
+<li><p>Are the formulas (excluding notation differences) always the same for parameters and statistics? If not, explain why not?</p></li>
+<li><p>Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, <span class="math inline">\(\delta\)</span> = 0.30. How do you interpret this information with respect to standard deviations?</p></li>
+</ol>
 
 </div>
 </div>
@@ -726,6 +754,9 @@ FIGURE 4.8: Populations of various strengths.
 <div id="refs" class="references">
 <div id="ref-cohen1988">
 <p>Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. Academic press.</p>
+</div>
+<div id="ref-lee1988thirteen">
+<p>Lee Rodgers, Joseph, and W Alan Nicewander. 1988. “Thirteen Ways to Look at the Correlation Coefficient.” <em>The American Statistician</em> 42 (1): 59–66.</p>
 </div>
 <div id="ref-schafer2019meaningfulness">
 <p>Schäfer, Thomas, and Marcus A Schwarz. 2019. “The Meaningfulness of Effect Sizes in Psychological Research: Differences Between Sub-Disciplines and the Impact of Potential Biases.” <em>Frontiers in Psychology</em> 10: 813. <a href="https://doi.org/10.3389/fpsyg.2019.00813">https://doi.org/10.3389/fpsyg.2019.00813</a>.</p>
