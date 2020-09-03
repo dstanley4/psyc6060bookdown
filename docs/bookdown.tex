@@ -203,7 +203,7 @@
 
 \title{PSYC6060 Course Notes}
 \author{David J. Stanley}
-\date{2020-09-02}
+\date{2020-09-03}
 
 \begin{document}
 \maketitle
@@ -4682,9 +4682,9 @@ Likewise, the sum of the squared differences from the mean can be expressed usin
 
 As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A population is the complete set of people/animals about which we want to make conclusions. A sample is a randomly selected subset of the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample.
 
-Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.
+Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians or all humans. We study samples but typically wish to make conclusions that apply to the population. Thus, even if you are an experimental researcher it's critical that you think in terms of populations and not samples. Indeed, statistical tests (such as the \emph{t}-test) are a means of helping researchers use sample data to make conclusions at the population level.
 
-Statistic tests are a means of helping researchers use sample data to make conclusions at the population level. When we calculate a number that summarises an attribute of all of the people/animals in the population we refer to it as a \textbf{parameter}.
+In this chapter, our focus is on describing populations. When we calculate a number that summarises an attribute of all of the people/animals in the population we refer to it as a \textbf{parameter}.
 
 \hypertarget{a-small-population}{%
 \section{A small population}\label{a-small-population}}
@@ -4872,12 +4872,10 @@ Populations are typically quite large in nature and it's often imposssible to pr
 \includegraphics[width=0.8\linewidth,height=0.8\textheight]{ch_populations/images/popvisual} \caption{Three ways of visualizing a population distribution}\label{fig:popvisual3}
 \end{figure}
 
-\hypertarget{population-comparisons}{%
-\section{Population comparisons}\label{population-comparisons}}
+\hypertarget{comparisons-same-variance}{%
+\section{Comparisons: Same variance}\label{comparisons-same-variance}}
 
-To facilitate comparing two populations we use the heights of males and females, measured in centimeters, as an example. There is variability in the heights of both males and females. However, on average, males are taller than females. That is, the mean of the male population is higher than the mean of the female population.
-
-In this section we present a large number of hypothetical populations representing the heights of males and females. Each of the following figures contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
+In this section we review one method of comparing population means when the populations have the same variance/standard deviation. To facilitate comparing two populations we use the heights of males and females, measured in centimeters, as an example. On average males are taller than females. There is, however, variability in the heights of both males and females. The variability in heights is the same for males and females even though the means differ. We illustrate these differences in a series of figures below. Each figure contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
 
 \hypertarget{standardized-units}{%
 \subsection{Standardized units}\label{standardized-units}}
@@ -4910,8 +4908,8 @@ The above calculation is a ratio. Ratios are used to compare two numbers. The nu
 
 In this case, the numerator is the extent to which Ian is taller than the mean height for males (\(X_{Ian} - \mu_{males}\)). This numerator is compared to the denominator -- which is the standard deviation for males (\(\sigma_{males}\)). The resulting number is 1.50 which indicates the numerator is 1.50 times larger than the denominator. In other words, Ian is 1.50 standard deviations taller than the average male. This is a standardized score for Ian's height - it expresses the difference between his height and the mean height in standard deviation units.
 
-\hypertarget{population-means}{%
-\subsubsection{Population means}\label{population-means}}
+\hypertarget{independent-group-population-means}{%
+\subsubsection{Independent Group: Population Means}\label{independent-group-population-means}}
 
 The same approach to generating standardized scores can be applied to population means. Consider a situation where we have population of male heights (\(\mu = 170\), \(\sigma = 10\)) and a population of female heights (\(\mu = 165\), \(\sigma = 10\)). Notice that both populations have the same standard deviation.
 
@@ -4964,16 +4962,38 @@ It is important to also look at the original units when interpreting results - n
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex3} \caption[Caveats for standardized mean difference]{The three scenarios in this figure illustrate that a Standardized Mean Difference (i.e., population $d$-value or $\delta$) can remain constant across scenarios when there is a change in the raw difference (i.e., $\Delta M$) between the population means. This SMD is consistent across the three scenario despite a change in the mean difference using original units; this occurs because the standard deviations also changes across the three scenarios.}\label{fig:dex3}
 \end{figure}
 
+\hypertarget{comparisons-different-variances}{%
+\section{Comparisons: Different variances}\label{comparisons-different-variances}}
+
+The calculation of the standardized mean difference values (\(\delta\)-values) above assumed that the two populations had identical standard deviations. In some scenarios, you might reasonably expect the standard deviations to be different for two populations. When the \textbf{populations} being compared have different standard deviations, we can still calculate a standardized mean difference (i.e, \(\delta\)-value) but we need to pick one of the standard deviations to use in the formula. In many cases, it makes sense to think of one population as the frame of reference for the comparison; a ``Control'' population of sorts. In this case, you use the standard deviation of the control population as the reference/denominator when calculating the \(\delta\)-value as illustrated in Formula \eqref{eq:popsmdcontrolch4} below. Make sure you recognize we are talking about a scenario with different population standard deviations (not sample standard deviations) as the appropriate situation for this type of calculation.
+
+\begin{equation} 
+\delta =  \frac{\mu_{1} - \mu_{2}}{\sigma_{control}}
+      \label{eq:popsmdcontrolch4}
+\end{equation}
+
+\hypertarget{comparisons-repeated-measures}{%
+\section{Comparisons: Repeated Measures}\label{comparisons-repeated-measures}}
+
+Sometimes we measures the members of a single population twice and are interested in the change across occasions. Consider a scenario where everyone in a large population (\emph{N} = 1000000) attempts to loose weight over a given period of time. We weigh everyone in the population at time 1 before the weight loss attempt. Then we weigh everyone in the population at time 2 after the weight loss attempt.
+
+Think of this scenario concretely with respect to how we would record this information. Imagine a large spreadsheet with 1000000 rows - each representing a person. There are two columns. The first column contains time 1 weights. The second column contains time 2 weights. We are interested in how weights changed across the times. So we create a third column, called diff, by subtracting time 1 weight from time 2 weights. That is, diff = time 2 weight - time 1 weight. The new diff column indicates how the weights for each person have changed over the diet. We can think of this single column of differences as being a population. This column is used to calcualted the repeated-measures \(\delta\)-value. Specifically, the mean of the diff column (\(bar{x}_{diff}\)) and the standard deviation of the diff column (\(s_{diff}\)) are used in Formula \eqref{eq:popsmddiffch4} below:
+
+\begin{equation} 
+\delta =  \frac{\mu_{diff}}{\sigma_{diff}}
+      \label{eq:popsmddiffch4}
+\end{equation}
+
 \hypertarget{benchmarks}{%
 \subsection{Benchmarks}\label{benchmarks}}
 
-Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively \citep{cohen1988}. These effect sizes are illustrated in Figure \ref{fig:dex4}. As described in an interesting \href{https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/}{blog post}, these benchmark values came from reviewing a single issue of the \emph{Journal of Abnormal and Social Psychology}. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation \citep[see][]{schafer2019meaningfulness} of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.
+Regardless of how the standardized mean difference (i.e., \(\delta\)-value) is calculated, Cohen suggested that the values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively \citep{cohen1988}. These effect sizes are illustrated in Figure \ref{fig:dex4}. As described in an interesting \href{https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/}{blog post}, these benchmark values came from reviewing a single issue of the \emph{Journal of Abnormal and Social Psychology}. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation \citep[see][]{schafer2019meaningfulness} of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{ch_populations/images/dvalue_ex4} \caption{Cohen's (1988) effect size benchmarks}\label{fig:dex4}
 \end{figure}
 
-You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the rpsychologist \href{https://rpsychologist.com/d3/cohend/}{website}. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given \(\delta\)/d value.
+You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the rpsychologist \href{https://rpsychologist.com/d3/cohend/}{website}. This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given \(\delta\)/d value. Take a minute to use this website now.
 
 Cohen's benchmarks for standardized mean differences are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
 
@@ -4991,9 +5011,9 @@ Large & \(\delta\) = .80\tabularnewline
 \hypertarget{population-relations}{%
 \section{Population relations}\label{population-relations}}
 
-Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the linear relation between two variables.
+Often researchers are interested in the extent to which one variable is related to another variable. For example, to what extent does variability in weight relate to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the \emph{linear} relation between two variables.
 
-A population correlation is represented by the symbol \(\rho\) (pronounced rho) and calculated using Formula \eqref{eq:poprho4} below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations \citep[see][]{lee1988thirteen} but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
+A population correlation is represented by the symbol \(\rho\) (pronounced rho) and calculated using Formula \eqref{eq:poprho4} below. The correlation may range from -1.00 to 1.00. A strong negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations \citep[see][]{lee1988thirteen} but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
 
 \begin{equation} 
 \rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
@@ -5020,9 +5040,9 @@ Large & \(\rho\) = .50\tabularnewline
 \end{longtable}
 
 \hypertarget{linear-relations}{%
-\section{Linear relations}\label{linear-relations}}
+\subsection{Linear relations}\label{linear-relations}}
 
-A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \ref{fig:datarex} The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
+A correlation only provides an index of a linear relation - so it is important to plot the data. Weak correlations (close to zero) may indicate there is not a linear relation. But there may still be a relation between the variables - just not one that follows a straight line. Indeed, the same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \ref{fig:datarex} The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
 
 \begin{itemize}
 \tightlist
@@ -5034,10 +5054,10 @@ A correlation only provides an index of a linear relation - so it is important t
   The correlation between X and Y is \(\rho\) = -.06
 \end{itemize}
 
-Therefore, make sure you ALWAYS graph your data.
+Therefore, make sure you ALWAYS graph your data. The numbers only tell part of the story.
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth,height=0.8\textheight]{ch_populations/images/datarex} \caption{Various data sets with the same correlation}\label{fig:datarex}
+\includegraphics[width=0.8\linewidth,height=0.8\textheight]{ch_populations/images/datarex} \caption{Various data sets with the same correlation, same means, and same standard deviations}\label{fig:datarex}
 \end{figure}
 
 \newpage
@@ -5069,6 +5089,19 @@ Therefore, make sure you ALWAYS graph your data.
   SMD is indicated at the population level using the Greek letter delta (\(\delta\)). At the sample level we tend to use the term ``\(d\)-value'' or ``Cohen's \(d\)''.
 \end{enumerate}
 
+\hypertarget{minor-points}{%
+\section{Minor Points}\label{minor-points}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Standardized mean differences are reported with a leading zero: \(delta\) = 0.50.
+\item
+  Correlations are reported \emph{without} a leading zero: \(rho\) = .30.
+\item
+  The difference in reporting is an APA-style issue. Values that are bounded between 0 and 1 (or between -1 and +1) are reported without a leading zero. Values that are not bounded (such as \(\delta\) values) are reported with the leading zero.
+\end{enumerate}
+
 \hypertarget{self-assessment}{%
 \section{Self Assessment}\label{self-assessment}}
 
@@ -5079,7 +5112,11 @@ Therefore, make sure you ALWAYS graph your data.
 \item
   Are the formulas (excluding notation differences) always the same for parameters and statistics? If not, explain why not?
 \item
-  Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, \(\delta\) = 0.30. How do you interpret this information with respect to standard deviations?
+  Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, \(\delta\) = 0.30. How would you describe what this value means to an audience of experts at a conference? How would you describe what this values means to community members during a talk at the local public library?
+\item
+  We reviewed three different ways of calculating a standardized mean different (\(\delta\)). What is the appropriate circumstance to use each formula? Describe a concrete scenario for each one.
+\item
+  There is a strong relation between two variables that follows and upside-down U-shape. Would you expect there to be a strong correlation between these two variables? Why or why not?
 \end{enumerate}
 
 \hypertarget{sampling-accuracy}{%
