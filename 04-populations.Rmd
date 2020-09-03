@@ -93,9 +93,9 @@ $$
 
 As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A population is the complete set of people/animals about which we want to make conclusions. A sample is a randomly selected subset of the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample. 
 
-Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians or all humans. Thus, we study samples but typically wish to make conclusions that apply to the population.
+Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians or all humans. We study samples but typically wish to make conclusions that apply to the population. Thus, even if you are an experimental researcher it's critical that you think in terms of populations and not samples. Indeed, statistical tests (such as the *t*-test) are a means of helping researchers use sample data to make conclusions at the population level. 
 
-Statistic tests are a means of helping researchers use sample data to make conclusions at the population level. When we calculate a number that summarises an attribute of all of the people/animals in the population we refer to it as a **parameter**. 
+In this chapter, our focus is on describing populations. When we calculate a number that summarises an attribute of all of the people/animals in the population we refer to it as a **parameter**. 
 
 ## A small population
 
@@ -715,11 +715,9 @@ dev.off()
 knitr::include_graphics("ch_populations/images/popvisual.png")
 ```
 
-## Population comparisons
+## Comparisons: Same variance
 
-To facilitate comparing two populations we use the heights of males and females, measured in centimeters, as an example. There is variability in the heights of both males and females. However, on average, males are taller than females. That is, the mean of the male population is higher than the mean of the female population.
-
-In this section we present a large number of hypothetical populations representing the heights of males and females. Each of the following figures contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
+In this section we review one method of comparing population means when the populations have the same variance/standard deviation. To facilitate comparing two populations we use the heights of males and females, measured in centimeters, as an example. On average males are taller than females. There is, however, variability in the heights of both males and females. The variability in heights is the same for males and females even though the means differ. We illustrate these differences in a series of figures below. Each figure contains three scenarios (labeled A, B, C) in which we manipulate the mean height and variability of the populations. In each scenario the standard deviation of heights is the same for the male and female populations.
 
 
 ### Standardized units
@@ -804,32 +802,30 @@ It is important to also look at the original units when interpreting results - n
 knitr::include_graphics("ch_populations/images/dvalue_ex3.png")
 ```
 
-### Other $\delta$-values
+## Comparisons: Different variances
 
-The calculate of independent groups $\delta$-values aboved assumed that the two populations had identical standard deviations. In some scenarios, you might reasonably expect the standard deviations to be different. For example, you might expect a drug to affect the mean level of the dependent variable but also make people more similar to each other. In that case, you would use the standard deviation of the control group as the reference/denominator when calculating the $\delta$-value as illustrated in Formula XX below:
+The calculation of the standardized mean difference values ($\delta$-values) above assumed that the two populations had identical standard deviations. In some scenarios, you might reasonably expect the standard deviations to be different for two populations. When the **populations** being compared have different standard deviations, we can still calculate a standardized mean difference (i.e, $\delta$-value) but we need to pick one of the standard deviations to use in the formula. In many cases, it makes sense to think of one population as the frame of reference for the comparison; a "Control" population of sorts. In this case, you use the standard deviation of the control population as the reference/denominator when calculating the $\delta$-value as illustrated in Formula \@ref(eq:popsmdcontrolch4) below. Make sure you recognize we are talking about a scenario with different population standard deviations (not sample standard deviations) as the appropriate situation for this type of calculation.
 
 \begin{equation} 
 \delta =  \frac{\mu_{1} - \mu_{2}}{\sigma_{control}}
       (\#eq:popsmdcontrolch4)
 \end{equation} 
 
+## Comparisons: Repeated Measures
 
+Sometimes we measures the members of a single population twice and are interested in the change across occasions. Consider a scenario where everyone in a large population (*N* = 1000000) attempts to loose weight over a given period of time. We weigh everyone in the population at time 1 before the weight loss attempt. Then we weigh everyone in the population at time 2 after the weight loss attempt.
 
-Additionally, you might wish to 
-
-
+Think of this scenario concretely with respect to how we would record this information. Imagine a large spreadsheet with 1000000 rows - each representing a person. There are two columns. The first column contains time 1 weights. The second column contains time 2 weights. We are interested in how weights changed across the times. So we create a third column, called diff, by subtracting time 1 weight from time 2 weights. That is, diff = time 2 weight - time 1 weight. The new diff column indicates how the weights for each person have changed over the diet. We can think of this single column of differences as being a population. This column is used to calcualted the repeated-measures $\delta$-value. Specifically, the mean of the diff column ($bar{x}_{diff}$) and the standard deviation of the diff column ($s_{diff}$) are used in Formula \@ref(eq:popsmddiffch4) below:
 
 \begin{equation} 
 \delta =  \frac{\mu_{diff}}{\sigma_{diff}}
-      (\#eq:popsmdcontrolch4)
+      (\#eq:popsmddiffch4)
 \end{equation} 
-
-
 
 
 ### Benchmarks
 
-Cohen suggested that the standardized mean difference values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively [@cohen1988]. These effect sizes are illustrated in Figure \@ref(fig:dex4). As described in an interesting  [blog post](https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/), these benchmark values came from reviewing a single issue of the *Journal of Abnormal and Social Psychology*. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation [see @schafer2019meaningfulness] of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.
+Regardless of how the standardized mean difference (i.e., $\delta$-value) is calculated, Cohen suggested that the values of 0.20, 0.50, and 0.80 correspond to the effect size labels of small, medium, and large, respectively [@cohen1988]. These effect sizes are illustrated in Figure \@ref(fig:dex4). As described in an interesting  [blog post](https://replicationindex.com/2015/09/22/the-statistical-power-of-abnormal-social-psychological-research-a-revew-by-jacob-cohen/), these benchmark values came from reviewing a single issue of the *Journal of Abnormal and Social Psychology*. Basing benchmarks on such a small number of studies is potentially problematic - as is the fact that the that time all the studies were prone to publication bias. A recent investigation [see @schafer2019meaningfulness] of effect sizes in pre-registered studies, with no publication bias, suggests substantially lower benchmark values.
 
 
 ```{r dex4, fig.cap="Cohen's (1988) effect size benchmarks", echo = FALSE, out.width="100%"}
@@ -837,7 +833,7 @@ knitr::include_graphics("ch_populations/images/dvalue_ex4.png")
 ```
 
 
-You can visualize any $\delta$ value (i.e., population $d$-value) using the rpsychologist [website](https://rpsychologist.com/d3/cohend/). This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given $\delta$/d value.
+You can visualize any $\delta$ value (i.e., population $d$-value) using the rpsychologist [website](https://rpsychologist.com/d3/cohend/). This website also provides a number of interesting statistics such as the percentage of overlapping values in two populations for a given $\delta$/d value. Take a minute to use this website now.
 
 Cohen's benchmarks for standardized mean differences are displayed in the table below. These should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
 
@@ -946,7 +942,7 @@ Cohen's benchmarks for correlations (i.e., $\rho$) are displayed in the table be
 | Medium          | $\rho$ = .30 |
 | Large           | $\rho$ = .50 |
 
-## Linear relations
+### Linear relations
 
 A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \@ref(fig:datarex) The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
 
