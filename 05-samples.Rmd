@@ -254,9 +254,9 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 \end{equation} 
 
 
-## Estimating SMD
+## Estimating $\delta$
 
-We are interested in the sample standardized mean difference ($d$) to the extent that it provides an estimate of the population standardized mean difference ($\delta$). The population standardized mean difference is calculated using Formula \@ref(eq:popsmdch5):
+We are interested in the sample standardized mean difference ($d$) to the extent that it provides an estimate of the population standardized mean difference ($\delta$). The population standardized mean difference is calculated using Formula \@ref(eq:popsmdch5) when we work for the assumption that the two population have the same variance / standard deviation:
 
 \begin{equation} 
 \delta  = \frac{\mu_{1} - \mu_{2}}{\sigma} 
@@ -381,14 +381,14 @@ knitr::include_graphics("ch_samples/images/sex_pops.png")
 ```
 
 
-We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below. This value is known by many other names: $d$, Cohen's $d$, and Hedges' $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
+We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below -- when we assume the populations have equal variances. This value is known by many other names: $d$, Cohen's $d$, and Hedges' $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
 
 \begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
       (\#eq:samplesmdch5)
 \end{equation} 
 
-Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardize mean difference ($\delta$). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5).
+Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardize mean difference ($\delta$). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5). This is one approach to calculating $d_{unbiased}$ -- there are others. 
 
 \begin{equation} 
 d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
@@ -400,9 +400,9 @@ If we try to apply either $d$-value formula (\@ref(eq:samplesmdch5) or \@ref(eq:
 
 ### Pooled standard deviation
 
-When we calculated the population-level standardized mean difference, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \@ref(eq:popsmdch5), has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact that  both populations have the same standard deviation.
+When we calculated the population-level standardized mean difference we knew the population variances where the same. Consequently, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula \@ref(eq:popsmdch5), has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact that  both populations have the same standard deviation.
 
-Let's consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations -- one for males and one for females. Moreover, these two sample-level standard deviations (using $n$-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviations are identical. Fortunately, this is sample-level data and not population-level data.
+Let's consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations -- one for males and one for females. Moreover, these two sample-level standard deviations (using $n$-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviations are identical. 
 
 
 $$
@@ -424,8 +424,7 @@ s_{females} &= 8.2 \\
 \end{aligned} 
 $$
 
-
-We need to recognize that the sample-level standard deviations are likely to differ from the population-level standard deviation due to sampling error. Consequently, we are likely to get two different sample-level standard deviations even if the population-level standard deviations are identical for males and females.
+Fortunately, this is sample-level data and not population-level data. Sample-level standard deviations may differ even when the population-level standard deviations are the same. In fact, sample-level standard deviations are *likely* to differ from the population-level standard deviation due to sampling error. Consequently, we are *likely* to get two different sample-level standard deviations even if the population-level standard deviations are identical for males and females.
 
 How do we resolve this situation of having two sample-level standard deviations? The first step is to switch to thinking in terms of variance rather than standard deviation. Due to the way the math works, life becomes very complicated, very quickly, if we continue to think in terms of standard deviations. Therefore, we reframe the problem into a variance problem. Variances are preferable to standard deviations because we can add and subtract variances - but not standard deviations.
 
@@ -571,6 +570,71 @@ many_samples %>%
 
 We see from the output that $d_{unbiased}$ values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of $\delta = 1.49$. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative $d$-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that women are taller than men - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population. 
 
+
+## Estimating $\rho$
+
+
+```{r, include=FALSE}
+library(learnSampling)
+library(tidyverse)
+N <- 30000
+n <- 75
+mu <- c(150, 170)
+sd <- c(8, 12)
+
+cormatrix <- diag(2)
+cormatrix[1,2] <- .5
+cormatrix[2,1] <- .5
+rhopop <- expression(rho == ".50")
+
+set.seed(1)
+pop_rho <- mvrnorm_cor(n = N, mu = mu, sd = sd, cormatrix = cormatrix, empirical = TRUE)
+pop_rho <- pop_rho %>% round(1)
+pop_data <- as.data.frame(pop_rho)
+names(pop_data) <- c("weight", "height")
+
+many_samples <- get_r_samples_from_population_data(data = pop_data,
+                                                   n = n,
+                                                   number.of.samples = 1000)
+
+pop_graph <- ggplot(data = pop_data,
+                  mapping = aes(x = height, y = weight)) +
+  geom_point(alpha = .30) +
+  scale_x_continuous(breaks = seq(100, 250, by = 20)) +
+  scale_y_continuous(breaks = seq(70, 250, by = 20)) +
+  coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
+  annotate(geom = "text", x= 220, y = 90, label = rhopop, parse = TRUE) +
+  labs(title = sprintf("Population correlation = .50, N = %g", N)) +
+  theme_classic()
+
+r_graph <- ggplot(data = many_samples,
+                  mapping = aes(x = r)) +
+  geom_density(adjust = 1.8) +
+  scale_x_continuous(breaks = seq(0, 1, by = .1)) +
+  coord_cartesian(xlim = c(0,1)) +
+  annotate(geom = "text", x= .65, y = 3, label = "Each r based", hjust = 0) +
+  annotate(geom = "text", x= .65, y = 2.75, label = "on n = 75", hjust = 0) +
+  labs(title = sprintf("%g sample correlations", N),
+       x = "Sample correlation (r)",
+       y = "Density") +
+  theme_classic()
+
+png(filename = "ch_samples/images/rdist_example.png",
+    width = 4*300,
+    height = 8*300,
+    res = 300)
+gridExtra::grid.arrange(pop_graph, r_graph)
+dev.off()
+
+```
+
+
+```{r rdistplot, fig.cap="Variability in sample correlations", echo = FALSE, out.height="80%", out.width="80%"}
+knitr::include_graphics("ch_samples/images/rdist_example.png")
+```
+  
+  
+
 ## Overview
 
 In this chapter we have illustrated how population parameters can be estimated by sample statistics; these are summarized below:
@@ -612,4 +676,16 @@ Now that you understand the logic for assessing bias, we present an old statisti
 * To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter.
 
 * Meta-analyses are used in the "real world" the way we used simulations in this chapter.
+
+
+## To Do
+
+1 - add correlation sampling graphs etc. emphsize subset of row so population correlation vs sample correlaiton is clear...
+
+2- emphaise SMD is scenario where we assume equal population variances
+
+
+
+
+
 
