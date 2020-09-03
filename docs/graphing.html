@@ -284,16 +284,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-the-mean"><i class="fa fa-check"></i><b>5.4</b> Estimating the mean</a></li>
 <li class="chapter" data-level="5.5" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-variance"><i class="fa fa-check"></i><b>5.5</b> Estimating variance</a></li>
 <li class="chapter" data-level="5.6" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-standard-deviation"><i class="fa fa-check"></i><b>5.6</b> Estimating standard deviation</a></li>
-<li class="chapter" data-level="5.7" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-smd"><i class="fa fa-check"></i><b>5.7</b> Estimating SMD</a><ul>
+<li class="chapter" data-level="5.7" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-delta"><i class="fa fa-check"></i><b>5.7</b> Estimating <span class="math inline">\(\delta\)</span></a><ul>
 <li class="chapter" data-level="5.7.1" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#pooled-standard-deviation"><i class="fa fa-check"></i><b>5.7.1</b> Pooled standard deviation</a></li>
 <li class="chapter" data-level="5.7.2" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#calculating-d"><i class="fa fa-check"></i><b>5.7.2</b> Calculating <span class="math inline">\(d\)</span></a></li>
 <li class="chapter" data-level="5.7.3" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#assessing-bias"><i class="fa fa-check"></i><b>5.7.3</b> Assessing bias</a></li>
 <li class="chapter" data-level="5.7.4" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#illustrating-variability"><i class="fa fa-check"></i><b>5.7.4</b> Illustrating variability</a></li>
 </ul></li>
-<li class="chapter" data-level="5.8" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#overview-1"><i class="fa fa-check"></i><b>5.8</b> Overview</a></li>
-<li class="chapter" data-level="5.9" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#meta-analysis"><i class="fa fa-check"></i><b>5.9</b> Meta-analysis</a></li>
-<li class="chapter" data-level="5.10" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#a-joke"><i class="fa fa-check"></i><b>5.10</b> A joke</a></li>
-<li class="chapter" data-level="5.11" data-path="populations.html"><a href="populations.html#key-points"><i class="fa fa-check"></i><b>5.11</b> Key Points</a></li>
+<li class="chapter" data-level="5.8" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#estimating-rho"><i class="fa fa-check"></i><b>5.8</b> Estimating <span class="math inline">\(\rho\)</span></a></li>
+<li class="chapter" data-level="5.9" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#overview-1"><i class="fa fa-check"></i><b>5.9</b> Overview</a></li>
+<li class="chapter" data-level="5.10" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#meta-analysis"><i class="fa fa-check"></i><b>5.10</b> Meta-analysis</a></li>
+<li class="chapter" data-level="5.11" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#a-joke"><i class="fa fa-check"></i><b>5.11</b> A joke</a></li>
+<li class="chapter" data-level="5.12" data-path="populations.html"><a href="populations.html#key-points"><i class="fa fa-check"></i><b>5.12</b> Key Points</a></li>
+<li class="chapter" data-level="5.13" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#to-do"><i class="fa fa-check"></i><b>5.13</b> To Do</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="sampling-precision.html"><a href="sampling-precision.html"><i class="fa fa-check"></i><b>6</b> Sampling Precision</a><ul>
 <li class="chapter" data-level="6.1" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
@@ -496,7 +498,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb377-4"><a href="graphing.html#cb377-4"></a>                         <span class="dt">y =</span> boxoffice))</span>
 <span id="cb377-5"><a href="graphing.html#cb377-5"></a></span>
 <span id="cb377-6"><a href="graphing.html#cb377-6"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-261-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-262-1.png" width="65%" /></p>
 <p>Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="graphing.html#cb378-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
 <span id="cb378-2"><a href="graphing.html#cb378-2"></a><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">data =</span> movie_data,</span>
@@ -507,7 +509,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb378-7"><a href="graphing.html#cb378-7"></a>                         <span class="dt">y =</span> boxoffice, </span>
 <span id="cb378-8"><a href="graphing.html#cb378-8"></a>                         <span class="dt">label =</span> boxoffice))</span>
 <span id="cb378-9"><a href="graphing.html#cb378-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-262-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-263-1.png" width="65%" /></p>
 <p>Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge_y.</p>
 <p>We can nudge each label higher on the y-axis using the <em>nudge_y</em> command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.</p>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="graphing.html#cb379-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
@@ -521,7 +523,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb379-9"><a href="graphing.html#cb379-9"></a>           <span class="dt">nudge_y =</span> <span class="dv">150</span>)</span>
 <span id="cb379-10"><a href="graphing.html#cb379-10"></a></span>
 <span id="cb379-11"><a href="graphing.html#cb379-11"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-263-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-264-1.png" width="65%" /></p>
 </div>
 <div id="graphing-efficiently" class="section level2">
 <h2><span class="header-section-number">8.4</span> Graphing efficiently</h2>
@@ -535,7 +537,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb380-6"><a href="graphing.html#cb380-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb380-7"><a href="graphing.html#cb380-7"></a></span>
 <span id="cb380-8"><a href="graphing.html#cb380-8"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-264-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-265-1.png" width="65%" /></p>
 </div>
 <div id="aesthetics" class="section level2">
 <h2><span class="header-section-number">8.5</span> Aesthetics</h2>
@@ -558,7 +560,7 @@ FIGURE 8.1: Internal data structure for ggplot
 <span id="cb381-7"><a href="graphing.html#cb381-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb381-8"><a href="graphing.html#cb381-8"></a></span>
 <span id="cb381-9"><a href="graphing.html#cb381-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-265-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-266-1.png" width="65%" /></p>
 <div class="figure"><span id="fig:addfill"></span>
 <img src="ch_graphing/images/mapping_fill.png" alt="Adding a fill column to the internal data" width="70%" />
 <p class="caption">
@@ -580,7 +582,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb382-7"><a href="graphing.html#cb382-7"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">nudge_y =</span> <span class="dv">150</span>)  <span class="op">+</span></span>
 <span id="cb382-8"><a href="graphing.html#cb382-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud)) </span>
 <span id="cb382-9"><a href="graphing.html#cb382-9"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-266-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-267-1.png" width="65%" /></p>
 <p>Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add “nudge_y = 400” to move the text higher than the boxoffice text/label. Don’t forget the units used by nudge_y are the units on the y-axis.</p>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="graphing.html#cb383-1"></a>my_graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> movie_data,</span>
 <span id="cb383-2"><a href="graphing.html#cb383-2"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> short_title,</span>
@@ -592,7 +594,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb383-8"><a href="graphing.html#cb383-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">label =</span> tomatoes_aud), </span>
 <span id="cb383-9"><a href="graphing.html#cb383-9"></a>            <span class="dt">nudge_y =</span> <span class="dv">400</span>) </span>
 <span id="cb383-10"><a href="graphing.html#cb383-10"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-267-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-268-1.png" width="65%" /></p>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -611,7 +613,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb384-10"><a href="graphing.html#cb384-10"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb384-11"><a href="graphing.html#cb384-11"></a></span>
 <span id="cb384-12"><a href="graphing.html#cb384-12"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-268-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-269-1.png" width="65%" /></p>
 </div>
 <div id="axes" class="section level2">
 <h2><span class="header-section-number">8.7</span> Axes</h2>
@@ -632,7 +634,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb385-12"><a href="graphing.html#cb385-12"></a></span>
 <span id="cb385-13"><a href="graphing.html#cb385-13"></a></span>
 <span id="cb385-14"><a href="graphing.html#cb385-14"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-269-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-270-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:</p>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="graphing.html#cb386-1"></a><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
 <span id="cb386-2"><a href="graphing.html#cb386-2"></a>                <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>))</span></code></pre></div>
@@ -654,7 +656,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb387-12"><a href="graphing.html#cb387-12"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb387-13"><a href="graphing.html#cb387-13"></a></span>
 <span id="cb387-14"><a href="graphing.html#cb387-14"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-271-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-272-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale_x_continuous:</p>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="graphing.html#cb388-1"></a><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dt">by =</span> <span class="dv">500</span>))</span></code></pre></div>
 </div>
@@ -680,7 +682,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb389-15"><a href="graphing.html#cb389-15"></a><span class="st">  </span><span class="kw">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb389-16"><a href="graphing.html#cb389-16"></a></span>
 <span id="cb389-17"><a href="graphing.html#cb389-17"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-274-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-275-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="axis-values" class="section level2">
@@ -718,7 +720,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb390-24"><a href="graphing.html#cb390-24"></a>  </span>
 <span id="cb390-25"><a href="graphing.html#cb390-25"></a></span>
 <span id="cb390-26"><a href="graphing.html#cb390-26"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-275-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-276-1.png" width="65%" /></p>
 </div>
 <div id="method-2-longer-label-columns" class="section level4">
 <h4><span class="header-section-number">8.8.1.2</span> Method 2: Longer label columns</h4>
@@ -741,7 +743,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb391-16"><a href="graphing.html#cb391-16"></a>  </span>
 <span id="cb391-17"><a href="graphing.html#cb391-17"></a></span>
 <span id="cb391-18"><a href="graphing.html#cb391-18"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-276-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-277-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="angle" class="section level3">
@@ -766,7 +768,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb392-16"><a href="graphing.html#cb392-16"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>))</span>
 <span id="cb392-17"><a href="graphing.html#cb392-17"></a></span>
 <span id="cb392-18"><a href="graphing.html#cb392-18"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-277-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-278-1.png" width="65%" /></p>
 </div>
 <div id="alignment" class="section level3">
 <h3><span class="header-section-number">8.8.3</span> Alignment</h3>
@@ -790,7 +792,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb393-17"><a href="graphing.html#cb393-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb393-18"><a href="graphing.html#cb393-18"></a></span>
 <span id="cb393-19"><a href="graphing.html#cb393-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-278-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-279-1.png" width="65%" /></p>
 </div>
 <div id="order" class="section level3">
 <h3><span class="header-section-number">8.8.4</span> Order</h3>
@@ -819,7 +821,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb395-17"><a href="graphing.html#cb395-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb395-18"><a href="graphing.html#cb395-18"></a></span>
 <span id="cb395-19"><a href="graphing.html#cb395-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-280-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-281-1.png" width="65%" /></p>
 </div>
 <div id="decreasing-order" class="section level4">
 <h4><span class="header-section-number">8.8.4.2</span> Decreasing order</h4>
@@ -845,7 +847,7 @@ FIGURE 8.2: Adding a fill column to the internal data
 <span id="cb397-17"><a href="graphing.html#cb397-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb397-18"><a href="graphing.html#cb397-18"></a></span>
 <span id="cb397-19"><a href="graphing.html#cb397-19"></a><span class="kw">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-282-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-283-1.png" width="65%" /></p>
 </div>
 <div id="custom-order" class="section level4">
 <h4><span class="header-section-number">8.8.4.3</span> Custom order</h4>
