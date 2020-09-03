@@ -847,9 +847,9 @@ Cohen's benchmarks for standardized mean differences are displayed in the table 
 
 ## Population relations
 
-Often researchers are interested in the extent to which variability in one variable is related to variability in another variable. For example, to what extent does variability in weight related to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the linear relation between two variables.
+Often researchers are interested in the extent to which one variable is related to another variable. For example, to what extent does variability in weight relate to variability in height? In other words, is there a relation between weight and height? One approach to this question to calculate a regression equation relating weight to height - this provides an index of the relation in the original units of the variables. Here we focus on a second approach to describing the relation between variable, namely, the correlation. The correlation is standardized effect size for the *linear* relation between two variables.
 
-A population correlation is represented by the symbol $\rho$ (pronounced rho) and calculated using Formula \@ref(eq:poprho4) below. The correlation may range from -1.00 to 1.00. A negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations [see @lee1988thirteen] but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
+A population correlation is represented by the symbol $\rho$ (pronounced rho) and calculated using Formula \@ref(eq:poprho4) below. The correlation may range from -1.00 to 1.00. A strong negative correlation indicates that as one variable increases the other decreases. A positive correlation indicates that as one variable increases the other increases. There are at least thirteen ways to conceptualize a correlations [see @lee1988thirteen] but it's easiest to think of it as an index of the extent to which the variables covary in a linear way.
 
 \begin{equation} 
 \rho =  \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2}\sqrt{\Sigma (Y - \mu_Y)^2}}
@@ -944,13 +944,13 @@ Cohen's benchmarks for correlations (i.e., $\rho$) are displayed in the table be
 
 ### Linear relations
 
-A correlation only provides an index of a linear relation - so it is important to plot the data. The same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \@ref(fig:datarex) The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
+A correlation only provides an index of a linear relation - so it is important to plot the data. Weak correlations (close to zero) may indicate there is not a linear relation. But there may still be a relation between the variables - just not one that follows a straight line. Indeed, the same correlation may take many different forms. Consider the data sets from the datasauRus package presented in Figure \@ref(fig:datarex) The graphs for each data set appear quite different. Yet, the following is true for all 12 data sets:
 
 * The mean of X is 54.3 and the standard deviation is 16.8
 * The mean of Y is 47.8 and the standard deviation is 26.9
 * The correlation between X and Y is $\rho$ = -.06
 
-Therefore, make sure you ALWAYS graph your data.
+Therefore, make sure you ALWAYS graph your data. The numbers only tell part of the story.
 
 ```{r, include=FALSE}
 library(datasauRus)
@@ -998,6 +998,13 @@ knitr::include_graphics("ch_populations/images/datarex.png")
 
 10. SMD is indicated at the population level using the Greek letter delta ($\delta$). At the sample level we tend to use the term "$d$-value" or "Cohen's $d$".
 
+## Minor Points
+
+1. Standardized mean differences are reported with a leading zero: $delta$ = 0.50.
+
+2. Correlations are reported *without* a leading zero: $rho$ = .30.
+
+3. The difference in reporting is an APA-style issue. Values that are bounded between 0 and 1 (or between -1 and +1) are reported without a leading zero. Values that are not bounded (such as $\delta$ values) are reported with the leading zero.
 
 ## Self Assessment 
 
@@ -1005,6 +1012,9 @@ knitr::include_graphics("ch_populations/images/datarex.png")
 
 2. Are the formulas (excluding notation differences) always the same for parameters and statistics? If not, explain why not? 
 
-3. Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, $\delta$ = 0.30. How do you interpret this information with respect to standard deviations?
+3. Grade 4 students in Ontario are taller than the Grade 3 students. Specifically, $\delta$ = 0.30. How would you describe what this value means to an audience of experts at a conference? How would you describe what this values means to community members during a talk at the local public library?
 
+4. We reviewed three different ways of calculating a standardized mean different ($\delta$). What is the appropriate circumstance to use each formula? Describe a concrete scenario for each one.
+
+5. There is a strong relation between two variables that follows and upside-down U-shape. Would you expect there to be a strong correlation between these two variables? Why or why not?
 
