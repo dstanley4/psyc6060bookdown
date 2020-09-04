@@ -573,6 +573,68 @@ We see from the output that $d_{unbiased}$ values were as small as -0.38 and as 
 
 ## Estimating $\rho$
 
+The population-level correlation, $\rho$, is estimated by the sample-level correlation, $r$. The value for $r$ can be calculated using Formula \@ref(eq:sampler5) below.
+
+\begin{equation} 
+r =  \frac{\Sigma (x - \bar{X})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma (y - \bar{Y})^2}}
+      (\#eq:sampler5)
+\end{equation} 
+
+
+Sample-level correlations, $r$, often differ from the population-level correlation (i.e., $\rho$) due to sampling error. We can confirm that sample correlations are not substantially biased with a simulation. That is, we can confirm that the average of many sample correlations ($r$) roughly equals the population correlation (i.e., $\rho$) using a simulation. We say "roughly equal" because $r$ is a biased estimator of $\rho$ but the bias is typically small enough that it can be ignored (Schmidt & Hunter, 2015),
+
+We have the height and weight for 300000 people that comprise our population (fictious data). This data can be loaded with the command below.
+
+```{r}
+library(tidyverse)
+pop_data <- read_csv(file = "data_cor_pop.csv")
+```
+
+The glimpse() command reveals there are 300000 rows and two columns (weight and height).
+
+```{r}
+glimpse(pop_data)
+```
+
+We can obtain the population correlation, $\rho$, by correlating the weight and height columns:
+
+```{r}
+cor(pop_data)
+```
+
+We see from this matrix that the correlation between weight and height is $\rho$ = .50 (with rounding).
+
+To examine the extent to which this population correlation, $\rho$ = .50, is estimated by the sample statistic, $r$, we need to take a larger number of samples. Therefore, we take 50000 sample (each n = 75) and calculate the correlation for each of them:
+
+```{r, eval = FALSE}
+set.seed(1)
+many_samples <- get_r_samples_from_population_data(data = pop_data,
+                                                   n = 75,
+                                                   number.of.samples = 50000)
+```
+
+
+```{r, eval = TRUE, echo = FALSE}
+many_samples <- readRDS("ch_samples/many_samples_r_n75_rho50.RDS")
+```
+
+We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates a sample correlation in the $r$ column. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
+
+```{r}
+head(many_samples, 10)
+```
+
+Recall the population-level standardized mean difference, $\delta$, was 1.49. We can see the extent to which the average of the sample-level $d$ and $d_{unbiased}$ values compare to this population-level value.
+
+```{r}
+many_samples %>%
+  summarise(mean_d = mean(d),
+            mean_d_unbiased = mean(d_unbiased))
+```
+
+You can see that the mean of the sample-level $d$ values is 1.56 which is higher than the population-level standardized mean difference ($\delta$ = 1.49). In contrast, you can see that the mean of the sample-level $d_{unbiased}$ values is 1.49 which corresponds to the population-level standardized mean difference ($\delta$ = 1.49).
+
+
 
 ```{r, include=FALSE, eval = FALSE}
 library(learnSampling)
@@ -594,6 +656,7 @@ pop_rho <- pop_rho %>% round(1)
 pop_data <- as.data.frame(pop_rho)
 names(pop_data) <- c("weight", "height")
 
+write_csv(pop_data, path = "data_cor_pop.csv")
 
 # set.seed(1)
 # many_samples <- get_r_samples_from_population_data(data = pop_data,
