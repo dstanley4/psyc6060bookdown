@@ -574,13 +574,14 @@ We see from the output that $d_{unbiased}$ values were as small as -0.38 and as 
 ## Estimating $\rho$
 
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval = FALSE}
 library(learnSampling)
 library(tidyverse)
-N <- 30000
+N <- 300000
 n <- 75
 mu <- c(150, 170)
 sd <- c(8, 12)
+k = 50000
 
 cormatrix <- diag(2)
 cormatrix[1,2] <- .5
@@ -593,9 +594,19 @@ pop_rho <- pop_rho %>% round(1)
 pop_data <- as.data.frame(pop_rho)
 names(pop_data) <- c("weight", "height")
 
-many_samples <- get_r_samples_from_population_data(data = pop_data,
-                                                   n = n,
-                                                   number.of.samples = 1000)
+
+# set.seed(1)
+# many_samples <- get_r_samples_from_population_data(data = pop_data,
+#                                                    n = n,
+#                                                    number.of.samples = k)
+# 
+# saveRDS(many_samples, file = "ch_samples/many_samples_r_n75_rho50.RDS")
+
+many_samples <- readRDS("ch_samples/many_samples_r_n75_rho50.RDS")
+
+set.seed(1)
+single_sample = sample_n(pop_data, size = n)
+
 
 pop_graph <- ggplot(data = pop_data,
                   mapping = aes(x = height, y = weight)) +
@@ -603,34 +614,47 @@ pop_graph <- ggplot(data = pop_data,
   scale_x_continuous(breaks = seq(100, 250, by = 20)) +
   scale_y_continuous(breaks = seq(70, 250, by = 20)) +
   coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
-  annotate(geom = "text", x= 220, y = 90, label = rhopop, parse = TRUE) +
-  labs(title = sprintf("Population correlation = .50, N = %g", N)) +
+  labs(title = expression("Population correlation")) +
+  annotate(geom = "text", x= 220, y = 125, label = rhopop, parse = TRUE) +
   theme_classic()
+
+sample_graph <- ggplot(data = single_sample,
+                  mapping = aes(x = height, y = weight)) +
+  geom_point() +
+  scale_x_continuous(breaks = seq(100, 250, by = 20)) +
+  scale_y_continuous(breaks = seq(70, 250, by = 20)) +
+  coord_cartesian(xlim = c(110,250), ylim = c(70, 210)) +
+  labs(title = "A single sample correlation (n = 75)") +
+  annotate(geom = "text", x= 220, y = 135, label = "r = .38") +
+  theme_classic()
+
+
 
 r_graph <- ggplot(data = many_samples,
                   mapping = aes(x = r)) +
   geom_density(adjust = 1.8) +
   scale_x_continuous(breaks = seq(0, 1, by = .1)) +
   coord_cartesian(xlim = c(0,1)) +
-  annotate(geom = "text", x= .65, y = 3, label = "Each r based", hjust = 0) +
-  annotate(geom = "text", x= .65, y = 2.75, label = "on n = 75", hjust = 0) +
-  labs(title = sprintf("%g sample correlations", N),
-       x = "Sample correlation (r)",
+  annotate(geom = "text", x= .65, y = 3, label = "Each    ", hjust = 0) +
+  annotate(geom = "text", x= .65, y = 2.6, label = "based", hjust = 0) +
+  annotate(geom = "text", x= .65, y = 2.2, label = "on n = 75", hjust = 0) +
+  labs(title = sprintf("Distribution of %g sample correlations", k),
+       x = "Sample correlation",
        y = "Density") +
   theme_classic()
 
 png(filename = "ch_samples/images/rdist_example.png",
     width = 4*300,
-    height = 8*300,
+    height = 10*300,
     res = 300)
-gridExtra::grid.arrange(pop_graph, r_graph)
+gridExtra::grid.arrange(pop_graph, sample_graph, r_graph)
 dev.off()
 
 ```
 
 
-```{r rdistplot, fig.cap="Variability in sample correlations", echo = FALSE, out.height="80%", out.width="80%"}
-knitr::include_graphics("ch_samples/images/rdist_example.png")
+```{r rdistplot, fig.cap="Correlation sampling distribution", echo = FALSE, out.height="70%", out.width="70%"}
+knitr::include_graphics("ch_samples/images/r_sampling_dist_edit.png")
 ```
   
   
