@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2020-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,14 +33,14 @@
   
 <link rel="prev" href="populations.html"/>
 <link rel="next" href="sampling-precision.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -416,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>A GitHub package can be installed using the code below:</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="sampling-accuracy.html#cb313-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dstanley4/learnsampling&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sampling-accuracy.html#cb1-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;dstanley4/learnsampling&quot;</span>)</span></code></pre></div>
 <div id="overview" class="section level2">
 <h2><span class="header-section-number">5.1</span> Overview</h2>
 <p>Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.</p>
@@ -429,19 +429,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-for-the-chapter" class="section level2">
 <h2><span class="header-section-number">5.2</span> Data for the chapter</h2>
 <p>In this chapter we will use a population of heights to learn about random sampling. To engage in the learning activities you need to activate the required packages:</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="sampling-accuracy.html#cb314-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb314-2"><a href="sampling-accuracy.html#cb314-2"></a><span class="kw">library</span>(learnSampling)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sampling-accuracy.html#cb2-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="sampling-accuracy.html#cb2-2"></a><span class="kw">library</span>(learnSampling)</span></code></pre></div>
 <p>Next, we create a large population with 100,000 people using the get_height_population() command:</p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="sampling-accuracy.html#cb315-1"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sampling-accuracy.html#cb3-1"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
 <p>The glimpse() command can be used to confirm that the population contains 100,000 people.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="sampling-accuracy.html#cb316-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="sampling-accuracy.html#cb4-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
 <pre><code>## Rows: 100,000
 ## Columns: 3
-## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
-## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;…
-## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 17…</code></pre>
+## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,…
+## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;, &quot;male&quot;, &quot;female&quot;, …
+## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 172, 193, 190, 181, 15…</code></pre>
 <p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the heights for everyone in the population.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="sampling-accuracy.html#cb318-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sampling-accuracy.html#cb6-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 3
 ##       id sex    height
 ##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
@@ -468,11 +468,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       \tag{5.1}
 \end{equation}\]</span></p>
 <p>We can calculate the population mean for the height column of pop_data using the summarise() and mean() commands. The mean() command uses Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a>. We see in the output that the population mean is 172.48 (<span class="math inline">\(\mu = 172.48\)</span>).</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="sampling-accuracy.html#cb320-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb320-2"><a href="sampling-accuracy.html#cb320-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb320-3"><a href="sampling-accuracy.html#cb320-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="sampling-accuracy.html#cb8-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb8-2"><a href="sampling-accuracy.html#cb8-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb8-3"><a href="sampling-accuracy.html#cb8-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   pop_mean
-## 1    172.5</code></pre>
+## 1 172.4762</code></pre>
 <p>As noted previously, we rarely have access to data from an entire population. Consequently, we use the sample mean as an estimate of the population mean. The sample mean, <span class="math inline">\(\bar{x}\)</span>, is a statistic calculated using the using Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> below. The bar above the <span class="math inline">\(x\)</span>, indicates that it is a mean. Notice that Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a> and Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a> are the same - even though they use different notation. In this formula, the letter <span class="math inline">\(n\)</span> corresponds to the number of people in the sample.</p>
 <p><span class="math display" id="eq:samplemeanch5">\[\begin{equation} 
 \bar{x} = \frac{\sum{x}}{n}
@@ -491,24 +491,24 @@ FIGURE 5.1: Sampling accuracy and precision
 </p>
 </div>
 <p>We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 50000 samples to create an approximate sampling distribution of means. We use the code below to do so:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="sampling-accuracy.html#cb322-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
-<span id="cb322-2"><a href="sampling-accuracy.html#cb322-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
-<span id="cb322-3"><a href="sampling-accuracy.html#cb322-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
-<span id="cb322-4"><a href="sampling-accuracy.html#cb322-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="sampling-accuracy.html#cb323-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;ch_samples/many_samples_n10.RDS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sampling-accuracy.html#cb10-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
+<span id="cb10-2"><a href="sampling-accuracy.html#cb10-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
+<span id="cb10-3"><a href="sampling-accuracy.html#cb10-3"></a>                              <span class="dt">n =</span> <span class="dv">10</span>,</span>
+<span id="cb10-4"><a href="sampling-accuracy.html#cb10-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="sampling-accuracy.html#cb11-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;ch_samples/many_samples_n10.RDS&quot;</span>)</span></code></pre></div>
 <p>We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 samples):</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="sampling-accuracy.html#cb324-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sampling-accuracy.html#cb12-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    study  n sample_mean sample_var_n sample_var_n_1
-## 1      1 10       174.3        27.81          30.90
-## 2      2 10       161.8        83.36          92.62
-## 3      3 10       173.2       139.16         154.62
-## 4      4 10       180.0       321.80         357.56
-## 5      5 10       172.8       160.96         178.84
-## 6      6 10       172.0       159.60         177.33
-## 7      7 10       166.5        86.45          96.06
-## 8      8 10       173.5       139.45         154.94
-## 9      9 10       177.7       167.01         185.57
-## 10    10 10       168.5       262.65         291.83</code></pre>
+## 1      1 10       174.3       27.810          30.90
+## 2      2 10       161.8       83.358          92.62
+## 3      3 10       173.2      139.158         154.62
+## 4      4 10       180.0      321.804         357.56
+## 5      5 10       172.8      160.956         178.84
+## 6      6 10       172.0      159.597         177.33
+## 7      7 10       166.5       86.454          96.06
+## 8      8 10       173.5      139.446         154.94
+## 9      9 10       177.7      167.013         185.57
+## 10    10 10       168.5      262.647         291.83</code></pre>
 <p>Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate “n” (the sample size) and “sample_mean” (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample_mean column vary across samples/rows.</p>
 <div class="figure"><span id="fig:bothdist"></span>
 <img src="ch_samples/images/sampling_dist.png" alt="Sampling distribution of the mean. The population of individuals is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)." width="80%" />
@@ -518,11 +518,11 @@ FIGURE 5.2: Sampling distribution of the mean. The population of individuals is 
 </div>
 <p>Above, in Figure <a href="sampling-accuracy.html#fig:bothdist">5.2</a>, we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 50000 sample means, from the sample_mean column. Recall the population mean for heights is <span class="math inline">\(\mu = 172.48\)</span> cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean (<span class="math inline">\(\bar{x}\)</span>) may differ substantially from the population mean (<span class="math inline">\(\mu = 172.48\)</span>). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.</p>
 <p>Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct – on average. That is, does the average of many sample means correspond to the population mean? If, on average, the sample mean does corresponds to the population mean, it is accurate and we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="sampling-accuracy.html#cb326-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb326-2"><a href="sampling-accuracy.html#cb326-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample_mean =</span> <span class="kw">mean</span>(sample_mean)) <span class="op">%&gt;%</span></span>
-<span id="cb326-3"><a href="sampling-accuracy.html#cb326-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sampling-accuracy.html#cb14-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb14-2"><a href="sampling-accuracy.html#cb14-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_sample_mean =</span> <span class="kw">mean</span>(sample_mean)) <span class="op">%&gt;%</span></span>
+<span id="cb14-3"><a href="sampling-accuracy.html#cb14-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   mean_of_sample_mean
-## 1               172.5</code></pre>
+## 1             172.472</code></pre>
 <p>We find that the average of the 50000 sample means is 172.47 which is very close to the population mean of 172.48. Note that when we did this, we used the same formula to calculate the sample mean (Formula <a href="sampling-accuracy.html#eq:samplemeanch5">(5.2)</a>) as we did the population mean (Formula <a href="sampling-accuracy.html#eq:popmeanch5">(5.1)</a>), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples (i.e., an infinite number of samples). Therefore, we conclude the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be “wrong”.</p>
 </div>
 <div id="estimating-variance" class="section level2">
@@ -533,22 +533,22 @@ FIGURE 5.2: Sampling distribution of the mean. The population of individuals is 
       \tag{5.4}
 \end{equation}\]</span></p>
 <p>We can calculate the population variance for the height column of pop_data using the summarise() and var.pop() commands. The var.pop() command uses Formula <a href="sampling-accuracy.html#eq:popvarch5">(5.4)</a>. We see in the output that the population variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>).</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="sampling-accuracy.html#cb328-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb328-2"><a href="sampling-accuracy.html#cb328-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb328-3"><a href="sampling-accuracy.html#cb328-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   pop_var
-## 1   157.5</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sampling-accuracy.html#cb16-1"></a>pop_data <span class="op">%&gt;%</span></span>
+<span id="cb16-2"><a href="sampling-accuracy.html#cb16-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height)) <span class="op">%&gt;%</span></span>
+<span id="cb16-3"><a href="sampling-accuracy.html#cb16-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<pre><code>##    pop_var
+## 1 157.4611</code></pre>
 <p><span class="math display">\[
 \begin{aligned} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 \]</span></p>
 <p>The formula for sample variance with an <span class="math inline">\(n\)</span> in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an <span class="math inline">\(n\)</span> in the denominator. We can see that this is true by examining the many_samples data. In these data, the column sample_var_n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample_var_n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using <span class="math inline">\(n\)</span> in the denominator, is an unbiased estimator of the population variance.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sampling-accuracy.html#cb330-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb330-2"><a href="sampling-accuracy.html#cb330-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_var_n =</span> <span class="kw">mean</span>(sample_var_n)) <span class="op">%&gt;%</span></span>
-<span id="cb330-3"><a href="sampling-accuracy.html#cb330-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sampling-accuracy.html#cb18-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb18-2"><a href="sampling-accuracy.html#cb18-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_var_n =</span> <span class="kw">mean</span>(sample_var_n)) <span class="op">%&gt;%</span></span>
+<span id="cb18-3"><a href="sampling-accuracy.html#cb18-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   mean_of_var_n
-## 1         141.5</code></pre>
+## 1      141.5442</code></pre>
 <p>You can see the average of sample_var_n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using <span class="math inline">\(n\)</span> in the denominator, was smaller than the population variance. Consequently, sample variance (using <span class="math inline">\(n\)</span> in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using <span class="math inline">\(n\)</span> in the denominator) we will, on average, be wrong.</p>
 <p>Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span>. The unbiased estimate is calculated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>.</p>
 <p><span class="math display" id="eq:samplevarn1ch5">\[\begin{equation} 
@@ -556,11 +556,11 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
       \tag{5.5}
 \end{equation}\]</span></p>
 <p>In the many_samples data, the column sample_var_n_1 was generated using Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>. We can evaluate the quality of Formula <a href="sampling-accuracy.html#eq:samplevarn1ch5">(5.5)</a>, using <span class="math inline">\(n-1\)</span>, by averaging the values in the sample_var_n_1 column.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="sampling-accuracy.html#cb332-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb332-2"><a href="sampling-accuracy.html#cb332-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_var_n_1 =</span> <span class="kw">mean</span>(sample_var_n_<span class="dv">1</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb332-3"><a href="sampling-accuracy.html#cb332-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sampling-accuracy.html#cb20-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb20-2"><a href="sampling-accuracy.html#cb20-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_of_var_n_1 =</span> <span class="kw">mean</span>(sample_var_n_<span class="dv">1</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb20-3"><a href="sampling-accuracy.html#cb20-3"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
 <pre><code>##   mean_of_var_n_1
-## 1           157.3</code></pre>
+## 1        157.2713</code></pre>
 <p>We see that the average of the 50000 values using <span class="math inline">\(n-1\)</span> in the denominator is 157.27 which is very close to the population variance of 157.46. These numbers would have been identical with an infinite number of samples. Consequently, when we use <span class="math inline">\(n-1\)</span> in the denominator we have an unbiased estimate of the population variance. If we try to estimate the population variance with a sample variance, using <span class="math inline">\(n-1\)</span> in the denominator, we will, on average, be right.</p>
 <p>You may wonder at this point, when we use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance, can we still think of it as the average of the squared differences from the mean? The short answer is yes. When you use <span class="math inline">\(n-1\)</span> in the denominator of the sample variance you are not calculating the variance for the group people in the sample. Rather, you are estimating the variance for the much larger group of people in the population. Consequently, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared differences/errors <em>in the population</em>. That is, it makes sense to think of sample variance, using <span class="math inline">\(n-1\)</span>, as an estimate of the average of the squared differences between each person in the population and the population mean.</p>
 </div>
@@ -585,22 +585,22 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
       \tag{5.8}
 \end{equation}\]</span></p>
 <p>We can calculate the population standardized mean difference for men and women once we have the respective population means and standard deviations. Recall the initial data mixed males and females. We begin by creating separate data sets for males and females:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="sampling-accuracy.html#cb334-1"></a>male_population_heights &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb334-2"><a href="sampling-accuracy.html#cb334-2"></a><span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>) </span>
-<span id="cb334-3"><a href="sampling-accuracy.html#cb334-3"></a></span>
-<span id="cb334-4"><a href="sampling-accuracy.html#cb334-4"></a>female_population_heights &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb334-5"><a href="sampling-accuracy.html#cb334-5"></a><span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="sampling-accuracy.html#cb22-1"></a>male_population_heights &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb22-2"><a href="sampling-accuracy.html#cb22-2"></a><span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;male&quot;</span>) </span>
+<span id="cb22-3"><a href="sampling-accuracy.html#cb22-3"></a></span>
+<span id="cb22-4"><a href="sampling-accuracy.html#cb22-4"></a>female_population_heights &lt;-<span class="st"> </span>pop_data <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb22-5"><a href="sampling-accuracy.html#cb22-5"></a><span class="st">  </span><span class="kw">filter</span>(sex <span class="op">==</span><span class="st"> &quot;female&quot;</span>) </span></code></pre></div>
 <p>Next, we calculate the mean and standard deviation of each population:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="sampling-accuracy.html#cb335-1"></a>male_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb335-2"><a href="sampling-accuracy.html#cb335-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(height),</span>
-<span id="cb335-3"><a href="sampling-accuracy.html#cb335-3"></a>            <span class="dt">sd =</span> <span class="kw">sd.pop</span>(height))</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="sampling-accuracy.html#cb23-1"></a>male_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb23-2"><a href="sampling-accuracy.html#cb23-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(height),</span>
+<span id="cb23-3"><a href="sampling-accuracy.html#cb23-3"></a>            <span class="dt">sd =</span> <span class="kw">sd.pop</span>(height))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
 ## 1  180.  10.1</code></pre>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="sampling-accuracy.html#cb337-1"></a>female_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb337-2"><a href="sampling-accuracy.html#cb337-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(height),</span>
-<span id="cb337-3"><a href="sampling-accuracy.html#cb337-3"></a>            <span class="dt">sd =</span> <span class="kw">sd.pop</span>(height))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="sampling-accuracy.html#cb25-1"></a>female_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb25-2"><a href="sampling-accuracy.html#cb25-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(height),</span>
+<span id="cb25-3"><a href="sampling-accuracy.html#cb25-3"></a>            <span class="dt">sd =</span> <span class="kw">sd.pop</span>(height))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
@@ -731,46 +731,35 @@ d_{unbiased}  &amp;= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
 <h3><span class="header-section-number">5.7.3</span> Assessing bias</h3>
 <p>Sample-level <span class="math inline">\(d_{unbiased}\)</span>-values, calculated above, often differ from the population-level standardized mean difference (i.e., <span class="math inline">\(\delta\)</span>) due to sampling error. We can confirm that <span class="math inline">\(d_{unbiased}\)</span>-values are actually unbiased with a simulation. That is, we can confirm that the average of many <span class="math inline">\(d_{unbiased}\)</span>-values equals the population standardized mean difference (i.e., <span class="math inline">\(\delta\)</span>) using a simulation.</p>
 <p>First, we obtain the heights from the male and female populations and place them into male_heights and female_heights, respectively.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sampling-accuracy.html#cb339-1"></a>male_heights &lt;-<span class="st"> </span>male_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb339-2"><a href="sampling-accuracy.html#cb339-2"></a><span class="st">  </span><span class="kw">pull</span>(height)</span>
-<span id="cb339-3"><a href="sampling-accuracy.html#cb339-3"></a></span>
-<span id="cb339-4"><a href="sampling-accuracy.html#cb339-4"></a>female_heights &lt;-<span class="st"> </span>female_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb339-5"><a href="sampling-accuracy.html#cb339-5"></a><span class="st">  </span><span class="kw">pull</span>(height)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="sampling-accuracy.html#cb27-1"></a>male_heights &lt;-<span class="st"> </span>male_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb27-2"><a href="sampling-accuracy.html#cb27-2"></a><span class="st">  </span><span class="kw">pull</span>(height)</span>
+<span id="cb27-3"><a href="sampling-accuracy.html#cb27-3"></a></span>
+<span id="cb27-4"><a href="sampling-accuracy.html#cb27-4"></a>female_heights &lt;-<span class="st"> </span>female_population_heights <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb27-5"><a href="sampling-accuracy.html#cb27-5"></a><span class="st">  </span><span class="kw">pull</span>(height)</span></code></pre></div>
 <p>Next, we obtain a large number of samples from each population and place them in many_samples.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="sampling-accuracy.html#cb340-1"></a>many_samples&lt;-<span class="st">  </span><span class="kw">get_d_samples_from_population_data</span>(<span class="dt">pop1 =</span> male_heights,</span>
-<span id="cb340-2"><a href="sampling-accuracy.html#cb340-2"></a>                                   <span class="dt">pop2 =</span> female_heights,</span>
-<span id="cb340-3"><a href="sampling-accuracy.html#cb340-3"></a>                                   <span class="dt">cell.n =</span> <span class="dv">10</span>,</span>
-<span id="cb340-4"><a href="sampling-accuracy.html#cb340-4"></a>                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="sampling-accuracy.html#cb28-1"></a>many_samples&lt;-<span class="st">  </span><span class="kw">get_d_samples_from_population_data</span>(<span class="dt">pop1 =</span> male_heights,</span>
+<span id="cb28-2"><a href="sampling-accuracy.html#cb28-2"></a>                                   <span class="dt">pop2 =</span> female_heights,</span>
+<span id="cb28-3"><a href="sampling-accuracy.html#cb28-3"></a>                                   <span class="dt">cell.n =</span> <span class="dv">10</span>,</span>
+<span id="cb28-4"><a href="sampling-accuracy.html#cb28-4"></a>                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
 <p>We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the <span class="math inline">\(d\)</span> and <span class="math inline">\(d_{unbiased}\)</span> for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sampling-accuracy.html#cb341-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##    study group_n mean1 var1_n_1 mean2 var2_n_1    d
-## 1      1      10 187.2    92.18 160.1    66.77 3.04
-## 2      2      10 183.0   107.33 166.0    77.78 1.77
-## 3      3      10 181.0    39.78 168.8   144.18 1.27
-## 4      4      10 175.4    80.27 162.5    89.39 1.40
-## 5      5      10 184.1    90.99 163.6    28.93 2.65
-## 6      6      10 181.8    96.40 165.6   106.27 1.61
-## 7      7      10 176.6    97.16 167.0   161.56 0.84
-## 8      8      10 188.0   211.56 160.8   204.62 1.89
-## 9      9      10 185.3    54.68 165.8    91.51 2.28
-## 10    10      10 179.3    69.34 161.9    55.43 2.20
-##    d_unbiased
-## 1        2.91
-## 2        1.69
-## 3        1.22
-## 4        1.34
-## 5        2.54
-## 6        1.54
-## 7        0.81
-## 8        1.81
-## 9        2.18
-## 10       2.11</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="sampling-accuracy.html#cb29-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    study group_n mean1 var1_n_1 mean2 var2_n_1    d d_unbiased
+## 1      1      10 187.2    92.18 160.1    66.77 3.04       2.91
+## 2      2      10 183.0   107.33 166.0    77.78 1.77       1.69
+## 3      3      10 181.0    39.78 168.8   144.18 1.27       1.22
+## 4      4      10 175.4    80.27 162.5    89.39 1.40       1.34
+## 5      5      10 184.1    90.99 163.6    28.93 2.65       2.54
+## 6      6      10 181.8    96.40 165.6   106.27 1.61       1.54
+## 7      7      10 176.6    97.16 167.0   161.56 0.84       0.81
+## 8      8      10 188.0   211.56 160.8   204.62 1.89       1.81
+## 9      9      10 185.3    54.68 165.8    91.51 2.28       2.18
+## 10    10      10 179.3    69.34 161.9    55.43 2.20       2.11</code></pre>
 <p>Recall the population-level standardized mean difference, <span class="math inline">\(\delta\)</span>, was 1.49. We can see the extent to which the average of the sample-level <span class="math inline">\(d\)</span> and <span class="math inline">\(d_{unbiased}\)</span> values compare to this population-level value.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="sampling-accuracy.html#cb343-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb343-2"><a href="sampling-accuracy.html#cb343-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_d =</span> <span class="kw">mean</span>(d),</span>
-<span id="cb343-3"><a href="sampling-accuracy.html#cb343-3"></a>            <span class="dt">mean_d_unbiased =</span> <span class="kw">mean</span>(d_unbiased))</span></code></pre></div>
-<pre><code>##   mean_d mean_d_unbiased
-## 1  1.557           1.491</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="sampling-accuracy.html#cb31-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb31-2"><a href="sampling-accuracy.html#cb31-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_d =</span> <span class="kw">mean</span>(d),</span>
+<span id="cb31-3"><a href="sampling-accuracy.html#cb31-3"></a>            <span class="dt">mean_d_unbiased =</span> <span class="kw">mean</span>(d_unbiased))</span></code></pre></div>
+<pre><code>##     mean_d mean_d_unbiased
+## 1 1.556964        1.491187</code></pre>
 <p>You can see that the mean of the sample-level <span class="math inline">\(d\)</span> values is 1.56 which is higher than the population-level standardized mean difference (<span class="math inline">\(\delta\)</span> = 1.49). In contrast, you can see that the mean of the sample-level <span class="math inline">\(d_{unbiased}\)</span> values is 1.49 which corresponds to the population-level standardized mean difference (<span class="math inline">\(\delta\)</span> = 1.49).</p>
 </div>
 <div id="illustrating-variability" class="section level3">
@@ -783,9 +772,9 @@ FIGURE 5.7: Histogram of <span class="math inline">\(d_{unbiased}\)</span> when 
 </p>
 </div>
 <p>We can calculate the full range of sample-level <span class="math inline">\(d_{unbiased}\)</span> values with the commands below:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="sampling-accuracy.html#cb345-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb345-2"><a href="sampling-accuracy.html#cb345-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">d_min =</span> <span class="kw">min</span>(d_unbiased),</span>
-<span id="cb345-3"><a href="sampling-accuracy.html#cb345-3"></a>            <span class="dt">d_max =</span> <span class="kw">max</span>(d_unbiased))</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="sampling-accuracy.html#cb33-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb33-2"><a href="sampling-accuracy.html#cb33-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">d_min =</span> <span class="kw">min</span>(d_unbiased),</span>
+<span id="cb33-3"><a href="sampling-accuracy.html#cb33-3"></a>            <span class="dt">d_max =</span> <span class="kw">max</span>(d_unbiased))</span></code></pre></div>
 <pre><code>##   d_min d_max
 ## 1 -0.38  5.15</code></pre>
 <p>We see from the output that <span class="math inline">\(d_{unbiased}\)</span> values were as small as -0.38 and as large as 5.15. All of these values are estimates of the population-level standardized mean difference of <span class="math inline">\(\delta = 1.49\)</span>. You can see that many of the sample-level estimates differed considerably from the population-level value. The negative <span class="math inline">\(d\)</span>-value (i.e., the minimum) is a case where the study (i.e, sample-level result) would have found that women are taller than men - a reversal of what is actually true at the population-level. This range of results illustrates the extent to which the findings for a single sample/study may deviate from the underlying truth for the entire population.</p>
@@ -798,57 +787,74 @@ FIGURE 5.7: Histogram of <span class="math inline">\(d_{unbiased}\)</span> when 
 r =  \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma (y - \bar{y})^2}}
       \tag{5.13}
 \end{equation}\]</span></p>
-<p>Sample-level correlations, <span class="math inline">\(r\)</span>, often differ from the population-level correlation (i.e., <span class="math inline">\(\rho\)</span>) due to sampling error. We can confirm that sample correlations are not substantially biased with a simulation. That is, we can confirm that the average of many sample correlations (<span class="math inline">\(r\)</span>) roughly equals the population correlation (i.e., <span class="math inline">\(\rho\)</span>) using a simulation. We say “roughly equal” because <span class="math inline">\(r\)</span> is a biased estimator of <span class="math inline">\(\rho\)</span> but the bias is typically small enough that it can be ignored (Schmidt &amp; Hunter, 2015),</p>
+<p>Sample-level correlations, <span class="math inline">\(r\)</span>, often differ from the population-level correlation (<span class="math inline">\(\rho\)</span>) due to sampling error. We can confirm that sample correlations are not substantially biased with a simulation. That is, we can confirm that the average of many sample correlations (<span class="math inline">\(r\)</span>) roughly equals the population correlation (<span class="math inline">\(\rho\)</span>) using a simulation. We say “roughly equal” because <span class="math inline">\(r\)</span> is technically a biased estimator of <span class="math inline">\(\rho\)</span> but the bias is sufficiently small that it can be ignored <span class="citation">(Schmidt and Hunter <a href="#ref-schmidt2014methods" role="doc-biblioref">2014</a>)</span>.</p>
 <p>We have the height and weight for 300000 people that comprise our population (fictious data). This data can be loaded with the command below.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sampling-accuracy.html#cb347-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb347-2"><a href="sampling-accuracy.html#cb347-2"></a>pop_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data_cor_pop.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="sampling-accuracy.html#cb35-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb35-2"><a href="sampling-accuracy.html#cb35-2"></a>pop_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data_cor_pop.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   weight = col_double(),
 ##   height = col_double()
 ## )</code></pre>
-<p>The glimpse() command reveals there are 300000 rows and two columns (weight and height). Each row represents a different person in the population.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sampling-accuracy.html#cb349-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
-<pre><code>## Rows: 300,000
-## Columns: 2
-## $ weight &lt;dbl&gt; 143.2, 155.8, 143.8, 152.0, 154.8, 147.1, …
-## $ height &lt;dbl&gt; 163.1, 171.4, 160.4, 189.9, 173.4, 160.1, …</code></pre>
+<p>The print() command reveals there are 300000 rows and two columns (weight and height). Each row represents a different person in the population.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="sampling-accuracy.html#cb37-1"></a><span class="kw">print</span>(pop_data)</span></code></pre></div>
+<pre><code>## # A tibble: 300,000 x 2
+##    weight height
+##     &lt;dbl&gt;  &lt;dbl&gt;
+##  1   143.   163.
+##  2   156.   171.
+##  3   144.   160.
+##  4   152    190.
+##  5   155.   173.
+##  6   147.   160.
+##  7   145.   177.
+##  8   153.   179.
+##  9   151.   177.
+## 10   146.   167.
+## # … with 299,990 more rows</code></pre>
 <p>We can obtain the population correlation, <span class="math inline">\(\rho\)</span>, by correlating the weight and height columns:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sampling-accuracy.html#cb351-1"></a><span class="kw">cor</span>(pop_data)</span></code></pre></div>
-<pre><code>##        weight height
-## weight    1.0    0.5
-## height    0.5    1.0</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="sampling-accuracy.html#cb39-1"></a><span class="kw">cor</span>(pop_data)</span></code></pre></div>
+<pre><code>##           weight    height
+## weight 1.0000000 0.4999951
+## height 0.4999951 1.0000000</code></pre>
 <p>We see from this matrix that the population correlation (<em>N</em> = 300000) between weight and height is <span class="math inline">\(\rho\)</span> = .50 (with rounding), see Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>A.</p>
 <p>To examine the extent to which this population correlation, <span class="math inline">\(\rho\)</span> = .50, is estimated by the sample statistic, <span class="math inline">\(r\)</span>, we need to take a large number of samples. Therefore, we take 50000 samples (each <em>n</em> = 75) and calculate the correlation for each:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sampling-accuracy.html#cb353-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb353-2"><a href="sampling-accuracy.html#cb353-2"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_r_samples_from_population_data</span>(<span class="dt">data =</span> pop_data,</span>
-<span id="cb353-3"><a href="sampling-accuracy.html#cb353-3"></a>                                                   <span class="dt">n =</span> <span class="dv">75</span>,</span>
-<span id="cb353-4"><a href="sampling-accuracy.html#cb353-4"></a>                                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
-<p>We can examine the first 10 rows of many_samples using the head() command. There are 50000 rows and each row represent a different sample of 75 people. The correlation between height and weight for each sample is presented in the <span class="math inline">\(r\)</span> column.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sampling-accuracy.html#cb354-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##    sample.number  n    r
-## 1              1 75 0.38
-## 2              2 75 0.50
-## 3              3 75 0.56
-## 4              4 75 0.52
-## 5              5 75 0.49
-## 6              6 75 0.37
-## 7              7 75 0.57
-## 8              8 75 0.40
-## 9              9 75 0.59
-## 10            10 75 0.50</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="sampling-accuracy.html#cb41-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb41-2"><a href="sampling-accuracy.html#cb41-2"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_r_samples_from_population_data</span>(<span class="dt">data =</span> pop_data,</span>
+<span id="cb41-3"><a href="sampling-accuracy.html#cb41-3"></a>                                                   <span class="dt">n =</span> <span class="dv">75</span>,</span>
+<span id="cb41-4"><a href="sampling-accuracy.html#cb41-4"></a>                                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
+<p>We can examine the first few rows of many_samples using the print() command. There are 50000 rows and each row represent a different sample of 75 people. The correlation between height and weight for each sample is presented in the <span class="math inline">\(r\)</span> column.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="sampling-accuracy.html#cb42-1"></a><span class="kw">print</span>(many_samples)</span></code></pre></div>
+<pre><code>## # A tibble: 50,000 x 3
+##    sample.number     n     r
+##            &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1             1    75 0.38 
+##  2             2    75 0.5  
+##  3             3    75 0.56 
+##  4             4    75 0.52 
+##  5             5    75 0.49 
+##  6             6    75 0.37 
+##  7             7    75 0.570
+##  8             8    75 0.4  
+##  9             9    75 0.59 
+## 10            10    75 0.5  
+## # … with 49,990 more rows</code></pre>
 <p>If you examine the first row carefully you see a sample correlation of <span class="math inline">\(r = .38\)</span> based on <span class="math inline">\(n\)</span> = 75. This sample correlation is illustrated in Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>B and it is just one of the 50000 sample correlations. The distribution of the 50000 sample correlations is illustrated in in Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>C.</p>
 <p>Even though the population correlation is <span class="math inline">\(\rho = .50\)</span> there is considerable variability in the sample correlations, <span class="math inline">\(r\)</span>. Each sample correlation is based on a subset of the population data (i.e., 75 of the 300000 rows). Consequently, the sample correlations differ from the population correlation due to sampling error. The differences among the sample correlations can be quite large. Indeed, as the code below reveals, some sample correlation were as low as <span class="math inline">\(r = .06\)</span> and as high as <span class="math inline">\(r = .77\)</span> – even though the population correlation was <span class="math inline">\(\rho = .50\)</span>.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sampling-accuracy.html#cb356-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb356-2"><a href="sampling-accuracy.html#cb356-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">min_r =</span> <span class="kw">min</span>(r),</span>
-<span id="cb356-3"><a href="sampling-accuracy.html#cb356-3"></a>            <span class="dt">max_r =</span> <span class="kw">max</span>(r))</span></code></pre></div>
-<pre><code>##   min_r max_r
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="sampling-accuracy.html#cb44-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb44-2"><a href="sampling-accuracy.html#cb44-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">min_r =</span> <span class="kw">min</span>(r),</span>
+<span id="cb44-3"><a href="sampling-accuracy.html#cb44-3"></a>            <span class="dt">max_r =</span> <span class="kw">max</span>(r))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   min_r max_r
+##   &lt;dbl&gt; &lt;dbl&gt;
 ## 1  0.06  0.77</code></pre>
 <p>Even though the sample correlations usually differed from the population correlation we are not concerned. We recognize that there is little to be learned from a single study. We are more concerned as to whether the average of a large number of sample correlations is correct. We assess this with the code below.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sampling-accuracy.html#cb358-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb358-2"><a href="sampling-accuracy.html#cb358-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_r =</span> <span class="kw">mean</span>(r))</span></code></pre></div>
-<pre><code>##   mean_r
-## 1 0.4972</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="sampling-accuracy.html#cb46-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb46-2"><a href="sampling-accuracy.html#cb46-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_r =</span> <span class="kw">mean</span>(r))</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   mean_r
+##    &lt;dbl&gt;
+## 1  0.497</code></pre>
 <p>You can see that the mean of the sample-level correlations is <span class="math inline">\(\bar{r} = .497\)</span> which is very close to the population-level correlation <span class="math inline">\(\rho = .50\)</span> (.4999951 without rounding). Consequently, for practical purposes, we don’t worry about the sample correlation being a biased estimator of the population correlation. On average, sample correlation are correct - even though any single sample correlation is likely incorrect due to sampling error (i.e., the fact it is based on a small subset of the population).</p>
 <div class="figure"><span id="fig:rdistplot"></span>
 <img src="ch_samples/images/r_sampling_dist_edit.png" alt="Correlation sampling distribution" width="70%" height="70%" />
@@ -943,6 +949,12 @@ FIGURE 5.8: Correlation sampling distribution
 
 </div>
 </div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-schmidt2014methods">
+<p>Schmidt, Frank L, and John E Hunter. 2014. <em>Methods of Meta-Analysis: Correcting Error and Bias in Research Findings</em>. Sage.</p>
+</div>
+</div>
             </section>
 
           </div>
@@ -952,15 +964,15 @@ FIGURE 5.8: Correlation sampling distribution
 <a href="sampling-precision.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
