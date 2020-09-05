@@ -292,7 +292,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.10" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#meta-analysis"><i class="fa fa-check"></i><b>5.10</b> Meta-analysis</a></li>
 <li class="chapter" data-level="5.11" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#a-joke"><i class="fa fa-check"></i><b>5.11</b> A joke</a></li>
 <li class="chapter" data-level="5.12" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#key-points-1"><i class="fa fa-check"></i><b>5.12</b> Key Points</a></li>
-<li class="chapter" data-level="5.13" data-path="sampling-accuracy.html"><a href="sampling-accuracy.html#to-do"><i class="fa fa-check"></i><b>5.13</b> To Do</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="sampling-precision.html"><a href="sampling-precision.html"><i class="fa fa-check"></i><b>6</b> Sampling Precision</a><ul>
 <li class="chapter" data-level="6.1" data-path="sampling-precision.html"><a href="sampling-precision.html#overview-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
@@ -794,6 +793,63 @@ FIGURE 5.7: Histogram of <span class="math inline">\(d_{unbiased}\)</span> when 
 </div>
 <div id="estimating-rho" class="section level2">
 <h2><span class="header-section-number">5.8</span> Estimating <span class="math inline">\(\rho\)</span></h2>
+<p>The population-level correlation, <span class="math inline">\(\rho\)</span>, is estimated by the sample-level correlation, <span class="math inline">\(r\)</span>. The value for <span class="math inline">\(r\)</span> can be calculated using Formula <a href="sampling-accuracy.html#eq:sampler5">(5.13)</a> below.</p>
+<p><span class="math display" id="eq:sampler5">\[\begin{equation} 
+r =  \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma (y - \bar{y})^2}}
+      \tag{5.13}
+\end{equation}\]</span></p>
+<p>Sample-level correlations, <span class="math inline">\(r\)</span>, often differ from the population-level correlation (i.e., <span class="math inline">\(\rho\)</span>) due to sampling error. We can confirm that sample correlations are not substantially biased with a simulation. That is, we can confirm that the average of many sample correlations (<span class="math inline">\(r\)</span>) roughly equals the population correlation (i.e., <span class="math inline">\(\rho\)</span>) using a simulation. We say “roughly equal” because <span class="math inline">\(r\)</span> is a biased estimator of <span class="math inline">\(\rho\)</span> but the bias is typically small enough that it can be ignored (Schmidt &amp; Hunter, 2015),</p>
+<p>We have the height and weight for 300000 people that comprise our population (fictious data). This data can be loaded with the command below.</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sampling-accuracy.html#cb347-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb347-2"><a href="sampling-accuracy.html#cb347-2"></a>pop_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&quot;data_cor_pop.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   weight = col_double(),
+##   height = col_double()
+## )</code></pre>
+<p>The glimpse() command reveals there are 300000 rows and two columns (weight and height). Each row represents a different person in the population.</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="sampling-accuracy.html#cb349-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
+<pre><code>## Rows: 300,000
+## Columns: 2
+## $ weight &lt;dbl&gt; 143.2, 155.8, 143.8, 152.0, 154.8, 147.1, …
+## $ height &lt;dbl&gt; 163.1, 171.4, 160.4, 189.9, 173.4, 160.1, …</code></pre>
+<p>We can obtain the population correlation, <span class="math inline">\(\rho\)</span>, by correlating the weight and height columns:</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="sampling-accuracy.html#cb351-1"></a><span class="kw">cor</span>(pop_data)</span></code></pre></div>
+<pre><code>##        weight height
+## weight    1.0    0.5
+## height    0.5    1.0</code></pre>
+<p>We see from this matrix that the population correlation (<em>N</em> = 300000) between weight and height is <span class="math inline">\(\rho\)</span> = .50 (with rounding), see Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>A.</p>
+<p>To examine the extent to which this population correlation, <span class="math inline">\(\rho\)</span> = .50, is estimated by the sample statistic, <span class="math inline">\(r\)</span>, we need to take a large number of samples. Therefore, we take 50000 samples (each <em>n</em> = 75) and calculate the correlation for each:</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="sampling-accuracy.html#cb353-1"></a><span class="kw">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb353-2"><a href="sampling-accuracy.html#cb353-2"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_r_samples_from_population_data</span>(<span class="dt">data =</span> pop_data,</span>
+<span id="cb353-3"><a href="sampling-accuracy.html#cb353-3"></a>                                                   <span class="dt">n =</span> <span class="dv">75</span>,</span>
+<span id="cb353-4"><a href="sampling-accuracy.html#cb353-4"></a>                                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
+<p>We can examine the first 10 rows of many_samples using the head() command. There are 50000 rows and each row represent a different sample of 75 people. The correlation between height and weight for each sample is presented in the <span class="math inline">\(r\)</span> column.</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="sampling-accuracy.html#cb354-1"></a><span class="kw">head</span>(many_samples, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    sample.number  n    r
+## 1              1 75 0.38
+## 2              2 75 0.50
+## 3              3 75 0.56
+## 4              4 75 0.52
+## 5              5 75 0.49
+## 6              6 75 0.37
+## 7              7 75 0.57
+## 8              8 75 0.40
+## 9              9 75 0.59
+## 10            10 75 0.50</code></pre>
+<p>If you examine the first row carefully you see a sample correlation of <span class="math inline">\(r = .38\)</span> based on <span class="math inline">\(n\)</span> = 75. This sample correlation is illustrated in Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>B and it is just one of the 50000 sample correlations. The distribution of the 50000 sample correlations is illustrated in in Figure <a href="sampling-accuracy.html#fig:rdistplot">5.8</a>C.</p>
+<p>Even though the population correlation is <span class="math inline">\(\rho = .50\)</span> there is considerable variability in the sample correlations, <span class="math inline">\(r\)</span>. Each sample correlation is based on a subset of the population data (i.e., 75 of the 300000 rows). Consequently, the sample correlations differ from the population correlation due to sampling error. The differences among the sample correlations can be quite large. Indeed, as the code below reveals, some sample correlation were as low as <span class="math inline">\(r = .06\)</span> and as high as <span class="math inline">\(r = .77\)</span> – even though the population correlation was <span class="math inline">\(\rho = .50\)</span>.</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="sampling-accuracy.html#cb356-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb356-2"><a href="sampling-accuracy.html#cb356-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">min_r =</span> <span class="kw">min</span>(r),</span>
+<span id="cb356-3"><a href="sampling-accuracy.html#cb356-3"></a>            <span class="dt">max_r =</span> <span class="kw">max</span>(r))</span></code></pre></div>
+<pre><code>##   min_r max_r
+## 1  0.06  0.77</code></pre>
+<p>Even though the sample correlations usually differed from the population correlation we are not concerned. We recognize that there is little to be learned from a single study. We are more concerned as to whether the average of a large number of sample correlations is correct. We assess this with the code below.</p>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="sampling-accuracy.html#cb358-1"></a>many_samples <span class="op">%&gt;%</span></span>
+<span id="cb358-2"><a href="sampling-accuracy.html#cb358-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_r =</span> <span class="kw">mean</span>(r))</span></code></pre></div>
+<pre><code>##   mean_r
+## 1 0.4972</code></pre>
+<p>You can see that the mean of the sample-level correlations is <span class="math inline">\(\bar{r} = .497\)</span> which is very close to the population-level correlation <span class="math inline">\(\rho = .50\)</span> (.4999951 without rounding). Consequently, for practical purposes, we don’t worry about the sample correlation being a biased estimator of the population correlation. On average, sample correlation are correct - even though any single sample correlation is likely incorrect due to sampling error (i.e., the fact it is based on a small subset of the population).</p>
 <div class="figure"><span id="fig:rdistplot"></span>
 <img src="ch_samples/images/r_sampling_dist_edit.png" alt="Correlation sampling distribution" width="70%" height="70%" />
 <p class="caption">
@@ -854,6 +910,11 @@ FIGURE 5.8: Correlation sampling distribution
 <td></td>
 <td><span class="math inline">\(d_{unbiased} = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]\)</span></td>
 </tr>
+<tr class="even">
+<td>Correlation</td>
+<td><span class="math inline">\(\rho = \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2\Sigma (Y - \mu_Y)^2}}\)</span></td>
+<td><span class="math inline">\(r = \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma (y - \bar{y})^2}}\)</span></td>
+</tr>
 </tbody>
 </table>
 
@@ -871,19 +932,14 @@ FIGURE 5.8: Correlation sampling distribution
 </div>
 <div id="key-points-1" class="section level2">
 <h2><span class="header-section-number">5.12</span> Key Points</h2>
-<ul>
+<ol style="list-style-type: decimal">
 <li><p>Samples are of interest because they help us estimate attributes of a population.</p></li>
-<li><p>Sample statistics estimate population parameters.</p></li>
+<li><p>Sample <em>statistics</em> estimate population <em>parameters</em>.</p></li>
 <li><p>Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that informational value of a single study is typically quite low.</p></li>
 <li><p>A statistic is unbiased if the average of the sample statistics, over many thousand of samples, equals the population parameter.</p></li>
 <li><p>To avoid bias, sometimes the formula for a sample statistics differs from the formula for the population parameter.</p></li>
 <li><p>Meta-analyses are used in the “real world” the way we used simulations in this chapter.</p></li>
-</ul>
-</div>
-<div id="to-do" class="section level2">
-<h2><span class="header-section-number">5.13</span> To Do</h2>
-<p>1 - add correlation sampling graphs etc. emphsize subset of row so population correlation vs sample correlaiton is clear…</p>
-<p>2- emphaise SMD is scenario where we assume equal population variances</p>
+</ol>
 
 </div>
 </div>
