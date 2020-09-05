@@ -752,23 +752,22 @@ d_{unbiased}  &amp;= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
 <span id="cb338-2"><a href="sampling-accuracy.html#cb338-2"></a>                                   <span class="dt">pop2 =</span> female_heights,</span>
 <span id="cb338-3"><a href="sampling-accuracy.html#cb338-3"></a>                                   <span class="dt">cell.n =</span> <span class="dv">10</span>,</span>
 <span id="cb338-4"><a href="sampling-accuracy.html#cb338-4"></a>                                   <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
-<p>We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the <span class="math inline">\(d\)</span> and <span class="math inline">\(d_{unbiased}\)</span> for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.</p>
+<p>We can examine the contents of many_samples using the print() command. Each row of many_samples represents a single study. Each study has two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the <span class="math inline">\(d\)</span> and <span class="math inline">\(d_{unbiased}\)</span> for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="sampling-accuracy.html#cb339-1"></a><span class="kw">print</span>(many_samples)</span></code></pre></div>
-<pre><code>## # A tibble: 50,000 x 8
-##    study group_n mean1 var1_n_1 mean2 var2_n_1     d
-##    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
-##  1     1      10  187.     92.2  160.     66.8  3.04
-##  2     2      10  183     107.   166      77.8  1.77
-##  3     3      10  181      39.8  169.    144.   1.27
-##  4     4      10  175.     80.3  162.     89.4  1.4 
-##  5     5      10  184.     91.0  164.     28.9  2.65
-##  6     6      10  182.     96.4  166.    106.   1.61
-##  7     7      10  177.     97.2  167     162.   0.84
-##  8     8      10  188     212.   161.    205.   1.89
-##  9     9      10  185.     54.7  166.     91.5  2.28
-## 10    10      10  179.     69.3  162.     55.4  2.2 
-## # … with 49,990 more rows, and 1 more variable:
-## #   d_unbiased &lt;dbl&gt;</code></pre>
+<pre><code>## # A tibble: 50,000 x 7
+##    n_per_cell mean1 var1_n_1 mean2 var2_n_1     d d_unbiased
+##         &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+##  1         10  187.     92.2  160.     66.8  3.04       2.91
+##  2         10  183     107.   166      77.8  1.77       1.69
+##  3         10  181      39.8  169.    144.   1.27       1.22
+##  4         10  175.     80.3  162.     89.4  1.4        1.34
+##  5         10  184.     91.0  164.     28.9  2.65       2.54
+##  6         10  182.     96.4  166.    106.   1.61       1.54
+##  7         10  177.     97.2  167     162.   0.84       0.81
+##  8         10  188     212.   161.    205.   1.89       1.81
+##  9         10  185.     54.7  166.     91.5  2.28       2.18
+## 10         10  179.     69.3  162.     55.4  2.2        2.11
+## # … with 49,990 more rows</code></pre>
 <p>Recall the population-level standardized mean difference, <span class="math inline">\(\delta\)</span>, was 1.49. We can see the extent to which the average of the sample-level <span class="math inline">\(d\)</span> and <span class="math inline">\(d_{unbiased}\)</span> values compare to this population-level value.</p>
 <div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="sampling-accuracy.html#cb341-1"></a>many_samples <span class="op">%&gt;%</span></span>
 <span id="cb341-2"><a href="sampling-accuracy.html#cb341-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_d =</span> <span class="kw">mean</span>(d),</span>
