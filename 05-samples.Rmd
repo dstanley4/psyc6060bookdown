@@ -56,19 +56,11 @@ Next, we create a large population with 100,000 people using the get_height_popu
 pop_data <- get_height_population() 
 ```
 
-The glimpse() command can be used to confirm that the population contains 100,000 people.
+The print() command can be used to confirm that the population contains 100,000 people. We see that each row in pop_data represents a single person. There is a column called height that contains the heights for everyone in the population.
 
 ```{r}
-glimpse(pop_data)
+print(pop_data)
 ```
-
-We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the heights for everyone in the population.
-
-```{r}
-head(pop_data, 10)
-```
-
-
 
 ## Notation
 
@@ -131,12 +123,11 @@ saveRDS(many_samples, file = "ch_samples/many_samples_n10.RDS")
 many_samples <- readRDS("ch_samples/many_samples_n10.RDS")
 ```
 
-We use the head() command to see the first 10 rows (i.e., 10 samples of 50000 samples):
+We use the print() command to see the first few rows of the 50000 samples:
 
 ```{r}
-head(many_samples, 10)
+print(many_samples)
 ```
-
 
 Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate "n" (the sample size) and "sample_mean" (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample_mean column vary across samples/rows. 
 
@@ -172,6 +163,8 @@ knitr::include_graphics("ch_samples/images/sampling_dist.png")
  
 Above, in Figure \@ref(fig:bothdist), we present a graph comparing the distribution of peoples heights (i.e., the population) to the distribution of sample means based on those heights (i.e., the sampling distribution). The sample means plotted are the 50000 sample means, from the sample_mean column. Recall the population mean for heights is $\mu = 172.48$ cm. Notice that most of the sample means cluster around this value. Also notice that there is considerable variability about this value. Any given sample mean ($\bar{x}$) may differ substantially from the population mean ($\mu = 172.48$). This variability illustrates the challenges with learning something from a single study - particularly a study with a small sample size. Many of the sample means fall quite far from the population mean.
 
+### Assessing bias  
+
 Statisticians, recognizing the limitations of a single study, are not particularly concerned if a single sample mean deviates from the population mean. That said, statisticians are very concerned as to whether or not the results of a large number of studies are correct -- on average. That is, does the average of many sample means correspond to the population mean? If, on average, the sample mean does corresponds to the population mean, it is accurate and we refer to it as an unbiased estimator. Visually, this appears to be the case. But in the code below we confirm it numerically.
 
 ```{r}
@@ -200,7 +193,10 @@ pop_data %>%
   as.data.frame()
 ```
 
+### Assessing bias  
 
+
+The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance (formula below).
 
 $$
 \begin{aligned} 
@@ -208,7 +204,8 @@ s^2 = \frac{\sum{(x - \bar{x})^2}}{n}
 \end{aligned} 
 $$
 
-The formula for sample variance with an $n$ in the denominator is, unfortunately, a biased estimator of population variance. That is, estimates of the population variance are systematically too low when you use a sample variance formula with an $n$ in the denominator. We can see that this is true by examining the many_samples data. In these data, the column sample_var_n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample_var_n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
+
+Estimates of the population variance are systematically too low when you use a sample variance formula with an $n$ in the denominator. We can see that this is true by examining the many_samples data. In these data, the column sample_var_n contains the variance for the sample calculated with the above formula. Below we use code to obtain the average of the sample_var_n column over the 50000 samples. If this average equals the population variance of 157.5 then variance, using $n$ in the denominator, is an unbiased estimator of the population variance.
 
 ```{r}
 many_samples %>%
@@ -537,7 +534,7 @@ many_samples <- readRDS("ch_samples/many_samples_d_n10.RDS")
 We can examine the contents of many_samples using the head() command. Each row of many_samples illustrates two samples: 10 males and 10 females. For both males and females we calculate the mean and variance. As well, we calculate the $d$ and $d_{unbiased}$ for each row. If you examine the first row carefully you see that the data in this row corresponds to the hand calculation example.
 
 ```{r}
-head(many_samples, 10)
+print(many_samples)
 ```
 
 Recall the population-level standardized mean difference, $\delta$, was 1.49. We can see the extent to which the average of the sample-level $d$ and $d_{unbiased}$ values compare to this population-level value.
@@ -634,6 +631,8 @@ many_samples %>%
   summarise(min_r = min(r),
             max_r = max(r))
 ```
+
+### Assessing bias  
 
 Even though the sample correlations usually differed from the population correlation we are not concerned. We recognize that there is little to be learned from a single study. We are more concerned as to whether the average of a large number of sample correlations is correct. We assess this with the code below.
 
