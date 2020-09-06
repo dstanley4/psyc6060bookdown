@@ -444,14 +444,14 @@ knitr::include_graphics("ch_samples_precision/images/d_distribs2.png")
 
 \newpage
 
-### Population effect size
+### Population effect size ($\delta$)
 
 The precision with which sample $d$-values estimate the population standardized mean difference is influenced by the magnitude of the population standardized mean difference. This situation differs sharply from that of sample means. The magnitude of the population mean does not influence the shape of the distribution of sample means. The distribution of sample means is normal - regardless of whether the population mean is high or low. 
 
-In contrast, the shape of the the sampling distribution of $d$-values changes depending on the magnitude of the population effect (i.e., $\delta$). In Figure \@ref(fig:dvalueskew) we illustrate two scenarios. Both scenarios are based on a repeated measures design. For each scenario we created a population-level difference and then obtained 50000 sample $d$-values. The sample size, $n$ = 10 for each $d$-value, was held constant across the two scenarios. In contrast, the population standardized mean difference was different across the two scenarios. In Figure \@ref(fig:dvalueskew)A the population standardized mean difference was $\delta$ = 0.10. In contrast, in Figure \@ref(fig:dvalueskew)B the population standardized mean difference was $\delta$ = 2.00. Compare the shape of the distributions of $d$-values in Figure \@ref(fig:dvalueskew)A and Figure \@ref(fig:dvalueskew)B. You can see how the shape changes when the population level effect size changes. Consequently, the size of the population standardized mean difference influences the precision with which sample $d$-values estimate the population level effect ($\delta$).
+In contrast, the shape of the the sampling distribution of $d$-values changes depending on the magnitude of the population effect (i.e., $\delta$). In Figure \@ref(fig:dvalueskew) we illustrate two scenarios. Both scenarios are based on a repeated measures design. For each scenario we created a population-level difference and then obtained 50000 sample $d$-values. The sample size, $n$ = 10 for each $d$-value, was held constant across the two scenarios. In contrast, the population standardized mean difference was different across the two scenarios. In Figure \@ref(fig:dvalueskew)A the population standardized mean difference was $\delta$ = 0.50. In contrast, in Figure \@ref(fig:dvalueskew)B the population standardized mean difference was $\delta$ = 2.00. Compare the shape of the distributions of $d$-values in Figure \@ref(fig:dvalueskew)A and Figure \@ref(fig:dvalueskew)B. You can see how the shape changes when the population level effect size changes. Consequently, the size of the population standardized mean difference influences the precision with which sample $d$-values estimate the population level effect ($\delta$).
 
 ```{r, include= FALSE, eval = FALSE}
-
+library(tidyverse)
 library(learnSampling)
 
 k <- 50000
@@ -464,7 +464,7 @@ get_rep_d <- function(x) {
   return(dout)
 }  
 
-pop.d <- .10
+pop.d <- .50
 for (i in ks) {
   cur_sample <- rnorm(n)+pop.d
   d <- get_rep_d(cur_sample)
@@ -489,7 +489,7 @@ dp10 <- ggplot(dfd, mapping = aes(x = d10)) +
   geom_density(adjust = 2) +
   coord_cartesian(xlim = c(-1.5, 5), ylim = c(0, 1.2)) +
   scale_x_continuous(breaks = seq(-1.5, 5, by = .5)) +
-  scale_y_continuous(breaks = seq(0, 1.2, by = .1)) +
+  scale_y_continuous(breaks = seq(0, 1.2, by = .4)) +
   labs(x = "d-value", y = "Density") +
   theme_classic(18)
   
@@ -497,18 +497,18 @@ dp200 <- ggplot(dfd, mapping = aes(x = d200)) +
   geom_density(adjust = 2) +
   coord_cartesian(xlim = c(-1.5, 5), ylim = c(0, 1.2)) +
   scale_x_continuous(breaks = seq(-1.5, 5, by = .5)) +
-  scale_y_continuous(breaks = seq(0, 1.2, by = .1)) +
+  scale_y_continuous(breaks = seq(0, 1.2, by = .4)) +
   labs(x = "d-value", y = "Density") +
   theme_classic(18)
 
 
-png(filename = "ch_samples_precision/images/dskew.png", width = 12*300, height = 9*300, res = 300)
+png(filename = "ch_samples_precision/images/dskew.png", width = 8*300, height = 10*300, res = 300)
 gridExtra::grid.arrange(dp10, dp200)
 dev.off()
 ```
 
 ```{r dvalueskew, echo = FALSE, out.width = "80%", fig.cap = "d-value skew graphs"}
-knitr::include_graphics("ch_samples_precision/images/dskew.png")
+knitr::include_graphics("ch_samples_precision/images/d_sampling_dist_delta_vary.png")
 ```
 
 
@@ -520,7 +520,7 @@ There is a standard error for $d$-values (i.e., $SE_d$ or $SE_{d_{unbiased}}$). 
 
 **The precision of sample $d$-values is influenced by:**
 
-* population standardized mean difference ($\delta$)
+* population standardized mean difference ($\delta$)  - influences shape of the distribution
 
 * sample size ($n$)
 
@@ -586,21 +586,24 @@ dev.off()
 
 ```
 
-```{r rvaluen, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and sample size"}
-knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_n_vary.png")
-```
-
-```{r rvalueskew, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and effect size"}
-knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_rho_vary.png")
-```
-
 
 
 
 ### Sample size
 
+```{r rvaluen, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and sample size"}
+knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_n_vary.png")
+```
 
-### Population effect size
+
+
+### Population effect size ($\rho$)
+
+
+```{r rvalueskew, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and effect size"}
+knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_rho_vary.png")
+```
+
 
 **Standard Error**
 
@@ -608,6 +611,6 @@ As with the other statistics reviewed, for sample correlations ($r$) you can cal
 
 **The precision of sample correlations ($r$) is influenced by:**
 
-* population correlation ($\rho$)
+* population correlation ($\rho$) - influences shape of the distribution
 
 * sample size ($n$)
