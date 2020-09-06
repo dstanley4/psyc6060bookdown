@@ -350,9 +350,10 @@ Additionally, a larger sample size makes the sample estimate ($s^2$) of the popu
 
 ## Precision for $d$-values: Causes
 
+Whenever we use a statistic (e.g., $\bar{x}$) to estimate a population-level parameter (e.g., $\mu$) the statistic will differ from the parameter due to sampling error. This is true of all statistics. Therefore, it is possible to generate a sampling distribution for all statistics. In this section will focus on the factors that influence the precision with which $d$-value estimate the population-level standardized mean difference ($\delta$). More specifically, we focus on how the sample size and the size of the population-level effect influence width of the sampling distribution.
+
 ### Sample size
 
-Whenever we use a statistic (e.g., $\bar{x}$) to estimate a population-level parameter (e.g., $\mu$) the statistic will differ from the parameter due to sampling error. This is true of all statistics. Therefore, it is possible to generate a sampling distribution for all statistics. 
 
 Consider the case of estimating the standardized mean difference (i.e., $\delta$) between the heights of males and females, illustrated in Figure \@ref(fig:ddistributions). The population-level height information is presented in Figure \@ref(fig:ddistributions)A. The sampling distribution for sample-level $d_{unbiased}$ values when you use 10 people per group (10 males, 10 females) is presented in Figure \@ref(fig:ddistributions)B. We could calculate the variance of $d_{unbiased}$ values or the standard error (i.e., standard deviation) of $d_{unbiased}$ values; just like we did for sample mean.
 
@@ -515,8 +516,7 @@ knitr::include_graphics("ch_samples_precision/images/d_sampling_dist_delta_vary.
 
 **Standard Error**
 
-There is a standard error for $d$-values (i.e., $SE_d$ or $SE_{d_{unbiased}}$). It is simply the standard deviation of the thousands of $d$-values in the simulation. More generally, it is an index of much $d$-values vary from a population standardized mean difference ($\delta$) due to sampling error for a given sample size.
-
+There is a standard error for $d$-values (i.e., $SE_d$ or $SE_{d_{unbiased}}$). It is simply the standard deviation of the thousands of $d$-values in the simulation. More generally, it is an index of much $d$-values vary from a population standardized mean difference ($\delta$) due to sampling error for a given sample size. In geometric terms, the standard error is an index of the width of a sampling distribution. The standard error is larger in Figure \@ref(fig:ddistributions)B than in Figure \@ref(fig:ddistributions)C.
 
 **The precision of sample $d$-values is influenced by:**
 
@@ -527,6 +527,7 @@ There is a standard error for $d$-values (i.e., $SE_d$ or $SE_{d_{unbiased}}$). 
 
 ## Precision for sample correlations ($r$): Causes
 
+Sample correlations ($r$) are likely to differ from the population correlation ($\rho$) due to sampling error. The precision with which sample correlations estimate the population correlation is influenced by sample size and the magnitude of the population correlation. These are reviewed below.
 
 
 ```{r, include= FALSE, eval=FALSE}
@@ -591,6 +592,9 @@ dev.off()
 
 ### Sample size
 
+Consider a situation where the population-level relation between two variables is $\rho = .30$. For example, when looking at 300000 people the correlation between weight and height is .30. Then consider two scenarios where we sample from the population. In Scenario 1, we use a sample size of 50 people. We take 50000 samples (each comprised of 50 people) and calculate for each sample the correlation ($r$). The distribution of these sample correlations for Scenario 1 are presented in Figure \@ref(fig:rvaluen)A.  In Scenario 2, we use a sample size of 500 people (ten times more per sample). We take 50000 samples (each comprised of 500 people) and calculate for each sample the correlation ($r$). The distribution of these sample correlations for Scenario 2 are presented in Figure \@ref(fig:rvaluen)B. If you contrast these two graphs you see the sampling distribution is narrower in Scenario 2 where the sample size is larger, see Figure \@ref(fig:rvaluen)B. This means that sampling error is less when the sample size is larger. In other words, a larger sample size results in more precise sample correlations.
+
+
 ```{r rvaluen, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and sample size"}
 knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_n_vary.png")
 ```
@@ -598,6 +602,9 @@ knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_n_vary.png"
 
 
 ### Population effect size ($\rho$)
+
+Consider a situation where we look at the correlation between height and weight in two different cities. Each city has 300000 people and we consider each city a population. 
+In City 1 the population correlation is $\rho = .30$ whereas in City 2 the population correlation is $\rho = .70$. For City 1, we take 50000 samples (each comprised of 50 people) and calculate for each sample the correlation ($r$). The distribution of these sample correlations for City 1 are presented in Figure \@ref(fig:rvalueskew)A. We repeat the process and obtain 50000 sample correlations (each comprised of 50 people) for City 2; the distribution of these sample correlations is presented in Figure \@ref(fig:rvalueskew)B. If you contrast these two graphs you see the sampling distribution is narrower for City 2 where the population correlation is stronger, see Figure \@ref(fig:rvalueskew)B. This means that sampling error is less when the population correlation ($\rho$) is stronger. In other words, a larger population correlation results in more precise sample correlations. Importantly, also notice how the shape of the sampling distribution varies across the two effect-size scenarios (Figure \@ref(fig:rvalueskew) A vs B).
 
 
 ```{r rvalueskew, echo = FALSE, out.width = "80%", fig.cap = "Correlation precision and effect size"}
@@ -607,7 +614,7 @@ knitr::include_graphics("ch_samples_precision/images/r_sampling_dist_rho_vary.pn
 
 **Standard Error**
 
-As with the other statistics reviewed, for sample correlations ($r$) you can calculate a standard error ($SE_r$). It is simply the standard deviation of the thousands of sample correlations ($r$'s) in the simulation. More generally, it is an index of much sample correlations vary from a population correlation ($\rho$) due to sampling error for a given sample size.
+As with the other statistics reviewed, for sample correlations ($r$) you can calculate a standard error ($SE_r$). It is simply the standard deviation of the thousands of sample correlations ($r$'s) in the simulation. More generally, it is an index of much sample correlations vary from a population correlation ($\rho$) due to sampling error for a given sample size. In geometric terms, the standard error is an index of the width of a sampling distribution. The standard error is larger in Figure \@ref(fig:rvaluen)A than in Figure \@ref(fig:rvaluen)B.
 
 **The precision of sample correlations ($r$) is influenced by:**
 
