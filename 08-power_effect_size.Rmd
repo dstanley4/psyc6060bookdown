@@ -1,0 +1,268 @@
+
+# Sample size analysis for NHST
+
+## Required
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|MBESS              |
+|pwr              |
+
+
+## Independent Groups t-test
+
+### Obtaining the population esimates
+
+#### Safeguard
+
+```{r}
+library(MBESS)
+ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
+```
+
+
+#### Small telescope approach
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+n1 <- 50
+n2 <- 50
+
+pwr.t2n.test(power = .33,
+             n1 = n1, 
+             n2 = n2, 
+             alternative = alternative) # n1 per group
+```
+
+#### Smallest sig. effect size
+
+The approach determine the smallest effect size that would have been significant in the original study.
+
+```{r}
+n1 <- 50
+n2 <- 50
+df <- n1 + n2 - 2
+
+# use .975 if original study was two-tail test;
+# use .95 if original study was one-tail test
+p_critical <- .95 
+
+t_critical <- qt(p = p_critical, df = df) 
+d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+print(d_critical)
+```
+
+
+
+### Sample size 
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+pop.d <- .33
+power <- .90
+
+pwr.t.test(d = pop.d, 
+           power = power,
+           type = "two.sample",
+           alternative = alternative)
+```
+
+
+### Implications 
+
+```{r}
+n1 <- 158
+n2 <- 158
+alpha = .05
+t_critical_one_sided <- qt((1-alpha), df = (n1 + n2 - 2))
+d_critical_one_sided = t_critical_one_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_one_sided)
+```
+
+
+```{r}
+n1 <- 158
+n2 <- 158
+alpha = .05
+t_critical_two_sided <- qt((1-(alpha/2)), df = (n1 + n2 - 2))
+d_critical_two_sided = t_critical_two_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_two_sided)
+```
+
+## Repeated Measures t-test
+
+
+### Obtaining the population esimates
+
+#### Safeguard
+
+```{r}
+library(MBESS)
+ci.sm(sm = .45, N = 50) # dvalues
+```
+
+
+#### Small telescope approach
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater" 
+n <- 50
+pwr.t.test(power = .33, 
+           n = n, 
+           alternative = alternative, 
+           type = "paired") # 100 per group
+```
+
+#### Smallest sig. effect size
+
+The approach determine the smallest effect size that would have been significant in the original study.
+
+```{r}
+n1 <- 50
+n2 <- 50
+df <- n1 + n2 - 2
+
+# use .975 if original study was two-tail test;
+# use .95 if original study was one-tail test
+p_critical <- .95 
+
+t_critical <- qt(p = p_critical, df = df) 
+d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+print(d_critical)
+```
+
+
+
+### Sample size 
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+pop.d <- .33
+power <- .90
+
+pwr.t.test(d = pop.d, 
+           power = power,
+           type = "paired",
+           alternative = alternative)
+```
+
+
+### Implications 
+
+```{r}
+n1 <- 158
+n2 <- 158
+alpha = .05
+t_critical_one_sided <- qt((1-alpha), df = (n1 + n2 - 2))
+d_critical_one_sided = t_critical_one_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_one_sided)
+```
+
+
+```{r}
+n1 <- 50
+n2 <- 50
+alpha = .05
+t_critical_two_sided <- qt((1-(alpha/2)), df = (n1 + n2 - 2))
+d_critical_two_sided = t_critical_two_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_two_sided)
+```
+
+
+
+## Correlations
+
+
+### Obtaining the population esimates
+
+#### Safeguard
+
+```{r}
+library(MBESS)
+ci.cc(r = .45, n = 50) # dvalues
+```
+
+
+#### Small telescope approach
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater" 
+n <- 50
+pwr.t.test(power = .33, 
+           n = n, 
+           alternative = alternative, 
+           type = "paired") # 100 per group
+```
+
+#### Smallest sig. effect size
+
+The approach determine the smallest effect size that would have been significant in the original study.
+
+```{r}
+n1 <- 50
+n2 <- 50
+df <- n1 + n2 - 2
+
+# use .975 if original study was two-tail test;
+# use .95 if original study was one-tail test
+p_critical <- .95 
+
+t_critical <- qt(p = p_critical, df = df) 
+d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+print(d_critical)
+```
+
+
+
+### Sample size 
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+pop.d <- .33
+power <- .90
+
+pwr.t.test(d = pop.d, 
+           power = power,
+           type = "paired",
+           alternative = alternative)
+```
+
+
+### Implications 
+
+```{r}
+n1 <- 158
+n2 <- 158
+alpha = .05
+t_critical_one_sided <- qt((1-alpha), df = (n1 + n2 - 2))
+d_critical_one_sided = t_critical_one_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_one_sided)
+```
+
+
+```{r}
+n1 <- 50
+n2 <- 50
+alpha = .05
+t_critical_two_sided <- qt((1-(alpha/2)), df = (n1 + n2 - 2))
+d_critical_two_sided = t_critical_two_sided * sqrt((1/n1) + (1/n2))
+print(d_critical_two_sided)
+```
+
+
+
+
