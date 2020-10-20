@@ -328,3 +328,120 @@ d_critical = t_critical * sqrt((1/n1) + (1/n2))
 print(d_critical)
 ```
 
+
+### MISC
+
+```{r}
+# Correlation
+
+library(pwr)
+pwr.r.test(r = .30, power = .80)
+
+library(pwr)
+n <- 84  # change this line
+alternative = "greater"  # or change this line. Use "two.sided" or "greater".
+rho <- seq(0, 1, by = 0.01)
+rho_axis_values <- seq(0, 1, by = 0.10)
+power_values <- data.frame(rho = rho, n = n, power = NA)
+for (i in 1:nrow(power_values)){
+  pwr_analysis <- pwr.r.test(r = power_values$rho[i],
+                             n = n,
+                             alternative = alternative)
+  power_values$power[i] <- pwr_analysis$power
+}
+
+pwr_50 <- pwr.r.test(n = n, power = .50)$r
+pwr_80 <- pwr.r.test(n = n, power = .80)$r
+pwr_95 <- pwr.r.test(n = n, power = .95)$r
+library(tidyverse)
+power_plot <- ggplot(data = power_values,
+                     mapping = aes(x = rho, y = power)) +
+  geom_line() +
+  scale_x_continuous(breaks = rho_axis_values) +
+  scale_y_continuous(breaks = seq(0, 1, by = .10)) +
+  labs(title = sprintf("Power plot for N = %g", n),
+       subtitle = sprintf("Alternative = %s", alternative),
+       x = "Population Correlation",
+       y = "Power (probability of sig. effect)") +
+  annotate("rect", xmin = 0, xmax = pwr_50, ymin = 0, ymax = 1, fill = "red", alpha = .5) +
+  annotate("rect", xmin = pwr_50, xmax = pwr_80, ymin = 0, ymax = 1, fill = "red", alpha = .2) +
+  annotate("rect", xmin = pwr_80, xmax = pwr_95, ymin = 0, ymax = 1, fill = "green", alpha = .2) +
+  annotate("rect", xmin = pwr_95, xmax = 1, ymin = 0, ymax = 1, fill = "green", alpha = .5) +
+  theme_classic()
+print(power_plot)
+
+
+
+power_table <- data.frame(power = c("dangerously low (0 to .50)", "moderate (.50 to .80)", "high (.80 to .99)", "almost certain (> .99)"),
+                          rho_start = round(c(0, red_zone, green_zone, green_zone2),2),
+                          rho_end = round(c(red_zone, green_zone, green_zone2, NA),2))
+
+print(power_table)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# t-test
+
+library(pwr)
+pwr.t.test(d = .20, power = .80)
+
+library(pwr)
+n <- 400  # change this line. N per group for two.sample test.
+alternative = "greater"  # or change this line. Use "two.sided" or "greater".
+type = "two.sample" # Use "two.sample" or "paired"
+max_pop_d = .8  # you may need to adjust this line
+
+
+pop_d <- seq(0, max_pop_d, by = 0.01) 
+pop_d_axis_values <- seq(0, max_pop_d, by = 0.10) 
+power_values <- data.frame(pop_d = pop_d, n = n, power = NA)
+for (i in 1:nrow(power_values)){
+  pwr_analysis <- pwr.t.test(d = power_values$pop_d[i],
+                             n = n,
+                             alternative = alternative)
+  power_values$power[i] <- pwr_analysis$power
+}
+
+
+red_zone <- pwr.t.test(n = n, power = .50)$d
+green_zone <- pwr.t.test(n = n, power = .80)$d
+green_zone2 <- pwr.t.test(n = n, power = .99)$d
+library(tidyverse)
+power_plot <- ggplot(data = power_values,
+                     mapping = aes(x = pop_d, y = power)) +
+  geom_line() +
+  scale_x_continuous(breaks = pop_d_axis_values) +
+  scale_y_continuous(breaks = seq(0, 1, by = .10)) +
+  labs(title = sprintf("Power plot for N = %g", n),
+       subtitle = sprintf("Alternative = %s", alternative),
+       x = "Population d-value",
+       y = "Power (probability of sig. effect)") +
+  annotate("rect", xmin = 0, xmax = red_zone, ymin = 0, ymax = 1, fill = "red", alpha = .2) +
+  annotate("rect", xmin = red_zone, xmax = green_zone, ymin = 0, ymax = 1, fill = "yellow", alpha = .2) +
+  annotate("rect", xmin = green_zone, xmax = green_zone2, ymin = 0, ymax = 1, fill = "green", alpha = .2) +
+  annotate("rect", xmin = green_zone2, xmax = max_pop_d, ymin = 0, ymax = 1, fill = "green", alpha = .5) +
+  theme_classic()
+
+print(power_plot)
+
+# table
+power_table <- data.frame(power = c("dangerously low (0 to .50)", "moderate (.50 to .80)", "high (.80 to .99)", "almost certain (> .99)"),
+                          pop_d_start = round(c(0, red_zone, green_zone, green_zone2),2),
+                          pop_d_end = round(c(red_zone, green_zone, green_zone2, NA),2))
+
+print(power_table)
+
+```
+
