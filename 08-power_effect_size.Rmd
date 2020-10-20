@@ -21,38 +21,34 @@ The two points above indicate that low statistical power is associated with untr
 
 Interesting, it is possible to calculate the average statistical power for a journal. Doing so allows us to examine many journals and, in particular, the relation between journal impact factor (how often they are cited) and journal statistical power. It turns out there is a negative relation between journal statistical power and journal impact factor [@szucs2017empirical]. This indicates that as the journal impact factor increases there is a corresponding decrease in statistical power -- which means means that journals with high impact factors (those that are most cited) tend to have the most untrustworthy findings. This conclusion is perhaps not as counter intuitive as it might seem. High impact journals often have policies that require published findings to be surprising. The most surprising finding is one that is wrong and inconsistent with previous research -- the exact type of finding you will get with low statistical power.
 
-
-
-
-
 ## Goals
 
-In the rest of the chapter we focus on conducting a sample size analysis based on Null Hypothesis Significance Testing (NHST) logic. Conducting a sample size analysis requires a few pieces of information before you start.
+In the rest of the chapter we focus on obtaining the desired power for our study by conducting a sample size analysis based on Null Hypothesis Significance Testing (NHST) logic. We caveat all of the subsequent advise is based on the goal of obtaining research findings that are trustworthy.  Many times, however, research may be conducted a different goal. For example, an Honours Thesis in psychology may be conducted with the primary goal being a learning experience for the student. When this is the case (as it often is in training scenarios) then the sample sizes used for the project may fall substantially short of the sample sizes suggested by power analyses below. This occurs frequently due to the fact that student theses have limited time and financial resources because the focus is on learning the research process rather than producing robust findings. 
 
-1. Desired power. Power refers to probability of obtaining a significant result (p < .05) if the effect/difference exists. Often a power level of .80 or .85 is suggested when planning studies. However, a power-level of .90 is probability more advisable given how easy it is to obtain a p-value less than .05. Indeed, Dr. Daniel Lakens [notes](http://daniellakens.blogspot.com/2017/05/how-power-analysis-implicitly-reveals.html) that only individuals with power .90 or higher are eligible funding in his Department at the Eindhoven University of Technology.
+Conducting a sample size analysis requires a few pieces of information before you start.
 
-2. Population-level effect size. To conduct a sample-size analysis you need an estimate of the population effect size you are trying to find. Most commonly, for theses, that means you needs a estimate of the population-level $d$-value (i.e., $\delta$) or population-level correlation ($\rho$) that you are trying to detect. 
+1. Desired power. Power refers to probability of obtaining a significant result (p < .05) if the effect/difference exists. Often a power level of .80 or .85 is suggested when planning studies. However, a power-level of .90 is probability more advisable given how easy it is to obtain a $p$-value less than .05. Indeed, Dr. Daniel Lakens [notes](http://daniellakens.blogspot.com/2017/05/how-power-analysis-implicitly-reveals.html) that only individuals with power .90 or higher are eligible funding in his Department at the Eindhoven University of Technology.
+
+2. Population-level effect size. To conduct a sample-size analysis you need an estimate of the population effect size you are trying to find. Most commonly, for theses, that means you needs a estimate of the population-level $d$-value (i.e., $\delta$) or population-level correlation ($\rho$) that you are trying to detect.
+
+Below we present the process for conducing a sample size analysis for the independent groups t-test, repeated measures t-test, and the correlations. For each of these analyses we go through three steps:
+
+1. Estimating the population effect size
+2. Determining the desired sample size
+3. Determining what sample-level effect sizes will be significant with the derived sample size.
+
+As we review these steps for the analyses below we omit using subjective judgment as the basis for estimating the population effect size. Sometimes researchers are tempted to use a subjective judgment as to whether the population effect is small, medium, or large based on Cohen's (1988) benchmarks. Unfortunately, using benchmarks of this sort as the basis for determine the smallest effect size of interest (SESOI) at the population level is problematic because it is subjective. Many researchers might be tempted to take a middle of the road approach and use a medium effect size. Yet at review of meta-analytic effect size (i.e, population estimates) by [@hemphill2003interpreting] indicated that 2/3 of population effect sizes in the psychology literature are smaller than a medium effect size. Consequently, taking a middle of the road approach and assuming a medium effect size is likely to result in very low statistical power. Consequently, "[r]elying on a benchmark is the weakest possible justification of a SESOI and should be avoided." [p. 262, @lakens2018equivalence]
 
 
 ```{block2, type='rmdcaution'}
-Don't look to the sample size used in past research as a guide ...details here..
+**Using a sample size of previous study**. One approach to sample size analysis is simply to use the sample size from a previous study conducted in that research area. This is the worst possible strategy for choosing a sample size. Richard Morey and Daniel Lakens [discuss](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj3wvikhsPsAhVxk-AKHe5xCsYQFjAAegQIBRAC&url=https%3A%2F%2Fraw.githubusercontent.com%2Fricharddmorey%2Fpsychology_resolution%2Fmaster%2Fpaper%2Fresponse.pdf&usg=AOvVaw2-uqEGCGlGvLVlazweKRq2) how most study results in psychology are statistically unfalsifiable because the sample sizes (and corresponding power) are so low. Consequently, using a the sample size for your study based on past research is not advised. Doing so will most likely to result in a sample size that is so small any resulting findings will be untrustworthy and unfalsifiable. Conduct a proper sample size analysis.
 ```
 
+## Independent Groups t-test
 
+### Estimating the population effect
 
-## Estimating the population effect
-
-
-
-### Subjective judgment
-
-The typical standardized effect size for the independent groups $t$-test is Cohen's $d$ (or variant). Small, medium, and large benchmarks for Cohen's $d$ correspond to 0.20, 0.50, and 0.80. Unfortunately, using benchmarks of this sort as the basis for determine the smallest effect size of interest (SESOI) at the population level is problematic because it is so subjective. Many researchers might be tempted to take a middle of the road approach and use a medium effect size. Yet at review of meta-analytic effect size (i.e, population estimates) by [@hemphill2003interpreting] indicated that 2/3 of population effect sizes in the psychology literature are smaller than a medium effect size. Indeed, "[r]elying on a benchmark is the weakest possible justification of a SESOI and should be avoided." [p. 262, @lakens2018equivalence]
-
-
-### Prior study 
-
-
-### Safeguard approach
+#### Safeguard approach
 
 [@perugini2014safeguard]
 
@@ -62,7 +58,7 @@ ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
 ```
 
 
-### Small telescope 
+#### Small telescope 
 
 [@simonsohn2015small]
 
@@ -79,9 +75,7 @@ pwr.t2n.test(power = .33,
              alternative = alternative) # n1 per group
 ```
 
-### Smallest sig. effect 
-
-[@perugini2014safeguard]
+#### Smallest sig. effect 
 
 The approach determine the smallest effect size that would have been significant in the original study.
 
@@ -99,11 +93,7 @@ d_critical <- t_critical * sqrt(1/n1 + 1/n2)
 print(d_critical)
 ```
 
-### Resourse limitations
-[@@lakens2018equivalence]
-
-
-## Determining sample size
+### Determining sample size
 
 ```{r}
 library(pwr)
@@ -112,30 +102,229 @@ alternative <- "greater"
 pop.d <- .33
 power <- .90
 
-pwr.t.test(d = pop.d, 
-           power = power,
-           type = "two.sample",
-           alternative = alternative)
+pwr_out <- pwr.t.test(d = pop.d, 
+                      power = power,
+                      type = "two.sample",
+                      alternative = alternative)
+```
+
+Now see the results of that power analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+Now see what happens to power with a greater or fewer number of participants:
+
+```{r}
+plot(pwr_out)
 ```
 
 
-## What will be signficant?
+### What will be signficant?
 
 ```{r}
 n1 <- 158
 n2 <- 158
-alpha = .05
-t_critical_one_sided <- qt((1-alpha), df = (n1 + n2 - 2))
-d_critical_one_sided = t_critical_one_sided * sqrt((1/n1) + (1/n2))
-print(d_critical_one_sided)
+
+# Use .95 for one-sided and .975 for two-sided tests
+percentile = .95 
+
+t_critical <- qt(percentile, df = (n1 + n2 - 2))
+d_critical = t_critical * sqrt((1/n1) + (1/n2))
+
+print(d_critical)
 ```
 
+
+
+## Repeated Measures t-test
+
+### Estimating the population effect
+
+#### Safeguard approach
+
+[@perugini2014safeguard]
+
+```{r}
+library(MBESS)
+ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
+```
+
+
+#### Small telescope 
+
+[@simonsohn2015small]
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+n1 <- 50
+n2 <- 50
+
+pwr.t2n.test(power = .33,
+             n1 = n1, 
+             n2 = n2, 
+             alternative = alternative) # n1 per group
+```
+
+#### Smallest sig. effect 
+
+The approach determine the smallest effect size that would have been significant in the original study.
+
+```{r}
+n1 <- 50
+n2 <- 50
+df <- n1 + n2 - 2
+
+# use .975 if original study was two-tail test;
+# use .95 if original study was one-tail test
+p_critical <- .95 
+
+t_critical <- qt(p = p_critical, df = df) 
+d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+print(d_critical)
+```
+
+### Determining sample size
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+pop.d <- .33
+power <- .90
+
+pwr_out <- pwr.t.test(d = pop.d, 
+                      power = power,
+                      type = "two.sample",
+                      alternative = alternative)
+```
+
+Now see the results of that power analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+Now see what happens to power with a greater or fewer number of participants:
+
+```{r}
+plot(pwr_out)
+```
+
+
+### What will be signficant?
 
 ```{r}
 n1 <- 158
 n2 <- 158
-alpha = .05
-t_critical_two_sided <- qt((1-(alpha/2)), df = (n1 + n2 - 2))
-d_critical_two_sided = t_critical_two_sided * sqrt((1/n1) + (1/n2))
-print(d_critical_two_sided)
+
+# Use .95 for one-sided and .975 for two-sided tests
+percentile = .95 
+
+t_critical <- qt(percentile, df = (n1 + n2 - 2))
+d_critical = t_critical * sqrt((1/n1) + (1/n2))
+
+print(d_critical)
 ```
+
+
+
+
+## Correlations
+
+### Estimating the population effect
+
+#### Safeguard approach
+
+[@perugini2014safeguard]
+
+```{r}
+library(MBESS)
+ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
+```
+
+
+#### Small telescope 
+
+[@simonsohn2015small]
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+n1 <- 50
+n2 <- 50
+
+pwr.t2n.test(power = .33,
+             n1 = n1, 
+             n2 = n2, 
+             alternative = alternative) # n1 per group
+```
+
+#### Smallest sig. effect 
+
+The approach determine the smallest effect size that would have been significant in the original study.
+
+```{r}
+n1 <- 50
+n2 <- 50
+df <- n1 + n2 - 2
+
+# use .975 if original study was two-tail test;
+# use .95 if original study was one-tail test
+p_critical <- .95 
+
+t_critical <- qt(p = p_critical, df = df) 
+d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+print(d_critical)
+```
+
+### Determining sample size
+
+```{r}
+library(pwr)
+#use "greater" for one-sided and "two.sided" for two sided test
+alternative <- "greater"
+pop.d <- .33
+power <- .90
+
+pwr_out <- pwr.t.test(d = pop.d, 
+                      power = power,
+                      type = "two.sample",
+                      alternative = alternative)
+```
+
+Now see the results of that power analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+Now see what happens to power with a greater or fewer number of participants:
+
+```{r}
+plot(pwr_out)
+```
+
+
+### What will be signficant?
+
+```{r}
+n1 <- 158
+n2 <- 158
+
+# Use .95 for one-sided and .975 for two-sided tests
+percentile = .95 
+
+t_critical <- qt(percentile, df = (n1 + n2 - 2))
+d_critical = t_critical * sqrt((1/n1) + (1/n2))
+
+print(d_critical)
+```
+
