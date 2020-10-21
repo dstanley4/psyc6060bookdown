@@ -74,7 +74,7 @@ library(pwr)
 
 # Based on the previous study modify the settings below.
 # For alternative: use "greater" for one-sided 
-# and "two.sided" for two sided test
+# and "two.sided" for two-sided test
 # For n1 and n2 indicate the two group sizes
 alternative <- "greater"
 n1 <- 50
@@ -118,148 +118,198 @@ The indicates that the smallest sample $d$-value that would have been significan
 
 ### Determining sample size
 
+To determine a sample size for you need to specify:
+* an estimate of the population effect size (see the various methods reviewed above)
+* desired power (probability of a significant effect if it exists)
+* examine a graph to see how a greater/fewer number of participants influences power
+* examine a graph to see how a higher/lower population effect power
 
-
+In the example below we use:
+* Effect size estimate from the from the small telescope approach ($\delta = .24$)
+* Desired power of .90 - a 90% chance of finding our effect if it exists
 
 ```{r}
 library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
 alternative <- "greater"
-pop.d <- .33
+pop_d <- .24
 power <- .90
 
-pwr_out <- pwr.t.test(d = pop.d, 
+pwr_out <- pwr.t.test(d = pop_d, 
                       power = power,
                       type = "two.sample",
                       alternative = alternative)
 ```
 
-Now see the results of that power analysis:
+Then we need to print our power / sample size analysis:
 
 ```{r}
 print(pwr_out)
 
 ```
 
-Now see what happens to power with a greater or fewer number of participants:
+This analysis reveals that a) if we assume the population effect size is .24 ($\delta = .24$) and b) desire a 90% chance of finding our effect if it exits - we need 298 people/animals per group. So a total of 596 participants for these two cells.
+
+##### A different number of participants?
+
+But what happens to our power if we get a greater/fewer number of participants? We don't always have control over the exact number due to non-response rates etc. We can use the graph below to see how power changes as the number of participants changes. Based on this graph, we may want to adjust the number of participants.
 
 ```{r}
 plot(pwr_out)
 ```
 
 
-### What will be signficant?
 
 ```{r}
-n1 <- 158
-n2 <- 158
+# Specify the population effect size from your power analysis
+pop_d <- .24
+
+# Do not change code below
+pwr_50 <- round(pwr.t.test(d = pop_d, power = .50)$n)
+pwr_80 <- round(pwr.t.test(d = pop_d, power = .80)$n)
+pwr_95 <- round(pwr.t.test(d = pop_d, power = .95)$n)
+
+power_labels <- c("dangerously low power (0 to .50)",
+                  "low power (.50 to .80)",
+                  "adequate power (.80 to .95)",
+                  "almost certain power (> .95)")
+  
+power_table <- data.frame(power = power_labels,
+                          n_start = round(c(1, pwr_50, pwr_80, pwr_95),2),
+                          n_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
+
+print(power_table)
+
+```
+
+This table indicates that assuming a population effect size of $\delta$ = .24 that your statistical power will be:
+
+* dangerously low if you have between 1 and 134 participants **per group**
+
+* low if you have between 134 and 273 participants **per group**
+
+* adequate if you have between 273 and 452 participants **per group**
+
+* excellent if you have  452 or more participants **per group**
+
+
+
+##### A different effect size?
+
+```{r}
+library(pwr)
+library(tidyverse)
+
+# Indicate the type of test for your study.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+alternative <- "greater"
+n <- 298  # N per group for two.sample test
+max_pop_d = 1.2  #max d value on x-axis. Must be high (e.g., 3 or so) when n is low.
+
+
+# Do not modify code below
+type = "two.sample" # Use "two.sample" or "paired"
+pop_d <- seq(0, max_pop_d, by = 0.01) 
+pop_d_axis_values <- seq(0, max_pop_d, by = 0.10) 
+power_values <- data.frame(pop_d = pop_d, n = n, power = NA)
+for (i in 1:nrow(power_values)){
+  pwr_analysis <- pwr.t.test(d = power_values$pop_d[i],
+                             n = n,
+                             alternative = alternative)
+  power_values$power[i] <- pwr_analysis$power
+}
+
+
+pwr_50 <- pwr.t.test(n = n, power = .50)$d
+pwr_80 <- pwr.t.test(n = n, power = .80)$d
+pwr_95 <- pwr.t.test(n = n, power = .95)$d
+
+power_plot <- ggplot(data = power_values,
+                     mapping = aes(x = pop_d, y = power)) +
+  geom_line() +
+  scale_x_continuous(breaks = pop_d_axis_values) +
+  scale_y_continuous(breaks = seq(0, 1, by = .10)) +
+  labs(title = sprintf("Power plot for N = %g per group", n),
+       subtitle = sprintf("Alternative = %s", alternative),
+       x = "Population d-value",
+       y = "Power (probability of sig. effect)") +
+  annotate("rect", xmin = 0, xmax = pwr_50, 
+           ymin = 0, ymax = 1, 
+           fill = "red", alpha = .5) +
+  annotate("rect", xmin = pwr_50, xmax = pwr_80, 
+           ymin = 0, ymax = 1, 
+           fill = "red", alpha = .2) +
+  annotate("rect", xmin = pwr_80, xmax = pwr_95, 
+           ymin = 0, ymax = 1, 
+           fill = "green", alpha = .2) +
+  annotate("rect", xmin = pwr_95, xmax = max_pop_d, 
+           ymin = 0, ymax = 1, 
+           fill = "green", alpha = .5) +
+  theme_classic()
+
+print(power_plot)
+```
+
+
+
+```{r}
+# Specify the sample size per group from your power analysis
+n = 298 # N per group
+
+# Do not modify the code below
+pwr_50 <- pwr.t.test(n = n, power = .50)$d
+pwr_80 <- pwr.t.test(n = n, power = .80)$d
+pwr_95 <- pwr.t.test(n = n, power = .95)$d
+
+power_labels <- c("red: dangerously low power (0 to .50)",
+                  "light red: low power (.50 to .80)",
+                  "green: adequate power (.80 to .95)",
+                  "dark green: almost certain power (> .95)")
+
+power_table <- data.frame(power = power_labels,
+                          delta_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
+                          delta_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
+
+print(power_table)
+
+```
+
+This table indicates that using 298 people **per group** your statistical power will be:
+
+* dangerously low if the actual population effect is higher than 0 and lower than $\delta = 0.16$
+
+* low if the actual population effect is between $\delta = 0.16$ and $\delta = 0.23$
+
+* adequate if the actual population effect is between $\delta = 0.23$ and $\delta = 0.30$
+
+* excellent if the actual population effect is higher than $\delta = 0.30$
+
+
+### What will be signficant?
+
+Let's assume that after looking at all the graphs and tables you end up sticking with your intial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
+
+
+```{r}
+# Specify the sample size per group from your power / sample size analysis
+n1 <- 298
+n2 <- 298
 
 # Use .95 for one-sided and .975 for two-sided tests
 percentile = .95 
 
+# Do not modify the code below
 t_critical <- qt(percentile, df = (n1 + n2 - 2))
 d_critical = t_critical * sqrt((1/n1) + (1/n2))
-
 print(d_critical)
 ```
 
-
+This indicates that with a sample size of 298 per group that only $d$-values greater than $d$ = 0.135 will be significant. 
 
 ## Repeated Measures t-test
-
-### Population effect size
-
-#### Safeguard approach
-
-[@perugini2014safeguard]
-
-```{r}
-library(MBESS)
-ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
-```
-
-
-#### Small telescope 
-
-[@simonsohn2015small]
-
-```{r}
-library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
-alternative <- "greater"
-n1 <- 50
-n2 <- 50
-
-pwr.t2n.test(power = .33,
-             n1 = n1, 
-             n2 = n2, 
-             alternative = alternative) # n1 per group
-```
-
-#### Smallest sig. effect 
-
-The approach determine the smallest effect size that would have been significant in the original study.
-
-```{r}
-n1 <- 50
-n2 <- 50
-df <- n1 + n2 - 2
-
-# use .975 if original study was two-tail test;
-# use .95 if original study was one-tail test
-p_critical <- .95 
-
-t_critical <- qt(p = p_critical, df = df) 
-d_critical <- t_critical * sqrt(1/n1 + 1/n2)
-print(d_critical)
-```
-
-### Determining sample size
-
-```{r}
-library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
-alternative <- "greater"
-pop.d <- .33
-power <- .90
-
-pwr_out <- pwr.t.test(d = pop.d, 
-                      power = power,
-                      type = "two.sample",
-                      alternative = alternative)
-```
-
-Now see the results of that power analysis:
-
-```{r}
-print(pwr_out)
-
-```
-
-Now see what happens to power with a greater or fewer number of participants:
-
-```{r}
-plot(pwr_out)
-```
-
-
-### What will be signficant?
-
-```{r}
-n1 <- 158
-n2 <- 158
-
-# Use .95 for one-sided and .975 for two-sided tests
-percentile = .95 
-
-t_critical <- qt(percentile, df = (n1 + n2 - 2))
-d_critical = t_critical * sqrt((1/n1) + (1/n2))
-
-print(d_critical)
-```
-
-
-
 
 ## Correlations
 
@@ -426,10 +476,11 @@ pwr.t.test(d = .20, power = .80)
 library(pwr)
 n <- 400  # change this line. N per group for two.sample test.
 alternative = "greater"  # or change this line. Use "two.sided" or "greater".
-type = "two.sample" # Use "two.sample" or "paired"
 max_pop_d = .8  # you may need to adjust this line
 
 
+
+type = "two.sample" # Use "two.sample" or "paired"
 pop_d <- seq(0, max_pop_d, by = 0.01) 
 pop_d_axis_values <- seq(0, max_pop_d, by = 0.10) 
 power_values <- data.frame(pop_d = pop_d, n = n, power = NA)
@@ -441,9 +492,9 @@ for (i in 1:nrow(power_values)){
 }
 
 
-red_zone <- pwr.t.test(n = n, power = .50)$d
-green_zone <- pwr.t.test(n = n, power = .80)$d
-green_zone2 <- pwr.t.test(n = n, power = .99)$d
+pwr_50 <- pwr.t.test(n = n, power = .50)$d
+pwr_80 <- pwr.t.test(n = n, power = .80)$d
+pwr_95 <- pwr.t.test(n = n, power = .95)$d
 library(tidyverse)
 power_plot <- ggplot(data = power_values,
                      mapping = aes(x = pop_d, y = power)) +
@@ -454,18 +505,18 @@ power_plot <- ggplot(data = power_values,
        subtitle = sprintf("Alternative = %s", alternative),
        x = "Population d-value",
        y = "Power (probability of sig. effect)") +
-  annotate("rect", xmin = 0, xmax = red_zone, ymin = 0, ymax = 1, fill = "red", alpha = .2) +
-  annotate("rect", xmin = red_zone, xmax = green_zone, ymin = 0, ymax = 1, fill = "yellow", alpha = .2) +
-  annotate("rect", xmin = green_zone, xmax = green_zone2, ymin = 0, ymax = 1, fill = "green", alpha = .2) +
-  annotate("rect", xmin = green_zone2, xmax = max_pop_d, ymin = 0, ymax = 1, fill = "green", alpha = .5) +
+  annotate("rect", xmin = 0, xmax = pwr_50, ymin = 0, ymax = 1, fill = "red", alpha = .5) +
+  annotate("rect", xmin = pwr_50, xmax = pwr_80, ymin = 0, ymax = 1, fill = "red", alpha = .2) +
+  annotate("rect", xmin = pwr_80, xmax = pwr_95, ymin = 0, ymax = 1, fill = "green", alpha = .2) +
+  annotate("rect", xmin = pwr_95, xmax = 1, ymin = 0, ymax = 1, fill = "green", alpha = .5) +
   theme_classic()
 
 print(power_plot)
 
 # table
-power_table <- data.frame(power = c("dangerously low (0 to .50)", "moderate (.50 to .80)", "high (.80 to .99)", "almost certain (> .99)"),
-                          pop_d_start = round(c(0, red_zone, green_zone, green_zone2),2),
-                          pop_d_end = round(c(red_zone, green_zone, green_zone2, NA),2))
+power_table <- data.frame(power = c("dangerously low (0 to .50)", "low (.50 to .80)", "adequate (.80 to .95)", "almost certain (> .95)"),
+                          rho_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
+                          rho_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
 
 print(power_table)
 
