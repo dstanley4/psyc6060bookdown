@@ -333,6 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.6.2" data-path="sample-size-analysis-for-nhst.html"><a href="sample-size-analysis-for-nhst.html#determining-sample-size-2"><i class="fa fa-check"></i><b>8.6.2</b> Determining sample size</a></li>
 <li class="chapter" data-level="8.6.3" data-path="sample-size-analysis-for-nhst.html"><a href="sample-size-analysis-for-nhst.html#what-will-be-signficant-2"><i class="fa fa-check"></i><b>8.6.3</b> What will be signficant?</a></li>
 </ul></li>
+<li class="chapter" data-level="8.7" data-path="sample-size-analysis-for-nhst.html"><a href="sample-size-analysis-for-nhst.html#references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
@@ -554,6 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="a-different-effect-size" class="section level5">
 <h5><span class="header-section-number">8.4.2.0.2</span> A different effect size?</h5>
+<p>We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.</p>
 <div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="sample-size-analysis-for-nhst.html#cb312-1"></a><span class="kw">library</span>(pwr)</span>
 <span id="cb312-2"><a href="sample-size-analysis-for-nhst.html#cb312-2"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb312-3"><a href="sample-size-analysis-for-nhst.html#cb312-3"></a></span>
@@ -808,6 +810,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="a-different-effect-size-1" class="section level5">
 <h5><span class="header-section-number">8.5.2.0.2</span> A different effect size?</h5>
+<p>We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.</p>
 <div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="sample-size-analysis-for-nhst.html#cb330-1"></a><span class="kw">library</span>(pwr)</span>
 <span id="cb330-2"><a href="sample-size-analysis-for-nhst.html#cb330-2"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb330-3"><a href="sample-size-analysis-for-nhst.html#cb330-3"></a></span>
@@ -1056,6 +1059,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="a-different-effect-size-2" class="section level5">
 <h5><span class="header-section-number">8.6.2.0.2</span> A different effect size?</h5>
+<p>We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.</p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="sample-size-analysis-for-nhst.html#cb347-1"></a><span class="kw">library</span>(pwr)</span>
 <span id="cb347-2"><a href="sample-size-analysis-for-nhst.html#cb347-2"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb347-3"><a href="sample-size-analysis-for-nhst.html#cb347-3"></a></span>
@@ -1096,7 +1100,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb347-38"><a href="sample-size-analysis-for-nhst.html#cb347-38"></a><span class="st">  </span><span class="kw">theme_classic</span>()</span>
 <span id="cb347-39"><a href="sample-size-analysis-for-nhst.html#cb347-39"></a><span class="kw">print</span>(power_plot)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-260-1.png" width="672" /></p>
-<p>We can see the information conveyed in the graph above for an repeated measures <span class="math inline">\(t\)</span>-test in table form using the code below.</p>
+<p>We can see the information conveyed in the graph above for a correlation study in table form using the code below.</p>
 <div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="sample-size-analysis-for-nhst.html#cb348-1"></a><span class="co"># Specify the sample size from your power analysis</span></span>
 <span id="cb348-2"><a href="sample-size-analysis-for-nhst.html#cb348-2"></a>n =<span class="st"> </span><span class="dv">261</span> </span>
 <span id="cb348-3"><a href="sample-size-analysis-for-nhst.html#cb348-3"></a></span>
@@ -1105,16 +1109,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb348-6"><a href="sample-size-analysis-for-nhst.html#cb348-6"></a>pwr_<span class="dv">80</span> &lt;-<span class="st"> </span><span class="kw">pwr.r.test</span>(<span class="dt">n =</span> n, <span class="dt">power =</span> <span class="fl">.80</span>)<span class="op">$</span>r</span>
 <span id="cb348-7"><a href="sample-size-analysis-for-nhst.html#cb348-7"></a>pwr_<span class="dv">95</span> &lt;-<span class="st"> </span><span class="kw">pwr.r.test</span>(<span class="dt">n =</span> n, <span class="dt">power =</span> <span class="fl">.95</span>)<span class="op">$</span>r</span>
 <span id="cb348-8"><a href="sample-size-analysis-for-nhst.html#cb348-8"></a></span>
-<span id="cb348-9"><a href="sample-size-analysis-for-nhst.html#cb348-9"></a>power_table &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">power =</span> <span class="kw">c</span>(<span class="st">&quot;dangerously low (0 to .50)&quot;</span>, <span class="st">&quot;low (.50 to .80)&quot;</span>, <span class="st">&quot;adequate (.80 to .95)&quot;</span>, <span class="st">&quot;almost certain (&gt; .95)&quot;</span>),</span>
-<span id="cb348-10"><a href="sample-size-analysis-for-nhst.html#cb348-10"></a>                          <span class="dt">rho_start =</span> <span class="kw">round</span>(<span class="kw">c</span>(<span class="dv">0</span>, pwr_<span class="dv">50</span>, pwr_<span class="dv">80</span>, pwr_<span class="dv">95</span>),<span class="dv">2</span>),</span>
-<span id="cb348-11"><a href="sample-size-analysis-for-nhst.html#cb348-11"></a>                          <span class="dt">rho_end =</span> <span class="kw">round</span>(<span class="kw">c</span>(pwr_<span class="dv">50</span>, pwr_<span class="dv">80</span>, pwr_<span class="dv">95</span>, <span class="ot">NA</span>),<span class="dv">2</span>))</span>
-<span id="cb348-12"><a href="sample-size-analysis-for-nhst.html#cb348-12"></a></span>
-<span id="cb348-13"><a href="sample-size-analysis-for-nhst.html#cb348-13"></a><span class="kw">print</span>(power_table)</span></code></pre></div>
-<pre><code>##                        power rho_start rho_end
-## 1 dangerously low (0 to .50)      0.00    0.12
-## 2           low (.50 to .80)      0.12    0.17
-## 3      adequate (.80 to .95)      0.17    0.22
-## 4     almost certain (&gt; .95)      0.22      NA</code></pre>
+<span id="cb348-9"><a href="sample-size-analysis-for-nhst.html#cb348-9"></a>power_labels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dangerously low power (0 to .50)&quot;</span>,</span>
+<span id="cb348-10"><a href="sample-size-analysis-for-nhst.html#cb348-10"></a>                  <span class="st">&quot;low power (.50 to .80)&quot;</span>,</span>
+<span id="cb348-11"><a href="sample-size-analysis-for-nhst.html#cb348-11"></a>                  <span class="st">&quot;adequate power (.80 to .95)&quot;</span>,</span>
+<span id="cb348-12"><a href="sample-size-analysis-for-nhst.html#cb348-12"></a>                  <span class="st">&quot;almost certain power (&gt; .95)&quot;</span>)</span>
+<span id="cb348-13"><a href="sample-size-analysis-for-nhst.html#cb348-13"></a>  </span>
+<span id="cb348-14"><a href="sample-size-analysis-for-nhst.html#cb348-14"></a>power_table &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">power =</span> power_labels,</span>
+<span id="cb348-15"><a href="sample-size-analysis-for-nhst.html#cb348-15"></a>                          <span class="dt">rho_start =</span> <span class="kw">round</span>(<span class="kw">c</span>(<span class="dv">0</span>, pwr_<span class="dv">50</span>, pwr_<span class="dv">80</span>, pwr_<span class="dv">95</span>),<span class="dv">2</span>),</span>
+<span id="cb348-16"><a href="sample-size-analysis-for-nhst.html#cb348-16"></a>                          <span class="dt">rho_end =</span> <span class="kw">round</span>(<span class="kw">c</span>(pwr_<span class="dv">50</span>, pwr_<span class="dv">80</span>, pwr_<span class="dv">95</span>, <span class="ot">NA</span>),<span class="dv">2</span>))</span>
+<span id="cb348-17"><a href="sample-size-analysis-for-nhst.html#cb348-17"></a></span>
+<span id="cb348-18"><a href="sample-size-analysis-for-nhst.html#cb348-18"></a><span class="kw">print</span>(power_table)</span></code></pre></div>
+<pre><code>##                              power rho_start rho_end
+## 1 dangerously low power (0 to .50)      0.00    0.12
+## 2           low power (.50 to .80)      0.12    0.17
+## 3      adequate power (.80 to .95)      0.17    0.22
+## 4     almost certain power (&gt; .95)      0.22      NA</code></pre>
 <p>This table indicates that using 261 participants your statistical power will be:</p>
 <ul>
 <li><p>dangerously low if the actual population effect is higher than 0 and lower than <span class="math inline">\(\rho = .12\)</span></p></li>
@@ -1140,6 +1149,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb350-11"><a href="sample-size-analysis-for-nhst.html#cb350-11"></a><span class="kw">print</span>(r_critical)</span></code></pre></div>
 <pre><code>## [1] 0.102</code></pre>
 <p>This indicates that with a sample size of 261 that only sample correlations greater than <span class="math inline">\(r\)</span> = .10 (rounded) will be significant.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">8.7</span> References</h2>
 
 <div id="refs" class="references">
 <div>
@@ -1180,7 +1193,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div>
 <p>Szucs, Denes, and John PA Ioannidis. 2017. “Empirical Assessment of Published Effect Sizes and Power in the Recent Cognitive Neuroscience and Psychology Literature.” <em>PLoS Biology</em> 15 (3): e2000797.</p>
-</div>
 </div>
 </div>
 </div>

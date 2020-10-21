@@ -5916,6 +5916,8 @@ This table indicates that assuming a population effect size of \(\delta\) = .24 
 \hypertarget{a-different-effect-size}{%
 \paragraph{A different effect size?}\label{a-different-effect-size}}
 
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(pwr)}
@@ -6283,6 +6285,8 @@ This table indicates that assuming a population effect size of \(\delta\) = .24 
 \hypertarget{a-different-effect-size-1}{%
 \paragraph{A different effect size?}\label{a-different-effect-size-1}}
 
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(pwr)}
@@ -6641,6 +6645,8 @@ This table indicates that assuming a population effect size of \(\rho\) = .18 th
 \hypertarget{a-different-effect-size-2}{%
 \paragraph{A different effect size?}\label{a-different-effect-size-2}}
 
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might cause you to adjust your sample size.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(pwr)}
@@ -6687,7 +6693,7 @@ This table indicates that assuming a population effect size of \(\rho\) = .18 th
 
 \includegraphics{bookdown_files/figure-latex/unnamed-chunk-260-1.pdf}
 
-We can see the information conveyed in the graph above for an repeated measures \(t\)-test in table form using the code below.
+We can see the information conveyed in the graph above for a correlation study in table form using the code below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6699,7 +6705,12 @@ We can see the information conveyed in the graph above for an repeated measures 
 \NormalTok{pwr_}\DecValTok{80}\NormalTok{ <-}\StringTok{ }\KeywordTok{pwr.r.test}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n, }\DataTypeTok{power =} \FloatTok{.80}\NormalTok{)}\OperatorTok{$}\NormalTok{r}
 \NormalTok{pwr_}\DecValTok{95}\NormalTok{ <-}\StringTok{ }\KeywordTok{pwr.r.test}\NormalTok{(}\DataTypeTok{n =}\NormalTok{ n, }\DataTypeTok{power =} \FloatTok{.95}\NormalTok{)}\OperatorTok{$}\NormalTok{r}
 
-\NormalTok{power_table <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{power =} \KeywordTok{c}\NormalTok{(}\StringTok{"dangerously low (0 to .50)"}\NormalTok{, }\StringTok{"low (.50 to .80)"}\NormalTok{, }\StringTok{"adequate (.80 to .95)"}\NormalTok{, }\StringTok{"almost certain (> .95)"}\NormalTok{),}
+\NormalTok{power_labels <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"dangerously low power (0 to .50)"}\NormalTok{,}
+                  \StringTok{"low power (.50 to .80)"}\NormalTok{,}
+                  \StringTok{"adequate power (.80 to .95)"}\NormalTok{,}
+                  \StringTok{"almost certain power (> .95)"}\NormalTok{)}
+  
+\NormalTok{power_table <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{power =}\NormalTok{ power_labels,}
                           \DataTypeTok{rho_start =} \KeywordTok{round}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, pwr_}\DecValTok{50}\NormalTok{, pwr_}\DecValTok{80}\NormalTok{, pwr_}\DecValTok{95}\NormalTok{),}\DecValTok{2}\NormalTok{),}
                           \DataTypeTok{rho_end =} \KeywordTok{round}\NormalTok{(}\KeywordTok{c}\NormalTok{(pwr_}\DecValTok{50}\NormalTok{, pwr_}\DecValTok{80}\NormalTok{, pwr_}\DecValTok{95}\NormalTok{, }\OtherTok{NA}\NormalTok{),}\DecValTok{2}\NormalTok{))}
 
@@ -6708,11 +6719,11 @@ We can see the information conveyed in the graph above for an repeated measures 
 \end{Shaded}
 
 \begin{verbatim}
-##                        power rho_start rho_end
-## 1 dangerously low (0 to .50)      0.00    0.12
-## 2           low (.50 to .80)      0.12    0.17
-## 3      adequate (.80 to .95)      0.17    0.22
-## 4     almost certain (> .95)      0.22      NA
+##                              power rho_start rho_end
+## 1 dangerously low power (0 to .50)      0.00    0.12
+## 2           low power (.50 to .80)      0.12    0.17
+## 3      adequate power (.80 to .95)      0.17    0.22
+## 4     almost certain power (> .95)      0.22      NA
 \end{verbatim}
 
 This table indicates that using 261 participants your statistical power will be:
@@ -6754,6 +6765,9 @@ Let's assume that after looking at all the graphs and tables you end up sticking
 \end{verbatim}
 
 This indicates that with a sample size of 261 that only sample correlations greater than \(r\) = .10 (rounded) will be significant.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
 
   \bibliography{book.bib,packages.bib}
 

@@ -205,6 +205,9 @@ This table indicates that assuming a population effect size of $\delta$ = .24 th
 
 ##### A different effect size?
 
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might  cause you to adjust your sample size.
+
+
 ```{r}
 library(pwr)
 library(tidyverse)
@@ -476,6 +479,9 @@ This table indicates that assuming a population effect size of $\delta$ = .24 th
 
 
 ##### A different effect size?
+
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might  cause you to adjust your sample size.
+
 
 ```{r}
 library(pwr)
@@ -749,6 +755,9 @@ This table indicates that assuming a population effect size of $\rho$ = .18 that
 
 ##### A different effect size?
 
+We are only use an estimate of the population effect size. What happens to power if the population effect size is different than we estimated. That information if conveyed in the graph below. An examination of this output might  cause you to adjust your sample size.
+
+
 ```{r}
 library(pwr)
 library(tidyverse)
@@ -795,7 +804,7 @@ print(power_plot)
 
 ```
 
-We can see the information conveyed in the graph above for an repeated measures $t$-test in table form using the code below.
+We can see the information conveyed in the graph above for a correlation study in table form using the code below.
 
 
 ```{r}
@@ -807,7 +816,12 @@ pwr_50 <- pwr.r.test(n = n, power = .50)$r
 pwr_80 <- pwr.r.test(n = n, power = .80)$r
 pwr_95 <- pwr.r.test(n = n, power = .95)$r
 
-power_table <- data.frame(power = c("dangerously low (0 to .50)", "low (.50 to .80)", "adequate (.80 to .95)", "almost certain (> .95)"),
+power_labels <- c("dangerously low power (0 to .50)",
+                  "low power (.50 to .80)",
+                  "adequate power (.80 to .95)",
+                  "almost certain power (> .95)")
+  
+power_table <- data.frame(power = power_labels,
                           rho_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
                           rho_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
 
@@ -845,3 +859,6 @@ print(r_critical)
 ```
 
 This indicates that with a sample size of 261 that only sample correlations greater than $r$ = .10 (rounded) will be significant. 
+
+## References
+
