@@ -225,14 +225,15 @@ power_values <- data.frame(pop_d = pop_d, n = n, power = NA)
 for (i in 1:nrow(power_values)){
   pwr_analysis <- pwr.t.test(d = power_values$pop_d[i],
                              n = n,
+                             type = type,
                              alternative = alternative)
   power_values$power[i] <- pwr_analysis$power
 }
 
 
-pwr_50 <- pwr.t.test(n = n, power = .50)$d
-pwr_80 <- pwr.t.test(n = n, power = .80)$d
-pwr_95 <- pwr.t.test(n = n, power = .95)$d
+pwr_50 <- pwr.t.test(n = n, power = .50, type = type)$d
+pwr_80 <- pwr.t.test(n = n, power = .80, type = type)$d
+pwr_95 <- pwr.t.test(n = n, power = .95, type = type)$d
 
 power_plot <- ggplot(data = power_values,
                      mapping = aes(x = pop_d, y = power)) +
@@ -268,9 +269,9 @@ We can see the information conveyed in the graph above for an independent groups
 n = 298 # N per group
 
 # Do not modify the code below
-pwr_50 <- pwr.t.test(n = n, power = .50)$d
-pwr_80 <- pwr.t.test(n = n, power = .80)$d
-pwr_95 <- pwr.t.test(n = n, power = .95)$d
+pwr_50 <- pwr.t.test(n = n, power = .50, type = "two.sample")$d
+pwr_80 <- pwr.t.test(n = n, power = .80, type = "two.sample")$d
+pwr_95 <- pwr.t.test(n = n, power = .95, type = "two.sample")$d
 
 power_labels <- c("dangerously low power (0 to .50)",
                   "low power (.50 to .80)",
