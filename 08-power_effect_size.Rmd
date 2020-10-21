@@ -59,52 +59,67 @@ library(MBESS)
 ci.smd(smd = .45 , n.1 = 50, n.2 = 50) 
 ```
 
-Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.45 ($n_1=n_2=50$) a plausible range for the population $d$-value ($\delta$) is .05 to .85. That is, the population $d$-value ($\delta$) could be as low as .05. With the safeguard approach you use $\delta = .05$ as your population $d$-value in the power/sample size analysis.
+Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.45 ($n_1=n_2=50$) a plausible range for the population $d$-value ($\delta$) is .05 to .85. That is, the population $d$-value ($\delta$) could be as low as .05. Therefore, we would use $\delta$ = .05 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
+
 
 
 #### Small telescope 
 
-The small telescope approach to determining the effect size to use if you power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for sample size.
+The small telescope approach to determining the effect size to use in your power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
 
-We treat a previous study as a small telescope - a reasonable assumption given what we know about power levels in psychology studies. Specifically, we begin by de
-
-
-
-
-
+We begin by assuming the previous study is a small telescope and has low statistical power. We use the cell sizes for the two groups from the previous study and assume a power of .33. Then we calculate the population effect that would produce a power of .33 using the code below:
 
 ```{r}
 library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
+
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two sided test
+# For n1 and n2 indicate the two group sizes
 alternative <- "greater"
 n1 <- 50
 n2 <- 50
 
+# do not modify this line
 pwr.t2n.test(power = .33,
              n1 = n1, 
              n2 = n2, 
-             alternative = alternative) # n1 per group
+             alternative = alternative)
 ```
+
+The indicates when $\delta$ = .24 the previous study (with 50 per group) would have statistical power of .33. Therefore, we would use $\delta$ = .24 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
 
 #### Smallest sig. effect 
 
-The approach determine the smallest effect size that would have been significant in the original study.
+
+Another approach to determine the effect size using in your power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
 
 ```{r}
+# Based on the previous study modify the settings below.
+# For n1 and n2 indicate the two group sizes
 n1 <- 50
 n2 <- 50
-df <- n1 + n2 - 2
 
+# Did the previous study use a direction (one-tail test)
+# Set p_critical accordingly
 # use .975 if original study was two-tail test;
 # use .95 if original study was one-tail test
-p_critical <- .95 
+p_critical <- .95 # indicates one-tail test
 
+# do not modify the lines below
+df <- n1 + n2 - 2
 t_critical <- qt(p = p_critical, df = df) 
 d_critical <- t_critical * sqrt(1/n1 + 1/n2)
 print(d_critical)
 ```
 
+The indicates that the smallest sample $d$-value that would have been significant in the previous study is $d$ = 0.33. Therefore, we would use $\delta$ = .33 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
+
+
 ### Determining sample size
+
+
+
 
 ```{r}
 library(pwr)
