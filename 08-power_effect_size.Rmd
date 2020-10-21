@@ -50,7 +50,7 @@ As we review these steps for the analyses below we omit using subjective judgmen
 
 #### Safeguard approach
 
-The $d$-value obtained from a previous independent groups t-test study is highly influenced by sampling error and therefore a relatively poor estimate of the population $d$-value ($\delta$). The population $d$-value may be substantially higher or lower than the previous study's sample $d$-value. If the population $d$-value is higher than the previous study's $d$-value this does not create a problem for detecting the effect being studied. On the other hand, if the population $d$-value is substantially lower than the previous study's $d$-value then the situation is problematic. Using the previous study's effect size in your sample size/power analysis will produce a desired sample size for your study that is insufficient to detect the effect of interest.  Consequently one approach for determining the smallest effect size of interest in your power analysis is a safeguard approach [@perugini2014safeguard].
+The $d$-value obtained from a previous independent groups $t$-test study is highly influenced by sampling error and therefore a relatively poor estimate of the population $d$-value ($\delta$). The population $d$-value may be substantially higher or lower than the previous study's sample $d$-value. If the population $d$-value is higher than the previous study's $d$-value this does not create a problem for detecting the effect being studied. On the other hand, if the population $d$-value is substantially lower than the previous study's $d$-value then the situation is problematic. Using the previous study's effect size in your sample size/power analysis will produce a desired sample size for your study that is insufficient to detect the effect of interest.  Consequently one approach for determining the smallest effect size of interest in your power analysis is a safeguard approach [@perugini2014safeguard].
 
 With this approach you use the lower bound of the 95% confidence interval as the population effect size in your power / sample size analysis. Let's assume the effect size in the previous study was $d$ = 0.45 and there were 50 people in each group.  If the previous study did not report an effect size - you can use the approaches outlined in the "Effect sizes from publications" chapter to obtain one. The confidence interval is obtained by:
 
@@ -59,13 +59,13 @@ library(MBESS)
 ci.smd(smd = .45 , n.1 = 50, n.2 = 50) 
 ```
 
-Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.45 ($n_1=n_2=50$) a plausible range for the population $d$-value ($\delta$) is .05 to .85. That is, the population $d$-value ($\delta$) could be as low as .05. Therefore, we would use $\delta$ = .05 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
+Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.45 ($n_1=n_2=50$) a plausible range for the population $d$-value ($\delta$) is 0.05 to 0.85. That is, the population $d$-value ($\delta$) could be as low as 0.05. Therefore, we would use $\delta$ = 0.05 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
 
 
 
 #### Small telescope 
 
-The small telescope approach to determining the effect size to use in your power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
+The small telescope approach to determining the effect size to use in your independent groups t-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
 
 We begin by assuming the previous study is a small telescope and has low statistical power. We use the cell sizes for the two groups from the previous study and assume a power of .33. Then we calculate the population effect that would produce a power of .33 using the code below:
 
@@ -92,7 +92,7 @@ The indicates when $\delta$ = .24 the previous study (with 50 per group) would h
 #### Smallest sig. effect 
 
 
-Another approach to determine the effect size using in your power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
+Another approach to determine the effect size using in yourn independent groups t-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
 
 ```{r}
 # Based on the previous study modify the settings below.
@@ -118,14 +118,21 @@ The indicates that the smallest sample $d$-value that would have been significan
 
 ### Determining sample size
 
-To determine a sample size for you need to specify:
-* an estimate of the population effect size (see the various methods reviewed above)
-* desired power (probability of a significant effect if it exists)
+To determine a sample size for your independent groups t-test you need to:
+
+* specify an estimate of the population effect size (see the various methods reviewed above)
+
+* specify desired power (probability of a significant effect if it exists)
+
 * examine a graph to see how a greater/fewer number of participants influences power
+
 * examine a graph to see how a higher/lower population effect power
 
+
 In the example below we use:
+
 * Effect size estimate from the from the small telescope approach ($\delta = .24$)
+
 * Desired power of .90 - a 90% chance of finding our effect if it exists
 
 ```{r}
@@ -154,13 +161,13 @@ This analysis reveals that a) if we assume the population effect size is .24 ($\
 
 ##### A different number of participants?
 
-But what happens to our power if we get a greater/fewer number of participants? We don't always have control over the exact number due to non-response rates etc. We can use the graph below to see how power changes as the number of participants changes. Based on this graph, we may want to adjust the number of participants.
+But what happens to our power if we get a greater/fewer number of participants? We don't always have control over the exact number due to non-response rates etc. We can use the graph below to see how power changes as the number of participants changes. Based on an examination of this graph, we may want to adjust the number of participants.
 
 ```{r}
 plot(pwr_out)
 ```
 
-
+We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
 
 ```{r}
 # Specify the population effect size from your power analysis
@@ -253,6 +260,7 @@ power_plot <- ggplot(data = power_values,
 print(power_plot)
 ```
 
+We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
 
 
 ```{r}
@@ -264,10 +272,10 @@ pwr_50 <- pwr.t.test(n = n, power = .50)$d
 pwr_80 <- pwr.t.test(n = n, power = .80)$d
 pwr_95 <- pwr.t.test(n = n, power = .95)$d
 
-power_labels <- c("red: dangerously low power (0 to .50)",
-                  "light red: low power (.50 to .80)",
-                  "green: adequate power (.80 to .95)",
-                  "dark green: almost certain power (> .95)")
+power_labels <- c("dangerously low power (0 to .50)",
+                  "low power (.50 to .80)",
+                  "adequate power (.80 to .95)",
+                  "almost certain power (> .95)")
 
 power_table <- data.frame(power = power_labels,
                           delta_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
@@ -311,98 +319,278 @@ This indicates that with a sample size of 298 per group that only $d$-values gre
 
 ## Repeated Measures t-test
 
-## Correlations
-
 ### Population effect size
 
 #### Safeguard approach
 
-[@perugini2014safeguard]
+The $d$-value obtained from a previous repeated measures $t$-test study is highly influenced by sampling error and therefore a relatively poor estimate of the population $d$-value ($\delta$). The population $d$-value may be substantially higher or lower than the previous study's sample $d$-value. If the population $d$-value is higher than the previous study's $d$-value this does not create a problem for detecting the effect being studied. On the other hand, if the population $d$-value is substantially lower than the previous study's $d$-value then the situation is problematic. Using the previous study's effect size in your sample size/power analysis will produce a desired sample size for your study that is insufficient to detect the effect of interest.  Consequently one approach for determining the smallest effect size of interest in your power analysis is a safeguard approach [@perugini2014safeguard].
+
+With this approach you use the lower bound of the 95% confidence interval as the population effect size in your power / sample size analysis. Let's assume the effect size in the previous study was $d$ = 0.45 and there were 50 people in each group.  If the previous study did not report an effect size - you can use the approaches outlined in the "Effect sizes from publications" chapter to obtain one. The confidence interval is obtained by:
 
 ```{r}
 library(MBESS)
-ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
+ci.sm(sm = .45 , N = 50) 
 ```
+
+Thus, $d$ = 0.45, 95% CI [0.16, 0.74]. Therefore, with a sample $d$-value of 0.45 ($N=50$) a plausible range for the population $d$-value ($\delta$) is 0.16 to 0.74. That is, the population $d$-value ($\delta$) could be as low as 0.16. Therefore, we would use $\delta$ = 0.16 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
+
 
 
 #### Small telescope 
 
-[@simonsohn2015small]
+The small telescope approach to determining the effect size to use in your independent groups t-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
+
+We begin by assuming the previous study is a small telescope and has low statistical power. We use the cell sizes for the two groups from the previous study and assume a power of .33. Then we calculate the population effect that would produce a power of .33 using the code below:
 
 ```{r}
 library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
-alternative <- "greater"
-n1 <- 50
-n2 <- 50
 
-pwr.t2n.test(power = .33,
-             n1 = n1, 
-             n2 = n2, 
-             alternative = alternative) # n1 per group
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+# For n indicate the sample size
+alternative <- "greater"
+n <- 50
+
+# do not modify this line
+pwr.t.test(power = .33,
+           n = n, 
+           type = "one.sample",
+           alternative = alternative)
 ```
+
+The indicates when $\delta$ = 0.17 the previous study (with 50 per group) would have statistical power of .33. Therefore, we would use $\delta$ = 0.17 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
 
 #### Smallest sig. effect 
 
-The approach determine the smallest effect size that would have been significant in the original study.
+
+Another approach to determine the effect size using in yourn independent groups t-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
 
 ```{r}
-n1 <- 50
-n2 <- 50
-df <- n1 + n2 - 2
+# Based on the previous study modify the settings below.
+# For n indicate the sample size
+n <- 50
 
+# Did the previous study use a direction (one-tail test)
+# Set p_critical accordingly
 # use .975 if original study was two-tail test;
 # use .95 if original study was one-tail test
-p_critical <- .95 
+p_critical <- .95 # indicates one-tail test
 
+# do not modify the lines below
+df <- n - 1
 t_critical <- qt(p = p_critical, df = df) 
-d_critical <- t_critical * sqrt(1/n1 + 1/n2)
+d_critical <- t_critical * sqrt(1/n)
 print(d_critical)
 ```
 
+The indicates that the smallest sample $d$-value that would have been significant in the previous study is $d$ = 0.24. Therefore, we would use $\delta$ = .24 as the population effect size in next stage of the power/sample size analysis: Determining Sample Size.
+
+
 ### Determining sample size
+
+To determine a sample size for your independent groups t-test you need to:
+
+* specify an estimate of the population effect size (see the various methods reviewed above)
+
+* specify desired power (probability of a significant effect if it exists)
+
+* examine a graph to see how a greater/fewer number of participants influences power
+
+* examine a graph to see how a higher/lower population effect power
+
+
+In the example below we use:
+
+* Effect size estimate from the from the small telescope approach ($\delta = .17$)
+
+* Desired power of .90 - a 90% chance of finding our effect if it exists
 
 ```{r}
 library(pwr)
-#use "greater" for one-sided and "two.sided" for two sided test
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
 alternative <- "greater"
-pop.d <- .33
+pop_d <- .17
 power <- .90
 
-pwr_out <- pwr.t.test(d = pop.d, 
+pwr_out <- pwr.t.test(d = pop_d, 
                       power = power,
-                      type = "two.sample",
+                      type = "paired",
                       alternative = alternative)
 ```
 
-Now see the results of that power analysis:
+Then we need to print our power / sample size analysis:
 
 ```{r}
 print(pwr_out)
 
 ```
 
-Now see what happens to power with a greater or fewer number of participants:
+This analysis reveals that a) if we assume the population effect size for our repeated measures t-test is 0.17 ($\delta = 0.17$) and b) desire a 90% chance of finding our effect if it exits - we need 298 participants.
+
+##### A different number of participants?
+
+But what happens to our power if we get a greater/fewer number of participants? We don't always have control over the exact number due to non-response rates etc. We can use the graph below to see how power changes as the number of participants changes. Based on an examination of this graph, we may want to adjust the number of participants.
 
 ```{r}
 plot(pwr_out)
 ```
 
+We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+
+```{r}
+# Specify the population effect size from your power analysis
+pop_d <- .17
+
+# Do not change code below
+pwr_50 <- round(pwr.t.test(d = pop_d, power = .50, type = "paired")$n)
+pwr_80 <- round(pwr.t.test(d = pop_d, power = .80, type = "paired")$n)
+pwr_95 <- round(pwr.t.test(d = pop_d, power = .95, type = "paired")$n)
+
+power_labels <- c("dangerously low power (0 to .50)",
+                  "low power (.50 to .80)",
+                  "adequate power (.80 to .95)",
+                  "almost certain power (> .95)")
+  
+power_table <- data.frame(power = power_labels,
+                          n_start = round(c(1, pwr_50, pwr_80, pwr_95),2),
+                          n_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
+
+print(power_table)
+
+```
+
+This table indicates that assuming a population effect size of $\delta$ = .24 that your statistical power will be:
+
+* dangerously low if you have between 1 and 135 participants 
+
+* low if you have between 135 and 274 participants
+
+* adequate if you have between 274 and 452 participants 
+
+* excellent if you have  452 or more participants 
+
+
+
+##### A different effect size?
+
+```{r}
+library(pwr)
+library(tidyverse)
+
+# Indicate the type of test for your study.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+alternative <- "greater"
+n <- 298  # N per group for two.sample test
+max_pop_d = 1.2  #max d value on x-axis. Must be high (e.g., 3 or so) when n is low.
+
+
+# Do not modify code below
+type = "paired" # Use "two.sample" or "paired"
+pop_d <- seq(0, max_pop_d, by = 0.01) 
+pop_d_axis_values <- seq(0, max_pop_d, by = 0.10) 
+power_values <- data.frame(pop_d = pop_d, n = n, power = NA)
+for (i in 1:nrow(power_values)){
+  pwr_analysis <- pwr.t.test(d = power_values$pop_d[i],
+                             n = n, 
+                             type = type,
+                             alternative = alternative)
+  power_values$power[i] <- pwr_analysis$power
+}
+
+
+pwr_50 <- pwr.t.test(n = n, power = .50, type = type)$d
+pwr_80 <- pwr.t.test(n = n, power = .80, type = type)$d
+pwr_95 <- pwr.t.test(n = n, power = .95, type = type)$d
+
+power_plot <- ggplot(data = power_values,
+                     mapping = aes(x = pop_d, y = power)) +
+  geom_line() +
+  scale_x_continuous(breaks = pop_d_axis_values) +
+  scale_y_continuous(breaks = seq(0, 1, by = .10)) +
+  labs(title = sprintf("Power plot for N = %g per group", n),
+       subtitle = sprintf("Alternative = %s", alternative),
+       x = "Population d-value",
+       y = "Power (probability of sig. effect)") +
+  annotate("rect", xmin = 0, xmax = pwr_50, 
+           ymin = 0, ymax = 1, 
+           fill = "red", alpha = .5) +
+  annotate("rect", xmin = pwr_50, xmax = pwr_80, 
+           ymin = 0, ymax = 1, 
+           fill = "red", alpha = .2) +
+  annotate("rect", xmin = pwr_80, xmax = pwr_95, 
+           ymin = 0, ymax = 1, 
+           fill = "green", alpha = .2) +
+  annotate("rect", xmin = pwr_95, xmax = max_pop_d, 
+           ymin = 0, ymax = 1, 
+           fill = "green", alpha = .5) +
+  theme_classic()
+
+print(power_plot)
+```
+
+We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+
+
+```{r}
+# Specify the sample size from your power analysis
+n = 298 
+
+# Do not modify the code below
+pwr_50 <- pwr.t.test(n = n, power = .50, type = "paired")$d
+pwr_80 <- pwr.t.test(n = n, power = .80, type = "paired")$d
+pwr_95 <- pwr.t.test(n = n, power = .95, type = "paired")$d
+
+power_labels <- c("dangerously low power (0 to .50)",
+                  "low power (.50 to .80)",
+                  "adequate power (.80 to .95)",
+                  "almost certain power (> .95)")
+
+power_table <- data.frame(power = power_labels,
+                          delta_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
+                          delta_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
+
+print(power_table)
+
+```
+
+This table indicates that using 298 people **per group** your statistical power will be:
+
+* dangerously low if the actual population effect is higher than 0 and lower than $\delta = 0.11$
+
+* low if the actual population effect is between $\delta = 0.11$ and $\delta = 0.16$
+
+* adequate if the actual population effect is between $\delta = 0.16$ and $\delta = 0.21$
+
+* excellent if the actual population effect is higher than $\delta = 0.21$
+
 
 ### What will be signficant?
 
+Let's assume that after looking at all the graphs and tables you end up sticking with your intial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
+
+
 ```{r}
-n1 <- 158
-n2 <- 158
+# Specify the sample size per group from your power / sample size analysis
+n <- 298
 
 # Use .95 for one-sided and .975 for two-sided tests
 percentile = .95 
 
-t_critical <- qt(percentile, df = (n1 + n2 - 2))
-d_critical = t_critical * sqrt((1/n1) + (1/n2))
-
+# Do not modify the code below
+t_critical <- qt(percentile, df = (n - 1))
+d_critical <- t_critical * sqrt(1/n)
 print(d_critical)
 ```
+
+This indicates that with a sample size of 298 that only $d$-values greater than $d$ = 0.10 (rounded) will be significant. 
+
+
+
+## Correlations
 
 
 ### MISC
