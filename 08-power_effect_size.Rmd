@@ -46,21 +46,32 @@ As we review these steps for the analyses below we omit using subjective judgmen
 
 ## Independent Groups t-test
 
-### Estimating the population effect
+### Population effect size
 
 #### Safeguard approach
 
-[@perugini2014safeguard]
+The $d$-value obtained from a previous independent groups t-test study is highly influenced by sampling error and therefore a relatively poor estimate of the population $d$-value ($\delta$). The population $d$-value may be substantially higher or lower than the previous study's sample $d$-value. If the population $d$-value is higher than the previous study's $d$-value this does not create a problem for detecting the effect being studied. On the other hand, if the population $d$-value is substantially lower than the previous study's $d$-value then the situation is problematic. Using the previous study's effect size in your sample size/power analysis will produce a desired sample size for your study that is insufficient to detect the effect of interest.  Consequently one approach for determining the smallest effect size of interest in your power analysis is a safeguard approach [@perugini2014safeguard].
+
+With this approach you use the lower bound of the 95% confidence interval as the population effect size in your power / sample size analysis. Let's assume the effect size in the previous study was $d$ = 0.45 and there were 50 people in each group.  If the previous study did not report an effect size - you can use the approaches outlined in the "Effect sizes from publications" chapter to obtain one. The confidence interval is obtained by:
 
 ```{r}
 library(MBESS)
-ci.smd(smd = .45 , n.1 = 50, n.2 = 50) # dvalues
+ci.smd(smd = .45 , n.1 = 50, n.2 = 50) 
 ```
+
+Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.45 ($n_1=n_2=50$) a plausible range for the population $d$-value ($\delta$) is .05 to .85. That is, the population $d$-value ($\delta$) could be as low as .05. With the safeguard approach you use $\delta = .05$ as your population $d$-value in the power/sample size analysis.
 
 
 #### Small telescope 
 
-[@simonsohn2015small]
+The small telescope approach to determining the effect size to use if you power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for sample size.
+
+We treat a previous study as a small telescope - a reasonable assumption given what we know about power levels in psychology studies. Specifically, we begin by de
+
+
+
+
+
 
 ```{r}
 library(pwr)
@@ -141,7 +152,7 @@ print(d_critical)
 
 ## Repeated Measures t-test
 
-### Estimating the population effect
+### Population effect size
 
 #### Safeguard approach
 
@@ -237,7 +248,7 @@ print(d_critical)
 
 ## Correlations
 
-### Estimating the population effect
+### Population effect size
 
 #### Safeguard approach
 
@@ -372,9 +383,9 @@ print(power_plot)
 
 
 
-power_table <- data.frame(power = c("dangerously low (0 to .50)", "moderate (.50 to .80)", "high (.80 to .99)", "almost certain (> .99)"),
-                          rho_start = round(c(0, red_zone, green_zone, green_zone2),2),
-                          rho_end = round(c(red_zone, green_zone, green_zone2, NA),2))
+power_table <- data.frame(power = c("dangerously low (0 to .50)", "low (.50 to .80)", "adequate (.80 to .95)", "almost certain (> .95)"),
+                          rho_start = round(c(0, pwr_50, pwr_80, pwr_95),2),
+                          rho_end = round(c(pwr_50, pwr_80, pwr_95, NA),2))
 
 print(power_table)
 
