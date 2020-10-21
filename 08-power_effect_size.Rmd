@@ -31,7 +31,7 @@ Conducting a sample size analysis requires a few pieces of information before yo
 
 2. Population-level effect size. To conduct a sample-size analysis you need an estimate of the population effect size you are trying to find. Most commonly, for theses, that means you needs a estimate of the population-level $d$-value (i.e., $\delta$) or population-level correlation ($\rho$) that you are trying to detect.
 
-Below we present the process for conducing a sample size analysis for the independent groups t-test, repeated measures t-test, and the correlations. For each of these analyses we go through three steps:
+Below we present the process for conducing a sample size analysis for the independent groups $t$-test, repeated measures $t$-test, and the correlations. For each of these analyses we go through three steps:
 
 1. Estimating the population effect size
 2. Determining the desired sample size
@@ -44,7 +44,7 @@ As we review these steps for the analyses below we omit using subjective judgmen
 **Using a sample size of previous study**. One approach to sample size analysis is simply to use the sample size from a previous study conducted in that research area. This is the worst possible strategy for choosing a sample size. Richard Morey and Daniel Lakens [discuss](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwj3wvikhsPsAhVxk-AKHe5xCsYQFjAAegQIBRAC&url=https%3A%2F%2Fraw.githubusercontent.com%2Fricharddmorey%2Fpsychology_resolution%2Fmaster%2Fpaper%2Fresponse.pdf&usg=AOvVaw2-uqEGCGlGvLVlazweKRq2) how most study results in psychology are statistically unfalsifiable because the sample sizes (and corresponding power) are so low. Consequently, using a the sample size for your study based on past research is not advised. Doing so will most likely to result in a sample size that is so small any resulting findings will be untrustworthy and unfalsifiable. Conduct a proper sample size analysis.
 ```
 
-## Independent Groups t-test
+## Independent Groups $t$-test
 
 ### Population effect size
 
@@ -65,7 +65,7 @@ Thus, $d$ = 0.45, 95% CI [0.05, 0.85]. Therefore, with a sample $d$-value of 0.4
 
 #### Small telescope 
 
-The small telescope approach to determining the effect size to use in your independent groups t-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
+The small telescope approach to determining the effect size to use in your independent groups $t$-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
 
 We begin by assuming the previous study is a small telescope and has low statistical power. We use the cell sizes for the two groups from the previous study and assume a power of .33. Then we calculate the population effect that would produce a power of .33 using the code below:
 
@@ -92,7 +92,7 @@ The indicates when $\delta$ = .24 the previous study (with 50 per group) would h
 #### Smallest sig. effect 
 
 
-Another approach to determine the effect size using in yourn independent groups t-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
+Another approach to determine the effect size using in your independent groups $t$-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
 
 ```{r}
 # Based on the previous study modify the settings below.
@@ -118,7 +118,7 @@ The indicates that the smallest sample $d$-value that would have been significan
 
 ### Determining sample size
 
-To determine a sample size for your independent groups t-test you need to:
+To determine a sample size for your independent groups $t$-test you need to:
 
 * specify an estimate of the population effect size (see the various methods reviewed above)
 
@@ -131,7 +131,7 @@ To determine a sample size for your independent groups t-test you need to:
 
 In the example below we use:
 
-* Effect size estimate from the from the small telescope approach ($\delta = .24$)
+* Effect size estimate from the small telescope approach ($\delta = .24$)
 
 * Desired power of .90 - a 90% chance of finding our effect if it exists
 
@@ -167,7 +167,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 plot(pwr_out)
 ```
 
-We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+We can see the information conveyed in the graph above for an independent groups $t$-test in table form using the code below.
 
 ```{r}
 # Specify the population effect size from your power analysis
@@ -260,7 +260,7 @@ power_plot <- ggplot(data = power_values,
 print(power_plot)
 ```
 
-We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+We can see the information conveyed in the graph above for an independent groups $t$-test in table form using the code below.
 
 
 ```{r}
@@ -298,7 +298,7 @@ This table indicates that using 298 people **per group** your statistical power 
 
 ### What will be signficant?
 
-Let's assume that after looking at all the graphs and tables you end up sticking with your intial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
+Let's assume that after looking at all the graphs and tables you end up sticking with your initial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
 
 
 ```{r}
@@ -317,7 +317,7 @@ print(d_critical)
 
 This indicates that with a sample size of 298 per group that only $d$-values greater than $d$ = 0.135 will be significant. 
 
-## Repeated Measures t-test
+## Repeated Measures $t$-test
 
 ### Population effect size
 
@@ -338,7 +338,7 @@ Thus, $d$ = 0.45, 95% CI [0.16, 0.74]. Therefore, with a sample $d$-value of 0.4
 
 #### Small telescope 
 
-The small telescope approach to determining the effect size to use in your independent groups t-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
+The small telescope approach to determining the effect size to use in your repeated measures $t$-test power/sample size analysis is based on the analogy of a telescope [@simonsohn2015small]. Imagine you are an astronomer. A previous study used a small telescope and claimed to see a new asteroid. You are the proud owner of a large telescope and decide to look for the asteroid. If the asteroid exists then you should be able to find it easily with your larger telescope. Conversely, if the you are unable to find the asteroid with your larger telescope it draws into question the original study. In this example, the size of the telescope is a proxy for statistical power. Use of this approach is based on the premise the previous study had a significant finding.
 
 We begin by assuming the previous study is a small telescope and has low statistical power. We use the cell sizes for the two groups from the previous study and assume a power of .33. Then we calculate the population effect that would produce a power of .33 using the code below:
 
@@ -364,7 +364,7 @@ The indicates when $\delta$ = 0.17 the previous study (with 50 per group) would 
 #### Smallest sig. effect 
 
 
-Another approach to determine the effect size using in yourn independent groups t-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
+Another approach to determine the effect size using in your repeated measures $t$-test power / sample size analysis is to determine the smallest effect that would have been significant in the previous study [@lakens2018equivalence]. We do that with the code below:
 
 ```{r}
 # Based on the previous study modify the settings below.
@@ -389,7 +389,7 @@ The indicates that the smallest sample $d$-value that would have been significan
 
 ### Determining sample size
 
-To determine a sample size for your independent groups t-test you need to:
+To determine a sample size for your repeated measures $t$-test you need to:
 
 * specify an estimate of the population effect size (see the various methods reviewed above)
 
@@ -402,7 +402,7 @@ To determine a sample size for your independent groups t-test you need to:
 
 In the example below we use:
 
-* Effect size estimate from the from the small telescope approach ($\delta = .17$)
+* Effect size estimate from the small telescope approach ($\delta = .17$)
 
 * Desired power of .90 - a 90% chance of finding our effect if it exists
 
@@ -428,7 +428,7 @@ print(pwr_out)
 
 ```
 
-This analysis reveals that a) if we assume the population effect size for our repeated measures t-test is 0.17 ($\delta = 0.17$) and b) desire a 90% chance of finding our effect if it exits - we need 298 participants.
+This analysis reveals that a) if we assume the population effect size for our repeated measures $t$-test is 0.17 ($\delta = 0.17$) and b) desire a 90% chance of finding our effect if it exits - we need 298 participants.
 
 ##### A different number of participants?
 
@@ -438,7 +438,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 plot(pwr_out)
 ```
 
-We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+We can see the information conveyed in the graph above for an repeated measures $t$-test in table form using the code below.
 
 ```{r}
 # Specify the population effect size from your power analysis
@@ -532,7 +532,7 @@ power_plot <- ggplot(data = power_values,
 print(power_plot)
 ```
 
-We can see the information conveyed in the graph above for an independent groups t-test in table form using the code below.
+We can see the information conveyed in the graph above for an repeated measures $t$-test in table form using the code below.
 
 
 ```{r}
@@ -570,7 +570,7 @@ This table indicates that using 298 people **per group** your statistical power 
 
 ### What will be signficant?
 
-Let's assume that after looking at all the graphs and tables you end up sticking with your intial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
+Let's assume that after looking at all the graphs and tables you end up sticking with your initial sample size of 298 per group. What sample-level effect sizes will be significant when you do so?
 
 
 ```{r}
