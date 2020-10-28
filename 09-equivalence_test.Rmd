@@ -1,0 +1,231 @@
+---
+title: "Power 2"
+output: html_document
+---
+# Equivalence tests
+
+## Required
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|MBESS              |
+|TOSTER             |
+
+## Interpretting non-significant findings
+
+A common problem in the psychological literature is the interpretation of non-significant effects. As [Kirk]@kirk1996practical] notes "some researchers mistakenly interpret a failure to reject the null hypothesis as evidence for accepting it". Indeed, it unfortunately common to see an incorrect sentence like the following: "The difference between the mean IQ's for males and females was non-significant, $t$(98) = 12.247, *p*  = .458, indicating that males and females have, on average, the same intelligence." Or alternatively an incorrect sentence like this one: "The correlation between height and IQ was non-significant, $r$ = .15, *p* = .854, indicating the height was not related to IQ." Both of these sentences are incorrect because the conclusions do not follow from the reported statistics.
+
+The tendency for researchers to incorrectly conclude that there is no effect, when $p$ > .05, is particularly troubling (and ubiquitous) when interpreting the interaction in an ANOVA. For example, consider a 2 (sex) by 2 (occassion) between/within ANOVA where the dependent variable is reaction time. Imagine there as a significant sex x occasion interaction. The significant interaction indicates the relation between occasion and response time that depends on the level of sex. The researcher describes this significant interaction by comparing the reaction time of males vs females at occasion 1 and then again at occasion 2: "A comparison of the mean reaction of times of males and females at occasion 1, $t$(28) = 1.06, $p$ = .300, revealed no difference in reaction time. In contrast, at occasion 2, there was a difference in the mean reaction times of males and females, t(28) =  2.15, $p$ = .040. Thus, the reaction time was the same for males and females at occasion 1 but not occasion 2." In this example paragraph the researcher errred in the their interpreation of the results at occasion 1. Specifically, the researcher incorrectly concluded at occasion 1 that the reaction time for males and females was the same because $p$ > .05. That type of conclusion is not possible for p > .05 in a standard paired comparison / $t$-test.
+
+When an effect/relation is non-significant it could mean the effect/relation does not exist. Alternatively, it could mean you didn't have sufficient statistical power to detect it. Consequently, when a $p$-value exceeds the threshold for significance (.05) you cannot conclude there is no effect. This fact is discussed at the 10 minute mark in an excellent [video](https://youtu.be/RVxHlsIw_Do) by Daniel Lakens.
+
+You might well wonder what to do if you do want to make the conclusion there this no effect/relation. This type of conclusion is possible but you need to use the right tool to do so. One tool for concluding there is no effect is the Bayes Factor [BF](https://en.wikipedia.org/wiki/Bayes_factor) - but that is beyond the scope of this course. An easily accessible alternative for concluding there is no effect or relation is the equivalence test [@lakens2018equivalence].
+
+## When would I use an equivalence test?
+
+You can use an equivalent test when you want to conclude there is not effect or relation. This situation might be more common that you might think. A few of the scenarios where you would like to use an equivalence test are outlined below:
+
+### $t$-test
+
+* You calculate a $t$-test and expect to find a difference between the two groups. Unexpectedly, the hypothesized difference is non-signficant. A this point you can't draw much of a conclusion. You can say the groups were not statistically different but you cannot say the groups were statistically the same. An equivalence test could allow you to condlude there is no difference between the two groups.
+
+* For theoretical reasons the purpose of your study may be to provide that two groups are the same (e.g., two treatments for the same disease).
+
+### Correlation
+
+
+* You calculate a correlation and expect to find a relation between two variables. Unexpectedly, the hypothesized relation is non-signficant. A this point you can't draw much of a conclusion. You can say didn't find evidence for a relation but you cannot say you found evidence of no relation. An equivalence test could allow you to conclude there is no relation.
+
+
+* For theoretical reasons the purpose of your study may be to provide that there is no relation between two variables (e.g., video game use and violent behaviors).
+
+## Possible Outcomes
+
+[@lakens2018equivalence] review how a variety of outcomes from an equivalence test. You may find
+
+1. Not statistically equivalent and not statistically different
+
+2. Statistically equivalent and not statistically different
+
+3. Statistically equivalent and statistically different
+
+4. Not statistically equivalent and not statistically different
+
+You can see from the possible outcomes above it is still possible to obtain an outcome that is difficult to interpret. The outcomes that are challening to interpret are most likley to occur when you have small sample sizes and lower statistical power for the equivalence test.
+
+## Statistical power
+
+To avoid an ambigrous outcome from an equivalence test make sure you conduct a sample size analysis for an equivalence test. The sample size demands for an equivalence test may be **substantially** greater than for a traditional analysis. Therefore we encourage you to conduct both a traditional sample size analysis and an sample size analysis for an equivalence test before you start your study.
+
+
+## What is an equivalenct test
+
+A equivalence test is just a pair of one-sided $t$-tests that are used to establish an effect fall within a specificied range of effect sizes bounding zero. That is, an equivalence test is used to indicate if an effect/relation is close enough to zero to be considered zero for practical purposes.
+
+
+## Defining a zero effect
+
+How do decide how to zero is close enough to be practically zero? You already did so in the the previous chapter on "Sample size analysis for NHST". In that chapter you reviewed various ways of determining the smallest effect size of interest (SESOI). Any effect below the SESOI is logically close enough to zero to, for practical purposes, be zero. However, I encourage you to review [@lakens2018equivalence] so see the full discussion on this issue. 
+
+For now, the most important aspect of conducting an equivalce test is the fact that you need to determine the smallest effect size of interest **prior** to data collection - to avoid equivlance testing being a fancy form of **$p$-[hacking](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002106)**.
+
+
+## Repeated $t$-test
+
+Consider the following scenario where you begin a study with the intent to prove there is no effect. Many years ago the cereal [Shreddies](https://fameable.com/diamond-shreddies-rebranding-case-study/144/) engaged in an interested marketing strategy. They decided to market "New Diamond Shreddies" as illustrated below. Imagine that you are a researcher tasked to compare the taste of the two types of Shreddies. Participants are given a bowl of the original Shreddies and then asked to rate it on a 1 to 15 point scale where higher ratings indicate a better taste. Following this they are given a bowl of the new Diamond Shreddies and asked rate the taste. How do you go about comparing the taste ratings if your goal is to establish the taste of the old Shreddies is the same as new Diamond Shreddies.
+
+```{r, echo=FALSE, out.width="60%"}
+knitr::include_graphics("ch_equivalence/images/diamond.jpg")
+```
+
+An incorrect approach to determining if the two types of cereal taste the same would be to conduct a repeated measures $t$-test and look for a non-significant difference. A non-significant repeated measures $t$-test would leave you with no conclusion. The appropriate approach in this circumstance is to use an equivalence test. Prior to collecting data you set your smallest effect size of interest. Specifically, you imagine getting a mean for each group and calculating a difference using the original numbers on the 15-point rating scale. You decide that if that difference is between -1 and +1 (the smallest jump on the rating scale) then you will consider the two types of Shreddies to have equivalent taste. Notably you set this smallest effect size of interest before you examine your data - to avoid being a $p$-hacker.
+
+### Raw units
+
+After you collect your data (*N*" = 50) you have ratings for old Shreddies (*M* = 12.1, *SD* = 2.50) and new Diamond Shreddies  (*M* = 11.9, *SD* = 2.50). Because the same people taste both cereals you also have a correlation between the two taste ratings of $r$ = .80). You run the R-code below to conduct the equivalence test.
+
+
+
+```{r, eval=FALSE}
+library(TOSTER)
+
+TOSTpaired.raw(m1 = 12.1,
+        sd1 = 2.5,
+        m2 = 11.9,
+        sd2 = 2.5,
+        r12 = .8,
+        n = 50,
+        low_eqbound = -1,
+        high_eqbound = 1,
+        plot = FALSE)
+```
+
+
+
+```{r, eval = FALSE}
+Equivalence Test Result:
+The equivalence test was significant, t(49) = -1.934, p = 0.0294, 
+given equivalence bounds of -0.632 and 0.632 (on a raw scale) and an alpha of 0.05.
+
+Null Hypothesis Test Result:
+The null hypothesis test was non-significant,
+t(49) = 0.894, p = 0.375, given an alpha of 0.05.
+
+Based on the equivalence test and the null-hypothesis test combined,
+we can conclude that the observed effect is statistically not different
+from zero and statistically equivalent to zero.
+```
+
+
+We can then report that:
+
+A repeated measures $t$-test indicates that the mean taste ratings for old Shreddiess (*M* = 12.1, *SD* = 2.50) and new Diamond Shreddies  (*M* = 11.9, *SD* = 2.50) were not significantly different, $d$ = 0.13, 95% CI [-0.15, 0.40], $t$(49) = 0.984, $p$ = 0.375. Prior to conducting analyses we established that a raw difference in the -1 to +1 range (the smallest possible change on the scale) would, for practical purposes, be considered eqivalent to zero. The equivalence test was significant $t$(49) = -1.934, $p$ = 0.0294 indicating the two means are equivalent. Thus, we can conclude that the taste ratings of the two types of Shreddies are not statistically different and that they are statistically equivalent.
+
+
+Note that the $d$-value and 95% CI obtained with MBESS command: ci.sm(ncp = 0.894, N = 50)
+
+
+### Standardized units
+
+You could also have run this test by indicating the smallest effect size of interest using standardized effect size (i.e., a repeated measures $d$-value).  When the standard deviation is 2.50 and the difference is 1.0 the corresponding d-value is 0.40. Therefore the code below produces a result identical to the above code. We simply specify the range of values that count as practically equivalent to zero as a $d$-value.
+
+
+```{r, eval = FALSE}
+library(TOSTER)
+
+TOSTpaired(m1 = 12.1,
+        sd1 = 2.5,
+        m2 = 11.9,
+        sd2 = 2.5,
+        r12 = .8,
+        n = 50,
+        low_eqbound_dz = -0.4,
+        high_eqbound_dz = 0.4,
+        plot = FALSE)
+```
+
+
+
+
+## Independent groups $t$-test
+
+
+
+```{r}
+library(TOSTER)
+
+TOSTtwo(m1 = 12.1,
+        sd1 = 1.76,
+        m2 = 11.7,
+        sd2 = 1.76,
+        n1 = 50,
+        n2 = 50,
+        low_eqbound_d = -0.57,
+        high_eqbound_d = 0.57,
+        plot = FALSE)
+```
+
+
+```{r}
+library(TOSTER)
+
+TOSTtwo.raw(m1 = 12.1,
+        sd1 = 1.76,
+        m2 = 11.7,
+        sd2 = 1.76,
+        n1 = 50,
+        n2 = 50,
+        low_eqbound =  -1.0,
+        high_eqbound = 1.0,
+        plot = FALSE)
+```
+
+
+
+### Correlation
+
+If you have collected your data already - but not look
+
+
+
+## Correlation equivalence test
+
+### SESOI
+
+Ideally a research picks a SESOI using one of the techniques outlined in  [@lakens2018equivalence] as the input for the equivalence test. But imagine you conducted the correlations study and did not obtain a proper SESOI interest prior to collecting your data. You can, before looking at your data, determine an effect size for the equivalence test f
+
+### Sample size
+
+We then determine the sample size we need when the SESOI is .20. The R code below conducts a sample size analysis using this information. We use the traditional threshold for significance (alpha = .05) and desire statistical power to be .90.
+
+```{r}
+library(TOSTER)
+powerTOSTr(alpha = .05,
+           statistical_power = .90,
+           low_eqbound_r = -.20,
+           high_eqbound_r = .20)
+```
+
+This indicates that we need 267 people if we are to conduct an equivalence test.
+Note that this value can sometime be much larger than the sample size we require for a traditional signficance test. Therefore, if think it's possible that will want to conclude a correlation is zero be sure to conduct a sample size analysis using equivalence testing.
+
+### Equivalence
+
+Imagine we conduct the study describe above using N = 267 people. We obtain a sample correlation of $r$ = .09. We proceed using the R-code below:
+
+```{r}
+library(TOSTER)
+TOSTr(n = 267,
+      r = .09,
+      low_eqbound_r = -.20,
+      high_eqbound_r = .20, 
+      plot = FALSE)
+```
+
+
+
+
+
+
