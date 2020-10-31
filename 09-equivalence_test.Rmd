@@ -1,8 +1,4 @@
----
-title: "Equivalence Tests"
-output: html_document
----
-# Equivalence tests
+# Equivalence tests and sample size
 
 ## Required
 
@@ -65,7 +61,7 @@ A equivalence test is just a pair of one-sided $t$-tests that are used to establ
 
 ## Defining a zero effect
 
-How do decide how to zero is close enough to be practically zero? You already did so in the the previous chapter on "Sample size analysis for NHST". In that chapter you reviewed various ways of determining the smallest effect size of interest (SESOI). Any effect below the SESOI is logically close enough to zero to, for practical purposes, be zero. However, I encourage you to review [@lakens2018equivalence] so see the full discussion on this issue. 
+How do decide how to zero is close enough to be practically zero? You already did so in the the previous chapter on "NHST and sample size". In that chapter you reviewed various ways of determining the smallest effect size of interest (SESOI). Any effect below the SESOI is logically close enough to zero to, for practical purposes, be zero. However, I encourage you to review [@lakens2018equivalence] so see the full discussion on this issue. 
 
 For now, the most important aspect of conducting an equivalence test is the fact that you need to determine the smallest effect size of interest **prior** to data collection - to avoid equivalence testing being a fancy form of intentional or unintentional **[$p$-hacking](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002106)**. Take note of this point -- a recent [article](https://psyarxiv.com/3v7hx) indicated that approximately 25% of researchers have engaged in at least one form of $p$-hacking in the just last 12 months.
 
@@ -238,5 +234,75 @@ The relation between academic performance and self-esteem was non-significant, $
 
 Notice how much clearer and stronger this results section is with the inclusion of an equivalence test. Note that the 95% CI for the correlation was obtained with the MBESS command: ci.cc(r = .09, n = 267)
 
-## References
+## Sample sizes for equivalence testing
+
+### Independent t-test
+
+#### Standardized units
+
+```{r}
+library(TOSTER)
+
+powerTOSTtwo(alpha = 0.05,
+             statistical_power = 0.90,
+             low_eqbound_d = 0.40,
+             high_eqbound_d = 0.40)
+```
+
+#### Raw units
+
+```{r}
+library(TOSTER)
+
+powerTOSTtwo.raw(alpha = 0.05,
+                 statistical_power = 0.90,
+                 sdpooled = 2.50,
+                 low_eqbound = 1,
+                 high_eqbound = 1)
+            
+```
+
+
+### Repeated t-test
+
+#### Standardized units
+
+```{r}
+library(TOSTER)
+
+powerTOSTpaired(alpha = 0.05,
+                statistical_power = 0.90,
+                low_eqbound_dz = -0.6325,
+                high_eqbound_dz = 0.6325)
+            
+```
+
+#### Raw units
+
+```{r}
+library(TOSTER)
+
+powerTOSTpaired.raw(alpha = 0.05,
+                    statistical_power = 0.90,
+                    sdif = 1.581,
+                    low_eqbound = -1,
+                    high_eqbound = 1)
+            
+```
+
+
+
+
+### Correlation
+
+```{r}
+library(TOSTER)
+
+powerTOSTr(alpha = .05,
+           statistical_power = .90,
+           low_eqbound_r = -.20, 
+           high_eqbound_r = .20)
+            
+```
+
 
