@@ -1,5 +1,5 @@
 
-# NHST and sample size
+# Positive Predictive Value
 
 ## Required
 
@@ -8,12 +8,86 @@ The following CRAN packages must be installed:
 | Required CRAN Packages |
 |-------------------|
 |MBESS              |
-|pwr              |
+|pwr                |
 
 
 ## Overview
 
-In this chapter we focus on statistical power -- which is the probability of finding an effect if it exists. For example, if the power for your study is .90 that means you have a 90% chance of finding an effect if it exists. On the other hand, if your statistical power is below .50 that means you have less than a 50% chance of finding an effect if it exists. If your power is .50 you might well question whether it is even worth conducting your study - because the odds of finding an effect (if there is one) are so incredibly low. Low statistical power means you have a *__low__ chance of concluding there is an effect* when an effect **is** present.
+$$
+\begin{align}
+P(\text{effect}) = 0.40
+\end{align}
+$$
+
+
+
+$$
+\begin{align}
+P(\text{effect} \cap [p < .05]) &= P(\text{effect}) \times P(\text{detecting it}) \\
+&= P(\text{effect}) \times \text{Power} \\
+&= 0.40 \times 0.30 \\
+&= 0.12 \\
+\end{align}
+$$
+
+
+
+$$
+\begin{align}
+P(\text{no effect} \cap [p < .05]) &= P(\text{no effect}) \times P(\text{sig. test}) \\
+&= P(\text{effect}) \times \text{Alpha} \\
+&= 0.60 \times 0.05 \\
+&= 0.03
+\end{align}
+$$
+
+
+
+
+$$
+\begin{align}
+P(\text{effect} | p < .05) = \frac{P(\text{effect} \cap [p < .05]) }{P(\text{effect} \cap [p < .05])  + P(\text{no effect} \cap [p < .05])}
+\end{align}
+$$
+
+
+
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/sqplot1.png")
+```
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/sqplot2.png")
+```
+
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/sqplot3.png")
+```
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/areaplot1.png")
+```
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/areaplot2.png")
+```
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/areaplot3.png")
+```
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("ch_ppv/images/areaplot4.png")
+```
+
+
+
+
+
+
+
 
 ## Power Independent groups $t$-test
 
