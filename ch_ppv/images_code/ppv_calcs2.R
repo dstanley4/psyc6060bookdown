@@ -135,6 +135,9 @@ areaplot2 = ggplot(data = noeffect_squares, aes(x = x, y = y)) +
   annotate(geom = "text", x = -.5, y = 14, label = "hypothesis", hjust = 1, size = 5) +
   annotate(geom = "text", x = -.5, y = 13.2, label = "is true", hjust = 1, size = 5) +
   annotate(geom = "text", x = -5, y = 16, label = "Population-level Reality", hjust = 1, angle = 90, size = 7) +
+  annotate(geom = "text", x = 19.5, y = 14, label = "Type I Error, False Positive", size = 5, colour = "white", angle = 90) +
+  annotate(geom = "text", x = 9, y = 15, label = "True Negative", size = 5, colour = "white") +
+  annotate(geom = "text", x = 9, y = 14, label = "(Correct Decision)", size = 5, colour = "white") +
   coord_fixed() +
   theme_void()
 
@@ -152,7 +155,14 @@ areaplot3 = ggplot(data = noeffect_squares, aes(x = x, y = y)) +
   annotate(geom = "text", x = -.5, y = 14, label = "hypothesis", hjust = 1, size = 5) +
   annotate(geom = "text", x = -.5, y = 13.2, label = "is true", hjust = 1, size = 5) +
   annotate(geom = "text", x = -5, y = 16, label = "Population-level Reality", hjust = 1, angle = 90, size = 7) +
-  coord_fixed() +
+  annotate(geom = "text", x = 19.5, y = 14, label = "Type I Error, False Positive", size = 5, colour = "white", angle = 90) +
+  annotate(geom = "text", x = 7, y = 5, label = "Type II Error", size = 5, colour = "white") +
+  annotate(geom = "text", x = 7, y = 4, label = "False Negative", size = 5, colour = "white") +
+  annotate(geom = "text", x = 17, y = 5, label = "True Positive", size = 5, colour = "white") +
+  annotate(geom = "text", x = 17, y = 4, label = "(Correct Decision)", size = 5, colour = "white") +
+  annotate(geom = "text", x = 9, y = 15, label = "True Negative", size = 5, colour = "white") +
+  annotate(geom = "text", x = 9, y = 14, label = "(Correct Decision)", size = 5, colour = "white") +
+    coord_fixed() +
   theme_void()
 
 
@@ -170,12 +180,13 @@ red2 = "#ee2b01"
 
 
 
+
 #prob true + false positive
 areaplot4 = ggplot(data = noeffect_squares, aes(x = x, y = y)) +
-  annotate(geom = "rect", xmin = 0, xmax = 20, ymin = 0, ymax = 10 , fill = green, alpha = .5) +
-  annotate(geom = "rect", xmin = 0, xmax = 20, ymin = 10, ymax = 20, fill = yellow, alpha = .5) +
-  annotate(geom = "rect", xmin = 10, xmax = 20, ymin = 10, ymax = 20, fill = dark_green, alpha = .5) +
-  annotate(geom = "rect", xmin = 0, xmax = 10, ymin = 0, ymax = 10, fill = red, alpha = .5) +
+  annotate(geom = "rect", xmin = 0, xmax = 20, ymin = 0, ymax = 10 , fill = green) +
+  annotate(geom = "rect", xmin = 0, xmax = 20, ymin = 10, ymax = 20, fill = yellow) +
+  annotate(geom = "rect", xmin = 10, xmax = 20, ymin = 10, ymax = 20, fill = dark_green) +
+  annotate(geom = "rect", xmin = 0, xmax = 10, ymin = 0, ymax = 10, fill = red) +
   annotate(geom = "text", x = -.5, y = 5.8, label = "Alternative", hjust = 1, size = 5) +
   annotate(geom = "text", x = -.5, y = 5, label = "hypothesis", hjust = 1, size = 5) +
   annotate(geom = "text", x = -.5, y = 4.2, label = "is true", hjust = 1, size = 5) +
@@ -188,13 +199,14 @@ areaplot4 = ggplot(data = noeffect_squares, aes(x = x, y = y)) +
   annotate(geom = "text", x = 15, y = 21, label = "Null", size = 5) +
   annotate(geom = "text", x = 5, y = 22, label = "Fail to", size = 5) +
   annotate(geom = "text", x = 5, y = 21, label = "Reject Null", size = 5) +
-  annotate(geom = "text", x = 15, y = 15, label = "Type I Error", size = 5) +
-  annotate(geom = "text", x = 5, y = 5, label = "Type II Error", size = 5) +
-  annotate(geom = "text", x = 15, y = 6, label = "Power", size = 5) +
-  annotate(geom = "text", x = 15, y = 5, label = "True Positive", size = 5) +
-  annotate(geom = "text", x = 15, y = 4, label = "(Correct Decision)", size = 5) +
-  annotate(geom = "text", x = 5, y = 15, label = "True Negative", size = 5) +
-  annotate(geom = "text", x = 5, y = 14, label = "(Correct Decision)", size = 5) +
+  annotate(geom = "text", x = 15, y = 15, label = "Type I Error", size = 5, colour = "white") +
+  annotate(geom = "text", x = 15, y = 14, label = "False Positive", size = 5, colour = "white") +
+  annotate(geom = "text", x = 5, y = 5, label = "Type II Error", size = 5, colour = "white") +
+  annotate(geom = "text", x = 5, y = 4, label = "False Negative", size = 5, colour = "white") +
+  annotate(geom = "text", x = 15, y = 5, label = "True Positive", size = 5, colour = "white") +
+  annotate(geom = "text", x = 15, y = 4, label = "(Correct Decision)", size = 5, colour = "white") +
+  annotate(geom = "text", x = 5, y = 15, label = "True Negative", size = 5, colour = "white") +
+  annotate(geom = "text", x = 5, y = 14, label = "(Correct Decision)", size = 5, colour = "white") +
   coord_fixed() +
   theme_void()
 
