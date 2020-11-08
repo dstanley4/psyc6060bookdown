@@ -1,0 +1,174 @@
+
+# NHST and sample size
+
+## Required
+
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|MBESS              |
+|pwr              |
+
+
+## Overview
+
+In this chapter we focus on statistical power -- which is the probability of finding an effect if it exists. For example, if the power for your study is .90 that means you have a 90% chance of finding an effect if it exists. On the other hand, if your statistical power is below .50 that means you have less than a 50% chance of finding an effect if it exists. If your power is .50 you might well question whether it is even worth conducting your study - because the odds of finding an effect (if there is one) are so incredibly low. Low statistical power means you have a *__low__ chance of concluding there is an effect* when an effect **is** present.
+
+## Power Independent groups $t$-test
+
+
+#298 suggested but we got 25
+
+```{r}
+library(pwr)
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+alternative <- "greater"
+pop_d <- .24
+sample_size_per_group <- 25
+
+pwr_out <- pwr.t.test(d = pop_d, 
+                      n = sample_size_per_group,
+                      type = "two.sample",
+                      alternative = alternative)
+```
+
+Then we need to print our power / sample size analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+This analysis reveals that a) if we assume the population effect size is .24 ($\delta = .24$) and b) use a sample size of 25 per group, then our resulting power is 0.21. That is, if an effect exists, we have a 21% chance of finding it.
+
+
+## Power Repeated measures $t$-test
+
+#298 # we get 30
+```{r}
+library(pwr)
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+alternative <- "greater"
+pop_d <- .17
+n <- 30
+
+pwr_out <- pwr.t.test(d = pop_d, 
+                      n = n,
+                      type = "paired",
+                      alternative = alternative)
+```
+
+Then we need to print our power / sample size analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+This analysis reveals that a) if we assume the population effect size for our repeated measures $t$-test is 0.17 ($\delta = 0.17$) and b) we have a sample size of 30, then our resulting power is 0.23. That is, if an effect exists, we have a 23% chance of finding it. 
+
+
+
+
+## PowerCorrelations
+
+#260 to #100
+```{r}
+library(pwr)
+# Based on the previous study modify the settings below.
+# For alternative: use "greater" for one-sided 
+# and "two.sided" for two-sided test
+alternative <- "greater"
+pop_r <- .18
+n <- 100
+
+pwr_out <- pwr.r.test(r = pop_r, 
+                      n = n,
+                      alternative = alternative)
+```
+
+Then we need to print our power / sample size analysis:
+
+```{r}
+print(pwr_out)
+
+```
+
+This analysis reveals that a) if we assume the population correlation is .18 ($\rho = .18$) and b) we use a sample sizse of 100, then our resulting power is 0.56. That is, if an effect exists, we have a 56% chance of finding it. 
+
+
+## Power for equivalence testing
+
+### Independent *t*-test
+
+#### Standardized units
+
+```{r}
+library(TOSTER)
+n_per_group = 40
+powerTOSTtwo(alpha = 0.05,
+             N  = n_per_group,
+             low_eqbound_d = -0.40,
+             high_eqbound_d = 0.40)
+```
+
+#### Raw units
+
+```{r}
+library(TOSTER)
+n_per_group = 40
+
+powerTOSTtwo.raw(alpha = 0.05,
+                 N  = n_per_group,
+                 sdpooled = 2.50,
+                 low_eqbound = -1,
+                 high_eqbound = 1)
+            
+```
+
+
+### Repeated *t*-test
+
+#### Standardized units
+
+```{r}
+library(TOSTER)
+n <- 10
+powerTOSTpaired(alpha = 0.05,
+                N = n,
+                low_eqbound_dz = -0.6325,
+                high_eqbound_dz = 0.6325)
+            
+```
+
+#### Raw units
+
+```{r}
+library(TOSTER)
+n <- 10
+powerTOSTpaired.raw(alpha = 0.05,
+                    N = n,
+                    sdif = 1.581,
+                    low_eqbound = -1,
+                    high_eqbound = 1)
+            
+```
+
+### Correlation
+
+```{r}
+library(TOSTER)
+n <- 75
+powerTOSTr(alpha = .05,
+           N = n,
+           low_eqbound_r = -.20, 
+           high_eqbound_r = .20)
+```
+
+
+Assignment add some mulitple choice videos
