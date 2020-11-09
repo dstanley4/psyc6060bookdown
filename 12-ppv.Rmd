@@ -7,97 +7,105 @@ The following CRAN packages must be installed:
 
 | Required CRAN Packages |
 |-------------------|
-|MBESS              |
-|pwr                |
+|pwr               |
+|TOSTER            |
 
 
 ## Overview
 
-$$
-\begin{align}
-P(\text{effect}) = 0.40
-\end{align}
-$$
+At this point you've learned to be cautious when it comes to interpreting $p$-values. But so far, that's been more of a qualitative form of caution. In this section we attempt to make it a more quantitative form of caution. Specifically, we introduce you to the concept of positive predictive values (PPV) in the context of interpretting significant p-values. The PPV statistic provides us with an estimate of how likely it is there really is an effect when a p-value is significant.
 
 
+## Informal explanation
 
-$$
-\begin{align}
-P(\text{effect} \cap [p < .05]) &= P(\text{effect}) \times P(\text{sig. test}) \\
-&= P(\text{effect}) \times \text{Power} \\
-&= 0.40 \times 0.30 \\
-&= 0.12 \\
-\end{align}
-$$
+### Many hypotheses
 
+When you conduct an experiment to determine if an effect exists you start off fairly confident that the effect is there - otherwise you would not invest the time and money to run the study. Unfortunately only a minority of hypotheses are true. A recent examination of pre-registered studies determined that just over 40% of research hypotheses are true [@scheel2020excess]. Which correspondingly implies that 60% of research hypotheses are false. That is, 60% of studies fail to find what the desired effect. 
 
+One way to think about this finding is by imagining 1000 hypothesis as per Figure \@ref(fig:ppv1). In this figure there are 1000 squares. Each square represents an hypothesis. We've shaded the squares to indicate hypotheses that are true and false. Specifically, 40% of the 1000 hypothses (i.e., 400 squares) are shaded green to indicate the hypothses are true. In contrast, 60% of the 1000 hypothses (i.e., 600 squares) are shaded yellow to indicate the hypothses are false.  
 
-$$
-\begin{align}
-P(\text{no effect} \cap [p < .05]) &= P(\text{no effect}) \times P(\text{sig. test}) \\
-&= P(\text{effect}) \times \text{Alpha} \\
-&= 0.60 \times 0.05 \\
-&= 0.03
-\end{align}
-$$
-
-
-
-
-$$
-\begin{align}
-P(\text{effect} | p < .05) &= \frac{P(\text{effect} \cap [p < .05]) }{P(\text{effect} \cap [p < .05])  + P(\text{no effect} \cap [p < .05])} \\
-&= \frac{0.12 }{0.12  + 0.03} \\
-&= \frac{0.12 }{0.15} \\
-&= 0.80
-\end{align}
-$$
-
-
-
-
-```{r, echo = FALSE, out.width = "90%"}
+```{r ppvfig1, echo = FALSE, out.width = "90%", fig.scap = "One-thousand hypotheses represented as squares.", fig.cap="One-thousand hypotheses represented as squares. True hypotheses are indicated by the color green. False hypotheses are indicated by the color yellow."}
 knitr::include_graphics("ch_ppv/images/fig1.png")
 ```
 
 
-```{r, echo = FALSE, out.width = "90%"}
+### Type I Error
+
+Even when an hypothesis is false there still a chance we will obtain a significant result (i.e., $p$ < .05). More specifically, we will obtain a significant result 5% of the time when the null hypothesis is true and there is no effect. In terms of our example, this means that of the 600 false hypotheses, we would obtain a significant result for 30 of them (i.e., .05 * 600 = 30). These 30 false positive significance tests are illustrated in Figure \@ref(fig:ppvfig2) below.
+
+```{r ppvfig2, echo = FALSE, out.width = "90%", fig.scap= "False positive significance tests.", fig.cap = "False positive significance tests. False hypotheses for which the researcher obtained a significant result are indicated by dark green squares."}
 knitr::include_graphics("ch_ppv/images/fig2.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+
+### Power
+
+Unfortunately, even when an hypothesis is true we won't always obtain a significant p-value. Low sample sizes in psychology are common. As a result most studies in psychology only have a 30% chance of finding an effect if there is one. That is, the typical value for statistical power in psychology is around .30. This typical statistical power level is illustrated in the context of our example in Figure \@ref(fig:ppvfig3) below. In this figure, hypotheses that were true but obtained non-significant p-values are indicated by red squares. In contrast, the hypotheses that were true and determined to be significant are indicated by green squares.
+
+```{r ppvfig3, echo = FALSE, out.width = "90%", fig.scap = "True positive signficance tests.", fig.cap = "True positive signficance tests. True hypotheses for which the researcher obtained a significant result are indicated by green squares. True hypotheses for which the researcher obtained a non-significant result are indicated by red squares." }
 knitr::include_graphics("ch_ppv/images/fig3.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+### Calculating PPV
+
+You can see from Figure \@ref(fig:ppvfig4), below, that there two ways to obtain a signficant p-value. Specifically, you can obtain a significant p-value when the null hypothesis is true (a false positive p-value). As well, you can obtain a significant p-value when the null hypothesis is false (a true positive p-value). As a researcher, when we obtain a signficant p-value we don't know if it's a true-positive or a false-positive. We calculate PPV to determine how likely it is there is an effect when the p-value is significant.
+
+
+```{r ppvfig4, echo = FALSE, out.width = "90%", fig.cap = "xx"}
 knitr::include_graphics("ch_ppv/images/fig4.png")
 ```
 
-```{r, echo = FALSE, out.width = "40%"}
+
+As illustatred in Figure \@ref(fig:ppvfig4), below, the positive predictive value (PPV) is simply the ratio of the true-positive p-values over all the p-values (true positive or true negative). 
+
+
+```{r ppvfig5, echo = FALSE, out.width = "40%", fig.align='center', fig.cap = "Graphical illustration of the PPV formula."}
 knitr::include_graphics("ch_ppv/images/fig5.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+
+Placing number into the equation:
+
+
+
+\begin{align}
+PPV &= \frac{120 }{120  + 30} \\
+&= \frac{120}{150} \\
+&= 0.80
+\end{align}
+
+We see that the positive predictive value is .80 in this circumstance. That is, if we obtain a significant p-value there is an 80% chance there really is an effect.
+
+##  Formal explanation
+
+A more formal explanation of PPV can be made by thinking in terms of the area on a figure.
+
+
+
+```{r ppvfig6, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("ch_ppv/images/fig6.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+```{r ppvfig7, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("ch_ppv/images/fig7.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+```{r ppvfig8, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("ch_ppv/images/fig8.png")
 ```
 
-```{r, echo = FALSE, out.width = "90%"}
+```{r ppvfig9, echo = FALSE, out.width = "90%"}
 knitr::include_graphics("ch_ppv/images/fig9.png")
 ```
 
 
+## Calculating power for your study
 
 
+You can estimate positive predictive value for your own study. You merely need an estimate of the power of your study
 
-## Power Independent groups $t$-test
+
+### Power independent groups $t$-test
 
 
 #298 suggested but we got 25
@@ -127,7 +135,7 @@ print(pwr_out)
 This analysis reveals that a) if we assume the population effect size is .24 ($\delta = .24$) and b) use a sample size of 25 per group, then our resulting power is 0.21. That is, if an effect exists, we have a 21% chance of finding it.
 
 
-## Power Repeated measures $t$-test
+### Power repeated measures $t$-test
 
 #298 # we get 30
 ```{r}
@@ -157,7 +165,7 @@ This analysis reveals that a) if we assume the population effect size for our re
 
 
 
-## PowerCorrelations
+### Power correlations
 
 #260 to #100
 ```{r}
@@ -183,10 +191,7 @@ print(pwr_out)
 
 This analysis reveals that a) if we assume the population correlation is .18 ($\rho = .18$) and b) we use a sample sizse of 100, then our resulting power is 0.56. That is, if an effect exists, we have a 56% chance of finding it. 
 
-
-## Power for equivalence testing
-
-### Independent *t*-test
+### Equivalence independent *t*-test
 
 #### Standardized units
 
@@ -214,7 +219,7 @@ powerTOSTtwo.raw(alpha = 0.05,
 ```
 
 
-### Repeated *t*-test
+### Equivalence repeated *t*-test
 
 #### Standardized units
 
@@ -241,7 +246,7 @@ powerTOSTpaired.raw(alpha = 0.05,
             
 ```
 
-### Correlation
+### Equivalence correlation
 
 ```{r}
 library(TOSTER)
@@ -253,4 +258,4 @@ powerTOSTr(alpha = .05,
 ```
 
 
-Assignment add some mulitple choice videos
+## Calculating PPV for your study
