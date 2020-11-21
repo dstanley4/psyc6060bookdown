@@ -459,7 +459,7 @@ my_plot <- ggplot(data = sample_data,
 
 ## Comparing correlations
 
-The part of the exercise involves comparing correlations within and across studies. We begin by obtaining a data set from the psych package. Note that we **do not** use the library(psych) command due to conflicts with the tidyverse.
+In this part of the chapter we compare correlations within and across studies. We begin by obtaining a data set from the psych package. Note that we **do not** use the library(psych) command due to conflicts with the tidyverse.
 
 ```{r}
 # Obtain the bfi data set from the psych package
@@ -537,12 +537,12 @@ cocor( ~ a1 + c1 | e1 + o1, data = as.data.frame(bfi))
 ```
 
 
-We could  write this as $\Delta$*r* = .13, 95% CI [.07, .18]. We could also add the p-value from silver2004. In this case we would write this as $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
+We could  write this as $\Delta$*r* = .13, 95% CI [.07, .18]. We could also add the *p*-value from silver2004. In this case we would write this as $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
 
 
 #### Overlapping correlations
 
-We will compare the correlation to between (a1, c1) to the correlation between (a1, e1) with cocor. In this case, because A1 is common to the first correlation (a1, c1) and the second correlation (e1, o1) we refer to this as an overlapping correlation comparison.
+We will compare the correlation to between (a1, c1) to the correlation between (a1, e1) with cocor. In this case, because a1 is common to the first correlation (a1, c1) and the second correlation (e1, o1) we refer to this as an overlapping correlation comparison.
 
 The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007).
 But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
@@ -556,7 +556,7 @@ cocor( ~ a1 + c1 | a1 + e1, data = as.data.frame(bfi))
 ```
 
 
-We could  write this as $\Delta$*r* = -.08, 95% CI [-.13, -.03]. If we include the p-value from hittner2003 it becomes:
+We could  write this as $\Delta$*r* = -.08, 95% CI [-.13, -.03]. If we include the *p*-value from hittner2003 it becomes:
 
 $\Delta$*r* = -.08, 95% CI [-.13, -.03], *p* = .004.
 
@@ -596,10 +596,6 @@ For **men**, we can obtain the correlation matrix with the code below. Pay speci
 apa.cor.table(bfi_men)
 ```
 
-
-
-### Correlations for women
-
 For **women**, we can obtain the correlation matrix with the code below. Pay special attention to the correlation between a1 and e1.
 
 ```{r}
@@ -609,7 +605,7 @@ apa.cor.table(bfi_women)
 
 ##  Comparison r(a1, e1)
 
-As per the correlations tables above we find the correlations for men ($r_{(a1, e1)}$ = 0.1387) and women ($r_{(a1, e1)}$=  0.1387) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval.
+As per the correlation tables above we find the correlations for men ($r_{(a1, e1)}$ = 0.1387) and women ($r_{(a1, e1)}$=  0.1387) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval.
 
 ```{r}
 library(cocor)
@@ -620,7 +616,7 @@ cocor( ~ a1 + e1 | a1 + e1,
        data = list(bfi_men_dataframe, bfi_women_dataframe))
 ```
 
-We could  write this as $\Delta$*r* = .08, 95% CI [-.002, .15]. If we include the p-value from fisher1925. We would write:
+We could  write this as $\Delta$*r* = .08, 95% CI [-.002, .15]. If we include the *p*-value from fisher1925. We would write:
 
 $\Delta$*r* = .08, 95% CI [-.002, .15], *p* = .057.
 
