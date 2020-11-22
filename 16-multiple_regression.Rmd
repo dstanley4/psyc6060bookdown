@@ -1,0 +1,392 @@
+---
+title: "PSYC 6060: Multiple Regression Part 1"
+output:
+  html_document
+---
+
+```{r set-options, echo=FALSE, cache=FALSE}
+options(width = 120)
+
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(GGally)
+```
+
+# Multiple regression
+
+## Conducting Analyses: Create a project 
+
+Create a project for this activity called multiple_regression_intro. Copy the file "data_mr_ex.csv" into this project folder.
+
+## Load the data
+
+```{r,echo=TRUE,eval=TRUE, message=FALSE}
+library(tidyverse)
+library(janitor)
+
+my_data <- read_csv("data_mr_ex.csv")
+
+my_data <- my_data %>%
+  clean_names()
+```
+
+```{r}
+glimpse(my_data)
+```
+
+
+## Bivariate relations
+
+When you conduct multiple regression analyses you should always report a correlation matrix with all of your predictors and criterion.
+
+```{r}
+library(apaTables)
+
+apa.cor.table(my_data)
+
+```
+
+You should always check for curvilinear relations when reporting correlations. We do so with the code below. In this case we don't see any curvilinear relations.
+
+```{r}
+ggpairs(my_data)
+```
+
+
+## Single best predictor
+
+What is the best predictor of video_game? Just look at the correlation matrix above - no need for regression (or beta-weights). To use beta-weights to answer this question would be an error. Beta-weights only provide information about contribution to prediction in the context of a specific set of other predictors.
+
+In our current example, video_game_score is predicted by iq (*r* = .50) and age (*r* = -.30). The best predictor of video_game_score is iq because it has the strongest correlation (using absolute values .50 is larger than .30).
+
+
+## Multiple regression
+
+Multiple regression is most often use to ask two question:
+
+* how well we can predict the criterion using a set of predictors (see $R^2$)
+
+* what is the unique contribution of a single variable in a set or predictors. In other words, does one variable predict a criterion above and beyond another variable. For example, does study time predict exam grades above and beyond iq? Or phrased differently: Does study time predict unique variance in exam grades that is not accounted for by iq? (see $sr^2$ or $\beta$-weights).
+
+We want to use age and IQ to predict video game score ($Y$). More specifically, we want to combine age and IQ to create a new variable ($\widehat{Y}$) that correlates as highly as possible with video game score. 
+
+```{r,echo=TRUE,eval=TRUE}
+lm_object <- lm(video_game ~ age + iq,
+                    data = my_data)
+```
+
+Now look at the brief output:
+
+```{r,echo=TRUE,eval=TRUE}
+print(lm_object)
+```
+
+This output shows you how we combined age, IQ, and a constant to create ($\widehat{Y}$).
+
+More specifically:
+$\widehat{Y} = 102.233 - 0.0371(age) + 0.328(iq)$
+
+The slopes for age and iq are -0.0371 and 0.328, respecivtly. These are also referred to as the b-weights or unstandardized regression coefficients.
+
+$\widehat{Y}$ is the new variable we created from age and IQ. How well does it predict video game score? Said another way, overall how well can age and IQ predict video game scores? 
+
+A quick way to get more comprehensive regression output is to use the *apa.reg.table* function in the apaTables package.
+
+```{r,echo=TRUE,eval=TRUE}
+library(apaTables)
+
+apa.reg.table(lm_object,
+              filename = "table_regression.doc")
+```
+
+
+Take special note of the $R^2$ value. The $R^2$ value indicates how successful we were in predicting video game score ($Y$) using age and IQ. Said another way, the $R^2$ indicates how well $\widehat{Y}$ (created from age and IQ) predicts video game score. $R^2$ ranges from 0 to 1. In this case, the .29 value indicates that 29% of the variability in actual video game scores was predicted by a linear combination of age and iq (that we refer to as $\widehat{Y}$. 
+## $R$ and $R^2$
+
+**Correlating estimated criterion scores with actual criterion scores**
+
+What do predicted values represent? They are estimated values of video_game (i.e., $\widehat{Y}$) created by combining iq and age according to the regression equation. 
+
+Often people struggle to understand the what $R$ and $R^2$ represent. In general, the computer will calculate $R$ and $R^2$ for you. In this section we will calculate them in a different (impractical) way that will make it clear what is represented by these statistics.
+
+How well did age and iq predict video_game? One way to do this is to compare the predicted scores on the criterion ($\widehat{Y}$) with actual scores on the criterion ($Y$). That is, compare participants video_game values ($Y$) to predicted_values_video_game ($\widehat{Y}$); we do this with the correlation coefficient.
+
+We begin by obtaining predicted video game scores ($\widehat{Y}$)
+
+$\widehat{Y} = 102.233 + 0.3285(iq) - 0.3712(age)$
+
+predicted_video_game_scores  $= 102.233 + 0.3285(iq) - 0.3712(age)$
+
+```{r, echo=TRUE, eval=TRUE}
+predicted_video_game_scores  <- predict(lm_object)
+```
+
+Then we correlate predicted scores ($\widehat{Y}$) with actual video game scores ($Y$).
+
+```{r,echo=TRUE,eval=TRUE}
+R <- cor(predicted_video_game_scores , my_data$video_game)
+print(R)
+
+R2 <- R * R
+print(R2)
+```
+
+Compare the big_R2 value here to the $R^2$ value in the output from print(lm_object) above. You can see that they match. 
+
+What does the $R^2$ mean? It is the proportion variability in criterion scores ($Y$) accounted for by ($\widehat{Y}$). In other words, it is the proportion of the variability in criterion scores that can be accounted for by (a linear combination of) iq and age.
+
+This produces the same value as using the approach from the previous bivariate regression chapter in which:
+
+$$
+\begin{align}
+R^2 = \frac{\text{Variance of predicted scores}}{\text{Variance of actual scores}}
+\end{align}
+$$
+
+```{r}
+var_predicted_video_game_scores <- var(predicted_video_game_scores ) 
+var_actual_video_game_scores   <-  var(my_data$video_game)
+
+R2 <- var_predicted_video_game_scores / var_actual_video_game_scores
+
+print(R2)
+```
+
+Thus, 29% of the variability in video game scores is predicted by the combination of age and IQ.
+
+## Semi-partial ($sr$)
+
+Repeat APA output here there show summary() output for p-values and how to report sr2 values.
+Go back up and show how to report R2 values with CI-p-value etc.
+
+
+
+```{r,echo=TRUE,eval=FALSE}
+summary(lm_object)
+```
+In this output the \emph{b-weight} for each variable is presented under the column \emph{b}. These \emph{b-weights} are also called \emph{unstandardized regression weights}.
+
+The signficance of each variable is indicated with stars. If a predictor's b-weight has a star beside it in the b column, this indicates that the predictor contributes unique variance to $\widehat{Y}$ that can not be contributed by any of the other predictors. The amount of unique variance contributed by a predictor is indicated by $sr^2$ (semi-partial correlation squared) -- and we will calculate it below.
+
+We can more detailed output with specific p-values for each predictor using the command below:
+
+
+
+A semi-partial correlation is represented by the symbol $sr$ and correspondingly a squared semi-partial correlation is represented by the symbol $sr^2$. What is a squared semi-partial correlation and why is it useful?
+
+When an $R^2$ value is reported, it is often useful to know what part of it is accounted for uniquely by each variable in the equation. Another way of thinking about the unique contribution of each variable in the regression equation is by indicating what amount the $R^2$ would drop by if that variable was removed. This “drop” value indicates the unique contribution of the predictor.
+
+Semi-partial correlations are way of determining the unique contribution of a variable. The semi-partial correlation is the correlation of one predictor (with all the other predictors removed) with the criterion. The semi-partial correlation squared is the amount $R^2$ would drop by if that variable was removed from the regression.
+
+
+In the text below we go "inside the black box" to show you how semi-partial correlations are computed. In partice, they are just displayed in R output - but understanding the text below where we do calculate them "old school" will help with you interpretate $sr^2$.
+
+Overall, squared semi-partial correlations provide an index of how much that predictor contributes to the overall $R^2$ (with the effect of the other predictors removed). We calculate $sr^2$ for IQ (removing the effect of age) to demonstrate this fact. We do this with a regression equation in which we make IQ the criterion ($Y$). Then we predict IQ with age. The results is my_iq_regression which has inside of it $\widehat{Y}$, which in this case represents a best guess of IQ based on age. 
+
+```{r,echo=TRUE,eval=FALSE}
+my_iq_regression <- lm(iq ~ age, data = my_data)
+
+print(my_iq_regression)
+```
+.
+Thus, we find: $\widehat{Y_{iq}} = 124.763 - 0.506(age)$
+
+Consequently, when you see $\widehat{Y_{iq}}$ recognize that it is really just an estimate of IQ **created entirely from age**. In contrast, $Y_{iq}$ is the actual IQ score we obtained from participants.
+
+We want IQ with the effect of age removed. Therefore, we want IQ (i.e., $Y_{iq}$) with the effect of age (i.e.,$widehat{Y_{iq}}$ ) removed.
+
+Thus we want: residual = $Y_{iq}$ - $widehat{Y_{iq}}$
+
+or another way of thinking of it is:
+
+iq_without_age = $Y_{iq}$ - $widehat{Y_{iq}}$
+
+iq_without_age = iq - (124.763 - 0.506(age) )
+
+We do this below:
+```{r,echo=TRUE,eval=FALSE}
+iq_without_age <- resid(my_iq_regression) 
+```
+
+Then we correlate IQ without age (i.e., iq_without_age) with video game scores (i.e., video_game). This tells us how IQ correlates with video game scores when the effects of age have been removed from IQ; that is, the semi-partial correlation (i.e., $sr$).
+
+```{r,echo=TRUE,eval=FALSE}
+# apa.reg.table does this for you - this is for learning/illustration only.
+
+sr  <- cor(iq_without_age, my_data$video_game)
+sr2 <- sr * sr
+```
+
+
+
+### Compare the semi-partial correlation squared ($sr^2$) to the difference between $R^2$ between the two regressions below.
+
+```{r,echo=TRUE,eval=FALSE}
+# apa.reg.table does this for you - this is for learning/illustration only.
+
+block1 <- lm(video_game ~ age, data = my_data)
+block2 <- lm(video_game ~ age + iq, data = my_data)
+
+summary(block1)
+summary(block2)
+```
+
+Look at the $R^2$ in block1 (0.0898) and compare it to $R^2$ in block2 (0.291). The increase you see (approx .20) is the $sr^2$ (or $\Delta R^2$) for IQ.
+
+### Is the change in R2 (i.e., sr2) significant for iq?
+
+```{r,echo=TRUE,eval=FALSE}
+# apa.reg.table does this for you - this is for learning/illustration only.
+anova(block1, block2)
+```
+
+Think about this approach in detail. For block1, $R^2=0.0898$. For block2, $0.291$. The ANOVA tells us if this increase (approximately .20) was significant. 
+
+This approach helps us to understanding a lot about using regression. You conduct two regressions that differ by only one variable and see if the increase in variance by running the second regression is signficant. 
+
+Recall block1 and block2:
+
+```{r,echo=TRUE,eval=TRUE}
+block1 <- lm(video_game ~ age, data = my_data)
+block2 <- lm(video_game ~ age + iq, data = my_data)
+```
+Note that the increase in $R^2$ occured because we added IQ as a predictor. The increase in $R^2$ that resulted from adding IQ (.20) is the $sr^2$ value for IQ.  
+
+
+You can easily see this in the apa.reg.table output.
+
+
+
+```{r,echo=TRUE,eval=TRUE}
+apa.reg.table(block1, block2)
+```
+
+
+
+
+
+## Understanding *beta-weights*
+
+*Beta-weights* are often referred to as *standardized regression weights*. This is a poor description that makes beta weights hard to understand.  A better description of *beta-weights* is the regression weights for standardized variables (i.e., $M = 0$, $SD = 1$).
+
+### Calculate the beta-weights the fast way.
+
+```{r}
+head(my_data)
+
+reg_with_raw_variables <- lm(video_game ~ iq + age, data = my_data)
+```
+
+Check out the b-weights (not beta) in the estimate column:
+```{r}
+summary(reg_with_raw_variables)
+
+```
+
+
+
+Check out the b-weights and beta weights in table below. Notice the b-weights are the same as Estimates in the summary table above. Notice the beta weights are .46 and -.21 (and are not in the above table).
+
+
+
+```{r}
+apa.reg.table(reg_with_raw_variables)
+```
+
+
+
+
+
+### Calculate the beta-weights old school.
+
+
+```{r}
+# Create a z-score version of each predictor. 
+# The scale command remove the mean from each column then divides scores by the sd
+# That is, the scale command runs scores in a column through the z-score formula using M and SD for the column
+# The result is a column with a mean of zero and sd = 1.0
+my_data <- my_data %>% mutate(z_iq = scale(iq),
+                   z_age = scale(age),
+                   z_video_game = scale(video_game))
+
+# Confirm mean = 0 and sd = 1 (just for learning) for new columns (z_age, z_iq, z_video_game)
+psych::describe( as.data.frame(my_data) )
+
+# see the data
+head(my_data, 3)
+```
+
+
+Now we conduct the regression again with standardized variables (i.e., z-score versions).
+
+
+```{r}
+reg_with_standardized_variables <- lm(z_video_game ~ z_iq + z_age, data = my_data)
+summary(reg_with_standardized_variables) 
+```
+
+
+
+Notice that the estimates above are 4.582e-01 -2.070e-01 which are, in decimal form, .46 and -.21, respectively. These are the beta weights from the apa.reg.table on the previous page.
+
+For the *b-weights* (far above), describe how a 1 unit change in the IQ influences video_game
+
+For the beta-weights (here), describe how a 1 unit change in z_iq influences video_game. Keep in mind that 1 unit of z_iq (and z_video_game) is 1 standard deviation. So a beta-weight indicates how much the criterion scores will change (in SD units) with a 1 SD increase in the predictors.
+
+
+One name for beta-weights is *standardized weights* but it should be clear that it would better to describe beta-weights as the weights for standardized variables.
+
+
+
+# Predicted Scores: Confidence Intervals
+
+What if we wanted the predicted score for a person who is 43 years old and has an IQ of 130.
+In other words, is the estimated population mean video game score for 43 year olds with an IQ of 30?
+
+*What is the CI on that estimate?*
+
+```{r}
+x_axis_range <- data.frame(age = c(43), iq = c(130) )  
+
+
+CI_data <- predict(lm_object, 
+                   newdata = x_axis_range, 
+                   interval = "confidence", 
+                   level = 0.95)
+
+
+CI_data <- as.data.frame(cbind(x_axis_range, CI_data))
+
+
+print(CI_data)
+
+```
+
+
+# Predicted Scores: Prediction Intervals
+
+What if we wanted the predicted score for a person who is 43 years old and has an IQ of 130.
+In other words, is the estimated population mean video game score for 43 year olds with an IQ of 30?
+**What is the range of video game scores we can expect for 43 year-olds with an IQ of 130?**
+
+```{r}
+x_axis_range <- data.frame(age = c(43), iq = c(130) )  
+
+
+pi_data <- predict(lm_object, 
+                   newdata = x_axis_range, 
+                   interval = "prediction", 
+                   level = 0.95)
+
+
+pi_data <- as.data.frame(cbind(x_axis_range, pi_data))
+
+
+print(pi_data)
+
+```
+
+
