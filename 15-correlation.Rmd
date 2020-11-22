@@ -52,7 +52,7 @@ knitr::include_graphics("ch_correlation/images/tetris.png")
 
 
 
-Consider the following the scenario, we want to examine the relation between IQ and video games scores for people who live in the City of Guelph. Because we want to make conclusions about people who live in the City of Guelph we refer to this as our population. Next, imagine that we are actually able to get an IQ and a video game score for everyone in the City of Guelph (*N* = 100,000). That is we have data for everyone in the population.
+Consider the following the scenario, we want to examine the extent to which IQ predicts video games scores for people who live in the City of Guelph. We want to make conclusions about people who live in the City of Guelph so we refer to Guelph citizens as our population. Because we are interested in using IQ to predict video game score we refer to IQ as the **predictor**. The value being predicted is video game score and we refer to that variable as the **criterion** (i.e., the dependent variable). Imagine, for a moment, that we are actually able to get an IQ and a video game score for everyone in the City of Guelph (*N* = 100,000). 
 
 ### No predictor
 
@@ -65,7 +65,7 @@ We illustrate the range and variability of video game scores for everyone in the
 
 * Said another way, we want to explain, for this population, the variability in video game scores above/below the mean video game score.
 
-* Correlation/regression can never provide evidence of causation (or explanation) but we can use a correlation to find a pattern in our data that is consistent with a causal relation. Then we conduct a second **experimental** study to determine if their really is a causal relation.
+* Correlation/regression can never provide evidence of causation (or explanation) but we can use those analyses to find a pattern in our data that is consistent with a causal relation. Then we conduct a second **experimental** study to determine if their really is a causal relation.
 
 
 
@@ -86,7 +86,7 @@ pop_graph <- ggplot() +
   scale_y_continuous(breaks = seq(0, 2000, by = 200)) + 
   scale_x_continuous(breaks = seq(40, 160, by = 20)) +
   xlab("") +
-  ylab("Video Game Score") +
+  ylab("video game score") +
   theme_classic(18)
 
 
@@ -95,7 +95,7 @@ knitr::include_graphics("ch_correlation/images/pop_graph_arrow.png")
 ```
 
 
-Without a predictor variable, our best estimate of a person's video game score is the population mean. Moreover, without a predictor, we have the same estimate for everyone in the population - the mean video game score for the population. We have no way of creating an individualized estimate of someone's video game score.
+Without a predictor variable, our best estimate of a person's video game score is the population mean. Moreover, without a predictor, we have the same estimate for everyone in the population - the mean video game score for the population. We have no way of creating an individualized estimate of someone's video game score. The mean video game score is illustrated in the figure below with a horizontal green line.
 
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
@@ -124,10 +124,9 @@ knitr::include_graphics("ch_correlation/images/pop_graph_mean.png")
 
 ### Weak relation
 
-We can plot a variable (e.g., extraversion) against video score to see if there is a relation between the two. In this case there doesn't appear to be a relation. Indeed, this graph illustrates a $\rho = 0$ correlation between extraversion and video game scores. That is, there is no linear relation between extraversion and video game scores.
+We can plot a variable (e.g., extraversion) against video game score to see if there is a relation between the two. In this case there doesn't appear to be a relation. Indeed, this graph illustrates a zero correlation between extraversion and video game scores - the weakest possible relation for a predictor. Effectively, there is no linear relation between extraversion and video game scores.
 
-
-Below we place a horizontal line on the graph which indicates the mean Video Game Score. We also place a red best-fit line (i.e., regression line) on the graph; however, it is completely hidden by the black line representing the mean video game score. In this case, with these data, knowing a person's extraversion score **does not** allow us to provide an individualized estimate of a person's video game score. As a result, extraversion does not help us explain the variability in video game scores. That is, extraversion scores doesn't not allows us to explain why some people have high video game score whereas other people have low video game scores.
+As before, we place a horizontal green line on the graph to indicate the mean video game score. We also place a red regression line (i.e., best-fit line) on the graph; however, it is completely hidden by the green line representing the mean video game score. In this case, with these data, knowing a person's extraversion score **does not** allow us to provide an individualized estimate of a person's video game score. As a result, extraversion does not help us explain the variability in video game scores. That is, extraversion scores doesn't not allows us to explain why some people have high video game score whereas other people have low video game scores.
 
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
@@ -154,11 +153,24 @@ knitr::include_graphics("ch_correlation/images/pop_graph_extraversion_mean.png")
 
 ### Strong relation
 
-What if we were to try another variable -- like IQ? This illustrates a positive $\rho = .60$ correlation between IQ and video game score. That is, there is a linear relation between extraversion and video game scores and the strength of that linear relation is indexed by the population correlation $\rho = .60$. If there is a linear relation between two variables it simply indicate that the data cluster around a best-fit line when you draw it on the graph.
+What if we were to try another variable -- like IQ? The graph below illustrates a positive linear relation between IQ and video game score. As before, we place a green horizontal line on the graph to indicate the population mean. Additionally, we place a red regression line (i.e., a best-fit line) on the graph. This regression line represents an individualized estimate of video game score for each person based on their IQ. The population-level regression line has the slope 8.00; which indicate that as IQ increase by 1.0 point video game score increases by 8.00 points. The equation for the regression line is:
 
-As before, we place a black horizontal line of the graph to indicate the population mean. Additionally, we place the a red regression line (i.e., a best-fit line) on the graph. This regression line represents an individualized estimate of video game score for each person based on their IQ. You can see that for some people the individualized estimate of video game score (i.e., the y-axis position of the red line) is higher than the population mean. That is, in some cases the red regression is line is higher than the black mean line. For other people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is lower than the population mean. That is, in some cases the red regression is line is low than the black mean line. Overall, because the individualized estimates differ  from the population mean - we can suggest a reason why video game scores vary. Specifically, it appears that individuals with a high IQ tend to have a high video game scores whereas individuals with a low IQ tend of have a low video game score.
-Later we see how to calculate $R^2$ which indexes the extent which the individualized estimate of video game score (i.e., the regression line) predict video game score above and beyond the population mean.
+$$
+\begin{align}
+\widehat{score} &= 8.00(IQ) + 200.31
+\end{align}
+$$
 
+Or using the more generic X/Y notation:
+
+$$
+\begin{align}
+\hat{Y} &= 8.00(X) + 200.31 \\
+\end{align}
+$$
+
+
+You can see in the graph below that for some people the individualized estimate of video game score (i.e., the y-axis position of the red line) is higher than the population mean. That is, in some cases the red regression is line is higher than the green mean line. For other people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is lower than the population mean. That is, in some cases the red regression is line is lower than the green mean line. It appears that individuals with a high IQ tend to have a high video game scores whereas individuals with a low IQ tend of have a low video game score. The regression line provides more nuanced estimates for individuals than you can obtain by simply using the same estimation (i.e., the mean) for everyone.
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
 pop_graph <- ggplot() + 
@@ -181,8 +193,10 @@ ggsave("ch_correlation/images/pop_graph_iq_line.png", pop_graph, width = fig_wid
 knitr::include_graphics("ch_correlation/images/pop_graph_iq_line.png")
 ```
 
-In the above diagram we illustrate the population-level correlation ($\rho$) and population-level slope of the regression line. Cohen (1988) suggest the effect size labels below. These effect size labels should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
 
+But how good is this model of the data? There are a variety of way of assessing model fit. We present two below. First, when you are only concerned about how well a single predictor performs, as is the case here, you can use a correlation. The symbol for the population correlation is $\rho$. In these data, $\rho = .60$. The correlation coefficient can range from -1 to 1. The further the correlation is from zero - the stronger the relation between the predictor and the criterion. That is, the better a linear model fits the data the further the correlation will be from zero. A positive correlation indicates that as one variable increases the other variable also increases. A negative correlation indicates that as one variable increases the other variable decreases.
+
+Cohen's benchmarks are below:
 
 |  Cohen (1988) Label  | Value        |
 |             :-: |  :-:         | 
@@ -190,10 +204,30 @@ In the above diagram we illustrate the population-level correlation ($\rho$) and
 | Medium          | $\rho$ = .30 |
 | Large           | $\rho$ = .50 |
 
+An alternative, and more general, means of assessing the quality of statistical model is to use $R^2$. This index the proportion of video game scores that is accounted for by a statistical model. One important attribute of $R^2$ is that can be used when there are multiple predictors.  When there is only one predictor, $R^2$ is simple the correlation squared. Thus, at the population level, **when there is only one predictor**:
+
+$$
+\begin{align}
+R^2  = \rho^2
+\end{align}
+$$
+
+
+To summarize, the population-level values (i.e., parameters):
+
+* Slope = 8.00
+
+* $\rho = .60$
+
+* $R^2 = .36$
+
+
+In the next section we use sample-level data to estimate these population-level value.
+
 
 ## Consider a sample
 
-Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. We always need to remember the sample correlation ($r$) only provides an estimate of the population correlation ($\rho$). The sample estimate ($r$) might be "off a bit/a lot" from the population correlation ($\rho$) due to sampling error
+Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. We always need to remember the sample correlation ($r$) only provides an estimate of the population correlation ($\rho$). Likewise, the sample slope is merely an estimate of the population slope. Sample estimates are likely to differ from population parameters due to sampling error
 
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
