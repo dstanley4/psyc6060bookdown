@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2020-11-21" />
+<meta name="date" content="2020-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -601,7 +601,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>An alternative, and more general, means of assessing the quality of statistical model is to use <span class="math inline">\(R^2\)</span>. This index the proportion of video game scores that is accounted for by a statistical model. One important attribute of <span class="math inline">\(R^2\)</span> is that can be used when there are multiple predictors. When there is only one predictor, <span class="math inline">\(R^2\)</span> is simple the correlation squared. Thus, at the population level, <strong>when there is only one predictor</strong>:</p>
+<p>An alternative, and more general, means of assessing the quality of statistical model is to use <span class="math inline">\(R^2\)</span>. This indexes the proportion of video game scores that are accounted for by a statistical model. One important attribute of <span class="math inline">\(R^2\)</span> is that can be used when there are multiple predictors. When there is only one predictor, <span class="math inline">\(R^2\)</span> is simple the correlation squared. Thus, at the population level, <strong>when there is only one predictor</strong>:</p>
 <p><span class="math display">\[
 \begin{align}
 R^2  = \rho^2
@@ -613,7 +613,7 @@ R^2  = \rho^2
 <li><p><span class="math inline">\(\rho = .60\)</span></p></li>
 <li><p><span class="math inline">\(R^2 = .36\)</span></p></li>
 </ul>
-<p>In the next section we use sample-level data to estimate these population-level value.</p>
+<p>In the next section we use sample-level data to estimate these population-level values.</p>
 </div>
 </div>
 <div id="consider-a-sample" class="section level2">
@@ -621,7 +621,7 @@ R^2  = \rho^2
 <p>Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. In the figure below there are 100,000 blue dots - each dot represents an individual in the population. Additionally, there are also 9 black dots. These black dots are a random subset of the population – our sample. We will use the data from our sample (i.e., the 9 black dots) to estimate the slope, correlation, and <span class="math inline">\(R^2\)</span> for the population (i.e., the 100,000 blue dots).</p>
 <p><img src="ch_correlation/images/pop_sample_graph.png" width="70%" /></p>
 <p>We always need to remember the values calculated from our sample (statistics) are only estimates of the population-level parameters; estimates that are likely are likely to differ from population parameters due to sampling error.</p>
-<p>Let’s look at our sample in more detail. Notice, in the figure below, that there is one plotted (<span class="math inline">\(X_i\)</span>,<span class="math inline">\(Y_i\)</span>) data point for each of the 9 people. We illustrate the mean video game score of the 9 people with the horizontal green line.</p>
+<p>Let’s look at our sample in more detail. Notice, in the figure below, that there is one plotted (<span class="math inline">\(X_i\)</span>, <span class="math inline">\(Y_i\)</span>) data point for each of the 9 people. We illustrate the mean video game score of the 9 people with the horizontal green line.</p>
 <p><img src="ch_correlation/images/sample_plot1.png" width="80%" /></p>
 <p>We can calculate the variance of the video game scores using the formula below.</p>
 <p><span class="math display">\[
@@ -637,9 +637,31 @@ SS_{Total} = \sum{(Y_i - \bar{Y})^2}
 \]</span></p>
 <p>The values used in the <strong>Sum of Squares Total</strong> calculation are illustrated in the figure below. The vertical blue line indicates the difference between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of the <strong>actual</strong> video game scores around the sample mean.</p>
 <p><img src="ch_correlation/images/sample_plot2.png" width="80%" /></p>
-<p>In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the (<span class="math inline">\(\bar{X}\)</span>,<span class="math inline">\(\bar{Y}\)</span>) point).</p>
+<p>In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the [<span class="math inline">\(\bar{X}\)</span>, <span class="math inline">\(\bar{Y}\)</span>] point).</p>
 <p><img src="ch_correlation/images/sample_plot3.png" width="80%" /></p>
-<p>Recall that the regression line represents an individualized estimate of each person’s video game score derived from their IQ (via the regression equation). You can see in the graph below that each person is represented by a blue dot. The estimate of each person’s video game score, <span class="math inline">\(\hat{Y_i}\)</span>, derived from the regression equation, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate, for each person (i.e., blue dot, <span class="math inline">\(Y_i\)</span>), the estimate of their video game score (i.e., red dot, <span class="math inline">\(\hat{Y_i}\)</span>).</p>
+<p>Recall that the regression line represents an individualized estimate of each person’s video game score derived from their IQ (via the regression equation). Later we will show you how to calculate the regression line. For now, accept that the regression equation for the sample in standard notation is:</p>
+<p><span class="math display">\[
+\begin{align}
+\hat{Y_i} &amp;= 9.44(X_i) -21.21 \\
+\end{align}
+\]</span>
+And contextualized to the variable names is:</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{score_i} &amp;= 9.44(IQ_i) -21.21
+\end{align}
+\]</span></p>
+<p>Therefore, the predicted value for Jane is:</p>
+<p><span class="math display">\[
+\begin{align}
+\widehat{score_i} &amp;= 9.44(IQ_i) -21.21 \\
+&amp;= 9.44(71) - 21.21 \\
+&amp;= 649 \text{(rounded)} \\
+\end{align}
+\]</span>
+You can see this calculation for everyone in the sample:</p>
+<p><img src="ch_correlation/images/yhat_data.png" width="490" /></p>
+<p>In the graph below each person is represented by a blue dot. The estimate of each person’s video game score, <span class="math inline">\(\hat{Y_i}\)</span>, derived from the regression equation, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate, for each person (i.e., blue dot, <span class="math inline">\(Y_i\)</span>), the estimate of their video game score (i.e., red dot, <span class="math inline">\(\hat{Y_i}\)</span>).</p>
 <p><img src="ch_correlation/images/sample_plot4.png" width="80%" /></p>
 <p>We can calculate the extent to which individualized estimates are better than the sample mean for modeling the data. That is, we can calculate the extent to which the regression line is better at modelling the data than the mean line. We do so by calculating the extent to which the individualized estimates on the regression line differ from the sample mean. This is done with the calculation below for the <strong>Sum of Squares Regression</strong>.</p>
 <p><span class="math display">\[
@@ -647,9 +669,9 @@ SS_{Total} = \sum{(Y_i - \bar{Y})^2}
 SS_{Regression} = \sum{(\hat{Y_i} - \bar{Y})^2}
 \end{align}
 \]</span>
-The values used in the <strong>Sum of Squares Regression</strong> calculation are illustrated in the figure below. The vertical red line indicates the difference between <span class="math inline">\(\bar{Y_i}\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Regression}\)</span> value indexes the variability of the <strong>estimates</strong> of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the <span class="math inline">\((\hat{Y_i} - \bar{Y})\)</span> difference) the better the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.</p>
+The values used in the <strong>Sum of Squares Regression</strong> calculation are illustrated in the figure below. The vertical red line indicates the difference between <span class="math inline">\(\hat{Y_i}\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Regression}\)</span> value indexes the variability of the <strong>estimates</strong> of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the <span class="math inline">\((\hat{Y_i} - \bar{Y})\)</span> difference) the better the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.</p>
 <p><img src="ch_correlation/images/sample_plot5.png" width="80%" /></p>
-<p>So far we have calculated two values, <span class="math inline">\(SS_{Regression}\)</span> and <span class="math inline">\(SS_{Total}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of <strong>actual</strong> video game scores about the sample mean (it’s the numerator for the variance calculation). In contrast, <span class="math inline">\(SS_{Regression}\)</span> indexes the variability of <strong>estimated</strong> video game scores about the sample mean. We can calculate the proportion of the variability in actual score accounted for the statistical model using <span class="math inline">\(R^2\)</span>.</p>
+<p>So far we have calculated two values, <span class="math inline">\(SS_{Regression}\)</span> and <span class="math inline">\(SS_{Total}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of <strong>actual</strong> video game scores about the sample mean (it’s the numerator for the variance calculation). In contrast, <span class="math inline">\(SS_{Regression}\)</span> indexes the variability of <strong>estimated</strong> video game scores about the sample mean. We can calculate the proportion of the variability in actual scores accounted for the statistical model (i.e., regression line) using <span class="math inline">\(R^2\)</span>:</p>
 <p><span class="math display">\[
 \begin{align}
 R^2 = \frac{SS_{Regression}}{SS_{Total}}
