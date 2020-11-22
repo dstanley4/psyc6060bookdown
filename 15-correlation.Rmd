@@ -227,8 +227,7 @@ In the next section we use sample-level data to estimate these population-level 
 
 ## Consider a sample
 
-Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. We always need to remember the sample correlation ($r$) only provides an estimate of the population correlation ($\rho$). Likewise, the sample slope is merely an estimate of the population slope. Sample estimates are likely to differ from population parameters due to sampling error
-
+Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. In the figure below there are 100,000 blue dots - each dot represents an individual in the population. Additionally, there are also 9 black dots. These black dots are a random subset of the population -- our sample. We will use the data from our sample (i.e., the 9 black dots) to estimate the slope, correlation, and $R^2$ for the population (i.e., the 100,000 blue dots).
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
 sample_mean_video_game <- mean(sample_data$video_game)
@@ -326,8 +325,10 @@ ggsave("ch_correlation/images/vplot5.png", var_plot5, width = fig_width, height 
 
 ```
 
+We always need to remember the values calculated from our sample (statistics) are only estimates of the population-level parameters; estimates that are likely are likely to differ from population parameters due to sampling error.
 
-We can look at just the sample data. Notice, in the figure below, that there is one plotted ($X_i$,$Y_i$) data point for each person.  As well we illustrate the sample mean with a horizontal green line.
+Let's look at our sample in more detail. Notice, in the figure below, that there is one plotted ($X_i$,$Y_i$) data point for each of the 9 people. We illustrate the mean video game score of the 9 people with the horizontal green line.
+
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_correlation/images/sample_plot1.png")
