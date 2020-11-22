@@ -475,13 +475,14 @@ rout <- cor.test(sample_data$iq, sample_data$video_game,
 
 From this output we extract the numbers below in APA reporting style:
 
-$r$ = `r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$estimate))`, 95% CI[`r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$conf.int[1]))`, `r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$conf.int[2]))`], $p$ = `r apaTables:::strip.leading.zero(sprintf("%1.3f", rout$p.value))`, *N* = `r n`
+There was a positive relation between IQ and video game score, such that as IQ increased, so did video game score, $r$ = `r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$estimate))`, 95% CI[`r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$conf.int[1]))`, `r apaTables:::strip.leading.zero(sprintf("%1.2f", rout$conf.int[2]))`], $p$ = `r apaTables:::strip.leading.zero(sprintf("%1.3f", rout$p.value))`, *N* = `r n`.
 
 ### Graphing
 
-The scatter plot was made with the code below:
+A scatter plot can be made code below:
 
-```{r., eval = FALSE}
+```{r, eval = FALSE}
+
 my_plot <- ggplot(data = sample_data, 
                   mapping = aes(x = iq, y = video_game)) + 
   geom_point(color = "blue", size = 4) +
@@ -490,6 +491,7 @@ my_plot <- ggplot(data = sample_data,
   scale_x_continuous(breaks = seq(70, 140, by = 20)) +
   labs(x = "IQ", y = "Video Game Score") +
   theme_classic(24)
+
 ```
 
 ## Comparing correlations
@@ -547,12 +549,40 @@ cor(bfi, use = "pairwise.complete.obs") %>%
 
 Or you could use apaTable apa.cor.table() command:
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 library(apaTables)
-apa.cor.table(bfi)
+
+apa.cor.table(bfi,
+              table.number = 1,
+              filename = "table_1_bfi.doc")
+
 ```
 
-If you do this on your own computer you will see that the correlation between a1 and c1 with rounding is *r* =  .03. Likewise, the correlation between e1 and o1 with rounding is *r* = -.10.
+```{r, echo=FALSE, out.width = "80%"}
+library(apaTables)
+knitr::include_graphics("ch_correlation/images/table1_bfi.png")
+```
+
+
+Inspecting the above table you see that the correlation between a1 and c1 with is *r* =  .03, 95% CI [-.01, .07]. Likewise, the correlation between e1 and o1 is *r* = -.10, 95% CI [-.14, -.06].
+
+
+### p-values
+
+The code below obtains the *p*-value for the a1/c1 relation - a value of .144.
+```{r}
+cor.test(bfi$a1, bfi$c1)
+```
+
+The code below obtains the *p*-value for the e1/o1 relation - a value sufficiently small we report it as $p$ < .001
+
+```{r}
+cor.test(bfi$e1, bfi$o1)
+```
+With *p*-values in hand we can write this up as:
+
+Inspecting the above table you see that the correlation between a1 and c1 with is *r* =  .03, 95% CI [-.01, .07], *p* = .144. Likewise, the correlation between e1 and o1 is *r* = -.10, 95% CI [-.14, -.06], *p* < .001.
+
 
 ### Within a data set
 
@@ -562,8 +592,7 @@ In this section we look at comparing correlation within a single data set.
 
 We will compare the correlation to between (a1, c1) to the correlation between (e1, o1) with the cocor package. In this case, because neither of the variables in the first correlation (a1, c1) are in the second correlation (e1, o1) we refer to this as a non-overlapping correlation comparison.
 
-The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007).
-But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (e1, o1) = -0.1002. As well it also shows us the difference between them, Difference: r.jk - r.hm = 0.1278.
+The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (e1, o1) = -0.1002 (these are the .03 and -.10 values prior to rounding). As well it also shows us the difference between them, Difference: r.jk - r.hm = 0.1278.
 
 ```{r}
 library(cocor)
@@ -572,7 +601,10 @@ cocor( ~ a1 + c1 | e1 + o1, data = as.data.frame(bfi))
 ```
 
 
-We could  write this as $\Delta$*r* = .13, 95% CI [.07, .18]. We could also add the *p*-value from silver2004. In this case we would write this as $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
+
+We could  write this as:
+
+There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, *r* =  .03, 95% CI [-.01, .07], *p* = .144. In contrast, there was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, *r* = -.10, 95% CI [-.14, -.06], *p* < .001. The difference between these two correlations was significant, $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
 
 
 #### Overlapping correlations
