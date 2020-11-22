@@ -609,17 +609,18 @@ R^2  = \rho^2
 <p>To summarize, the population-level values (i.e., parameters):</p>
 <ul>
 <li><p>Slope = 8.00</p></li>
-<li><p><span class="math inline">\(\rho = .60\)</span>.</p></li>
-<li><p><span class="math inline">\(R^2 = .36\)</span>.</p></li>
+<li><p><span class="math inline">\(\rho = .60\)</span></p></li>
+<li><p><span class="math inline">\(R^2 = .36\)</span></p></li>
 </ul>
 <p>In the next section we use sample-level data to estimate these population-level value.</p>
 </div>
 </div>
 <div id="consider-a-sample" class="section level2">
 <h2><span class="header-section-number">15.2</span> Consider a sample</h2>
-<p>Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. We always need to remember the sample correlation (<span class="math inline">\(r\)</span>) only provides an estimate of the population correlation (<span class="math inline">\(\rho\)</span>). Likewise, the sample slope is merely an estimate of the population slope. Sample estimates are likely to differ from population parameters due to sampling error</p>
+<p>Unfortunately, we never/rarely have data for everyone in the population (in this example everyone in the City of Guelph). Consequently, we usually have to select a subset of the population as a sample and use sample data for our analyses. In the figure below there are 100,000 blue dots - each dot represents an individual in the population. Additionally, there are also 9 black dots. These black dots are a random subset of the population – our sample. We will use the data from our sample (i.e., the 9 black dots) to estimate the slope, correlation, and <span class="math inline">\(R^2\)</span> for the population (i.e., the 100,000 blue dots).</p>
 <p><img src="ch_correlation/images/pop_sample_graph.png" width="70%" /></p>
-<p>We can look at just the sample data. Notice, in the figure below, that there is one plotted (<span class="math inline">\(X_i\)</span>,<span class="math inline">\(Y_i\)</span>) data point for each person. As well we illustrate the sample mean with a horizontal green line.</p>
+<p>We always need to remember the values calculated from our sample (statistics) are only estimates of the population-level parameters; estimates that are likely are likely to differ from population parameters due to sampling error.</p>
+<p>Let’s look at our sample in more detail. Notice, in the figure below, that there is one plotted (<span class="math inline">\(X_i\)</span>,<span class="math inline">\(Y_i\)</span>) data point for each of the 9 people. We illustrate the mean video game score of the 9 people with the horizontal green line.</p>
 <p><img src="ch_correlation/images/sample_plot1.png" width="80%" /></p>
 <p>We can calculate the variance of the video game scores using the formula below.</p>
 <p><span class="math display">\[
@@ -633,21 +634,21 @@ It’s often useful to just focus on the numerator of this equation. We call thi
 SS_{Total} = \sum{(Y_i - \bar{Y})^2}
 \end{align}
 \]</span></p>
-<p>The values used in the numerator of the <strong>Sum of Squares Total</strong> calculation are illustrated in the figure below. The vertical blue line indicates the difference between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of the <strong>actual</strong> video game scores around the sample mean.</p>
+<p>The values used in the <strong>Sum of Squares Total</strong> calculation are illustrated in the figure below. The vertical blue line indicates the difference between <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of the <strong>actual</strong> video game scores around the sample mean.</p>
 <p><img src="ch_correlation/images/sample_plot2.png" width="80%" /></p>
-<p>In the figure below we add the regression line in red. The regression line is a model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the (<span class="math inline">\(\bar{X}\)</span>,<span class="math inline">\(\bar{Y}\)</span>) point).</p>
+<p>In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the (<span class="math inline">\(\bar{X}\)</span>,<span class="math inline">\(\bar{Y}\)</span>) point).</p>
 <p><img src="ch_correlation/images/sample_plot3.png" width="80%" /></p>
-<p>Recall that the regression line represents and individualized estimate of each person’s video game score derived from their IQ. You can see in the graph below that each person is represented by a blue dot. The estimate of each person’s video game score, <span class="math inline">\(\hat{Y_i}\)</span>, derived from the regression, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate for each person (i.e., blue dot, <span class="math inline">\(Y_i\)</span>) the corresponding estimate of their video game score (i.e., red dot, <span class="math inline">\(\hat{Y_i}\)</span>).</p>
+<p>Recall that the regression line represents an individualized estimate of each person’s video game score derived from their IQ (via the regression equation). You can see in the graph below that each person is represented by a blue dot. The estimate of each person’s video game score, <span class="math inline">\(\hat{Y_i}\)</span>, derived from the regression equation, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate, for each person (i.e., blue dot, <span class="math inline">\(Y_i\)</span>), the estimate of their video game score (i.e., red dot, <span class="math inline">\(\hat{Y_i}\)</span>).</p>
 <p><img src="ch_correlation/images/sample_plot4.png" width="80%" /></p>
-<p>The regression line allows us to make an individualized estimate of the video game score for each person, <span class="math inline">\(\hat{Y_i}\)</span>, based on our regression equation. We can calculate the extent to which individualized estimates are better than the sample mean in terms of modeling the data. We begin by calculating the extent to which the individualized estimates differ from the sample mean. This is done with the calculation below.</p>
+<p>We can calculate the extent to which individualized estimates are better than the sample mean for modeling the data. That is, we can calculate the extent to which the regression line is better at modelling the data than the mean line. We do so by calculating the extent to which the individualized estimates on the regression line differ from the sample mean. This is done with the calculation below for the <strong>Sum of Squares Regression</strong>.</p>
 <p><span class="math display">\[
 \begin{align}
 SS_{Regression} = \sum{(\hat{Y_i} - \bar{Y})^2}
 \end{align}
 \]</span>
-The values used in the numerator of the <strong>Sum of Squares Regression</strong> calculation are illustrated in the figure below. The vertical red line indicates the difference between <span class="math inline">\(\bar{Y_i}\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Regression}\)</span> value indexes the variability of the <strong>estimates</strong> of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the <span class="math inline">\((\hat{Y_i} - \bar{Y})\)</span> difference) the better the model. The length of the vertical red line is an index of the variability in scores accounted for by the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.</p>
+The values used in the <strong>Sum of Squares Regression</strong> calculation are illustrated in the figure below. The vertical red line indicates the difference between <span class="math inline">\(\bar{Y_i}\)</span> and <span class="math inline">\(\bar{Y}\)</span>. The <span class="math inline">\(SS_{Regression}\)</span> value indexes the variability of the <strong>estimates</strong> of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the <span class="math inline">\((\hat{Y_i} - \bar{Y})\)</span> difference) the better the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.</p>
 <p><img src="ch_correlation/images/sample_plot5.png" width="80%" /></p>
-<p>So far we have calculated two values, <span class="math inline">\(SS_{Regression}\)</span> and <span class="math inline">\(SS_{Total}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of <strong>actual</strong> video game scores about the sample mean. In contrast, <span class="math inline">\(SS_{Regression}\)</span> indexes the variability of <strong>estimated</strong> video game scores about the sample mean. We can calculate the proportion of the variability in actual score accounted for the statistical model using <span class="math inline">\(R^2\)</span>.</p>
+<p>So far we have calculated two values, <span class="math inline">\(SS_{Regression}\)</span> and <span class="math inline">\(SS_{Total}\)</span>. The <span class="math inline">\(SS_{Total}\)</span> value indexes the variability of <strong>actual</strong> video game scores about the sample mean (it’s the numerator for the variance calculation). In contrast, <span class="math inline">\(SS_{Regression}\)</span> indexes the variability of <strong>estimated</strong> video game scores about the sample mean. We can calculate the proportion of the variability in actual score accounted for the statistical model using <span class="math inline">\(R^2\)</span>.</p>
 <p><span class="math display">\[
 \begin{align}
 R^2 = \frac{SS_{Regression}}{SS_{Total}}
@@ -655,7 +656,7 @@ R^2 = \frac{SS_{Regression}}{SS_{Total}}
 \]</span></p>
 <div id="regression" class="section level3">
 <h3><span class="header-section-number">15.2.1</span> Regression</h3>
-<p>We can obtain the regression model (i.e.. linear model or lm) using the command below:</p>
+<p>Let’s obtain the actual value for <span class="math inline">\(R^2\)</span>, as well as the slope, using R. We can obtain the regression model (i.e.. linear model or lm) using the command below:</p>
 <div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="regression-and-correlation.html#cb577-1"></a>lm_object &lt;-<span class="st"> </span><span class="kw">lm</span>(video_game <span class="op">~</span><span class="st"> </span>iq,</span>
 <span id="cb577-2"><a href="regression-and-correlation.html#cb577-2"></a>                <span class="dt">data =</span> sample_data)</span></code></pre></div>
 <p>We display the result using apaTables:</p>
@@ -666,7 +667,7 @@ R^2 = \frac{SS_{Regression}}{SS_{Total}}
 <span id="cb578-5"><a href="regression-and-correlation.html#cb578-5"></a>              <span class="dt">filename =</span> <span class="st">&quot;regression_table.doc&quot;</span>)</span></code></pre></div>
 <p>Which produces the output:</p>
 <p><img src="ch_correlation/images/regression_output.png" width="1018" /></p>
-<p>If we examine the fit column on the far right we see the <span class="math inline">\(R^2\)</span> value is .74 indicating the 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line).</p>
+<p>If we examine the fit column on the far right we see the <span class="math inline">\(R^2\)</span> = .74, 95% CI [.17, .86]. This indicates that in this sample, 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line). The confidence interval suggests a plausible range of values for the <span class="math inline">\(R^2\)</span> at the population-level is .17 to .86. Notice that this range captures that population-level <span class="math inline">\(R^2\)</span> of .36 that we calculated from the entire population previously.</p>
 <p><span class="math display">\[
 \begin{align}
 R^2 &amp;= .736 = .74\\\\ 
@@ -679,7 +680,8 @@ R^2 &amp;= .736 = .74\\\\
 \widehat{score_i} &amp;= 9.44(IQ) -21.21
 \end{align}
 \]</span></p>
-<p>This tells use the slope in our sample is 9.44. That is, in the sample, each IQ point is associated with an additional 9.44 points in the video game. The population regression line might have a smaller/larger slope. The 95% confidence intervals tells us that a plausible range of values for the slope of the regression line at the population-level is 4.39 to 14.50. Additional regression details are provided with the command below.</p>
+<p>This tells use the slope in our sample is 9.44, 95% CI [4.39, 14.50]. That is, in the sample, each IQ point is associated with an additional 9.44 points in the video game. The population regression line might have a smaller/larger slope. The 95% confidence intervals tells us that a plausible range of values for the slope of the regression line at the population-level is 4.39 to 14.50. Notice that this range captures that population-level slope of 8.00 that we calculated from the entire population previously.</p>
+<p>Additional regression details are provided with the command below.</p>
 <div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb579-1"><a href="regression-and-correlation.html#cb579-1"></a><span class="kw">summary</span>(lm_object)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -700,7 +702,6 @@ R^2 &amp;= .736 = .74\\\\
 ## Residual standard error: 130 on 7 degrees of freedom
 ## Multiple R-squared:  0.736,  Adjusted R-squared:  0.698 
 ## F-statistic: 19.5 on 1 and 7 DF,  p-value: 0.00309</code></pre>
-<p>You can also see the <span class="math inline">\(R^2\)</span> = .74 at the bottom of this additional output.</p>
 </div>
 <div id="correlation-2" class="section level3">
 <h3><span class="header-section-number">15.2.2</span> Correlation</h3>

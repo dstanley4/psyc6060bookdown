@@ -351,27 +351,27 @@ SS_{Total} = \sum{(Y_i - \bar{Y})^2}
 $$
 
 
-The values used in the numerator of the **Sum of Squares Total** calculation are illustrated in the figure below. The vertical blue line indicates the difference between $Y_i$ and $\bar{Y}$. The $SS_{Total}$ value indexes the variability of the **actual** video game scores around the sample mean.
+The values used in the **Sum of Squares Total** calculation are illustrated in the figure below. The vertical blue line indicates the difference between $Y_i$ and $\bar{Y}$. The $SS_{Total}$ value indexes the variability of the **actual** video game scores around the sample mean.
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_correlation/images/sample_plot2.png")
 ```
 
 
-In the figure below we add the regression line in red. The regression line is a model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the ($\bar{X}$,$\bar{Y}$) point).
+In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the ($\bar{X}$,$\bar{Y}$) point).
 
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_correlation/images/sample_plot3.png")
 ```
 
-Recall that the regression line represents and individualized estimate of each person's video game score derived from their IQ. You can see in the graph below that each person is represented by a blue dot. The estimate of each person's video game score, $\hat{Y_i}$, derived from the regression, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate for each person (i.e., blue dot, $Y_i$) the corresponding estimate of their video game score (i.e., red dot, $\hat{Y_i}$).
+Recall that the regression line represents an individualized estimate of each person's video game score derived from their IQ (via the regression equation). You can see in the graph below that each person is represented by a blue dot. The estimate of each person's video game score, $\hat{Y_i}$, derived from the regression equation, is indicated by a red dot on the red regression line. The vertical blue lines are used to indicate, for each person (i.e., blue dot, $Y_i$), the estimate of their video game score (i.e., red dot, $\hat{Y_i}$).
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_correlation/images/sample_plot4.png")
 ```
 
-The regression line allows us to make an individualized estimate of the video game score for each person, $\hat{Y_i}$, based on our regression equation. We can calculate the extent to which individualized estimates are better than the sample mean in terms of modeling the data. We begin by calculating the extent to which the individualized estimates differ from the sample mean. This is done with the calculation below.
+We can calculate the extent to which individualized estimates are better than the sample mean for modeling the data. That is, we can calculate the extent to which the regression line is better at modelling the data than the mean line. We do so by calculating the extent to which the individualized estimates on the regression line differ from the sample mean. This is done with the calculation below for the **Sum of Squares Regression**.
 
 
 $$
@@ -379,7 +379,7 @@ $$
 SS_{Regression} = \sum{(\hat{Y_i} - \bar{Y})^2}
 \end{align}
 $$
-The values used in the numerator of the **Sum of Squares Regression** calculation are illustrated in the figure below. The vertical red line indicates the difference between $\bar{Y_i}$ and $\bar{Y}$. The $SS_{Regression}$ value indexes the variability of the **estimates** of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the $(\hat{Y_i} - \bar{Y})$ difference) the better the model. The length of the vertical red line is an index of the variability in scores accounted for by the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.
+The values used in the  **Sum of Squares Regression** calculation are illustrated in the figure below. The vertical red line indicates the difference between $\bar{Y_i}$ and $\bar{Y}$. The $SS_{Regression}$ value indexes the variability of the **estimates** of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the $(\hat{Y_i} - \bar{Y})$ difference) the better the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.
 
 
 ```{r, echo = FALSE, out.width="80%"}
@@ -387,7 +387,7 @@ knitr::include_graphics("ch_correlation/images/sample_plot5.png")
 ```
 
 
-So far we have calculated two values, $SS_{Regression}$ and $SS_{Total}$. The $SS_{Total}$ value indexes the variability of **actual** video game scores about the sample mean. In contrast, $SS_{Regression}$ indexes the variability of **estimated** video game scores about the sample mean. We can calculate the proportion of the variability in actual score accounted for the statistical model using $R^2$.
+So far we have calculated two values, $SS_{Regression}$ and $SS_{Total}$. The $SS_{Total}$ value indexes the variability of **actual** video game scores about the sample mean (it's the numerator for the variance calculation). In contrast, $SS_{Regression}$ indexes the variability of **estimated** video game scores about the sample mean. We can calculate the proportion of the variability in actual score accounted for the statistical model using $R^2$.
 
 $$
 \begin{align}
@@ -397,7 +397,7 @@ $$
 
 ### Regression
 
-We can obtain the regression model (i.e.. linear model or lm) using the command below:
+Let's obtain the actual value for $R^2$, as well as the slope, using R. We can obtain the regression model (i.e.. linear model or lm) using the command below:
 
 ```{r}
 lm_object <- lm(video_game ~ iq,
@@ -420,7 +420,7 @@ Which produces the output:
 knitr::include_graphics("ch_correlation/images/regression_output.png")
 ```
 
-If we examine the fit column on the far right we see the $R^2$ value is .74 indicating the 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line).
+If we examine the fit column on the far right we see the $R^2$ = .74, 95% CI [.17, .86]. This indicates that in this sample, 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line). The confidence interval suggests a plausible range of values for the $R^2$ at the population-level is .17 to .86. Notice that this range captures that population-level $R^2$ of .36 that we calculated from the entire population previously.
 
 $$
 \begin{align}
@@ -437,19 +437,19 @@ $$
 \end{align}
 $$
 
-This tells use the slope in our sample is 9.44. That is, in the sample, each IQ point is associated with an additional 9.44 points in the video game. The population regression line might have a smaller/larger slope. The 95% confidence intervals tells us that a plausible range of values for the slope of the regression line at the population-level is 4.39 to 14.50. Additional regression details are provided with the command below.
+This tells use the slope in our sample is 9.44, 95% CI [4.39, 14.50]. That is, in the sample, each IQ point is associated with an additional 9.44 points in the video game. The population regression line might have a smaller/larger slope. The 95% confidence intervals tells us that a plausible range of values for the slope of the regression line at the population-level is 4.39 to 14.50. Notice that this range captures that population-level slope of 8.00 that we calculated from the entire population previously.
+
+Additional regression details are provided with the command below.
 
 ```{r}
 summary(lm_object)
 ```
 
 
-You can also see the $R^2$ = .74 at the bottom of this additional output.
-
 
 ### Correlation
 
-One way to think of a correlation is as a fit index for a linear regression line. That is, the correlations indicates the extent to which the data fit a straight line (i.e., the extent to which the data fit a linear model). Correlation values range between -1 and +1. The further a correlation value is from 0 the more tightly points will cluster around the regression line.
+As discussed previously, a correlation can be considered a fit index for a linear regression line. That is, the correlations indicates the extent to which the data fit a straight line (i.e., the extent to which the data fit a linear model). Correlation values range between -1 and +1. The further a correlation value is from 0 the more tightly points will cluster around the regression line.
 
 * A **positive correlation** indicates that as one value **increases** the other value **increases**. For example, as height increases weight increases.
 
