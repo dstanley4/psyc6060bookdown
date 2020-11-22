@@ -1,14 +1,3 @@
----
-title: "PSYC 6060: Multiple Regression Part 1"
-output:
-  html_document
----
-
-```{r set-options, echo=FALSE, cache=FALSE}
-options(width = 120)
-
-```
-
 ```{r, include=FALSE}
 library(tidyverse)
 library(janitor)
@@ -17,11 +6,32 @@ library(GGally)
 
 # Multiple regression
 
-## Conducting Analyses: Create a project 
+The following CRAN packages must be installed:
 
-Create a project for this activity called multiple_regression_intro. Copy the file "data_mr_ex.csv" into this project folder.
+| Required CRAN Packages |
+|-------------------|
+|tidyverse          |
+|apaTables         |
+|janitor            |
+|skimr             |
+
+
+## Example
+
+In this chapter, we extend the scenario from the bivariate regression chapter but we add an additional predictor. Specifically, we want to examine the extent to video game scores are predicted by age and IQ for people who live in the City of Guelph. As before, we treat citizens of Guelph as our population -- though in this chapter we move straight to the sample data (without showing the population-level data).
+
+We are interested in using both IQ and age to predict video game scores so we refer to these variables as **predictor** variables. The value being predicted is video game score and we refer to that variable as the **criterion** (i.e., the dependent variable). 
+
+
+
+
 
 ## Load the data
+
+
+we use a data set called  "data_mr_ex.csv". In this exqm
+
+The data can be loaded with the command:
 
 ```{r,echo=TRUE,eval=TRUE, message=FALSE}
 library(tidyverse)
@@ -52,6 +62,8 @@ apa.cor.table(my_data)
 You should always check for curvilinear relations when reporting correlations. We do so with the code below. In this case we don't see any curvilinear relations.
 
 ```{r}
+library(GGally)
+
 ggpairs(my_data)
 ```
 
@@ -89,7 +101,7 @@ This output shows you how we combined age, IQ, and a constant to create ($\wideh
 More specifically:
 $\widehat{Y} = 102.233 - 0.0371(age) + 0.328(iq)$
 
-The slopes for age and iq are -0.0371 and 0.328, respecivtly. These are also referred to as the b-weights or unstandardized regression coefficients.
+The slopes for age and iq are -0.0371 and 0.328, respecivtly. These are also referred to as the *b*-weights or unstandardized regression coefficients.
 
 $\widehat{Y}$ is the new variable we created from age and IQ. How well does it predict video game score? Said another way, overall how well can age and IQ predict video game scores? 
 
@@ -103,10 +115,19 @@ apa.reg.table(lm_object,
 ```
 
 
-Take special note of the $R^2$ value. The $R^2$ value indicates how successful we were in predicting video game score ($Y$) using age and IQ. Said another way, the $R^2$ indicates how well $\widehat{Y}$ (created from age and IQ) predicts video game score. $R^2$ ranges from 0 to 1. In this case, the .29 value indicates that 29% of the variability in actual video game scores was predicted by a linear combination of age and iq (that we refer to as $\widehat{Y}$. 
+Take special note of the $R^2$ value. The $R^2$ value indicates how successful we were in predicting video game score ($Y$) using age and IQ. Said another way, the $R^2$ indicates how well $\widehat{Y}$ (created from age and IQ) predicts video game score. $R^2$ ranges from 0 to 1. In this case, the .29 value indicates that 29% of the variability in actual video game scores was predicted by a linear combination of age and iq (that we refer to as $\widehat{Y}$).
+
+## *b*-weights
+
+An inspection of the b column in the above table reveals the *b*-weights. The *b*-weights are also known as the slopes or the unstandardized regression weights. The *b*-weights are used to create predicted/estimated video game score via the regression equation:
+
+$\widehat{\text{video game}} = 102.233 + 0.3285(iq) - 0.3712(age)$
+
+The computer picks the *b*-weights weights using a process that ensures the predicted video game scores ($\widehat{\text{video game}}$) correspond as closely as possible to actual video game scores. You can interpret the *b*-weights as indicating how much the criterion changes when a predictor changes -- **holding the other predictors constant**. In this context, a 0.3285 b-weight for IQ indicates that for each one-unit increase in IQ video game score will increase 0.3285 points -- holding the effect of age constant. Don't forget the b-weight can only be interpretting in context of that specific regression equation. If you replaced the age predictor with, say, height as a predictor, then the b-weight for IQ would change. Context matters when interpretting *b*-weights.
+
 ## $R$ and $R^2$
 
-**Correlating estimated criterion scores with actual criterion scores**
+Correlating estimated criterion scores with actual criterion scores
 
 What do predicted values represent? They are estimated values of video_game (i.e., $\widehat{Y}$) created by combining iq and age according to the regression equation. 
 
@@ -167,7 +188,7 @@ Go back up and show how to report R2 values with CI-p-value etc.
 ```{r,echo=TRUE,eval=FALSE}
 summary(lm_object)
 ```
-In this output the \emph{b-weight} for each variable is presented under the column \emph{b}. These \emph{b-weights} are also called \emph{unstandardized regression weights}.
+In this output the \emph{b-weight} for each variable is presented under the column \emph{b}. These \emph{*b*-weights} are also called \emph{unstandardized regression weights}.
 
 The signficance of each variable is indicated with stars. If a predictor's b-weight has a star beside it in the b column, this indicates that the predictor contributes unique variance to $\widehat{Y}$ that can not be contributed by any of the other predictors. The amount of unique variance contributed by a predictor is indicated by $sr^2$ (semi-partial correlation squared) -- and we will calculate it below.
 
@@ -236,6 +257,10 @@ summary(block2)
 
 Look at the $R^2$ in block1 (0.0898) and compare it to $R^2$ in block2 (0.291). The increase you see (approx .20) is the $sr^2$ (or $\Delta R^2$) for IQ.
 
+
+GO BACK AND MAKE 3D graph for two predictors in fastInteraction ..expand fast interaction
+
+
 ### Is the change in R2 (i.e., sr2) significant for iq?
 
 ```{r,echo=TRUE,eval=FALSE}
@@ -265,32 +290,26 @@ apa.reg.table(block1, block2)
 ```
 
 
-
-
-
-## Understanding *beta-weights*
+## *beta-weights*
 
 *Beta-weights* are often referred to as *standardized regression weights*. This is a poor description that makes beta weights hard to understand.  A better description of *beta-weights* is the regression weights for standardized variables (i.e., $M = 0$, $SD = 1$).
 
-### Calculate the beta-weights the fast way.
+### In practice
 
 ```{r}
 head(my_data)
 
-reg_with_raw_variables <- lm(video_game ~ iq + age, data = my_data)
+reg_with_raw_variables <- lm(video_game ~ iq + age,
+                             data = my_data)
 ```
 
-Check out the b-weights (not beta) in the estimate column:
+Check out the *b*-weights (not beta) in the estimate column:
 ```{r}
 summary(reg_with_raw_variables)
 
 ```
 
-
-
-Check out the b-weights and beta weights in table below. Notice the b-weights are the same as Estimates in the summary table above. Notice the beta weights are .46 and -.21 (and are not in the above table).
-
-
+Check out the *b*-weights and beta weights in table below. Notice the *b*-weights are the same as Estimates in the summary table above. Notice the beta weights are .46 and -.21 (and are not in the above table).
 
 ```{r}
 apa.reg.table(reg_with_raw_variables)
@@ -298,47 +317,49 @@ apa.reg.table(reg_with_raw_variables)
 
 
 
+### Old school
 
+To obtain beta-weights there are two steps. First, we create standardized score versions of each column. Second, we run the usual regression using those columns.
 
-### Calculate the beta-weights old school.
+A set of standardized scores have a mean of 0 and a standard deviation of 1.0. To create the standardized score versions of each column in the regression we use the z-score formula:
 
+$$
+\begin{align}
+\text{standardized scores}=z_{X} = \frac{X-\bar{X}}{\sigma_X}
+\end{align}
+$$
+
+Consider the age column. We can calculate the mean for this column, mean(age), and the standard deviation for this column, sd(age). Then for every value in the age column we subtract the column mean and then divide by the column standard deviation. We do so with the calculation: (age-mean(age))/sd(age). The code below creates standardized score versions of the iq, age, and video_game columns called z_iq, z_age, and z_video_game, respectively.
 
 ```{r}
-# Create a z-score version of each predictor. 
-# The scale command remove the mean from each column then divides scores by the sd
-# That is, the scale command runs scores in a column through the z-score formula using M and SD for the column
-# The result is a column with a mean of zero and sd = 1.0
-my_data <- my_data %>% mutate(z_iq = scale(iq),
-                   z_age = scale(age),
-                   z_video_game = scale(video_game))
-
-# Confirm mean = 0 and sd = 1 (just for learning) for new columns (z_age, z_iq, z_video_game)
-psych::describe( as.data.frame(my_data) )
-
-# see the data
-head(my_data, 3)
+my_data <- my_data %>% 
+  mutate(z_iq = (iq-mean(iq))/sd(iq),
+         z_age = (age-mean(age))/sd(age),
+         z_video_game = (video_game-mean(video_game))/sd(video_game))
 ```
 
+We can confirm a mean of 0 and a standard deviation of 1.0 for these new columns with the skim command:
+
+```{r}
+library(skimr)
+skim(my_data)
+```
 
 Now we conduct the regression again with standardized variables (i.e., z-score versions).
 
-
 ```{r}
-reg_with_standardized_variables <- lm(z_video_game ~ z_iq + z_age, data = my_data)
+reg_with_standardized_variables <- lm(z_video_game ~ z_iq + z_age, 
+                                      data = my_data)
+
 summary(reg_with_standardized_variables) 
 ```
 
 
-
 Notice that the estimates above are 4.582e-01 -2.070e-01 which are, in decimal form, .46 and -.21, respectively. These are the beta weights from the apa.reg.table on the previous page.
 
-For the *b-weights* (far above), describe how a 1 unit change in the IQ influences video_game
+For the **b*-weights* (far above), describe how a 1 unit change in the IQ influences video_game poinits. Similarly, beta-weights, describe how a 1 unit change in z_iq influences z_video_game. Keep in mind, however, that 1 unit of z_iq (and z_video_game) is 1 standard deviation. As a result, a beta-weight indicates how much the criterion scores will change in SD units when a predictor increases by 1 SD -- holding the effect of the other predictors constant. Similar to b-weights, beta-weight can only be interpreted in the context of the other variables in the equation.
 
-For the beta-weights (here), describe how a 1 unit change in z_iq influences video_game. Keep in mind that 1 unit of z_iq (and z_video_game) is 1 standard deviation. So a beta-weight indicates how much the criterion scores will change (in SD units) with a 1 SD increase in the predictors.
-
-
-One name for beta-weights is *standardized weights* but it should be clear that it would better to describe beta-weights as the weights for standardized variables.
-
+One name for beta-weights is *standardized regression weights*. It would be more accurate, however, to  describe beta-weights as the **weights for standardized variables**.
 
 
 # Predicted Scores: Confidence Intervals
