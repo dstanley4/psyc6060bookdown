@@ -931,7 +931,7 @@ R^2 &amp;= .736 = .74\\\\
 ## sample estimates:
 ##    cor 
 ## 0.0278</code></pre>
-<p>We use the cocor command to compare the two relationsl</p>
+<p>We use the cocor command to compare the two relations:</p>
 <div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="regression-and-correlation.html#cb603-1"></a><span class="kw">library</span>(cocor)</span>
 <span id="cb603-2"><a href="regression-and-correlation.html#cb603-2"></a></span>
 <span id="cb603-3"><a href="regression-and-correlation.html#cb603-3"></a><span class="kw">cocor</span>( <span class="op">~</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>c1 <span class="op">|</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(bfi))</span></code></pre></div>
@@ -988,7 +988,7 @@ R^2 &amp;= .736 = .74\\\\
 ## zou2007: Zou&#39;s (2007) confidence interval
 ##   95% confidence interval for r.jk - r.jh: -0.1317 -0.0250
 ##   Null hypothesis rejected (Interval does not include 0)</code></pre>
-<p>The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).</p>
+<p>The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007), -.13 to -.03. But we also want to examine the first part of the output which will show us the two original correlations <span class="math inline">\(r_{(a1, c1)}\)</span> = 0.0276, and <span class="math inline">\(r_{(a1, e1)}\)</span> = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).</p>
 <p>We write this up as:</p>
 <p>Agreeableness and extraversion were weakly positively related, <em>r</em> = .11, 95% [.07, .14], <em>p</em> &lt; .001, such that as agreeableness increased so did extraversion. The relation between agreeableness and conscientiousness was non-significant, <em>r</em> = .03, 95% [-.00, .07], <em>p</em> = .14. The agreeableness/extraversion relation was significantly stronger than the agreeableness/conscientiousness relation, <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [.03, .13], <em>p</em> = .004.</p>
 </div>
@@ -1005,7 +1005,7 @@ R^2 &amp;= .736 = .74\\\\
 <span id="cb605-5"><a href="regression-and-correlation.html#cb605-5"></a>bfi_women &lt;-<span class="st"> </span>bfi <span class="op">%&gt;%</span></span>
 <span id="cb605-6"><a href="regression-and-correlation.html#cb605-6"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span></span>
 <span id="cb605-7"><a href="regression-and-correlation.html#cb605-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gender)</span></code></pre></div>
-<p>Use glimpse to check out the subgroups. Note that it also tells you the number of participants in each subgroup.</p>
+<p>Use glimpse() to check out the subgroups. Note that it also tells you the number of participants in each subgroup.</p>
 <div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="regression-and-correlation.html#cb606-1"></a><span class="kw">glimpse</span>(bfi_men)</span></code></pre></div>
 <pre><code>## Rows: 919
 ## Columns: 4
@@ -1078,7 +1078,7 @@ R^2 &amp;= .736 = .74\\\\
 ## zou2007: Zou&#39;s (2007) confidence interval
 ##   95% confidence interval for r1.jk - r2.hm: -0.0021 0.1543
 ##   Null hypothesis retained (Interval includes 0)</code></pre>
-<p>The output reveals the correlation for men (<span class="math inline">\(r_{(a1, e1)}\)</span> = 0.1387, .14 rounded) and women (<span class="math inline">\(r_{(a1, e1)}\)</span>= 0.0623, .06 rounded) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval: -.00 to .15.</p>
+<p>The output reveals the correlation for men, <span class="math inline">\(r_{(a1, e1)}\)</span> = 0.1387, .14 rounded, and women <span class="math inline">\(r_{(a1, e1)}\)</span>= 0.0623, .06 rounded, in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Finally, we see the zou2007 95% confidence interval: -.00 to .15.</p>
 <p>We write this up as:</p>
 <p>For men, there was a positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .14, 95% [.07, .20], <em>p</em> &lt; .001, such that as agreeableness increases so did extraversion. Likewise, for women, there was a similar positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .06, 95% [.02, .11], <em>p</em> = .007. We did not find a significant difference in the strength of these relations, <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [-.002, .15], <em>p</em> = .057.</p>
 

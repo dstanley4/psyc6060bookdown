@@ -624,8 +624,7 @@ We obtain the (a1, c1) correlation, below, and find: *r* = .03, 95% [-.00, .07],
 cor.test(bfi$a1, bfi$c1)
 ```
 
-We use the cocor command to compare the two relationsl
-
+We use the cocor command to compare the two relations:
 
 
 ```{r}
@@ -633,7 +632,7 @@ library(cocor)
 
 cocor( ~ a1 + c1 | a1 + e1, data = as.data.frame(bfi))
 ```
-The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
+The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007), -.13 to -.03. But we also want to examine the first part of the output which will show us the two original correlations $r_{(a1, c1)}$ = 0.0276, and $r_{(a1, e1)}$ = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
 
 We write this up as:
 
@@ -657,7 +656,7 @@ bfi_women <- bfi %>%
 ```
 
 
-Use glimpse to check out the subgroups. Note that it also tells you the number of participants in each subgroup.
+Use glimpse() to check out the subgroups. Note that it also tells you the number of participants in each subgroup.
 
 ```{r}
 glimpse(bfi_men)
@@ -694,8 +693,7 @@ bfi_women_dataframe <- as.data.frame(bfi_women)
 cocor( ~ a1 + e1 | a1 + e1,
        data = list(bfi_men_dataframe, bfi_women_dataframe))
 ```
-The output reveals the correlation for men ($r_{(a1, e1)}$ = 0.1387, .14 rounded) and women ($r_{(a1, e1)}$=  0.0623, .06 rounded) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval: -.00 to .15.
-
+The output reveals the correlation for men, $r_{(a1, e1)}$ = 0.1387, .14 rounded, and women $r_{(a1, e1)}$=  0.0623, .06 rounded, in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Finally, we see the zou2007 95% confidence interval: -.00 to .15.
 
 We write this up as:
 
