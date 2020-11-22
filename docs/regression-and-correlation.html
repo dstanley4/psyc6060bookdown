@@ -487,8 +487,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.3.1" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html#p-values"><i class="fa fa-check"></i><b>15.3.1</b> p-values</a></li>
 <li class="chapter" data-level="15.3.2" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html#within-a-data-set"><i class="fa fa-check"></i><b>15.3.2</b> Within a data set</a></li>
 <li class="chapter" data-level="15.3.3" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html#between-data-sets"><i class="fa fa-check"></i><b>15.3.3</b> Between data sets</a></li>
+<li class="chapter" data-level="15.3.4" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html#comparison-ra1-e1"><i class="fa fa-check"></i><b>15.3.4</b> Comparison r(a1, e1)</a></li>
 </ul></li>
-<li class="chapter" data-level="15.4" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html#comparison-ra1-e1"><i class="fa fa-check"></i><b>15.4</b> Comparison r(a1, e1)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -899,17 +899,42 @@ R^2 &amp;= .736 = .74\\\\
 ##   95% confidence interval for r.jk - r.hm: 0.0753 0.1800
 ##   Null hypothesis rejected (Interval does not include 0)</code></pre>
 <p>We could write this as:</p>
-<p>There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, <em>r</em> = .03, 95% CI [-.01, .07], <em>p</em> = .144. In contrast, there was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, <em>r</em> = -.10, 95% CI [-.14, -.06], <em>p</em> &lt; .001. The difference between these two correlations was significant, <span class="math inline">\(\Delta\)</span><em>r</em> = .13, 95% CI [.07, .18], <em>p</em> &lt; .001.</p>
+<p>There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, <em>r</em> = .03, 95% CI [-.01, .07], <em>p</em> = .144.</p>
+<p>There was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, <em>r</em> = -.10, 95% CI [-.14, -.06], <em>p</em> &lt; .001. In contrast, the relation between agreeableness (a1) and conscientiousness(c1) was non-significant, <em>r</em> = .03, 95% CI [-.01, .07], <em>p</em> = .144. The extraversion/openness relation was stronger than the agreeableness/conscientiousness relation, <span class="math inline">\(\Delta\)</span><em>r</em> = .13, 95% CI [.07, .18], <em>p</em> &lt; .001.</p>
 </div>
 <div id="overlapping-correlations" class="section level4">
 <h4><span class="header-section-number">15.3.2.2</span> Overlapping correlations</h4>
 <p>We will compare the correlation to between (a1, c1) to the correlation between (a1, e1) with cocor. In this case, because a1 is common to the first correlation (a1, c1) and the second correlation (e1, o1) we refer to this as an overlapping correlation comparison.</p>
-<p>The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007).
-But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).</p>
-<p>Look in the APA correlation table above to confirm the correlations that are being compared (.0276 (i.e., .03) and .10472 (i.e., .10)).</p>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="regression-and-correlation.html#cb599-1"></a><span class="kw">library</span>(cocor)</span>
-<span id="cb599-2"><a href="regression-and-correlation.html#cb599-2"></a></span>
-<span id="cb599-3"><a href="regression-and-correlation.html#cb599-3"></a><span class="kw">cocor</span>( <span class="op">~</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>c1 <span class="op">|</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(bfi))</span></code></pre></div>
+<p>We obtain the (a1, e1) correlation, below, and find: <em>r</em> = .11, 95% [.07, .14], <em>p</em> &lt; .001.</p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="regression-and-correlation.html#cb599-1"></a><span class="kw">cor.test</span>(bfi<span class="op">$</span>a1, bfi<span class="op">$</span>e1)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  bfi$a1 and bfi$e1
+## t = 5.6, df = 2759, p-value = 2e-08
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.06917 0.14294
+## sample estimates:
+##    cor 
+## 0.1062</code></pre>
+<p>We obtain the (a1, c1) correlation, below, and find: <em>r</em> = .03, 95% [-.00, .07], <em>p</em> = .14.</p>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="regression-and-correlation.html#cb601-1"></a><span class="kw">cor.test</span>(bfi<span class="op">$</span>a1, bfi<span class="op">$</span>c1)</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  bfi$a1 and bfi$c1
+## t = 1.5, df = 2762, p-value = 0.1
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.00949  0.06502
+## sample estimates:
+##    cor 
+## 0.0278</code></pre>
+<p>We use the cocor command to compare the two relationsl</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="regression-and-correlation.html#cb603-1"></a><span class="kw">library</span>(cocor)</span>
+<span id="cb603-2"><a href="regression-and-correlation.html#cb603-2"></a></span>
+<span id="cb603-3"><a href="regression-and-correlation.html#cb603-3"></a><span class="kw">cocor</span>( <span class="op">~</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>c1 <span class="op">|</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1, <span class="dt">data =</span> <span class="kw">as.data.frame</span>(bfi))</span></code></pre></div>
 <pre><code>## 
 ##   Results of a comparison of two overlapping correlations based on dependent groups
 ## 
@@ -963,8 +988,9 @@ But we also want to examine the first part of the output which will show us the 
 ## zou2007: Zou&#39;s (2007) confidence interval
 ##   95% confidence interval for r.jk - r.jh: -0.1317 -0.0250
 ##   Null hypothesis rejected (Interval does not include 0)</code></pre>
-<p>We could write this as <span class="math inline">\(\Delta\)</span><em>r</em> = -.08, 95% CI [-.13, -.03]. If we include the <em>p</em>-value from hittner2003 it becomes:</p>
-<p><span class="math inline">\(\Delta\)</span><em>r</em> = -.08, 95% CI [-.13, -.03], <em>p</em> = .004.</p>
+<p>The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).</p>
+<p>We write this up as:</p>
+<p>Agreeableness and extraversion were weakly positively related, <em>r</em> = .11, 95% [.07, .14], <em>p</em> &lt; .001, such that as agreeableness increased so did extraversion. The relation between agreeableness and conscientiousness was non-significant, <em>r</em> = .03, 95% [-.00, .07], <em>p</em> = .14. The agreeableness/extraversion relation was significantly stronger than the agreeableness/conscientiousness relation, <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [.03, .13], <em>p</em> = .004.</p>
 </div>
 </div>
 <div id="between-data-sets" class="section level3">
@@ -972,22 +998,22 @@ But we also want to examine the first part of the output which will show us the 
 <p>In this section we look at comparing correlation across two data sets.</p>
 <div id="create-seperate-data-files-for-men-and-women-if-needed" class="section level4">
 <h4><span class="header-section-number">15.3.3.1</span> Create seperate data files for men and women (if needed)</h4>
-<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="regression-and-correlation.html#cb601-1"></a>bfi_men   &lt;-<span class="st"> </span>bfi <span class="op">%&gt;%</span></span>
-<span id="cb601-2"><a href="regression-and-correlation.html#cb601-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb601-3"><a href="regression-and-correlation.html#cb601-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gender)</span>
-<span id="cb601-4"><a href="regression-and-correlation.html#cb601-4"></a></span>
-<span id="cb601-5"><a href="regression-and-correlation.html#cb601-5"></a>bfi_women &lt;-<span class="st"> </span>bfi <span class="op">%&gt;%</span></span>
-<span id="cb601-6"><a href="regression-and-correlation.html#cb601-6"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb601-7"><a href="regression-and-correlation.html#cb601-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gender)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="regression-and-correlation.html#cb605-1"></a>bfi_men   &lt;-<span class="st"> </span>bfi <span class="op">%&gt;%</span></span>
+<span id="cb605-2"><a href="regression-and-correlation.html#cb605-2"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb605-3"><a href="regression-and-correlation.html#cb605-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gender)</span>
+<span id="cb605-4"><a href="regression-and-correlation.html#cb605-4"></a></span>
+<span id="cb605-5"><a href="regression-and-correlation.html#cb605-5"></a>bfi_women &lt;-<span class="st"> </span>bfi <span class="op">%&gt;%</span></span>
+<span id="cb605-6"><a href="regression-and-correlation.html#cb605-6"></a><span class="st">  </span><span class="kw">filter</span>(gender <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span></span>
+<span id="cb605-7"><a href="regression-and-correlation.html#cb605-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gender)</span></code></pre></div>
 <p>Use glimpse to check out the subgroups. Note that it also tells you the number of participants in each subgroup.</p>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb602-1"><a href="regression-and-correlation.html#cb602-1"></a><span class="kw">glimpse</span>(bfi_men)</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="regression-and-correlation.html#cb606-1"></a><span class="kw">glimpse</span>(bfi_men)</span></code></pre></div>
 <pre><code>## Rows: 919
 ## Columns: 4
 ## $ a1 &lt;int&gt; 2, 2, 2, 4, 4, 4, 2, 5, 4, 4, 5, 5, 1, 4, 1, 4…
 ## $ c1 &lt;int&gt; 2, 4, 5, 3, 6, 4, 5, 4, 5, 5, 5, 4, 4, 5, 1, 4…
 ## $ e1 &lt;int&gt; 3, 2, 4, 3, 5, 1, 3, 2, 3, 1, 2, 3, 2, 3, 6, 2…
 ## $ o1 &lt;int&gt; 3, 3, 5, 3, 6, 5, 4, 5, 5, 6, 5, 6, 6, 6, 6, 4…</code></pre>
-<div class="sourceCode" id="cb604"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb604-1"><a href="regression-and-correlation.html#cb604-1"></a><span class="kw">glimpse</span>(bfi_women)</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="regression-and-correlation.html#cb608-1"></a><span class="kw">glimpse</span>(bfi_women)</span></code></pre></div>
 <pre><code>## Rows: 1,881
 ## Columns: 4
 ## $ a1 &lt;int&gt; 2, 5, 4, 6, 2, 5, 4, 4, 4, 1, 2, 1, 2, 2, 2, 4…
@@ -998,7 +1024,7 @@ But we also want to examine the first part of the output which will show us the 
 <div id="check-out-the-subgroup-correlations" class="section level4">
 <h4><span class="header-section-number">15.3.3.2</span> Check out the subgroup correlations</h4>
 <p>For <strong>men</strong>, we can obtain the correlation between a1/e1 with the code below. From this we determine, <em>r</em> = .14, 95% [.07, .20], <em>p</em> &lt; .001.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="regression-and-correlation.html#cb606-1"></a><span class="kw">cor.test</span>(bfi_men<span class="op">$</span>a1, bfi_men<span class="op">$</span>e1)</span></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="regression-and-correlation.html#cb610-1"></a><span class="kw">cor.test</span>(bfi_men<span class="op">$</span>a1, bfi_men<span class="op">$</span>e1)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -1011,7 +1037,7 @@ But we also want to examine the first part of the output which will show us the 
 ##    cor 
 ## 0.1387</code></pre>
 <p>For <strong>women</strong>, we can obtain the correlation between a1/e1 with the code below. From this we determine, <em>r</em> = .06, 95% [.02, .11], <em>p</em> = .007.</p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="regression-and-correlation.html#cb608-1"></a><span class="kw">cor.test</span>(bfi_women<span class="op">$</span>a1, bfi_women<span class="op">$</span>e1)</span></code></pre></div>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="regression-and-correlation.html#cb612-1"></a><span class="kw">cor.test</span>(bfi_women<span class="op">$</span>a1, bfi_women<span class="op">$</span>e1)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -1025,16 +1051,15 @@ But we also want to examine the first part of the output which will show us the 
 ## 0.06226</code></pre>
 </div>
 </div>
-</div>
-<div id="comparison-ra1-e1" class="section level2">
-<h2><span class="header-section-number">15.4</span> Comparison r(a1, e1)</h2>
+<div id="comparison-ra1-e1" class="section level3">
+<h3><span class="header-section-number">15.3.4</span> Comparison r(a1, e1)</h3>
 <p>We run the R commands below to compare the correlations for men and women.</p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="regression-and-correlation.html#cb610-1"></a><span class="kw">library</span>(cocor)</span>
-<span id="cb610-2"><a href="regression-and-correlation.html#cb610-2"></a>bfi_men_dataframe   &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_men)</span>
-<span id="cb610-3"><a href="regression-and-correlation.html#cb610-3"></a>bfi_women_dataframe &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_women)</span>
-<span id="cb610-4"><a href="regression-and-correlation.html#cb610-4"></a></span>
-<span id="cb610-5"><a href="regression-and-correlation.html#cb610-5"></a><span class="kw">cocor</span>( <span class="op">~</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1 <span class="op">|</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1,</span>
-<span id="cb610-6"><a href="regression-and-correlation.html#cb610-6"></a>       <span class="dt">data =</span> <span class="kw">list</span>(bfi_men_dataframe, bfi_women_dataframe))</span></code></pre></div>
+<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="regression-and-correlation.html#cb614-1"></a><span class="kw">library</span>(cocor)</span>
+<span id="cb614-2"><a href="regression-and-correlation.html#cb614-2"></a>bfi_men_dataframe   &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_men)</span>
+<span id="cb614-3"><a href="regression-and-correlation.html#cb614-3"></a>bfi_women_dataframe &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_women)</span>
+<span id="cb614-4"><a href="regression-and-correlation.html#cb614-4"></a></span>
+<span id="cb614-5"><a href="regression-and-correlation.html#cb614-5"></a><span class="kw">cocor</span>( <span class="op">~</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1 <span class="op">|</span><span class="st"> </span>a1 <span class="op">+</span><span class="st"> </span>e1,</span>
+<span id="cb614-6"><a href="regression-and-correlation.html#cb614-6"></a>       <span class="dt">data =</span> <span class="kw">list</span>(bfi_men_dataframe, bfi_women_dataframe))</span></code></pre></div>
 <pre><code>## 
 ##   Results of a comparison of two correlations based on independent groups
 ## 
@@ -1057,6 +1082,7 @@ But we also want to examine the first part of the output which will show us the 
 <p>We write this up as:</p>
 <p>For men, there was a positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .14, 95% [.07, .20], <em>p</em> &lt; .001, such that as agreeableness increases so did extraversion. Likewise, for women, there was a similar positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .06, 95% [.02, .11], <em>p</em> = .007. We did not find a significant difference in the strength of these relations, <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [-.002, .15], <em>p</em> = .057.</p>
 
+</div>
 </div>
 </div>
             </section>

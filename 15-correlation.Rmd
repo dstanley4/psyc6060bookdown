@@ -601,31 +601,43 @@ cocor( ~ a1 + c1 | e1 + o1, data = as.data.frame(bfi))
 ```
 
 
-
 We could  write this as:
 
-There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, *r* =  .03, 95% CI [-.01, .07], *p* = .144. In contrast, there was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, *r* = -.10, 95% CI [-.14, -.06], *p* < .001. The difference between these two correlations was significant, $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
+There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, *r* =  .03, 95% CI [-.01, .07], *p* = .144. 
+
+There was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, *r* = -.10, 95% CI [-.14, -.06], *p* < .001. In contrast, the relation between agreeableness (a1) and conscientiousness(c1) was non-significant, *r* =  .03, 95% CI [-.01, .07], *p* = .144. The extraversion/openness relation was stronger than the agreeableness/conscientiousness relation, $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
 
 
 #### Overlapping correlations
 
 We will compare the correlation to between (a1, c1) to the correlation between (a1, e1) with cocor. In this case, because a1 is common to the first correlation (a1, c1) and the second correlation (e1, o1) we refer to this as an overlapping correlation comparison.
 
-The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007).
-But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
+We obtain the (a1, e1) correlation, below, and find: *r* = .11, 95% [.07, .14], *p* < .001.
 
-Look in the APA correlation table above to confirm the correlations that are being compared (.0276 (i.e., .03) and .10472 (i.e., .10)).
+```{r}
+cor.test(bfi$a1, bfi$e1)
+```
+
+We obtain the (a1, c1) correlation, below, and find: *r* = .03, 95% [-.00, .07], *p* = .14.
+
+```{r}
+cor.test(bfi$a1, bfi$c1)
+```
+
+We use the cocor command to compare the two relationsl
+
+
 
 ```{r}
 library(cocor)
 
 cocor( ~ a1 + c1 | a1 + e1, data = as.data.frame(bfi))
 ```
+The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (a1, e1) = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
 
+We write this up as:
 
-We could  write this as $\Delta$*r* = -.08, 95% CI [-.13, -.03]. If we include the *p*-value from hittner2003 it becomes:
-
-$\Delta$*r* = -.08, 95% CI [-.13, -.03], *p* = .004.
+Agreeableness and extraversion were weakly positively related, *r* = .11, 95% [.07, .14], *p* < .001, such that as agreeableness increased so did extraversion. The relation between agreeableness and conscientiousness was non-significant, *r* = .03, 95% [-.00, .07], *p* = .14. The agreeableness/extraversion relation was significantly stronger than the agreeableness/conscientiousness relation, $\Delta$*r* = .08, 95% CI [.03, .13], *p* = .004.
 
 ### Between data sets
 
@@ -670,7 +682,7 @@ cor.test(bfi_women$a1, bfi_women$e1)
 ```
 
 
-##  Comparison r(a1, e1)
+###  Comparison r(a1, e1)
 
 We run the R commands below to compare the correlations for men and women.
 
