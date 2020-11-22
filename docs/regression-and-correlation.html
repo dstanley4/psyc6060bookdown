@@ -997,64 +997,38 @@ But we also want to examine the first part of the output which will show us the 
 </div>
 <div id="check-out-the-subgroup-correlations" class="section level4">
 <h4><span class="header-section-number">15.3.3.2</span> Check out the subgroup correlations</h4>
-<p>For <strong>men</strong>, we can obtain the correlation matrix with the code below. Pay special attention to the correlation between a1 and e1.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="regression-and-correlation.html#cb606-1"></a><span class="kw">apa.cor.table</span>(bfi_men)</span></code></pre></div>
+<p>For <strong>men</strong>, we can obtain the correlation between a1/e1 with the code below. From this we determine, <em>r</em> = .14, 95% [.07, .20], <em>p</em> &lt; .001.</p>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="regression-and-correlation.html#cb606-1"></a><span class="kw">cor.test</span>(bfi_men<span class="op">$</span>a1, bfi_men<span class="op">$</span>e1)</span></code></pre></div>
 <pre><code>## 
+##  Pearson&#39;s product-moment correlation
 ## 
-## Means, standard deviations, and correlations with confidence intervals
-##  
-## 
-##   Variable M    SD   1           2           3           
-##   1. a1    2.73 1.43                                     
-##                                                          
-##   2. c1    4.48 1.24 .02                                 
-##                      [-.05, .08]                         
-##                                                          
-##   3. e1    3.27 1.66 .14**       .01                     
-##                      [.07, .20]  [-.06, .07]             
-##                                                          
-##   4. o1    4.98 1.08 -.02        .18**       -.11**      
-##                      [-.09, .04] [.11, .24]  [-.18, -.05]
-##                                                          
-## 
-## Note. M and SD are used to represent mean and standard deviation, respectively.
-## Values in square brackets indicate the 95% confidence interval.
-## The confidence interval is a plausible range of population correlations 
-## that could have caused the sample correlation (Cumming, 2014).
-## * indicates p &lt; .05. ** indicates p &lt; .01.
-## </code></pre>
-<p>For <strong>women</strong>, we can obtain the correlation matrix with the code below. Pay special attention to the correlation between a1 and e1.</p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="regression-and-correlation.html#cb608-1"></a><span class="kw">apa.cor.table</span>(bfi_women)</span></code></pre></div>
+## data:  bfi_men$a1 and bfi_men$e1
+## t = 4.2, df = 910, p-value = 3e-05
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.07448 0.20182
+## sample estimates:
+##    cor 
+## 0.1387</code></pre>
+<p>For <strong>women</strong>, we can obtain the correlation between a1/e1 with the code below. From this we determine, <em>r</em> = .06, 95% [.02, .11], <em>p</em> = .007.</p>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="regression-and-correlation.html#cb608-1"></a><span class="kw">cor.test</span>(bfi_women<span class="op">$</span>a1, bfi_women<span class="op">$</span>e1)</span></code></pre></div>
 <pre><code>## 
+##  Pearson&#39;s product-moment correlation
 ## 
-## Means, standard deviations, and correlations with confidence intervals
-##  
-## 
-##   Variable M    SD   1           2           3           
-##   1. a1    2.26 1.37                                     
-##                                                          
-##   2. c1    4.52 1.24 .04                                 
-##                      [-.01, .08]                         
-##                                                          
-##   3. e1    2.83 1.60 .06**       -.04                    
-##                      [.02, .11]  [-.08, .01]             
-##                                                          
-##   4. o1    4.73 1.14 .00         .17**       -.12**      
-##                      [-.04, .05] [.12, .21]  [-.16, -.07]
-##                                                          
-## 
-## Note. M and SD are used to represent mean and standard deviation, respectively.
-## Values in square brackets indicate the 95% confidence interval.
-## The confidence interval is a plausible range of population correlations 
-## that could have caused the sample correlation (Cumming, 2014).
-## * indicates p &lt; .05. ** indicates p &lt; .01.
-## </code></pre>
+## data:  bfi_women$a1 and bfi_women$e1
+## t = 2.7, df = 1847, p-value = 0.007
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.01672 0.10754
+## sample estimates:
+##     cor 
+## 0.06226</code></pre>
 </div>
 </div>
 </div>
 <div id="comparison-ra1-e1" class="section level2">
 <h2><span class="header-section-number">15.4</span> Comparison r(a1, e1)</h2>
-<p>As per the correlation tables above we find the correlations for men (<span class="math inline">\(r_{(a1, e1)}\)</span> = 0.1387) and women (<span class="math inline">\(r_{(a1, e1)}\)</span>= 0.1387) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval.</p>
+<p>We run the R commands below to compare the correlations for men and women.</p>
 <div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="regression-and-correlation.html#cb610-1"></a><span class="kw">library</span>(cocor)</span>
 <span id="cb610-2"><a href="regression-and-correlation.html#cb610-2"></a>bfi_men_dataframe   &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_men)</span>
 <span id="cb610-3"><a href="regression-and-correlation.html#cb610-3"></a>bfi_women_dataframe &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(bfi_women)</span>
@@ -1079,8 +1053,9 @@ But we also want to examine the first part of the output which will show us the 
 ## zou2007: Zou&#39;s (2007) confidence interval
 ##   95% confidence interval for r1.jk - r2.hm: -0.0021 0.1543
 ##   Null hypothesis retained (Interval includes 0)</code></pre>
-<p>We could write this as <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [-.002, .15]. If we include the <em>p</em>-value from fisher1925. We would write:</p>
-<p><span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [-.002, .15], <em>p</em> = .057.</p>
+<p>The output reveals the correlation for men (<span class="math inline">\(r_{(a1, e1)}\)</span> = 0.1387, .14 rounded) and women (<span class="math inline">\(r_{(a1, e1)}\)</span>= 0.0623, .06 rounded) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval: -.00 to .15.</p>
+<p>We write this up as:</p>
+<p>For men, there was a positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .14, 95% [.07, .20], <em>p</em> &lt; .001, such that as agreeableness increases so did extraversion. Likewise, for women, there was a similar positive relation between agreeableness (a1) and extraversion (e1), <em>r</em> = .06, 95% [.02, .11], <em>p</em> = .007. We did not find a significant difference in the strength of these relations, <span class="math inline">\(\Delta\)</span><em>r</em> = .08, 95% CI [-.002, .15], <em>p</em> = .057.</p>
 
 </div>
 </div>

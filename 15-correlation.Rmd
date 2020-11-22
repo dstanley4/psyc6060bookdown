@@ -657,22 +657,22 @@ glimpse(bfi_women)
 #### Check out the subgroup correlations
 
 
-For **men**, we can obtain the correlation matrix with the code below. Pay special attention to the correlation between a1 and e1.
+For **men**, we can obtain the correlation between a1/e1 with the code below. From this we determine, *r* = .14, 95% [.07, .20], *p* < .001.
 
 ```{r}
-apa.cor.table(bfi_men)
+cor.test(bfi_men$a1, bfi_men$e1)
 ```
 
-For **women**, we can obtain the correlation matrix with the code below. Pay special attention to the correlation between a1 and e1.
+For **women**, we can obtain the correlation between a1/e1 with the code below. From this we determine, *r* = .06, 95% [.02, .11], *p* = .007.
 
 ```{r}
-apa.cor.table(bfi_women)
+cor.test(bfi_women$a1, bfi_women$e1)
 ```
 
 
 ##  Comparison r(a1, e1)
 
-As per the correlation tables above we find the correlations for men ($r_{(a1, e1)}$ = 0.1387) and women ($r_{(a1, e1)}$=  0.1387) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval.
+We run the R commands below to compare the correlations for men and women.
 
 ```{r}
 library(cocor)
@@ -682,10 +682,12 @@ bfi_women_dataframe <- as.data.frame(bfi_women)
 cocor( ~ a1 + e1 | a1 + e1,
        data = list(bfi_men_dataframe, bfi_women_dataframe))
 ```
+The output reveals the correlation for men ($r_{(a1, e1)}$ = 0.1387, .14 rounded) and women ($r_{(a1, e1)}$=  0.0623, .06 rounded) in the output. We also see the comparison: Difference: r1.jk - r2.hm = 0.0765. Looking below we see the zou2007 confidence interval: -.00 to .15.
 
-We could  write this as $\Delta$*r* = .08, 95% CI [-.002, .15]. If we include the *p*-value from fisher1925. We would write:
 
-$\Delta$*r* = .08, 95% CI [-.002, .15], *p* = .057.
+We write this up as:
+
+For men, there was a positive relation between agreeableness (a1) and extraversion (e1), *r* = .14, 95% [.07, .20], *p* < .001, such that as agreeableness increases so did extraversion. Likewise, for women, there was a similar positive relation between agreeableness (a1) and extraversion (e1), *r* = .06, 95% [.02, .11], *p* = .007. We did not find a significant difference in the strength of these relations, $\Delta$*r* = .08, 95% CI [-.002, .15], *p* = .057.
 
 
 
