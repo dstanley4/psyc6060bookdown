@@ -13,8 +13,21 @@ The following CRAN packages must be installed:
 |tidyverse          |
 |apaTables         |
 |janitor            |
+|remotes            |
 |skimr             |
 
+The following GitHub packages must be installed:
+
+| Required GitHub Packages |
+|--------------------------|
+|dstanley4/fastInteraction |
+
+
+After the remotes package is installed, it can be used to install a package from GitHub:
+
+```{r, eval = FALSE}
+remotes::install_github("dstanley4/fastInteraction")
+```
 
 ## Example
 
@@ -125,11 +138,38 @@ knitr::include_graphics("ch_multiple_regression/images/mr_table.png")
 
 ## *b*-weights
 
-An inspection of the b column in the above table reveals the *b*-weights. The *b*-weights are also known as the slopes or the unstandardized regression weights. The *b*-weights are used to create predicted/estimated video game score via the regression equation:
+An inspection of the *b* column in the above table reveals the *b*-weights. The *b*-weights are also known as the slopes or the unstandardized regression weights. The *b*-weights are used to create predicted/estimated video game score via the regression equation:
 
-$\widehat{\text{video game}} = 102.233 + 0.3285(iq) - 0.3712(age)$
+$$
+\begin{align}
+\widehat{Y} &= 102.233 + 0.3285(Z) - 0.3712(X) \\
+\widehat{\text{video game}} &= 102.233 + 0.3285(iq) - 0.3712(age) \\
+\end{align}
+$$
 
-The computer picks the *b*-weights weights using a process that ensures the predicted video game scores ($\widehat{\text{video game}}$) correspond as closely as possible to actual video game scores. You can interpret the *b*-weights as indicating how much the criterion changes when a predictor changes -- **holding the other predictors constant**. In this context, a 0.3285 b-weight for IQ indicates that for each one-unit increase in IQ video game score will increase 0.3285 points -- holding the effect of age constant. Don't forget the b-weight can only be interpreting in context of that specific regression equation. If you replaced the age predictor with, say, height as a predictor, then the b-weight for IQ would change. Context matters when interpreting *b*-weights.
+You can think of the regression equation as a receipe for making $\hat{Y}$. The variables in the regression (e.g., age and iq) are the ingredients. The *b*-weights (e.g., 0.3285 and 00.3712) are the amount of each ingredient you need to make $\hat{Y}$.
+
+The computer picks the *b*-weights using a process that ensures the predicted video game scores ($\hat{Y}$) corresponds as closely as possible to actual video game scores ($Y$). Consider the regression calculation for Person 1, below, who is 41.7 years old and has an IQ of 107.6.
+
+$$
+\begin{align}
+\widehat{Y} &= 102.233 + 0.3285(Z) - 0.3712(X) \\
+\widehat{\text{video game}} &= 102.233 + 0.3285(iq) - 0.3712(age) \\
+&= 102.233 + 0.3285(107.6) - 0.3712(41.1) \\
+&= 122.3
+\end{align}
+$$
+
+
+
+The above calculation reveals an estimated video game score for Person 1 of 122.3 (i.e., $\hat{Y} = 122.3$) -- which differs only slightly from their actual video game score of 122 (i.e.. $Y = 122$). You can see the similarity between actual video game scores ($Y$) and predicted video game scores ($\hat{Y}$) for the first several participants in the table below.
+
+```{r, echo = FALSE, out.width="50%"}
+knitr::include_graphics("ch_multiple_regression/images/mr_reg_data_figure.png")
+```
+
+You can interpret the *b*-weights as indicating how much the criterion changes when a predictor changes -- **holding the other predictors constant**. In this context, a 0.3285 *b*-weight for IQ indicates that for each one-unit increase in IQ video game score will increase 0.3285 points -- holding the effect of age constant. Don't forget the b-weight can only be interpreting in context of that specific regression equation. If you replaced the age predictor with, say, height as a predictor, then the *b*-weight for IQ would change. Context matters when interpreting *b*-weights.
+
 
 ## $R^2$
 
@@ -408,3 +448,39 @@ Notice that the estimates above are 4.582e-01 -2.070e-01 which are, in decimal f
 
 Hopefully, this description has made it clear that although beta weights are often referred to as *standardized regression weights*; it would be more accurate to describe them as the **weights for standardized variables**.
 
+## Graphing
+
+Let's take a minute to consider the nature of the data we have so far.  For each person, we have three values: age, video, and video game score. If are to represent each person on a graph we need a 3D graph. Typically, we place 
+
+
+Recall we previously conducted our regression with this command:
+
+```{r,echo=TRUE,eval=FALSE}
+lm_object <- lm(video_game ~ age + iq,
+                    data = my_data)
+```
+
+The lm_object has the three data point for each person (age, iq, video_game) embeded inside it. 
+
+
+So we can use the make a 3D graph using the lm_object. We do so via the fast.plot command in the fastInteraction package.
+
+Note:  The fast.plot command uses the argument "moderator" which is not appropriate in our context. When you see moderator in the command below just think of it as another predictor.
+
+```{r, warning=FALSE, message=FALSE}
+library(fastInteraction)
+
+fast.plot(lm_object,
+          criterion = video_game,
+          predictor = iq,
+          moderator = age)
+```
+
+$$
+\begin{align}
+X &= 1 \\
+Z &= 1 \\
+Y &= 1 \\
+\hat{Y} &= 1 \\
+\end{align}
+$$
