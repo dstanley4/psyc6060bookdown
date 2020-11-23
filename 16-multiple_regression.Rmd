@@ -450,37 +450,43 @@ Hopefully, this description has made it clear that although beta weights are oft
 
 ## Graphing
 
-Let's take a minute to consider the nature of the data we have so far.  For each person, we have three values: age, video, and video game score. If are to represent each person on a graph we need a 3D graph. Typically, we place 
+Let's take a minute to consider the nature of the data we have so far - examine the first few rows of the data below (that includes the predicted value for each person).
+
+```{r, echo = FALSE, out.width="50%"}
+knitr::include_graphics("ch_multiple_regression/images/mr_reg_data_figure.png")
+```
 
 
-Recall we previously conducted our regression with this command:
+You can see that each person has three measured variables associated with them: video_game_score, iq, and age. These columns are in blue to indicate the fact they are measured variables. Because we have three measured variables we can't create a typical 2D scatter plot. That type of plot only work when there is one predictor and one criterion. Now we have two predictors and one criterions. Consequently, we need make a 3D scatter plot.
+
+Correspondingly, because we have two predictors, we can't obtain a regression line (i.e., best-fit line). A regression line is only possible when there is one predictor. Now we have two predictors. Consequently, a regression surface is required to show the predicted values for combinations of age and iq. In this case, when there are two predictor variables, the regression surface is a plane.
+
+Let's create the 3D scatter plot with a regression surface. You recall we previously created the lm_object when we ran our regression:
 
 ```{r,echo=TRUE,eval=FALSE}
 lm_object <- lm(video_game ~ age + iq,
                     data = my_data)
 ```
 
-The lm_object has the three data point for each person (age, iq, video_game) embeded inside it. 
-
-
-So we can use the make a 3D graph using the lm_object. We do so via the fast.plot command in the fastInteraction package.
-
-Note:  The fast.plot command uses the argument "moderator" which is not appropriate in our context. When you see moderator in the command below just think of it as another predictor.
+The lm_object has the three data point for each person (age, iq, video_game) embedded inside it. So we can use the lm_object to create the scatter plot with regression plane. We do so using the fastInteraction package. More specifically,  we use the fast.plot command as illustrated below.Note:  The fast.plot command uses the argument "moderator" which is not appropriate in our context. When you see moderator in the command below just think of it as another predictor. 
 
 ```{r, warning=FALSE, message=FALSE}
 library(fastInteraction)
 
-fast.plot(lm_object,
-          criterion = video_game,
-          predictor = iq,
-          moderator = age)
+surface_plot <- fast.plot(lm_object,
+                          criterion = video_game,
+                          predictor = iq,
+                          moderator = age)
+
 ```
 
-$$
-\begin{align}
-X &= 1 \\
-Z &= 1 \\
-Y &= 1 \\
-\hat{Y} &= 1 \\
-\end{align}
-$$
+Then just type:
+
+```{r}
+surface_plot
+```
+
+
+All of the predicted scores fall on the regression surface. You can think of the regression surface as a best-fit plane. Each dot represents a person. The graph is interactive - you can rotate it to see a better view of the surface. The graph illustrates that predicted video game scores (i.e., the surface) change as a function of both age and iq.
+
+
