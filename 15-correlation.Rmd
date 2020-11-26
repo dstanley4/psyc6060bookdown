@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Regression and correlation
 
 The following CRAN packages must be installed:
@@ -5,10 +10,10 @@ The following CRAN packages must be installed:
 | Required CRAN Packages |
 |-------------------|
 |tidyverse          |
-|apaTables         |
-|cocor            |
+|apaTables          |
+|cocor              |
 |janitor            |
-|psych            |
+|psych              |
 
 
 ```{r, echo=FALSE, message=FALSE}
@@ -158,17 +163,17 @@ knitr::include_graphics("ch_correlation/images/pop_graph_extraversion_mean.png")
 What if we were to try another variable -- like IQ? The graph below illustrates a positive linear relation between IQ and video game score. As before, we place a green horizontal line on the graph to indicate the population mean. Additionally, we place a red regression line (i.e., a best-fit line) on the graph. This red regression line represents, for each person, an individualized estimate of video game score based on their IQ. The population-level regression line has the slope 8.00; which indicate that as IQ increase by 1.0 point video game score increases by 8.00 points. The equation for the regression line is:
 
 $$
-\begin{align}
+\begin{aligned}
 \widehat{score} &= 8.00(IQ) + 200.31
-\end{align}
+\end{aligned}
 $$
 
 Or using the more generic X/Y notation:
 
 $$
-\begin{align}
+\begin{aligned}
 \hat{Y} &= 8.00(X) + 200.31 \\
-\end{align}
+\end{aligned}
 $$
 You can see in the graph below that, for some people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is higher than the population mean. That is, in some cases the red regression is line is higher than the green line for the population mean. For other people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is lower than the population mean. That is, in some cases the red regression is line is lower than the green line for the population mean. It appears that individuals with a high IQ tend to have a high video game score whereas individuals with a low IQ tend of have a low video game score. The regression line provides a more nuanced estimate for individual's video game score than you can obtain by simply using the same estimation (i.e., the population mean) for everyone.
 
@@ -207,9 +212,9 @@ Cohen's benchmarks are below:
 An alternative, and more general, means of assessing the quality of statistical model is to use $R^2$. This indexes the proportion of video game scores that are accounted for by a statistical model. One important attribute of $R^2$ is that can be used when there are multiple predictors.  When there is only one predictor, $R^2$ is simply the correlation squared. Thus, at the population level, **when there is only one predictor**:
 
 $$
-\begin{align}
+\begin{aligned}
 R^2  = \rho^2
-\end{align}
+\end{aligned}
 $$
 
 
@@ -337,17 +342,18 @@ knitr::include_graphics("ch_correlation/images/sample_plot1.png")
 We can calculate the variance of the video game scores using the formula below.
 
 $$
-\begin{align}
+\begin{aligned}
 s^2_{score} = \frac{\sum{(Y_i - \bar{Y})^2}}{N-1}
-\end{align}
+\end{aligned}
 $$
+
 It's often useful to just focus on the numerator of this equation. We call this Sum of Squares Total (SSR):
 
 
 $$
-\begin{align}
+\begin{aligned}
 SS_{Total} = \sum{(Y_i - \bar{Y})^2}
-\end{align}
+\end{aligned}
 $$
 
 
@@ -368,27 +374,29 @@ knitr::include_graphics("ch_correlation/images/sample_plot3.png")
 Recall that the regression line represents an individualized estimate of each person's video game score derived from their IQ (via the regression equation). Later we will show you how to calculate the regression line. For now, accept that the regression equation for the sample in standard notation is:
 
 $$
-\begin{align}
+\begin{aligned}
 \hat{Y_i} &= 9.44(X_i) -21.21 \\
-\end{align}
+\end{aligned}
 $$
+
 And contextualized to the variable names is:
 
 $$
-\begin{align}
+\begin{aligned}
 \widehat{score_i} &= 9.44(IQ_i) -21.21
-\end{align}
+\end{aligned}
 $$
 
 Therefore, the predicted value for Jane is:
 
 $$
-\begin{align}
+\begin{aligned}
 \widehat{score_i} &= 9.44(IQ_i) -21.21 \\
 &= 9.44(71) - 21.21 \\
 &= 649 \text{(rounded)} \\
-\end{align}
+\end{aligned}
 $$
+
 You can see this calculation for everyone in the sample:
 
 ```{r, echo = FALSE}
@@ -406,10 +414,11 @@ We can calculate the extent to which individualized estimates are better than th
 
 
 $$
-\begin{align}
+\begin{aligned}
 SS_{Regression} = \sum{(\hat{Y_i} - \bar{Y})^2}
-\end{align}
+\end{aligned}
 $$
+
 The values used in the  **Sum of Squares Regression** calculation are illustrated in the figure below. The vertical red line indicates the difference between $\hat{Y_i}$ and $\bar{Y}$. The $SS_{Regression}$ value indexes the variability of the **estimates** of video game scores around the sample mean. The longer the vertical red line (i.e., the larger the $(\hat{Y_i} - \bar{Y})$ difference) the better the model. Longer vertical red lines are associated with models that do a better job of accounting for variability in video scores.
 
 
@@ -421,19 +430,19 @@ knitr::include_graphics("ch_correlation/images/sample_plot5.png")
 So far we have calculated two values, $SS_{Regression}$ and $SS_{Total}$. The $SS_{Total}$ value indexes the variability of **actual** video game scores about the sample mean (it's the numerator for the variance calculation). In contrast, $SS_{Regression}$ indexes the variability of **estimated** video game scores about the sample mean. We can calculate the proportion of the variability in actual scores accounted for the statistical model (i.e., regression line) using $R^2$:
 
 $$
-\begin{align}
+\begin{aligned}
 R^2 = \frac{SS_{Regression}}{SS_{Total}}
-\end{align}
+\end{aligned}
 $$
 We can also think of this as in terms of variance (because N-1 terms cancel each other out).
 
 $$
-\begin{align}
+\begin{aligned}
 R^2 &= \frac{\text{Variance of predicted scores}}{\text{Variance of actual scores}} \\
 &= \frac{\frac{\sum{(\hat{Y_i} - \bar{Y})^2}}{N-1}}{\frac{\sum{(Y_i - \bar{Y})^2}}{N-1}} \\
 &= \frac{\sum{(\hat{Y_i} - \bar{Y})^2}}{\sum{(Y_i - \bar{Y})^2}} \\
 &= \frac{SS_{Regression}}{SS_{Total}}\\
-\end{align}
+\end{aligned}
 $$
 
 
@@ -466,18 +475,18 @@ knitr::include_graphics("ch_correlation/images/regression_output.png")
 If we examine the fit column on the far right of the output above we see $R^2$ = .74, 95% CI [.17, .86]. This value indicates that in this sample 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line). The confidence interval suggests a plausible range of values for the $R^2$ at the population-level is .17 to .86. Notice that this range captures that population-level $R^2$ of .36 that we calculated from the entire population previously.
 
 $$
-\begin{align}
+\begin{aligned}
 R^2 &= .736 = .74\\\\ 
-\end{align}
+\end{aligned}
 $$
 
 If we examine the b column in the output we can create the regression equations below:
 
 $$
-\begin{align}
+\begin{aligned}
 \hat{Y_i} &= 9.44(X_i) -21.21 \\
-\widehat{score_i} &= 9.44(IQ_i) -21.21
-\end{align}
+\widehat{score_i} &= 9.44(IQ_i) -21.21\\
+\end{aligned}
 $$
 
 This tells use the slope in our sample is 9.44, 95% CI [4.39, 14.50]. That is, in the sample, each IQ point is associated with an additional 9.44 points in the video game. The population regression line might have a smaller/larger slope. The 95% confidence intervals tells us that a plausible range of values for the slope of the regression line at the population-level is 4.39 to 14.50. Notice that this range captures that population-level slope of 8.00 that we calculated from the entire population previously.

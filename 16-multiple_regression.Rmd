@@ -149,10 +149,10 @@ knitr::include_graphics("ch_multiple_regression/images/mr_table.png")
 An inspection of the *b* column in the above table reveals the *b*-weights we previously discussed. The *b*-weights are also known as the slopes or the unstandardized regression weights. The *b*-weights are used to create predicted/estimated video game score via the regression equation:
 
 $$
-\begin{align}
+\begin{aligned}
 \widehat{Y} &= 102.233 + 0.3285(Z) - 0.3712(X) \\
 \widehat{\text{video game}} &= 102.233 + 0.3285(iq) - 0.3712(age) \\
-\end{align}
+\end{aligned}
 $$
 
 You can think of the regression equation as a receipe for making $\hat{Y}$. The variables in the regression (e.g., age and iq) are the ingredients. The *b*-weights (e.g., 0.3285 and 00.3712) are the amount of each ingredient you need to make $\hat{Y}$.
@@ -160,12 +160,12 @@ You can think of the regression equation as a receipe for making $\hat{Y}$. The 
 As previously noted, the computer picks the *b*-weights using a process that ensures the predicted video game scores ($\hat{Y}$) corresponds as closely as possible to actual video game scores ($Y$). Consider the regression calculation for Person 1, below, who is 41.7 years old and has an IQ of 107.6.
 
 $$
-\begin{align}
+\begin{aligned}
 \widehat{Y} &= 102.233 + 0.3285(Z) - 0.3712(X) \\
 \widehat{\text{video game}} &= 102.233 + 0.3285(iq) - 0.3712(age) \\
 &= 102.233 + 0.3285(107.6) - 0.3712(41.1) \\
 &= 122.3
-\end{align}
+\end{aligned}
 $$
 
 
@@ -212,9 +212,9 @@ actual_video_game_scores <- my_data$video_game
 Recall the formula for $R^2$:
 
 $$
-\begin{align}
+\begin{aligned}
 R^2 = \frac{\text{Variance of predicted scores}}{\text{Variance of actual scores}}
-\end{align}
+\end{aligned}
 $$
 
 We implement this formula using the code below:
@@ -237,10 +237,10 @@ Thus, 29% of the variability in video game scores is predicted by the combinatio
 An alternative way of thinking about $R^2$ is as the squared correlation between predicted criterion scores and actual criterion scores:
 
 $$
-\begin{align}
+\begin{aligned}
 R^2 &= r^2_{\hat{Y}, Y}\\
-&= r^2_{(\text{predicted_video_game_scores},\text{actual_video_game_scores})}
-\end{align}
+&= r^2_{(predicted_video_game_scores, actual_video_game_scores)}\\
+\end{aligned}
 $$
 
 We implement this formula with the code below and obtain the same value:
@@ -418,9 +418,9 @@ To obtain beta-weights there are two steps. First, we create standardized score 
 A set of standardized scores have a mean of 0 and a standard deviation of 1.0. To create the standardized score versions of each column in the regression we use the z-score formula:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{standardized scores}=z_{X} = \frac{X-\bar{X}}{\sigma_X}
-\end{align}
+\end{aligned}
 $$
 
 Consider the age column. We can calculate the mean for this column, mean(age), and the standard deviation for this column, sd(age). Then for every value in the age column we subtract the column mean and then divide by the column standard deviation. We do so with the calculation: (age-mean(age))/sd(age). The code below creates standardized score versions of the iq, age, and video_game columns called z_iq, z_age, and z_video_game, respectively.
@@ -434,7 +434,7 @@ my_data <- my_data %>%
 
 We can confirm a mean of 0 and a standard deviation of 1.0 for these new columns with the skim command:
 
-```{r}
+```{r, eval = FALSE}
 library(skimr)
 skim(my_data)
 ```
@@ -506,8 +506,8 @@ All of the predicted scores fall on the regression surface. You can think of the
 
 Try the interactive version of the graph below. Caveat, sometimes it doesn't appear correctly on the web. If the graph appears incorrectly (e.g., no data points or no surface) try using the Chrome browser. Safari sometimes has problems with this web object. You can rotate the graph to see a better view of the surface. The graph illustrates that predicted video game scores (i.e., the surface) change as a function of both age and iq.
 
-```{r}
+
+```{r, eval= TRUE}
 surface_plot
 ```
-
 
