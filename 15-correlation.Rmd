@@ -52,20 +52,22 @@ knitr::include_graphics("ch_correlation/images/tetris.png")
 
 
 
-Consider the following the scenario, we want to examine the extent to which IQ predicts video games scores for people who live in the City of Guelph. We want to make conclusions about people who live in the City of Guelph so we refer to Guelph citizens as our population. Because we are interested in using IQ to predict video game score we refer to IQ as the **predictor**. The value being predicted is video game score and we refer to that variable as the **criterion** (i.e., the dependent variable). Imagine, for a moment, that we are actually able to get an IQ and a video game score for everyone in the City of Guelph (*N* = 100,000). 
+Consider the following the scenario, we want to examine the extent to which IQ predicts video game scores for people who live in the City of Guelph. We want to make conclusions about people who live in the City of Guelph so we refer to Guelph citizens as our population. Because we are interested in using IQ to predict video game score we refer to IQ as the **predictor**. The value being predicted is video game score and we refer to that variable as the **criterion** (i.e., the dependent variable). Imagine, for a moment, that we are actually able to get an IQ and a video game score for everyone in the City of Guelph (*N* = 100,000). 
 
 ### No predictor
 
 We illustrate the range and variability of video game scores for everyone in the population below. There are 100,000 blue dots on this graph. Each blue dot represents a person in the **population**. The vertical position of the dot indicates each person's video game. 
 
 
-* Notice the range of video game scores - everyone did not obtain the same score. But there are so many dots that they overlap.
+* Notice the large number of dots (i.e., people) - there are so many that it's hard to see individual dots/people.
 
-* We want to try to understand why, in this population, some people have higher vs lower scores.
+* The dots illustrate the range of video game scores - everyone did not obtain the same score. 
 
-* Said another way, we want to explain, for this population, the variability in video game scores above/below the mean video game score.
+* We want to try to understand why, in this population, some people have higher vs lower video game scores.
 
-* Correlation/regression can never provide evidence of causation (or explanation) but we can use those analyses to find a pattern in our data that is consistent with a causal relation. Then we conduct a second **experimental** study to determine if their really is a causal relation.
+* Said another way, we want to explain, for this population, the variability in video game scores.
+
+* Correlation/regression can never provide evidence of causation (or explanation) but we can use those analyses to find a pattern in our data that is *consistent* with a causal relation. Then we conduct a second **experimental** study to determine if their really is a causal relation.
 
 
 
@@ -126,7 +128,7 @@ knitr::include_graphics("ch_correlation/images/pop_graph_mean.png")
 
 We can plot a variable (e.g., extraversion) against video game score to see if there is a relation between the two. In this case there doesn't appear to be a relation. Indeed, this graph illustrates a zero correlation between extraversion and video game scores - the weakest possible relation for a predictor. Effectively, there is no linear relation between extraversion and video game scores.
 
-As before, we place a horizontal green line on the graph to indicate the mean video game score. We also place a red regression line (i.e., best-fit line) on the graph; however, it is completely hidden by the green line representing the mean video game score. In this case, with these data, knowing a person's extraversion score **does not** allow us to provide an individualized estimate of a person's video game score. As a result, extraversion does not help us explain the variability in video game scores. That is, extraversion scores doesn't not allows us to explain why some people have high video game score whereas other people have low video game scores.
+As before, we place a horizontal green line on the graph to indicate the mean video game score. We also place a red regression line (i.e., best-fit line) on the graph; however, the red line is completely hidden by the green line representing the mean video game score. In this case, with these data, knowing a person's extraversion score **does not** allow us to provide an individualized estimate of a person's video game score. As a result, extraversion does not help us explain the variability in video game scores. That is, extraversion scores do not allow us to explain why some people have high video game score whereas other people have low video game scores.
 
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
@@ -153,7 +155,7 @@ knitr::include_graphics("ch_correlation/images/pop_graph_extraversion_mean.png")
 
 ### Strong relation
 
-What if we were to try another variable -- like IQ? The graph below illustrates a positive linear relation between IQ and video game score. As before, we place a green horizontal line on the graph to indicate the population mean. Additionally, we place a red regression line (i.e., a best-fit line) on the graph. This regression line represents an individualized estimate of video game score for each person based on their IQ. The population-level regression line has the slope 8.00; which indicate that as IQ increase by 1.0 point video game score increases by 8.00 points. The equation for the regression line is:
+What if we were to try another variable -- like IQ? The graph below illustrates a positive linear relation between IQ and video game score. As before, we place a green horizontal line on the graph to indicate the population mean. Additionally, we place a red regression line (i.e., a best-fit line) on the graph. This red regression line represents, for each person, an individualized estimate of video game score based on their IQ. The population-level regression line has the slope 8.00; which indicate that as IQ increase by 1.0 point video game score increases by 8.00 points. The equation for the regression line is:
 
 $$
 \begin{align}
@@ -168,9 +170,7 @@ $$
 \hat{Y} &= 8.00(X) + 200.31 \\
 \end{align}
 $$
-
-
-You can see in the graph below that for some people the individualized estimate of video game score (i.e., the y-axis position of the red line) is higher than the population mean. That is, in some cases the red regression is line is higher than the green mean line. For other people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is lower than the population mean. That is, in some cases the red regression is line is lower than the green mean line. It appears that individuals with a high IQ tend to have a high video game scores whereas individuals with a low IQ tend of have a low video game score. The regression line provides more nuanced estimates for individuals than you can obtain by simply using the same estimation (i.e., the mean) for everyone.
+You can see in the graph below that, for some people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is higher than the population mean. That is, in some cases the red regression is line is higher than the green line for the population mean. For other people, the individualized estimate of video game score (i.e., the y-axis position of the red line) is lower than the population mean. That is, in some cases the red regression is line is lower than the green line for the population mean. It appears that individuals with a high IQ tend to have a high video game score whereas individuals with a low IQ tend of have a low video game score. The regression line provides a more nuanced estimate for individual's video game score than you can obtain by simply using the same estimation (i.e., the population mean) for everyone.
 
 ```{r, echo=FALSE, message=FALSE, out.width="70%"}
 pop_graph <- ggplot() + 
@@ -194,7 +194,7 @@ knitr::include_graphics("ch_correlation/images/pop_graph_iq_line.png")
 ```
 
 
-But how good is this model of the data? There are a variety of way of assessing model fit. We present two below. First, when you are only concerned about how well a single predictor performs, as is the case here, you can use a correlation. The symbol for the population correlation is $\rho$. In these data, $\rho = .60$. The correlation coefficient can range from -1 to 1. The further the correlation is from zero - the stronger the relation between the predictor and the criterion. That is, the better a linear model fits the data the further the correlation will be from zero. A positive correlation indicates that as one variable increases the other variable also increases. A negative correlation indicates that as one variable increases the other variable decreases.
+But how good is this model of the data? There are a variety of way of assessing model fit. We present two below. First, when you are only concerned about how well a single predictor performs, as is the case here, you can use a correlation. The symbol for the population correlation is $\rho$. In these data, $\rho = .60$. The correlation coefficient can range from -1 to 1. The further the correlation is from zero - the stronger the relation between the predictor and the criterion. That is, the further the correlation is from zero the better a linear model fits the data. A positive correlation indicates that as one variable increases the other variable also increases. A negative correlation indicates that as one variable increases the other variable decreases.
 
 Cohen's benchmarks are below:
 
@@ -204,7 +204,7 @@ Cohen's benchmarks are below:
 | Medium          | $\rho$ = .30 |
 | Large           | $\rho$ = .50 |
 
-An alternative, and more general, means of assessing the quality of statistical model is to use $R^2$. This indexes the proportion of video game scores that are accounted for by a statistical model. One important attribute of $R^2$ is that can be used when there are multiple predictors.  When there is only one predictor, $R^2$ is simple the correlation squared. Thus, at the population level, **when there is only one predictor**:
+An alternative, and more general, means of assessing the quality of statistical model is to use $R^2$. This indexes the proportion of video game scores that are accounted for by a statistical model. One important attribute of $R^2$ is that can be used when there are multiple predictors.  When there is only one predictor, $R^2$ is simply the correlation squared. Thus, at the population level, **when there is only one predictor**:
 
 $$
 \begin{align}
@@ -327,7 +327,7 @@ ggsave("ch_correlation/images/vplot5.png", var_plot5, width = fig_width, height 
 
 We always need to remember the values calculated from our sample (statistics) are only estimates of the population-level parameters; estimates that are likely are likely to differ from population parameters due to sampling error.
 
-Let's look at our sample in more detail. Notice, in the figure below, that there is one plotted ($X_i$, $Y_i$) data point for each of the 9 people. We illustrate the mean video game score of the 9 people with the horizontal green line.
+Let's look at our sample in more detail. Notice, in the figure below, that there is one data point ($X_i$, $Y_i$) for each of the 9 people. We illustrate the mean video game score for the 9 people with the horizontal green line.
 
 
 ```{r, echo = FALSE, out.width="80%"}
@@ -358,7 +358,7 @@ knitr::include_graphics("ch_correlation/images/sample_plot2.png")
 ```
 
 
-In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line always runs through the joint mean of the two variables (i.e., the [$\bar{X}$, $\bar{Y}$] point).
+In the figure below we add the regression line in red. The regression line is a statistical model for the data (a best-fit line). The regression line will always run through the joint mean of the two variables (i.e., the [$\bar{X}$, $\bar{Y}$] point).
 
 
 ```{r, echo = FALSE, out.width="80%"}
@@ -425,11 +425,14 @@ $$
 R^2 = \frac{SS_{Regression}}{SS_{Total}}
 \end{align}
 $$
-We can also think of this as:
+We can also think of this as in terms of variance (because N-1 terms cancel each other out).
 
 $$
 \begin{align}
-R^2 = \frac{\text{Variance of predicted scores}}{\text{Variance of actual scores}}
+R^2 &= \frac{\text{Variance of predicted scores}}{\text{Variance of actual scores}} \\
+&= \frac{\frac{\sum{(\hat{Y_i} - \bar{Y})^2}}{N-1}}{\frac{\sum{(Y_i - \bar{Y})^2}}{N-1}} \\
+&= \frac{\sum{(\hat{Y_i} - \bar{Y})^2}}{\sum{(Y_i - \bar{Y})^2}} \\
+&= \frac{SS_{Regression}}{SS_{Total}}\\
 \end{align}
 $$
 
@@ -460,7 +463,7 @@ Which produces the output:
 knitr::include_graphics("ch_correlation/images/regression_output.png")
 ```
 
-If we examine the fit column on the far right we see the $R^2$ = .74, 95% CI [.17, .86]. This indicates that in this sample, 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line). The confidence interval suggests a plausible range of values for the $R^2$ at the population-level is .17 to .86. Notice that this range captures that population-level $R^2$ of .36 that we calculated from the entire population previously.
+If we examine the fit column on the far right of the output above we see $R^2$ = .74, 95% CI [.17, .86]. This value indicates that in this sample 74% of the variability in video scores is accounted accounted for by the statistical model (i.e., red regression line). The confidence interval suggests a plausible range of values for the $R^2$ at the population-level is .17 to .86. Notice that this range captures that population-level $R^2$ of .36 that we calculated from the entire population previously.
 
 $$
 \begin{align}
@@ -489,7 +492,7 @@ summary(lm_object)
 
 ### Correlation
 
-As discussed previously, a correlation can be considered a fit index for a linear regression line. That is, the correlations indicates the extent to which the data fit a straight line (i.e., the extent to which the data fit a linear model). Correlation values range between -1 and +1. The further a correlation value is from 0 the more tightly points will cluster around the regression line.
+As discussed previously, a correlation can be considered a fit index for a linear regression line. That is, a correlation indicates the extent to which the data fit a straight line (i.e., the extent to which the data fit a linear model). Correlation values range between -1 and +1. The further a correlation value is from 0 the more tightly points will cluster around the regression line.
 
 * A **positive correlation** indicates that as one value **increases** the other value **increases**. For example, as height increases weight increases.
 
@@ -536,7 +539,7 @@ my_plot <- ggplot(data = sample_data,
 
 ## Comparing correlations
 
-In this part of the chapter we compare correlations within and across studies. We begin by obtaining a data set from the psych package. Note that we **do not** use the library(psych) command due to conflicts with the tidyverse.
+In this part of the chapter we compare correlations within and across studies we do so with the cocor package. We begin by obtaining a data set from the psych package. Note that we **do not** use the library(psych) command due to conflicts with the tidyverse.
 
 ```{r}
 # Obtain the bfi data set from the psych package
@@ -587,7 +590,7 @@ cor(bfi, use = "pairwise.complete.obs") %>%
     round(2)
 ```
 
-Or you could use apaTable apa.cor.table() command:
+Or we could use apaTable apa.cor.table() command:
 
 ```{r, eval = FALSE}
 library(apaTables)
@@ -604,12 +607,13 @@ knitr::include_graphics("ch_correlation/images/table1_bfi.png")
 ```
 
 
-Inspecting the above table you see that the correlation between a1 and c1 with is *r* =  .03, 95% CI [-.01, .07]. Likewise, the correlation between e1 and o1 is *r* = -.10, 95% CI [-.14, -.06].
+Inspecting the above table you see that the correlation between a1 and c1 with is *r* =  .03, 95% CI [-.01, .07]. Likewise, the correlation between e1 and o1 is *r* = -.10, 95% CI [-.14, -.06]. We obtain the *p*-values for these relations below.
 
 
 ### p-values
 
 The code below obtains the *p*-value for the a1/c1 relation - a value of .144.
+
 ```{r}
 cor.test(bfi$a1, bfi$c1)
 ```
@@ -632,7 +636,7 @@ In this section we look at comparing correlation within a single data set.
 
 We will compare the correlation to between (a1, c1) to the correlation between (e1, o1) with the cocor package. In this case, because neither of the variables in the first correlation (a1, c1) are in the second correlation (e1, o1) we refer to this as a non-overlapping correlation comparison.
 
-The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007). But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (e1, o1) = -0.1002 (these are the .03 and -.10 values prior to rounding). As well it also shows us the difference between them, Difference: r.jk - r.hm = 0.1278.
+The cocor command will provide a lot of output. We are most interested in the last part of the output corresponding to Zou (2007) which provides the confidence interval for the difference in the correlations. But we also want to examine the first part of the output which will show us the two original correlations (a1, c1) = 0.0276, and (e1, o1) = -0.1002 (these are the .03 and -.10 values prior to rounding). As well it also shows us the difference between them, Difference: r.jk - r.hm = 0.1278.
 
 ```{r}
 library(cocor)
@@ -642,8 +646,6 @@ cocor( ~ a1 + c1 | e1 + o1, data = as.data.frame(bfi))
 
 
 We could  write this as:
-
-There was a weak positive relation between agreeableness (a1) and conscientiousness(c1) such that as agreeableness increased so did conscientiousness, *r* =  .03, 95% CI [-.01, .07], *p* = .144. 
 
 There was a negative weak relation between extraversion (e1) and openness (o1) such that as extraversion increased openness decreased, *r* = -.10, 95% CI [-.14, -.06], *p* < .001. In contrast, the relation between agreeableness (a1) and conscientiousness(c1) was non-significant, *r* =  .03, 95% CI [-.01, .07], *p* = .144. The extraversion/openness relation was stronger than the agreeableness/conscientiousness relation, $\Delta$*r* = .13, 95% CI [.07, .18], *p* < .001.
 
@@ -672,17 +674,19 @@ library(cocor)
 
 cocor( ~ a1 + c1 | a1 + e1, data = as.data.frame(bfi))
 ```
-The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007), -.13 to -.03. But we also want to examine the first part of the output which will show us the two original correlations $r_{(a1, c1)}$ = 0.0276, and $r_{(a1, e1)}$ = 0.10472 As well it also shows us the difference between them, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
+The cocor command provides a lot of output. We are most interested in the last part of the output corresponding to Zou (2007) which provides the confidence interval for the difference: -.13 to -.03. But we also want to examine the first part of the output which will show us the two original correlations $r_{(a1, c1)}$ = 0.0276, and $r_{(a1, e1)}$ = 0.10472 As well, the output also shows us the difference between thesee two correlations, Difference: r.jk - r.jh = -0.0784 (with rounding, -.08).
 
-We write this up as:
+We can write this up as:
 
-Agreeableness and extraversion were weakly positively related, *r* = .11, 95% [.07, .14], *p* < .001, such that as agreeableness increased so did extraversion. The relation between agreeableness and conscientiousness was non-significant, *r* = .03, 95% [-.00, .07], *p* = .14. The agreeableness/extraversion relation was significantly stronger than the agreeableness/conscientiousness relation, $\Delta$*r* = .08, 95% CI [.03, .13], *p* = .004.
+Agreeableness and extraversion were weakly related, *r* = .11, 95% [.07, .14], *p* < .001, such that as agreeableness increased so did extraversion. The relation between agreeableness and conscientiousness was non-significant, *r* = .03, 95% [-.00, .07], *p* = .14. The agreeableness/extraversion relation was significantly stronger than the agreeableness/conscientiousness relation, $\Delta$*r* = .08, 95% CI [.03, .13], *p* = .004.
 
 ### Between data sets
 
-In this section we look at comparing correlation across two data sets.
+In this section we look at comparing correlations from two data sets.
 
 #### Create seperate data files for men and women (if needed)
+
+We begin by creating two separate data sets - one for men and one for women:
 
 ```{r} 
 bfi_men   <- bfi %>%
