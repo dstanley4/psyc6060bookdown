@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Sampling Precision | Welcome!</title>
+  <title>Chapter 17 Sample size for multiple regression | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Sampling Precision | Welcome!" />
+  <meta property="og:title" content="Chapter 17 Sample size for multiple regression | Welcome!" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="dstanley4/psyc6060bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Sampling Precision | Welcome!" />
+  <meta name="twitter:title" content="Chapter 17 Sample size for multiple regression | Welcome!" />
   
   <meta name="twitter:description" content="Course notes for PSYC 6060" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sampling-accuracy.html"/>
-<link rel="next" href="effect-sizes-from-publications.html"/>
+<link rel="prev" href="multiple-regression.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
@@ -554,342 +554,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sampling-precision" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Sampling Precision</h1>
-<div id="overview-2" class="section level2">
-<h2><span class="header-section-number">6.1</span> Overview</h2>
-<p>In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong. Sample statistics may overestimate, or underestimate, a population parameter - often substantially. Consequently, we learned to think about the accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure <a href="sampling-precision.html#fig:showbias2">6.1</a>). When the average of many sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average).</p>
-<p>In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we focus now on the precision of sample means as estimates of the population mean, see Figure <a href="sampling-precision.html#fig:showbias2">6.1</a>. That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder, how much does my sample mean differ from the population mean? That’s the question we address in this chapter. When we conduct a single study we can’t know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample means differ from the population mean in general. We focus on two indices of precision – variance of sample mean and standard error of sample means. By the end of the chapter you will understand how to a) conceptualize these indices with respect to a large number of samples/studies and b) estimate them for a single study.</p>
-<div class="figure"><span id="fig:showbias2"></span>
-<img src="ch_samples_precision/images/sampling_accuracy.png" alt="Sampling accuracy and precision" width="80%" />
-<p class="caption">
-FIGURE 6.1: Sampling accuracy and precision
-</p>
-</div>
-</div>
-<div id="population-individuals" class="section level2">
-<h2><span class="header-section-number">6.2</span> Population / Individuals</h2>
-<p>We use a population of heights to learn about random sampling and the precision of sample estimates. We can obtain that population with the code below:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="sampling-precision.html#cb247-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb247-2"><a href="sampling-precision.html#cb247-2"></a><span class="kw">library</span>(learnSampling)</span>
-<span id="cb247-3"><a href="sampling-precision.html#cb247-3"></a></span>
-<span id="cb247-4"><a href="sampling-precision.html#cb247-4"></a>pop_data &lt;-<span class="st"> </span><span class="kw">get_height_population</span>() </span></code></pre></div>
-<p>The glimpse() command can be used to confirm that the population contains 100,000 people.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="sampling-precision.html#cb248-1"></a><span class="kw">glimpse</span>(pop_data)</span></code></pre></div>
-<pre><code>## Rows: 100,000
-## Columns: 3
-## $ id     &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,…
-## $ sex    &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;male&quot;…
-## $ height &lt;dbl&gt; 177, 150, 171, 157, 169, 187, 163, 173, 17…</code></pre>
-<p>We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the height for everyone in the population.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="sampling-precision.html#cb250-1"></a><span class="kw">head</span>(pop_data, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 10 x 3
-##       id sex    height
-##    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-##  1     1 male      177
-##  2     2 female    150
-##  3     3 female    171
-##  4     4 male      157
-##  5     5 male      169
-##  6     6 male      187
-##  7     7 female    163
-##  8     8 male      173
-##  9     9 female    172
-## 10    10 male      193</code></pre>
-<p>We can calculate the descriptive parameters for the population with the code below:</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="sampling-precision.html#cb252-1"></a>pop_data <span class="op">%&gt;%</span></span>
-<span id="cb252-2"><a href="sampling-precision.html#cb252-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">pop_mean =</span> <span class="kw">mean</span>(height),</span>
-<span id="cb252-3"><a href="sampling-precision.html#cb252-3"></a>            <span class="dt">pop_var =</span> <span class="kw">var.pop</span>(height),</span>
-<span id="cb252-4"><a href="sampling-precision.html#cb252-4"></a>            <span class="dt">pop_sd =</span> <span class="kw">sd.pop</span>(height)) <span class="op">%&gt;%</span></span>
-<span id="cb252-5"><a href="sampling-precision.html#cb252-5"></a><span class="st">  </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   pop_mean pop_var pop_sd
-## 1    172.5   157.5  12.55</code></pre>
-<p>We see the mean of the population of heights is 172.5 (<span class="math inline">\(\mu = 172.5\)</span>) and the variance is 157.5 (<span class="math inline">\(\sigma^2 = 157.5\)</span>). Correspondingly, the standard deviation of the population of heights is 12.5 (<span class="math inline">\(\sigma = 12.5\)</span>); simply the square root of the variance.</p>
-<p><span class="math display">\[
-\begin{aligned} 
-\mu &amp;= 172.5 \\
-\sigma^2 &amp;= 157.5 \\
-\sigma &amp;= 12.5 \\
-\end{aligned} 
-\]</span></p>
-</div>
-<div id="sampling-distribution" class="section level2">
-<h2><span class="header-section-number">6.3</span> Sampling distribution</h2>
-<p>A sampling distribution is composed of an infinite number of samples. For pedagogical purposes, we will use a sampling distribution of just 50000 samples. This large number of samples will lead us to roughly the same conclusions as using an infinite, but impractical, number of samples. We obtain 50000 samples with code below:</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="sampling-precision.html#cb254-1"></a>many_samples &lt;-<span class="st"> </span><span class="kw">get_M_samples</span>(<span class="dt">pop.data =</span> pop_data, </span>
-<span id="cb254-2"><a href="sampling-precision.html#cb254-2"></a>                              <span class="dt">pop.column.name =</span> height,</span>
-<span id="cb254-3"><a href="sampling-precision.html#cb254-3"></a>                              <span class="dt">n =</span> <span class="dv">50</span>,</span>
-<span id="cb254-4"><a href="sampling-precision.html#cb254-4"></a>                              <span class="dt">number.of.samples =</span> <span class="dv">50000</span>)</span></code></pre></div>
-<p>We can use the head() command to see the first few rows of many_samples. Every row represents a sample of 10 people. That is, each row represents a study with 10 participants for which we measured their heights. For each row/study we have the sample mean and variance (using n-1) for the 10 heights.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="sampling-precision.html#cb255-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 5
-##   study     n sample_mean sample_var_n sample_var_n_1
-##   &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
-## 1     1    10        174.         27.8           30.9
-## 2     2    10        162.         83.4           92.6
-## 3     3    10        173.        139.           155. 
-## 4     4    10        180         322.           358. 
-## 5     5    10        173.        161.           179. 
-## 6     6    10        172         160.           177.</code></pre>
-<p>We will study the precision of sample means as estimates of the population mean using the values in the sample_mean column. Each of the 50000 values in the sample_mean column is a sample mean (<span class="math inline">\(\bar{x}\)</span>), based on <span class="math inline">\(n\)</span> = 10. Each sample mean provides an estimate of the population mean (<span class="math inline">\(\mu = 172.5\)</span>). Sample means often overestimate, or underestimate, the population mean. We can see this using the code below which reveals that the smallest sample mean is 155.6 (<span class="math inline">\(\bar{x} = 155.6\)</span>) and the largest sample mean is 188.8 (<span class="math inline">\(\bar{x} = 188.8\)</span>). Both are estimates of the population mean (<span class="math inline">\(\mu = 172.5\)</span>) but differ from that value due to sampling error (i.e., the fact that sample means are based on a small subset of the population). You can see that the conclusions of any single study may differ rather substantially from what is true for the overall population.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="sampling-precision.html#cb257-1"></a>many_samples <span class="op">%&gt;%</span></span>
-<span id="cb257-2"><a href="sampling-precision.html#cb257-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">min_mean =</span> <span class="kw">min</span>(sample_mean),</span>
-<span id="cb257-3"><a href="sampling-precision.html#cb257-3"></a>             <span class="dt">max_mean =</span> <span class="kw">max</span>(sample_mean))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 2
-##   min_mean max_mean
-##      &lt;dbl&gt;    &lt;dbl&gt;
-## 1     156.     189.</code></pre>
-<p>The 50000 means in the sample_mean column form a <strong>sampling distribution</strong>; specifically, the sampling distribution of the mean. It’s critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure <a href="sampling-precision.html#fig:bothdist2">6.2</a> below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people’s heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than <span class="math inline">\(\bar{x}\)</span>’s; the <span class="math inline">\(\bar{x}\)</span>’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means.</p>
-<div class="figure"><span id="fig:bothdist2"></span>
-<img src="ch_samples_precision/images/sampling_dist.png" alt="Sampling distribution of the mean. The population of individual height's is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)." width="80%" />
-<p class="caption">
-FIGURE 6.2: Sampling distribution of the mean. The population of individual height’s is presented at the top and filled with X’s to remind you they are individuals. There are more individuals than X’s. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with <span class="math inline">\(\bar{x}\)</span>’s to remind you that sample means are being graphed. There are more means than <span class="math inline">\(\bar{x}\)</span>’s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias).
-</p>
-</div>
-</div>
-<div id="precision-indices" class="section level2">
-<h2><span class="header-section-number">6.4</span> Precision indices</h2>
-<p>The most common way of referring to the width of this distribution of sample means is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean using Formula <a href="sampling-precision.html#eq:samplesechnext">(6.1)</a> below. We use <span class="math inline">\(k\)</span> in the formula to refer to the number of sample means in the distribution.</p>
-<p><span class="math display" id="eq:samplesechnext">\[\begin{equation} 
-\sigma_{\bar{x}} = \sqrt{\frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{k}}
-      \tag{6.1}
-\end{equation}\]</span></p>
-<p>Notice that the formula for standard error is actually just the formula for standard deviation but with notation adapted to reflect the fact we are examining sample means (i.e., <span class="math inline">\(\bar{x}\)</span>’s) instead of people (i.e., X’s).</p>
-<p>Often we will not talk about standard error but rather the variance of the distribution of sample means. When we do so, we are talking about the same thing - the variability in sample means - but using different units. You can see that the formula for the variance of sample means, see Formula <a href="sampling-precision.html#eq:samplevarchnext">(6.2)</a> below, is just a squared version of the standard error equation, Formula <a href="sampling-precision.html#eq:samplesechnext">(6.1)</a> above.</p>
-<p><span class="math display" id="eq:samplevarchnext">\[\begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{k}
-      \tag{6.2}
-\end{equation}\]</span></p>
-<p>How do we interpret variance of sample means? Assuming the sample mean provides an unbiased estimate of the population mean (i.e., <span class="math inline">\(\bar{\bar{x}} = \mu\)</span>), then the <strong>variance of the sample means is simply the average of the squared differences between sample means and the population mean</strong>. Standard error is simply the square root of the variance of sample means. Both are different ways of describing the same thing - the precision with which sample means estimate the population mean.</p>
-<p>If the variance of sample means is large, it indicates sample means differ considerably (on average) from the population mean. If the variance of sample means is small, it indicates sample means differ only slightly (on average) from the population mean. If the variance of sample means is zero, all the sample means are exactly the same as the population mean.</p>
-<p>We can calculate the variance of sample means below:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="sampling-precision.html#cb259-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb259-2"><a href="sampling-precision.html#cb259-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">var_of_means =</span> <span class="kw">var.pop</span>(sample_mean)) <span class="op">%&gt;%</span></span>
-<span id="cb259-3"><a href="sampling-precision.html#cb259-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   var_of_means
-## 1        15.73</code></pre>
-<p>The standard error of sample mean is just the square root of this value:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="sampling-precision.html#cb261-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb261-2"><a href="sampling-precision.html#cb261-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">sd_of_means =</span> <span class="kw">sqrt</span>(<span class="kw">var.pop</span>(sample_mean))) <span class="op">%&gt;%</span></span>
-<span id="cb261-3"><a href="sampling-precision.html#cb261-3"></a><span class="st">   </span><span class="kw">as.data.frame</span>()</span></code></pre></div>
-<pre><code>##   sd_of_means
-## 1       3.967</code></pre>
-<p>Thus, we can indicate the precision with which sample means (<span class="math inline">\(\bar{x}\)</span>) estimate the population mean (<span class="math inline">\(\mu\)</span>) using the notation below. We use <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> to refer to the variance of sample means and <span class="math inline">\(\sigma_{\bar{x}}\)</span> to refer to the standard error of sample means. Again notice in the notation that for both of these symbols there is a subscript with an <span class="math inline">\(\bar{x}\)</span> to remind us we are talking about the variability of sample means (and not people).</p>
-<p><span class="math display">\[
-\begin{aligned} 
-\sigma_{\bar{x}}^2 &amp;= 15.73 \\
-\sigma_{\bar{x}} &amp;= 3.97 \\
-\end{aligned} 
-\]</span></p>
-</div>
-<div id="a-short-cut" class="section level2">
-<h2><span class="header-section-number">6.5</span> A short cut</h2>
-<p>In the previous section we used a computer simulation to calculate the variance of sample means. This involved several steps:</p>
-<ol style="list-style-type: decimal">
-<li>Obtaining the entire population</li>
-<li>Creating 50000 samples (each n = 10) from the population</li>
-<li>Calculating the mean for each of the 50000 samples</li>
-<li>Calculating the variance of the 50000 sample means as per Formula <a href="sampling-precision.html#eq:samplevarchnext">(6.2)</a></li>
-</ol>
-<p>All those steps are a lot of work - and a lot of computer time. Interestingly, we don’t need to go to all that work to determine the variance of sample means. There is a quicker way to obtain the variance of sample means. That is, there is a quicker way to determine the precision with which sample means estimate the population mean when we use a sample size of <span class="math inline">\(n\)</span> = 10.</p>
-<p>Statisticians have created a short-cut formula for obtaining the variance of sample means. The equation by itself, see Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a> below, is extraordinarily simple to use. The formula, however, is not easy to understand. Over many years of teaching, we’ve seen students struggle to understand why the formula is structured in the way that it is - looking for a straightforward logic as to why the short-cut formula works. We encourage you to avoid going down that road. Understanding Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a> below is beyond the scope of this chapter and, likely, your mathematical background at this point. It was derived via a complex mathematical proof discussed in <span class="citation">Hays (<a href="#ref-hays1994" role="doc-biblioref">1994</a>)</span> if you want more information. Simply accept that there is a short-cut formula and do not try to understand the logic of the formula.</p>
-<p>Variance sample means:</p>
-<p><span class="math display" id="eq:samplevar2chnext">\[\begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sigma^2}{n}
-      \tag{6.3}
-\end{equation}\]</span></p>
-<p>You can see that with this formula the variance of sample means, Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a>, is simply the variance of heights of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don’t need to have the entire population, create thousands of samples, or go through any of the calculation work. All we need to know is the variance of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the variance of people’s heights in the population is <span class="math inline">\(\sigma^2=157.5\)</span> and our sample size is <span class="math inline">\(n\)</span> = 10.</p>
-<p><span class="math display">\[
-\begin{aligned} 
-\sigma_{\bar{x}}^2 &amp;= \frac{\sigma^2}{n} \\
-&amp;= \frac{157.5}{10}\\
-&amp;= \frac{157.5}{10}\\
-&amp;= 15.75
-\end{aligned} 
-\]</span></p>
-<p>We see that the variance of the sample means from this short-cut approach is 15.75 (i.e., <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75). Likewise, the variance of the sample means from our simulation was 15.73; incredibly close. If we had used substantially more than 50000 samples in the simulation the 15.73 value would have been 15.75 – making the two results identical. Thus, the short-cut formula gives us the variance of sample means without having to do all the simulation work.</p>
-<p>Of course, the variance of sample means is only one of the two ways we can describe the precision of sample estimates of the population mean. Many people prefer to use standard error (i.e. standard deviation of sample means) instead. The calculation for standard error is below:</p>
-<p><span class="math display">\[
-\begin{aligned} 
-\sigma_{\bar{x}} &amp;= \sqrt{\frac{\sigma^2}{n}} \\
-&amp;= \sqrt{\frac{157.5}{10}}\\
-&amp;= \sqrt{\frac{157.5}{10}}\\
-&amp;= \sqrt{15.75} \\
-&amp;= 3.97 \\
-\end{aligned} 
-\]</span></p>
-</div>
-<div id="estimates-of-precision" class="section level2">
-<h2><span class="header-section-number">6.6</span> Estimates of precision</h2>
-<p>As wonderful as it is to have a short-cut formula for obtaining the variance of sample means (or standard error) there is a catch. The formula requires knowledge of the population variance (or standard deviation). In a research scenario we don’t know the mean or standard deviation of the population - that’s why we’re conducting research. Consequently, we can’t directly calculate the variance of sample means (or standard error) using Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a> above.</p>
-<p>Fortunately, if we have only a single study, we can use the sample variance (with n-1 in the denominator) to estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e, the precision of sample means) using Formula <a href="sampling-precision.html#eq:samplevar2estchnext">(6.4)</a> below.</p>
-<p>Estimated variance sample means:</p>
-<p><span class="math display" id="eq:samplevar2estchnext">\[\begin{equation} 
-s_{\bar{x}}^2 = \frac{s^2}{n}
-      \tag{6.4}
-\end{equation}\]</span></p>
-<p>Estimated standard error for the mean:</p>
-<p><span class="math display" id="eq:samplese2estchnext">\[\begin{equation} 
-s_{\bar{x}} = \sqrt{\frac{s^2}{n}} = \frac{s}{{\sqrt{n}}}
-      \tag{6.5}
-\end{equation}\]</span></p>
-<div id="a-worked-example" class="section level3">
-<h3><span class="header-section-number">6.6.1</span> A worked example</h3>
-<p>Consider a worked example below. Imagine a scenario where we do not know anything about the population of heights. Therefore we conduct a study by taking a random sample of 10 people to estimate the average height of people in the population. The sample mean is 174.3cm and the sample variance is 30.90. Therefore, our best guess of the unknown population mean is 174.3cm. Because we used a sample (a small subset of the population) we know that 174.3cm is unlikely to be the actual mean height for the population. The mean height for the population might be higher or lower than 174.3cm. Nonetheless, at this point our best guess is that the mean of the population is 174.3cm; but we recognize that this is just an estimate of the population mean and is likely off by some amount.</p>
-<p>Wouldn’t it be great to know the extent to which the sample mean in our study might differ from the population mean? As budding statisticians, we know we can’t know that for this particular sample/study, but we can try to figure out how much sample means differ from the population mean on average (when using <span class="math inline">\(n\)</span> = 10) to help us understand the precision of our current sample/study estimate (174.3cm) of the population mean. This precision information is exactly what is conveyed by the variance of sample means, <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, or standard error of sample means, <span class="math inline">\(\sigma_{\bar{x}}\)</span>. We can’t obtain these precision indices but we can estimate them (via <span class="math inline">\(s_{\bar{x}}^2\)</span> and <span class="math inline">\(s_{\bar{x}}\)</span>).</p>
-<p>We want to know the precision with which sample means estimate the population mean. Said another way, we want to know the variance of sample means (or standard error of sample means) but we only have a single study. Therefore, we have to rely on the short-cut formula for determining the variability in sample means. Unfortunately, the short-cut formula for the variance of sample means formula requires the population variance which we don’t know. We do, however, have an estimate of the population variance from our sample. The sample variance is 30.9cm<span class="math inline">\(^2\)</span>. Therefore, our best guess of the unknown population variance is 30.9cm<span class="math inline">\(^2\)</span>. Because we used a sample (a small subset of the population) we know that 30.9cm<span class="math inline">\(^2\)</span> is likely to be different than the actual variance for the population. The variance for the population might be higher or lower than 30.9cm<span class="math inline">\(^2\)</span>. So even though our estimate of the population variance may be “off” in this single sample we know it will be accurate in the long run averaging over many studies (see previous chapter).</p>
-<p>Nonetheless, at this point our best guess is that the variance of the population is 30.9cm<span class="math inline">\(^2\)</span>. We use this information to estimate the variance of sample means:</p>
-<p><span class="math display">\[
-\begin{aligned} 
-s^2_{\bar{x}} &amp;= \frac{s^2}{n} \\
-&amp;= \frac{30.90}{10} \\
-&amp;= 3.09 \\
-\end{aligned} 
-\]</span></p>
-<p>Or alternatively, estimate standard error:</p>
-<p><span class="math display">\[
-\begin{aligned} 
-s_{\bar{x}} &amp;= \sqrt{\frac{s^2}{n}} \\
-&amp;= \sqrt{\frac{30.90}{10}} \\
-&amp;= \sqrt{3.09} \\
-&amp;= 1.76 \\
-\end{aligned} 
-\]</span></p>
-<p>At this point we don’t know the precision of sample means when <span class="math inline">\(n\)</span> = 10; that is, we don’t know <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> or <span class="math inline">\(\sigma_{\bar{x}}\)</span>. We do have an estimate of the precision of sample means (i.e., with via <span class="math inline">\(s_{\bar{x}}^2\)</span> and <span class="math inline">\(s_{\bar{x}}\)</span>). Whenever you calculate the variance of sample means, or standard error, based on sample data it is ALWAYS just an estimate of the actual variance of sample means or the actual standard error.</p>
-<p>That fact that an estimate of the variance of sample means is the best you can do with sample data is evident when we calculate the estimate for the many samples. We do that with the R code below:</p>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="sampling-precision.html#cb263-1"></a>many_samples &lt;-<span class="st"> </span>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb263-2"><a href="sampling-precision.html#cb263-2"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">est_se2 =</span> sample_var_n_<span class="dv">1</span><span class="op">/</span>n)</span></code></pre></div>
-<p>The command above calculated the estimate variance of sample means (est_se2 or <span class="math inline">\(s_{\bar{x}}^2\)</span>) for each of the 50000 samples. We can see the first few samples with the head() command.</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="sampling-precision.html#cb264-1"></a><span class="kw">head</span>(many_samples)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 6
-##   study     n sample_mean sample_var_n sample_var_n_1
-##   &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
-## 1     1    10        174.         27.8           30.9
-## 2     2    10        162.         83.4           92.6
-## 3     3    10        173.        139.           155. 
-## 4     4    10        180         322.           358. 
-## 5     5    10        173.        161.           179. 
-## 6     6    10        172         160.           177. 
-## # … with 1 more variable: est_se2 &lt;dbl&gt;</code></pre>
-<p>Inspect the est_se2 column. Notice how each of these values is an <span class="math inline">\(s_{\bar{x}}^2\)</span> number that is an estimate of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75. The first estimate, <span class="math inline">\(s_{\bar{x}}^2\)</span> = 3.09, is the one we did by hand above. This estimate of the variance of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span> = 3.09) is much lower than the actual variance of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75). Notice how the other values in the est_se2 column tend to either overestimate, or underestimate, the variance of sample means. That is, the other studies also overestimate, or underestimate, the precision with which sample means (<span class="math inline">\(n\)</span> = 10) estimate the population mean.</p>
-</div>
-</div>
-<div id="bias-of-precision-estimates" class="section level2">
-<h2><span class="header-section-number">6.7</span> Bias of precision estimates</h2>
-<p>At this point, you might be a bit concerned about our ability to estimate the variance of sample means ( <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75). In the simulation above, we calculated an estimate of the variance of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>) and placed those values in the est_se2 column. We saw that the values in this column mostly differed from the actual variance of sample means (15.75). You might wonder if these estimates of the variance of sample means are themselves biased? The answer is no - they are not biased. Our estimate of the population variance (n-1 in the denominator) was not biased so there is no reason to suspect that the estimate of the variance of sample means is biased. But we can confirm this by averaging over the 50000 samples. If the average of the est_est2 column is 15.75 (or very close) than <span class="math inline">\(s_{\bar{x}}^2\)</span> is not a biased estimate of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="sampling-precision.html#cb266-1"></a>many_samples <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb266-2"><a href="sampling-precision.html#cb266-2"></a><span class="st">   </span><span class="kw">summarise</span>(<span class="dt">avg.of.est_se2 =</span> <span class="kw">mean</span>(est_se2))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
-##   avg.of.est_se2
-##            &lt;dbl&gt;
-## 1           15.7</code></pre>
-<p>We see that the average of the 50000 estimates of the variance of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>) is 15.73 which is very close to the actual value of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> = 15.75. Any sample estimate of the variance of sample means will be off somewhat due to sampling error. But, on average, estimates of the variance of sample means will be unbiased/accurate.</p>
-</div>
-<div id="where-are-we" class="section level2">
-<h2><span class="header-section-number">6.8</span> Where are we?</h2>
-<p>So where are we? We’ve learned that sample means may overestimate, or underestimate, the population mean. Over many studies, on average, sample means will approximate the population mean. In other words, on average, sample means are accurate. As well, we’ve learned that the variability in estimates of the population mean is referred to as <strong>precision</strong>. We can index the precision of sample means, for a given sample size, using two indices: variance of sample means and standard error of sample means (i.e., standard deviation of sample means). Both of these formulas require knowledge of the population variance - something we never have.</p>
-<p>When we conduct a single study, we get a sample mean. We cannot estimate how precise that sample mean is; we can however, estimate how precise sample means are in general – via the variance of sample means (or standard error). There is a formula for calculating the variance of sample means, Formula <a href="sampling-precision.html#eq:samplevar2chnext">(6.3)</a>, but it requires knowledge of the (unknown) population variance. Consequently, we use an estimate of the population variance in these formulas rather than the actual population variance, see Formula <a href="sampling-precision.html#eq:samplevar2estchnext">(6.4)</a>. As a result, when we calculate variance of sample means (or standard error) using an estimate of the population variance (from our sample) we only obtain an estimates of the variance of sample means. Moreover, this estimate of the variance of sample means is itself influenced by sampling error - but accurate when averaged over many studies.</p>
-</div>
-<div id="precision-for-means-causes" class="section level2">
-<h2><span class="header-section-number">6.9</span> Precision for means: Causes</h2>
-<p>The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don’t have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below.</p>
-<p><span class="math display">\[
-\begin{aligned} 
-\sigma^2 &amp;= 157.5 \\
-\sigma_{\bar{x}}^2 &amp;= \frac{\sigma^2}{n} = \frac{157.5}{10} = 15.75 \\
-\sigma_{\bar{x}}^2 &amp;= \frac{\sigma^2}{n} = \frac{157.5}{50} = 3.15 \\
-\end{aligned} 
-\]</span></p>
-<p>We also show in Figure <a href="sampling-precision.html#fig:threedist">6.3</a> the difference that increasing the sample size makes. The larger the sample size the less sample means vary due to sampling error. A larger sample size means a more precise estimate of the population parameter.</p>
-<div class="figure"><span id="fig:threedist"></span>
-<img src="ch_samples_precision/images/sampling_mdist.png" alt="Two sampling distributions illustrating variability in sample means based on sample size. The top graph show the variance of individual's heights in the population. The graph is filled with X's to remind you it is a graph of individuals. There are more individuals than X's. The bottom two graphs show variability in sample means due to random sampling. Each of the lower two graphs is a sampling distribution for a given sample size. Each sampling distribution contains 50000 sample means. Each sample mean is the average of the heights of individuals in a sample. The sampling distributions are filled with $\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\bar{x}$'s. You can see that by using a larger sample size ($n = 50$, for 50000 samples) there is less variability in sample means than when using a smaller sample size ($n = 10$), for 50000 samples." width="80%" />
-<p class="caption">
-FIGURE 6.3: Two sampling distributions illustrating variability in sample means based on sample size. The top graph show the variance of individual’s heights in the population. The graph is filled with X’s to remind you it is a graph of individuals. There are more individuals than X’s. The bottom two graphs show variability in sample means due to random sampling. Each of the lower two graphs is a sampling distribution for a given sample size. Each sampling distribution contains 50000 sample means. Each sample mean is the average of the heights of individuals in a sample. The sampling distributions are filled with <span class="math inline">\(\bar{x}\)</span>’s to remind you that it is sample means being graphed. There are more means than <span class="math inline">\(\bar{x}\)</span>’s. You can see that by using a larger sample size (<span class="math inline">\(n = 50\)</span>, for 50000 samples) there is less variability in sample means than when using a smaller sample size (<span class="math inline">\(n = 10\)</span>), for 50000 samples.
-</p>
-</div>
-<p>Additionally, a larger sample size makes the sample estimate (<span class="math inline">\(s^2\)</span>) of the population variance (<span class="math inline">\(\sigma^2\)</span>) more precise. Consequently, it makes the sample estimate (<span class="math inline">\(s_{\bar{x}}^2\)</span> or <span class="math inline">\(s_{\bar{x}}\)</span>) of the variance of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span> or <span class="math inline">\(\sigma_{\bar{x}}\)</span>) more precise. Therefore, increasing the sample size increases the precision of a) sample means (<span class="math inline">\(\bar{x}\)</span>) and b) precision estimates (<span class="math inline">\(s_{\bar{x}}^2\)</span> or <span class="math inline">\(s_{\bar{x}}\)</span>).</p>
-<p><strong>The precision of sample means is influenced by:</strong></p>
+<div id="sample-size-for-multiple-regression" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> Sample size for multiple regression</h1>
+<p>When you conduct a multiple regression there are two ways to think about conducting a sample size analysis.</p>
 <ul>
-<li><p>population variance/standard deviation (<span class="math inline">\(\sigma^2\)</span> / <span class="math inline">\(\sigma^2\)</span>)</p></li>
-<li><p>sample size (%n%)</p></li>
+<li><p>Focus on having a sufficient power to the variance accounted for by the set of predictors (i.e. <span class="math inline">\(R^2\)</span>)</p></li>
+<li><p>Focus on having a sufficient power to the unique variance account for by a single predictor (i.e. <span class="math inline">\(sr^2\)</span>)</p></li>
 </ul>
-<div style="page-break-after: always;"></div>
+<div id="sample-size-using-r2" class="section level2">
+<h2><span class="header-section-number">17.1</span> Sample size using <span class="math inline">\(R^2\)</span></h2>
+<p>You want to run a multiple regression study in an existing research area using 3 predictors. A past study, <span class="math inline">\(N\)</span> = 100, found an <span class="math inline">\(R^2=.20\)</span>. How many people do you need in your study to have 80% power for the overall regression equation (i.e., <span class="math inline">\(R^2\)</span>).</p>
+<p>We need to determine two pieces of information to proceed: 1) the effect size as <span class="math inline">\(f^2\)</span> instead of <span class="math inline">\(R^2\)</span> and 2) the degrees of freedom for the predictors. We use these two pieces of information in the <em>pwr</em> command.</p>
+<div id="determining-f2" class="section level3">
+<h3><span class="header-section-number">17.1.1</span> Determining <span class="math inline">\(f^2\)</span></h3>
+<p>We need to represent <span class="math inline">\(R^2\)</span> as <span class="math inline">\(f^2\)</span>. We do this with the formula:</p>
+<p><span class="math display">\[
+f^2=\frac{R^2}{1-R^2}
+\]</span></p>
+<p>So in R we type:</p>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb654-1"><a href="sample-size-for-multiple-regression.html#cb654-1"></a>my_f2 &lt;-<span class="st"> </span><span class="fl">.20</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">.20</span>)</span>
+<span id="cb654-2"><a href="sample-size-for-multiple-regression.html#cb654-2"></a><span class="kw">print</span>(my_f2)</span></code></pre></div>
+<pre><code>## [1] 0.25</code></pre>
+<p>Thus, <span class="math inline">\(f^2=.25\)</span>.</p>
 </div>
-<div id="precision-for-d-values-causes" class="section level2">
-<h2><span class="header-section-number">6.10</span> Precision for <span class="math inline">\(d\)</span>-values: Causes</h2>
-<p>Whenever we use a statistic (e.g., <span class="math inline">\(\bar{x}\)</span>) to estimate a population-level parameter (e.g., <span class="math inline">\(\mu\)</span>) the statistic will differ from the parameter due to sampling error. This is true of all statistics. Therefore, it is possible to generate a sampling distribution for all statistics. In this section will focus on the factors that influence the precision with which <span class="math inline">\(d\)</span>-value estimate the population-level standardized mean difference (<span class="math inline">\(\delta\)</span>). More specifically, we focus on how the sample size and the size of the population-level effect influence width of the sampling distribution.</p>
-<div id="sample-size" class="section level3">
-<h3><span class="header-section-number">6.10.1</span> Sample size</h3>
-<p>Consider the case of estimating the standardized mean difference (i.e., <span class="math inline">\(\delta\)</span>) between the heights of males and females, illustrated in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>. The population-level height information is presented in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>A. The sampling distribution for sample-level <span class="math inline">\(d_{unbiased}\)</span> values when you use 10 people per group (10 males, 10 females) is presented in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>B. We could calculate the variance of <span class="math inline">\(d_{unbiased}\)</span> values or the standard error (i.e., standard deviation) of <span class="math inline">\(d_{unbiased}\)</span> values; just like we did for sample mean.</p>
-<p>You can see in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>B that even though the population-level standardized mean difference is 1.49 (<span class="math inline">\(\delta\)</span> = 1.49) there was considerably variability in sample-level <span class="math inline">\(d_{unbiased}\)</span> values. Indeed, inspecting the sample-level data reveals when the population difference is <span class="math inline">\(\delta\)</span> = 1.49, the sample level differences range from <span class="math inline">\(d_{unbiased}\)</span> = -0.38 to <span class="math inline">\(d_{unbiased}\)</span> = 5.50. That’s a considerable range. When <span class="math inline">\(d_{unbiased}\)</span> = -0.38 you would conclude, in your study, that the mean female height is .38 standard deviations higher than than the mean male height. Yet a colleague, conducting exactly the same study, could obtain a sample that leads him to observe <span class="math inline">\(d_{unbiased}\)</span> = 5.50. This would indicate to him that the mean male height is 5.50 standard deviations higher than the mean female height; an opposite conclusion. The results of both your study and the colleague’s study differ considerably from the truth that <span class="math inline">\(\delta\)</span> = 1.49 – which indicates the mean male height is 1.49 standard deviations higher than the mean female height.</p>
-<p>We investigated the extent to which study-level <span class="math inline">\(d_{unbiased}\)</span> values differ from the population <span class="math inline">\(\delta\)</span> = 1.49 when using 100 people per group for the comparison (i.e., 100 males, 100 females).
-You can see in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>C that in this scenario the precision of the sample estimates (<span class="math inline">\(d_{unbiased}\)</span>) of the population parameter (<span class="math inline">\(\delta\)</span>) still vary considerably - but substantially less than they did when it was 10 per group. With a 100 people per group, the <span class="math inline">\(d_{unbiased}\)</span> values range from 0.91 to 2.21. For the lower end of this range, 0.91, a researcher would conclude that the mean for males is .91 standard deviations higher than the mean for females. At the upper end of this range, 2.21, a researcher would conclude that the mean for males is 2.21 standard deviations higher than the mean for females. The variability in <span class="math inline">\(d_{unbiased}\)</span> values is still large - but at least the conclusions are a) all in the same direction, and b) would all be considered large (i.e, above 0.80) according to Cohen’s standards.</p>
-<p>These simulations illustrate a few important points. First, drawing any conclusion from a single study is problematic. The findings for a single study may differ substantially from the population parameter. Second, increasing sample size increases the precision with which a sample statistic estimates a population parameter. Third, drawing conclusions from small sample size studies (e.g., <span class="math inline">\(n\)</span> = 10 per group) is extraordinarily problematic. Finally, we note that single studies (even with small sample size) are useful because they serve as data points for a future meta-analysis.</p>
-<div class="figure"><span id="fig:ddistributions"></span>
-<img src="ch_samples_precision/images/d_distribs2.png" alt="Sampling distribution for $d_{unbiased}$" width="80%" />
-<p class="caption">
-FIGURE 6.4: Sampling distribution for <span class="math inline">\(d_{unbiased}\)</span>
-</p>
+<div id="determine-degrees-of-freedom" class="section level3">
+<h3><span class="header-section-number">17.1.2</span> Determine degrees of freedom</h3>
+<p>There are degrees of freedom for the predictors (<span class="math inline">\(u\)</span>) and error (<span class="math inline">\(v\)</span>) in the original study. The degrees of freedom for the predictors is easy to compute:</p>
+<p>Degrees of Freedom Predictors: <span class="math inline">\(u =\)</span> number of predictors = 3.</p>
 </div>
-<div style="page-break-after: always;"></div>
-</div>
-<div id="population-effect-size-delta" class="section level3">
-<h3><span class="header-section-number">6.10.2</span> Population effect size (<span class="math inline">\(\delta\)</span>)</h3>
-<p>The precision with which sample <span class="math inline">\(d\)</span>-values estimate the population standardized mean difference is influenced by the magnitude of the population standardized mean difference. This situation differs sharply from that of sample means. The magnitude of the population mean does not influence the shape of the distribution of sample means. The distribution of sample means is normal - regardless of whether the population mean is high or low.</p>
-<p>In contrast, the shape of the the sampling distribution of <span class="math inline">\(d\)</span>-values changes depending on the magnitude of the population effect (i.e., <span class="math inline">\(\delta\)</span>). In Figure <a href="sampling-precision.html#fig:dvalueskew">6.5</a> we illustrate two scenarios. Both scenarios are based on a repeated measures design. For each scenario we created a population-level difference and then obtained 50000 sample <span class="math inline">\(d\)</span>-values. The sample size, <span class="math inline">\(n\)</span> = 10 for each <span class="math inline">\(d\)</span>-value, was held constant across the two scenarios. In contrast, the population standardized mean difference was different across the two scenarios. In Figure <a href="sampling-precision.html#fig:dvalueskew">6.5</a>A the population standardized mean difference was <span class="math inline">\(\delta\)</span> = 0.50. In contrast, in Figure <a href="sampling-precision.html#fig:dvalueskew">6.5</a>B the population standardized mean difference was <span class="math inline">\(\delta\)</span> = 2.00. Compare the shape of the distributions of <span class="math inline">\(d\)</span>-values in Figure <a href="sampling-precision.html#fig:dvalueskew">6.5</a>A and Figure <a href="sampling-precision.html#fig:dvalueskew">6.5</a>B. You can see how the shape changes when the population level effect size changes. Consequently, the size of the population standardized mean difference influences the precision with which sample <span class="math inline">\(d\)</span>-values estimate the population level effect (<span class="math inline">\(\delta\)</span>).</p>
-<div class="figure"><span id="fig:dvalueskew"></span>
-<img src="ch_samples_precision/images/d_sampling_dist_delta_vary.png" alt="d-value skew graphs" width="80%" />
-<p class="caption">
-FIGURE 6.5: d-value skew graphs
-</p>
-</div>
-<p><strong>Standard Error</strong></p>
-<p>There is a standard error for <span class="math inline">\(d\)</span>-values (i.e., <span class="math inline">\(SE_d\)</span> or <span class="math inline">\(SE_{d_{unbiased}}\)</span>). It is simply the standard deviation of the thousands of <span class="math inline">\(d\)</span>-values in the simulation. More generally, it is an index of much <span class="math inline">\(d\)</span>-values vary from a population standardized mean difference (<span class="math inline">\(\delta\)</span>) due to sampling error for a given sample size. In geometric terms, the standard error is an index of the width of a sampling distribution. The standard error is larger in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>B than in Figure <a href="sampling-precision.html#fig:ddistributions">6.4</a>C.</p>
-<p><strong>The precision of sample <span class="math inline">\(d\)</span>-values is influenced by:</strong></p>
-<ul>
-<li><p>population standardized mean difference (<span class="math inline">\(\delta\)</span>) - influences shape of the distribution</p></li>
-<li><p>sample size (<span class="math inline">\(n\)</span>)</p></li>
-</ul>
-</div>
-</div>
-<div id="precision-for-sample-correlations-r-causes" class="section level2">
-<h2><span class="header-section-number">6.11</span> Precision for sample correlations (<span class="math inline">\(r\)</span>): Causes</h2>
-<p>Sample correlations (<span class="math inline">\(r\)</span>) are likely to differ from the population correlation (<span class="math inline">\(\rho\)</span>) due to sampling error. The precision with which sample correlations estimate the population correlation is influenced by sample size and the magnitude of the population correlation. These are reviewed below.</p>
-<div id="sample-size-1" class="section level3">
-<h3><span class="header-section-number">6.11.1</span> Sample size</h3>
-<p>Consider a situation where the population-level relation between two variables is <span class="math inline">\(\rho = .30\)</span>. For example, when looking at 300000 people the correlation between weight and height is .30. Then consider two scenarios where we sample from the population. In Scenario 1, we use a sample size of 50 people. We take 50000 samples (each comprised of 50 people) and calculate for each sample the correlation (<span class="math inline">\(r\)</span>). The distribution of these sample correlations for Scenario 1 are presented in Figure <a href="sampling-precision.html#fig:rvaluen">6.6</a>A. In Scenario 2, we use a sample size of 500 people (ten times more per sample). We take 50000 samples (each comprised of 500 people) and calculate for each sample the correlation (<span class="math inline">\(r\)</span>). The distribution of these sample correlations for Scenario 2 are presented in Figure <a href="sampling-precision.html#fig:rvaluen">6.6</a>B. If you contrast these two graphs you see the sampling distribution is narrower in Scenario 2 where the sample size is larger, see Figure <a href="sampling-precision.html#fig:rvaluen">6.6</a>B. This means that sampling error is less when the sample size is larger. In other words, a larger sample size results in more precise sample correlations.</p>
-<div class="figure"><span id="fig:rvaluen"></span>
-<img src="ch_samples_precision/images/r_sampling_dist_n_vary.png" alt="Correlation precision and sample size" width="80%" />
-<p class="caption">
-FIGURE 6.6: Correlation precision and sample size
-</p>
+<div id="calculate-sample-size" class="section level3">
+<h3><span class="header-section-number">17.1.3</span> Calculate sample size</h3>
+<p>With multiple regression we send R the effect size (.25) the degrees of freedom for the predictor (3). The output provide returns the degrees of freedom for the denominator - which requires a bit of work to convert to sample size.</p>
+<p>We begin with the R code below:</p>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="sample-size-for-multiple-regression.html#cb656-1"></a><span class="kw">library</span>(pwr)</span>
+<span id="cb656-2"><a href="sample-size-for-multiple-regression.html#cb656-2"></a><span class="kw">pwr.f2.test</span>(<span class="dt">u =</span> <span class="dv">3</span>,</span>
+<span id="cb656-3"><a href="sample-size-for-multiple-regression.html#cb656-3"></a>            <span class="dt">f2 =</span> <span class="fl">.25</span>,</span>
+<span id="cb656-4"><a href="sample-size-for-multiple-regression.html#cb656-4"></a>            <span class="dt">power =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## 
+##      Multiple regression power calculation 
+## 
+##               u = 3
+##               v = 56.75
+##              f2 = 0.25
+##       sig.level = 0.05
+##           power = 0.9</code></pre>
+<p>What does this output mean? It provides us with the degrees of freedom error (i.e., <span class="math inline">\(v\)</span>) for your study (not the original study). We need to use the degrees of freedom error to calculate the <span class="math inline">\(N\)</span> needed.</p>
+<p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1\)</span> therefore <span class="math inline">\(N = u + v + 1\)</span>.</p>
+<p>We know <span class="math inline">\(u = 3\)</span> because there were three predictors. Our power analysis revealed we need <span class="math inline">\(v = 57\)</span> in our study.</p>
+<p>Therefore <span class="math inline">\(N = u + v + 1 = 3 + 57 + 1\)</span></p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="sample-size-for-multiple-regression.html#cb658-1"></a>N =<span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">57</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb658-2"><a href="sample-size-for-multiple-regression.html#cb658-2"></a><span class="kw">print</span>(N)</span></code></pre></div>
+<pre><code>## [1] 61</code></pre>
+<p>Thus we want an N of 61 in our study.</p>
 </div>
 </div>
-<div id="population-effect-size-rho" class="section level3">
-<h3><span class="header-section-number">6.11.2</span> Population effect size (<span class="math inline">\(\rho\)</span>)</h3>
-<p>Consider a situation where we look at the correlation between height and weight in two different cities. Each city has 300000 people and we consider each city a population.
-In City 1 the population correlation is <span class="math inline">\(\rho = .30\)</span> whereas in City 2 the population correlation is <span class="math inline">\(\rho = .70\)</span>. For City 1, we take 50000 samples (each comprised of 50 people) and calculate for each sample the correlation (<span class="math inline">\(r\)</span>). The distribution of these sample correlations for City 1 are presented in Figure <a href="sampling-precision.html#fig:rvalueskew">6.7</a>A. We repeat the process and obtain 50000 sample correlations (each comprised of 50 people) for City 2; the distribution of these sample correlations is presented in Figure <a href="sampling-precision.html#fig:rvalueskew">6.7</a>B. If you contrast these two graphs you see the sampling distribution is narrower for City 2 where the population correlation is stronger, see Figure <a href="sampling-precision.html#fig:rvalueskew">6.7</a>B. This means that sampling error is less when the population correlation (<span class="math inline">\(\rho\)</span>) is stronger. In other words, a larger population correlation results in more precise sample correlations. Importantly, also notice how the shape of the sampling distribution varies across the two effect-size scenarios (Figure <a href="sampling-precision.html#fig:rvalueskew">6.7</a> A vs B).</p>
-<div class="figure"><span id="fig:rvalueskew"></span>
-<img src="ch_samples_precision/images/r_sampling_dist_rho_vary.png" alt="Correlation precision and effect size" width="80%" />
-<p class="caption">
-FIGURE 6.7: Correlation precision and effect size
-</p>
+<div id="sample-size-using-sr2" class="section level2">
+<h2><span class="header-section-number">17.2</span> Sample size using <span class="math inline">\(sr^2\)</span></h2>
+<p>You want to run a multiple regression study in an existing research area using 3 predictors (A, B, and C). A past study, <span class="math inline">\(N\)</span> = 100, found an <span class="math inline">\(R^2=.20\)</span>. You are particularly interested in one predictor (predictor C) that you think will account for 2% of the variance in the criterion above and beyond the other two predictors. Said another way you believe .02 of the .20 will be a result of the unique contribution of one predictor. What sample size do you need to ensure you have power of .90 for detecting this increment in variance.</p>
+<p>Let’s think about this scenario in terms of Blocks to make it a bit clear. You are describing a scenario where if you put predictors A and B are in Block 1 you would obtain an overall <span class="math inline">\(R^2 = .18\)</span>. Then when you put Predictor A, B, and C into Block 2 you would obtain an overall <span class="math inline">\(R^2 = .20\)</span>, an increment of .02 so <span class="math inline">\(sr^2\)</span> for predictor C is .02.</p>
+<p>We want to conduct a power analysis to determine how many people you need to ensure power of .90 for this incremental prediction effect.</p>
+<div id="determine-degrees-of-freedom-1" class="section level3">
+<h3><span class="header-section-number">17.2.1</span> Determine degrees of freedom</h3>
+<p>We are interested in the incremental prediction of one variable so <span class="math inline">\(u = 1\)</span>.</p>
 </div>
-<p><strong>Standard Error</strong></p>
-<p>As with the other statistics reviewed, for sample correlations (<span class="math inline">\(r\)</span>) you can calculate a standard error (<span class="math inline">\(SE_r\)</span>). It is simply the standard deviation of the thousands of sample correlations (<span class="math inline">\(r\)</span>’s) in the simulation. More generally, it is an index of much sample correlations vary from a population correlation (<span class="math inline">\(\rho\)</span>) due to sampling error for a given sample size. In geometric terms, the standard error is an index of the width of a sampling distribution. The standard error is larger in Figure <a href="sampling-precision.html#fig:rvaluen">6.6</a>A than in Figure <a href="sampling-precision.html#fig:rvaluen">6.6</a>B.</p>
-<p><strong>The precision of sample correlations (<span class="math inline">\(r\)</span>) is influenced by:</strong></p>
-<ul>
-<li><p>population correlation (<span class="math inline">\(\rho\)</span>) - influences shape of the distribution</p></li>
-<li><p>sample size (<span class="math inline">\(n\)</span>)</p></li>
-</ul>
+<div id="determine-f2" class="section level3">
+<h3><span class="header-section-number">17.2.2</span> Determine <span class="math inline">\(f^2\)</span></h3>
+<p>We know <span class="math inline">\(sr^2=.02\)</span> and <span class="math inline">\(R^2 = .20\)</span>. We can use these to compute the needed <span class="math inline">\(f^2\)</span>.</p>
+<p><span class="math display">\[
+f^2=\frac{sr^2}{1-R^2}
+\]</span></p>
+<p>So we type:</p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="sample-size-for-multiple-regression.html#cb660-1"></a>my_f2 &lt;-<span class="st"> </span><span class="fl">.02</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">.20</span>)</span>
+<span id="cb660-2"><a href="sample-size-for-multiple-regression.html#cb660-2"></a></span>
+<span id="cb660-3"><a href="sample-size-for-multiple-regression.html#cb660-3"></a><span class="kw">print</span>(my_f2)</span></code></pre></div>
+<pre><code>## [1] 0.025</code></pre>
+</div>
+<div id="calculate-power" class="section level3">
+<h3><span class="header-section-number">17.2.3</span> Calculate power</h3>
+<p>We can calculate the required degrees of freedom with the command below:</p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="sample-size-for-multiple-regression.html#cb662-1"></a><span class="kw">library</span>(pwr)</span>
+<span id="cb662-2"><a href="sample-size-for-multiple-regression.html#cb662-2"></a><span class="kw">pwr.f2.test</span>(<span class="dt">u =</span> <span class="dv">1</span>,</span>
+<span id="cb662-3"><a href="sample-size-for-multiple-regression.html#cb662-3"></a>            <span class="dt">f2 =</span> <span class="fl">0.025</span>,</span>
+<span id="cb662-4"><a href="sample-size-for-multiple-regression.html#cb662-4"></a>            <span class="dt">power =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## 
+##      Multiple regression power calculation 
+## 
+##               u = 1
+##               v = 420.2
+##              f2 = 0.025
+##       sig.level = 0.05
+##           power = 0.9</code></pre>
+<p>Thus, degrees of freedom error (i.e., <span class="math inline">\(v\)</span>) is 421</p>
+<p>We then calculate <span class="math inline">\(N = u + v + 1\)</span></p>
+<p>In R we type:</p>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="sample-size-for-multiple-regression.html#cb664-1"></a>N =<span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">421</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb664-2"><a href="sample-size-for-multiple-regression.html#cb664-2"></a><span class="kw">print</span>(N)</span></code></pre></div>
+<pre><code>## [1] 423</code></pre>
+<p>Thus, you need an <span class="math inline">\(N\)</span> of 423.</p>
+</div>
+</div>
+<div id="power-obtained-sr2" class="section level2">
+<h2><span class="header-section-number">17.3</span> Power obtained <span class="math inline">\(sr^2\)</span></h2>
+<p>Imagine your power analysis tells you that you need an <span class="math inline">\(N\)</span> of 423 but you only get an <span class="math inline">\(N\)</span> of 75. What is your power? Simply calculate the degrees of freedom for the predictors and error and run the command again. This time you leave out power. It will be calculated for you. You can do this before you collect your data if you know in advance you will have a low/restricted <span class="math inline">\(N\)</span> - as is the case for many theses.</p>
+<p>In this example, <span class="math inline">\(R^2=.20\)</span> and <span class="math inline">\(sr^2=.02\)</span> are the expected effect sizes.</p>
+<p>Degrees of Freedom Predictors: <span class="math inline">\(u = 1\)</span> as above (incremental prediction of one variable)</p>
+<p>In terms of error:</p>
+<p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1 = 75 - 1 - 1 = 73\)</span>.</p>
+<p>In terms of effect size:</p>
+<p><span class="math inline">\(f^2=\frac{sr^2}{1-R^2} = \frac{.02}{1-.20}=.025\)</span>.</p>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="sample-size-for-multiple-regression.html#cb666-1"></a><span class="kw">pwr.f2.test</span>(<span class="dt">u =</span> <span class="dv">1</span>,</span>
+<span id="cb666-2"><a href="sample-size-for-multiple-regression.html#cb666-2"></a>            <span class="dt">v =</span> <span class="dv">73</span>,</span>
+<span id="cb666-3"><a href="sample-size-for-multiple-regression.html#cb666-3"></a>            <span class="dt">f2 =</span> <span class="fl">0.025</span>)</span></code></pre></div>
+<pre><code>## 
+##      Multiple regression power calculation 
+## 
+##               u = 1
+##               v = 73
+##              f2 = 0.025
+##       sig.level = 0.05
+##           power = 0.2718</code></pre>
+<p>In this case, power is .27. Thus, there is only a 27% chance of finding the effect if it exists. Given this, would it make sense to spend the time and energy to run the study?</p>
 
-</div>
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-hays1994">
-<p>Hays, William. 1994. <em>Statistics</em>. 5th ed. Cengage Learning.</p>
 </div>
 </div>
             </section>
@@ -897,8 +682,8 @@ FIGURE 6.7: Correlation precision and effect size
           </div>
         </div>
       </div>
-<a href="sampling-accuracy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="effect-sizes-from-publications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiple-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -929,7 +714,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yihui/bookdown-crc/edit/master/06-samples_precision.Rmd",
+"link": "https://github.com/yihui/bookdown-crc/edit/master/17-mr_sample_size.Rmd",
 "text": "Edit"
 },
 "history": {
