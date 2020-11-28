@@ -4,6 +4,25 @@
 library(tidyverse)
 library(fastInteraction)
 ```
+The following CRAN packages must be installed:
+
+| Required CRAN Packages |
+|-------------------|
+|tidyverse          |
+|remotes            |
+
+The following GitHub packages must be installed:
+
+| Required GitHub Packages |
+|--------------------------|
+|dstanley4/fastInteraction |
+
+
+After the remotes package is installed, it can be used to install a package from GitHub:
+
+```{r, eval = FALSE}
+remotes::install_github("dstanley4/fastInteraction")
+```
 
 ## Overview
 
@@ -22,7 +41,7 @@ Imagine a scenario where we are interested in predicted endurance from participa
 
 We can load the data:
 
-```{r}
+```{r, message=FALSE}
 library(tidyverse)
 
 data_endurance <- read_csv("data_endurance.csv")
@@ -46,29 +65,12 @@ lm_no_int <- lm(endurance ~ age + exercise,
 ```
 
 
-```{r, eval = FALSE}
 
-plot_no_int <- fast.plot(lm_no_int,
-                         criterion = endurance,
-                         predictor = exercise,
-                         moderator = age)
+```{r, echo = FALSE, out.width="35%"}
+knitr::include_graphics("ch_mmr/images/mmr_no_int.png")
 ```
 
-```{r, eval = FALSE, echo = FALSE}
-cam_position <- list(theta = 105,
-                     phi = 20,
-                     distance = 2.6)
 
-plot_no_int <- fast.plot(lm_no_int,
-                         criterion = endurance,
-                         predictor = exercise,
-                         moderator = age,
-                         cam.position = cam_position)
-```
-
-```{r, eval = FALSE}
-plot_no_int
-```
 
 ### Interaction
 
@@ -80,26 +82,98 @@ lm_int <- lm(endurance ~ age + exercise + I(age*exercise),
 
 
 
+```{r, echo = FALSE, out.width="35%"}
+knitr::include_graphics("ch_mmr/images/mmr_int.png")
+```
+
+
+### Comparison
+
+```{r, echo = FALSE, out.width="90%"}
+knitr::include_graphics("ch_mmr/images/mmr_both.png")
+```
+
+
+## fastInteraction
+
+We want to conduct the regression below:
+
+$$ \hat{Y} = b_0 + b_1age + b_2exercise + b_3(age)(exercise)$$
+
+The fast.int() command in the fastInteraction package does the following:
+
+1. Centers variables if requested
+
+2. Conducts the regression (i.e., the lm command)
+
+3. Creates the 2D graph
+
+4. Creates the 3D graph
+
+5. Creates two APA style tables to describe the analyses
+
+
+```{r}
+library(fastInteraction)
+
+new_axis_labels <- list(criterion = "Endurance",
+                        predictor = "Age (centered)",
+                        moderator = "Exercise (centered)")
+
+mmr_output <- fast.int(data = cohen_exercise,
+                       criterion = endurance,
+                       predictor = age,
+                       moderator = exercise,
+                       center.predictors = TRUE,
+                       axis.labels = new_axis_labels,
+                       path = "tables_mmr.doc")
+```
+
+### Graphing in 3D
+
+```{r}
+mmr_output$graph3D
+```
+
+### Unformatted 2D graph
+
+
+```{r}
+unformatted_ggplot_graph <- mmr_output$graph2D.unformatted
+
+print(unformatted_ggplot_graph)
+```
+
+
+
+### Tables
+
+We inspect MS Word file created by the fast.int() command below. It presents the results of the various regression in tables corresponding to APA style.
+
+```{r, echo=FALSE, out.width="80%"}
+knitr::include_graphics("ch_mmr/images/tables_apa.gif")
+```
+
+### Formatted 2D graph
+
+We inspect the Table output and find the value for -1/+1 SD of the moderator (age). In this case, we find the value is 4.775. So we use this to set the x-axis labels. That way the ticks on the x-axis correspond to standard deviations.
+
+```{r}
+
+custom_formatted_ggplot_graph <- unformatted_ggplot_graph +
+  coord_cartesian(ylim = c(10, 40)) +
+  scale_y_continuous(breaks = seq(10, 40, by = 5)) +
+  scale_x_continuous(breaks = seq(-4.775*2, 4.775*2, by = 4.775)) +
+  labs(x = "Exercise (centered)",
+       y = "Endurance",
+       linetype = "Age (centered)") +
+  theme_classic(18)
+
+print(custom_formatted_ggplot_graph)
+```
+
+#### Saving
+
 ```{r, eval = FALSE}
-plot_int <- fast.plot(lm_int,
-                      criterion = endurance,
-                      predictor = exercise,
-                      moderator = age)
+ggsave("graph_2D_interaction.png", custom_formatted_ggplot_graph)
 ```
-
-```{r, eval = FALSE, echo=FALSE}
-
-plot_int <- fast.plot(lm_int,
-                      criterion = endurance,
-                      predictor = exercise,
-                      moderator = age,
-                      cam.position = cam_position)
-
-plot_int
-
-```
-
-```{r, eval = FALSE}
-plot_int
-```
-
