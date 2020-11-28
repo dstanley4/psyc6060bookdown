@@ -1,0 +1,105 @@
+# Moderated multiple regression
+
+```{r, include=FALSE}
+library(tidyverse)
+library(fastInteraction)
+```
+
+## Overview
+
+In this chapter we present a brief overview of moderated multiple regression. In an ANOVA you can have two variables interact to predict a dependent variable. In this ANOVA scenario, the predictors are the categorical ANOVA variables. When our predictors are continuous variables (e.g., height, weight, etc) they can still interact to predict the dependent variable (i.e., criterion). In this chapter we primarily focus on how to obtain the required information from R to write up a continous variable interaction (also known as a moderated multiple regression). For an understanding of the underlying theory I strongly encourage you to read *Chapter 7: Interactions among continuous variables* in Cohen, Cohen, West, and Aiken (2003):
+
+
+```{r, echo = FALSE, out.width="30%"}
+knitr::include_graphics("ch_mmr/images/ccwa_cover.png")
+```
+
+Cohen, J., Cohen, P., West, S. G., & Aiken, L. S. (2013). Applied multiple regression/correlation analysis for the behavioral sciences. Routledge.
+
+## Scenario
+
+Imagine a scenario where we are interested in predicted endurance from participant age and exercise.
+
+We can load the data:
+
+```{r}
+library(tidyverse)
+
+data_endurance <- read_csv("data_endurance.csv")
+```
+
+We can see the structure of the data:
+
+```{r}
+glimpse(data_endurance)
+```
+
+## Overview
+
+### No interaction
+
+$$ \hat{Y} = b_0 + b_1age + b_2exercise $$
+
+```{r}
+lm_no_int <- lm(endurance ~ age + exercise,
+                data = data_endurance)
+```
+
+
+```{r, eval = FALSE}
+
+plot_no_int <- fast.plot(lm_no_int,
+                         criterion = endurance,
+                         predictor = exercise,
+                         moderator = age)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+cam_position <- list(theta = 105,
+                     phi = 20,
+                     distance = 2.6)
+
+plot_no_int <- fast.plot(lm_no_int,
+                         criterion = endurance,
+                         predictor = exercise,
+                         moderator = age,
+                         cam.position = cam_position)
+```
+
+```{r, eval = FALSE}
+plot_no_int
+```
+
+### Interaction
+
+$$ \hat{Y} = b_0 + b_1age + b_2exercise + b_3(age)(exercise)$$
+```{r}
+lm_int <- lm(endurance ~ age + exercise + I(age*exercise),
+             data = data_endurance)
+```
+
+
+
+```{r, eval = FALSE}
+plot_int <- fast.plot(lm_int,
+                      criterion = endurance,
+                      predictor = exercise,
+                      moderator = age)
+```
+
+```{r, eval = FALSE, echo=FALSE}
+
+plot_int <- fast.plot(lm_int,
+                      criterion = endurance,
+                      predictor = exercise,
+                      moderator = age,
+                      cam.position = cam_position)
+
+plot_int
+
+```
+
+```{r, eval = FALSE}
+plot_int
+```
+
