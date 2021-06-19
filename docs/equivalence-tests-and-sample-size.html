@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Equivalence tests and sample size | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Equivalence tests and sample size | Welcome!" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-03-16" />
+<meta name="date" content="2021-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -66,6 +66,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -124,6 +125,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -668,10 +692,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="interpreting-non-significant-findings" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Interpreting non-significant findings</h2>
-<p>A common problem in the psychological literature is the interpretation of non-significant effects. As <span class="citation">(Kirk <a href="references.html#ref-kirk1996practical" role="doc-biblioref">Kirk 1996</a>)</span> notes “some researchers mistakenly interpret a failure to reject the null hypothesis as evidence for accepting it.” Indeed, it is unfortunately common to see an incorrect sentences like the following examples based on fictitious data: “The difference between the mean IQ’s for males and females was non-significant, <span class="math inline">\(t\)</span>(98) = 12.247, <em>p</em> = .458, indicating that males and females have, on average, the same intelligence.” Or alternatively an incorrect sentence like: “The correlation between height and IQ was non-significant, <span class="math inline">\(r\)</span> = .15, <em>p</em> = .854, indicating that height was not related to IQ.” Both of these sentences are statistically incorrect because the conclusions do not follow from the reported statistics.</p>
+<p>A common problem in the psychological literature is the interpretation of non-significant effects. As <span class="citation">(Kirk <a href="#ref-kirk1996practical" role="doc-biblioref">Kirk 1996</a>)</span> notes “some researchers mistakenly interpret a failure to reject the null hypothesis as evidence for accepting it.” Indeed, it is unfortunately common to see an incorrect sentences like the following examples based on fictitious data: “The difference between the mean IQ’s for males and females was non-significant, <span class="math inline">\(t\)</span>(98) = 12.247, <em>p</em> = .458, indicating that males and females have, on average, the same intelligence.” Or alternatively an incorrect sentence like: “The correlation between height and IQ was non-significant, <span class="math inline">\(r\)</span> = .15, <em>p</em> = .854, indicating that height was not related to IQ.” Both of these sentences are statistically incorrect because the conclusions do not follow from the reported statistics.</p>
 <p>The tendency for researchers to incorrectly conclude that there is no effect, when <span class="math inline">\(p\)</span> &gt; .05, is particularly troubling (and ubiquitous) when interpreting the interaction in an ANOVA. For example, consider a 2 (sex) by 2 (occasion) between/within ANOVA where the dependent variable is reaction time. Imagine there is a significant sex x occasion interaction. The significant interaction indicates the relation between occasion and response time depends on the level of sex. The researcher describes this significant interaction by comparing the reaction times of males and females at occasion 1 and then again at occasion 2: “A comparison of the mean reaction of times of males and females at occasion 1, <span class="math inline">\(t\)</span>(28) = 1.06, <span class="math inline">\(p\)</span> = .300, revealed no difference in reaction time. In contrast, at occasion 2, there was a difference in the mean reaction times of males and females, t(28) = 2.15, <span class="math inline">\(p\)</span> = .040. Thus, reaction time were the same, on average, for males and females at occasion 1 but not occasion 2.” In this example the researcher erred in the their interpretation of the results at occasion 1. Specifically, the researcher incorrectly concluded at occasion 1 that the reaction time for males and females was the same because <span class="math inline">\(p\)</span> &gt; .05. That type of conclusion is not possible for p &gt; .05 in a standard paired comparison / <span class="math inline">\(t\)</span>-test.</p>
 <p>The calculation of a <span class="math inline">\(p\)</span>-value begins by assuming the null hypothesis is true; consequently, you cannot use a <span class="math inline">\(p\)</span>-value as evidence the null hypothesis is true. That is, when a <span class="math inline">\(p\)</span>-value exceeds the threshold for significance (.05) you cannot conclude there is no effect. This fact is discussed at the 10 minute mark in an excellent <a href="https://youtu.be/RVxHlsIw_Do">video</a> by Daniel Lakens.</p>
-<p>You might well wonder what to do if you do want to make the conclusion there this no effect/relation. This type of conclusion is possible but you need to use the right tool to do so. One tool for concluding there is no effect is the Bayes Factor <a href="https://en.wikipedia.org/wiki/Bayes_factor">BF</a> - but that is beyond the scope of this course. An easily accessible alternative for concluding there is no effect or relation is the equivalence test <span class="citation">(<a href="references.html#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span>.</p>
+<p>You might well wonder what to do if you do want to make the conclusion there this no effect/relation. This type of conclusion is possible but you need to use the right tool to do so. One tool for concluding there is no effect is the Bayes Factor <a href="https://en.wikipedia.org/wiki/Bayes_factor">BF</a> - but that is beyond the scope of this course. An easily accessible alternative for concluding there is no effect or relation is the equivalence test <span class="citation">(<a href="#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span>.</p>
 </div>
 <div id="when-would-i-use-an-equivalence-test" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> When would I use an equivalence test?</h2>
@@ -693,7 +717,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="possible-outcomes" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> Possible Outcomes</h2>
-<p><span class="citation">(<a href="references.html#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span> review a variety of outcomes from an equivalence test. These are easiest to understand in the context of a <em>t</em>-test with two groups. You could find the two groups are:</p>
+<p><span class="citation">(<a href="#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span> review a variety of outcomes from an equivalence test. These are easiest to understand in the context of a <em>t</em>-test with two groups. You could find the two groups are:</p>
 <ol style="list-style-type: decimal">
 <li><p>Not statistically equivalent and not statistically different</p></li>
 <li><p>Statistically equivalent and not statistically different</p></li>
@@ -709,14 +733,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="defining-a-zero-effect" class="section level2" number="9.6">
 <h2><span class="header-section-number">9.6</span> Defining a zero effect</h2>
-<p>How do you decide how close to zero is close enough to be practically zero? You already did so in the the previous chapter on “NHST and sample size.” In that chapter you reviewed various ways of determining the smallest effect size of interest (SESOI). Any effect below the SESOI is logically close enough to zero to, for practical purposes, be zero. However, I encourage you to review <span class="citation">(<a href="references.html#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span> to see the full discussion on this issue.</p>
+<p>How do you decide how close to zero is close enough to be practically zero? You already did so in the the previous chapter on “NHST and sample size.” In that chapter you reviewed various ways of determining the smallest effect size of interest (SESOI). Any effect below the SESOI is logically close enough to zero to, for practical purposes, be zero. However, I encourage you to review <span class="citation">(<a href="#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span> to see the full discussion on this issue.</p>
 <p>For now, the most important aspect of conducting an equivalence test is the fact that you need to determine the smallest effect size of interest <strong>prior</strong> to data collection - to avoid equivalence testing being a fancy form of intentional or unintentional <strong><a href="https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1002106"><span class="math inline">\(p\)</span>-hacking</a></strong>. Take note of this point – a recent <a href="https://psyarxiv.com/3v7hx">article</a> indicated that approximately 25% of researchers have engaged in at least one form of <span class="math inline">\(p\)</span>-hacking in the just last 12 months.</p>
 </div>
 <div id="equivalence---repeated-measures" class="section level2" number="9.7">
 <h2><span class="header-section-number">9.7</span> Equivalence - repeated measures</h2>
 <p>Consider the following scenario where you begin a study with the intent to prove there is no effect. Many years ago the cereal <a href="https://fameable.com/diamond-shreddies-rebranding-case-study/144/">Shreddies</a> engaged in an interested marketing strategy. They decided to market new Diamond Shreddies as illustrated below. Imagine that you are a researcher tasked to compare the taste of the two types of Shreddies. Participants are given a bowl of the old Shreddies and then asked to rate it on a 1 to 15 point scale where higher ratings indicate a better taste. Following this they are given a bowl of the new Diamond Shreddies and asked rate the taste. How do you go about comparing the taste ratings if your goal is to establish the taste of the old Shreddies is the same as new Diamond Shreddies?</p>
 <p><img src="ch_equivalence/images/diamond.jpg" width="60%" /></p>
-<p>An incorrect approach to determining if the two types of cereal taste the same would be to <strong>just</strong> conduct a repeated measures <span class="math inline">\(t\)</span>-test and look for a non-significant difference. A non-significant repeated measures <span class="math inline">\(t\)</span>-test would leave you with no conclusion. The appropriate approach in this circumstance is to use an equivalence test. Prior to collecting data you set your smallest effect size of interest. Specifically, you imagine getting a mean for each group and calculating a difference using the original numbers on the 15-point rating scale. You decide that if that difference is between -1 and +1 (the smallest jump on the rating scale) then you will consider the two types of Shreddies to have equivalent taste. Notably, as per <span class="citation">(<a href="references.html#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span>, you set this smallest effect size of interest before you examine your data - to avoid being a <span class="math inline">\(p\)</span>-hacker.</p>
+<p>An incorrect approach to determining if the two types of cereal taste the same would be to <strong>just</strong> conduct a repeated measures <span class="math inline">\(t\)</span>-test and look for a non-significant difference. A non-significant repeated measures <span class="math inline">\(t\)</span>-test would leave you with no conclusion. The appropriate approach in this circumstance is to use an equivalence test. Prior to collecting data you set your smallest effect size of interest. Specifically, you imagine getting a mean for each group and calculating a difference using the original numbers on the 15-point rating scale. You decide that if that difference is between -1 and +1 (the smallest jump on the rating scale) then you will consider the two types of Shreddies to have equivalent taste. Notably, as per <span class="citation">(<a href="#ref-lakens2018equivalence" role="doc-biblioref">Lakens, Scheel, and Isager 2018</a>)</span>, you set this smallest effect size of interest before you examine your data - to avoid being a <span class="math inline">\(p\)</span>-hacker.</p>
 <div id="raw-units" class="section level3" number="9.7.1">
 <h3><span class="header-section-number">9.7.1</span> Raw units</h3>
 <p>After you collect your data (<em>N</em> = 50) you have ratings for old Shreddies (<em>M</em> = 12.1, <em>SD</em> = 2.50) and new Diamond Shreddies (<em>M</em> = 11.9, <em>SD</em> = 2.50). Because the same people taste both cereals you also have a correlation between the two taste ratings of <span class="math inline">\(r\)</span> = .80. You run the R-code below to conduct the equivalence test.</p>
@@ -904,6 +928,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-kirk1996practical" class="csl-entry">
+Kirk, Roger E. 1996. <span>“Practical Significance: A Concept Whose Time Has Come.”</span> <em>Educational and Psychological Measurement</em> 56 (5): 746–59.
+</div>
+<div id="ref-lakens2018equivalence" class="csl-entry">
+Lakens, Daniël, Anne M Scheel, and Peder M Isager. 2018. <span>“Equivalence Testing for Psychological Research: A Tutorial.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 259–69.
+</div>
+</div>
             </section>
 
           </div>
@@ -933,6 +966,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
