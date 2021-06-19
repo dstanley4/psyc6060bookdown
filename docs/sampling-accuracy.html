@@ -1001,7 +1001,10 @@ s_{pooled}  &amp;= \sqrt{79.5} \\
 &amp;= 8.9\\
 \end{aligned} 
 \]</span></p>
-<p>Variance pooling is an extraordinarily important part of statistics - we see it used in many topics. To prepare you for that future learning, examine the more general version of the variance pooling equation below. Go through each line of the math below to see how the pooling formula used above is only a specific case of the more general formula below. No really do it - don’t skip this task! Actually take a minute to understand the general version of the pooling formula below. You’ll thank me in future weeks. This is foundational knowledge.</p>
+
+<div class="rmdcaution">
+<p>AN ASIDE ON POOLING. Variance pooling is an extraordinarily important part of statistics - we see it used in many topics. To prepare you for that future learning, examine the more general version of the variance pooling equation below. Go through each line of the math below to see how the pooling formula used above is only a specific case of the more general formula below. No really do it - don’t skip this task! Actually take a minute to understand the general version of the pooling formula below. You’ll thank me in future weeks. This is foundational knowledge.
+In the math below we use a = 2 to indicate there are two sample variances being pooled.</p>
 <p><span class="math display">\[
 \begin{aligned}
 s_{pooled}^2 &amp;= \frac{\sum_{i=1}^{a}(n_i-1)(s_i^2)}{\sum_{i=1}^{a}(n_i-1)} \\
@@ -1010,10 +1013,18 @@ s_{pooled}^2 &amp;= \frac{\sum_{i=1}^{a}(n_i-1)(s_i^2)}{\sum_{i=1}^{a}(n_i-1)} \
 &amp;= \frac{(n_{male} -1)s_{male}^2 + (n_{female} -1)s_{female}^2}{n_{male} + n_{female}-2} \\
 \end{aligned}\\
 \]</span></p>
+<p>Also note the simplification of the general formula below when the sample sizes (<span class="math inline">\(n_i\)</span>) are all the same. In particular notice how we express the denominator when the sample sizes are the same. This will become relevant when we get to ANOVA. Recall a = 2 to indicate there are two sample variances.</p>
+<span class="math display">\[
+\begin{aligned}
+s_{pooled}^2 &amp;= \frac{\sum_{i=1}^{a}(n_i-1)(s_i^2)}{\sum_{i=1}^{a}(n_i-1)} \\
+&amp;= \frac{(n-1)s_1^2 + (n-1)s_2^2}{a(n-1)} \\
+\end{aligned}\\
+\]</span>
+</div>
 </div>
 <div id="calculating-d" class="section level3" number="5.7.2">
 <h3><span class="header-section-number">5.7.2</span> Calculating <span class="math inline">\(d\)</span></h3>
-<p>Now that we have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span>, we can calculate the standardized mean difference. We do so below using unbiased formula, Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a> below.</p>
+<p>Recall that in the above we calculated the pooled standard deviation, <span class="math inline">\(s_{pooled} = 8.9\)</span>. Using this value we can calculate the standardized mean difference. We do so below using unbiased formula, Formula <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a> below.</p>
 <p><span class="math display">\[
 \begin{aligned}
 d_{unbiased}  &amp;= d \times [1 - \frac{3}{4(n_{males} + n_{females})-9}] \\
