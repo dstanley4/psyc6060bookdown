@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-06-19" />
+<meta name="date" content="2021-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -712,30 +712,30 @@ div.csl-indent {
 <p>You can read more about planning for precision in <span class="citation"><a href="#ref-rothman2018planning" role="doc-biblioref">Rothman and Greenland</a> (<a href="#ref-rothman2018planning" role="doc-biblioref">2018</a>)</span>.</p>
 <div id="precision-independent-t-test" class="section level3" number="10.3.1">
 <h3><span class="header-section-number">10.3.1</span> Precision Independent <em>t</em>-test</h3>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="precision-and-sample-size.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
-<span id="cb380-2"><a href="precision-and-sample-size.html#cb380-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-3"><a href="precision-and-sample-size.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.smd</span>(<span class="at">delta =</span> <span class="fl">0.40</span>,</span>
-<span id="cb380-4"><a href="precision-and-sample-size.html#cb380-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.40</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="precision-and-sample-size.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
+<span id="cb390-2"><a href="precision-and-sample-size.html#cb390-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb390-3"><a href="precision-and-sample-size.html#cb390-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.smd</span>(<span class="at">delta =</span> <span class="fl">0.40</span>,</span>
+<span id="cb390-4"><a href="precision-and-sample-size.html#cb390-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.40</span>)</span></code></pre></div>
 <pre><code>## [1] 196</code></pre>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="precision-and-sample-size.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns sample size per group</span></span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="precision-and-sample-size.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Returns sample size per group</span></span></code></pre></div>
 </div>
 <div id="precision-repeated-t-test" class="section level3" number="10.3.2">
 <h3><span class="header-section-number">10.3.2</span> Precision Repeated <em>t</em>-test</h3>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="precision-and-sample-size.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
-<span id="cb383-2"><a href="precision-and-sample-size.html#cb383-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb383-3"><a href="precision-and-sample-size.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.sm</span>(<span class="at">sm =</span> <span class="fl">0.40</span>,</span>
-<span id="cb383-4"><a href="precision-and-sample-size.html#cb383-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.40</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="precision-and-sample-size.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
+<span id="cb393-2"><a href="precision-and-sample-size.html#cb393-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-3"><a href="precision-and-sample-size.html#cb393-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.sm</span>(<span class="at">sm =</span> <span class="fl">0.40</span>,</span>
+<span id="cb393-4"><a href="precision-and-sample-size.html#cb393-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">width =</span> <span class="fl">0.40</span>)</span></code></pre></div>
 <pre><code>## [1] 104</code></pre>
 </div>
 <div id="precision-correlation" class="section level3" number="10.3.3">
 <h3><span class="header-section-number">10.3.3</span> Precision Correlation</h3>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="precision-and-sample-size.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
-<span id="cb385-2"><a href="precision-and-sample-size.html#cb385-2" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> .<span class="dv">30</span></span>
-<span id="cb385-3"><a href="precision-and-sample-size.html#cb385-3" aria-hidden="true" tabindex="-1"></a>rho2 <span class="ot">&lt;-</span> rho <span class="sc">*</span> rho</span>
-<span id="cb385-4"><a href="precision-and-sample-size.html#cb385-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb385-5"><a href="precision-and-sample-size.html#cb385-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.R2</span>(<span class="at">Population.R2 =</span> rho2, </span>
-<span id="cb385-6"><a href="precision-and-sample-size.html#cb385-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">width =</span> rho2,</span>
-<span id="cb385-7"><a href="precision-and-sample-size.html#cb385-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">p =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="precision-and-sample-size.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
+<span id="cb395-2"><a href="precision-and-sample-size.html#cb395-2" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> .<span class="dv">30</span></span>
+<span id="cb395-3"><a href="precision-and-sample-size.html#cb395-3" aria-hidden="true" tabindex="-1"></a>rho2 <span class="ot">&lt;-</span> rho <span class="sc">*</span> rho</span>
+<span id="cb395-4"><a href="precision-and-sample-size.html#cb395-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb395-5"><a href="precision-and-sample-size.html#cb395-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ss.aipe.R2</span>(<span class="at">Population.R2 =</span> rho2, </span>
+<span id="cb395-6"><a href="precision-and-sample-size.html#cb395-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">width =</span> rho2,</span>
+<span id="cb395-7"><a href="precision-and-sample-size.html#cb395-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">p =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;The approximate sample size is given below; you should consider using the additional&quot;
 ## [1] &quot;argument &#39;verify.ss=TRUE&#39; to ensure the exact sample size value is obtained.&quot;</code></pre>
 <pre><code>## $Required.Sample.Size
