@@ -246,10 +246,14 @@ div.csl-indent {
 <li class="chapter" data-level="3.2" data-path="qualtrics.html"><a href="qualtrics.html#qualtrics-survey-creation"><i class="fa fa-check"></i><b>3.2</b> Qualtrics Survey Creation</a></li>
 <li class="chapter" data-level="3.3" data-path="qualtrics.html"><a href="qualtrics.html#items"><i class="fa fa-check"></i><b>3.3</b> Items</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="qualtrics.html"><a href="qualtrics.html#response-options"><i class="fa fa-check"></i><b>3.3.1</b> Response options</a></li>
-<li class="chapter" data-level="3.3.2" data-path="qualtrics.html"><a href="qualtrics.html#create-item-file"><i class="fa fa-check"></i><b>3.3.2</b> Create item file</a></li>
-<li class="chapter" data-level="3.3.3" data-path="qualtrics.html"><a href="qualtrics.html#import-into-qualtrics"><i class="fa fa-check"></i><b>3.3.3</b> Import into Qualtrics</a></li>
-<li class="chapter" data-level="3.3.4" data-path="qualtrics.html"><a href="qualtrics.html#resulting-survey"><i class="fa fa-check"></i><b>3.3.4</b> Resulting Survey</a></li>
+<li class="chapter" data-level="3.3.1" data-path="qualtrics.html"><a href="qualtrics.html#block-column"><i class="fa fa-check"></i><b>3.3.1</b> block column</a></li>
+<li class="chapter" data-level="3.3.2" data-path="qualtrics.html"><a href="qualtrics.html#item_name-column"><i class="fa fa-check"></i><b>3.3.2</b> item_name column</a></li>
+<li class="chapter" data-level="3.3.3" data-path="qualtrics.html"><a href="qualtrics.html#item_text-column"><i class="fa fa-check"></i><b>3.3.3</b> item_text column</a></li>
+<li class="chapter" data-level="3.3.4" data-path="qualtrics.html"><a href="qualtrics.html#type-column"><i class="fa fa-check"></i><b>3.3.4</b> type column</a></li>
+<li class="chapter" data-level="3.3.5" data-path="qualtrics.html"><a href="qualtrics.html#response_options-column"><i class="fa fa-check"></i><b>3.3.5</b> response_options column</a></li>
+<li class="chapter" data-level="3.3.6" data-path="qualtrics.html"><a href="qualtrics.html#create-item-file"><i class="fa fa-check"></i><b>3.3.6</b> Create item file</a></li>
+<li class="chapter" data-level="3.3.7" data-path="qualtrics.html"><a href="qualtrics.html#import-into-qualtrics"><i class="fa fa-check"></i><b>3.3.7</b> Import into Qualtrics</a></li>
+<li class="chapter" data-level="3.3.8" data-path="qualtrics.html"><a href="qualtrics.html#resulting-survey"><i class="fa fa-check"></i><b>3.3.8</b> Resulting Survey</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="qualtrics.html"><a href="qualtrics.html#exporting-from-qualtrics"><i class="fa fa-check"></i><b>3.4</b> Exporting from Qualtrics</a>
 <ul>
@@ -505,7 +509,7 @@ div.csl-indent {
 <li class="chapter" data-level="13.4" data-path="starting-your-research.html"><a href="starting-your-research.html#data-collection-considerations"><i class="fa fa-check"></i><b>13.4</b> Data collection considerations</a>
 <ul>
 <li class="chapter" data-level="13.4.1" data-path="starting-your-research.html"><a href="starting-your-research.html#naming-conventions"><i class="fa fa-check"></i><b>13.4.1</b> Naming conventions</a></li>
-<li class="chapter" data-level="13.4.2" data-path="starting-your-research.html"><a href="starting-your-research.html#likert-type-items"><i class="fa fa-check"></i><b>13.4.2</b> Likert-type items</a></li>
+<li class="chapter" data-level="13.4.2" data-path="starting-your-research.html"><a href="starting-your-research.html#likert-type-items-1"><i class="fa fa-check"></i><b>13.4.2</b> Likert-type items</a></li>
 <li class="chapter" data-level="13.4.3" data-path="starting-your-research.html"><a href="starting-your-research.html#anova-between"><i class="fa fa-check"></i><b>13.4.3</b> ANOVA between</a></li>
 <li class="chapter" data-level="13.4.4" data-path="starting-your-research.html"><a href="starting-your-research.html#anova-within"><i class="fa fa-check"></i><b>13.4.4</b> ANOVA within</a></li>
 </ul></li>
@@ -752,11 +756,11 @@ div.csl-indent {
 <p>You may also find the <a href="https://github.com/crsh/papaja">papaja package</a> helpful - and an easy way to use rmarkdown. It is a based on the rmarkdown extension called bookdown. This package is specifically designed to make it easy to use rmarkdown/bookdown to maka an APA style paper. Indeed that’s the basis for the odd package name: <strong>Preparing APA Journal Articles</strong> (papaja).</p>
 <p>I suggest you read the extensive papaja (documentation)[<a href="https://crsh.github.io/papaja_man/introduction.html" class="uri">https://crsh.github.io/papaja_man/introduction.html</a>]. It will be worth your while!</p>
 <p>The only slight complication with papaja is the fact it is not on the CRAN and can’t be installed in the usual way. But it’s still straight forward. You can install papaja with the commands below - taken from the papaja website.</p>
-<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="research-tools.html#cb694-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install devtools package if necessary</span></span>
-<span id="cb694-2"><a href="research-tools.html#cb694-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;devtools&quot;</span> <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())) <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb694-3"><a href="research-tools.html#cb694-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb694-4"><a href="research-tools.html#cb694-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the stable development verions from GitHub</span></span>
-<span id="cb694-5"><a href="research-tools.html#cb694-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="research-tools.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install devtools package if necessary</span></span>
+<span id="cb695-2"><a href="research-tools.html#cb695-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;devtools&quot;</span> <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())) <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb695-3"><a href="research-tools.html#cb695-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb695-4"><a href="research-tools.html#cb695-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the stable development verions from GitHub</span></span>
+<span id="cb695-5"><a href="research-tools.html#cb695-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span></code></pre></div>
 <p>Indeed, once papaja is installed - you simply have to select the APA template before you enter your rmarkdown, as illustrated below:</p>
 <p><img src="ch_tools/images/papaja_template.png" width="60%" /></p>
 </div>
