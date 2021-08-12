@@ -3,6 +3,24 @@
 ```{r, include=FALSE}
 library(tidyverse)
 ```
+## Overview
+
+There are two tasks covered in this section: 1) importing surveys into Qualtrics and 2) moving data from Qualtrics to R. An overview of each process is below.
+
+**1. Importing items into Qualtrics**
+
+* Create a survey codebook in Excel (or similar program) that has each item and the response options for it
+* Convert the survey codebook to Qualtrics [Advanced Text Format](https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/)
+* Import the items
+* Tweak the survey after import
+
+**2. Qualtrics Data to R**
+
+* Export the raw data from Qualtrics with maximal information in the data file
+* Load the raw data into R
+* Convert the raw data to analytic data. This conversion includes: assigning values to response options (e.g., "Strongly Disagree" becomes the value 1), flipping response for reverse-worded (i.e., reverse-key) items, and creating scale scores.
+
+The overall steps are quite simple and I walk you through each step in detail below.
 
 ## Required
 
@@ -28,7 +46,7 @@ The following GitHub packages must be installed:
 
 | Required GitHub Packages |
 |--------------------------|
-|dstanley4/qualtricsMaker |
+|[dstanley4/qualtricsMaker](https://github.com/dstanley4/qualtricsMaker)|
 
 
 A GitHub package can be installed using the code below:
@@ -38,31 +56,31 @@ remotes::install_github("dstanley4/qualtricsMaker")
 ```
 
 
-## Qualtrics Survey Creation
+## Items to Qualtrics
 
 There are two approaches to entering survey items into Qualtrics.
 
 * Enter the items one at a time using the Qualtrics web interface.
 
-* Create a text file using *Qualtrics Advanced Text Import format* and import the times. Be warned though a bit of tweaking is often still needed using the web interface.
+* Create a text file using Qualtrics [Advanced Text Format](https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/) and import the times. Be warned though a bit of tweaking is often still needed using the web interface.
 
 Here we focus only on the second approach to entering items into Qualtrics.
 
-## Items
+### Create survey codebook
 
-We want to create a survey that contains 18 commitment items and 4 job satisfaction items. We have entered the items into the XXXX file (illustrated below). We treat the 18 commitment items as a block and the 4 job satisfaction items as a block for the survey.
+We want to create a survey that contains 2 demographics items, 18 commitment items, and 4 job satisfaction items. We have entered the items into the [survey_codebook.csv](survey_codebook.csv) file (illustrated below). We treat the 2 demogrpahic questions as block, the 18 commitment items as a block, and the 4 job satisfaction items as a block. Below I describe what information should be place into each of the columns in the survey codebook (block, item_name, item_text, type, response_options).
 
 ```{r, echo=FALSE, out.width="100%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_items.png")
 ```
 
-### block column
+#### block column
 
 Enter any text you wish to use as a label for a block of items.
 
-### item_name column
+#### item_name column
 
-  To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that it uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse [style guide](https://style.tidyverse.org).
+To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that it uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse [style guide](https://style.tidyverse.org).
 
 * Do not allow Qualtrics to name your items for you. Set up meaningful names for each item.
 
@@ -78,7 +96,7 @@ Enter any text you wish to use as a label for a block of items.
 
 * If you have a column name that represents the levels of two repeated measures variables only use the underscore character to separate the levels of the different variables. See within-participant ANOVA section below for details.
 
-#### Likert-type items
+##### Likert-type items
 
 A Likert-type item is typically composed of a statement with which participants are asked to agree or disagree. For example, participants could be asked to indicate the extent to which they agree with a number of statements such as "I like my job". Then they would be presented with response scale such as: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. A common question is, how should I enter the data?
 
@@ -100,16 +118,16 @@ A Likert-type item is typically composed of a statement with which participants 
 
 
 
-### item_text column
+#### item_text column
 
 The item_text column contains the text for each item. Note that if you use commas in your item text do not save this file as a .csv file - it will not work. Rather save it as .tsv file (tab separated values). Then use read_tsv command instead of the read_csv command in the code that follows later.
 
 
-### type column
+#### type column
 
 | Code for type column | Qualtrics Item Type | Additional Information  |
 |----------------------|---------------------|-------------------------|
-| matrix               | matrix     | If the first item in a block has type *matrix* all items in the block will be used to constucts the matrix question. Unfortunately, importing item_names for matrix questions is not supported by qualtrics. **You will need to manually restore your item_names following the directions below for matrix items.** |
+| matrix               | matrix     | If the first item in a block has type *matrix* all items in the block will be used to constucts the matrix question. **Unfortunately, importing item_names for matrix questions is not supported by qualtrics. You will need to manually restore your item_names following the directions below for matrix items.** |
 | MC                   | multiple choice vertical format  |  |
 | MC_horizonal         | multiple choice horizontal format  |  |
 | MC_multi_horizonal   | multiple choice horizontal format multiple answers |  |
@@ -119,20 +137,20 @@ The item_text column contains the text for each item. Note that if you use comma
 
 
 
-### response_options column
+#### response_options column
 
 The Likert items for the different blocks use different response options. The commitment items use a 7-point response option and the job satisfaction items use a 5-point response option.
 
-#### Year of birth
+##### Year of birth
 
-We used a number of response options to indicate Year of Birth. We entered them as per below. Each response option is separated by a semi-colon.
+We used a number of response options to indicate Year of Birth. We entered them as per below. Each response option is separated by a semi-colon. Each of the years below will be in the dropdown button.
 
 **Entered in the response_option column as below. Each option separated by a semicolon.**
 
 1940;1941;1942;1943;1944;1945;1946;1947;1948;1949;1950;1951;1952;1953;1954;1955;1956;1957;1958;1959;1960;1961;1962;1963;1964;1965;1966;1967;1968;1969;1970;1971;1972;1973;1974;1975;1976;1977;1978;1979;1980;1981;1982;1983;1984;1985;1986;1987;1988;1989;1990;1991;1992;1993;1994;1995;1996;1997;1998;1999;2000;2001;2002;2003;2004;2005;2006;2007;2008;2009;2010
 
 
-#### Sex 3 points
+##### Sex 3 points
 
 | Sex 3-point Response Options |
 |-------------------|
@@ -140,8 +158,12 @@ We used a number of response options to indicate Year of Birth. We entered them 
 | 2 - female|
 | 3 - intersex|
 
+**Entered in the response_option column as below. Each option separated by a semicolon.**
 
-#### Commitment 7 points
+males; female; intersex
+
+
+##### Commitment 7 points
 
 | Commitment 7-point Response Options |
 |-------------------|
@@ -161,7 +183,7 @@ Strongly Disagree;Moderately Disagree;Slightly Disagree;Neither Agree nor Disagr
 
 To indicate this information in the survey_items.csv file, in the **response_options** column we put 
 
-#### Job Satisfaction 5 points
+##### Job Satisfaction 5 points
 
 | Job Satisfaction 5-point Response Options |
 |-------------------|
@@ -175,13 +197,47 @@ To indicate this information in the survey_items.csv file, in the **response_opt
 
 Strongly Disagree; Disagree; Neutral; Agree; Strongly Agree
 
+### Convert to Qualtrics format
 
-### Create item file
+#### Create TXT file
+
+Once you have the survey codebook above, you need to convert it to an [Advanced Text Format](https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/) .txt file. We can do so by following the steps below.
+
+##### RStudio on your computer
+1. Create a folder on your computer with the survey_codebook.csv file in it. if you are using RStudio Clo
+
+2. Op
 
 
-### Import into Qualtrics
+##### RStudio Cloud
 
-#### Click the Create New Project button.
+1. Open a new project
+
+2. Ensure you ave installed the packages specified above by typing the commands below into the RStudio Cloud Console (not the script window).
+
+```{r, eval=FALSE}
+install.packages("tidyverse", dep = TRUE)
+install.packages("janitor", dep = TRUE)
+install.packages("remotes", dep = TRUE)
+```
+
+Then install the qualtricsMaker package from GitHub:
+
+```{r, eval = FALSE}
+remotes::install_github("dstanley4/qualtricsMaker")
+```
+
+3. Import the [survey_codebook.csv](survey_codebook.csv) file by using the Import button in the Files tab in the lower right panel.
+
+```{r, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_import_button.png")
+```
+
+
+
+### Import the items
+
+##### Click the Create New Project button.
 
 ```{r, echo=FALSE, out.width="30%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_b1.png")
@@ -214,7 +270,7 @@ knitr::include_graphics("ch_qualtrics/images/screenshot_b5.png")
 ```
 
 
-### Resulting Survey
+#### Resulting Survey
 
 The resulting survey for data collection looks like the image below.
 
@@ -222,18 +278,25 @@ The resulting survey for data collection looks like the image below.
 knitr::include_graphics("ch_qualtrics/images/screenshot_iphone.png")
 ```
 
-## Exporting from Qualtrics
+### Tweak survey in Qualtrics
+
+
+
+
+## Qualtrics data to R
 
 Following data collection, you can obtain your data from Qualtrics. As of 2021, Tri-Agency (NSERC, SSHRC, CIHR) [policy](https://www.science.gc.ca/eic/site/063.nsf/eng/h_97610.html) is that data collected with Tri-Agency funded research must be available for reuse by others. The data should follow the FAIR (Findable, Accessible, Interoperable, and Reusable) principle. Consequently, when you export the data from Qualtrics (and eventually post it) we want to ensure it has as much information in it as possible. This principle guides the options we select below.
 
-### Click the Data & Analysis tab
+### Export from Qualtrics
+
+#### Click the Data & Analysis tab
 
 
 ```{r, echo=FALSE, out.width="70%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_data.png")
 ```
 
-### Click the Export & Import button.
+##3# Click the Export & Import button.
 
 Then click the **Export Data...** option.
 
@@ -242,7 +305,7 @@ knitr::include_graphics("ch_qualtrics/images/screenshot_export.png")
 ```
 
 
-### Click Use Choice Text
+#### Click Use Choice Text
 
 To ensure the data can be used by others, as per the FAIR policy described above, we SELECT the "Use Choice Text" option when exporting data. If you were (non-optimally) select "Use numeric value" as an export option then the resulting data file would be missing information that make it difficult for others to use. Then click the Download button.
 
@@ -250,10 +313,14 @@ To ensure the data can be used by others, as per the FAIR policy described above
 knitr::include_graphics("ch_qualtrics/images/screenshot_export_choice.png")
 ```
 
-## Loading into R
 
 In doing so we have several goals
 
 * Ensure a workflow that is reproducible. 
 
 * Ensure the data file has as much information as possible - so facilitate reuse by others. 
+
+
+### Load data in R
+
+### Convert to analytic data
