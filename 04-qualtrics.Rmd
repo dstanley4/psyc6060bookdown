@@ -276,22 +276,28 @@ knitr::include_graphics("ch_qualtrics/images/screenshot_export_filename.png")
 
 12. Move the file (items_qualtrics_format.txt) from the Download folder to an easy to access place (e.g. the Desktop).
 
+**Congratulation - your items are ready to be imported into Qualtrics. Move on to the "Import the items" section.**
+
 
 ### Import the items
 
-##### Click the Create New Project button.
+Begin by logging into Qualtrics via the University of Guelph site for [Data Collection & Surveys](https://www.lib.uoguelph.ca/working-data/data-collection-surveys). After you log in continue below.
+
+
+
+##### Click the Create New Project button in the top right of the page.
 
 ```{r, echo=FALSE, out.width="20%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_b1.png")
 ```
 
-#### Select the Survey option.
+#### Under Projects from Scratch select "Survey" by clicking on it.
 
 ```{r, echo=FALSE, out.width="30%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_b2.png")
 ```
 
-#### Click the Get Started button.
+#### Click the Get Started button in the lower right of the page.
 
 ```{r, echo=FALSE, out.width="40%"}
 knitr::include_graphics("ch_qualtrics/images/screenshot_b3.png")
@@ -311,20 +317,51 @@ Select the Import option and then specify the filename for the Advanced Text imp
 knitr::include_graphics("ch_qualtrics/images/screenshot_b5.png")
 ```
 
-**Congratulation - your items are ready to be imported into Qualtrics. Move on to the "Import the items" section.**
+**Congratulation - your items have been imported into Qualtrics.**
 
 
-#### Resulting Survey
+#### Remove the default Empty Question block at the top of the survey
 
-The resulting survey for data collection looks like the image below.
+Scroll to the top of the survey and you will see a Default Question Block above your first block. Click on the three dots "..." in the top right of this block and select Delete to remove it.
 
-```{r, echo=FALSE, out.width="30%"}
-knitr::include_graphics("ch_qualtrics/images/screenshot_iphone.png")
+```{r, echo=FALSE, out.width="90%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_empty_block.png")
 ```
+
 
 ### Tweak survey in Qualtrics
 
+Now you need to tweak the survey using the Qualtrics interface. Recall when you import items into a matrix style question Qualtrics drops the item names. **You need to manually restore the item names now for matrix questions.**
 
+1. Begin by scrolling down to a block of matrix style questions. Select the block so it gets a blue rectangle around it.
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_exporttag_select.png")
+```
+
+2. On the left side menu go the "Question Behaviour" menu and select "Recode values"
+
+```{r, echo=FALSE, out.width="30%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_exporttag_menu.png")
+```
+
+3. Click the Export Question Tags check box. You will see the default names for the items (instead of the ones you indicated in the codebook). Clock the Close button in the lower right when you're done.
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_exporttag_defaults.png")
+```
+
+4. Manually restore the item names from the survey codebook by clicking the blue name for each item and fixing it. Don't forget to use proper item naming formats and include the reverse-key status of each item.
+
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_exporttag_defaults_fixed.png")
+```
+
+5. Preview your final survey.
+
+```{r, echo=FALSE, out.width="60%"}
+knitr::include_graphics("ch_qualtrics/images/screenshot_iphone.png")
+```
 
 
 ## Qualtrics data to R

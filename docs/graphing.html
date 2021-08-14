@@ -813,7 +813,7 @@ div.csl-indent {
 <span id="cb220-4"><a href="graphing.html#cb220-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice))</span>
 <span id="cb220-5"><a href="graphing.html#cb220-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb220-6"><a href="graphing.html#cb220-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-159-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-164-1.png" width="65%" /></p>
 <p>Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="graphing.html#cb221-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb221-2"><a href="graphing.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> movie_data,</span>
@@ -824,7 +824,7 @@ div.csl-indent {
 <span id="cb221-7"><a href="graphing.html#cb221-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice, </span>
 <span id="cb221-8"><a href="graphing.html#cb221-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice))</span>
 <span id="cb221-9"><a href="graphing.html#cb221-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-160-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-165-1.png" width="65%" /></p>
 <p>Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge_y.</p>
 <p>We can nudge each label higher on the y-axis using the <em>nudge_y</em> command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="graphing.html#cb222-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -838,7 +838,7 @@ div.csl-indent {
 <span id="cb222-9"><a href="graphing.html#cb222-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">nudge_y =</span> <span class="dv">150</span>)</span>
 <span id="cb222-10"><a href="graphing.html#cb222-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb222-11"><a href="graphing.html#cb222-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-161-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-166-1.png" width="65%" /></p>
 </div>
 <div id="graphing-efficiently" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Graphing efficiently</h2>
@@ -852,7 +852,7 @@ div.csl-indent {
 <span id="cb223-6"><a href="graphing.html#cb223-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb223-7"><a href="graphing.html#cb223-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb223-8"><a href="graphing.html#cb223-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-162-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-167-1.png" width="65%" /></p>
 </div>
 <div id="aesthetics" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Aesthetics</h2>
@@ -875,7 +875,7 @@ FIGURE 5.1: Internal data structure for ggplot
 <span id="cb224-7"><a href="graphing.html#cb224-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
 <span id="cb224-8"><a href="graphing.html#cb224-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb224-9"><a href="graphing.html#cb224-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-163-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-168-1.png" width="65%" /></p>
 <div class="figure"><span id="fig:addfill"></span>
 <img src="ch_graphing/images/mapping_fill.png" alt="Adding a fill column to the internal data" width="70%" />
 <p class="caption">
@@ -897,7 +897,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb225-7"><a href="graphing.html#cb225-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
 <span id="cb225-8"><a href="graphing.html#cb225-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud)) </span>
 <span id="cb225-9"><a href="graphing.html#cb225-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-164-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-169-1.png" width="65%" /></p>
 <p>Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add “nudge_y = 400” to move the text higher than the boxoffice text/label. Don’t forget the units used by nudge_y are the units on the y-axis.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="graphing.html#cb226-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb226-2"><a href="graphing.html#cb226-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
@@ -909,7 +909,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb226-8"><a href="graphing.html#cb226-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
 <span id="cb226-9"><a href="graphing.html#cb226-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) </span>
 <span id="cb226-10"><a href="graphing.html#cb226-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-165-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-170-1.png" width="65%" /></p>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -928,7 +928,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb227-10"><a href="graphing.html#cb227-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb227-11"><a href="graphing.html#cb227-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb227-12"><a href="graphing.html#cb227-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-166-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-171-1.png" width="65%" /></p>
 </div>
 <div id="axes" class="section level2" number="5.7">
 <h2><span class="header-section-number">5.7</span> Axes</h2>
@@ -949,7 +949,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb228-12"><a href="graphing.html#cb228-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb228-13"><a href="graphing.html#cb228-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb228-14"><a href="graphing.html#cb228-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-167-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-172-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="graphing.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
 <span id="cb229-2"><a href="graphing.html#cb229-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>))</span></code></pre></div>
@@ -971,7 +971,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb230-12"><a href="graphing.html#cb230-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb230-13"><a href="graphing.html#cb230-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb230-14"><a href="graphing.html#cb230-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-169-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-174-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale_x_continuous:</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="graphing.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>))</span></code></pre></div>
 </div>
@@ -997,7 +997,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb232-15"><a href="graphing.html#cb232-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
 <span id="cb232-16"><a href="graphing.html#cb232-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-17"><a href="graphing.html#cb232-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-172-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-177-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="axis-values" class="section level2" number="5.8">
@@ -1035,7 +1035,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb233-24"><a href="graphing.html#cb233-24" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb233-25"><a href="graphing.html#cb233-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb233-26"><a href="graphing.html#cb233-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-173-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-178-1.png" width="65%" /></p>
 </div>
 <div id="method-2-longer-label-columns" class="section level4" number="5.8.1.2">
 <h4><span class="header-section-number">5.8.1.2</span> Method 2: Longer label columns</h4>
@@ -1058,7 +1058,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb234-16"><a href="graphing.html#cb234-16" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb234-17"><a href="graphing.html#cb234-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb234-18"><a href="graphing.html#cb234-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-174-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-179-1.png" width="65%" /></p>
 </div>
 </div>
 <div id="angle" class="section level3" number="5.8.2">
@@ -1083,7 +1083,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb235-16"><a href="graphing.html#cb235-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>))</span>
 <span id="cb235-17"><a href="graphing.html#cb235-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb235-18"><a href="graphing.html#cb235-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-175-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-180-1.png" width="65%" /></p>
 </div>
 <div id="alignment" class="section level3" number="5.8.3">
 <h3><span class="header-section-number">5.8.3</span> Alignment</h3>
@@ -1107,7 +1107,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb236-17"><a href="graphing.html#cb236-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb236-18"><a href="graphing.html#cb236-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb236-19"><a href="graphing.html#cb236-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-176-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-181-1.png" width="65%" /></p>
 </div>
 <div id="order" class="section level3" number="5.8.4">
 <h3><span class="header-section-number">5.8.4</span> Order</h3>
@@ -1136,7 +1136,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb238-17"><a href="graphing.html#cb238-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb238-18"><a href="graphing.html#cb238-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb238-19"><a href="graphing.html#cb238-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-178-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-183-1.png" width="65%" /></p>
 </div>
 <div id="decreasing-order" class="section level4" number="5.8.4.2">
 <h4><span class="header-section-number">5.8.4.2</span> Decreasing order</h4>
@@ -1162,7 +1162,7 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb240-17"><a href="graphing.html#cb240-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
 <span id="cb240-18"><a href="graphing.html#cb240-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb240-19"><a href="graphing.html#cb240-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-180-1.png" width="65%" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-185-1.png" width="65%" /></p>
 </div>
 <div id="custom-order" class="section level4" number="5.8.4.3">
 <h4><span class="header-section-number">5.8.4.3</span> Custom order</h4>
