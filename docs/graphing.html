@@ -755,15 +755,15 @@ div.csl-indent {
 </tbody>
 </table>
 <p>After the remotes package is installed, it can be used to install a package from GitHub:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="graphing.html#cb240-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dill/emoGG&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="graphing.html#cb241-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dill/emoGG&quot;</span>)</span></code></pre></div>
 </div>
 <div id="data" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Data</h2>
 <p>To learn about making graphs using the tidyverse we use movie ratings and box office data obtained at the time of writing. Movie ratings were obtained from the <a href="https://www.imdb.com">IMDB</a> and <a href="https://www.rottentomatoes.com">RottenTomatoes</a>. Box office data (in millions of dollars) was obtained from <a href="https://www.boxofficemojo.com">Box Office Mojo</a>. If you enjoy learning about movies these are all excellent sites.</p>
 <p>We begin by loading data_movies.csv using read_csv(), not read.csv():</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="graphing.html#cb241-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_movies.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="graphing.html#cb242-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_movies.csv&quot;</span>)</span></code></pre></div>
 <p>Next we inspect movie_data using the print() command. We see that each row of the data set corresponds to a superhero movie.</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="graphing.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(movie_data)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="graphing.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(movie_data)</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 7
 ##   title       short_title  year  imdb tomatoes_aud boxoffice
 ##   &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
@@ -777,7 +777,7 @@ div.csl-indent {
 ## 8 Wonder Wom… WW           2017   7.5           88       821
 ## # … with 1 more variable: studio &lt;chr&gt;</code></pre>
 <p>Next we use glimpse() to see the columns.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="graphing.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(movie_data)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="graphing.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(movie_data)</span></code></pre></div>
 <pre><code>## Rows: 8
 ## Columns: 7
 ## $ title        &lt;chr&gt; &quot;Iron Man&quot;, &quot;Thor Ragnarok&quot;, &quot;Avenger…
@@ -789,11 +789,11 @@ div.csl-indent {
 ## $ studio       &lt;chr&gt; &quot;Marvel&quot;, &quot;Marvel&quot;, &quot;Marvel&quot;, &quot;Marvel…</code></pre>
 <p>The title and short_title columns provide the full title and short title for each movie. Additionally, the IMDB rating, the Rotten Tomatoes Audience rating, and the Box Office Mojo revenue numbers are provided in the imdb, tomatoes_aud, and boxoffice columns, respectively. Finally, the last column, studio, indicates the studio that made the movie (Marvel or DC).</p>
 <p>It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as_factor command. The as_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variables using as_factor.</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="graphing.html#cb246-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
-<span id="cb246-2"><a href="graphing.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.character), </span>
-<span id="cb246-3"><a href="graphing.html#cb246-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as_factor))</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="graphing.html#cb247-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
+<span id="cb247-2"><a href="graphing.html#cb247-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.character), </span>
+<span id="cb247-3"><a href="graphing.html#cb247-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as_factor))</span></code></pre></div>
 <p>We can confirm the column type has changed by using the glimpse() command again and examing the column types:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="graphing.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(movie_data)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="graphing.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(movie_data)</span></code></pre></div>
 <pre><code>## Rows: 8
 ## Columns: 7
 ## $ title        &lt;fct&gt; Iron Man, Thor Ragnarok, Avengers Inf…
@@ -812,26 +812,14 @@ div.csl-indent {
 <p>Additionally, graphing commands, such as geom_col(), must know the columns/variables to use within that data set when plotting the graph. Specifically, commands need to know which variable/column will vary over the x- and y-axes. We can indicate these columns via the <strong>mapping</strong> argument. For example, we use “mapping = aes(x = short_title, y = boxoffice)” to tell ggplot() that we should use the column short_title along the x-axis and the column boxoffice when determining heights on the y-axis. This information is nested within the aes() command which is short for aesthetic. You are telling ggplot() about the aesthetics for the graph (i.e., which columns to use for the x- and y-axes) using the aes() command. There are a larger number of aesthetics that you can specify within the aes() command (e.g., color, fill, linetype, etc.).</p>
 <p>In the examples that follow we tell each command (geom_col, geom_text) which data set and columns to use via the <strong>data</strong> and <strong>mapping</strong> arguments.</p>
 <p>Use geom_col() to put each boxoffice column value into a bar.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="graphing.html#cb249-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb249-2"><a href="graphing.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb249-3"><a href="graphing.html#cb249-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
-<span id="cb249-4"><a href="graphing.html#cb249-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice))</span>
-<span id="cb249-5"><a href="graphing.html#cb249-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb249-6"><a href="graphing.html#cb249-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-186-1.png" width="65%" /></p>
-<p>Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="graphing.html#cb250-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb250-2"><a href="graphing.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb250-3"><a href="graphing.html#cb250-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
-<span id="cb250-4"><a href="graphing.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice)) <span class="sc">+</span></span>
-<span id="cb250-5"><a href="graphing.html#cb250-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> movie_data, </span>
-<span id="cb250-6"><a href="graphing.html#cb250-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
-<span id="cb250-7"><a href="graphing.html#cb250-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice, </span>
-<span id="cb250-8"><a href="graphing.html#cb250-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice))</span>
-<span id="cb250-9"><a href="graphing.html#cb250-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb250-4"><a href="graphing.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice))</span>
+<span id="cb250-5"><a href="graphing.html#cb250-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-6"><a href="graphing.html#cb250-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-187-1.png" width="65%" /></p>
-<p>Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge_y.</p>
-<p>We can nudge each label higher on the y-axis using the <em>nudge_y</em> command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.</p>
+<p>Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom_text() command below:</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="graphing.html#cb251-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb251-2"><a href="graphing.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb251-3"><a href="graphing.html#cb251-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
@@ -839,25 +827,37 @@ div.csl-indent {
 <span id="cb251-5"><a href="graphing.html#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> movie_data, </span>
 <span id="cb251-6"><a href="graphing.html#cb251-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
 <span id="cb251-7"><a href="graphing.html#cb251-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice, </span>
-<span id="cb251-8"><a href="graphing.html#cb251-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice),</span>
-<span id="cb251-9"><a href="graphing.html#cb251-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">nudge_y =</span> <span class="dv">150</span>)</span>
-<span id="cb251-10"><a href="graphing.html#cb251-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb251-11"><a href="graphing.html#cb251-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb251-8"><a href="graphing.html#cb251-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice))</span>
+<span id="cb251-9"><a href="graphing.html#cb251-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-188-1.png" width="65%" /></p>
+<p>Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge_y.</p>
+<p>We can nudge each label higher on the y-axis using the <em>nudge_y</em> command. In the above code, we nudge it up 150 units. Since nudge_y uses the values on the y-axis we are nudging the labels up by 150 million on the y-axis.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="graphing.html#cb252-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb252-2"><a href="graphing.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb252-3"><a href="graphing.html#cb252-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
+<span id="cb252-4"><a href="graphing.html#cb252-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice)) <span class="sc">+</span></span>
+<span id="cb252-5"><a href="graphing.html#cb252-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> movie_data, </span>
+<span id="cb252-6"><a href="graphing.html#cb252-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title, </span>
+<span id="cb252-7"><a href="graphing.html#cb252-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice, </span>
+<span id="cb252-8"><a href="graphing.html#cb252-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice),</span>
+<span id="cb252-9"><a href="graphing.html#cb252-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">nudge_y =</span> <span class="dv">150</span>)</span>
+<span id="cb252-10"><a href="graphing.html#cb252-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb252-11"><a href="graphing.html#cb252-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-189-1.png" width="65%" /></p>
 </div>
 <div id="graphing-efficiently" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Graphing efficiently</h2>
 <p>You may have noticed that creating the graphs the way we did above required repeating the data and mapping assignments within each command (e.g., geom_text, geom_col). Fortunately, we can use a shortcut and specify the data and mapping only once in the ggplot() command. Once we do that, the contents of the mapping argument are invisibly copied into each subsequent command (e.g., geom_col, geom_text). In this way, we only have to specify the data and the mapping once.</p>
 <p>Examine the code below and compare it to the code above. Notice how in the geom_col() command we don’t have anything specified – the data and mapping from the ggplot command are used. Likewise, notice how in the geom_text() command we only specify the arguments we need that are different from those in the ggplot command. In this case, that means simply adding the nudge_y = 150 to the geom_text command.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="graphing.html#cb252-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb252-2"><a href="graphing.html#cb252-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
-<span id="cb252-3"><a href="graphing.html#cb252-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb252-4"><a href="graphing.html#cb252-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice)) <span class="sc">+</span></span>
-<span id="cb252-5"><a href="graphing.html#cb252-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb252-6"><a href="graphing.html#cb252-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
-<span id="cb252-7"><a href="graphing.html#cb252-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb252-8"><a href="graphing.html#cb252-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-189-1.png" width="65%" /></p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="graphing.html#cb253-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb253-2"><a href="graphing.html#cb253-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
+<span id="cb253-3"><a href="graphing.html#cb253-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb253-4"><a href="graphing.html#cb253-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice)) <span class="sc">+</span></span>
+<span id="cb253-5"><a href="graphing.html#cb253-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb253-6"><a href="graphing.html#cb253-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
+<span id="cb253-7"><a href="graphing.html#cb253-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-8"><a href="graphing.html#cb253-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-190-1.png" width="65%" /></p>
 </div>
 <div id="aesthetics" class="section level2" number="5.5">
 <h2><span class="header-section-number">5.5</span> Aesthetics</h2>
@@ -871,16 +871,16 @@ FIGURE 5.1: Internal data structure for ggplot
 <div id="fill-color" class="section level3" number="5.5.1">
 <h3><span class="header-section-number">5.5.1</span> Fill color</h3>
 <p>You might want to influence the color of the bars in the graph such that the bars for Marvel and DC movies have different colors. That’s easy to do with the aes() command. We simply tell aes() that the <strong>fill</strong> color of any object in the graph should be determined by the studio column. Simply adding “fill = studio” to the aes() command changes the colors of the bars – and any other object on the graph for which fill would be relevant. The internal workings are illustrated in Figure <a href="graphing.html#fig:addfill">5.2</a>.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="graphing.html#cb253-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb253-2"><a href="graphing.html#cb253-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
-<span id="cb253-3"><a href="graphing.html#cb253-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb253-4"><a href="graphing.html#cb253-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice,</span>
-<span id="cb253-5"><a href="graphing.html#cb253-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio )) <span class="sc">+</span></span>
-<span id="cb253-6"><a href="graphing.html#cb253-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb253-7"><a href="graphing.html#cb253-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
-<span id="cb253-8"><a href="graphing.html#cb253-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb253-9"><a href="graphing.html#cb253-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-190-1.png" width="65%" /></p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="graphing.html#cb254-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb254-2"><a href="graphing.html#cb254-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
+<span id="cb254-3"><a href="graphing.html#cb254-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb254-4"><a href="graphing.html#cb254-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice,</span>
+<span id="cb254-5"><a href="graphing.html#cb254-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio )) <span class="sc">+</span></span>
+<span id="cb254-6"><a href="graphing.html#cb254-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb254-7"><a href="graphing.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>) </span>
+<span id="cb254-8"><a href="graphing.html#cb254-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-9"><a href="graphing.html#cb254-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-191-1.png" width="65%" /></p>
 <div class="figure"><span id="fig:addfill"></span>
 <img src="ch_graphing/images/mapping_fill.png" alt="Adding a fill column to the internal data" width="70%" />
 <p class="caption">
@@ -893,17 +893,6 @@ FIGURE 5.2: Adding a fill column to the internal data
 <p>Just because you specify something in the ggplot() command doesn’t mean that you are “stuck with it” for all your subsequent commands. Recall how at the start of this exercise we specified the data and the mapping for each geom_col() and geom_text() individually. We can still do that.</p>
 <p>Now we want to add the Rotten Tomatoes Audience score for each movie above the box office revenue. But if we use geom_text(), like we did before, it will plot the same boxoffice information because of “label = boxoffice” in the aes() specification within ggplot(). We want the new geom_text() command to plot different text; that is, we want it to use “label = tomatoes_aud.”</p>
 <p>Fortunately, if we simply put “mapping = aes(label = tomatoes_aud)” within the new geom_text() command we get the desired information on the graph. The mapping/aes arguments within geom_text() override the mapping/aes arguments within ggplot(). Or more accurately, the new geom_text() command creates its own version of the internal data set in which the label column is filled with information from tomatoes_aud.</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="graphing.html#cb254-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb254-2"><a href="graphing.html#cb254-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
-<span id="cb254-3"><a href="graphing.html#cb254-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb254-4"><a href="graphing.html#cb254-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb254-5"><a href="graphing.html#cb254-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb254-6"><a href="graphing.html#cb254-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb254-7"><a href="graphing.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb254-8"><a href="graphing.html#cb254-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud)) </span>
-<span id="cb254-9"><a href="graphing.html#cb254-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-191-1.png" width="65%" /></p>
-<p>Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add “nudge_y = 400” to move the text higher than the boxoffice text/label. Don’t forget the units used by nudge_y are the units on the y-axis.</p>
 <div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="graphing.html#cb255-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb255-2"><a href="graphing.html#cb255-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
 <span id="cb255-3"><a href="graphing.html#cb255-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -911,16 +900,10 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb255-5"><a href="graphing.html#cb255-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
 <span id="cb255-6"><a href="graphing.html#cb255-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb255-7"><a href="graphing.html#cb255-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb255-8"><a href="graphing.html#cb255-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb255-9"><a href="graphing.html#cb255-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) </span>
-<span id="cb255-10"><a href="graphing.html#cb255-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb255-8"><a href="graphing.html#cb255-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud)) </span>
+<span id="cb255-9"><a href="graphing.html#cb255-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-192-1.png" width="65%" /></p>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div id="apa-style" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> APA style</h2>
-<p>Use theme_classic() to make the graph apear in APA style. We use theme_classic(12) to make the graph APA style with a 12-point font:</p>
+<p>Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add “nudge_y = 400” to move the text higher than the boxoffice text/label. Don’t forget the units used by nudge_y are the units on the y-axis.</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="graphing.html#cb256-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb256-2"><a href="graphing.html#cb256-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
 <span id="cb256-3"><a href="graphing.html#cb256-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -929,17 +912,15 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb256-6"><a href="graphing.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb256-7"><a href="graphing.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
 <span id="cb256-8"><a href="graphing.html#cb256-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb256-9"><a href="graphing.html#cb256-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb256-10"><a href="graphing.html#cb256-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb256-11"><a href="graphing.html#cb256-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb256-12"><a href="graphing.html#cb256-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb256-9"><a href="graphing.html#cb256-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) </span>
+<span id="cb256-10"><a href="graphing.html#cb256-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-193-1.png" width="65%" /></p>
+<div style="page-break-after: always;"></div>
 </div>
-<div id="axes" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> Axes</h2>
-<div id="range" class="section level3" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> Range</h3>
-<p>We use the coord_cartesian() command to adjust range of axes. In the code below we use coord_cartesian() to make the y-axis range from 0 to 3500.</p>
+</div>
+<div id="apa-style" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> APA style</h2>
+<p>Use theme_classic() to make the graph apear in APA style. We use theme_classic(12) to make the graph APA style with a 12-point font:</p>
 <div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="graphing.html#cb257-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb257-2"><a href="graphing.html#cb257-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
 <span id="cb257-3"><a href="graphing.html#cb257-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -949,71 +930,61 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb257-7"><a href="graphing.html#cb257-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
 <span id="cb257-8"><a href="graphing.html#cb257-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
 <span id="cb257-9"><a href="graphing.html#cb257-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb257-10"><a href="graphing.html#cb257-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb257-11"><a href="graphing.html#cb257-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb257-12"><a href="graphing.html#cb257-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-13"><a href="graphing.html#cb257-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb257-14"><a href="graphing.html#cb257-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb257-10"><a href="graphing.html#cb257-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb257-11"><a href="graphing.html#cb257-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-12"><a href="graphing.html#cb257-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-194-1.png" width="65%" /></p>
+</div>
+<div id="axes" class="section level2" number="5.7">
+<h2><span class="header-section-number">5.7</span> Axes</h2>
+<div id="range" class="section level3" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> Range</h3>
+<p>We use the coord_cartesian() command to adjust range of axes. In the code below we use coord_cartesian() to make the y-axis range from 0 to 3500.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="graphing.html#cb258-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb258-2"><a href="graphing.html#cb258-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
+<span id="cb258-3"><a href="graphing.html#cb258-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb258-4"><a href="graphing.html#cb258-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb258-5"><a href="graphing.html#cb258-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb258-6"><a href="graphing.html#cb258-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb258-7"><a href="graphing.html#cb258-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb258-8"><a href="graphing.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb258-9"><a href="graphing.html#cb258-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb258-10"><a href="graphing.html#cb258-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb258-11"><a href="graphing.html#cb258-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb258-12"><a href="graphing.html#cb258-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-13"><a href="graphing.html#cb258-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-14"><a href="graphing.html#cb258-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-195-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="graphing.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
-<span id="cb258-2"><a href="graphing.html#cb258-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="graphing.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>),</span>
+<span id="cb259-2"><a href="graphing.html#cb259-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>))</span></code></pre></div>
 </div>
 <div id="ticks" class="section level3" number="5.7.2">
 <h3><span class="header-section-number">5.7.2</span> Ticks</h3>
 <p>We use the scale_y_continuous() command to adjust the ticks on the y-axis. We set the ticks on the y-axis to range from 0 to 3500 in 500 tick increments using the scale_y_continuous command below via the breaks argument:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="graphing.html#cb259-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb259-2"><a href="graphing.html#cb259-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
-<span id="cb259-3"><a href="graphing.html#cb259-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb259-4"><a href="graphing.html#cb259-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb259-5"><a href="graphing.html#cb259-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb259-6"><a href="graphing.html#cb259-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb259-7"><a href="graphing.html#cb259-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb259-8"><a href="graphing.html#cb259-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb259-9"><a href="graphing.html#cb259-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb259-10"><a href="graphing.html#cb259-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb259-11"><a href="graphing.html#cb259-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb259-12"><a href="graphing.html#cb259-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb259-13"><a href="graphing.html#cb259-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb259-14"><a href="graphing.html#cb259-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-196-1.png" width="65%" /></p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="graphing.html#cb260-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb260-2"><a href="graphing.html#cb260-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
+<span id="cb260-3"><a href="graphing.html#cb260-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb260-4"><a href="graphing.html#cb260-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb260-5"><a href="graphing.html#cb260-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb260-6"><a href="graphing.html#cb260-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb260-7"><a href="graphing.html#cb260-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb260-8"><a href="graphing.html#cb260-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb260-9"><a href="graphing.html#cb260-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb260-10"><a href="graphing.html#cb260-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb260-11"><a href="graphing.html#cb260-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb260-12"><a href="graphing.html#cb260-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb260-13"><a href="graphing.html#cb260-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb260-14"><a href="graphing.html#cb260-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-197-1.png" width="65%" /></p>
 <p>Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale_x_continuous:</p>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="graphing.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="graphing.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>))</span></code></pre></div>
 </div>
 <div id="labels" class="section level3" number="5.7.3">
 <h3><span class="header-section-number">5.7.3</span> Labels</h3>
 <p>Labels are an extremely important part of any graph. This fact is the focus of the <a href="https://xkcd.com/833/">xkcd</a> cartoon below:</p>
 <p><img src="ch_graphing/images/convincing.png" width="80%" /></p>
 <p>We use the labs() command to set the labels for the x- and y-axes:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="graphing.html#cb261-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb261-2"><a href="graphing.html#cb261-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
-<span id="cb261-3"><a href="graphing.html#cb261-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb261-4"><a href="graphing.html#cb261-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb261-5"><a href="graphing.html#cb261-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb261-6"><a href="graphing.html#cb261-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb261-7"><a href="graphing.html#cb261-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb261-8"><a href="graphing.html#cb261-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb261-9"><a href="graphing.html#cb261-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb261-10"><a href="graphing.html#cb261-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb261-11"><a href="graphing.html#cb261-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb261-12"><a href="graphing.html#cb261-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb261-13"><a href="graphing.html#cb261-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb261-14"><a href="graphing.html#cb261-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb261-15"><a href="graphing.html#cb261-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb261-16"><a href="graphing.html#cb261-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb261-17"><a href="graphing.html#cb261-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-199-1.png" width="65%" /></p>
-</div>
-</div>
-<div id="axis-values" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span> Axis values</h2>
-<div id="text" class="section level3" number="5.8.1">
-<h3><span class="header-section-number">5.8.1</span> Text</h3>
-<p>What if we want to use the full movie title rather than the short version on the x-axis of the graph? That is, you want to change the values along the x-axis. Two methods are presented below.</p>
-<div id="method-1-recoding-axis-values" class="section level4" number="5.8.1.1">
-<h4><span class="header-section-number">5.8.1.1</span> Method 1: Recoding axis values</h4>
-<p>Our data file contains a column with the long/full version of the movie names. But many times you won’t have the additional/longer labels available in this manner. In this situation, you use the scale_x_discrete() command to change the values along the x-axis.</p>
-<p>The values along the x-axis come from the short_title column which is a factor. The levels of that factor correspond to the short titles for the movies (Iron, Thor, etc.). We need to relabel the levels of the short_title factor to get a graph with full titles. We relabel the levels of the short_title factor using the scale_x_discrete() command. The graph code with scale_x_discrete() command is below - notice the problem we have with the labels overlapping though. On the next page, we’ll use an easier approach though - since we have an extra column with the full titles.</p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="graphing.html#cb262-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb262-2"><a href="graphing.html#cb262-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
 <span id="cb262-3"><a href="graphing.html#cb262-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1025,28 +996,26 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb262-9"><a href="graphing.html#cb262-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
 <span id="cb262-10"><a href="graphing.html#cb262-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
 <span id="cb262-11"><a href="graphing.html#cb262-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb262-12"><a href="graphing.html#cb262-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Iron&quot;</span> <span class="ot">=</span> <span class="st">&quot;Iron Man&quot;</span>, </span>
-<span id="cb262-13"><a href="graphing.html#cb262-13" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Thor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Thor Ragnarkok&quot;</span>,</span>
-<span id="cb262-14"><a href="graphing.html#cb262-14" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;AV3&quot;</span> <span class="ot">=</span> <span class="st">&quot;Avengers Infinity War&quot;</span>,</span>
-<span id="cb262-15"><a href="graphing.html#cb262-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;AV4&quot;</span> <span class="ot">=</span> <span class="st">&quot;Avengers Endgame&quot;</span>,</span>
-<span id="cb262-16"><a href="graphing.html#cb262-16" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Sup&quot;</span> <span class="ot">=</span> <span class="st">&quot;Man of Steel&quot;</span>,</span>
-<span id="cb262-17"><a href="graphing.html#cb262-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;BvS&quot;</span> <span class="ot">=</span> <span class="st">&quot;Batman v Superman&quot;</span>,</span>
-<span id="cb262-18"><a href="graphing.html#cb262-18" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;JL&quot;</span> <span class="ot">=</span> <span class="st">&quot;Justice League&quot;</span>,</span>
-<span id="cb262-19"><a href="graphing.html#cb262-19" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;WW&quot;</span> <span class="ot">=</span> <span class="st">&quot;Wonder Woman&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb262-20"><a href="graphing.html#cb262-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb262-21"><a href="graphing.html#cb262-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb262-22"><a href="graphing.html#cb262-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb262-23"><a href="graphing.html#cb262-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb262-24"><a href="graphing.html#cb262-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb262-25"><a href="graphing.html#cb262-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb262-26"><a href="graphing.html#cb262-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb262-12"><a href="graphing.html#cb262-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb262-13"><a href="graphing.html#cb262-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb262-14"><a href="graphing.html#cb262-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb262-15"><a href="graphing.html#cb262-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb262-16"><a href="graphing.html#cb262-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-17"><a href="graphing.html#cb262-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-200-1.png" width="65%" /></p>
 </div>
-<div id="method-2-longer-label-columns" class="section level4" number="5.8.1.2">
-<h4><span class="header-section-number">5.8.1.2</span> Method 2: Longer label columns</h4>
-<p>With our movie data we don’t need to use scale_x_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the <em>mapping</em>for x from short_title to title. Notice that we still have the problem with overlapping labels on the x-axis!</p>
+</div>
+<div id="axis-values" class="section level2" number="5.8">
+<h2><span class="header-section-number">5.8</span> Axis values</h2>
+<div id="text" class="section level3" number="5.8.1">
+<h3><span class="header-section-number">5.8.1</span> Text</h3>
+<p>What if we want to use the full movie title rather than the short version on the x-axis of the graph? That is, you want to change the values along the x-axis. Two methods are presented below.</p>
+<div id="method-1-recoding-axis-values" class="section level4" number="5.8.1.1">
+<h4><span class="header-section-number">5.8.1.1</span> Method 1: Recoding axis values</h4>
+<p>Our data file contains a column with the long/full version of the movie names. But many times you won’t have the additional/longer labels available in this manner. In this situation, you use the scale_x_discrete() command to change the values along the x-axis.</p>
+<p>The values along the x-axis come from the short_title column which is a factor. The levels of that factor correspond to the short titles for the movies (Iron, Thor, etc.). We need to relabel the levels of the short_title factor to get a graph with full titles. We relabel the levels of the short_title factor using the scale_x_discrete() command. The graph code with scale_x_discrete() command is below - notice the problem we have with the labels overlapping though. On the next page, we’ll use an easier approach though - since we have an extra column with the full titles.</p>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="graphing.html#cb263-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb263-2"><a href="graphing.html#cb263-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb263-2"><a href="graphing.html#cb263-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> short_title,</span>
 <span id="cb263-3"><a href="graphing.html#cb263-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
 <span id="cb263-4"><a href="graphing.html#cb263-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
 <span id="cb263-5"><a href="graphing.html#cb263-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
@@ -1056,20 +1025,26 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb263-9"><a href="graphing.html#cb263-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
 <span id="cb263-10"><a href="graphing.html#cb263-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
 <span id="cb263-11"><a href="graphing.html#cb263-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb263-12"><a href="graphing.html#cb263-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb263-13"><a href="graphing.html#cb263-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb263-14"><a href="graphing.html#cb263-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb263-15"><a href="graphing.html#cb263-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
-<span id="cb263-16"><a href="graphing.html#cb263-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb263-17"><a href="graphing.html#cb263-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb263-18"><a href="graphing.html#cb263-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb263-12"><a href="graphing.html#cb263-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;Iron&quot;</span> <span class="ot">=</span> <span class="st">&quot;Iron Man&quot;</span>, </span>
+<span id="cb263-13"><a href="graphing.html#cb263-13" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Thor&quot;</span> <span class="ot">=</span> <span class="st">&quot;Thor Ragnarkok&quot;</span>,</span>
+<span id="cb263-14"><a href="graphing.html#cb263-14" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;AV3&quot;</span> <span class="ot">=</span> <span class="st">&quot;Avengers Infinity War&quot;</span>,</span>
+<span id="cb263-15"><a href="graphing.html#cb263-15" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;AV4&quot;</span> <span class="ot">=</span> <span class="st">&quot;Avengers Endgame&quot;</span>,</span>
+<span id="cb263-16"><a href="graphing.html#cb263-16" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;Sup&quot;</span> <span class="ot">=</span> <span class="st">&quot;Man of Steel&quot;</span>,</span>
+<span id="cb263-17"><a href="graphing.html#cb263-17" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;BvS&quot;</span> <span class="ot">=</span> <span class="st">&quot;Batman v Superman&quot;</span>,</span>
+<span id="cb263-18"><a href="graphing.html#cb263-18" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;JL&quot;</span> <span class="ot">=</span> <span class="st">&quot;Justice League&quot;</span>,</span>
+<span id="cb263-19"><a href="graphing.html#cb263-19" aria-hidden="true" tabindex="-1"></a>                            <span class="st">&quot;WW&quot;</span> <span class="ot">=</span> <span class="st">&quot;Wonder Woman&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb263-20"><a href="graphing.html#cb263-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb263-21"><a href="graphing.html#cb263-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb263-22"><a href="graphing.html#cb263-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb263-23"><a href="graphing.html#cb263-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb263-24"><a href="graphing.html#cb263-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb263-25"><a href="graphing.html#cb263-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb263-26"><a href="graphing.html#cb263-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-201-1.png" width="65%" /></p>
 </div>
-</div>
-<div id="angle" class="section level3" number="5.8.2">
-<h3><span class="header-section-number">5.8.2</span> Angle</h3>
-<p>Use theme() to adjust the angle of x-axis labels. Notice, however, that the longer titles are vertically centered on each point on the x-axis. In the next section we fix this problem.</p>
-<p><strong>Important</strong>: The theme command must come after the theme_classic command. Otherwise, theme_classic will undo the work done by the theme_command if it appears after the theme command.</p>
+<div id="method-2-longer-label-columns" class="section level4" number="5.8.1.2">
+<h4><span class="header-section-number">5.8.1.2</span> Method 2: Longer label columns</h4>
+<p>With our movie data we don’t need to use scale_x_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the <em>mapping</em>for x from short_title to title. Notice that we still have the problem with overlapping labels on the x-axis!</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="graphing.html#cb264-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb264-2"><a href="graphing.html#cb264-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb264-3"><a href="graphing.html#cb264-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1084,15 +1059,17 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb264-12"><a href="graphing.html#cb264-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
 <span id="cb264-13"><a href="graphing.html#cb264-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
 <span id="cb264-14"><a href="graphing.html#cb264-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb264-15"><a href="graphing.html#cb264-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb264-16"><a href="graphing.html#cb264-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>))</span>
+<span id="cb264-15"><a href="graphing.html#cb264-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>)</span>
+<span id="cb264-16"><a href="graphing.html#cb264-16" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb264-17"><a href="graphing.html#cb264-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb264-18"><a href="graphing.html#cb264-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-202-1.png" width="65%" /></p>
 </div>
-<div id="alignment" class="section level3" number="5.8.3">
-<h3><span class="header-section-number">5.8.3</span> Alignment</h3>
-<p>Use theme() and the hjust argument to adjust the alignment of the x-axis labels. To make the titles look correct on the x-axis we need them at an angle, but we also need them right justified against the x-axis. We do that with the the hjust argument (1 means right justify). See the code below:</p>
+</div>
+<div id="angle" class="section level3" number="5.8.2">
+<h3><span class="header-section-number">5.8.2</span> Angle</h3>
+<p>Use theme() to adjust the angle of x-axis labels. Notice, however, that the longer titles are vertically centered on each point on the x-axis. In the next section we fix this problem.</p>
+<p><strong>Important</strong>: The theme command must come after the theme_classic command. Otherwise, theme_classic will undo the work done by the theme_command if it appears after the theme command.</p>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="graphing.html#cb265-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb265-2"><a href="graphing.html#cb265-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb265-3"><a href="graphing.html#cb265-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1108,133 +1085,130 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb265-13"><a href="graphing.html#cb265-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
 <span id="cb265-14"><a href="graphing.html#cb265-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
 <span id="cb265-15"><a href="graphing.html#cb265-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb265-16"><a href="graphing.html#cb265-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb265-17"><a href="graphing.html#cb265-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
-<span id="cb265-18"><a href="graphing.html#cb265-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb265-19"><a href="graphing.html#cb265-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<span id="cb265-16"><a href="graphing.html#cb265-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>))</span>
+<span id="cb265-17"><a href="graphing.html#cb265-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-18"><a href="graphing.html#cb265-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-203-1.png" width="65%" /></p>
+</div>
+<div id="alignment" class="section level3" number="5.8.3">
+<h3><span class="header-section-number">5.8.3</span> Alignment</h3>
+<p>Use theme() and the hjust argument to adjust the alignment of the x-axis labels. To make the titles look correct on the x-axis we need them at an angle, but we also need them right justified against the x-axis. We do that with the the hjust argument (1 means right justify). See the code below:</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="graphing.html#cb266-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb266-2"><a href="graphing.html#cb266-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb266-3"><a href="graphing.html#cb266-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb266-4"><a href="graphing.html#cb266-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb266-5"><a href="graphing.html#cb266-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb266-6"><a href="graphing.html#cb266-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb266-7"><a href="graphing.html#cb266-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb266-8"><a href="graphing.html#cb266-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb266-9"><a href="graphing.html#cb266-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb266-10"><a href="graphing.html#cb266-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb266-11"><a href="graphing.html#cb266-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb266-12"><a href="graphing.html#cb266-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb266-13"><a href="graphing.html#cb266-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb266-14"><a href="graphing.html#cb266-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb266-15"><a href="graphing.html#cb266-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb266-16"><a href="graphing.html#cb266-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb266-17"><a href="graphing.html#cb266-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
+<span id="cb266-18"><a href="graphing.html#cb266-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-19"><a href="graphing.html#cb266-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-204-1.png" width="65%" /></p>
 </div>
 <div id="order" class="section level3" number="5.8.4">
 <h3><span class="header-section-number">5.8.4</span> Order</h3>
 <div id="increasing-order" class="section level4" number="5.8.4.1">
 <h4><span class="header-section-number">5.8.4.1</span> Increasing order</h4>
 <p>We can make the movie bars go left to right in lowest to highest box office receipt order by changing the factor order prior to creating the graph. We do so with the mutate() and fct_reorder() commands. The default order is ascending values even though we don’t specify it.</p>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="graphing.html#cb266-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
-<span id="cb266-2"><a href="graphing.html#cb266-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_reorder</span>(title,</span>
-<span id="cb266-3"><a href="graphing.html#cb266-3" aria-hidden="true" tabindex="-1"></a>                             boxoffice))</span></code></pre></div>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="graphing.html#cb267-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb267-2"><a href="graphing.html#cb267-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb267-3"><a href="graphing.html#cb267-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb267-4"><a href="graphing.html#cb267-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb267-5"><a href="graphing.html#cb267-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb267-6"><a href="graphing.html#cb267-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb267-7"><a href="graphing.html#cb267-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb267-8"><a href="graphing.html#cb267-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb267-9"><a href="graphing.html#cb267-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb267-10"><a href="graphing.html#cb267-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb267-11"><a href="graphing.html#cb267-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb267-12"><a href="graphing.html#cb267-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb267-13"><a href="graphing.html#cb267-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb267-14"><a href="graphing.html#cb267-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb267-15"><a href="graphing.html#cb267-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb267-16"><a href="graphing.html#cb267-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb267-17"><a href="graphing.html#cb267-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
-<span id="cb267-18"><a href="graphing.html#cb267-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb267-19"><a href="graphing.html#cb267-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-205-1.png" width="65%" /></p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="graphing.html#cb267-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
+<span id="cb267-2"><a href="graphing.html#cb267-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_reorder</span>(title,</span>
+<span id="cb267-3"><a href="graphing.html#cb267-3" aria-hidden="true" tabindex="-1"></a>                             boxoffice))</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="graphing.html#cb268-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb268-2"><a href="graphing.html#cb268-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb268-3"><a href="graphing.html#cb268-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb268-4"><a href="graphing.html#cb268-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb268-5"><a href="graphing.html#cb268-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb268-6"><a href="graphing.html#cb268-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb268-7"><a href="graphing.html#cb268-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb268-8"><a href="graphing.html#cb268-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb268-9"><a href="graphing.html#cb268-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb268-10"><a href="graphing.html#cb268-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb268-11"><a href="graphing.html#cb268-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb268-12"><a href="graphing.html#cb268-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb268-13"><a href="graphing.html#cb268-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb268-14"><a href="graphing.html#cb268-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb268-15"><a href="graphing.html#cb268-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb268-16"><a href="graphing.html#cb268-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb268-17"><a href="graphing.html#cb268-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
+<span id="cb268-18"><a href="graphing.html#cb268-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-19"><a href="graphing.html#cb268-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-206-1.png" width="65%" /></p>
 </div>
 <div id="decreasing-order" class="section level4" number="5.8.4.2">
 <h4><span class="header-section-number">5.8.4.2</span> Decreasing order</h4>
 <p>We can make the movie bars go left to right in highest to lowest box office receipt order by changing the factor order prior to creating the graph. We use the same code as before but add the desc() command (i.e.,descending) around boxoffice in the fct_reorder() call:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="graphing.html#cb268-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_reorder</span>(title,</span>
-<span id="cb268-2"><a href="graphing.html#cb268-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">desc</span>(boxoffice)))</span></code></pre></div>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="graphing.html#cb269-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb269-2"><a href="graphing.html#cb269-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb269-3"><a href="graphing.html#cb269-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb269-4"><a href="graphing.html#cb269-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb269-5"><a href="graphing.html#cb269-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb269-6"><a href="graphing.html#cb269-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb269-7"><a href="graphing.html#cb269-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb269-8"><a href="graphing.html#cb269-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb269-9"><a href="graphing.html#cb269-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb269-10"><a href="graphing.html#cb269-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb269-11"><a href="graphing.html#cb269-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb269-12"><a href="graphing.html#cb269-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb269-13"><a href="graphing.html#cb269-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb269-14"><a href="graphing.html#cb269-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb269-15"><a href="graphing.html#cb269-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb269-16"><a href="graphing.html#cb269-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb269-17"><a href="graphing.html#cb269-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
-<span id="cb269-18"><a href="graphing.html#cb269-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb269-19"><a href="graphing.html#cb269-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-207-1.png" width="65%" /></p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="graphing.html#cb269-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_reorder</span>(title,</span>
+<span id="cb269-2"><a href="graphing.html#cb269-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">desc</span>(boxoffice)))</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="graphing.html#cb270-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb270-2"><a href="graphing.html#cb270-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb270-3"><a href="graphing.html#cb270-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb270-4"><a href="graphing.html#cb270-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb270-5"><a href="graphing.html#cb270-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb270-6"><a href="graphing.html#cb270-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb270-7"><a href="graphing.html#cb270-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb270-8"><a href="graphing.html#cb270-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb270-9"><a href="graphing.html#cb270-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb270-10"><a href="graphing.html#cb270-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb270-11"><a href="graphing.html#cb270-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb270-12"><a href="graphing.html#cb270-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb270-13"><a href="graphing.html#cb270-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb270-14"><a href="graphing.html#cb270-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb270-15"><a href="graphing.html#cb270-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb270-16"><a href="graphing.html#cb270-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb270-17"><a href="graphing.html#cb270-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span>
+<span id="cb270-18"><a href="graphing.html#cb270-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-19"><a href="graphing.html#cb270-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_graph)</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-208-1.png" width="65%" /></p>
 </div>
 <div id="custom-order" class="section level4" number="5.8.4.3">
 <h4><span class="header-section-number">5.8.4.3</span> Custom order</h4>
 <p>We can make the movie bars go left to right in a custom order by changing the factor order prior to creating the graph. Because we want a custom order of the factor levels we use fct_relevel(), instead of the the fct_reorder() command from the previous two examples. Below I use this approach to manually order movies highest to lowest boxoffice within movie studio (Marvel or DC).</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="graphing.html#cb270-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
-<span id="cb270-2"><a href="graphing.html#cb270-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_relevel</span>(title,</span>
-<span id="cb270-3"><a href="graphing.html#cb270-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Avengers Endgame&quot;</span>,</span>
-<span id="cb270-4"><a href="graphing.html#cb270-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Avengers Infinity War&quot;</span>,</span>
-<span id="cb270-5"><a href="graphing.html#cb270-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Thor Ragnarok&quot;</span>,</span>
-<span id="cb270-6"><a href="graphing.html#cb270-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Iron Man&quot;</span>,</span>
-<span id="cb270-7"><a href="graphing.html#cb270-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Batman v Superman&quot;</span>,</span>
-<span id="cb270-8"><a href="graphing.html#cb270-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Wonder Woman&quot;</span>,</span>
-<span id="cb270-9"><a href="graphing.html#cb270-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Man of Steel&quot;</span>,</span>
-<span id="cb270-10"><a href="graphing.html#cb270-10" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Justice League&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="graphing.html#cb271-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb271-2"><a href="graphing.html#cb271-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb271-3"><a href="graphing.html#cb271-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb271-4"><a href="graphing.html#cb271-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb271-5"><a href="graphing.html#cb271-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb271-6"><a href="graphing.html#cb271-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb271-7"><a href="graphing.html#cb271-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb271-8"><a href="graphing.html#cb271-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb271-9"><a href="graphing.html#cb271-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb271-10"><a href="graphing.html#cb271-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb271-11"><a href="graphing.html#cb271-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb271-12"><a href="graphing.html#cb271-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb271-13"><a href="graphing.html#cb271-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb271-14"><a href="graphing.html#cb271-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb271-15"><a href="graphing.html#cb271-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb271-16"><a href="graphing.html#cb271-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb271-17"><a href="graphing.html#cb271-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="graphing.html#cb271-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
+<span id="cb271-2"><a href="graphing.html#cb271-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">title =</span> <span class="fu">fct_relevel</span>(title,</span>
+<span id="cb271-3"><a href="graphing.html#cb271-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Avengers Endgame&quot;</span>,</span>
+<span id="cb271-4"><a href="graphing.html#cb271-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Avengers Infinity War&quot;</span>,</span>
+<span id="cb271-5"><a href="graphing.html#cb271-5" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Thor Ragnarok&quot;</span>,</span>
+<span id="cb271-6"><a href="graphing.html#cb271-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Iron Man&quot;</span>,</span>
+<span id="cb271-7"><a href="graphing.html#cb271-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Batman v Superman&quot;</span>,</span>
+<span id="cb271-8"><a href="graphing.html#cb271-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Wonder Woman&quot;</span>,</span>
+<span id="cb271-9"><a href="graphing.html#cb271-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Man of Steel&quot;</span>,</span>
+<span id="cb271-10"><a href="graphing.html#cb271-10" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Justice League&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="graphing.html#cb272-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb272-2"><a href="graphing.html#cb272-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb272-3"><a href="graphing.html#cb272-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb272-4"><a href="graphing.html#cb272-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb272-5"><a href="graphing.html#cb272-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb272-6"><a href="graphing.html#cb272-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb272-7"><a href="graphing.html#cb272-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb272-8"><a href="graphing.html#cb272-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb272-9"><a href="graphing.html#cb272-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb272-10"><a href="graphing.html#cb272-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb272-11"><a href="graphing.html#cb272-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb272-12"><a href="graphing.html#cb272-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb272-13"><a href="graphing.html#cb272-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb272-14"><a href="graphing.html#cb272-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb272-15"><a href="graphing.html#cb272-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb272-16"><a href="graphing.html#cb272-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb272-17"><a href="graphing.html#cb272-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
 <p><img src="ch_graphing/images/custom_order.png" width="65%" /></p>
 </div>
 </div>
 <div id="legend-order" class="section level3" number="5.8.5">
 <h3><span class="header-section-number">5.8.5</span> Legend order</h3>
 <p>After inspecting the graph on the previous page, you might think that Marvel should be above DC in the legend. You can do that by reordering the studio factor:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="graphing.html#cb272-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
-<span id="cb272-2"><a href="graphing.html#cb272-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">studio =</span> <span class="fu">fct_relevel</span>(studio,</span>
-<span id="cb272-3"><a href="graphing.html#cb272-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Marvel&quot;</span>,</span>
-<span id="cb272-4"><a href="graphing.html#cb272-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;DC&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="graphing.html#cb273-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb273-2"><a href="graphing.html#cb273-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb273-3"><a href="graphing.html#cb273-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb273-4"><a href="graphing.html#cb273-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb273-5"><a href="graphing.html#cb273-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb273-6"><a href="graphing.html#cb273-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb273-7"><a href="graphing.html#cb273-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb273-8"><a href="graphing.html#cb273-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb273-9"><a href="graphing.html#cb273-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
-<span id="cb273-10"><a href="graphing.html#cb273-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb273-11"><a href="graphing.html#cb273-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb273-12"><a href="graphing.html#cb273-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb273-13"><a href="graphing.html#cb273-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb273-14"><a href="graphing.html#cb273-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb273-15"><a href="graphing.html#cb273-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb273-16"><a href="graphing.html#cb273-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb273-17"><a href="graphing.html#cb273-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
-<p><img src="ch_graphing/images/custom_order2.png" width="65%" /></p>
-</div>
-</div>
-<div id="custom-colours" class="section level2" number="5.9">
-<h2><span class="header-section-number">5.9</span> Custom colours</h2>
-<div id="r-palette" class="section level3" number="5.9.1">
-<h3><span class="header-section-number">5.9.1</span> R palette</h3>
-<p>You might look at the previous graph and think “Marvel should be red and DC should be blue since those are the colours of their respective logos.” You can do that with the code below. Note that you specify the colours in the order the names appear in the legend (top to bottom).</p>
-<p>R colour names/pictures can be found here: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/colour</a></p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="graphing.html#cb273-1" aria-hidden="true" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
+<span id="cb273-2"><a href="graphing.html#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">studio =</span> <span class="fu">fct_relevel</span>(studio,</span>
+<span id="cb273-3"><a href="graphing.html#cb273-3" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;Marvel&quot;</span>,</span>
+<span id="cb273-4"><a href="graphing.html#cb273-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">&quot;DC&quot;</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="graphing.html#cb274-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb274-2"><a href="graphing.html#cb274-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb274-3"><a href="graphing.html#cb274-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1251,13 +1225,16 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb274-14"><a href="graphing.html#cb274-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
 <span id="cb274-15"><a href="graphing.html#cb274-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb274-16"><a href="graphing.html#cb274-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb274-17"><a href="graphing.html#cb274-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb274-18"><a href="graphing.html#cb274-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/base_color_graph.png" width="65%" /></p>
+<span id="cb274-17"><a href="graphing.html#cb274-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>))  </span></code></pre></div>
+<p><img src="ch_graphing/images/custom_order2.png" width="65%" /></p>
 </div>
-<div id="hex-colours" class="section level3" number="5.9.2">
-<h3><span class="header-section-number">5.9.2</span> Hex colours</h3>
-<p>If you are a really big geek (like me) you might look at the previous graph and think “Those aren’t the proper colours for the Marvel and DC - lame!” So… you do some internet research and determine that you can specify colours using hexidecimal numbers. More specifically, you find Marvel red is #ed1d24 and DC blue is #0476F2 using hex colour codes. You can use those precise colours via the scale_fill_manual() command below.</p>
+</div>
+<div id="custom-colours" class="section level2" number="5.9">
+<h2><span class="header-section-number">5.9</span> Custom colours</h2>
+<div id="r-palette" class="section level3" number="5.9.1">
+<h3><span class="header-section-number">5.9.1</span> R palette</h3>
+<p>You might look at the previous graph and think “Marvel should be red and DC should be blue since those are the colours of their respective logos.” You can do that with the code below. Note that you specify the colours in the order the names appear in the legend (top to bottom).</p>
+<p>R colour names/pictures can be found here: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/colour" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/colour</a></p>
 <div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="graphing.html#cb275-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb275-2"><a href="graphing.html#cb275-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb275-3"><a href="graphing.html#cb275-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1275,7 +1252,30 @@ FIGURE 5.2: Adding a fill column to the internal data
 <span id="cb275-15"><a href="graphing.html#cb275-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb275-16"><a href="graphing.html#cb275-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb275-17"><a href="graphing.html#cb275-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb275-18"><a href="graphing.html#cb275-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
+<span id="cb275-18"><a href="graphing.html#cb275-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/base_color_graph.png" width="65%" /></p>
+</div>
+<div id="hex-colours" class="section level3" number="5.9.2">
+<h3><span class="header-section-number">5.9.2</span> Hex colours</h3>
+<p>If you are a really big geek (like me) you might look at the previous graph and think “Those aren’t the proper colours for the Marvel and DC - lame!” So… you do some internet research and determine that you can specify colours using hexidecimal numbers. More specifically, you find Marvel red is #ed1d24 and DC blue is #0476F2 using hex colour codes. You can use those precise colours via the scale_fill_manual() command below.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="graphing.html#cb276-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb276-2"><a href="graphing.html#cb276-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb276-3"><a href="graphing.html#cb276-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb276-4"><a href="graphing.html#cb276-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb276-5"><a href="graphing.html#cb276-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb276-6"><a href="graphing.html#cb276-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb276-7"><a href="graphing.html#cb276-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb276-8"><a href="graphing.html#cb276-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb276-9"><a href="graphing.html#cb276-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">400</span>) <span class="sc">+</span></span>
+<span id="cb276-10"><a href="graphing.html#cb276-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb276-11"><a href="graphing.html#cb276-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb276-12"><a href="graphing.html#cb276-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb276-13"><a href="graphing.html#cb276-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb276-14"><a href="graphing.html#cb276-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb276-15"><a href="graphing.html#cb276-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb276-16"><a href="graphing.html#cb276-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb276-17"><a href="graphing.html#cb276-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb276-18"><a href="graphing.html#cb276-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/logo_color_graph.png" width="65%" /></p>
 </div>
 </div>
@@ -1283,31 +1283,31 @@ FIGURE 5.2: Adding a fill column to the internal data
 <h2><span class="header-section-number">5.10</span> Emoji</h2>
 <p>Make the graph more fun with the emoGG package. You might like to make the graph more fun by putting tomatoes on the graph to indicate what the extra numbers mean. We can do that with the emoGG package. The installation instructions for this package are at the start of this chapter; note, that it is installed via GitHub rather than the CRAN. Course R Studio Cloud users - the installation has already been done.</p>
 <p>After installation you need to activate the emoGG package:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="graphing.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emoGG)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="graphing.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emoGG)</span></code></pre></div>
 <p>Visit this link to check out the codes for emoji: <a href="https://apps.timwhitlock.info/emoji/tables/unicode" class="uri">https://apps.timwhitlock.info/emoji/tables/unicode</a></p>
 <p>If you scroll down to section 5 Uncategorized on this page you will find the code for a tomato is 1f345. Note that the code below will only work with an internet connection. The command geom_emoji() needs internet access to retrieve the emoji graphic requested.</p>
 <p><img src="ch_graphing/images/emoji_table.png" width="90%" /></p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="graphing.html#cb277-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb277-2"><a href="graphing.html#cb277-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb277-3"><a href="graphing.html#cb277-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb277-4"><a href="graphing.html#cb277-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb277-5"><a href="graphing.html#cb277-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb277-6"><a href="graphing.html#cb277-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb277-7"><a href="graphing.html#cb277-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb277-8"><a href="graphing.html#cb277-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb277-9"><a href="graphing.html#cb277-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
-<span id="cb277-10"><a href="graphing.html#cb277-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb277-11"><a href="graphing.html#cb277-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
-<span id="cb277-12"><a href="graphing.html#cb277-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
-<span id="cb277-13"><a href="graphing.html#cb277-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb277-14"><a href="graphing.html#cb277-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb277-15"><a href="graphing.html#cb277-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb277-16"><a href="graphing.html#cb277-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb277-17"><a href="graphing.html#cb277-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb277-18"><a href="graphing.html#cb277-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb277-19"><a href="graphing.html#cb277-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb277-20"><a href="graphing.html#cb277-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb277-21"><a href="graphing.html#cb277-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="graphing.html#cb278-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb278-2"><a href="graphing.html#cb278-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb278-3"><a href="graphing.html#cb278-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb278-4"><a href="graphing.html#cb278-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb278-5"><a href="graphing.html#cb278-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb278-6"><a href="graphing.html#cb278-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb278-7"><a href="graphing.html#cb278-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb278-8"><a href="graphing.html#cb278-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb278-9"><a href="graphing.html#cb278-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb278-10"><a href="graphing.html#cb278-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb278-11"><a href="graphing.html#cb278-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
+<span id="cb278-12"><a href="graphing.html#cb278-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
+<span id="cb278-13"><a href="graphing.html#cb278-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb278-14"><a href="graphing.html#cb278-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb278-15"><a href="graphing.html#cb278-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb278-16"><a href="graphing.html#cb278-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb278-17"><a href="graphing.html#cb278-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb278-18"><a href="graphing.html#cb278-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb278-19"><a href="graphing.html#cb278-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb278-20"><a href="graphing.html#cb278-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb278-21"><a href="graphing.html#cb278-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ed1d24&quot;</span>, <span class="st">&quot;#0476F2&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph.png" width="65%" /></p>
 </div>
 <div id="accessible-colors" class="section level2" number="5.11">
@@ -1326,8 +1326,8 @@ FIGURE 5.3: Hue removed from current graph
 <div id="picking-a-palette" class="section level4" number="5.11.1.1">
 <h4><span class="header-section-number">5.11.1.1</span> Picking a palette</h4>
 <p>The RColorBrewer package can be used to generate color palettes for graphs that are accessible to people with color blindness. That is, it creates sets of colors, called palettes, for which the colors vary in terms of both lightness and hue. You can see the color-blind accessible palettes, along with their respective names, by using the command below. This code produces a wide range of color-blind accessible palettes with a large number of colors in each palette - as illustrated in Figure <a href="graphing.html#fig:colorpal">5.4</a>.</p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="graphing.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb278-2"><a href="graphing.html#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">colorblindFriendly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="graphing.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb279-2"><a href="graphing.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">colorblindFriendly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:colorpal"></span>
 <img src="ch_graphing/images/colors_all.png" alt="Wide range color palette (color-blind accessible)" width="70%" height="70%" />
 <p class="caption">
@@ -1336,8 +1336,8 @@ FIGURE 5.4: Wide range color palette (color-blind accessible)
 </div>
 <div style="page-break-after: always;"></div>
 <p>In Figure <a href="graphing.html#fig:colorpal">5.4</a>, above, we showed palettes with a large number of colors. But if you have a smaller number of possible colors in your graph - you want a palette with fewer colors (to ensure maximum contrast between those colors). You can, for example, obtain palettes with only three colors using the code below.</p>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="graphing.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
-<span id="cb279-2"><a href="graphing.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">colorblindFriendly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="graphing.html#cb280-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb280-2"><a href="graphing.html#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="fu">display.brewer.all</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">colorblindFriendly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>The above code generates the three-color palettes presented in Figure <a href="graphing.html#fig:colorspalthree">5.5</a>.</p>
 <div class="figure"><span id="fig:colorspalthree"></span>
 <img src="ch_graphing/images/colors_3.png" alt="Narrow range color palette (color-blind accessible)" width="70%" height="70%" />
@@ -1350,33 +1350,33 @@ FIGURE 5.5: Narrow range color palette (color-blind accessible)
 <div id="using-a-palette" class="section level4" number="5.11.1.2">
 <h4><span class="header-section-number">5.11.1.2</span> Using a palette</h4>
 <p>We can use a color palette by specifying its name within scale_fill_brewer(). We want to use the “Paired” palette in Figure <a href="graphing.html#fig:colorspalthree">5.5</a> so we use the code: scale_fill_brewer(palette = “Paired”), as illustrated below:</p>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="graphing.html#cb280-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb280-2"><a href="graphing.html#cb280-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb280-3"><a href="graphing.html#cb280-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb280-4"><a href="graphing.html#cb280-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb280-5"><a href="graphing.html#cb280-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb280-6"><a href="graphing.html#cb280-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb280-7"><a href="graphing.html#cb280-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb280-8"><a href="graphing.html#cb280-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb280-9"><a href="graphing.html#cb280-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
-<span id="cb280-10"><a href="graphing.html#cb280-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb280-11"><a href="graphing.html#cb280-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
-<span id="cb280-12"><a href="graphing.html#cb280-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
-<span id="cb280-13"><a href="graphing.html#cb280-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb280-14"><a href="graphing.html#cb280-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb280-15"><a href="graphing.html#cb280-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb280-16"><a href="graphing.html#cb280-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb280-17"><a href="graphing.html#cb280-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb280-18"><a href="graphing.html#cb280-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb280-19"><a href="graphing.html#cb280-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb280-20"><a href="graphing.html#cb280-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb280-21"><a href="graphing.html#cb280-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="graphing.html#cb281-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb281-2"><a href="graphing.html#cb281-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb281-3"><a href="graphing.html#cb281-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb281-4"><a href="graphing.html#cb281-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb281-5"><a href="graphing.html#cb281-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb281-6"><a href="graphing.html#cb281-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb281-7"><a href="graphing.html#cb281-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb281-8"><a href="graphing.html#cb281-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb281-9"><a href="graphing.html#cb281-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb281-10"><a href="graphing.html#cb281-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb281-11"><a href="graphing.html#cb281-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
+<span id="cb281-12"><a href="graphing.html#cb281-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
+<span id="cb281-13"><a href="graphing.html#cb281-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb281-14"><a href="graphing.html#cb281-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb281-15"><a href="graphing.html#cb281-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb281-16"><a href="graphing.html#cb281-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb281-17"><a href="graphing.html#cb281-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb281-18"><a href="graphing.html#cb281-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb281-19"><a href="graphing.html#cb281-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb281-20"><a href="graphing.html#cb281-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb281-21"><a href="graphing.html#cb281-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph4.png" width="65%" /></p>
 </div>
 <div id="palette-subsets" class="section level4" number="5.11.1.3">
 <h4><span class="header-section-number">5.11.1.3</span> Palette subsets</h4>
 <p>Our graph had only two colors but the “Paired” palette had three colors. When ggplot made the graph it automatically used the first two colors of the three color palette. What if you wanted the second two colors in the palette? We can do that but we have to revert to a manual color process like we used before via the scale_fill_manual(). But we want to do so using the colors from the “Paired” palette. We can obtain the color codes for the “Paired” palette with the code below:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="graphing.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">name =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="graphing.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">name =</span> <span class="st">&quot;Paired&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;#A6CEE3&quot; &quot;#1F78B4&quot; &quot;#B2DF8A&quot;</code></pre>
 <p>The numbers in the output correspond to values representing the three colors of the “Paired” palette, see Figure <a href="graphing.html#fig:pairedpal">5.6</a>. If we want the last two colors in the palette for our graph that means we want the colors: #1F78B4 and #B2DF8A.</p>
 <div class="figure"><span id="fig:pairedpal"></span>
@@ -1386,40 +1386,6 @@ FIGURE 5.6: Paired palette colors with hex numbers
 </p>
 </div>
 <p>We can put the two colors we want (#1F78B4 and #B2DF8A) on the graph by using the scale_fill_manual() command - instead of the scale_fill_brewer() command. We can see this in the code below:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="graphing.html#cb283-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
-<span id="cb283-2"><a href="graphing.html#cb283-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
-<span id="cb283-3"><a href="graphing.html#cb283-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
-<span id="cb283-4"><a href="graphing.html#cb283-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
-<span id="cb283-5"><a href="graphing.html#cb283-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb283-6"><a href="graphing.html#cb283-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb283-7"><a href="graphing.html#cb283-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
-<span id="cb283-8"><a href="graphing.html#cb283-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
-<span id="cb283-9"><a href="graphing.html#cb283-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
-<span id="cb283-10"><a href="graphing.html#cb283-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb283-11"><a href="graphing.html#cb283-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
-<span id="cb283-12"><a href="graphing.html#cb283-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
-<span id="cb283-13"><a href="graphing.html#cb283-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
-<span id="cb283-14"><a href="graphing.html#cb283-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
-<span id="cb283-15"><a href="graphing.html#cb283-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
-<span id="cb283-16"><a href="graphing.html#cb283-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
-<span id="cb283-17"><a href="graphing.html#cb283-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
-<span id="cb283-18"><a href="graphing.html#cb283-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
-<span id="cb283-19"><a href="graphing.html#cb283-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
-<span id="cb283-20"><a href="graphing.html#cb283-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb283-21"><a href="graphing.html#cb283-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#1F78B4&quot;</span>, <span class="st">&quot;#B2DF8A&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph5.png" width="65%" /></p>
-<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure <a href="graphing.html#fig:colorcomparison2">5.7</a>B, below, notice that the bars representing the two studios are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">5.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
-<div class="figure"><span id="fig:colorcomparison2"></span>
-<img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="75%" />
-<p class="caption">
-FIGURE 5.7: Color information (i.e., hue) removed from new color-blind accessible graph
-</p>
-</div>
-</div>
-</div>
-<div id="avoid-color" class="section level3" number="5.11.2">
-<h3><span class="header-section-number">5.11.2</span> Avoid color</h3>
-<p>When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values “#ffffff” (white) and "“#000000” (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white background you can see this resulted in the Marvel bars disappearing.</p>
 <div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="graphing.html#cb284-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb284-2"><a href="graphing.html#cb284-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb284-3"><a href="graphing.html#cb284-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1440,16 +1406,26 @@ FIGURE 5.7: Color information (i.e., hue) removed from new color-blind accessibl
 <span id="cb284-18"><a href="graphing.html#cb284-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb284-19"><a href="graphing.html#cb284-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb284-20"><a href="graphing.html#cb284-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb284-21"><a href="graphing.html#cb284-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
-<p><img src="ch_graphing/images/emoji_graph2.png" width="65%" /></p>
-<p>How do we get around the Marvel bars disappearing when we use white?</p>
-<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term <strong>fill</strong> is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the previous code we used fill to change the colors of the bars but we did not use the “color” argument in a command. In the code below, we modify the geom_col() command to use the “color” argument. Specifically, we change geom_col() to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
+<span id="cb284-21"><a href="graphing.html#cb284-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#1F78B4&quot;</span>, <span class="st">&quot;#B2DF8A&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph5.png" width="65%" /></p>
+<p>Now that we have used a color-blind accessible palette in the graph we can look at the graph without the hue component. In Figure <a href="graphing.html#fig:colorcomparison2">5.7</a>B, below, notice that the bars representing the two studios are easily distinguishable based on lightness alone. That is, the lightness graph in Figure <a href="graphing.html#fig:colorcomparison2">5.7</a>B demonstrates the new color-blind accessible colors vary in term of both hue and lightness - not just hue. Therefore, when hue is removed the two colors are distinguishable. This makes the graph accessible to color-blind individuals.</p>
+<div class="figure"><span id="fig:colorcomparison2"></span>
+<img src="ch_graphing/images/nocolorcomparison2.png" alt="Color information (i.e., hue) removed from new color-blind accessible graph" width="75%" />
+<p class="caption">
+FIGURE 5.7: Color information (i.e., hue) removed from new color-blind accessible graph
+</p>
+</div>
+</div>
+</div>
+<div id="avoid-color" class="section level3" number="5.11.2">
+<h3><span class="header-section-number">5.11.2</span> Avoid color</h3>
+<p>When you only have two colors on a graph another option for creating an accessible graph is to remove the colors entirely and make a black and white graph. In the code below we use scale_fill_manual() with the values “#ffffff” (white) and "“#000000” (black). The intent was to create bars that are white for Marvel and black for DC. Unfortunately, because the graph has a white background you can see this resulted in the Marvel bars disappearing.</p>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="graphing.html#cb285-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb285-2"><a href="graphing.html#cb285-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb285-3"><a href="graphing.html#cb285-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
 <span id="cb285-4"><a href="graphing.html#cb285-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
 <span id="cb285-5"><a href="graphing.html#cb285-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
-<span id="cb285-6"><a href="graphing.html#cb285-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb285-6"><a href="graphing.html#cb285-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb285-7"><a href="graphing.html#cb285-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
 <span id="cb285-8"><a href="graphing.html#cb285-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
 <span id="cb285-9"><a href="graphing.html#cb285-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
@@ -1465,6 +1441,30 @@ FIGURE 5.7: Color information (i.e., hue) removed from new color-blind accessibl
 <span id="cb285-19"><a href="graphing.html#cb285-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
 <span id="cb285-20"><a href="graphing.html#cb285-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb285-21"><a href="graphing.html#cb285-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
+<p><img src="ch_graphing/images/emoji_graph2.png" width="65%" /></p>
+<p>How do we get around the Marvel bars disappearing when we use white?</p>
+<p><strong>Color vs. fill.</strong> The ggplot packages makes a distinction between <strong>fill</strong> and <strong>color</strong>. The term <strong>fill</strong> is used to refer to the inside color of bars. In contrast, <strong>color</strong> is used to the refer to the lines that outline the shape of each bar. In the previous code we used fill to change the colors of the bars but we did not use the “color” argument in a command. In the code below, we modify the geom_col() command to use the “color” argument. Specifically, we change geom_col() to geom_col(color = “black”). This change adds a black outline around all the bars – including the ones with a white fill. You can see the result is a much improved graph. This black/white graph is accessible to everyone.</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="graphing.html#cb286-1" aria-hidden="true" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
+<span id="cb286-2"><a href="graphing.html#cb286-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
+<span id="cb286-3"><a href="graphing.html#cb286-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
+<span id="cb286-4"><a href="graphing.html#cb286-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">label =</span> boxoffice, </span>
+<span id="cb286-5"><a href="graphing.html#cb286-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> studio)) <span class="sc">+</span></span>
+<span id="cb286-6"><a href="graphing.html#cb286-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb286-7"><a href="graphing.html#cb286-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="dv">150</span>)  <span class="sc">+</span></span>
+<span id="cb286-8"><a href="graphing.html#cb286-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">label =</span> tomatoes_aud), </span>
+<span id="cb286-9"><a href="graphing.html#cb286-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="dv">600</span>, </span>
+<span id="cb286-10"><a href="graphing.html#cb286-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb286-11"><a href="graphing.html#cb286-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_emoji</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">y =</span> boxoffice <span class="sc">+</span> <span class="dv">400</span>),</span>
+<span id="cb286-12"><a href="graphing.html#cb286-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">emoji=</span><span class="st">&quot;1f345&quot;</span>) <span class="sc">+</span></span>
+<span id="cb286-13"><a href="graphing.html#cb286-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3500</span>)) <span class="sc">+</span></span>
+<span id="cb286-14"><a href="graphing.html#cb286-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">3500</span>, <span class="at">by =</span> <span class="dv">500</span>)) <span class="sc">+</span></span>
+<span id="cb286-15"><a href="graphing.html#cb286-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Movie&quot;</span>,</span>
+<span id="cb286-16"><a href="graphing.html#cb286-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Box office (millions)&quot;</span>,</span>
+<span id="cb286-17"><a href="graphing.html#cb286-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Studio&quot;</span>) <span class="sc">+</span></span>
+<span id="cb286-18"><a href="graphing.html#cb286-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb286-19"><a href="graphing.html#cb286-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, </span>
+<span id="cb286-20"><a href="graphing.html#cb286-20" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb286-21"><a href="graphing.html#cb286-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#ffffff&quot;</span>, <span class="st">&quot;#000000&quot;</span>))</span></code></pre></div>
 <p><img src="ch_graphing/images/emoji_graph3.png" width="65%" /></p>
 </div>
 </div>
@@ -1474,20 +1474,20 @@ FIGURE 5.7: Color information (i.e., hue) removed from new color-blind accessibl
 <div id="mac" class="section level3" number="5.12.1">
 <h3><span class="header-section-number">5.12.1</span> MAC</h3>
 <p>If you are able to use PDFs in your workflow that’s often the best option for saving. PDFs are mathematical in nature and therefore can be printed at any size at high quality. With a MAC you can just drag and drop the PDF file into your MSWord document.</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="graphing.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> my_graph, </span>
-<span id="cb286-2"><a href="graphing.html#cb286-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">&quot;emoji_graph.pdf&quot;</span>, </span>
-<span id="cb286-3"><a href="graphing.html#cb286-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, </span>
-<span id="cb286-4"><a href="graphing.html#cb286-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="graphing.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> my_graph, </span>
+<span id="cb287-2"><a href="graphing.html#cb287-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">&quot;emoji_graph.pdf&quot;</span>, </span>
+<span id="cb287-3"><a href="graphing.html#cb287-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, </span>
+<span id="cb287-4"><a href="graphing.html#cb287-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
 </div>
 <div id="pc-or-mac" class="section level3" number="5.12.2">
 <h3><span class="header-section-number">5.12.2</span> PC or MAC</h3>
 <p>If you have a PC it’s hard to put a PDF into MSWord. Therefore, save the graph as a .jpg file. You do so with the code below. This creates a picture type file at a resolution (dpi = dots per inch) that is sufficiently high for quality printing.</p>
 <p>With a PC you need to use the INSERT menu and insert the graph as a picture in MSWord. With a MAC you can just drag and drop the .jpg file into your MSWord document.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="graphing.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> my_graph, </span>
-<span id="cb287-2"><a href="graphing.html#cb287-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">&quot;emoji_graph.jpg&quot;</span>, </span>
-<span id="cb287-3"><a href="graphing.html#cb287-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, </span>
-<span id="cb287-4"><a href="graphing.html#cb287-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>, </span>
-<span id="cb287-5"><a href="graphing.html#cb287-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="st">&quot;print&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="graphing.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> my_graph, </span>
+<span id="cb288-2"><a href="graphing.html#cb288-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">filename =</span> <span class="st">&quot;emoji_graph.jpg&quot;</span>, </span>
+<span id="cb288-3"><a href="graphing.html#cb288-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, </span>
+<span id="cb288-4"><a href="graphing.html#cb288-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">6</span>, </span>
+<span id="cb288-5"><a href="graphing.html#cb288-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">dpi =</span> <span class="st">&quot;print&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
