@@ -925,9 +925,11 @@ The code below:
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_survey <- analytic_data_survey %>% 
   mutate(6 - across(.cols = ends_with("_likert5rev")) ) %>% 
-  rename_with(.fn = str_remove,
+  rename_with(.fn = str_replace,
               .cols = ends_with("_likert5rev"),
-              pattern = "_likert5rev")
+              pattern = "_likert5rev",
+              replacement = "_likert5")
+
 ```
 
 You can use the glimpse() command to see the result of your work. If you compare these new values to those obtained from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
@@ -1246,9 +1248,10 @@ The code below:
 ```{r,echo=TRUE,eval=TRUE}
 analytic_data_occasions <- analytic_data_occasions %>% 
   mutate(6 - across(.cols = ends_with("_likert5rev")) ) %>% 
-  rename_with(.fn = str_remove,
+  rename_with(.fn = str_replace,
               .cols = ends_with("_likert5rev"),
-              pattern = "_likert5rev")
+              pattern = "_likert5rev",
+              replacement = "_likert5")
 ```
 
 You can use the glimpse() command to see the result of your work. If you compare these new values to those obtained from the previous glimpse() command you can see they have changed. Also notice the column names no longer indicate the items are reverse keyed.
