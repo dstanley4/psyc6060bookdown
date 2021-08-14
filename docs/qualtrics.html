@@ -781,12 +781,12 @@ div.csl-indent {
 <p>There are two approaches to entering survey items into Qualtrics.</p>
 <ul>
 <li><p>Enter the items one at a time using the Qualtrics web interface.</p></li>
-<li><p>Create a text file using Qualtrics <a href="https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/">Advanced Text Format</a> and import the times. Be warned though a bit of tweaking is often still needed using the web interface.</p></li>
+<li><p>Create a text file in the Qualtrics <a href="https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/">Advanced Text Format</a> and import the itme. Be warned though a bit of tweaking is often still needed using the web interface.</p></li>
 </ul>
 <p>Here we focus only on the second approach to entering items into Qualtrics.</p>
 <div id="create-survey-codebook" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Create survey codebook</h3>
-<p>We want to create a survey that contains 2 demographics items, 18 commitment items, and 4 job satisfaction items. To do we create a survey codebook spreadsheet in Excel (or similar program). The spreadsheet should have the columns block, item_name, item_text, type, response_options. The completed file is illustrated below <a href="survey_codebook.csv">survey_codebook.csv</a> file. Although you can see the information that should be in each column based of the figure I provide a detailed information of what should be placed in each column. Remember to work from the guiding principle that one row is use for one item/question.</p>
+<p>The easy way to create items in the <a href="https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/">Advanced Text Format</a> is to use the qualtricsMaker package. With this package you create a spreadsheet with the items and then convert that spreadsheet to the Advanced Text Format. Consider a scneario where we want to create a survey that contains 2 demographics items, 18 commitment items, and 4 job satisfaction items. We being by creating a survey codebook spreadsheet in Excel (or similar program). The spreadsheet should have the columns with the names: block, item_name, item_text, type, response_options. The completed file ( <a href="survey_codebook.csv">survey_codebook.csv</a>) is illustrated below. Although you can see the information that should be in each column based of the figure I provide a detailed information of what should be placed in each column. Remember to work from the guiding principle that one row is use for one item/question.</p>
 <p><img src="ch_qualtrics/images/screenshot_items.png" width="100%" /></p>
 <div id="block-column" class="section level4" number="4.3.1.1">
 <h4><span class="header-section-number">4.3.1.1</span> block column</h4>
@@ -884,46 +884,100 @@ div.csl-indent {
 <h3><span class="header-section-number">4.3.2</span> Convert to Qualtrics format</h3>
 <div id="create-txt-file" class="section level4" number="4.3.2.1">
 <h4><span class="header-section-number">4.3.2.1</span> Create TXT file</h4>
-<p>Once you have the survey codebook above, you need to convert it to an <a href="https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/">Advanced Text Format</a> .txt file. We can do so by following the steps below.</p>
+<p>Once you have the survey codebook above, you need to convert it to an <a href="https://www.qualtrics.com/support/survey-platform/survey-module/survey-tools/import-and-export-surveys/">Advanced Text Format</a> .txt file. We can do so by following the steps below. The instructions differ slightly for RStudio Cloud and RStudio - both are presented.</p>
 <div id="rstudio-on-your-computer" class="section level5" number="4.3.2.1.1">
 <h5><span class="header-section-number">4.3.2.1.1</span> RStudio on your computer</h5>
 <ol style="list-style-type: decimal">
-<li><p>Create a folder on your computer called “new_survey” with the survey_codebook.csv file in it.</p></li>
-<li><p>Open RStudio. Then go to File &gt; New Project…</p></li>
-<li></li>
+<li><p>Create a folder on your computer called “new_survey” <strong>with the survey_codebook.csv file in it.</strong></p></li>
+<li><p>Open RStudio. Then go to File &gt; New Project… and select Existing Directory.</p></li>
 </ol>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="qualtrics.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb205-2"><a href="qualtrics.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qualtricsMaker)</span>
-<span id="cb205-3"><a href="qualtrics.html#cb205-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-4"><a href="qualtrics.html#cb205-4" aria-hidden="true" tabindex="-1"></a>survey_codebook <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;survey_codebook.csv&quot;</span>,</span>
-<span id="cb205-5"><a href="qualtrics.html#cb205-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb205-6"><a href="qualtrics.html#cb205-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb205-7"><a href="qualtrics.html#cb205-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make_survey</span>(survey_codebook,</span>
-<span id="cb205-8"><a href="qualtrics.html#cb205-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="st">&quot;items_qualtrics_format.txt&quot;</span>)</span></code></pre></div>
+<p><img src="ch_qualtrics/images/screenshot_existing_dir.png" width="50%" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Then find and select the “new_survey” folder on your hard drive and click the Create Project button.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_folder.png" width="50%" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>You should previously have installed the remote and tidyverse package from the CRAN and the qualtricsMaker package from GitHub. If you haven’t done this already type the commands below into the <strong>Console</strong>.</li>
+</ol>
+<p><strong>Installing Packages from the CRAN</strong></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="qualtrics.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb205-2"><a href="qualtrics.html#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><strong>Installing Package from GitHub</strong></p>
+<p>Then install the qualtricsMaker package from GitHub:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="qualtrics.html#cb206-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dstanley4/qualtricsMaker&quot;</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a new script by going to File &gt; New File &gt; R Script. A new script will appear in RStudio. Immediately press Control-S to save the script. Call it “script_convert.R.”</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_new_script.png" width="50%" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Place the code below into the script and press Control-S to save your work.</li>
+</ol>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="qualtrics.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb207-2"><a href="qualtrics.html#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qualtricsMaker)</span>
+<span id="cb207-3"><a href="qualtrics.html#cb207-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-4"><a href="qualtrics.html#cb207-4" aria-hidden="true" tabindex="-1"></a>survey_codebook <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;survey_codebook.csv&quot;</span>,</span>
+<span id="cb207-5"><a href="qualtrics.html#cb207-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb207-6"><a href="qualtrics.html#cb207-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb207-7"><a href="qualtrics.html#cb207-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make_survey</span>(survey_codebook,</span>
+<span id="cb207-8"><a href="qualtrics.html#cb207-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="st">&quot;items_qualtrics_format.txt&quot;</span>)</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Run the script by pressing the Source button in the top right of the the Script window. Doing so will create the items_qualtrics_format.txt file that you will import into Qualtrics. You can see the file after it has been created in the Files tab below.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_post_creation.png" width="50%" /></p>
+<p><strong>Congratulation - your items are ready to be imported into Qualtrics. Move on to the “Import the items” section.</strong></p>
 </div>
 <div id="rstudio-cloud" class="section level5" number="4.3.2.1.2">
 <h5><span class="header-section-number">4.3.2.1.2</span> RStudio Cloud</h5>
 <ol style="list-style-type: decimal">
-<li><p>Open a new project</p></li>
-<li><p>Ensure you ave installed the packages specified above by typing the commands below into the RStudio Cloud Console (not the script window).</p></li>
+<li><p>Open a new project in RStudio Cloud</p></li>
+<li><p>You should previously have installed the remote and tidyverse package from the CRAN and the qualtricsMaker package from GitHub. If you haven’t done this already type the commands below into the <strong>Console</strong>.However, if you are working from a class project I created <strong>these packages will have been installed already for you.</strong></p></li>
 </ol>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="qualtrics.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb206-2"><a href="qualtrics.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;janitor&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb206-3"><a href="qualtrics.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="qualtrics.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb208-2"><a href="qualtrics.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Then install the qualtricsMaker package from GitHub:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="qualtrics.html#cb207-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dstanley4/qualtricsMaker&quot;</span>)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>Import the <a href="survey_codebook.csv">survey_codebook.csv</a> file by using the Import button in the Files tab in the lower right panel.</li>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="qualtrics.html#cb209-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dstanley4/qualtricsMaker&quot;</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Import the <a href="survey_codebook.csv">survey_codebook.csv</a> file by using the Upload button in the Files tab in the lower right panel.</li>
 </ol>
 <p><img src="ch_qualtrics/images/screenshot_import_button.png" width="50%" /></p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="qualtrics.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb208-2"><a href="qualtrics.html#cb208-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qualtricsMaker)</span>
-<span id="cb208-3"><a href="qualtrics.html#cb208-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-4"><a href="qualtrics.html#cb208-4" aria-hidden="true" tabindex="-1"></a>survey_codebook <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;survey_codebook.csv&quot;</span>,</span>
-<span id="cb208-5"><a href="qualtrics.html#cb208-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb208-6"><a href="qualtrics.html#cb208-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb208-7"><a href="qualtrics.html#cb208-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make_survey</span>(survey_codebook,</span>
-<span id="cb208-8"><a href="qualtrics.html#cb208-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="st">&quot;items_qualtrics_format.txt&quot;</span>)</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>Click the Choose File button and select the survey_codebook.csv file on your hard drive. Then click OK. The survey_codebook.csv file will then appear on the Files tab within RStudio Cloud.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_choose_file.png" width="50%" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Create a new script by going to File &gt; New File &gt; R Script. A new script will appear in RStudio. Immediately press Control-S to save the script. Call it “script_convert.R.”</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_new_script_RSC.png" width="50%" /></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Place the code below into the script and press Control-S to save your work.</li>
+</ol>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="qualtrics.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb210-2"><a href="qualtrics.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qualtricsMaker)</span>
+<span id="cb210-3"><a href="qualtrics.html#cb210-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-4"><a href="qualtrics.html#cb210-4" aria-hidden="true" tabindex="-1"></a>survey_codebook <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;survey_codebook.csv&quot;</span>,</span>
+<span id="cb210-5"><a href="qualtrics.html#cb210-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb210-6"><a href="qualtrics.html#cb210-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb210-7"><a href="qualtrics.html#cb210-7" aria-hidden="true" tabindex="-1"></a><span class="fu">make_survey</span>(survey_codebook,</span>
+<span id="cb210-8"><a href="qualtrics.html#cb210-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">filename =</span> <span class="st">&quot;items_qualtrics_format.txt&quot;</span>)</span></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>Run the script by pressing the Source button in the top right of the the Script window. Doing so will create the items_qualtrics_format.txt file that you will import into Qualtrics. You can see the file after it has been created in the Files tab below.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_post_creation_RSC.png" width="50%" /></p>
+<ol start="9" style="list-style-type: decimal">
+<li>Select the checkbox beside the file you just created: items_qualtrics_format.txt</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_select_export_file.png" width="35%" /></p>
+<ol start="10" style="list-style-type: decimal">
+<li>Select Export from the More menu.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_select_export_menu.png" width="60%" /></p>
+<ol start="11" style="list-style-type: decimal">
+<li>Leave the filename as it appears and click the Download button. The file will appear in the Downloads directory on your computer.</li>
+</ol>
+<p><img src="ch_qualtrics/images/screenshot_export_filename.png" width="40%" /></p>
+<ol start="12" style="list-style-type: decimal">
+<li>Move the file (items_qualtrics_format.txt) from the Download folder to an easy to access place (e.g. the Desktop).</li>
+</ol>
 </div>
 </div>
 </div>
@@ -931,7 +985,7 @@ div.csl-indent {
 <h3><span class="header-section-number">4.3.3</span> Import the items</h3>
 <div id="click-the-create-new-project-button." class="section level5" number="4.3.3.0.1">
 <h5><span class="header-section-number">4.3.3.0.1</span> Click the Create New Project button.</h5>
-<p><img src="ch_qualtrics/images/screenshot_b1.png" width="30%" /></p>
+<p><img src="ch_qualtrics/images/screenshot_b1.png" width="20%" /></p>
 </div>
 <div id="select-the-survey-option." class="section level4" number="4.3.3.1">
 <h4><span class="header-section-number">4.3.3.1</span> Select the Survey option.</h4>
@@ -949,6 +1003,7 @@ div.csl-indent {
 <h4><span class="header-section-number">4.3.3.4</span> Use the Tools menu to import the items</h4>
 <p>Select the Import option and then specify the filename for the Advanced Text import file with the items in it.</p>
 <p><img src="ch_qualtrics/images/screenshot_b5.png" width="50%" /></p>
+<p><strong>Congratulation - your items are ready to be imported into Qualtrics. Move on to the “Import the items” section.</strong></p>
 </div>
 <div id="resulting-survey" class="section level4" number="4.3.3.5">
 <h4><span class="header-section-number">4.3.3.5</span> Resulting Survey</h4>
@@ -968,12 +1023,14 @@ div.csl-indent {
 <div id="click-the-data-analysis-tab" class="section level4" number="4.4.1.1">
 <h4><span class="header-section-number">4.4.1.1</span> Click the Data &amp; Analysis tab</h4>
 <p><img src="ch_qualtrics/images/screenshot_data.png" width="70%" /></p>
-<p>##3# Click the Export &amp; Import button.</p>
+</div>
+<div id="click-the-export-import-button." class="section level4" number="4.4.1.2">
+<h4><span class="header-section-number">4.4.1.2</span> Click the Export &amp; Import button.</h4>
 <p>Then click the <strong>Export Data…</strong> option.</p>
 <p><img src="ch_qualtrics/images/screenshot_export.png" width="20%" /></p>
 </div>
-<div id="click-use-choice-text" class="section level4" number="4.4.1.2">
-<h4><span class="header-section-number">4.4.1.2</span> Click Use Choice Text</h4>
+<div id="click-use-choice-text" class="section level4" number="4.4.1.3">
+<h4><span class="header-section-number">4.4.1.3</span> Click Use Choice Text</h4>
 <p>To ensure the data can be used by others, as per the FAIR policy described above, we SELECT the “Use Choice Text” option when exporting data. If you were (non-optimally) select “Use numeric value” as an export option then the resulting data file would be missing information that make it difficult for others to use. Then click the Download button.</p>
 <p><img src="ch_qualtrics/images/screenshot_export_choice.png" width="60%" /></p>
 <p>In doing so we have several goals</p>
