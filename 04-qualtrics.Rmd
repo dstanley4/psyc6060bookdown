@@ -427,6 +427,12 @@ To load the data in R follow the steps below
 
 Read the file in with the right columns names - excluding unwanted rows.
 
+```{r, include=FALSE}
+library(tidyverse)
+library(janitor)
+library(skimr)
+```
+
 ```{r, results='hide'}
 # Date: YYYY-MM-DD
 # Name: your name here
@@ -435,6 +441,7 @@ Read the file in with the right columns names - excluding unwanted rows.
 # Load data
 library(tidyverse)
 library(janitor)
+library(skimr)
 
 # read the file in the normal way and get just the names of the columns.
 # put the names into the col_names
@@ -494,8 +501,6 @@ analytic_data_survey <- raw_data
 Remove empty row and columns from your data using the remove_empty_cols() and remove_empty_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions. 
 
 ```{r, results = "hide"}
-library(janitor)
-
 # Initial cleaning
 analytic_data_survey <- analytic_data_survey %>%
   remove_empty("rows") %>%
@@ -511,68 +516,122 @@ glimpse(analytic_data_survey)
 
 ### Creating factors
 
-Following initial cleaning, we identify categorical variables as factors. If you plan to conduct an ANOVA - it's critical that all predictor variables are converted to factors. Inspect the glimpse() output - if you followed our data entry naming conventions, categorical variables should be of the type character. 
+
+Following initial cleaning, we identify categorical variables as factors. 
+
 ```{r}
 glimpse(analytic_data_survey)
 ```
 
-We have two variables, sex and eye_color, that are categorical variable of type character (i.e., chr). The participant id column is categorical as well, but of type double (i.e., dbl) which is a numeric column. You can quickly convert all character columns to factors using the code below:
+#### Sex
+There is only one variable that we will convert to a factor and that's the sex variable. We convert it to a factor with the command below.
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>%
-  mutate(across(.cols = where(is.character),
-                .fns = as_factor))
-
+  mutate(sex = as_factor(sex))
 ```
 
-We don't have a participant identification column, so make one:
+
+#### Participant identification
+
+In many analyses we will need a column with a unique identification number that is a factor. We don't see one in this data set so we create it with the name participant_id.
 
 ```{r}
-N <- dim(analytic_data_survey)[1] # get the number of rows in the data set
+# get the number of rows in the data set
+N <- dim(analytic_data_survey)[1] 
 
+# create set of factor levels
+participant_id_levels <- factor(seq(1, N))
+
+# put the factor levels into a column called participant_id
 analytic_data_survey <- analytic_data_survey %>%
-  mutate(id = seq(1, N))
-```
-
-The participant identification number in the id column is a numeric column, but we want it to be a factor. 
-
-```{r}
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(id = as_factor(id))
+  mutate(participant_id = participant_id_levels)
+  
 ```
 
 You can ensure all of these columns are now factors using the glimpse() command. 
 
 ```{r}
-glimpse(analytic_data_survey)
+analytic_data_survey %>%
+  select(sex, participant_id) %>%
+  glimpse()
 ```
-
-Inspect the output of the glimpse() command and make sure you have converted all categorical variables to factors - especially those you will use as predictors.
 
 
 ### Factor screening
 
-Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels:
+Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels for sex:
 
 ```{r}
 analytic_data_survey %>%
-  select(where(is.factor)) %>%
+  select(sex) %>%
   summary()
 ```
 
+You can see in the above output there are three levels for sex in this data set: female, male and intersex. You can also see beside each of these labels the number of participants for each category.
 
-Also inspect the output of the above summary() command paying attention to the order of the levels in the factors. The order influences how text output and graphs are generated. In these data, the sex column has two levels: male and female in that order. Below we adjust the order of the sex variable because we want the x-axis of a future graph to display columns in the left to right order: female, male.
+Notice the order of the factor levels: female, male, and intersex. This will be the order they appear in graphs and tables. We might want another order. If we did want another order, we could use the code below to establish the custom order for graphs and tables: female, intersex, male.  Of course, you can use any order you want that makes sense for the context and your research question.
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>%
   mutate(sex = fct_relevel(sex,
-                           "intersex",
                            "female",
+                           "intersex",
                            "male"))
 ```
 
+### Numeric screening
+
+For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the Likert responses are impossible (e.g., outside the 1- to 5-point rating scale) or clearly data entry errors.
+
+```{r, eval = FALSE}
+analytic_data_survey %>%
+  select(yearofbirth) %>%
+  skim()
+```
+```{r, echo=FALSE}
+outdf <- analytic_data_survey %>%
+  select(starts_with("yearofbirth")) %>%
+  skim_without_charts() %>%
+  as_tibble() %>%
+  select(-skim_type) %>%
+    rename_with(.fn = str_remove,
+              .cols = everything(),
+              pattern = "numeric.") %>%
+  select(-p25, -complete_rate, -p75) %>%
+  as.data.frame()
+
+outdf$mean = round(outdf$mean,2)
+outdf$sd = round(outdf$sd,2)
+
+outdf
+```
 
 ### Item values from labels
+
+Recall that when we obtained our data from Qualtrics we selected "Use Choice Text. That means that, as desired, we didn't get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examing our data and code in an open access repository can see exactly what options survey particpants were provided with for each question. 
+
+But prior to beginning check out the type for each Likert column below using the glimpse() command notice that are all of type "chr". 
+
+```{r}
+analytic_data_survey %>% glimpse()
+```
+
+
+When you have type chr for a column the computer just see the context of each column as text that is different for everyone. It doesn't even realize that two people who both responded "Slightly Agree" responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.
+
+```{r}
+analytic_data_survey %>% 
+    select(aff_com1_likert7) %>%
+    summary()
+```
+
+
+
+#### Commitment Items
+
+To convert a column from txt to fct we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item to determine the response options the aff_com1_likert7 item. We use the pull() command to obtain all the participant responses from that column. Then we use the unique() command to give use just one instance of each response.
+
 
 ```{r}
 # Check levels for a likert7 item
@@ -581,7 +640,7 @@ analytic_data_survey %>%
   unique()
 ```
 
-Based on that output create a factor:
+Now the we know the labels used in that column (and all the columns that end in likert7) we create an ordered version of those labels with the code below. I copied and pasted the text (e.g., "Strongly Disagree") from the above output to avoid mistakes.
 
 ```{r}
 # write code to create a factor
@@ -595,6 +654,87 @@ likert7_factor <- c("Strongly Disagree",
 
 ```
 
+Now turn each column of text (i.e., type chr) into a factor using level labels we created above we use the code below. 
+
+```{r}
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(across(.cols = contains("likert7"), 
+                .fns = ~ factor(.x, levels = likert7_factor)))
+
+```
+
+In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains("likert7") to apply the mutate() command only to columns with likert7 in the name. You can see why column naming conventions are so important! Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before "factor" just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command. 
+
+After this mutate() command is used you can see the columns with likert7 in the name are now factors.
+
+```{r}
+glimpse(analytic_data_survey)
+```
+
+
+Now examine aff_com1_likert7 again - you can see it has levels:
+
+```{r}
+analytic_data_survey %>% 
+    select(aff_com1_likert7) %>%
+    summary()
+```
+
+
+The second step in our conversion process is converting each column from a factor to the numeric value associated with the factor level (i.e. Strongly Disagree becomes 1). We do so with the code below:
+
+```{r}
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(across(.cols = contains("likert7"), 
+                .fns = as.numeric))
+
+```
+
+You can see they are numeric values with the code below. Notice the column types for likert7 items is now dbl (short for double - a type of high precision number.)
+
+```{r}
+glimpse(analytic_data_survey)
+```
+
+If you run the summary() command on the aff_com1_likert7 you see we have values now.
+
+```{r}
+analytic_data_survey %>% 
+    select(aff_com1_likert7) %>%
+    summary()
+```
+
+
+Side note: We did a lot of explaining as we went through the steps above. But it's not as long as it seems. Some of the steps can even be combined. See the concise version of the code we used repeated below:
+
+```{r}
+# Check levels for a likert7 item
+analytic_data_survey %>%
+  pull(aff_com1_likert7) %>%
+  unique()
+
+# write code to create a factor
+likert7_factor <- c("Strongly Disagree",
+                    "Moderately Disagree",
+                    "Slightly Disagree",
+                    "Neither Agree nor Disagree",
+                    "Slightly Agree",
+                    "Moderately Agree",
+                    "Strongly Agree")
+
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(across(.cols = contains("likert7"), 
+                .fns = ~ factor(.x, levels = likert7_factor))) %>%
+  mutate(across(.cols = contains("likert7"), 
+                .fns = as.numeric))
+
+```
+
+
+#### Job Satisfaction Conversion
+
+We'll skip all the explanation steps for Job Satifaction and just show you the essentions. First, get the labels for the items:
+
 ```{r}
 
 # Check levels for a likert5 item
@@ -602,6 +742,8 @@ analytic_data_survey %>%
   pull(job_aff1_likert5) %>%
   unique()
 ```
+
+Second, create the ordered factor labels:
 
 ```{r}
 
@@ -614,6 +756,8 @@ likert5_factor <- c("Strongly Disagree",
 ```
 
 
+Third, convert the columns to a factor and then to numbers.
+
 ```{r}
 # Create numeric versions of Likert Response Options
 # First mutate command turns everything to a factor as defined above
@@ -625,11 +769,6 @@ analytic_data_survey <- analytic_data_survey %>%
   mutate(across(.cols = contains("likert5"), 
                 .fns = as.numeric))
 
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(across(.cols = contains("likert7"), 
-                .fns = ~ factor(.x, levels = likert7_factor))) %>%
-  mutate(across(.cols = contains("likert7"), 
-                .fns = as.numeric))
 
 ```
 

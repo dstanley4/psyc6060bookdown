@@ -260,9 +260,8 @@ We have two variables, sex and eye_color, that are categorical variable of type 
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>%
-  mutate(across(.cols = where(is.character),
+  mutate(across(.cols = c(sex, eye_color),
                 .fns = as_factor))
-
 ```
 
 The participant identification number in the id column is a numeric column, so we have to handle that column on its own. 
