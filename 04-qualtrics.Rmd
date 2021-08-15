@@ -447,6 +447,7 @@ Additionally, in the script we also:
 
 * Remove item columns (e.g., aff_com1_likert7) after that have been combined into the scale score while retaining the scale score column column (e.g., affective_commitment)
 
+##### Load Data
 
 ```{r, include=FALSE}
 library(tidyverse)
@@ -539,7 +540,7 @@ You can confirm the column names following our naming convention with the glimps
 glimpse(analytic_data_survey)
 ```
 
-### Creating factors
+#### Creating factors
 
 
 Following initial cleaning, we identify categorical variables as factors. 
@@ -586,7 +587,7 @@ analytic_data_survey %>%
 ```
 
 
-### Factor screening
+#### Factor screening
 
 Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn't want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels for sex:
 
@@ -611,7 +612,7 @@ analytic_data_survey <- analytic_data_survey %>%
                            "male"))
 ```
 
-### Numeric screening
+#### Numeric screening
 
 For numeric variables, it's important to find and remove impossible values. We only have yearofbirth as a numeric column - so we can easily check for nonsense values with the code below:
 
@@ -639,7 +640,7 @@ outdf$sd = round(outdf$sd,2)
 outdf
 ```
 
-### Item values from labels
+#### Item values from labels
 
 Recall that when we obtained our data from Qualtrics we selected "Use Choice Text". That means that, as desired, we didn't get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examining our data and code in an open access repository can see exactly what options survey participants were provided with for each question. 
 
@@ -659,7 +660,7 @@ analytic_data_survey %>%
 
 
 
-#### Commitment Items
+##### Commitment Items
 
 To convert a column from txt to fct we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item to determine the response options the aff_com1_likert7 item. We use the pull() command to obtain all the participant responses from that column. Then we use the unique() command to give use just one instance of each response.
 
@@ -767,7 +768,7 @@ analytic_data_survey <- analytic_data_survey %>%
 ```
 
 
-#### Job Satisfaction Conversion
+##### Job Satisfaction Conversion
 
 We'll skip all the explanation steps for Job Satifaction and just show you the essentions. First, get the labels for the items:
 
@@ -802,11 +803,11 @@ analytic_data_survey <- analytic_data_survey %>%
                 .fns = as.numeric))
 ```
 
-### Scale scores
+#### Scale scores
 
 For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.
 
-#### Reverse-key items
+##### Reverse-key items
 
 A commplete discussion of the rationale for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the [Scale Scores](https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores) section. We use that logic in the script below.
 
@@ -830,7 +831,7 @@ glimpse(analytic_data_survey)
 
 None of the job satisfaction items were reverse-keyed.
 
-#### Creating scores
+##### Creating scores
 
 **Important:** Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.
 
