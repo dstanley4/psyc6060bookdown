@@ -31,6 +31,7 @@ The files below are used in this chapter. Right click to save each file.
 |[survey_codebook.csv](survey_codebook.csv)   |
 |[items_qualtrics_format.txt](items_qualtrics_format.txt)|
 |[data_qualtrics_raw.csv](data_qualtrics_raw.csv)   |
+|[script_qualtrics.R](script_qualtrics.R) |
 
 The following CRAN packages must be installed:
 
@@ -827,6 +828,8 @@ You now have two data sets analytic_data_survey and analytic_data_survey_items. 
 
 ### Complete script
 
+The complete script [script_qualtrics.R](script_qualtrics.R) for the data file [data_qualtrics.csv](data_qualtrics.csv) is presented below.
+
 ```{r, eval = FALSE}
 # Date: YYYY-MM-DD
 # Name: your name here
@@ -877,6 +880,9 @@ cols_to_remove <- col_names[cols_to_remove_id]
 # remove the unwanted qualtrics columns
 raw_data <- raw_data %>% 
   select(!all_of(cols_to_remove))
+
+
+analytic_data_survey <- raw_data
 
 # Initial cleaning
 analytic_data_survey <- analytic_data_survey %>%
