@@ -1103,8 +1103,8 @@ div.csl-indent {
 <li><p>Combine items (e.g., aff_com1_likert7) for the same measure into a single scale score (e.g., affective_commitment)</p></li>
 <li><p>Remove item columns (e.g., aff_com1_likert7) after that have been combined into the scale score while retaining the scale score column column (e.g., affective_commitment)</p></li>
 </ul>
-<div id="load-data" class="section level5" number="4.4.3.0.1">
-<h5><span class="header-section-number">4.4.3.0.1</span> Load Data</h5>
+<div id="load-data" class="section level4" number="4.4.3.1">
+<h4><span class="header-section-number">4.4.3.1</span> Load Data</h4>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="qualtrics.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: YYYY-MM-DD</span></span>
 <span id="cb211-2"><a href="qualtrics.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: your name here</span></span>
 <span id="cb211-3"><a href="qualtrics.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Single occasion survey</span></span>
@@ -1193,8 +1193,8 @@ div.csl-indent {
 ## $ job_aff3_likert5     &lt;chr&gt; &quot;Neutral&quot;, &quot;Strongly Disagree…
 ## $ job_aff4_likert5     &lt;chr&gt; &quot;Disagree&quot;, &quot;Strongly Agree&quot;,…</code></pre>
 </div>
-<div id="creating-factors-1" class="section level4" number="4.4.3.1">
-<h4><span class="header-section-number">4.4.3.1</span> Creating factors</h4>
+<div id="creating-factors-1" class="section level4" number="4.4.3.2">
+<h4><span class="header-section-number">4.4.3.2</span> Creating factors</h4>
 <p>Following initial cleaning, we identify categorical variables as factors.</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="qualtrics.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
@@ -1223,17 +1223,16 @@ div.csl-indent {
 ## $ job_aff2_likert5     &lt;chr&gt; &quot;Strongly Disagree&quot;, &quot;Strongl…
 ## $ job_aff3_likert5     &lt;chr&gt; &quot;Neutral&quot;, &quot;Strongly Disagree…
 ## $ job_aff4_likert5     &lt;chr&gt; &quot;Disagree&quot;, &quot;Strongly Agree&quot;,…</code></pre>
-</div>
-<div id="sex" class="section level4" number="4.4.3.2">
-<h4><span class="header-section-number">4.4.3.2</span> Sex</h4>
+<div id="sex" class="section level5" number="4.4.3.2.1">
+<h5><span class="header-section-number">4.4.3.2.1</span> Sex</h5>
 <p>There is only one variable that we will convert to a factor and that’s the sex variable. We convert it to a factor with the command below.</p>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="qualtrics.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert variables to factors as needed</span></span>
 <span id="cb219-2"><a href="qualtrics.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert sex to factor</span></span>
 <span id="cb219-3"><a href="qualtrics.html#cb219-3" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb219-4"><a href="qualtrics.html#cb219-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex))</span></code></pre></div>
 </div>
-<div id="participant-identification" class="section level4" number="4.4.3.3">
-<h4><span class="header-section-number">4.4.3.3</span> Participant identification</h4>
+<div id="participant-identification" class="section level5" number="4.4.3.2.2">
+<h5><span class="header-section-number">4.4.3.2.2</span> Participant identification</h5>
 <p>In many analyses we will need a column with a unique identification number that is a factor. We don’t see one in this data set so we create it with the name participant_id.</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="qualtrics.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Participant identification to factor</span></span>
 <span id="cb220-2"><a href="qualtrics.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Participant identification column must be created first</span></span>
@@ -1255,8 +1254,9 @@ div.csl-indent {
 ## $ sex            &lt;fct&gt; female, female, female, male, inter…
 ## $ participant_id &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, …</code></pre>
 </div>
-<div id="factor-screening-1" class="section level4" number="4.4.3.4">
-<h4><span class="header-section-number">4.4.3.4</span> Factor screening</h4>
+</div>
+<div id="factor-screening-1" class="section level4" number="4.4.3.3">
+<h4><span class="header-section-number">4.4.3.3</span> Factor screening</h4>
 <p>Inspect the levels of each factor carefully. Make sure the factor levels of each variable are correct. Examine spelling and look for additional unwanted levels. For example, you wouldn’t want to have the following levels for sex: male, mmale, female. Obviously, mmale is an incorrectly typed version of male. Scan all the factors in your data for erroneous factor levels. The code below displays the factor levels for sex:</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="qualtrics.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen factors</span></span>
 <span id="cb223-2"><a href="qualtrics.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="do">## screen</span></span>
@@ -1276,8 +1276,8 @@ div.csl-indent {
 <span id="cb225-5"><a href="qualtrics.html#cb225-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
 <span id="cb225-6"><a href="qualtrics.html#cb225-6" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;male&quot;</span>))</span></code></pre></div>
 </div>
-<div id="numeric-screening-1" class="section level4" number="4.4.3.5">
-<h4><span class="header-section-number">4.4.3.5</span> Numeric screening</h4>
+<div id="numeric-screening-1" class="section level4" number="4.4.3.4">
+<h4><span class="header-section-number">4.4.3.4</span> Numeric screening</h4>
 <p>For numeric variables, it’s important to find and remove impossible values. We only have yearofbirth as a numeric column - so we can easily check for nonsense values with the code below:</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="qualtrics.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen numeric variables</span></span>
 <span id="cb226-2"><a href="qualtrics.html#cb226-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
@@ -1286,8 +1286,8 @@ div.csl-indent {
 <pre><code>##   skim_variable n_missing mean    sd   p0  p50 p100
 ## 1   yearofbirth         0 1974 20.06 1940 1970 2010</code></pre>
 </div>
-<div id="item-values-from-labels" class="section level4" number="4.4.3.6">
-<h4><span class="header-section-number">4.4.3.6</span> Item values from labels</h4>
+<div id="item-values-from-labels" class="section level4" number="4.4.3.5">
+<h4><span class="header-section-number">4.4.3.5</span> Item values from labels</h4>
 <p>Recall that when we obtained our data from Qualtrics we selected “Use Choice Text.” That means that, as desired, we didn’t get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examining our data and code in an open access repository can see exactly what options survey participants were provided with for each question.</p>
 <p>But prior to beginning check out the type for each Likert column below using the glimpse() command notice that are all of type “chr.”</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="qualtrics.html#cb228-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
@@ -1326,8 +1326,8 @@ div.csl-indent {
 ##  Length:150        
 ##  Class :character  
 ##  Mode  :character</code></pre>
-<div id="commitment-items" class="section level5" number="4.4.3.6.1">
-<h5><span class="header-section-number">4.4.3.6.1</span> Commitment Items</h5>
+<div id="commitment-items" class="section level5" number="4.4.3.5.1">
+<h5><span class="header-section-number">4.4.3.5.1</span> Commitment Items</h5>
 <p>To convert a column from txt to fct we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item to determine the response options the aff_com1_likert7 item. We use the pull() command to obtain all the participant responses from that column. Then we use the unique() command to give use just one instance of each response.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="qualtrics.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Commitment items to numeric  values</span></span>
 <span id="cb232-2"><a href="qualtrics.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Check levels for a likert7 item</span></span>
@@ -1466,8 +1466,8 @@ div.csl-indent {
 <span id="cb245-21"><a href="qualtrics.html#cb245-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
 <span id="cb245-22"><a href="qualtrics.html#cb245-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
 </div>
-<div id="job-satisfaction-conversion" class="section level5" number="4.4.3.6.2">
-<h5><span class="header-section-number">4.4.3.6.2</span> Job Satisfaction Conversion</h5>
+<div id="job-satisfaction-conversion" class="section level5" number="4.4.3.5.2">
+<h5><span class="header-section-number">4.4.3.5.2</span> Job Satisfaction Conversion</h5>
 <p>We’ll skip all the explanation steps for Job Satifaction and just show you the essentions. First, get the labels for the items:</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="qualtrics.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Job Satisfaction items to numeric  values</span></span>
 <span id="cb246-2"><a href="qualtrics.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Check levels for a likert5 item</span></span>
@@ -1493,11 +1493,11 @@ div.csl-indent {
 <span id="cb249-6"><a href="qualtrics.html#cb249-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
 </div>
 </div>
-<div id="scale-scores-1" class="section level4" number="4.4.3.7">
-<h4><span class="header-section-number">4.4.3.7</span> Scale scores</h4>
+<div id="scale-scores-1" class="section level4" number="4.4.3.6">
+<h4><span class="header-section-number">4.4.3.6</span> Scale scores</h4>
 <p>For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.</p>
-<div id="reverse-key-items-1" class="section level5" number="4.4.3.7.1">
-<h5><span class="header-section-number">4.4.3.7.1</span> Reverse-key items</h5>
+<div id="reverse-key-items-1" class="section level5" number="4.4.3.6.1">
+<h5><span class="header-section-number">4.4.3.6.1</span> Reverse-key items</h5>
 <p>A commplete discussion of the rationale for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the <a href="https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores">Scale Scores</a> section. We use that logic in the script below.</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="qualtrics.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse key items</span></span>
 <span id="cb250-2"><a href="qualtrics.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Reverse key likert7 items</span></span>
@@ -1538,8 +1538,8 @@ div.csl-indent {
 ## $ participant_id      &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,…</code></pre>
 <p>None of the job satisfaction items were reverse-keyed.</p>
 </div>
-<div id="creating-scores-1" class="section level5" number="4.4.3.7.2">
-<h5><span class="header-section-number">4.4.3.7.2</span> Creating scores</h5>
+<div id="creating-scores-1" class="section level5" number="4.4.3.6.2">
+<h5><span class="header-section-number">4.4.3.6.2</span> Creating scores</h5>
 <p><strong>Important:</strong> Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="qualtrics.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scale scores</span></span>
 <span id="cb253-2"><a href="qualtrics.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="do">## mutate commands create scale scores</span></span>
