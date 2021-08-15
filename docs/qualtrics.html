@@ -743,7 +743,7 @@ div.csl-indent {
 <td><a href="items_qualtrics_format.txt">items_qualtrics_format.txt</a></td>
 </tr>
 <tr class="odd">
-<td><a href="data_qualtrics_raw.csv">data_qualtrics_raw.csv</a></td>
+<td><a href="data_qualtrics.csv">data_qualtrics.csv</a></td>
 </tr>
 <tr class="even">
 <td><a href="script_qualtrics.R">script_qualtrics.R</a></td>
@@ -1086,10 +1086,27 @@ div.csl-indent {
 <li><p>Use the steps described previously on this page, use RStudio to create project for this data.</p></li>
 <li><p>You may be tempted to load the data using the usual read_csv() process. This will be problematic due to the way the data is formatted in the .csv file. (see image below.)</p></li>
 </ol>
+<p><img src="ch_qualtrics/images/screenshot_raw_data.png" width="100%" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>You can see by inspecting the data screenshot above that a variety of columns have been included before our first data column (yearofbirth) which appears on the far right of screenshot. Also note that there are three header rows at the top of the file before the data which starts on row 4. So there are few problems that need to be addressed when we load data from Qualtrics.</li>
+</ol>
+<ul>
+<li><p>Obtain the names from the first header row but read the data from row 4 on.</p></li>
+<li><p>Remove some, or all, of the additional columns on the side of data set added by Qualtrics</p></li>
+<li><p>Ensure our variable names follow the tidyverse <a href="https://style.tidyverse.org">style guide</a></p></li>
+<li><p>Ensure we DO NOT modify the data_qualtrics.csv file in Excel or other program. That would destroy the reproducibility of our work in the very first step.</p></li>
+</ul>
 </div>
 <div id="convert-to-analytic-data" class="section level3" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Convert to analytic data</h3>
-<p>Read the file in with the right columns names - excluding unwanted rows.</p>
+<p>The issues described above are all solved with the script below.</p>
+<p>Additionally, in the script we also:
+* Convert categorical variable to factors
+* Screen both numeric variables and factors for impossible values
+* Convert Likert items from labels (e.g., “Strongly Disagree”) to numbers (e.g., 1)
+* Flip reverse-key (i.e., reverse worded items) so they are scored in the right direction
+* Combine items (e.g., aff_com1_likert7) for the same measure into a single scale score (e.g., affective_commitment)
+* Remove item columns (e.g., aff_com1_likert7) after that have been combined into the scale score while retaining the scale score column column (e.g., affective_commitment)</p>
 <div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="qualtrics.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: YYYY-MM-DD</span></span>
 <span id="cb211-2"><a href="qualtrics.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: your name here</span></span>
 <span id="cb211-3"><a href="qualtrics.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Single occasion survey</span></span>
@@ -1106,7 +1123,7 @@ div.csl-indent {
 <span id="cb211-14"><a href="qualtrics.html#cb211-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">n_max =</span> <span class="dv">0</span>,</span>
 <span id="cb211-15"><a href="qualtrics.html#cb211-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>))</span>
 <span id="cb211-16"><a href="qualtrics.html#cb211-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-17"><a href="qualtrics.html#cb211-17" aria-hidden="true" tabindex="-1"></a><span class="co"># skip the first 3 rows than read in the data and use names from above</span></span>
+<span id="cb211-17"><a href="qualtrics.html#cb211-17" aria-hidden="true" tabindex="-1"></a><span class="co"># skip the first 3 rows than read in the data and use names from above step</span></span>
 <span id="cb211-18"><a href="qualtrics.html#cb211-18" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(survey_file,</span>
 <span id="cb211-19"><a href="qualtrics.html#cb211-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_names =</span> col_names, </span>
 <span id="cb211-20"><a href="qualtrics.html#cb211-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">skip =</span> <span class="dv">3</span>,</span>
@@ -1141,7 +1158,7 @@ div.csl-indent {
 <span id="cb212-27"><a href="qualtrics.html#cb212-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">all_of</span>(cols_to_remove))</span></code></pre></div>
 <p>We make a copy of the data called analytic_data_survey since the goals of the next several steps are to prepare the data for analysis.</p>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="qualtrics.html#cb213-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> raw_data</span></code></pre></div>
-<p>Remove empty row and columns from your data using the remove_empty_cols() and remove_empty_rows(), respectively. As well, clean the names of your columns to ensure they conform to tidyverse naming conventions.</p>
+<p>In the command below, we ensure our column names follow the tidyverse <a href="https://style.tidyverse.org">style guide</a> by using the clean_names() command from the janitor package. Addditionaly, we remove empty row and columns from the data using the remove_empty_cols() and remove_empty_rows(), respectively.</p>
 <div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="qualtrics.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial cleaning</span></span>
 <span id="cb214-2"><a href="qualtrics.html#cb214-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb214-3"><a href="qualtrics.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="st">&quot;rows&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -1469,6 +1486,7 @@ div.csl-indent {
 <p>For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.</p>
 <div id="reverse-key-items-1" class="section level4" number="4.4.8.1">
 <h4><span class="header-section-number">4.4.8.1</span> Reverse-key items</h4>
+<p>A commplete discussion of the rationale for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the <a href="https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores">Scale Scores</a> section. We use that logic in the script below.</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="qualtrics.html#cb250-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
 <span id="cb250-2"><a href="qualtrics.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">8</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>)) ) <span class="sc">%&gt;%</span> </span>
 <span id="cb250-3"><a href="qualtrics.html#cb250-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> str_replace,</span>
