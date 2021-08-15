@@ -582,7 +582,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ### Numeric screening
 
-For numeric variables, it's important to find and remove impossible values. For example, in the context of this example you want to ensure none of the Likert responses are impossible (e.g., outside the 1- to 5-point rating scale) or clearly data entry errors.
+For numeric variables, it's important to find and remove impossible values. We only have yearofbirth as a numeric column - so we can easily check for nonsense values with the code below:
 
 ```{r, eval = FALSE}
 analytic_data_survey %>%
@@ -609,7 +609,7 @@ outdf
 
 ### Item values from labels
 
-Recall that when we obtained our data from Qualtrics we selected "Use Choice Text. That means that, as desired, we didn't get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examing our data and code in an open access repository can see exactly what options survey particpants were provided with for each question. 
+Recall that when we obtained our data from Qualtrics we selected "Use Choice Text". That means that, as desired, we didn't get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examining our data and code in an open access repository can see exactly what options survey participants were provided with for each question. 
 
 But prior to beginning check out the type for each Likert column below using the glimpse() command notice that are all of type "chr". 
 

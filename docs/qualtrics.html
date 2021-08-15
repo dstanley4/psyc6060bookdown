@@ -1251,7 +1251,7 @@ div.csl-indent {
 </div>
 <div id="numeric-screening-1" class="section level3" number="4.4.6">
 <h3><span class="header-section-number">4.4.6</span> Numeric screening</h3>
-<p>For numeric variables, it’s important to find and remove impossible values. For example, in the context of this example you want to ensure none of the Likert responses are impossible (e.g., outside the 1- to 5-point rating scale) or clearly data entry errors.</p>
+<p>For numeric variables, it’s important to find and remove impossible values. We only have yearofbirth as a numeric column - so we can easily check for nonsense values with the code below:</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="qualtrics.html#cb226-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb226-2"><a href="qualtrics.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yearofbirth) <span class="sc">%&gt;%</span></span>
 <span id="cb226-3"><a href="qualtrics.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skim</span>()</span></code></pre></div>
@@ -1260,7 +1260,7 @@ div.csl-indent {
 </div>
 <div id="item-values-from-labels" class="section level3" number="4.4.7">
 <h3><span class="header-section-number">4.4.7</span> Item values from labels</h3>
-<p>Recall that when we obtained our data from Qualtrics we selected "Use Choice Text. That means that, as desired, we didn’t get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric value. The advantage of handling our data in this way is that anyone examing our data and code in an open access repository can see exactly what the options survey particpants were provided with for each question.</p>
+<p>Recall that when we obtained our data from Qualtrics we selected “Use Choice Text.” That means that, as desired, we didn’t get values for our Likert items - we obtained labels. Now we need to switch the Likert responses to numeric values. The advantage of handling our data in this way is that anyone examining our data and code in an open access repository can see exactly what options survey participants were provided with for each question.</p>
 <p>But prior to beginning check out the type for each Likert column below using the glimpse() command notice that are all of type “chr.”</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="qualtrics.html#cb228-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 150
