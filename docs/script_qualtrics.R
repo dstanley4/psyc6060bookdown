@@ -44,7 +44,7 @@ cols_to_maybe_remove <- c("StartDate",
 cols_to_remove_id <- col_names %in% cols_to_maybe_remove
 cols_to_remove <- col_names[cols_to_remove_id]
 
-# remove the unwanted qualtrics columns
+# remove the unwanted Qualtrics columns
 raw_data <- raw_data %>% 
   select(!all_of(cols_to_remove))
 
@@ -52,6 +52,8 @@ raw_data <- raw_data %>%
 analytic_data_survey <- raw_data
 
 # Initial cleaning
+## Convert column names to tidyverse style guide
+## Remove empty rows and columns
 analytic_data_survey <- analytic_data_survey %>%
   remove_empty("rows") %>%
   remove_empty("cols") %>%
@@ -76,6 +78,27 @@ participant_id_levels <- factor(seq(1, N))
 ## put the factor levels into a column called participant_id
 analytic_data_survey <- analytic_data_survey %>%
   mutate(participant_id = participant_id_levels)
+
+# Screen factors
+## screen
+analytic_data_survey %>%
+  select(sex) %>%
+  summary()
+
+## change to desired order
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(sex = fct_relevel(sex,
+                           "female",
+                           "intersex",
+                           "male"))
+
+
+# Screen numeric variables
+analytic_data_survey %>%
+  select(yearofbirth) %>%
+  skim()
+
+
 
 
 # Convert Commitment items to numeric  values
