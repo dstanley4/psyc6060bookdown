@@ -1318,7 +1318,7 @@ div.csl-indent {
 ## $ job_aff3_likert5     &lt;chr&gt; &quot;Neutral&quot;, &quot;Strongly Disagree…
 ## $ job_aff4_likert5     &lt;chr&gt; &quot;Disagree&quot;, &quot;Strongly Agree&quot;,…
 ## $ participant_id       &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10…</code></pre>
-<p>When you have type chr for a column the computer just see the context of each column as text that is different for everyone. It doesn’t even realize that two people who both responded “Slightly Agree” responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.</p>
+<p>When you have type chr for a column the computer sees the content of each column as text that is different for each participant. It doesn’t even realize that two people who both responded “Slightly Agree” responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="qualtrics.html#cb230-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span> </span>
 <span id="cb230-2"><a href="qualtrics.html#cb230-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(aff_com1_likert7) <span class="sc">%&gt;%</span></span>
 <span id="cb230-3"><a href="qualtrics.html#cb230-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>()</span></code></pre></div>
@@ -1328,7 +1328,7 @@ div.csl-indent {
 ##  Mode  :character</code></pre>
 <div id="commitment-items" class="section level5" number="4.4.3.5.1">
 <h5><span class="header-section-number">4.4.3.5.1</span> Commitment Items</h5>
-<p>To convert a column from txt to fct we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item to determine the response options the aff_com1_likert7 item. We use the pull() command to obtain all the participant responses from that column. Then we use the unique() command to give use just one instance of each response.</p>
+<p>To convert a column from a character column to factor column we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item aff_com1_likert7. We determine the response options for that one item and will apply them to all the commitment items. We use the pull() command to obtain all the participant responses from the aff_com1_likert7. column. Then we use the unique() command to give use just one instance of each response.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="qualtrics.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Commitment items to numeric  values</span></span>
 <span id="cb232-2"><a href="qualtrics.html#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Check levels for a likert7 item</span></span>
 <span id="cb232-3"><a href="qualtrics.html#cb232-3" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
@@ -1341,7 +1341,7 @@ div.csl-indent {
 ## [5] &quot;Strongly Disagree&quot;         
 ## [6] &quot;Moderately Agree&quot;          
 ## [7] &quot;Slightly Disagree&quot;</code></pre>
-<p>Now the we know the labels used in that column (and all the columns that end in likert7) we create an ordered version of those labels with the code below. I copied and pasted the text (e.g., “Strongly Disagree”) from the above output to avoid mistakes.</p>
+<p>Now that we know the labels used in that column (and all the commitment columns that end in likert7) we create an ordered version of those labels with the code below. I copied and pasted the text (e.g., “Strongly Disagree”) from the above output to avoid typos.</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="qualtrics.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="do">## write code to create ordered factor labels/levels</span></span>
 <span id="cb234-2"><a href="qualtrics.html#cb234-2" aria-hidden="true" tabindex="-1"></a>likert7_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
 <span id="cb234-3"><a href="qualtrics.html#cb234-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Disagree&quot;</span>,</span>
@@ -1350,12 +1350,12 @@ div.csl-indent {
 <span id="cb234-6"><a href="qualtrics.html#cb234-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Agree&quot;</span>,</span>
 <span id="cb234-7"><a href="qualtrics.html#cb234-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Agree&quot;</span>,</span>
 <span id="cb234-8"><a href="qualtrics.html#cb234-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Strongly Agree&quot;</span>)</span></code></pre></div>
-<p>Now turn each column of text (i.e., type chr) into a factor using level labels we created above we use the code below.</p>
+<p>Now we turn each column of text (i.e., type chr) into a factor column using the factor levels/labels we created:</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="qualtrics.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="do">## assign factor levels</span></span>
 <span id="cb235-2"><a href="qualtrics.html#cb235-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb235-3"><a href="qualtrics.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
 <span id="cb235-4"><a href="qualtrics.html#cb235-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert7_factor)))</span></code></pre></div>
-<p>In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains(“likert7”) to apply the mutate() command only to columns with likert7 in the name. You can see why column naming conventions are so important! Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before “factor” just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command.</p>
+<p>In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains(“likert7”) to apply the mutate() command only to columns with likert7 in the name. <strong>You can see why column naming conventions are so important!</strong> Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before “factor” just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command.</p>
 <p>After this mutate() command is used you can see the columns with likert7 in the name are now factors.</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="qualtrics.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
@@ -1402,7 +1402,7 @@ div.csl-indent {
 <span id="cb240-2"><a href="qualtrics.html#cb240-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb240-3"><a href="qualtrics.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
 <span id="cb240-4"><a href="qualtrics.html#cb240-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
-<p>You can see they are numeric values with the code below. Notice the column types for likert7 items is now dbl (short for double - a type of high precision number.)</p>
+<p>You can see there are numeric values with the code below. Notice the column types for likert7 items is now dbl (short for double - a type of high precision number.)</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="qualtrics.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 25
@@ -1498,7 +1498,7 @@ div.csl-indent {
 <p>For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.</p>
 <div id="reverse-key-items-1" class="section level5" number="4.4.3.6.1">
 <h5><span class="header-section-number">4.4.3.6.1</span> Reverse-key items</h5>
-<p>A commplete discussion of the rationale for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the <a href="https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores">Scale Scores</a> section. We use that logic in the script below.</p>
+<p>A complete discussion of the logic for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the <a href="https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores">Scale Scores</a> section. We use that logic in the script below.</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="qualtrics.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse key items</span></span>
 <span id="cb250-2"><a href="qualtrics.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Reverse key likert7 items</span></span>
 <span id="cb250-3"><a href="qualtrics.html#cb250-3" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
@@ -1540,7 +1540,7 @@ div.csl-indent {
 </div>
 <div id="creating-scores-1" class="section level5" number="4.4.3.6.2">
 <h5><span class="header-section-number">4.4.3.6.2</span> Creating scores</h5>
-<p><strong>Important:</strong> Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.</p>
+<p><strong>Important:</strong> Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example again illustrates how carefully you need to think about your column and scale naming conventions.</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="qualtrics.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scale scores</span></span>
 <span id="cb253-2"><a href="qualtrics.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="do">## mutate commands create scale scores</span></span>
 <span id="cb253-3"><a href="qualtrics.html#cb253-3" aria-hidden="true" tabindex="-1"></a><span class="do">## select commands with &quot;-&quot; remove items after scale creation</span></span>
@@ -1559,7 +1559,8 @@ div.csl-indent {
 <span id="cb253-16"><a href="qualtrics.html#cb253-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb253-17"><a href="qualtrics.html#cb253-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb253-18"><a href="qualtrics.html#cb253-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)) </span></code></pre></div>
-<p>We can see our data now has the self_esteem column, a job_sat column, and that all of the item-level data has been removed.</p>
+<p>We can see our data now has the columns: affective_commitment, continuance_commitment, normative_commitment, job satisfaction.</p>
+<p>As well, all of the items used to create the scale scores have been removed.</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="qualtrics.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 7
@@ -1570,7 +1571,6 @@ div.csl-indent {
 ## $ continuance_commitment &lt;dbl&gt; 4.333, 3.833, 2.667, 4.500,…
 ## $ normative_commitment   &lt;dbl&gt; 3.333, 3.167, 2.333, 4.667,…
 ## $ job_satisfaction       &lt;dbl&gt; 2.75, 4.00, 3.50, 2.25, 3.5…</code></pre>
-<p>You now have two data sets analytic_data_survey and analytic_data_survey_items. You can calculate descriptive statistics, correlations and most analyses using the analytic_data_survey. To obtain the reliability of the scales you just created though you will need to use the analytic_data_survey_items. Both sets of data are ready for analysis.</p>
 </div>
 </div>
 </div>

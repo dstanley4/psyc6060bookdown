@@ -650,7 +650,7 @@ But prior to beginning check out the type for each Likert column below using the
 analytic_data_survey %>% glimpse()
 ```
 
-When you have type chr for a column the computer just see the context of each column as text that is different for everyone. It doesn't even realize that two people who both responded "Slightly Agree" responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.
+When you have type chr for a column the computer sees the content of each column as text that is different for each participant. It doesn't even realize that two people who both responded "Slightly Agree" responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.
 
 ```{r}
 analytic_data_survey %>% 
@@ -662,7 +662,7 @@ analytic_data_survey %>%
 
 ##### Commitment Items
 
-To convert a column from txt to fct we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item to determine the response options the aff_com1_likert7 item. We use the pull() command to obtain all the participant responses from that column. Then we use the unique() command to give use just one instance of each response.
+To convert a column from a character column to factor column we need know the exact labels used in that column. We can obtain those with the code below. In this code, we use just one item aff_com1_likert7. We determine the response options for that one item and will apply them to all the commitment items. We use the pull() command to obtain all the participant responses from the aff_com1_likert7. column. Then we use the unique() command to give use just one instance of each response.
 
 
 ```{r}
@@ -673,7 +673,7 @@ analytic_data_survey %>%
   unique()
 ```
 
-Now the we know the labels used in that column (and all the columns that end in likert7) we create an ordered version of those labels with the code below. I copied and pasted the text (e.g., "Strongly Disagree") from the above output to avoid mistakes.
+Now that we know the labels used in that column (and all the commitment columns that end in likert7) we create an ordered version of those labels with the code below. I copied and pasted the text (e.g., "Strongly Disagree") from the above output to avoid typos.
 
 ```{r}
 ## write code to create ordered factor labels/levels
@@ -687,7 +687,7 @@ likert7_factor <- c("Strongly Disagree",
 
 ```
 
-Now turn each column of text (i.e., type chr) into a factor using level labels we created above we use the code below. 
+Now we turn each column of text (i.e., type chr) into a factor column using the factor levels/labels we created:
 
 ```{r}
 ## assign factor levels
@@ -697,7 +697,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ```
 
-In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains("likert7") to apply the mutate() command only to columns with likert7 in the name. You can see why column naming conventions are so important! Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before "factor" just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command. 
+In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains("likert7") to apply the mutate() command only to columns with likert7 in the name. **You can see why column naming conventions are so important!** Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before "factor" just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command. 
 
 After this mutate() command is used you can see the columns with likert7 in the name are now factors.
 
@@ -725,7 +725,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ```
 
-You can see they are numeric values with the code below. Notice the column types for likert7 items is now dbl (short for double - a type of high precision number.)
+You can see there are numeric values with the code below. Notice the column types for likert7 items is now dbl (short for double - a type of high precision number.)
 
 ```{r}
 glimpse(analytic_data_survey)
@@ -809,7 +809,7 @@ For each person, scale scores involve averaging scores from several items to cre
 
 ##### Reverse-key items
 
-A commplete discussion of the rationale for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the [Scale Scores](https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores) section. We use that logic in the script below.
+A complete discussion of the logic for flipping reverse-key (i.e., reverse worded) items is provide the previous chapter in the [Scale Scores](https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html#scale-scores) section. We use that logic in the script below.
 
 
 ```{r,echo=TRUE,eval=TRUE}
@@ -833,7 +833,7 @@ None of the job satisfaction items were reverse-keyed.
 
 ##### Creating scores
 
-**Important:** Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.
+**Important:** Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example again illustrates how carefully you need to think about your column and scale naming conventions.
 
 ```{r}
 # Create scale scores
@@ -856,13 +856,13 @@ analytic_data_survey <- analytic_data_survey %>%
   select(-starts_with("job_aff")) 
 ```
 
-We can see our data now has the self_esteem column, a job_sat column, and that all of the item-level data has been removed.
+We can see our data now has the columns:  affective_commitment, continuance_commitment, normative_commitment, job satisfaction.
+
+As well, all of the items used to create the scale scores have been removed. 
 
 ```{r}
 glimpse(analytic_data_survey)
 ```
-
-You now have two data sets analytic_data_survey and analytic_data_survey_items. You can calculate descriptive statistics, correlations and most analyses using the analytic_data_survey. To obtain the reliability of the scales you just created though you will need to use the analytic_data_survey_items. Both sets of data are ready for analysis.
 
 ### Complete script
 
