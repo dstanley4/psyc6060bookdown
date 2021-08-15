@@ -1415,50 +1415,50 @@ div.csl-indent {
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="qualtrics.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check levels for a likert7 item</span></span>
 <span id="cb245-2"><a href="qualtrics.html#cb245-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
 <span id="cb245-3"><a href="qualtrics.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aff_com1_likert7) <span class="sc">%&gt;%</span></span>
-<span id="cb245-4"><a href="qualtrics.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span></code></pre></div>
-<pre><code>## [1] 5 4 2 7 1 6 3</code></pre>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="qualtrics.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
-<span id="cb247-2"><a href="qualtrics.html#cb247-2" aria-hidden="true" tabindex="-1"></a>likert7_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
-<span id="cb247-3"><a href="qualtrics.html#cb247-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Disagree&quot;</span>,</span>
-<span id="cb247-4"><a href="qualtrics.html#cb247-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Disagree&quot;</span>,</span>
-<span id="cb247-5"><a href="qualtrics.html#cb247-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
-<span id="cb247-6"><a href="qualtrics.html#cb247-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Agree&quot;</span>,</span>
-<span id="cb247-7"><a href="qualtrics.html#cb247-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Agree&quot;</span>,</span>
-<span id="cb247-8"><a href="qualtrics.html#cb247-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Strongly Agree&quot;</span>)</span>
-<span id="cb247-9"><a href="qualtrics.html#cb247-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb247-10"><a href="qualtrics.html#cb247-10" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb247-11"><a href="qualtrics.html#cb247-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
-<span id="cb247-12"><a href="qualtrics.html#cb247-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert7_factor))) <span class="sc">%&gt;%</span></span>
-<span id="cb247-13"><a href="qualtrics.html#cb247-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
-<span id="cb247-14"><a href="qualtrics.html#cb247-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
+<span id="cb245-4"><a href="qualtrics.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb245-5"><a href="qualtrics.html#cb245-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-6"><a href="qualtrics.html#cb245-6" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
+<span id="cb245-7"><a href="qualtrics.html#cb245-7" aria-hidden="true" tabindex="-1"></a>likert7_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
+<span id="cb245-8"><a href="qualtrics.html#cb245-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Disagree&quot;</span>,</span>
+<span id="cb245-9"><a href="qualtrics.html#cb245-9" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Disagree&quot;</span>,</span>
+<span id="cb245-10"><a href="qualtrics.html#cb245-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
+<span id="cb245-11"><a href="qualtrics.html#cb245-11" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Agree&quot;</span>,</span>
+<span id="cb245-12"><a href="qualtrics.html#cb245-12" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Agree&quot;</span>,</span>
+<span id="cb245-13"><a href="qualtrics.html#cb245-13" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Strongly Agree&quot;</span>)</span>
+<span id="cb245-14"><a href="qualtrics.html#cb245-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-15"><a href="qualtrics.html#cb245-15" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb245-16"><a href="qualtrics.html#cb245-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
+<span id="cb245-17"><a href="qualtrics.html#cb245-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert7_factor))) <span class="sc">%&gt;%</span></span>
+<span id="cb245-18"><a href="qualtrics.html#cb245-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
+<span id="cb245-19"><a href="qualtrics.html#cb245-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
 </div>
 <div id="job-satisfaction-conversion" class="section level4" number="4.4.7.2">
 <h4><span class="header-section-number">4.4.7.2</span> Job Satisfaction Conversion</h4>
 <p>We’ll skip all the explanation steps for Job Satifaction and just show you the essentions. First, get the labels for the items:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="qualtrics.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check levels for a likert5 item</span></span>
-<span id="cb248-2"><a href="qualtrics.html#cb248-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb248-3"><a href="qualtrics.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(job_aff1_likert5) <span class="sc">%&gt;%</span></span>
-<span id="cb248-4"><a href="qualtrics.html#cb248-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="qualtrics.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check levels for a likert5 item</span></span>
+<span id="cb246-2"><a href="qualtrics.html#cb246-2" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb246-3"><a href="qualtrics.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(job_aff1_likert5) <span class="sc">%&gt;%</span></span>
+<span id="cb246-4"><a href="qualtrics.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;Strongly Agree&quot;    &quot;Neutral&quot;          
 ## [3] &quot;Strongly Disagree&quot; &quot;Agree&quot;            
 ## [5] &quot;Disagree&quot;</code></pre>
 <p>Second, create the ordered factor labels:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="qualtrics.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
-<span id="cb250-2"><a href="qualtrics.html#cb250-2" aria-hidden="true" tabindex="-1"></a>likert5_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
-<span id="cb250-3"><a href="qualtrics.html#cb250-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Disagree&quot;</span>,</span>
-<span id="cb250-4"><a href="qualtrics.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Neutral&quot;</span>,</span>
-<span id="cb250-5"><a href="qualtrics.html#cb250-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Agree&quot;</span>,</span>
-<span id="cb250-6"><a href="qualtrics.html#cb250-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Strongly Agree&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="qualtrics.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
+<span id="cb248-2"><a href="qualtrics.html#cb248-2" aria-hidden="true" tabindex="-1"></a>likert5_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
+<span id="cb248-3"><a href="qualtrics.html#cb248-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Disagree&quot;</span>,</span>
+<span id="cb248-4"><a href="qualtrics.html#cb248-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Neutral&quot;</span>,</span>
+<span id="cb248-5"><a href="qualtrics.html#cb248-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Agree&quot;</span>,</span>
+<span id="cb248-6"><a href="qualtrics.html#cb248-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Strongly Agree&quot;</span>)</span></code></pre></div>
 <p>Third, convert the columns to a factor and then to numbers.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="qualtrics.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create numeric versions of Likert Response Options</span></span>
-<span id="cb251-2"><a href="qualtrics.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First mutate command turns everything to a factor as defined above</span></span>
-<span id="cb251-3"><a href="qualtrics.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Second mutate command converts factor to a numeric variable</span></span>
-<span id="cb251-4"><a href="qualtrics.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Treat 5 and 7 point scale in different code blocks</span></span>
-<span id="cb251-5"><a href="qualtrics.html#cb251-5" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb251-6"><a href="qualtrics.html#cb251-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
-<span id="cb251-7"><a href="qualtrics.html#cb251-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert5_factor))) <span class="sc">%&gt;%</span></span>
-<span id="cb251-8"><a href="qualtrics.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
-<span id="cb251-9"><a href="qualtrics.html#cb251-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="qualtrics.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create numeric versions of Likert Response Options</span></span>
+<span id="cb249-2"><a href="qualtrics.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="co"># First mutate command turns everything to a factor as defined above</span></span>
+<span id="cb249-3"><a href="qualtrics.html#cb249-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Second mutate command converts factor to a numeric variable</span></span>
+<span id="cb249-4"><a href="qualtrics.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Treat 5 and 7 point scale in different code blocks</span></span>
+<span id="cb249-5"><a href="qualtrics.html#cb249-5" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb249-6"><a href="qualtrics.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
+<span id="cb249-7"><a href="qualtrics.html#cb249-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert5_factor))) <span class="sc">%&gt;%</span></span>
+<span id="cb249-8"><a href="qualtrics.html#cb249-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
+<span id="cb249-9"><a href="qualtrics.html#cb249-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span></code></pre></div>
 </div>
 </div>
 <div id="scale-scores-1" class="section level3" number="4.4.8">
@@ -1466,36 +1466,36 @@ div.csl-indent {
 <p>For each person, scale scores involve averaging scores from several items to create an overall score. The first step in the creation of scales is correcting the values of any reverse-keyed items.</p>
 <div id="reverse-key-items-1" class="section level4" number="4.4.8.1">
 <h4><span class="header-section-number">4.4.8.1</span> Reverse-key items</h4>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="qualtrics.html#cb252-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
-<span id="cb252-2"><a href="qualtrics.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">8</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>)) ) <span class="sc">%&gt;%</span> </span>
-<span id="cb252-3"><a href="qualtrics.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> str_replace,</span>
-<span id="cb252-4"><a href="qualtrics.html#cb252-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>),</span>
-<span id="cb252-5"><a href="qualtrics.html#cb252-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pattern =</span> <span class="st">&quot;_likert7rev&quot;</span>,</span>
-<span id="cb252-6"><a href="qualtrics.html#cb252-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">replacement =</span> <span class="st">&quot;_likert7&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="qualtrics.html#cb250-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
+<span id="cb250-2"><a href="qualtrics.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">8</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>)) ) <span class="sc">%&gt;%</span> </span>
+<span id="cb250-3"><a href="qualtrics.html#cb250-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> str_replace,</span>
+<span id="cb250-4"><a href="qualtrics.html#cb250-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>),</span>
+<span id="cb250-5"><a href="qualtrics.html#cb250-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">pattern =</span> <span class="st">&quot;_likert7rev&quot;</span>,</span>
+<span id="cb250-6"><a href="qualtrics.html#cb250-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">replacement =</span> <span class="st">&quot;_likert7&quot;</span>)</span></code></pre></div>
 <p>You can see that are all keyed in the right direction now.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="qualtrics.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="qualtrics.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 25
 ## $ yearofbirth         &lt;dbl&gt; 1961, 2006, 2008, 1985, 1953, …
 ## $ sex                 &lt;fct&gt; female, female, female, male, …
-## $ aff_com1_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ aff_com2_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ aff_com3_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ aff_com4_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ aff_com5_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ aff_com6_likert7    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com1_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com2_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com3_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com4_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com5_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ contin_com6_likert7 &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com1_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com2_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com3_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com4_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com5_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
-## $ norm_com6_likert7   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA…
+## $ aff_com1_likert7    &lt;dbl&gt; 5, 4, 2, 7, 1, 6, 6, 2, 4, 2, …
+## $ aff_com2_likert7    &lt;dbl&gt; 5, 3, 4, 2, 6, 7, 2, 3, 2, 7, …
+## $ aff_com3_likert7    &lt;dbl&gt; 7, 4, 6, 3, 1, 6, 2, 5, 3, 4, …
+## $ aff_com4_likert7    &lt;dbl&gt; 6, 1, 2, 2, 5, 3, 1, 2, 1, 6, …
+## $ aff_com5_likert7    &lt;dbl&gt; 7, 4, 2, 3, 5, 1, 3, 1, 3, 3, …
+## $ aff_com6_likert7    &lt;dbl&gt; 6, 7, 1, 7, 5, 6, 5, 7, 4, 2, …
+## $ contin_com1_likert7 &lt;dbl&gt; 7, 4, 1, 3, 2, 1, 1, 6, 7, 3, …
+## $ contin_com2_likert7 &lt;dbl&gt; 5, 5, 3, 2, 7, 6, 1, 3, 5, 2, …
+## $ contin_com3_likert7 &lt;dbl&gt; 1, 3, 7, 7, 5, 2, 7, 2, 7, 1, …
+## $ contin_com4_likert7 &lt;dbl&gt; 6, 4, 3, 7, 7, 5, 4, 5, 3, 2, …
+## $ contin_com5_likert7 &lt;dbl&gt; 5, 5, 1, 4, 4, 6, 5, 5, 5, 2, …
+## $ contin_com6_likert7 &lt;dbl&gt; 2, 2, 1, 4, 7, 7, 6, 6, 4, 5, …
+## $ norm_com1_likert7   &lt;dbl&gt; 4, 5, 2, 5, 5, 2, 3, 1, 5, 1, …
+## $ norm_com2_likert7   &lt;dbl&gt; 2, 6, 1, 5, 3, 2, 3, 1, 7, 1, …
+## $ norm_com3_likert7   &lt;dbl&gt; 4, 4, 7, 3, 1, 1, 4, 3, 3, 5, …
+## $ norm_com4_likert7   &lt;dbl&gt; 2, 2, 1, 6, 4, 6, 1, 1, 5, 5, …
+## $ norm_com5_likert7   &lt;dbl&gt; 1, 1, 1, 5, 7, 4, 3, 6, 4, 4, …
+## $ norm_com6_likert7   &lt;dbl&gt; 7, 1, 2, 4, 6, 6, 1, 4, 6, 2, …
 ## $ job_aff1_likert5    &lt;dbl&gt; 5, 5, 3, 1, 1, 3, 4, 4, 1, 4, …
 ## $ job_aff2_likert5    &lt;dbl&gt; 1, 5, 5, 2, 3, 1, 3, 3, 5, 5, …
 ## $ job_aff3_likert5    &lt;dbl&gt; 3, 1, 2, 5, 5, 3, 3, 1, 5, 2, …
@@ -1504,195 +1504,193 @@ div.csl-indent {
 </div>
 <div id="creating-scores-1" class="section level4" number="4.4.8.2">
 <h4><span class="header-section-number">4.4.8.2</span> Creating scores</h4>
-<p><strong>Important:</strong> Take note of how we name the scale variables (e.g., self_esteem, job_sat). We use a slightly different convention than our items. That is, these scale labels were picked so that they would <em>not</em> be selected by a starts_with(“esteem”) or starts_with(“jobsat”). Why - because we later use those commands to remove the item-level data. We would want the command designed to remove the item-level data to also remove the scale we just calculated! This example illustrates how carefully you need to think about your naming conventions.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="qualtrics.html#cb255-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
-<span id="cb255-2"><a href="qualtrics.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb255-3"><a href="qualtrics.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">affective_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)),</span>
-<span id="cb255-4"><a href="qualtrics.html#cb255-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-5"><a href="qualtrics.html#cb255-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">continuance_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)),</span>
-<span id="cb255-6"><a href="qualtrics.html#cb255-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-7"><a href="qualtrics.html#cb255-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normative_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)),</span>
-<span id="cb255-8"><a href="qualtrics.html#cb255-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-9"><a href="qualtrics.html#cb255-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">job_satisfaction =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)),</span>
-<span id="cb255-10"><a href="qualtrics.html#cb255-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-11"><a href="qualtrics.html#cb255-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb255-12"><a href="qualtrics.html#cb255-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-13"><a href="qualtrics.html#cb255-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-14"><a href="qualtrics.html#cb255-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb255-15"><a href="qualtrics.html#cb255-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)) </span></code></pre></div>
+<p><strong>Important:</strong> Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="qualtrics.html#cb253-1" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
+<span id="cb253-2"><a href="qualtrics.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb253-3"><a href="qualtrics.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">affective_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)),</span>
+<span id="cb253-4"><a href="qualtrics.html#cb253-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-5"><a href="qualtrics.html#cb253-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">continuance_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)),</span>
+<span id="cb253-6"><a href="qualtrics.html#cb253-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-7"><a href="qualtrics.html#cb253-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normative_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)),</span>
+<span id="cb253-8"><a href="qualtrics.html#cb253-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-9"><a href="qualtrics.html#cb253-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">job_satisfaction =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)),</span>
+<span id="cb253-10"><a href="qualtrics.html#cb253-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-11"><a href="qualtrics.html#cb253-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb253-12"><a href="qualtrics.html#cb253-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-13"><a href="qualtrics.html#cb253-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-14"><a href="qualtrics.html#cb253-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-15"><a href="qualtrics.html#cb253-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)) </span></code></pre></div>
 <p>We can see our data now has the self_esteem column, a job_sat column, and that all of the item-level data has been removed.</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="qualtrics.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="qualtrics.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 <pre><code>## Rows: 150
 ## Columns: 7
 ## $ yearofbirth            &lt;dbl&gt; 1961, 2006, 2008, 1985, 195…
 ## $ sex                    &lt;fct&gt; female, female, female, mal…
 ## $ participant_id         &lt;fct&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, …
-## $ affective_commitment   &lt;dbl&gt; NaN, NaN, NaN, NaN, NaN, Na…
-## $ continuance_commitment &lt;dbl&gt; NaN, NaN, NaN, NaN, NaN, Na…
-## $ normative_commitment   &lt;dbl&gt; NaN, NaN, NaN, NaN, NaN, Na…
+## $ affective_commitment   &lt;dbl&gt; 6.000, 3.833, 2.833, 4.000,…
+## $ continuance_commitment &lt;dbl&gt; 4.333, 3.833, 2.667, 4.500,…
+## $ normative_commitment   &lt;dbl&gt; 3.333, 3.167, 2.333, 4.667,…
 ## $ job_satisfaction       &lt;dbl&gt; 2.75, 4.00, 3.50, 2.25, 3.5…</code></pre>
 <p>You now have two data sets analytic_data_survey and analytic_data_survey_items. You can calculate descriptive statistics, correlations and most analyses using the analytic_data_survey. To obtain the reliability of the scales you just created though you will need to use the analytic_data_survey_items. Both sets of data are ready for analysis.</p>
 </div>
 </div>
 <div id="complete-script" class="section level3" number="4.4.9">
 <h3><span class="header-section-number">4.4.9</span> Complete script</h3>
-<p>Here is the complete script in one block.</p>
-<p>Read the file in with the right columns names - excluding unwanted rows.</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="qualtrics.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: YYYY-MM-DD</span></span>
-<span id="cb258-2"><a href="qualtrics.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: your name here</span></span>
-<span id="cb258-3"><a href="qualtrics.html#cb258-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Single occasion survey</span></span>
-<span id="cb258-4"><a href="qualtrics.html#cb258-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-5"><a href="qualtrics.html#cb258-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb258-6"><a href="qualtrics.html#cb258-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb258-7"><a href="qualtrics.html#cb258-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb258-8"><a href="qualtrics.html#cb258-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-9"><a href="qualtrics.html#cb258-9" aria-hidden="true" tabindex="-1"></a><span class="co"># read the file in the normal way and get just the names of the columns.</span></span>
-<span id="cb258-10"><a href="qualtrics.html#cb258-10" aria-hidden="true" tabindex="-1"></a><span class="co"># put the names into the col_names</span></span>
-<span id="cb258-11"><a href="qualtrics.html#cb258-11" aria-hidden="true" tabindex="-1"></a>survey_file <span class="ot">&lt;-</span> <span class="st">&quot;data_qualtrics.csv&quot;</span></span>
-<span id="cb258-12"><a href="qualtrics.html#cb258-12" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">read_csv</span>(survey_file,</span>
-<span id="cb258-13"><a href="qualtrics.html#cb258-13" aria-hidden="true" tabindex="-1"></a>                            <span class="at">n_max =</span> <span class="dv">0</span>,</span>
-<span id="cb258-14"><a href="qualtrics.html#cb258-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb258-15"><a href="qualtrics.html#cb258-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-16"><a href="qualtrics.html#cb258-16" aria-hidden="true" tabindex="-1"></a><span class="co"># skip the first 3 rows than read in the data and use names from above</span></span>
-<span id="cb258-17"><a href="qualtrics.html#cb258-17" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(survey_file,</span>
-<span id="cb258-18"><a href="qualtrics.html#cb258-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_names =</span> col_names, </span>
-<span id="cb258-19"><a href="qualtrics.html#cb258-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">skip =</span> <span class="dv">3</span>,</span>
-<span id="cb258-20"><a href="qualtrics.html#cb258-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb258-21"><a href="qualtrics.html#cb258-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-22"><a href="qualtrics.html#cb258-22" aria-hidden="true" tabindex="-1"></a><span class="co"># list of Qualtrics columns you probably don&#39;t want</span></span>
-<span id="cb258-23"><a href="qualtrics.html#cb258-23" aria-hidden="true" tabindex="-1"></a>cols_to_maybe_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;StartDate&quot;</span>,</span>
-<span id="cb258-24"><a href="qualtrics.html#cb258-24" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;EndDate&quot;</span>,</span>
-<span id="cb258-25"><a href="qualtrics.html#cb258-25" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Status&quot;</span>,</span>
-<span id="cb258-26"><a href="qualtrics.html#cb258-26" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;IPAddress&quot;</span>,</span>
-<span id="cb258-27"><a href="qualtrics.html#cb258-27" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Progress&quot;</span>,</span>
-<span id="cb258-28"><a href="qualtrics.html#cb258-28" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Duration (in seconds)&quot;</span>,</span>
-<span id="cb258-29"><a href="qualtrics.html#cb258-29" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Finished&quot;</span>,</span>
-<span id="cb258-30"><a href="qualtrics.html#cb258-30" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecordedDate&quot;</span>,</span>
-<span id="cb258-31"><a href="qualtrics.html#cb258-31" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;ResponseId&quot;</span>,</span>
-<span id="cb258-32"><a href="qualtrics.html#cb258-32" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientLastName&quot;</span>,</span>
-<span id="cb258-33"><a href="qualtrics.html#cb258-33" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientFirstName&quot;</span>,</span>
-<span id="cb258-34"><a href="qualtrics.html#cb258-34" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientEmail&quot;</span>,</span>
-<span id="cb258-35"><a href="qualtrics.html#cb258-35" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;ExternalReference&quot;</span>,</span>
-<span id="cb258-36"><a href="qualtrics.html#cb258-36" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;LocationLatitude&quot;</span>,</span>
-<span id="cb258-37"><a href="qualtrics.html#cb258-37" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;LocationLongitude&quot;</span>,</span>
-<span id="cb258-38"><a href="qualtrics.html#cb258-38" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;DistributionChannel&quot;</span>,</span>
-<span id="cb258-39"><a href="qualtrics.html#cb258-39" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;UserLanguage&quot;</span>)</span>
-<span id="cb258-40"><a href="qualtrics.html#cb258-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-41"><a href="qualtrics.html#cb258-41" aria-hidden="true" tabindex="-1"></a><span class="co"># check to see overlap with actual column names in data file</span></span>
-<span id="cb258-42"><a href="qualtrics.html#cb258-42" aria-hidden="true" tabindex="-1"></a><span class="co"># put names to remove (that are present) into cols_to_remove</span></span>
-<span id="cb258-43"><a href="qualtrics.html#cb258-43" aria-hidden="true" tabindex="-1"></a>cols_to_remove_id <span class="ot">&lt;-</span> col_names <span class="sc">%in%</span> cols_to_maybe_remove</span>
-<span id="cb258-44"><a href="qualtrics.html#cb258-44" aria-hidden="true" tabindex="-1"></a>cols_to_remove <span class="ot">&lt;-</span> col_names[cols_to_remove_id]</span>
-<span id="cb258-45"><a href="qualtrics.html#cb258-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-46"><a href="qualtrics.html#cb258-46" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the unwanted qualtrics columns</span></span>
-<span id="cb258-47"><a href="qualtrics.html#cb258-47" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb258-48"><a href="qualtrics.html#cb258-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">all_of</span>(cols_to_remove))</span>
-<span id="cb258-49"><a href="qualtrics.html#cb258-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-50"><a href="qualtrics.html#cb258-50" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> raw_data</span>
-<span id="cb258-51"><a href="qualtrics.html#cb258-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-52"><a href="qualtrics.html#cb258-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-53"><a href="qualtrics.html#cb258-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial cleaning</span></span>
-<span id="cb258-54"><a href="qualtrics.html#cb258-54" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-55"><a href="qualtrics.html#cb258-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="st">&quot;rows&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb258-56"><a href="qualtrics.html#cb258-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="st">&quot;cols&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb258-57"><a href="qualtrics.html#cb258-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
-<span id="cb258-58"><a href="qualtrics.html#cb258-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-59"><a href="qualtrics.html#cb258-59" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span>
-<span id="cb258-60"><a href="qualtrics.html#cb258-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-61"><a href="qualtrics.html#cb258-61" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-62"><a href="qualtrics.html#cb258-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.character),</span>
-<span id="cb258-63"><a href="qualtrics.html#cb258-63" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as_factor))</span>
-<span id="cb258-64"><a href="qualtrics.html#cb258-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-65"><a href="qualtrics.html#cb258-65" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>(analytic_data_survey)[<span class="dv">1</span>] <span class="co"># get the number of rows in the data set</span></span>
-<span id="cb258-66"><a href="qualtrics.html#cb258-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-67"><a href="qualtrics.html#cb258-67" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-68"><a href="qualtrics.html#cb258-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">seq</span>(<span class="dv">1</span>, N))</span>
-<span id="cb258-69"><a href="qualtrics.html#cb258-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-70"><a href="qualtrics.html#cb258-70" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-71"><a href="qualtrics.html#cb258-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">as_factor</span>(id))</span>
-<span id="cb258-72"><a href="qualtrics.html#cb258-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-73"><a href="qualtrics.html#cb258-73" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span>
-<span id="cb258-74"><a href="qualtrics.html#cb258-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-75"><a href="qualtrics.html#cb258-75" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-76"><a href="qualtrics.html#cb258-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-77"><a href="qualtrics.html#cb258-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span>
-<span id="cb258-78"><a href="qualtrics.html#cb258-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-79"><a href="qualtrics.html#cb258-79" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-80"><a href="qualtrics.html#cb258-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">fct_relevel</span>(sex,</span>
-<span id="cb258-81"><a href="qualtrics.html#cb258-81" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;intersex&quot;</span>,</span>
-<span id="cb258-82"><a href="qualtrics.html#cb258-82" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;female&quot;</span>,</span>
-<span id="cb258-83"><a href="qualtrics.html#cb258-83" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;male&quot;</span>))</span>
-<span id="cb258-84"><a href="qualtrics.html#cb258-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-85"><a href="qualtrics.html#cb258-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Check levels for a likert7 item</span></span>
-<span id="cb258-86"><a href="qualtrics.html#cb258-86" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-87"><a href="qualtrics.html#cb258-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aff_com1_likert7) <span class="sc">%&gt;%</span></span>
-<span id="cb258-88"><a href="qualtrics.html#cb258-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb258-89"><a href="qualtrics.html#cb258-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-90"><a href="qualtrics.html#cb258-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-91"><a href="qualtrics.html#cb258-91" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
-<span id="cb258-92"><a href="qualtrics.html#cb258-92" aria-hidden="true" tabindex="-1"></a>likert7_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
-<span id="cb258-93"><a href="qualtrics.html#cb258-93" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Disagree&quot;</span>,</span>
-<span id="cb258-94"><a href="qualtrics.html#cb258-94" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Disagree&quot;</span>,</span>
-<span id="cb258-95"><a href="qualtrics.html#cb258-95" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
-<span id="cb258-96"><a href="qualtrics.html#cb258-96" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Agree&quot;</span>,</span>
-<span id="cb258-97"><a href="qualtrics.html#cb258-97" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Agree&quot;</span>,</span>
-<span id="cb258-98"><a href="qualtrics.html#cb258-98" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Strongly Agree&quot;</span>)</span>
-<span id="cb258-99"><a href="qualtrics.html#cb258-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-100"><a href="qualtrics.html#cb258-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-101"><a href="qualtrics.html#cb258-101" aria-hidden="true" tabindex="-1"></a><span class="co"># Check levels for a likert5 item</span></span>
-<span id="cb258-102"><a href="qualtrics.html#cb258-102" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-103"><a href="qualtrics.html#cb258-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(job_aff1_likert5) <span class="sc">%&gt;%</span></span>
-<span id="cb258-104"><a href="qualtrics.html#cb258-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb258-105"><a href="qualtrics.html#cb258-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-106"><a href="qualtrics.html#cb258-106" aria-hidden="true" tabindex="-1"></a><span class="co"># write code to create a factor</span></span>
-<span id="cb258-107"><a href="qualtrics.html#cb258-107" aria-hidden="true" tabindex="-1"></a>likert5_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
-<span id="cb258-108"><a href="qualtrics.html#cb258-108" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Disagree&quot;</span>,</span>
-<span id="cb258-109"><a href="qualtrics.html#cb258-109" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Neutral&quot;</span>,</span>
-<span id="cb258-110"><a href="qualtrics.html#cb258-110" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Agree&quot;</span>,</span>
-<span id="cb258-111"><a href="qualtrics.html#cb258-111" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Strongly Agree&quot;</span>)</span>
-<span id="cb258-112"><a href="qualtrics.html#cb258-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-113"><a href="qualtrics.html#cb258-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Create numeric versions of Likert Response Options</span></span>
-<span id="cb258-114"><a href="qualtrics.html#cb258-114" aria-hidden="true" tabindex="-1"></a><span class="co"># First mutate command turns everything to a factor as defined above</span></span>
-<span id="cb258-115"><a href="qualtrics.html#cb258-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Second mutate command converts factor to a numeric variable</span></span>
-<span id="cb258-116"><a href="qualtrics.html#cb258-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Treat 5 and 7 point scale in different code blocks</span></span>
-<span id="cb258-117"><a href="qualtrics.html#cb258-117" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-118"><a href="qualtrics.html#cb258-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
-<span id="cb258-119"><a href="qualtrics.html#cb258-119" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert5_factor))) <span class="sc">%&gt;%</span></span>
-<span id="cb258-120"><a href="qualtrics.html#cb258-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
-<span id="cb258-121"><a href="qualtrics.html#cb258-121" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span>
-<span id="cb258-122"><a href="qualtrics.html#cb258-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-123"><a href="qualtrics.html#cb258-123" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
-<span id="cb258-124"><a href="qualtrics.html#cb258-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
-<span id="cb258-125"><a href="qualtrics.html#cb258-125" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert7_factor))) <span class="sc">%&gt;%</span></span>
-<span id="cb258-126"><a href="qualtrics.html#cb258-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
-<span id="cb258-127"><a href="qualtrics.html#cb258-127" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span>
-<span id="cb258-128"><a href="qualtrics.html#cb258-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-129"><a href="qualtrics.html#cb258-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-130"><a href="qualtrics.html#cb258-130" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
-<span id="cb258-131"><a href="qualtrics.html#cb258-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">8</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>)) ) <span class="sc">%&gt;%</span> </span>
-<span id="cb258-132"><a href="qualtrics.html#cb258-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> str_replace,</span>
-<span id="cb258-133"><a href="qualtrics.html#cb258-133" aria-hidden="true" tabindex="-1"></a>              <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>),</span>
-<span id="cb258-134"><a href="qualtrics.html#cb258-134" aria-hidden="true" tabindex="-1"></a>              <span class="at">pattern =</span> <span class="st">&quot;_likert7rev&quot;</span>,</span>
-<span id="cb258-135"><a href="qualtrics.html#cb258-135" aria-hidden="true" tabindex="-1"></a>              <span class="at">replacement =</span> <span class="st">&quot;_likert7&quot;</span>)</span>
-<span id="cb258-136"><a href="qualtrics.html#cb258-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-137"><a href="qualtrics.html#cb258-137" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span>
-<span id="cb258-138"><a href="qualtrics.html#cb258-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb258-139"><a href="qualtrics.html#cb258-139" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
-<span id="cb258-140"><a href="qualtrics.html#cb258-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb258-141"><a href="qualtrics.html#cb258-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">affective_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)),</span>
-<span id="cb258-142"><a href="qualtrics.html#cb258-142" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-143"><a href="qualtrics.html#cb258-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">continuance_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)),</span>
-<span id="cb258-144"><a href="qualtrics.html#cb258-144" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-145"><a href="qualtrics.html#cb258-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normative_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)),</span>
-<span id="cb258-146"><a href="qualtrics.html#cb258-146" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-147"><a href="qualtrics.html#cb258-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">job_satisfaction =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)),</span>
-<span id="cb258-148"><a href="qualtrics.html#cb258-148" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-149"><a href="qualtrics.html#cb258-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb258-150"><a href="qualtrics.html#cb258-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-151"><a href="qualtrics.html#cb258-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-152"><a href="qualtrics.html#cb258-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb258-153"><a href="qualtrics.html#cb258-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)) </span>
-<span id="cb258-154"><a href="qualtrics.html#cb258-154" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb258-155"><a href="qualtrics.html#cb258-155" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="qualtrics.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Date: YYYY-MM-DD</span></span>
+<span id="cb256-2"><a href="qualtrics.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Name: your name here</span></span>
+<span id="cb256-3"><a href="qualtrics.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Single occasion survey</span></span>
+<span id="cb256-4"><a href="qualtrics.html#cb256-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-5"><a href="qualtrics.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb256-6"><a href="qualtrics.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb256-7"><a href="qualtrics.html#cb256-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb256-8"><a href="qualtrics.html#cb256-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb256-9"><a href="qualtrics.html#cb256-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-10"><a href="qualtrics.html#cb256-10" aria-hidden="true" tabindex="-1"></a><span class="co"># read the file in the normal way and get just the names of the columns.</span></span>
+<span id="cb256-11"><a href="qualtrics.html#cb256-11" aria-hidden="true" tabindex="-1"></a><span class="co"># put the names into the col_names</span></span>
+<span id="cb256-12"><a href="qualtrics.html#cb256-12" aria-hidden="true" tabindex="-1"></a>survey_file <span class="ot">&lt;-</span> <span class="st">&quot;data_qualtrics.csv&quot;</span></span>
+<span id="cb256-13"><a href="qualtrics.html#cb256-13" aria-hidden="true" tabindex="-1"></a>col_names <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">read_csv</span>(survey_file,</span>
+<span id="cb256-14"><a href="qualtrics.html#cb256-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">n_max =</span> <span class="dv">0</span>,</span>
+<span id="cb256-15"><a href="qualtrics.html#cb256-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">show_col_types =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb256-16"><a href="qualtrics.html#cb256-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-17"><a href="qualtrics.html#cb256-17" aria-hidden="true" tabindex="-1"></a><span class="co"># skip the first 3 rows than read in the data and use names from above</span></span>
+<span id="cb256-18"><a href="qualtrics.html#cb256-18" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(survey_file,</span>
+<span id="cb256-19"><a href="qualtrics.html#cb256-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col_names =</span> col_names, </span>
+<span id="cb256-20"><a href="qualtrics.html#cb256-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">skip =</span> <span class="dv">3</span>,</span>
+<span id="cb256-21"><a href="qualtrics.html#cb256-21" aria-hidden="true" tabindex="-1"></a>                  <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb256-22"><a href="qualtrics.html#cb256-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-23"><a href="qualtrics.html#cb256-23" aria-hidden="true" tabindex="-1"></a><span class="co"># list of Qualtrics columns you probably don&#39;t want</span></span>
+<span id="cb256-24"><a href="qualtrics.html#cb256-24" aria-hidden="true" tabindex="-1"></a>cols_to_maybe_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;StartDate&quot;</span>,</span>
+<span id="cb256-25"><a href="qualtrics.html#cb256-25" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;EndDate&quot;</span>,</span>
+<span id="cb256-26"><a href="qualtrics.html#cb256-26" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Status&quot;</span>,</span>
+<span id="cb256-27"><a href="qualtrics.html#cb256-27" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;IPAddress&quot;</span>,</span>
+<span id="cb256-28"><a href="qualtrics.html#cb256-28" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Progress&quot;</span>,</span>
+<span id="cb256-29"><a href="qualtrics.html#cb256-29" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Duration (in seconds)&quot;</span>,</span>
+<span id="cb256-30"><a href="qualtrics.html#cb256-30" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;Finished&quot;</span>,</span>
+<span id="cb256-31"><a href="qualtrics.html#cb256-31" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecordedDate&quot;</span>,</span>
+<span id="cb256-32"><a href="qualtrics.html#cb256-32" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;ResponseId&quot;</span>,</span>
+<span id="cb256-33"><a href="qualtrics.html#cb256-33" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientLastName&quot;</span>,</span>
+<span id="cb256-34"><a href="qualtrics.html#cb256-34" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientFirstName&quot;</span>,</span>
+<span id="cb256-35"><a href="qualtrics.html#cb256-35" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;RecipientEmail&quot;</span>,</span>
+<span id="cb256-36"><a href="qualtrics.html#cb256-36" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;ExternalReference&quot;</span>,</span>
+<span id="cb256-37"><a href="qualtrics.html#cb256-37" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;LocationLatitude&quot;</span>,</span>
+<span id="cb256-38"><a href="qualtrics.html#cb256-38" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;LocationLongitude&quot;</span>,</span>
+<span id="cb256-39"><a href="qualtrics.html#cb256-39" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;DistributionChannel&quot;</span>,</span>
+<span id="cb256-40"><a href="qualtrics.html#cb256-40" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;UserLanguage&quot;</span>)</span>
+<span id="cb256-41"><a href="qualtrics.html#cb256-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-42"><a href="qualtrics.html#cb256-42" aria-hidden="true" tabindex="-1"></a><span class="co"># check to see overlap with actual column names in data file</span></span>
+<span id="cb256-43"><a href="qualtrics.html#cb256-43" aria-hidden="true" tabindex="-1"></a><span class="co"># put names to remove (that are present) into cols_to_remove</span></span>
+<span id="cb256-44"><a href="qualtrics.html#cb256-44" aria-hidden="true" tabindex="-1"></a>cols_to_remove_id <span class="ot">&lt;-</span> col_names <span class="sc">%in%</span> cols_to_maybe_remove</span>
+<span id="cb256-45"><a href="qualtrics.html#cb256-45" aria-hidden="true" tabindex="-1"></a>cols_to_remove <span class="ot">&lt;-</span> col_names[cols_to_remove_id]</span>
+<span id="cb256-46"><a href="qualtrics.html#cb256-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-47"><a href="qualtrics.html#cb256-47" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the unwanted qualtrics columns</span></span>
+<span id="cb256-48"><a href="qualtrics.html#cb256-48" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb256-49"><a href="qualtrics.html#cb256-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">all_of</span>(cols_to_remove))</span>
+<span id="cb256-50"><a href="qualtrics.html#cb256-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-51"><a href="qualtrics.html#cb256-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial cleaning</span></span>
+<span id="cb256-52"><a href="qualtrics.html#cb256-52" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-53"><a href="qualtrics.html#cb256-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="st">&quot;rows&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb256-54"><a href="qualtrics.html#cb256-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_empty</span>(<span class="st">&quot;cols&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb256-55"><a href="qualtrics.html#cb256-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb256-56"><a href="qualtrics.html#cb256-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-57"><a href="qualtrics.html#cb256-57" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span>
+<span id="cb256-58"><a href="qualtrics.html#cb256-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-59"><a href="qualtrics.html#cb256-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert variables to factors as needed</span></span>
+<span id="cb256-60"><a href="qualtrics.html#cb256-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Convert sex to factor</span></span>
+<span id="cb256-61"><a href="qualtrics.html#cb256-61" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-62"><a href="qualtrics.html#cb256-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex))</span>
+<span id="cb256-63"><a href="qualtrics.html#cb256-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-64"><a href="qualtrics.html#cb256-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-65"><a href="qualtrics.html#cb256-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Participant identification to factor</span></span>
+<span id="cb256-66"><a href="qualtrics.html#cb256-66" aria-hidden="true" tabindex="-1"></a><span class="do">## Participant identification column must be created first</span></span>
+<span id="cb256-67"><a href="qualtrics.html#cb256-67" aria-hidden="true" tabindex="-1"></a><span class="do">## get the number of rows in the data set</span></span>
+<span id="cb256-68"><a href="qualtrics.html#cb256-68" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>(analytic_data_survey)[<span class="dv">1</span>] </span>
+<span id="cb256-69"><a href="qualtrics.html#cb256-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-70"><a href="qualtrics.html#cb256-70" aria-hidden="true" tabindex="-1"></a><span class="do">## create set of factor levels</span></span>
+<span id="cb256-71"><a href="qualtrics.html#cb256-71" aria-hidden="true" tabindex="-1"></a>participant_id_levels <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">seq</span>(<span class="dv">1</span>, N))</span>
+<span id="cb256-72"><a href="qualtrics.html#cb256-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-73"><a href="qualtrics.html#cb256-73" aria-hidden="true" tabindex="-1"></a><span class="do">## put the factor levels into a column called participant_id</span></span>
+<span id="cb256-74"><a href="qualtrics.html#cb256-74" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-75"><a href="qualtrics.html#cb256-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">participant_id =</span> participant_id_levels)</span>
+<span id="cb256-76"><a href="qualtrics.html#cb256-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb256-77"><a href="qualtrics.html#cb256-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-78"><a href="qualtrics.html#cb256-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Commitment items to numeric  values</span></span>
+<span id="cb256-79"><a href="qualtrics.html#cb256-79" aria-hidden="true" tabindex="-1"></a><span class="do">## Check levels for a likert7 item</span></span>
+<span id="cb256-80"><a href="qualtrics.html#cb256-80" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-81"><a href="qualtrics.html#cb256-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(aff_com1_likert7) <span class="sc">%&gt;%</span></span>
+<span id="cb256-82"><a href="qualtrics.html#cb256-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb256-83"><a href="qualtrics.html#cb256-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-84"><a href="qualtrics.html#cb256-84" aria-hidden="true" tabindex="-1"></a><span class="do">## write code to create ordered factor labels/levels</span></span>
+<span id="cb256-85"><a href="qualtrics.html#cb256-85" aria-hidden="true" tabindex="-1"></a>likert7_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
+<span id="cb256-86"><a href="qualtrics.html#cb256-86" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Disagree&quot;</span>,</span>
+<span id="cb256-87"><a href="qualtrics.html#cb256-87" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Disagree&quot;</span>,</span>
+<span id="cb256-88"><a href="qualtrics.html#cb256-88" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Neither Agree nor Disagree&quot;</span>,</span>
+<span id="cb256-89"><a href="qualtrics.html#cb256-89" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Slightly Agree&quot;</span>,</span>
+<span id="cb256-90"><a href="qualtrics.html#cb256-90" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Moderately Agree&quot;</span>,</span>
+<span id="cb256-91"><a href="qualtrics.html#cb256-91" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Strongly Agree&quot;</span>)</span>
+<span id="cb256-92"><a href="qualtrics.html#cb256-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-93"><a href="qualtrics.html#cb256-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-94"><a href="qualtrics.html#cb256-94" aria-hidden="true" tabindex="-1"></a><span class="do">## assign factor levels and then covert to numeric</span></span>
+<span id="cb256-95"><a href="qualtrics.html#cb256-95" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-96"><a href="qualtrics.html#cb256-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
+<span id="cb256-97"><a href="qualtrics.html#cb256-97" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert7_factor))) <span class="sc">%&gt;%</span></span>
+<span id="cb256-98"><a href="qualtrics.html#cb256-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert7&quot;</span>), </span>
+<span id="cb256-99"><a href="qualtrics.html#cb256-99" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span>
+<span id="cb256-100"><a href="qualtrics.html#cb256-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-101"><a href="qualtrics.html#cb256-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-102"><a href="qualtrics.html#cb256-102" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Job Satisfaction items to numeric  values</span></span>
+<span id="cb256-103"><a href="qualtrics.html#cb256-103" aria-hidden="true" tabindex="-1"></a><span class="do">## Check levels for a likert5 item</span></span>
+<span id="cb256-104"><a href="qualtrics.html#cb256-104" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-105"><a href="qualtrics.html#cb256-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(job_aff1_likert5) <span class="sc">%&gt;%</span></span>
+<span id="cb256-106"><a href="qualtrics.html#cb256-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb256-107"><a href="qualtrics.html#cb256-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-108"><a href="qualtrics.html#cb256-108" aria-hidden="true" tabindex="-1"></a><span class="do">## write code to create ordered factor labels/levels</span></span>
+<span id="cb256-109"><a href="qualtrics.html#cb256-109" aria-hidden="true" tabindex="-1"></a>likert5_factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Strongly Disagree&quot;</span>,</span>
+<span id="cb256-110"><a href="qualtrics.html#cb256-110" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Disagree&quot;</span>,</span>
+<span id="cb256-111"><a href="qualtrics.html#cb256-111" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Neutral&quot;</span>,</span>
+<span id="cb256-112"><a href="qualtrics.html#cb256-112" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Agree&quot;</span>,</span>
+<span id="cb256-113"><a href="qualtrics.html#cb256-113" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Strongly Agree&quot;</span>)</span>
+<span id="cb256-114"><a href="qualtrics.html#cb256-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-115"><a href="qualtrics.html#cb256-115" aria-hidden="true" tabindex="-1"></a><span class="do">## assign factor levels and then covert to numeric</span></span>
+<span id="cb256-116"><a href="qualtrics.html#cb256-116" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span></span>
+<span id="cb256-117"><a href="qualtrics.html#cb256-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
+<span id="cb256-118"><a href="qualtrics.html#cb256-118" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> likert5_factor))) <span class="sc">%&gt;%</span></span>
+<span id="cb256-119"><a href="qualtrics.html#cb256-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">contains</span>(<span class="st">&quot;likert5&quot;</span>), </span>
+<span id="cb256-120"><a href="qualtrics.html#cb256-120" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> as.numeric))</span>
+<span id="cb256-121"><a href="qualtrics.html#cb256-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-122"><a href="qualtrics.html#cb256-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse key items</span></span>
+<span id="cb256-123"><a href="qualtrics.html#cb256-123" aria-hidden="true" tabindex="-1"></a><span class="do">## Reverse key likert7 items</span></span>
+<span id="cb256-124"><a href="qualtrics.html#cb256-124" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
+<span id="cb256-125"><a href="qualtrics.html#cb256-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="dv">8</span> <span class="sc">-</span> <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>)) ) <span class="sc">%&gt;%</span> </span>
+<span id="cb256-126"><a href="qualtrics.html#cb256-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="at">.fn =</span> str_replace,</span>
+<span id="cb256-127"><a href="qualtrics.html#cb256-127" aria-hidden="true" tabindex="-1"></a>              <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_likert7rev&quot;</span>),</span>
+<span id="cb256-128"><a href="qualtrics.html#cb256-128" aria-hidden="true" tabindex="-1"></a>              <span class="at">pattern =</span> <span class="st">&quot;_likert7rev&quot;</span>,</span>
+<span id="cb256-129"><a href="qualtrics.html#cb256-129" aria-hidden="true" tabindex="-1"></a>              <span class="at">replacement =</span> <span class="st">&quot;_likert7&quot;</span>)</span>
+<span id="cb256-130"><a href="qualtrics.html#cb256-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-131"><a href="qualtrics.html#cb256-131" aria-hidden="true" tabindex="-1"></a><span class="do">## No likert5 items are reverse-keyed but if they were</span></span>
+<span id="cb256-132"><a href="qualtrics.html#cb256-132" aria-hidden="true" tabindex="-1"></a><span class="do">## You would adapt the code above replacing 8 (one higher than 7) to 6 (one higher than 5)</span></span>
+<span id="cb256-133"><a href="qualtrics.html#cb256-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-134"><a href="qualtrics.html#cb256-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-135"><a href="qualtrics.html#cb256-135" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scale scores</span></span>
+<span id="cb256-136"><a href="qualtrics.html#cb256-136" aria-hidden="true" tabindex="-1"></a><span class="do">## mutate commands create scale scores</span></span>
+<span id="cb256-137"><a href="qualtrics.html#cb256-137" aria-hidden="true" tabindex="-1"></a><span class="do">## select commands with &quot;-&quot; remove items after scale creation</span></span>
+<span id="cb256-138"><a href="qualtrics.html#cb256-138" aria-hidden="true" tabindex="-1"></a>analytic_data_survey <span class="ot">&lt;-</span> analytic_data_survey <span class="sc">%&gt;%</span> </span>
+<span id="cb256-139"><a href="qualtrics.html#cb256-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb256-140"><a href="qualtrics.html#cb256-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">affective_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)),</span>
+<span id="cb256-141"><a href="qualtrics.html#cb256-141" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-142"><a href="qualtrics.html#cb256-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">continuance_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)),</span>
+<span id="cb256-143"><a href="qualtrics.html#cb256-143" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-144"><a href="qualtrics.html#cb256-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">normative_commitment =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)),</span>
+<span id="cb256-145"><a href="qualtrics.html#cb256-145" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-146"><a href="qualtrics.html#cb256-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">job_satisfaction =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)),</span>
+<span id="cb256-147"><a href="qualtrics.html#cb256-147" aria-hidden="true" tabindex="-1"></a>                               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-148"><a href="qualtrics.html#cb256-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb256-149"><a href="qualtrics.html#cb256-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;aff_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-150"><a href="qualtrics.html#cb256-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;contin_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-151"><a href="qualtrics.html#cb256-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;norm_com&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb256-152"><a href="qualtrics.html#cb256-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;job_aff&quot;</span>)) </span>
+<span id="cb256-153"><a href="qualtrics.html#cb256-153" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb256-154"><a href="qualtrics.html#cb256-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-155"><a href="qualtrics.html#cb256-155" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(analytic_data_survey)</span></code></pre></div>
 
 </div>
 </div>

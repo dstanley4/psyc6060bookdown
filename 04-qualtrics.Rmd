@@ -617,7 +617,6 @@ But prior to beginning check out the type for each Likert column below using the
 analytic_data_survey %>% glimpse()
 ```
 
-
 When you have type chr for a column the computer just see the context of each column as text that is different for everyone. It doesn't even realize that two people who both responded "Slightly Agree" responded the same way. It sees every response in the column as unique. Check that out for the aff_com1_likert7 item.
 
 ```{r}
@@ -707,7 +706,7 @@ analytic_data_survey %>%
 
 Side note: We did a lot of explaining as we went through the steps above. But it's not as long as it seems. Some of the steps can even be combined. See the concise version of the code we used repeated below:
 
-```{r}
+```{r, eval = FALSE}
 # Check levels for a likert7 item
 analytic_data_survey %>%
   pull(aff_com1_likert7) %>%
@@ -797,7 +796,7 @@ glimpse(analytic_data_survey)
 
 #### Creating scores
 
-**Important:** Take note of how we name the scale variables (e.g., self_esteem, job_sat). We use a slightly different convention than our items. That is, these scale labels were picked so that they would *not* be selected by a starts_with("esteem") or starts_with("jobsat"). Why - because we later use those commands to remove the item-level data. We would want the command designed to remove the item-level data to also remove the scale we just calculated! This example illustrates how carefully you need to think about your naming conventions.
+**Important:** Take note of how we name the scale variables (e.g., affective_commitment) with a different prefix than the items (e..g, aff_com1_likert7). This allows us to delete the items (i.e., columns that start with aff_com) but not the final scale score (i.e., a column starts with affective_commitment). This example illustrates how carefully you need to think about your column and scale naming conventions.
 
 ```{r}
 analytic_data_survey <- analytic_data_survey %>% 
@@ -828,13 +827,7 @@ You now have two data sets analytic_data_survey and analytic_data_survey_items. 
 
 ### Complete script
 
-Here is the complete script in one block.
-
-
-
-Read the file in with the right columns names - excluding unwanted rows.
-
-```{r, results='hide'}
+```{r, eval = FALSE}
 # Date: YYYY-MM-DD
 # Name: your name here
 # Example: Single occasion survey
@@ -842,6 +835,7 @@ Read the file in with the right columns names - excluding unwanted rows.
 # Load data
 library(tidyverse)
 library(janitor)
+library(skimr)
 
 # read the file in the normal way and get just the names of the columns.
 # put the names into the col_names
@@ -884,9 +878,6 @@ cols_to_remove <- col_names[cols_to_remove_id]
 raw_data <- raw_data %>% 
   select(!all_of(cols_to_remove))
 
-analytic_data_survey <- raw_data
-
-
 # Initial cleaning
 analytic_data_survey <- analytic_data_survey %>%
   remove_empty("rows") %>%
@@ -895,37 +886,32 @@ analytic_data_survey <- analytic_data_survey %>%
 
 glimpse(analytic_data_survey)
 
+# Convert variables to factors as needed
+## Convert sex to factor
 analytic_data_survey <- analytic_data_survey %>%
-  mutate(across(.cols = where(is.character),
-                .fns = as_factor))
+  mutate(sex = as_factor(sex))
 
-N <- dim(analytic_data_survey)[1] # get the number of rows in the data set
 
+## Participant identification to factor
+## Participant identification column must be created first
+## get the number of rows in the data set
+N <- dim(analytic_data_survey)[1] 
+
+## create set of factor levels
+participant_id_levels <- factor(seq(1, N))
+
+## put the factor levels into a column called participant_id
 analytic_data_survey <- analytic_data_survey %>%
-  mutate(id = seq(1, N))
+  mutate(participant_id = participant_id_levels)
+  
 
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(id = as_factor(id))
-
-glimpse(analytic_data_survey)
-
-analytic_data_survey %>%
-  select(where(is.factor)) %>%
-  summary()
-
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(sex = fct_relevel(sex,
-                           "intersex",
-                           "female",
-                           "male"))
-
-# Check levels for a likert7 item
+# Convert Commitment items to numeric  values
+## Check levels for a likert7 item
 analytic_data_survey %>%
   pull(aff_com1_likert7) %>%
   unique()
 
-
-# write code to create a factor
+## write code to create ordered factor labels/levels
 likert7_factor <- c("Strongly Disagree",
                     "Moderately Disagree",
                     "Slightly Disagree",
@@ -935,28 +921,7 @@ likert7_factor <- c("Strongly Disagree",
                     "Strongly Agree")
 
 
-# Check levels for a likert5 item
-analytic_data_survey %>%
-  pull(job_aff1_likert5) %>%
-  unique()
-
-# write code to create a factor
-likert5_factor <- c("Strongly Disagree",
-                     "Disagree",
-                     "Neutral",
-                     "Agree",
-                     "Strongly Agree")
-
-# Create numeric versions of Likert Response Options
-# First mutate command turns everything to a factor as defined above
-# Second mutate command converts factor to a numeric variable
-# Treat 5 and 7 point scale in different code blocks
-analytic_data_survey <- analytic_data_survey %>%
-  mutate(across(.cols = contains("likert5"), 
-                .fns = ~ factor(.x, levels = likert5_factor))) %>%
-  mutate(across(.cols = contains("likert5"), 
-                .fns = as.numeric))
-
+## assign factor levels and then covert to numeric
 analytic_data_survey <- analytic_data_survey %>%
   mutate(across(.cols = contains("likert7"), 
                 .fns = ~ factor(.x, levels = likert7_factor))) %>%
@@ -964,6 +929,28 @@ analytic_data_survey <- analytic_data_survey %>%
                 .fns = as.numeric))
 
 
+# Convert Job Satisfaction items to numeric  values
+## Check levels for a likert5 item
+analytic_data_survey %>%
+  pull(job_aff1_likert5) %>%
+  unique()
+
+## write code to create ordered factor labels/levels
+likert5_factor <- c("Strongly Disagree",
+                     "Disagree",
+                     "Neutral",
+                     "Agree",
+                     "Strongly Agree")
+
+## assign factor levels and then covert to numeric
+analytic_data_survey <- analytic_data_survey %>%
+  mutate(across(.cols = contains("likert5"), 
+                .fns = ~ factor(.x, levels = likert5_factor))) %>%
+  mutate(across(.cols = contains("likert5"), 
+                .fns = as.numeric))
+
+# Reverse key items
+## Reverse key likert7 items
 analytic_data_survey <- analytic_data_survey %>% 
   mutate(8 - across(.cols = ends_with("_likert7rev")) ) %>% 
   rename_with(.fn = str_replace,
@@ -971,8 +958,13 @@ analytic_data_survey <- analytic_data_survey %>%
               pattern = "_likert7rev",
               replacement = "_likert7")
 
-glimpse(analytic_data_survey)
+## No likert5 items are reverse-keyed but if they were
+## You would adapt the code above replacing 8 (one higher than 7) to 6 (one higher than 5)
 
+
+# Create scale scores
+## mutate commands create scale scores
+## select commands with "-" remove items after scale creation
 analytic_data_survey <- analytic_data_survey %>% 
   rowwise() %>% 
   mutate(affective_commitment = mean(c_across(starts_with("aff_com")),
@@ -989,6 +981,6 @@ analytic_data_survey <- analytic_data_survey %>%
   select(-starts_with("norm_com")) %>%
   select(-starts_with("job_aff")) 
   
+
 glimpse(analytic_data_survey)
 ```
-
