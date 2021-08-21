@@ -1,0 +1,133 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Deep Dive: Sampling Distributions [DRAFT]
+
+Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height  of all 50,000 students is xx and the variance is yy. The heights of all the university students are illustrated in figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
+
+Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of n = 25 students and calculated a sample mean.  Then we repeated this sampling process an infinite number of times such that we had a infinite number of sample mean. This **distribution of an infinite number of sample means **is conceptually illustrated in Figure 1B and we refer to it as the *sampling distribution of the mean*. The variance of this distribution of sample means reflects that variability in sample means that occurs due to random sampling when the sample size is 25 and the population variance is YY.
+
+##Population: What’s in a name
+
+Typically, in psychology, when we use the word population we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to also thinking of the distribution of sample mean in Figure 1B as a population.  Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA). 
+
+### Distribution of sample means as a population
+Thus, in this chapter, we can think of there being a population of people and an imaginary population of sample means (each n = 25). The mean of the population people’s heights is calculated as below (where N = 50,000).
+
+Show mean of formula for population. And plug in value.
+
+The mean of the population sample mean is calculated as below. To make things a bit easier to follow we use (a) instead of N to represent the number of sample means (Where A = infinity). 
+
+Show formula for mean of sample means.
+
+You can see than the mean of the sample means (I.e., the mean of the distribution in Figure 1B) will always be the same as that of the individuals heights (Figure 1A).
+
+Consequently, any conclusions we make about population means based on Figure 1B will also apply to Figure 1A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people - all our work in this chapter (and in ANOVA) is based on the distribution of sample mean in Figure 1B. We just need to remember that our conclusion will also apply to Figure 1A because the mean of Figure 1A and Figure 1B will always be the same.
+
+## Variance of the distribution of sampling means
+
+**When there is only population mean** there are two approaches ways to calculate the variances of the distribution of sample means. 
+
+###Calculate the variance of infinite sample means
+
+In this first approach, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never have calculate the variance with an infinite number of sample means. Conceptually, however, it’s good to keep this calculation approach in mind - since it reminds us of principles we’ve already learned about the variance of populations. 
+
+(Show calculation is A in the denominator)
+
+Notice how this is similar to population formula when we are dealing with people we just use A in stead of N.
+
+When there is only one population this formula will reflect varibiltiy in sample means due to random sampling. When there is more than one population - it becomes more complicated. We’ll discuss that in more in future dchapters.
+
+### CLT Shortcut with variance and sample size
+
+(Show calculation using CLT short cut)
+
+This approach is unrealististic because we never know sigma2.
+It’s helpful moving forward to think of this formula as representing the variability due to random sample. No matter the situation - this formula will always reflect the variabilty in sample means due ONLY to random sampling.
+
+
+### Ratio comparison of two approaches
+
+Show ratio is one. When you have all elements of the population these two appraoches will produce **exactly** the same result. Obviously, neither can be used to determine the variance per se with real world data. The fist because can’t use an infinite number of samples and the second because we can’t know the population variance. However, as we see below they both can we useed to **estimate** the variance of the distribution of sampl emeans. 
+
+Show ratio with formulas and numbers
+
+
+
+## Estimating variance of the distribution of sampling means
+
+###Calculate the variance of a set of sample means
+
+If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case “a” to represent the number of sample means.  Recall, the when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a “-1” in the denominator - see previous chapter. 
+
+(Show formula with a -1)
+
+Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).   
+
+(Formula for mean)
+
+(Formula for variance)
+
+
+Sample 1 : mean and  estiamted populatioin varianc
+Sample 2 : mean and  estiamted populatioin varianc
+Sample 3 : mean and  estiamted populatioin varianc
+
+So our estimate of the variance of distribution of sample means is presented below.
+
+
+(Show formula with a -1) with plugged in values.
+
+Thus, our estimated variance of the distribution of sample means is the following:
+
+
+
+###CLT Shortcut with estimated variance and sample size
+
+Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut fromula based on central limit theorum. That formula is presented below.
+
+
+The problem with this fomula is that you need to know the variance of the all the people in the population - and we don’t know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below. 
+
+
+(Pooling formula)
+
+
+We use different names to refer to the resulting number - we could just call it a better estimate of the poplulation variance. But statisticians also use the names pooled variance of mean squared error for this term. It’s important to know that when the sample sizes are equal it’s the average of the variances... We’ll use the notation s2mse to refer to this estimate of the variance of the people.
+
+Armed with the estimate of the variance of the people in the population we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of smaple means.
+
+(Show clt shortcut with variance estimate here).
+
+
+
+ ### Ratio comparison of two approaches
+
+We revisit the ratio comparison appraoch and see that we are using estimates that the 
+
+But on average it will be one.
+
+See this simulation with 6 cols (m/var est), 2 col (both calcs), 1 col ratio.
+
+When everything comes from 1 population on average.....
+
+Show ratio with formulas and numbers
+
+
+## Walk away points
+- Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize
+- think of var/n as representing the variability in sample means due to random sampling
+- the findings we illustrate here only hold when there is only one population the sample means come from that one population.
+
+
+
+
+
+
+
+
+
+
