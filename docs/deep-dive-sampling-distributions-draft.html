@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Deep Dive: Sampling Distributions [DRAFT] | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Deep Dive: Sampling Distributions [DRAFT] | Welcome!" />
   <meta property="og:type" content="book" />
@@ -34,7 +34,7 @@
 <link rel="prev" href="positive-predictive-value.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
 <script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -521,8 +521,9 @@ div.csl-indent {
 <li class="chapter" data-level="14.0.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#distribution-of-sample-means-as-a-population"><i class="fa fa-check"></i><b>14.0.1</b> Distribution of sample means as a population</a></li>
 <li class="chapter" data-level="14.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#variance-of-the-distribution-of-sampling-means"><i class="fa fa-check"></i><b>14.1</b> Variance of the distribution of sampling means</a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#clt-shortcut-with-variance-and-sample-size"><i class="fa fa-check"></i><b>14.1.1</b> CLT Shortcut with variance and sample size</a></li>
-<li class="chapter" data-level="14.1.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-approaches"><i class="fa fa-check"></i><b>14.1.2</b> Ratio comparison of two approaches</a></li>
+<li class="chapter" data-level="14.1.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.1.1</b> Calculate the variance of infinite sample means</a></li>
+<li class="chapter" data-level="14.1.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#clt-shortcut-with-variance-and-sample-size"><i class="fa fa-check"></i><b>14.1.2</b> CLT Shortcut with variance and sample size</a></li>
+<li class="chapter" data-level="14.1.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-approaches"><i class="fa fa-check"></i><b>14.1.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimating-variance-of-the-distribution-of-sampling-means"><i class="fa fa-check"></i><b>14.2</b> Estimating variance of the distribution of sampling means</a></li>
 <li class="chapter" data-level="14.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.3</b> Walk away points</a></li>
@@ -726,29 +727,51 @@ div.csl-indent {
 <p>Typically, in psychology, when we use the word population we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to also thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).</p>
 <div id="distribution-of-sample-means-as-a-population" class="section level3" number="14.0.1">
 <h3><span class="header-section-number">14.0.1</span> Distribution of sample means as a population</h3>
-<p>Thus, in this chapter, we can think of there being a population of people and an imaginary population of sample means (each n = 25). The mean of the population people’s heights is calculated as below (where N = 50,000).</p>
-<p>Show mean of formula for population. And plug in value.</p>
-<p>The mean of the population sample mean is calculated as below. To make things a bit easier to follow we use (a) instead of N to represent the number of sample means (Where A = infinity).</p>
-<p>Show formula for mean of sample means.</p>
-<p>You can see than the mean of the sample means (I.e., the mean of the distribution in Figure 1B) will always be the same as that of the individuals heights (Figure 1A).</p>
-<p>Consequently, any conclusions we make about population means based on Figure 1B will also apply to Figure 1A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people - all our work in this chapter (and in ANOVA) is based on the distribution of sample mean in Figure 1B. We just need to remember that our conclusion will also apply to Figure 1A because the mean of Figure 1A and Figure 1B will always be the same.</p>
+<p>Thus, in this chapter, we can think of there being a population of people and an imaginary population of sample means (each n = 25). The mean and variance of the population people’s heights is calculated as below (where N = 50,000).</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\mu_{people} = \frac{\sum_{i=1}^{N=50000}{X_i}}{N}
+\end{aligned} 
+\]</span></p>
+<p>[plug in show value]</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}
+\end{aligned} 
+\]</span></p>
+<p>But in this chapter, our focus is on the distribution of sample means. The mean of the population sample means is calculated as below. To make things a bit easier to follow we use <span class="math inline">\(A\)</span> instead of <span class="math inline">\(N\)</span> to represent the number of sample means (where <span class="math inline">\(A\)</span> = infinity, because there are an infinite number of sample means in the distribution). I know it doesn’t make sense the divided by infinity per se - in formal mathematics we would write this up in a different way describing things in terms of <em>expected value</em>.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}
+\end{aligned} 
+\]</span></p>
+<p>The mean of the sample means, <em>{{x}}, will always be the same as that of the individuals heights, </em>{people}. Consequently, any conclusions we make about population means based on Figure 1B will also apply to Figure 1A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people - all our work in this chapter (and in ANOVA) is based on the distribution of sample mean in Figure 1B. We just need to remember that our conclusion will also apply to Figure 1A because the mean of Figure 1A and Figure 1B will always be the same.</p>
 </div>
 <div id="variance-of-the-distribution-of-sampling-means" class="section level2" number="14.1">
 <h2><span class="header-section-number">14.1</span> Variance of the distribution of sampling means</h2>
 <p><strong>When there is only population mean</strong> there are two approaches ways to calculate the variances of the distribution of sample means.</p>
-<p>###Calculate the variance of infinite sample means</p>
+<div id="calculate-the-variance-of-infinite-sample-means" class="section level3" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Calculate the variance of infinite sample means</h3>
 <p>In this first approach, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never have calculate the variance with an infinite number of sample means. Conceptually, however, it’s good to keep this calculation approach in mind - since it reminds us of principles we’ve already learned about the variance of populations.</p>
-<p>(Show calculation is A in the denominator)</p>
-<p>Notice how this is similar to population formula when we are dealing with people we just use A in stead of N.</p>
-<p>When there is only one population this formula will reflect varibiltiy in sample means due to random sampling. When there is more than one population - it becomes more complicated. We’ll discuss that in more in future dchapters.</p>
-<div id="clt-shortcut-with-variance-and-sample-size" class="section level3" number="14.1.1">
-<h3><span class="header-section-number">14.1.1</span> CLT Shortcut with variance and sample size</h3>
-<p>(Show calculation using CLT short cut)</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}
+\end{aligned} 
+\]</span></p>
+<p>Notice how this is similar to population formula when we are dealing with people we just use <span class="math inline">\(A\)</span> in stead of <span class="math inline">\(N\)</span>. When there is only one population this formula will reflect varibiltiy in sample means due to random sampling. When there is more than one population - it becomes more complicated. We’ll discuss that in more in future dchapters.</p>
+</div>
+<div id="clt-shortcut-with-variance-and-sample-size" class="section level3" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> CLT Shortcut with variance and sample size</h3>
+<p><span class="math display">\[
+\begin{aligned} 
+\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}
+\end{aligned} 
+\]</span></p>
 <p>This approach is unrealististic because we never know sigma2.
 It’s helpful moving forward to think of this formula as representing the variability due to random sample. No matter the situation - this formula will always reflect the variabilty in sample means due ONLY to random sampling.</p>
 </div>
-<div id="ratio-comparison-of-two-approaches" class="section level3" number="14.1.2">
-<h3><span class="header-section-number">14.1.2</span> Ratio comparison of two approaches</h3>
+<div id="ratio-comparison-of-two-approaches" class="section level3" number="14.1.3">
+<h3><span class="header-section-number">14.1.3</span> Ratio comparison of two approaches</h3>
 <p>Show ratio is one. When you have all elements of the population these two appraoches will produce <strong>exactly</strong> the same result. Obviously, neither can be used to determine the variance per se with real world data. The fist because can’t use an infinite number of samples and the second because we can’t know the population variance. However, as we see below they both can we useed to <strong>estimate</strong> the variance of the distribution of sampl emeans.</p>
 <p>Show ratio with formulas and numbers</p>
 </div>
@@ -841,10 +864,6 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "none"
 }
