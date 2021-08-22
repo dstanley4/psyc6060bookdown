@@ -92,10 +92,10 @@ The item_text column contains the text for each item. Note that if you use comma
 
 | Code for type column | Qualtrics Item Type | Additional Information  |
 |----------------------|---------------------|-------------------------|
-| matrix               | matrix     | If the first item in a block has type *matrix* all items in the block will be used to constucts the matrix question. **Unfortunately, importing item_names for matrix questions is not supported by Qualtrics. You will need to manually restore your item_names following the directions below for matrix items.** |
+| matrix               | matrix     | If the first item in a block has type *matrix* all items in the block will be used to construct the matrix question. **Unfortunately, importing item_names for matrix questions is not supported by Qualtrics. You will need to manually restore your item_names following the directions below for matrix items.** |
 | MC                   | multiple choice vertical format  |  |
-| MC_horizonal         | multiple choice horizontal format  |  |
-| MC_multi_horizonal   | multiple choice horizontal format multiple answers |  |
+| MC_horizontal         | multiple choice horizontal format  |  |
+| MC_multi_horizontal   | multiple choice horizontal format multiple answers |  |
 | MC_select            | select box |  |
 | MC_multi_select      | select multiple boxes     |  |
 | MC_dropdown          | dropdown   |  |
@@ -522,7 +522,7 @@ analytic_data_survey <- raw_data
 ```
 
 
-In the command below, we ensure our column names follow the tidyverse [style guide](https://style.tidyverse.org) by using the clean_names() command from the janitor package. Addditionaly, we remove empty row and columns from the data using the remove_empty_cols() and remove_empty_rows(), respectively.  
+In the command below, we ensure our column names follow the tidyverse [style guide](https://style.tidyverse.org) by using the clean_names() command from the janitor package. Additionally, we remove empty row and columns from the data using the remove_empty_cols() and remove_empty_rows(), respectively.  
 
 ```{r, results = "hide"}
 # Initial cleaning
@@ -697,7 +697,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ```
 
-In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains("likert7") to apply the mutate() command only to columns with likert7 in the name. **You can see why column naming conventions are so important!** Next, within the across() command, we specify .fns. This indicate the function/commmand that will apply to the columns selected. The ~ before "factor" just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command. 
+In this code we use the mutate() command to modify columns. We use the across() command to have the single mutate command apply to several columns. Within the across() command we use contains("likert7") to apply the mutate() command only to columns with likert7 in the name. **You can see why column naming conventions are so important!** Next, within the across() command, we specify .fns. This indicate the function/command that will apply to the columns selected. The ~ before "factor" just warns the computer that what comes next is a function/command name. The factor() command is what will be applied to the columns. The .x within the factor command is a placeholder for each column name that will obtained by the previous contains() command. 
 
 After this mutate() command is used you can see the columns with likert7 in the name are now factors.
 
@@ -770,7 +770,7 @@ analytic_data_survey <- analytic_data_survey %>%
 
 ##### Job Satisfaction Conversion
 
-We'll skip all the explanation steps for Job Satifaction and just show you the essentions. First, get the labels for the items:
+We'll skip all the explanation steps for Job Satisfaction and just show you the essentials. First, get the labels for the items:
 
 ```{r}
 # Convert Job Satisfaction items to numeric  values
