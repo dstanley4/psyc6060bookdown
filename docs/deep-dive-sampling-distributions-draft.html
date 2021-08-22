@@ -529,10 +529,10 @@ div.csl-indent {
 <li class="chapter" data-level="14.3.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#clt-shortcut-with-variance-and-sample-size"><i class="fa fa-check"></i><b>14.3.2</b> CLT Shortcut with variance and sample size</a></li>
 <li class="chapter" data-level="14.3.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-approaches"><i class="fa fa-check"></i><b>14.3.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimating-variance-of-the-distribution-of-sampling-means"><i class="fa fa-check"></i><b>14.4</b> Estimating variance of the distribution of sampling means</a>
+<li class="chapter" data-level="14.4" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.4</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.4.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimated-variance-from-a-set-of-sample-means"><i class="fa fa-check"></i><b>14.4.1</b> Estimated variance from a set of sample means</a></li>
-<li class="chapter" data-level="14.4.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimated-variance-from-the-clt-shortcut-formula"><i class="fa fa-check"></i><b>14.4.2</b> Estimated variance from the CLT shortcut formula</a></li>
+<li class="chapter" data-level="14.4.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimation-using-sample-means"><i class="fa fa-check"></i><b>14.4.1</b> Estimation using sample means</a></li>
+<li class="chapter" data-level="14.4.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimation-using-clt-shortcut"><i class="fa fa-check"></i><b>14.4.2</b> Estimation using CLT shortcut</a></li>
 <li class="chapter" data-level="14.4.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-approaches-1"><i class="fa fa-check"></i><b>14.4.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.5" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.5</b> Walk away points</a></li>
@@ -813,28 +813,82 @@ div.csl-indent {
 <p>In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on <strong>estimating</strong> the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.</p>
 </div>
 </div>
-<div id="estimating-variance-of-the-distribution-of-sampling-means" class="section level2" number="14.4">
-<h2><span class="header-section-number">14.4</span> Estimating variance of the distribution of sampling means</h2>
-<div id="estimated-variance-from-a-set-of-sample-means" class="section level3" number="14.4.1">
-<h3><span class="header-section-number">14.4.1</span> Estimated variance from a set of sample means</h3>
-<p>If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case “a” to represent the number of sample means. Recall, the when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a “-1” in the denominator - see previous chapter.</p>
-<p>(Show formula with a -1)</p>
-<p>Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).</p>
-<p>(Formula for mean)</p>
-<p>(Formula for variance)</p>
-<p>Sample 1 : mean and estimated population variance Sample 2 : mean and estimated population variance Sample 3 : mean and estimated population variance</p>
-<p>So our estimate of the variance of distribution of sample means is presented below.</p>
-<p>(Show formula with a -1) with plugged in values.</p>
-<p>Thus, our estimated variance of the distribution of sample means is the following:</p>
+<div id="estimating-sample-mean-distribution-variance" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> Estimating sample mean distribution variance</h2>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="29%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Sample Number</th>
+<th>Mean (<span class="math inline">\(\frac{\Sigma x_i}{n}\)</span>)</th>
+<th>Variance (<span class="math inline">\(\frac{\Sigma (x_i - \bar{x})^2}{n-1}\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>x</td>
+<td>xx</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>x</td>
+<td>xx</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>x</td>
+<td>xx</td>
+</tr>
+</tbody>
+</table>
+<div id="estimation-using-sample-means" class="section level3" number="14.4.1">
+<h3><span class="header-section-number">14.4.1</span> Estimation using sample means</h3>
+<p>If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case “a” to represent the number of sample means. Recall, that when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a “-1” in the denominator - see previous chapter.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+\end{aligned} 
+\]</span></p>
+<p>Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).
+<span class="math display">\[
+\begin{aligned} 
+\bar{\bar{x}} &amp;= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
+&amp;= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{a}\\
+&amp;= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{3}\\
+\end{aligned} 
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned} 
+s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+&amp;= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{a-1}\\
+&amp;= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{3-1}\\
+\end{aligned} 
+\]</span></p>
 </div>
-<div id="estimated-variance-from-the-clt-shortcut-formula" class="section level3" number="14.4.2">
-<h3><span class="header-section-number">14.4.2</span> Estimated variance from the CLT shortcut formula</h3>
+<div id="estimation-using-clt-shortcut" class="section level3" number="14.4.2">
+<h3><span class="header-section-number">14.4.2</span> Estimation using CLT shortcut</h3>
 <p>Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut formula based on central limit theorem. That formula is presented below.</p>
 <p>The problem with this formula is that you need to know the variance of the all the people in the population - and we don’t know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below.</p>
-<p>(Pooling formula)</p>
+<p><span class="math display">\[
+\begin{aligned}
+s_{people}^2 &amp;= MSE_{people}\\
+&amp;= \frac{\sum_{i=1}^{a=3}(n_i-1)(s_i^2)}{\sum_{i=1}^{a}(n_i-1)} \\
+&amp;= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2 + (n_3-1)s_3^2}{(n_1-1)+(n_2-1)+(n_3-1)} \\
+&amp;= \frac{(25-1)s_1^2 + (25-1)s_2^2 + (25-1)s_3^2}{(25-1)+(25-1)+(25-1)} \\
+\end{aligned}
+\]</span></p>
 <p>We use different names to refer to the resulting number - we could just call it a better estimate of the population variance. But statisticians also use the names pooled variance of mean squared error for this term. It’s important to know that when the sample sizes are equal it’s the average of the variances… We’ll use the notation s2mse to refer to this estimate of the variance of the people.</p>
 <p>Armed with the estimate of the variance of the people in the population we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means.</p>
-<p>(Show clt shortcut with variance estimate here).</p>
+<p><span class="math display">\[
+\begin{aligned} 
+s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
+\end{aligned} 
+\]</span></p>
 </div>
 <div id="ratio-comparison-of-two-approaches-1" class="section level3" number="14.4.3">
 <h3><span class="header-section-number">14.4.3</span> Ratio comparison of two approaches</h3>
@@ -858,7 +912,7 @@ div.csl-indent {
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-hays1994statistics" class="csl-entry">
-Hays, William L. 1994. <em>Statistics (4th Edn)</em>. Holt, Rinehart &amp; Winston, New York.
+Hays, William L. 1994. <em>Statistics (5th Edn)</em>. Holt, Rinehart &amp; Winston, New York.
 </div>
 </div>
 <div class="footnotes">

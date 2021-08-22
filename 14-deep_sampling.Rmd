@@ -110,41 +110,68 @@ In this section, we focused on actually **calculating** the variance of the dist
 
 In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on **estimating** the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.
 
-## Estimating variance of the distribution of sampling means
+## Estimating sample mean distribution variance 
 
-### Estimated variance from a set of sample means
+| Sample Number | Mean ($\frac{\Sigma x_i}{n}$) | Variance ($\frac{\Sigma (x_i - \bar{x})^2}{n-1}$) |
+|---------------|------------|--------------|
+| 1             |           x                   |       xx                                          |
+| 2             |           x                   |       xx                                          |
+| 3             |           x                   |       xx                                          |
 
-If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case "a" to represent the number of sample means. Recall, the when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a "-1" in the denominator - see previous chapter.
 
-(Show formula with a -1)
+### Estimation using sample means
+
+If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case "a" to represent the number of sample means. Recall, that when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a "-1" in the denominator - see previous chapter.
+
+$$
+\begin{aligned} 
+s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+\end{aligned} 
+$$
 
 Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).
+$$
+\begin{aligned} 
+\bar{\bar{x}} &= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
+&= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{a}\\
+&= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{3}\\
+\end{aligned} 
+$$
 
-(Formula for mean)
 
-(Formula for variance)
+$$
+\begin{aligned} 
+s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+&= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{a-1}\\
+&= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{3-1}\\
+\end{aligned} 
+$$
 
-Sample 1 : mean and estimated population variance Sample 2 : mean and estimated population variance Sample 3 : mean and estimated population variance
 
-So our estimate of the variance of distribution of sample means is presented below.
-
-(Show formula with a -1) with plugged in values.
-
-Thus, our estimated variance of the distribution of sample means is the following:
-
-### Estimated variance from the CLT shortcut formula
+### Estimation using CLT shortcut
 
 Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut formula based on central limit theorem. That formula is presented below.
 
 The problem with this formula is that you need to know the variance of the all the people in the population - and we don't know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below.
 
-(Pooling formula)
+$$
+\begin{aligned}
+s_{people}^2 &= MSE_{people}\\
+&= \frac{\sum_{i=1}^{a=3}(n_i-1)(s_i^2)}{\sum_{i=1}^{a}(n_i-1)} \\
+&= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2 + (n_3-1)s_3^2}{(n_1-1)+(n_2-1)+(n_3-1)} \\
+&= \frac{(25-1)s_1^2 + (25-1)s_2^2 + (25-1)s_3^2}{(25-1)+(25-1)+(25-1)} \\
+\end{aligned}
+$$
 
 We use different names to refer to the resulting number - we could just call it a better estimate of the population variance. But statisticians also use the names pooled variance of mean squared error for this term. It's important to know that when the sample sizes are equal it's the average of the variances... We'll use the notation s2mse to refer to this estimate of the variance of the people.
 
 Armed with the estimate of the variance of the people in the population we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means.
 
-(Show clt shortcut with variance estimate here).
+$$
+\begin{aligned} 
+s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
+\end{aligned} 
+$$
 
 ### Ratio comparison of two approaches
 
