@@ -6,9 +6,9 @@ output:
 
 # Deep Dive: Sampling Distributions [DRAFT]
 
-Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height  of all 50,000 students is 172.50 and the variance is 156.3236 The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
+Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 and the variance is 156.3236 The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
 
-The mean of the population people’s heights (in cm) is calculated as below (where N = 50,000).
+The mean of the population people's heights (in cm) is calculated as below (where N = 50,000).
 
 $$
 \begin{aligned} 
@@ -17,7 +17,7 @@ $$
 \end{aligned} 
 $$
 
-The variance of the population people’s heights (in cm) is calculated as below (where N = 50,000).
+The variance of the population people's heights (in cm) is calculated as below (where N = 50,000).
 
 $$
 \begin{aligned} 
@@ -32,14 +32,15 @@ Now imagine that we are interested in studying the random sampling process. Spec
 
 [Figure 1A and 1B goes here]
 
-## Population: What’s in a name
+## Population: What's in a name
 
-Typically, in psychology, when we use the word "population" we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to also thinking of the distribution of sample mean in Figure 1B as a population.  Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA). 
+Typically, in psychology, when we use the word "population" we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to also thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).
 
 ### Distribution of sample means as a population
 
-Since we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means.
-The mean of the population of sample means is calculated as below. To make things a bit easier to follow we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)^[I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.]
+Since we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below. To make things a bit easier to follow we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]
+
+[^deep_sampling-1]: I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
 
 $$
 \begin{aligned} 
@@ -56,7 +57,9 @@ When there is only *one* **population of people** there are two approaches to ca
 
 ### Calculate the variance of infinite sample means
 
-In this first approach, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never obtain an infite number of samples and then calculate the variance for each sample. Conceptually, however, it’s good to keep this calculation approach in mind - since it reminds us of principles we’ve already learned about the variance of populations ^[As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.]
+In this first approach, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never obtain an infite number of samples and then calculate the variance for each sample. Conceptually, however, it's good to keep this calculation approach in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
+
+[^deep_sampling-2]: As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.
 
 $$
 \begin{aligned} 
@@ -65,14 +68,13 @@ $$
 \end{aligned} 
 $$
 
-Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we just use $A$ to indicate the number of elements used in the calculation rather than $N$. 
+Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we just use $A$ to indicate the number of elements used in the calculation rather than $N$.
 
-When there is only one population this formula will reflect variability in sample means due to random sampling. When there is more than one population - it becomes more complicated. We’ll discuss that situation in a future chapter.
+When there is only one population this formula will reflect variability in sample means due to random sampling. When there is more than one population - it becomes more complicated. We'll discuss that situation in a future chapter.
 
 ### CLT Shortcut with variance and sample size
 
-Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population ($\sigma_{people}^2$). 
-$$
+Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population ($\sigma_{people}^2$). $$
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n}\\
 &= \frac{156.3236}{25}\\
@@ -80,23 +82,20 @@ $$
 \end{aligned} 
 $$
 
-
 The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you [consult](https://archive.org/details/statisticsfifthe00will) [@hays1994statistics] who provides a statistical proof for the Central Limit Theorem.
 
-It’s helpful, moving forward to, think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the variability due to random sample. No matter the situation - this formula will always reflect the variability in sample means due ONLY to random sampling.
-
+It's helpful, moving forward to, think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the variability due to random sampling. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.
 
 ### Ratio comparison of two approaches
 
 Thus, far we have calculated the variance of the distribution of sample means using two different approaches.
 
-1. variance of sample means calculated using sample means
-2. variance of sample means calculated using CLT shortcut formula
+1.  variance of sample means calculated using sample means
+2.  variance of sample means calculated using CLT shortcut formula
 
-Although we can just look the numbers resulting from these two approaches and compare them, that's not how statisticians typically handle comparisons. The approaches used by statisticians to compare two number is to create a ratio. That is one number is divided by the other number. If the two numbers are the same the ratio will be 1.00.  
+Although we can just look the numbers resulting from these two approaches and compare them, that's not how statisticians typically handle comparisons. The approaches used by statisticians to compare two numbers is to create a ratio. That is one number is divided by the other number. If the two numbers are the same the ratio will be 1.00.
 
-You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result. 
-
+You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result.
 
 $$
 \begin{aligned} 
@@ -107,8 +106,7 @@ $$
 \end{aligned} 
 $$
 
-
-In this section, we focused on actually **calculating** the variance of the distribution of sample means using two approaches. But to actually calculate this variance we needed an infinite number of sample mean (approach 1) or knowledge of the population variance (approach 2). Both are unrealistic approaches to determining this value.
+In this section, we focused on actually **calculating** the variance of the distribution of sample means using two approaches. But to actually calculate this variance we needed an infinite number of sample means (approach 1) or knowledge of the population variance (approach 2). Both are unrealistic approaches to determining this value.
 
 In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead we focus on **estimating** the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.
 
@@ -116,52 +114,41 @@ In the next section, below, we recognize that we can likely never know or calcul
 
 ### Calculate the variance of a set of sample means
 
-If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case “a” to represent the number of sample means.  Recall, the when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a “-1” in the denominator - see previous chapter. 
+If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case "a" to represent the number of sample means. Recall, the when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a "-1" in the denominator - see previous chapter.
 
 (Show formula with a -1)
 
-Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).   
+Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).
 
 (Formula for mean)
 
 (Formula for variance)
 
-
-Sample 1 : mean and  estimated population variance
-Sample 2 : mean and  estimated population variance
-Sample 3 : mean and  estimated population variance
+Sample 1 : mean and estimated population variance Sample 2 : mean and estimated population variance Sample 3 : mean and estimated population variance
 
 So our estimate of the variance of distribution of sample means is presented below.
-
 
 (Show formula with a -1) with plugged in values.
 
 Thus, our estimated variance of the distribution of sample means is the following:
 
-
-
 ### CLT Shortcut with estimated variance and sample size
 
 Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut formula based on central limit theorem. That formula is presented below.
 
-
-The problem with this formula is that you need to know the variance of the all the people in the population - and we don’t know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below. 
-
+The problem with this formula is that you need to know the variance of the all the people in the population - and we don't know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below.
 
 (Pooling formula)
 
-
-We use different names to refer to the resulting number - we could just call it a better estimate of the population variance. But statisticians also use the names pooled variance of mean squared error for this term. It’s important to know that when the sample sizes are equal it’s the average of the variances... We’ll use the notation s2mse to refer to this estimate of the variance of the people.
+We use different names to refer to the resulting number - we could just call it a better estimate of the population variance. But statisticians also use the names pooled variance of mean squared error for this term. It's important to know that when the sample sizes are equal it's the average of the variances... We'll use the notation s2mse to refer to this estimate of the variance of the people.
 
 Armed with the estimate of the variance of the people in the population we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means.
 
 (Show clt shortcut with variance estimate here).
 
-
-
 ### Ratio comparison of two approaches
 
-We revisit the ratio comparison approach and see that we are using estimates that the 
+We revisit the ratio comparison approach and see that we are using estimates that the
 
 But on average it will be one.
 
@@ -171,18 +158,8 @@ When everything comes from 1 population on average.....
 
 Show ratio with formulas and numbers
 
-
 ## Walk away points
-- Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize
-- think of var/n as representing the variability in sample means due to random sampling
-- the findings we illustrate here only hold when there is only one population the sample means come from that one population.
 
-
-
-
-
-
-
-
-
-
+-   Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize
+-   think of var/n as representing the variability in sample means due to random sampling
+-   the findings we illustrate here only hold when there is only one population the sample means come from that one population.
