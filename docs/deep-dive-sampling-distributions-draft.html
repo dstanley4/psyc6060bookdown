@@ -533,8 +533,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimation-using-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Estimation using sample means</a></li>
-<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimation-using-clt-shortcut"><i class="fa fa-check"></i><b>14.6.2</b> Estimation using CLT shortcut</a></li>
+<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-1-estimation-using-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Method 1: Estimation using sample means</a></li>
+<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-estimation-using-clt-shortcut"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: Estimation using CLT shortcut</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.7</b> Walk away points</a></li>
@@ -758,7 +758,7 @@ div.csl-indent {
 </div>
 <div id="random-sampling-process" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Random sampling process</h2>
-<p>Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of <span class="math inline">\(n\)</span> = 25 students and calculated a sample mean (<span class="math inline">\(\bar{x}\)</span>). Then we repeated this sampling process an infinite number of times such that we have a infinite number of sample means. This set of an <strong>infinite number of sample means</strong> is conceptually illustrated in Figure 1B and we refer to it as the <em>sampling distribution of the mean</em>. Moreover, <strong>because we sampled from a single population</strong> the variability in sample means is due only to the <strong>random sampling error</strong> that occurs when the sample size is 25 and the population variance is YY.</p>
+<p>Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of <span class="math inline">\(n\)</span> = 25 students and calculated a sample mean (<span class="math inline">\(\bar{x}\)</span>). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an <strong>infinite number of sample means</strong> is conceptually illustrated in Figure 1B and we refer to it as the <em>sampling distribution of the mean</em>. Moreover, <strong>because we sampled from a single population</strong> the variability in sample means is due only to the <strong>random sampling error</strong> that occurs when the sample size is 25 (<span class="math inline">\(n = 25\)</span>) and the population variance is 156.3236 (i.e., <span class="math inline">\(\sigma_{people}^2 =156.3236\)</span>).</p>
 <p>[Figure 1A and 1B goes here]</p>
 </div>
 <div id="population-whats-in-a-name" class="section level2" number="14.4">
@@ -766,14 +766,14 @@ div.csl-indent {
 <p>Typically, in psychology, when we use the word “population” we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to also thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).</p>
 <div id="distribution-of-sample-means-as-a-population" class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Distribution of sample means as a population</h3>
-<p>Since we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below. To make things a bit easier to follow we use <span class="math inline">\(A\)</span> instead of <span class="math inline">\(N\)</span> to represent the number of sample means (where <span class="math inline">\(A\)</span> = infinity, because there are an infinite number of sample means in the distribution)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>Since we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below. Notice that we used the symbol, <span class="math inline">\(\mu_{\bar{x}}\)</span>, to represented this value. Further notice, the little <span class="math inline">\(\bar{x}\)</span> beside the <span class="math inline">\(\mu\)</span> in <span class="math inline">\(\mu_{\bar{x}}\)</span> which indicates it is sample means that are being averaged. To make things a bit easier to follow we use <span class="math inline">\(A\)</span> instead of <span class="math inline">\(N\)</span> to represent the number of sample means (where <span class="math inline">\(A\)</span> = infinity, because there are an infinite number of sample means in the distribution)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p><span class="math display">\[
 \begin{aligned} 
 \mu_{\bar{x}} &amp;= \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}\\
 &amp;= 172.50\\
 \end{aligned} 
 \]</span></p>
-<p>The mean of the sample means, <span class="math inline">\(\mu_{\bar{x}}\)</span>, will always be the same as that of the individuals heights, <span class="math inline">\(\mu_{people}\)</span>. Consequently, any conclusions we make about population means based on Figure 1B will also apply to Figure 1A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people - all our work in this chapter (and in ANOVA) is based on the distribution of sample mean in Figure 1B. We just need to remember that any conclusion we make about the population mean in Figure 1B will also apply to Figure 1A – because with sample means the two distributions will always have the same mean.</p>
+<p>The mean of the sample means, <span class="math inline">\(\mu_{\bar{x}}\)</span>, will always be the same as that of the individuals heights, <span class="math inline">\(\mu_{people}\)</span>. Consequently, any conclusions we make about <em>population means</em> based on Figure 1B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>) will also apply to Figure 1A (i.e., <span class="math inline">\(\mu_{people}\)</span>). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., <span class="math inline">\(\mu_{people}\)</span>) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>).</p>
 </div>
 </div>
 <div id="variance-of-the-distribution-of-sampling-means" class="section level2" number="14.5">
@@ -788,7 +788,7 @@ div.csl-indent {
 &amp;= 6.252944\\
 \end{aligned} 
 \]</span></p>
-<p>Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we just use <span class="math inline">\(A\)</span> to indicate the number of elements used in the calculation rather than <span class="math inline">\(N\)</span>.</p>
+<p>Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we just use <span class="math inline">\(A\)</span> to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than <span class="math inline">\(N\)</span>.</p>
 <p>When there is only one population this formula will reflect variability in sample means due to random sampling. When there is more than one population - it becomes more complicated. We’ll discuss that situation in a future chapter.</p>
 </div>
 <div id="method-2-clt-shortcut-with-variance-and-sample-size" class="section level3" number="14.5.2">
@@ -801,7 +801,7 @@ div.csl-indent {
 \end{aligned} 
 \]</span></p>
 <p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">W. L. Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
-<p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the variability due to random sampling. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
+<p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
 </div>
 <div id="ratio-comparison-of-two-methods" class="section level3" number="14.5.3">
 <h3><span class="header-section-number">14.5.3</span> Ratio comparison of two methods</h3>
@@ -810,7 +810,7 @@ div.csl-indent {
 <li><p>Method 1: Variance of sample means calculated using sample means</p></li>
 <li><p>Method 2: Variance of sample means calculated using CLT shortcut formula</p></li>
 </ul>
-<p>Although we can just look the numbers resulting from these two methods and compare them, that’s not how statisticians typically handle comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is one number is divided by the other number. If the two numbers are the same the ratio will be 1.00.</p>
+<p>Although we can just look the numbers resulting from these two methods and compare them, that’s not how statisticians typically handle comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00.</p>
 <p>You can see the ratio comparing these two methods below is 1.00 - so we conclude two methods produced the same result.</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -857,34 +857,44 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div id="estimation-using-sample-means" class="section level3" number="14.6.1">
-<h3><span class="header-section-number">14.6.1</span> Estimation using sample means</h3>
-<p>If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean. We use the lower case “a” to represent the number of sample means. Recall, that when we use a subset of the elements of the population (i.e., population of sample means) to estimate the variance of the full population we need to use a “-1” in the denominator - see previous chapter.</p>
+<div id="method-1-estimation-using-sample-means" class="section level3" number="14.6.1">
+<h3><span class="header-section-number">14.6.1</span> Method 1: Estimation using sample means</h3>
+<p>If we obtain a set of sample means from this population of sample means (i.e., distribution of sample mean) we can use those to estimate the variance of the distribution of sample mean as illustrated in the formula below. We use the lower case “a” to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>).</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 \end{aligned} 
 \]</span></p>
-<p>Imagine that we have 3 sample means (each based on n = 25) that we use to estimate the variance of the population of sample means (i.e., estimate the variance of the distribution of sample means).
-<span class="math display">\[
+<p>In this example (see table above), we have 3 sample means (each based on n = 25) so <span class="math inline">\(a = 3\)</span>. Let’s estimate the variance of the distribution of sample means (Figure 1B) using these three sample means.</p>
+<p>First, we calculate the mean of the three sample means (<span class="math inline">\(\bar{\bar{x}}\)</span>) because we will need that in the variance formula.</p>
+<p><span class="math display">\[
 \begin{aligned} 
 \bar{\bar{x}} &amp;= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
 &amp;= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{a}\\
 &amp;= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{3}\\
 \end{aligned} 
 \]</span></p>
+<p>Second, we estimate the variance of the population of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>, see Figure 1B) using the set of sample means. Notice the use of “-1” in the denominator - <a href="https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2">as we discussed previously in the sample accuracy chapter</a>. The use of the “-1” in the denominator means we are not calculating the variance of these three sample means. Rather, we use -1 in the denominator we are estimating the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure 1B).</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 &amp;= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{a-1}\\
 &amp;= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{3-1}\\
 \end{aligned} 
-\]</span></p>
+\]</span>’</p>
+<p>Thus, using Method 1, our estimate of the variance of the distribution of sample means is XXX.</p>
 </div>
-<div id="estimation-using-clt-shortcut" class="section level3" number="14.6.2">
-<h3><span class="header-section-number">14.6.2</span> Estimation using CLT shortcut</h3>
-<p>Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut formula based on central limit theorem. That formula is presented below.</p>
-<p>The problem with this formula is that you need to know the variance of the all the people in the population - and we don’t know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people in the population using the formula below.</p>
+<div id="method-2-estimation-using-clt-shortcut" class="section level3" number="14.6.2">
+<h3><span class="header-section-number">14.6.2</span> Method 2: Estimation using CLT shortcut</h3>
+<p>Recall, than an alternative to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT).</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{n}\\
+\end{aligned} 
+\]</span></p>
+<div id="estimating-sigma_people2-with-s_people2" class="section level4" number="14.6.2.1">
+<h4><span class="header-section-number">14.6.2.1</span> Estimating <span class="math inline">\(\sigma_{people}^2\)</span> with <span class="math inline">\(s_{people}^2\)</span></h4>
+<p>The problem with the formula above is that you need to know the variance of the all the people in the population (<span class="math inline">\(\sigma_{people}^2\)</span>) - and we don’t know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into better (or average) estimate of the variance of the people (<span class="math inline">\(s_{people}^2\)</span>) in the population using the formula below.</p>
 <p><span class="math display">\[
 \begin{aligned}
 s_{people}^2 &amp;= MSE_{people}\\
@@ -900,6 +910,7 @@ s_{people}^2 &amp;= MSE_{people}\\
 s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 \end{aligned} 
 \]</span></p>
+</div>
 </div>
 <div id="ratio-comparison-of-two-methods-1" class="section level3" number="14.6.3">
 <h3><span class="header-section-number">14.6.3</span> Ratio comparison of two methods</h3>
