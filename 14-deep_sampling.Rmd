@@ -6,7 +6,13 @@ output:
 
 # Deep Dive: Sampling Distributions [DRAFT]
 
-Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 and the variance is 156.3236 The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
+## A tale of two methods
+
+In this chapter, we focus on describing the sampling distribution of the mean. Our goal is to understand the logic behind two different methods for estimating the variance of the sampling distribution of the mean. A thorough understanding of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA). 
+
+## A student population
+
+Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
 
 The mean of the population people's heights (in cm) is calculated as below (where N = 50,000).
 
@@ -53,11 +59,11 @@ The mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that o
 
 ## Variance of the distribution of sampling means
 
-When there is only *one* **population of people** there are two approaches to calculating the variance of the resulting **population of sample means** that will produce the same result.
+When there is only *one* **population of people** there are two methods for calculating the variance of the resulting **population of sample means** that will produce the same result.
 
-### Calculate the variance of infinite sample means
+### Method 1: Calculate the variance of infinite sample means
 
-In this first approach, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never obtain an infite number of samples and then calculate the variance for each sample. Conceptually, however, it's good to keep this calculation approach in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
+In this first method, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never obtain an infite number of samples and then calculate the variance for each sample. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
 
 [^deep_sampling-2]: As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.
 
@@ -72,7 +78,7 @@ Notice how this is similar to population formula when we are dealing with people
 
 When there is only one population this formula will reflect variability in sample means due to random sampling. When there is more than one population - it becomes more complicated. We'll discuss that situation in a future chapter.
 
-### CLT Shortcut with variance and sample size
+### Method 2: CLT Shortcut with variance and sample size
 
 Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population ($\sigma_{people}^2$). $$
 \begin{aligned} 
@@ -86,27 +92,28 @@ The reason this formula works should not be obvious - at all. If you are looking
 
 It's helpful, moving forward to, think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the variability due to random sampling. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.
 
-### Ratio comparison of two approaches
+### Ratio comparison of two methods
 
-Thus, far we have calculated the variance of the distribution of sample means using two different approaches.
+Thus, far we have calculated the variance of the distribution of sample means using two different methods.
 
-1.  variance of sample means calculated using sample means
-2.  variance of sample means calculated using CLT shortcut formula
+* Method 1: Variance of sample means calculated using sample means
 
-Although we can just look the numbers resulting from these two approaches and compare them, that's not how statisticians typically handle comparisons. The approaches used by statisticians to compare two numbers is to create a ratio. That is one number is divided by the other number. If the two numbers are the same the ratio will be 1.00.
+* Method 2: Variance of sample means calculated using CLT shortcut formula
 
-You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result.
+Although we can just look the numbers resulting from these two methods and compare them, that's not how statisticians typically handle comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is one number is divided by the other number. If the two numbers are the same the ratio will be 1.00.
+
+You can see the ratio comparing these two methods below is 1.00 - so we conclude two methods produced the same result.
 
 $$
 \begin{aligned} 
-\text{ratio comparing approaches} &= \frac{\text{variance of sample means calculated using sample means}}{\text{variance of sample means calculated using CLT shortcut formula}}\\
+\text{ratio comparing methods} &= \frac{\text{variance of sample means calculated using sample means}}{\text{variance of sample means calculated using CLT shortcut formula}}\\
 &=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
 &=\frac{6.252944}{6.252944}\\
 &= 1.00\\
 \end{aligned} 
 $$
 
-In this section, we focused on actually **calculating** the variance of the distribution of sample means using two approaches. But to actually calculate this variance we needed an infinite number of sample means (approach 1) or knowledge of the population variance (approach 2). Both are unrealistic approaches to determining this value.
+In this section, we focused on actually **calculating** the variance of the distribution of sample means using two methods. But to actually calculate this variance we needed an infinite number of sample means (method 1) or knowledge of the population variance (method 2). Both are unrealistic methods to determining this value.
 
 In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on **estimating** the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.
 
@@ -173,9 +180,9 @@ s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
 \end{aligned} 
 $$
 
-### Ratio comparison of two approaches
+### Ratio comparison of two methods
 
-We revisit the ratio comparison approach and see that we are using estimates that the
+We revisit the ratio comparison methods and see that we are using estimates that the
 
 But on average it will be one.
 
