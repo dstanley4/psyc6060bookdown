@@ -264,6 +264,10 @@ s_{people}^2 &= MSE_{people}\\
 &= \frac{\sum_{i=1}^{a=3}(n_i-1)s_i^2}{\sum_{i=1}^{a}(n_i-1)} \\
 &= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2 + (n_3-1)s_3^2}{(n_1-1)+(n_2-1)+(n_3-1)} \\
 &= \frac{(25-1)s_1^2 + (25-1)s_2^2 + (25-1)s_3^2}{(25-1)+(25-1)+(25-1)} \\
+&= \frac{(25-1)`r est_pop_var` + (25-1)`r est_pop_var2` +(25-1)`r est_pop_var3`}{(25-1) + (25-1) + (25-1)} \\
+&= \frac{`r 24*est_pop_var` + `r 24*est_pop_var2` + `r 24*est_pop_var3`}{75 -3} \\
+&= \frac{`r as.character((24*est_pop_var + 24*est_pop_var2 +  24*est_pop_var3))`}{72} \\
+&= `r est_pop_var_pooled` \\
 \end{aligned}
 $$
 
@@ -273,6 +277,9 @@ $$
 \begin{aligned}
 s_{people}^2 &= MSE_{people}\\
 &= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
+&= \frac{`r est_pop_var` + `r est_pop_var2` + `r est_pop_var3` }{3} \\
+&= \frac{660.7}{3} \\
+&= `r est_pop_var_pooled` \\
 \end{aligned}
 $$
 
