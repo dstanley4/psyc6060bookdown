@@ -529,13 +529,13 @@ div.csl-indent {
 <li class="chapter" data-level="14.5" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.5</b> Sample mean distribution variance</a>
 <ul>
 <li class="chapter" data-level="14.5.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-1-calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.5.1</b> Method 1: Calculate the variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.5.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-clt-shortcut-with-variance-and-sample-size"><i class="fa fa-check"></i><b>14.5.2</b> Method 2: CLT Shortcut with variance and sample size</a></li>
+<li class="chapter" data-level="14.5.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.5.2</b> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</a></li>
 <li class="chapter" data-level="14.5.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods"><i class="fa fa-check"></i><b>14.5.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-1-estimation-using-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Method 1: Estimation using sample means</a></li>
-<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-estimation-using-clt-shortcut"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: Estimation using CLT shortcut</a></li>
+<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Method 1: Estimate the variance of infinite sample means using 3 sample means</a></li>
+<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.7</b> Walk away points</a></li>
@@ -797,8 +797,8 @@ div.csl-indent {
 <p>Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we just use <span class="math inline">\(A\)</span> to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than <span class="math inline">\(N\)</span>.</p>
 <p><strong>When there is only one population of people</strong> this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We’ll discuss that situation in a future chapter.</p>
 </div>
-<div id="method-2-clt-shortcut-with-variance-and-sample-size" class="section level3" number="14.5.2">
-<h3><span class="header-section-number">14.5.2</span> Method 2: CLT Shortcut with variance and sample size</h3>
+<div id="method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means" class="section level3" number="14.5.2">
+<h3><span class="header-section-number">14.5.2</span> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</h3>
 <p>Fortunately we don’t need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a “shortcut formula” we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (<span class="math inline">\(\sigma_{people}^2\)</span>).</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -870,8 +870,8 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<div id="method-1-estimation-using-sample-means" class="section level3" number="14.6.1">
-<h3><span class="header-section-number">14.6.1</span> Method 1: Estimation using sample means</h3>
+<div id="method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means" class="section level3" number="14.6.1">
+<h3><span class="header-section-number">14.6.1</span> Method 1: Estimate the variance of infinite sample means using 3 sample means</h3>
 <p>We can use the sample means presented in the table above to estimate the variance of the distribution of sample mean as illustrated in the formula below. Recall, we use the lower case “<span class="math inline">\(a\)</span>” to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>).</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -899,8 +899,8 @@ s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 \]</span></p>
 <p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure 1B) is estimated, using Method 1, to be <span class="math inline">\(s_{\bar{x}}^2 = 79.213\)</span>. Remember though 79.213 is just an <em>estimate</em> of the population value (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>) based on three sample means.</p>
 </div>
-<div id="method-2-estimation-using-clt-shortcut" class="section level3" number="14.6.2">
-<h3><span class="header-section-number">14.6.2</span> Method 2: Estimation using CLT shortcut</h3>
+<div id="method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means" class="section level3" number="14.6.2">
+<h3><span class="header-section-number">14.6.2</span> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</h3>
 <p>We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT).</p>
 <p><span class="math display">\[
 \begin{aligned} 
