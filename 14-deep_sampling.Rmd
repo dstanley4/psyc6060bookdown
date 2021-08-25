@@ -75,6 +75,14 @@ In this first method, we use an infinite number of sample means and simply calcu
 
 [^deep_sampling-2]: As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.
 
+\begin{equation} 
+\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}
+      (\#eq:popvarxbardeep)
+\end{equation} 
+
+
+Putting values in:
+
 $$
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}\\
@@ -89,6 +97,15 @@ Notice how this is similar to population formula when we are dealing with people
 ### Method 2: CLT shortcut: *Calculation* of variance of infinite sample means
 
 Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population ($\sigma_{people}^2$). 
+
+
+\begin{equation} 
+\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\\
+      (\#eq:popvarCLTxbardeep)
+\end{equation} 
+
+
+Putting values in:
 
 $$
 \begin{aligned} 
@@ -207,11 +224,10 @@ In this section we focus on estimating the variance of the distribution of sampl
 
 We can use the sample means presented in the table above to estimate the variance of the distribution of sample mean as illustrated in the formula below. Recall, we use the lower case "$a$" to represent the number of sample means (in the case because we have 3 sample means $a = 3$).
 
-$$
-\begin{aligned} 
-s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
-\end{aligned} 
-$$
+\begin{equation} 
+s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
+      (\#eq:estpopvarxbardeep)
+\end{equation} 
 
 In this example (see table above), we have 3 sample means (each based on n = 25) so $a = 3$. Let's estimate the variance of the distribution of sample means (Figure 1B) using these three sample means.
 
@@ -311,6 +327,23 @@ See this simulation with 6 cols (m/var est), 2 col (both calcs), 1 col ratio.
 When everything comes from 1 population on average.....
 
 Show ratio with formulas and numbers
+
+
+## Summary table
+
+| Population | Attribute |  Parameter Calculation |  Estimate of Parameter |  
+|:----------:|:-------------------:|:----------------------:|:----------------------:|
+| People     |  Mean               | $\mu_{people} = \frac{\sum_{i=1}^{N}{X_i}}{N}$  |                        |
+| People     |  Variance           | $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}$        |                        |
+| People     |  Standard Deviation | $\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}}$   |                        |
+| Sample Means |  Mean             | $\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}$             |                        |
+| Sample Means |  Variance         | $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}$ |                        |
+| Sample Means |  Standard Error   | $\sigma_{\bar{x}} = \sqrt{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}}$ |                           |
+
+Add CLT versions to above table
+
+
+
 
 ## Walk away points
 
