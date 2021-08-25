@@ -10,28 +10,23 @@ output:
 
 In this chapter, we focus on describing the sampling distribution of the mean. Our goal is to understand the logic behind two different methods for estimating the variance of the sampling distribution of the mean. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
 
-
 ## A student population
 
-Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
+Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 50,000 people the mean is $\mu_{people}=172.50$ and the variance is $\sigma_{people}^2=156.3236$. 
 
-The mean of the population people's heights (in cm) is calculated as below (where N = 50,000).
+The mean of a population of 50,000 individuals is calculated using Equation \@ref(eq:popmeanchdeep) below.
 
-$$
-\begin{aligned} 
-\mu_{people} &= \frac{\sum_{i=1}^{N=50000}{X_i}}{N}\\
-&= 172.50\\
-\end{aligned} 
-$$
+\begin{equation} 
+\mu_{people} = \frac{\sum_{i=1}^{N=50000}{X_i}}{N}
+      (\#eq:popmeanchdeep)
+\end{equation}
 
-The variance of the population people's heights (in cm$^2$) is calculated as below (where N = 50,000).
+The variance of a population of 50,000 individuals is calculated using Equation \@ref(eq:popvardeep) below.
 
-$$
-\begin{aligned} 
-\sigma_{people}^2 &= \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}\\
-&= 156.3236\\
-\end{aligned} 
-$$
+\begin{equation} 
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}
+      (\#eq:popvardeep)
+\end{equation}
 
 
 
@@ -54,18 +49,20 @@ Consider a concrete example. When we obtain a sample of people ($n$ = 25) we can
 
 ### Distribution of sample means as a population
 
-Because we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below. Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]
+Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation  \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
+
 
 [^deep_sampling-1]: I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
 
-$$
-\begin{aligned} 
-\mu_{\bar{x}} &= \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}\\
-&= 172.50\\
-\end{aligned} 
-$$
+\begin{equation} 
+\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}
+      (\#eq:popmeanxbardeep)
+\end{equation} 
 
-The mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that of the people's heights, $\mu_{people}$. Consequently, any conclusions we make about *population means* based on Figure 1B (i.e., $\mu_{\bar{x}}$) will also apply to Figure 1A (i.e., $\mu_{people}$). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., $\mu_{\bar{x}}$).
+
+Using Equation \@ref(eq:popmeanxbardeep) we find that the mean of the sample means is 172.50 cm (i.e., $\mu_{\bar{x}} = 172.50$). 
+
+A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that of the people's heights, $\mu_{people}$. Consequently, any conclusions we make about *population means* based on Figure 1B (i.e., $\mu_{\bar{x}}$) will also apply to Figure 1A (i.e., $\mu_{people}$). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., $\mu_{\bar{x}}$).
 
 
 ##  Sample mean distribution variance
@@ -283,8 +280,12 @@ s_{people}^2 &= MSE_{people}\\
 \end{aligned}
 $$
 
-We use different names to refer to the resulting variance number - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statistician use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
+The number we just calculated,  $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure 1A. You could think of this number as an average variance estimate.
+
+We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 25 people (i.e., 24 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).
+
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure 1A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
 
 #### Estimating $\sigma_{\bar{x}}^2$ with CLT
