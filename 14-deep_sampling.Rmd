@@ -130,15 +130,80 @@ In this section, we focused on actually **calculating** the variance of the dist
 
 In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on **estimating** the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.
 
+
+
+
+```{r, include=FALSE}
+# Set up sample information for rest of chapter
+set.seed(20210901)
+pop_sd = sqrt(156.3236)
+pop_mean = 172.50
+
+n_sample <- 5 #don't use n it's a reserved variable name for this package
+
+sample_data <- round(rnorm(n_sample)*pop_sd+pop_mean)
+sample_mean <- round(mean(sample_data),1)
+sample_var <- var(sample_data)*(n_sample-1)/(n_sample)
+est_pop_var <- round(var(sample_data),1)
+df <-  n_sample-1
+barx <- sample_mean
+x1 <- sample_data[1]
+x2 <- sample_data[2]
+x3 <- sample_data[3]
+x4 <- sample_data[4]
+x5 <- sample_data[5]
+sumx2 <- sum((sample_data-mean(sample_mean))^2)
+
+
+
+sample_data2 <- round(rnorm(n_sample)*pop_sd+pop_mean)
+sample_mean2 <- round(mean(sample_data2),1)
+sample_var2 <- var(sample_data2)*(n_sample-1)/(n_sample)
+est_pop_var2 <- round(var(sample_data2),1)
+df2 <-  n_sample-1
+barxb <- sample_mean2
+x1b <- sample_data2[1]
+x2b <- sample_data2[2]
+x3b <- sample_data2[3]
+x4b <- sample_data2[4]
+x5b <- sample_data2[5]
+sumx2b <- sum((sample_data2-mean(sample_mean2))^2)
+
+
+
+
+sample_data3 <- round(rnorm(n_sample)*pop_sd+pop_mean)
+sample_mean3 <- round(mean(sample_data3),1)
+sample_var3 <- var(sample_data3)*(n_sample-1)/(n_sample)
+est_pop_var3 <- round(var(sample_data3),1)
+df3 <-  n_sample-1
+barxc <- sample_mean3
+x1c <- sample_data3[1]
+x2c <- sample_data3[2]
+x3c <- sample_data3[3]
+x4c <- sample_data3[4]
+x5c <- sample_data3[5]
+sumx2c <- sum((sample_data3-mean(sample_mean3))^2)
+
+dfpooled <- df+df2 + df3
+est_pop_var_pooled <- (est_pop_var+est_pop_var2+est_pop_var3)/3
+
+a <- 3
+xbarbar <- round((barx+barxb+barxc), 3)
+xbar_vector <- c(barx, barxb, barxc)
+method1_var <- round(var(xbar_vector),3)
+
+```
+
 ## Estimating sample mean distribution variance
 
 In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each $n$ = 25) from the population of people illustrated in Figure 1A. The statistics for those three sample are presented below.
 
 | Sample Number | Mean ($\frac{\Sigma x_i}{n}$) | Variance ($\frac{\Sigma (x_i - \bar{x})^2}{n-1}$) |
-|:-------------:|:-----------------------------:|:-------------------------------------------------:|
-| 1             | x                             | xx                                                |
-| 2             | x                             | xx                                                |
-| 3             | x                             | xx                                                |
+|:-------------:|:-----------------------------:|:------------------------------------------------:|
+| 1             | `r sample_mean`      | `r est_pop_var`                         |
+| 1             | `r sample_mean2`     | `r est_pop_var2`                        |
+| 1             | `r sample_mean3`     | `r est_pop_var3`                        |
 
 
 ### Method 1: Estimation using sample means
@@ -159,21 +224,25 @@ $$
 \begin{aligned} 
 \bar{\bar{x}} &= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
 &= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{a}\\
-&= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{3}\\
+&= \frac{`r barx` + `r barxb`  + `r barxc` }{`r a`}\\
+&= `r xbarbar`
 \end{aligned} 
 $$
 
+
 Second, we estimate the variance of the population of sample means ($s_{\bar{x}}^2$, see Figure 1B) using the set of sample means. Notice the use of "-1" in the denominator - [which we discussed previously in the sample accuracy chapter](https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2). The use of the "-1" in the denominator means we are not calculating the variance of these three sample means. Rather, when we use "-1" in the denominator we are **estimating** the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure 1B).
+
 
 $$
 \begin{aligned} 
 s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 &= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{a-1}\\
-&= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{3-1}\\
+&= \frac{(`r (barx)` - `r (xbarbar)`)^2+(`r (barxb)`  - `r (xbarbar)`)^2+(`r (barxc)` - `r (xbarbar)`)^2}{3-1}\\
+&= `r method1_var`
 \end{aligned} 
 $$
 
-Thus, using Method 1: Sample Means, our estimate of the variance of the distribution of sample means is XXX.
+Thus, the variance of the distribution of sample means ($\sigma_{\bar{x}}^2$) is estimated, using Method 1, to be  $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an estimate of the population value.
 
 ### Method 2: Estimation using CLT shortcut
 
