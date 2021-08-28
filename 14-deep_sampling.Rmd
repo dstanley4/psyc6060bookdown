@@ -303,7 +303,7 @@ s_{people}^2 &= MSE_{people}\\
 &= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
 &= \frac{`r est_pop_var` + `r est_pop_var2` + `r est_pop_var3` }{3} \\
 &= \frac{660.7}{3} \\
-&= `r est_mean_var_clt` \\
+&= `r est_pop_var_pooled` \\
 \end{aligned}
 $$
 
@@ -317,15 +317,25 @@ We use different names to refer to the resulting average variance estimate - we 
 
 #### Estimating $\sigma_{\bar{x}}^2$ with CLT
 
-Armed with the estimate of the variance of the people in the population ($s_{people}^2$) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means.
+Armed with the estimate of the variance of the people in the population ($s_{people}^2$) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means using Equation \@ref(eq:estpopvarmeansclt) below.
+
+\begin{equation} 
+s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
+      (\#eq:estpopvarmeansclt)
+\end{equation} 
+
+
+Putting in values:
 
 $$
 \begin{aligned} 
 s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
+&= \frac{`r est_pop_var_pooled` }{5}\\
+&= `r est_mean_var_clt`
 \end{aligned} 
 $$
 
-Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is XXX. 
+Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is $s_{\bar{x}}^2 =  `r est_mean_var_clt`$. 
 
 ### Ratio comparison of two methods
 
@@ -351,12 +361,6 @@ Show ratio with formulas and numbers
 | Sample Means |  Method 1: Variance| $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}$ |  $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$ |
 | Sample Means |  Method 2 CLT: Variance| $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$ |  $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$ |
 | Sample Means |  Method 2 CLT: Standard Error| $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |  $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$ |
-
-
-
-
-Add CLT versions to above table
-
 
 
 
