@@ -137,6 +137,7 @@ Thus, far we have calculated the variance of the distribution of sample means us
 
 Although we can just look at the numbers resulting from these two methods and compare them, that's not how statisticians typically handle such comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00. If the ratio is larger than 1.00 it means the number on the top was bigger than the number on the bottom.
 
+\
 
 $$
 \begin{aligned} 
@@ -346,15 +347,12 @@ The table below summarizes our work so far.
 |  Method 1: Variance| $\sigma_{\bar{x}}^2 =31.26472$ |  $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ |
 |  Method 2 CLT: Variance| $\sigma_{\bar{x}}^2 =31.26472$ |  $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$ |
 
-We are interested in the variance of the distribute of sample mean (Figure 1B). If we were all knowning we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowning cap" on we can see that both estimates produce values that differ from the actual variance of the distribution. That's because the best we can from sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample mean.
+You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from "the truth" (31.26472) due to sampling error. Consquently, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
 
-Each variance estimate (Method 1 or Method 2) will likely differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472. 
+\
 
-Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to estimate the variance of the distribution of sample means. Because we used such a small subset of people ($n = 15$, 5 from each sample) to estimate the variance of the distribution of people ($N = 50000$) our estimate of the variance of sample means will differ from 31.26472.
 
-So we need to accept the fact that best we can do is to estimate the variance of the distribution of sample mean. Regardless of the method used (Method 1 or 2) our estimate of that variance will differ from "the truth" due to sampling error. But - that's ok.
 
-What? Why is that ok? It's ok because we know 
 
 
 $$
@@ -366,16 +364,10 @@ $$
 \end{aligned} 
 $$
 
+We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on $n =5$).
 
-We revisit the ratio comparison methods and see that we are using estimates that the
 
-But on average it will be one.
 
-See this simulation with 6 cols (m/var est), 2 col (both calcs), 1 col ratio.
-
-When everything comes from 1 population on average.....
-
-Show ratio with formulas and numbers
 
 
 ## Summary table
@@ -397,3 +389,13 @@ Show ratio with formulas and numbers
 -   Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize
 -   think of var/n as representing the variability in sample means due to random sampling
 -   the findings we illustrate here only hold when there is only one population the sample means come from that one population.
+
+
+
+We are interested in the variance of the distribute of sample means (Figure 1B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. 
+
+We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample means.
+
+Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error. 
+
+Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 50000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.
