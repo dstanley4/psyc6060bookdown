@@ -339,6 +339,34 @@ Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribu
 
 ### Ratio comparison of two methods
 
+The table below summarizes our work so far.
+
+| Attribute | Unknown  Parameter |  Estimate of Parameter |  
+|:-------------------:|:----------------------:|:----------------------:|
+|  Method 1: Variance| $\sigma_{\bar{x}}^2 =31.26472$ |  $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ |
+|  Method 2 CLT: Variance| $\sigma_{\bar{x}}^2 =31.26472$ |  $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$ |
+
+We are interested in the variance of the distribute of sample mean (Figure 1B). If we were all knowning we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowning cap" on we can see that both estimates produce values that differ from the actual variance of the distribution. That's because the best we can from sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample mean.
+
+Each variance estimate (Method 1 or Method 2) will likely differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472. 
+
+Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to estimate the variance of the distribution of sample means. Because we used such a small subset of people ($n = 15$, 5 from each sample) to estimate the variance of the distribution of people ($N = 50000$) our estimate of the variance of sample means will differ from 31.26472.
+
+So we need to accept the fact that best we can do is to estimate the variance of the distribution of sample mean. Regardless of the method used (Method 1 or 2) our estimate of that variance will differ from "the truth" due to sampling error. But - that's ok.
+
+What? Why is that ok? It's ok because we know 
+
+
+$$
+\begin{aligned} 
+\text{ratio comparing methods} &= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
+&=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&=\frac{`r method1_var`}{`r est_mean_var_clt`}\\
+&= `r method1_var/est_mean_var_clt`\\
+\end{aligned} 
+$$
+
+
 We revisit the ratio comparison methods and see that we are using estimates that the
 
 But on average it will be one.

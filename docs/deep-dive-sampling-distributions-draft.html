@@ -33,15 +33,15 @@
   
 <link rel="prev" href="positive-predictive-value.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -51,10 +51,81 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/plotly-binding/plotly.js"></script>
+<script src="libs/typedarray/typedarray.min.js"></script>
+<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main/plotly-latest.min.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
@@ -739,7 +810,7 @@ div.csl-indent {
       \tag{14.5}
 \end{equation}\]</span></p>
 <p>An inspection of Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure 1B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure 1B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
-<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
+<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">W. L. Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
 <p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
 <p>Previously, we learned that the variance of the distribution of people in Figure 1A is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>. Consequently, we can use Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate the variance of the distribution of sample means in Figure 1B:</p>
 <p><span class="math display">\[
@@ -860,7 +931,7 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{(5-1)168 + (5-1)146.7 +(5-1)346}{(5-1) + (5-1) + (5-1)} \\
 &amp;= \frac{672 + 586.8 + 1384}{15 -3} \\
 &amp;= \frac{2642.8}{12} \\
-&amp;= 220.2333333 \\
+&amp;= 220.2333 \\
 \end{aligned}
 \]</span></p>
 <p>When the three sample sizes are the same the above formula just boils down to an average:</p>
@@ -870,11 +941,11 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
 &amp;= \frac{168 + 146.7 + 346 }{3} \\
 &amp;= \frac{660.7}{3} \\
-&amp;= 220.2333333 \\
+&amp;= 220.2333 \\
 \end{aligned}
 \]</span></p>
-<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333333\)</span>, is an estimate of the variance of the population of people illustrated in Figure 1A. You could think of this number as an average variance estimate.</p>
-<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333333\)</span>) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).</p>
+<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333\)</span>, is an estimate of the variance of the population of people illustrated in Figure 1A. You could think of this number as an average variance estimate.</p>
+<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333\)</span>) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).</p>
 <p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure 1A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
 </div>
 <div id="estimating-sigma_barx2-with-clt" class="section level4" number="14.6.2.2">
@@ -888,15 +959,55 @@ s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
-&amp;= \frac{220.2333333 }{5}\\
-&amp;= 44.0466667
+&amp;= \frac{220.2333 }{5}\\
+&amp;= 44.0467
 \end{aligned} 
 \]</span></p>
-<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0466667\)</span>.</p>
+<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0467\)</span>.</p>
 </div>
 </div>
 <div id="ratio-comparison-of-two-methods-1" class="section level3" number="14.6.3">
 <h3><span class="header-section-number">14.6.3</span> Ratio comparison of two methods</h3>
+<p>The table below summarizes our work so far.</p>
+<table>
+<colgroup>
+<col width="30%" />
+<col width="34%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Attribute</th>
+<th align="center">Unknown Parameter</th>
+<th align="center">Estimate of Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Method 1: Variance</td>
+<td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
+<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Method 2 CLT: Variance</td>
+<td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
+<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>We are interested in the variance of the distribute of sample mean (Figure 1B). If we were all knowning we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. We used two different approaches to estimating the variance of the distribution of sample means. With our “all knowning cap” on we can see that both estimates produce values that differ from the actual variance of the distribution. That’s because the best we can from sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample mean.</p>
+<p>Each variance estimate (Method 1 or Method 2) will likely differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means (<span class="math inline">\(a=3\)</span>) to estimate the variance of an infinite set of sample means (<span class="math inline">\(A = \infty\)</span>). Because we used such a small subset of sample means (3 of <span class="math inline">\(\infty\)</span>) our estimate will differ from 31.26472.</p>
+<p>Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>) to estimate the variance of the distribution of sample means. Because we used such a small subset of people (<span class="math inline">\(n = 15\)</span>, 5 from each sample) to estimate the variance of the distribution of people (<span class="math inline">\(N = 50000\)</span>) our estimate of the variance of sample means will differ from 31.26472.</p>
+<p>So we need to accept the fact that best we can do is to estimate the variance of the distribution of sample mean. Regardless of the method used (Method 1 or 2) our estimate of that variance will differ from “the truth” due to sampling error. But - that’s ok.</p>
+<p>What? Why is that ok? It’s ok because we know</p>
+<p><span class="math display">\[
+\begin{aligned} 
+\text{ratio comparing methods} &amp;= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
+&amp;=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&amp;=\frac{79.213}{44.0467}\\
+&amp;= 1.7984\\
+\end{aligned} 
+\]</span></p>
 <p>We revisit the ratio comparison methods and see that we are using estimates that the</p>
 <p>But on average it will be one.</p>
 <p>See this simulation with 6 cols (m/var est), 2 col (both calcs), 1 col ratio.</p>
@@ -999,15 +1110,15 @@ Hays, William L. 1994. <em>Statistics (5th Edn)</em>. Holt, Rinehart &amp; Winst
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
