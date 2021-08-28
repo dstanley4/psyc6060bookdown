@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 An Emphasis on Workflow | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 An Emphasis on Workflow | Welcome!" />
   <meta property="og:type" content="book" />
@@ -34,7 +34,7 @@
 <link rel="prev" href="sampling-precision.html"/>
 <link rel="next" href="qualtrics.html"/>
 <script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -377,8 +377,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#data-collection-considerations"><i class="fa fa-check"></i><b>7.4</b> Data collection considerations</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#naming-conventions"><i class="fa fa-check"></i><b>7.4.1</b> Naming conventions</a></li>
-<li class="chapter" data-level="7.4.2" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#likert-type-items"><i class="fa fa-check"></i><b>7.4.2</b> Likert-type items</a></li>
+<li class="chapter" data-level="7.4.1" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#file-naming-conventions"><i class="fa fa-check"></i><b>7.4.1</b> File naming conventions</a></li>
+<li class="chapter" data-level="7.4.2" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#data-column-naming-conventions"><i class="fa fa-check"></i><b>7.4.2</b> Data column naming conventions</a></li>
+<li class="chapter" data-level="7.4.3" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#likert-type-items"><i class="fa fa-check"></i><b>7.4.3</b> Likert-type items</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="an-emphasis-on-workflow.html"><a href="an-emphasis-on-workflow.html#example-single-occassion-survey"><i class="fa fa-check"></i><b>7.5</b> Example: Single Occassion Survey</a>
 <ul>
@@ -739,7 +740,7 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 7</span> An Emphasis on Workflow</h1>
 <div id="required-packages" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Required Packages</h2>
-<p>The data files below are used in this chapter. The files are available at: <a href="https://github.com/dstanley4/psyc6060bookdown" class="uri">https://github.com/dstanley4/psyc6060bookdown</a></p>
+<p>The data files below are used in this chapter.</p>
 <table>
 <thead>
 <tr class="header">
@@ -795,7 +796,7 @@ div.csl-indent {
 <p>It may seem that reproducibility should be a given - but it’s not. Correspondingly, there is a trend for journals and authors to adopt Transparency and Openness Promotion (TOP) <a href="https://www.cos.io/our-services/top-guidelines">guidelines</a>. These guidelines involve such things as making your materials, data, code, and analysis scripts available on public repositories so anyone can check your data. A new open science journal rating system has even emerged called the <a href="https://topfactor.org">TOP Factor</a>.</p>
 <p>The idea is not that open science articles are more trustworthy than other types of articles – the idea is that trust doesn’t play a role. Anyone can inspect the data using the scripts and data provided by authors. It’s really just the same as making your science available for auditing the way financial records can be audited. But just like in the world of business, some people don’t like the idea of making it possible for others to audit their work. The problems reported in Molecular Brain (doubtless common to many journals) are likely avoided with open science - because the data and scripts needed to reproduce the statistics in the articles are uploaded prior to publication.</p>
 <p>The TOP open science guidelines have made an impact and some newer journals, such as Meta Psychology, have fully embraced open science. Figure <a href="an-emphasis-on-workflow.html#fig:metapsychology">7.1</a> shows the header from an <a href="https://open.lnu.se/index.php/metapsychology/article/view/1630/2266">article</a> in Meta Psychology that clearly delineates the open science attributes of the article that used computer simulations (instead of participant data). Take note that the header even indicates who verified that the analyses in the article were reproducible.</p>
-<div class="figure"><span id="fig:metapsychology"></span>
+<div class="figure"><span style="display:block;" id="fig:metapsychology"></span>
 <img src="ch_enter_load/images/screenshot_metapsychology.png" alt="Open science in an article header" width="100%" />
 <p class="caption">
 FIGURE 7.1: Open science in an article header
@@ -816,7 +817,7 @@ FIGURE 7.1: Open science in an article header
 <h2><span class="header-section-number">7.3</span> Begin with the end in mind</h2>
 <p>In this chapter we will walk you though the steps from data collection, data entry, loading raw data, and the creation of data you will analyze (analytic data) via pre-processing scripts. These steps are outlined in Figure <a href="an-emphasis-on-workflow.html#fig:pipeline">7.2</a>. This figure makes a clear distinction between raw data and analytic data. Raw data refers to the data as you entered it into a spreadsheet or received it from survey software. Analytic data is the data that has been structured and processed so that it is ready for analysis. This pre-processing could include such things as identifying categorical variables to the computer, averaging multiple items into a scale score, and other tasks.</p>
 <p>It’s critical that you don’t think of the analysis of your data as being completely removed from the data collection and data entry choices you make. Poor choices at the data collection and data entry stage can make your life substantially more complicated when it comes time to write the pre-processing script that will convert your raw data to analytic data. The mantra of this chapter is <em>begin with the end in mind</em>.</p>
-<div class="figure"><span id="fig:pipeline"></span>
+<div class="figure"><span style="display:block;" id="fig:pipeline"></span>
 <img src="ch_enter_load/images/pipeline.png" alt="Data science pipeline by Roger Peng" width="85%" />
 <p class="caption">
 FIGURE 7.2: Data science pipeline by Roger Peng
@@ -1094,12 +1095,16 @@ FIGURE 7.2: Data science pipeline by Roger Peng
 <p>Data can be collected in a wide variety of ways. Regardless of the method of data collection researchers typically come to data in one of two ways: 1) a research assistant enters the data into a spreadsheet type interface, or 2) the data is obtained as the output from computer software (e.g., Qualtrics, SurveyMonkey, Noldus, etc.).</p>
 <p>Regardless of the approach, it is critical to name your variables appropriately. For those using software, such as Qualtrics, this means setting up the software to use appropriate variable names PRIOR to data collection - so the exported file has desirable column names. For spreadsheet users, this means setting up the spreadsheet in which the data will be recorded with column names that are amenable to the future analyses you want to conduct.</p>
 <p>Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to follow the naming conventions we espouse here when you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.</p>
-<div id="naming-conventions" class="section level3" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> Naming conventions</h3>
+<div id="file-naming-conventions" class="section level3" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> File naming conventions</h3>
+<p>I <strong>strongly</strong> suggest you check out these excellent <a href="https://slides.djnavarro.net/project-structure/#1">slides</a> by Danielle Navarro on file name convention best practices.</p>
+</div>
+<div id="data-column-naming-conventions" class="section level3" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Data column naming conventions</h3>
 <p>To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that it uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse <a href="https://style.tidyverse.org">style guide</a>.</p>
 <ul>
 <li><p>Lowercase letters only</p></li>
-<li><p>If two word column names are necessary, only use the underscore ("_") character to separate words in the name.</p></li>
+<li><p>If using multiple words in a name (a good idea), only use the underscore ("_") character to separate words in the name.</p></li>
 <li><p>Avoid short decontextualized variable names like q1, q2, q3, etc.</p></li>
 <li><p>Do use moderate length column names. Aim to achieve a unique prefix for related columns so that those columns can be selected using the starts_with() command discussed in the previous chapter. Be sure to avoid short two or three letter prefixes for item names. Instead, use unique moderate length item prefixes so that it will easy to select those columns using start_with() such that you don’t accidentally get additionally columns you don’t want - that have a similar prefix.</p></li>
 <li><p>Likert items. Be sure to indicate the following information in the name of each Likert item or you will make your life substantially more complicated when you start to analyze your data. The information to include: a) the name of the measure, b) the item number for the measure, c) that it is a Likert item, d) the number of Likert response options, and e) whether the item is reverse keyed. That’s five things to include in each Likert item name. But it’s easy to do so. Consider two “affective commitment” items, the 2nd and 3rd items on scale. Both items use a 5-point Likert response format. However, item 3 is reverse keyed. <strong>Names that conform to this convention are: aff_com3_likert5, aff_com3_likert5rev.</strong> Using this naming convention ensures you can easily select and convert the items later. You can select by “likert5,” “likert5rev” or select by “aff_com.”</p></li>
@@ -1107,8 +1112,8 @@ FIGURE 7.2: Data science pipeline by Roger Peng
 <li><p>Column content. Avoid numerical representation of categorical variables. Don’t use 1 or 2 to represent a variable like sex. Use male and female in your spreadsheet - likewise in your survey program. Similarly, for between participant variables like drug_condition don’t use 1 or 2 use “drug” and “placebo” but the actually drug name would be even better than the word “drug.” Following this approach ensure the data can “stand alone” for resuse by others (especially if a data codebook (<a href="https://ces-eec.sites.olt.ubc.ca/files/2017/04/CES2015_Combined_Data_Codebook.pdf">example</a>) is not provided.) Note you will covert categorical variables such as sex (male/female) to numeric representations in your script - but then it will be clear what each value means.</p></li>
 </ul>
 </div>
-<div id="likert-type-items" class="section level3" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> Likert-type items</h3>
+<div id="likert-type-items" class="section level3" number="7.4.3">
+<h3><span class="header-section-number">7.4.3</span> Likert-type items</h3>
 <p>A Likert-type item is typically composed of a statement with which participants are asked to agree or disagree. For example, participants could be asked to indicate the extent to which they agree with a number of statements such as “I like my job.” Then they would be presented with response scale such as: 1 - Strongly Disagree, 2 - Moderately Disagree, 3 - Neutral, 4, Moderately Agree, 5 - Strongly Agree. A common question is, how should I enter the data?</p>
 <p><strong>Export text responses not numbers</strong> Software such as Qualtrics gives you the option of exporting the label (e.g., “Strongly Agree”) or a value (e.g., 1). Make sure you export the text lable ("Strongly Agree). That way, the data file stands alone - and doesn’t require additional knowledge to know what 1 means. You can easily convert the labels to numbers later.</p>
 <ul>
@@ -1554,6 +1559,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
