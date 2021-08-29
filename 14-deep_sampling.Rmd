@@ -12,19 +12,19 @@ In this chapter, we focus on describing the sampling distribution of the mean. O
 
 ## A student population
 
-Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 50,000 people the mean is $\mu_{people}=172.50$ and the variance is $\sigma_{people}^2=156.3236$. 
+Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure \@ref(fig:chdeepfigure1)A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 100,000 people the mean is $\mu_{people}=172.50$ and the variance is $\sigma_{people}^2=156.3236$. 
 
-The mean of a population of 50,000 individuals is calculated using Equation \@ref(eq:popmeanchdeep) below.
+The mean of a population of 100,000 individuals is calculated using Equation \@ref(eq:popmeanchdeep) below.
 
 \begin{equation} 
-\mu_{people} = \frac{\sum_{i=1}^{N=50000}{X_i}}{N}
+\mu_{people} = \frac{\sum_{i=1}^{N=100000}{X_i}}{N}
       (\#eq:popmeanchdeep)
 \end{equation}
 
-The variance of a population of 50,000 individuals is calculated using Equation \@ref(eq:popvardeep) below.
+The variance of a population of 100,000 individuals is calculated using Equation \@ref(eq:popvardeep) below.
 
 \begin{equation} 
-\sigma_{people}^2 = \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \bar{X})^2}}{N}
       (\#eq:popvardeep)
 \end{equation}
 
@@ -33,19 +33,23 @@ The variance of a population of 50,000 individuals is calculated using Equation 
 
 ## Random sampling process
 
-Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of $n$ = 5 students and calculated a sample mean ($\bar{x}$). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an **infinite number of sample means** is conceptually illustrated in Figure 1B and we refer to it as the *sampling distribution of the mean*. Moreover, **because we sampled from a single population** the variability in sample means is due only to the **random sampling error** that occurs when the sample size is 5 ($n = 5$) and the population variance is 156.3236 (i.e., $\sigma_{people}^2 =156.3236$).
+Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the population of people (see Figure \@ref(fig:chdeepfigure1)). Indeed, imagine that we obtained a sample of $n$ = 5 students and calculated a sample mean ($\bar{x}$). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an **infinite number of sample means** is conceptually illustrated in Figure \@ref(fig:chdeepfigure1)B and we refer to it as the *sampling distribution of the mean*. Moreover, **because we sampled from a single population** the variability in sample means is due only to the **random sampling error** that occurs when the sample size is 5 ($n = 5$) and the population variance is 156.3236 (i.e., $\sigma_{people}^2 =156.3236$).
 
-[Figure 1A and 1B goes here]
+\
+
+```{r chdeepfigure1, echo=FALSE, out.width="60%", fig.cap="The distributions of people and the sample means can both be considered populations."}
+knitr::include_graphics("ch_deep_sampling/images/figure1.png")
+```
 
 ## Population: What's in a name
 
-Typically, in psychology, when we use the word "population" we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to **also** thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).
+Typically, in psychology, when we use the word "population" we are referring to a population of people - such as those illustrated in Figure \@ref(fig:chdeepfigure1)A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure \@ref(fig:chdeepfigure1)A as a population to **also** thinking of the distribution of sample mean in Figure \@ref(fig:chdeepfigure1)B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).
 
 ### Sample means in context
 
-Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word "population". Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure 1A), we use $N$ to indicate the number people in the population and $n$ to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure 1B), we use $A$ to indicate the number sample means in the population and $a$ to refer to the number of sample means in a subset of the population.
+Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word "population". Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure \@ref(fig:chdeepfigure1)A), we use $N$ to indicate the number people in the population and $n$ to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure \@ref(fig:chdeepfigure1)B), we use $A$ to indicate the number sample means in the population and $a$ to refer to the number of sample means in a subset of the population.
 
-Consider a concrete example. When we obtain a sample of people ($n$ = 5) we can think those people as being subset of the population of people ($N$=50,000), see Figure 1A. If we calculate a sample mean ($\bar{x}$) based on those 5 people we can think of that single sample mean ($a$ = 1) a being subset of a population of sample means ($A = \infty$), see Figure 1B. Alternatively, imagine we obtained three samples from the population of people, Figure 1A, each composed of 5 people ($n$ = 5 for each sample). Then we calculated the sample mean ($\bar{x}$) for each of the three samples. We could think of those three sample means ($a$ = 3) as being a subset of a population of sample means ($A = \infty$), see Figure 1B.
+Consider a concrete example. When we obtain a sample of people ($n$ = 5) we can think those people as being subset of the population of people ($N$=100,000), see Figure \@ref(fig:chdeepfigure1)A. If we calculate a sample mean ($\bar{x}$) based on those 5 people we can think of that single sample mean ($a$ = 1) a being subset of a population of sample means ($A = \infty$), see Figure \@ref(fig:chdeepfigure1)B. Alternatively, imagine we obtained three samples from the population of people, Figure \@ref(fig:chdeepfigure1)A, each composed of 5 people ($n$ = 5 for each sample). Then we calculated the sample mean ($\bar{x}$) for each of the three samples. We could think of those three sample means ($a$ = 3) as being a subset of a population of sample means ($A = \infty$), see Figure \@ref(fig:chdeepfigure1)B.
 
 ### Distribution of sample means as a population
 
@@ -62,12 +66,12 @@ Because we are thinking of the distribution of sample means as a population we c
 
 Using Equation \@ref(eq:popmeanxbardeep) we find that the mean of the sample means is 172.50 cm (i.e., $\mu_{\bar{x}} = 172.50$). 
 
-A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that of the people's heights, $\mu_{people}$. Consequently, any conclusions we make about *population means* based on Figure 1B (i.e., $\mu_{\bar{x}}$) will also apply to Figure 1A (i.e., $\mu_{people}$). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., $\mu_{\bar{x}}$).
+A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that of the people's heights, $\mu_{people}$. Consequently, any conclusions we make about *population means* based on Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$) will also apply to Figure \@ref(fig:chdeepfigure1)A (i.e., $\mu_{people}$). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$).
 
 
 ##  Sample mean distribution variance
 
-When there is *one* **population of people** (see Figure 1A) there is a single distribution of sample means that corresponds to that population (see Figure 1B). There are two methods for calculating the variance of this distribution of sample means.
+When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). There are two methods for calculating the variance of this distribution of sample means.
 
 ### Method 1: Calculate the variance of infinite sample means
 
@@ -78,7 +82,7 @@ In this first method, we use an infinite number of sample means and simply calcu
       (\#eq:popvarxbardeep)
 \end{equation} 
 
-Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure 1B, is similar to the formula we use the variance of people, Equation \@ref(eq:popvardeep), in Figure 1A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using on sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$. 
+Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using on sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$. 
 
 
 Obviously, using Equation \@ref(eq:popvarxbardeep) to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
@@ -94,13 +98,13 @@ $$
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure 1B) is **calculated**, based an infinite number of sample means ($A = \infty$) using Method 1, to be $\sigma_{\bar{x}}^2 = 31.26472$. 
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, based an infinite number of sample means ($A = \infty$) using Method 1, to be $\sigma_{\bar{x}}^2 = 31.26472$. 
 
 **When there is only one population of people** this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We'll discuss that situation in a future chapter.
 
 ### Method 2: CLT shortcut: *Calculation* of variance of infinite sample means
 
-Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure 1B. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT), see Equation \@ref(eq:popvarCLTxbardeep) below.
+Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure \@ref(fig:chdeepfigure1)B. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT), see Equation \@ref(eq:popvarCLTxbardeep) below.
 
 
 \begin{equation} 
@@ -109,13 +113,13 @@ Fortunately we don't need to obtain an infinite number of sample means to determ
 \end{equation} 
 
 
-An inspection of Equation \@ref(eq:popvarCLTxbardeep) reveals the variance of the distribution of sample means (see Figure 1B) depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population (see Figure 1B, $\sigma_{people}^2$). 
+An inspection of Equation \@ref(eq:popvarCLTxbardeep) reveals the variance of the distribution of sample means (see Figure \@ref(fig:chdeepfigure1)B) depends on both the number of people in each sample ($n$) and the variability in the people's heights in the population (see Figure \@ref(fig:chdeepfigure1)B, $\sigma_{people}^2$). 
  
 The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you [consult](https://archive.org/details/statisticsfifthe00will) [@hays1994statistics] who provides a statistical proof for the Central Limit Theorem.
 
 It's helpful, moving forward to, think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the *variability in means due to random sampling*. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.
 
-Previously, we learned that the variance of the distribution of people in Figure 1A is $\sigma_{people}^2=156.3236$. Consequently, we can use Equation \@ref(eq:popvarCLTxbardeep) to calculate the variance of the distribution of sample means in Figure 1B:
+Previously, we learned that the variance of the distribution of people in Figure \@ref(fig:chdeepfigure1)A is $\sigma_{people}^2=156.3236$. Consequently, we can use Equation \@ref(eq:popvarCLTxbardeep) to calculate the variance of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B:
 
 $$
 \begin{aligned} 
@@ -125,7 +129,7 @@ $$
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure 1B) is **calculated**, using Method 2 the CLT shortcut, to be $\sigma_{\bar{x}}^2 = 31.26472$. 
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, using Method 2 the CLT shortcut, to be $\sigma_{\bar{x}}^2 = 31.26472$. 
 
 ### Ratio comparison of two methods
 
@@ -221,7 +225,7 @@ est_mean_var_clt <- est_pop_var_pooled/n_sample
 
 ## Estimating sample mean distribution variance
 
-In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each $n$ = 5) from the population of people illustrated in Figure 1A. The statistics for those three sample are presented below.
+In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each $n$ = 5) from the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. The statistics for those three sample are presented below.
 
 | Sample Number | Sample size ($n$) | Mean ($\bar{x} = \frac{\Sigma x_i}{n}$) | Variance ($s^2=\frac{\Sigma (x_i - \bar{x})^2}{n-1}$) |
 |:-------------:|:-----:|:-----------------------------:|:------------------------------------------------:|
@@ -239,7 +243,7 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
       (\#eq:estpopvarxbardeep)
 \end{equation} 
 
-In this example (see table above), we have 3 sample means (each based on n = 5) so $a = 3$. Let's estimate the variance of the distribution of sample means (Figure 1B) using these three sample means.
+In this example (see table above), we have 3 sample means (each based on n = 5) so $a = 3$. Let's estimate the variance of the distribution of sample means (Figure \@ref(fig:chdeepfigure1)B) using these three sample means.
 
 First, we calculate the mean of the three sample means ($\bar{\bar{x}}$) because we will need that in the variance formula.
 
@@ -253,7 +257,7 @@ $$
 $$
 
 
-Second, we estimate the variance of the population of sample means ($s_{\bar{x}}^2$, see Figure 1B) using the set of sample means. Notice the use of "-1" in the denominator - [which we discussed previously in the sample accuracy chapter](https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2). The use of the "-1" in the denominator means we are not calculating the variance of these three sample means. Rather, when we use "-1" in the denominator we are **estimating** the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure 1B).
+Second, we estimate the variance of the population of sample means ($s_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) using the set of sample means. Notice the use of "-1" in the denominator - [which we discussed previously in the sample accuracy chapter](https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2). The use of the "-1" in the denominator means we are not calculating the variance of these three sample means. Rather, when we use "-1" in the denominator we are **estimating** the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure \@ref(fig:chdeepfigure1)B).
 
 
 $$
@@ -265,7 +269,7 @@ s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure 1B) is **estimated**, based on three sample means ($a = 3$) using Method 1, to be  $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **estimated**, based on three sample means ($a = 3$) using Method 1, to be  $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
 
 
 ### Method 2: CLT shortcut: *Estimation* of variance of infinite sample means
@@ -309,11 +313,11 @@ s_{people}^2 &= MSE_{people}\\
 $$
 
 
-The number we just calculated,  $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure 1A. You could think of this number as an average variance estimate.
+The number we just calculated,  $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. You could think of this number as an average variance estimate.
 
 We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).
 
-We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure 1A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
 
 #### Estimating $\sigma_{\bar{x}}^2$ with CLT
@@ -392,10 +396,10 @@ We can use the R code below to determine the extent to which this ratio will dif
 
 
 
-We are interested in the variance of the distribute of sample means (Figure 1B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. 
+We are interested in the variance of the distribute of sample means (Figure \@ref(fig:chdeepfigure1)B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution. 
 
 We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample means.
 
 Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error. 
 
-Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 50000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.
+Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.

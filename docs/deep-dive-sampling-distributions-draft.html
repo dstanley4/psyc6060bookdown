@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 Deep Dive: Sampling Distributions [DRAFT] | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 Deep Dive: Sampling Distributions [DRAFT] | Welcome!" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-08-28" />
+<meta name="date" content="2021-08-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,7 @@
 <link rel="prev" href="positive-predictive-value.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -673,30 +673,37 @@ div.csl-indent {
 </div>
 <div id="a-student-population" class="section level2" number="14.2">
 <h2><span class="header-section-number">14.2</span> A student population</h2>
-<p>Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm<span class="math inline">\(^2\)</span>. The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 50,000 people the mean is <span class="math inline">\(\mu_{people}=172.50\)</span> and the variance is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>.</p>
-<p>The mean of a population of 50,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanchdeep">(14.1)</a> below.</p>
+<p>Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm<span class="math inline">\(^2\)</span>. The heights of all the university students are illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 100,000 people the mean is <span class="math inline">\(\mu_{people}=172.50\)</span> and the variance is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>.</p>
+<p>The mean of a population of 100,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanchdeep">(14.1)</a> below.</p>
 <p><span class="math display" id="eq:popmeanchdeep">\[\begin{equation} 
-\mu_{people} = \frac{\sum_{i=1}^{N=50000}{X_i}}{N}
+\mu_{people} = \frac{\sum_{i=1}^{N=100000}{X_i}}{N}
       \tag{14.1}
 \end{equation}\]</span></p>
-<p>The variance of a population of 50,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a> below.</p>
+<p>The variance of a population of 100,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a> below.</p>
 <p><span class="math display" id="eq:popvardeep">\[\begin{equation} 
-\sigma_{people}^2 = \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \bar{X})^2}}{N}
       \tag{14.2}
 \end{equation}\]</span></p>
 </div>
 <div id="random-sampling-process" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Random sampling process</h2>
-<p>Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of <span class="math inline">\(n\)</span> = 5 students and calculated a sample mean (<span class="math inline">\(\bar{x}\)</span>). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an <strong>infinite number of sample means</strong> is conceptually illustrated in Figure 1B and we refer to it as the <em>sampling distribution of the mean</em>. Moreover, <strong>because we sampled from a single population</strong> the variability in sample means is due only to the <strong>random sampling error</strong> that occurs when the sample size is 5 (<span class="math inline">\(n = 5\)</span>) and the population variance is 156.3236 (i.e., <span class="math inline">\(\sigma_{people}^2 =156.3236\)</span>).</p>
-<p>[Figure 1A and 1B goes here]</p>
+<p>Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the population of people (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>). Indeed, imagine that we obtained a sample of <span class="math inline">\(n\)</span> = 5 students and calculated a sample mean (<span class="math inline">\(\bar{x}\)</span>). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an <strong>infinite number of sample means</strong> is conceptually illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B and we refer to it as the <em>sampling distribution of the mean</em>. Moreover, <strong>because we sampled from a single population</strong> the variability in sample means is due only to the <strong>random sampling error</strong> that occurs when the sample size is 5 (<span class="math inline">\(n = 5\)</span>) and the population variance is 156.3236 (i.e., <span class="math inline">\(\sigma_{people}^2 =156.3236\)</span>).</p>
+<p><br />
+</p>
+<div class="figure"><span id="fig:chdeepfigure1"></span>
+<img src="ch_deep_sampling/images/figure1.png" alt="The distributions of people and the sample means can both be considered populations." width="60%" />
+<p class="caption">
+FIGURE 14.1: The distributions of people and the sample means can both be considered populations.
+</p>
+</div>
 </div>
 <div id="population-whats-in-a-name" class="section level2" number="14.4">
 <h2><span class="header-section-number">14.4</span> Population: What’s in a name</h2>
-<p>Typically, in psychology, when we use the word “population” we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to <strong>also</strong> thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).</p>
+<p>Typically, in psychology, when we use the word “population” we are referring to a population of people - such as those illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A as a population to <strong>also</strong> thinking of the distribution of sample mean in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).</p>
 <div id="sample-means-in-context" class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Sample means in context</h3>
-<p>Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word “population.” Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure 1A), we use <span class="math inline">\(N\)</span> to indicate the number people in the population and <span class="math inline">\(n\)</span> to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure 1B), we use <span class="math inline">\(A\)</span> to indicate the number sample means in the population and <span class="math inline">\(a\)</span> to refer to the number of sample means in a subset of the population.</p>
-<p>Consider a concrete example. When we obtain a sample of people (<span class="math inline">\(n\)</span> = 5) we can think those people as being subset of the population of people (<span class="math inline">\(N\)</span>=50,000), see Figure 1A. If we calculate a sample mean (<span class="math inline">\(\bar{x}\)</span>) based on those 5 people we can think of that single sample mean (<span class="math inline">\(a\)</span> = 1) a being subset of a population of sample means (<span class="math inline">\(A = \infty\)</span>), see Figure 1B. Alternatively, imagine we obtained three samples from the population of people, Figure 1A, each composed of 5 people (<span class="math inline">\(n\)</span> = 5 for each sample). Then we calculated the sample mean (<span class="math inline">\(\bar{x}\)</span>) for each of the three samples. We could think of those three sample means (<span class="math inline">\(a\)</span> = 3) as being a subset of a population of sample means (<span class="math inline">\(A = \infty\)</span>), see Figure 1B.</p>
+<p>Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word “population.” Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A), we use <span class="math inline">\(N\)</span> to indicate the number people in the population and <span class="math inline">\(n\)</span> to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B), we use <span class="math inline">\(A\)</span> to indicate the number sample means in the population and <span class="math inline">\(a\)</span> to refer to the number of sample means in a subset of the population.</p>
+<p>Consider a concrete example. When we obtain a sample of people (<span class="math inline">\(n\)</span> = 5) we can think those people as being subset of the population of people (<span class="math inline">\(N\)</span>=100,000), see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. If we calculate a sample mean (<span class="math inline">\(\bar{x}\)</span>) based on those 5 people we can think of that single sample mean (<span class="math inline">\(a\)</span> = 1) a being subset of a population of sample means (<span class="math inline">\(A = \infty\)</span>), see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B. Alternatively, imagine we obtained three samples from the population of people, Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A, each composed of 5 people (<span class="math inline">\(n\)</span> = 5 for each sample). Then we calculated the sample mean (<span class="math inline">\(\bar{x}\)</span>) for each of the three samples. We could think of those three sample means (<span class="math inline">\(a\)</span> = 3) as being a subset of a population of sample means (<span class="math inline">\(A = \infty\)</span>), see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B.</p>
 </div>
 <div id="distribution-of-sample-means-as-a-population" class="section level3" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Distribution of sample means as a population</h3>
@@ -706,12 +713,12 @@ div.csl-indent {
       \tag{14.3}
 \end{equation}\]</span></p>
 <p>Using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanxbardeep">(14.3)</a> we find that the mean of the sample means is 172.50 cm (i.e., <span class="math inline">\(\mu_{\bar{x}} = 172.50\)</span>).</p>
-<p>A key point to remember is that the mean of the sample means, <span class="math inline">\(\mu_{\bar{x}}\)</span>, will always be the same as that of the people’s heights, <span class="math inline">\(\mu_{people}\)</span>. Consequently, any conclusions we make about <em>population means</em> based on Figure 1B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>) will also apply to Figure 1A (i.e., <span class="math inline">\(\mu_{people}\)</span>). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., <span class="math inline">\(\mu_{people}\)</span>) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>).</p>
+<p>A key point to remember is that the mean of the sample means, <span class="math inline">\(\mu_{\bar{x}}\)</span>, will always be the same as that of the people’s heights, <span class="math inline">\(\mu_{people}\)</span>. Consequently, any conclusions we make about <em>population means</em> based on Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>) will also apply to Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A (i.e., <span class="math inline">\(\mu_{people}\)</span>). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., <span class="math inline">\(\mu_{people}\)</span>) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>).</p>
 </div>
 </div>
 <div id="sample-mean-distribution-variance" class="section level2" number="14.5">
 <h2><span class="header-section-number">14.5</span> Sample mean distribution variance</h2>
-<p>When there is <em>one</em> <strong>population of people</strong> (see Figure 1A) there is a single distribution of sample means that corresponds to that population (see Figure 1B). There are two methods for calculating the variance of this distribution of sample means.</p>
+<p>When there is <em>one</em> <strong>population of people</strong> (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A) there is a single distribution of sample means that corresponds to that population (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B). There are two methods for calculating the variance of this distribution of sample means.</p>
 <div id="method-1-calculate-the-variance-of-infinite-sample-means" class="section level3" number="14.5.1">
 <h3><span class="header-section-number">14.5.1</span> Method 1: Calculate the variance of infinite sample means</h3>
 <p>In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> below.</p>
@@ -719,7 +726,7 @@ div.csl-indent {
 \sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}
       \tag{14.4}
 \end{equation}\]</span></p>
-<p>Notice how Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> for the variance of sample means in Figure 1B, is similar to the formula we use the variance of people, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a>, in Figure 1A. The formula for the variance of sample means, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a>, differs because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we use <span class="math inline">\(A\)</span> to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than <span class="math inline">\(N\)</span>.</p>
+<p>Notice how Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> for the variance of sample means in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B, is similar to the formula we use the variance of people, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a>, in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. The formula for the variance of sample means, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a>, differs because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we use <span class="math inline">\(A\)</span> to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than <span class="math inline">\(N\)</span>.</p>
 <p>Obviously, using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it’s good to keep this calculation method in mind - since it reminds us of principles we’ve already learned about the variance of populations<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>But imagine if we could obtain the full infinite set of sample means - then we could use the formula as below:</p>
 <p><span class="math display">\[
@@ -728,20 +735,20 @@ div.csl-indent {
 &amp;= 31.26472\\
 \end{aligned} 
 \]</span></p>
-<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure 1B) is <strong>calculated</strong>, based an infinite number of sample means (<span class="math inline">\(A = \infty\)</span>) using Method 1, to be <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>.</p>
+<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) is <strong>calculated</strong>, based an infinite number of sample means (<span class="math inline">\(A = \infty\)</span>) using Method 1, to be <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>.</p>
 <p><strong>When there is only one population of people</strong> this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We’ll discuss that situation in a future chapter.</p>
 </div>
 <div id="method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means" class="section level3" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</h3>
-<p>Fortunately we don’t need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure 1B. There is a “shortcut formula” we can used based on the Central Limit Theorem (CLT), see Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> below.</p>
+<p>Fortunately we don’t need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B. There is a “shortcut formula” we can used based on the Central Limit Theorem (CLT), see Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> below.</p>
 <p><span class="math display" id="eq:popvarCLTxbardeep">\[\begin{equation} 
 \sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\\
       \tag{14.5}
 \end{equation}\]</span></p>
-<p>An inspection of Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure 1B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure 1B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
+<p>An inspection of Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
 <p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
 <p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
-<p>Previously, we learned that the variance of the distribution of people in Figure 1A is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>. Consequently, we can use Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate the variance of the distribution of sample means in Figure 1B:</p>
+<p>Previously, we learned that the variance of the distribution of people in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>. Consequently, we can use Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate the variance of the distribution of sample means in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{n}\\
@@ -749,7 +756,7 @@ div.csl-indent {
 &amp;= 31.26472\\
 \end{aligned} 
 \]</span></p>
-<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure 1B) is <strong>calculated</strong>, using Method 2 the CLT shortcut, to be <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>.</p>
+<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) is <strong>calculated</strong>, using Method 2 the CLT shortcut, to be <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>.</p>
 </div>
 <div id="ratio-comparison-of-two-methods" class="section level3" number="14.5.3">
 <h3><span class="header-section-number">14.5.3</span> Ratio comparison of two methods</h3>
@@ -776,7 +783,7 @@ div.csl-indent {
 </div>
 <div id="estimating-sample-mean-distribution-variance" class="section level2" number="14.6">
 <h2><span class="header-section-number">14.6</span> Estimating sample mean distribution variance</h2>
-<p>In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each <span class="math inline">\(n\)</span> = 5) from the population of people illustrated in Figure 1A. The statistics for those three sample are presented below.</p>
+<p>In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each <span class="math inline">\(n\)</span> = 5) from the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. The statistics for those three sample are presented below.</p>
 <table>
 <colgroup>
 <col width="14%" />
@@ -820,7 +827,7 @@ div.csl-indent {
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
       \tag{14.6}
 \end{equation}\]</span></p>
-<p>In this example (see table above), we have 3 sample means (each based on n = 5) so <span class="math inline">\(a = 3\)</span>. Let’s estimate the variance of the distribution of sample means (Figure 1B) using these three sample means.</p>
+<p>In this example (see table above), we have 3 sample means (each based on n = 5) so <span class="math inline">\(a = 3\)</span>. Let’s estimate the variance of the distribution of sample means (Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) using these three sample means.</p>
 <p>First, we calculate the mean of the three sample means (<span class="math inline">\(\bar{\bar{x}}\)</span>) because we will need that in the variance formula.</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -830,7 +837,7 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 &amp;= 524.2
 \end{aligned} 
 \]</span></p>
-<p>Second, we estimate the variance of the population of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>, see Figure 1B) using the set of sample means. Notice the use of “-1” in the denominator - <a href="https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2">which we discussed previously in the sample accuracy chapter</a>. The use of the “-1” in the denominator means we are not calculating the variance of these three sample means. Rather, when we use “-1” in the denominator we are <strong>estimating</strong> the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure 1B).</p>
+<p>Second, we estimate the variance of the population of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) using the set of sample means. Notice the use of “-1” in the denominator - <a href="https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2">which we discussed previously in the sample accuracy chapter</a>. The use of the “-1” in the denominator means we are not calculating the variance of these three sample means. Rather, when we use “-1” in the denominator we are <strong>estimating</strong> the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B).</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
@@ -839,7 +846,7 @@ s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 &amp;= 79.213
 \end{aligned} 
 \]</span></p>
-<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure 1B) is <strong>estimated</strong>, based on three sample means (<span class="math inline">\(a = 3\)</span>) using Method 1, to be <span class="math inline">\(s_{\bar{x}}^2 = 79.213\)</span>. Remember though 79.213 is just an <em>estimate</em> of the population value (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>) based on three sample means.</p>
+<p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) is <strong>estimated</strong>, based on three sample means (<span class="math inline">\(a = 3\)</span>) using Method 1, to be <span class="math inline">\(s_{\bar{x}}^2 = 79.213\)</span>. Remember though 79.213 is just an <em>estimate</em> of the population value (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>) based on three sample means.</p>
 </div>
 <div id="method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means" class="section level3" number="14.6.2">
 <h3><span class="header-section-number">14.6.2</span> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</h3>
@@ -875,9 +882,9 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= 220.2333333 \\
 \end{aligned}
 \]</span></p>
-<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333333\)</span>, is an estimate of the variance of the population of people illustrated in Figure 1A. You could think of this number as an average variance estimate.</p>
+<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333333\)</span>, is an estimate of the variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. You could think of this number as an average variance estimate.</p>
 <p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333333\)</span>) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).</p>
-<p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure 1A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
+<p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
 </div>
 <div id="estimating-sigma_barx2-with-clt" class="section level4" number="14.6.2.2">
 <h4><span class="header-section-number">14.6.2.2</span> Estimating <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> with CLT</h4>
@@ -1010,10 +1017,10 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <li>think of var/n as representing the variability in sample means due to random sampling</li>
 <li>the findings we illustrate here only hold when there is only one population the sample means come from that one population.</li>
 </ul>
-<p>We are interested in the variance of the distribute of sample means (Figure 1B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution.</p>
+<p>We are interested in the variance of the distribute of sample means (Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution.</p>
 <p>We used two different approaches to estimating the variance of the distribution of sample means. With our “all knowing cap” on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That’s because the best we can do with sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample means.</p>
 <p>Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means (<span class="math inline">\(a=3\)</span>) to estimate the variance of an infinite set of sample means (<span class="math inline">\(A = \infty\)</span>). Because we used such a small subset of sample means (3 of <span class="math inline">\(\infty\)</span>) our estimate will differ from 31.26472 due to sampling error.</p>
-<p>Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>) to determine the variance of the distribution of sample means. We had to estimate <span class="math inline">\(\sigma_{people}^2\)</span> using <span class="math inline">\(s_{people}^2\)</span>. Because we used such a small subset of people (<span class="math inline">\(n = 15\)</span>, 5 from each sample) from the distribution of people (<span class="math inline">\(N = 50000\)</span>) for our estimate, <span class="math inline">\(s_{people}^2\)</span>, it will differ from <span class="math inline">\(\sigma_{people}^2\)</span> due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.</p>
+<p>Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>) to determine the variance of the distribution of sample means. We had to estimate <span class="math inline">\(\sigma_{people}^2\)</span> using <span class="math inline">\(s_{people}^2\)</span>. Because we used such a small subset of people (<span class="math inline">\(n = 15\)</span>, 5 from each sample) from the distribution of people (<span class="math inline">\(N = 100000\)</span>) for our estimate, <span class="math inline">\(s_{people}^2\)</span>, it will differ from <span class="math inline">\(\sigma_{people}^2\)</span> due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.</p>
 
 </div>
 </div>
@@ -1080,10 +1087,6 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "none"
 }
