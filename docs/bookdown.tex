@@ -207,7 +207,7 @@
 
 \title{Welcome!}
 \author{David J. Stanley}
-\date{2021-08-24}
+\date{2021-08-29}
 
 \begin{document}
 \maketitle
@@ -500,9 +500,9 @@ Select the library(tidyverse) text with your mouse/track-pad so that it is highl
 
 \begin{verbatim}
 ## v ggplot2 3.3.5     v purrr   0.3.4
-## v tibble  3.1.3     v dplyr   1.0.7
+## v tibble  3.1.4     v dplyr   1.0.7
 ## v tidyr   1.1.3     v stringr 1.4.0
-## v readr   2.0.0     v forcats 0.5.1
+## v readr   2.0.1     v forcats 0.5.1
 \end{verbatim}
 
 \begin{verbatim}
@@ -1091,8 +1091,28 @@ Required CRAN Packages \\
 \midrule
 \endhead
 tidyverse \\
+remotes \\
 \bottomrule
 \end{longtable}
+
+The following GitHub package must be installed:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+Required GitHub Packages \\
+\midrule
+\endhead
+spielmanlab/introverse \\
+\bottomrule
+\end{longtable}
+
+After the remotes package is installed, it can be used to install the introverse package from GitHub (an alternative ``App Store''). If you get asked if you would like to install more recent versions of packages on your machine press ``1'' and Return to indicate ``All'' (if you are asked, you may not be).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"spielmanlab/introverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{objective}{%
 \section{Objective}\label{objective}}
@@ -1104,10 +1124,43 @@ The objective of this chapter is to familiarize you with some key commands in th
 
 All of the commands in this chapter should be typed into the Console within R. If you see a command split over multiple lines, use SHIFT-RETURN (macOS) or SHIFT-ENTER (Windows) to move the next line that is part of the same command.
 
+\hypertarget{tidyverse-help-with-the-introverse}{%
+\section{Tidyverse help with the Introverse}\label{tidyverse-help-with-the-introverse}}
+
+The \textbf{introverse} package is just additional documentation that is helpful for beginners - until you learn to read the standard R documentation. The first command we will use in this chapter is the \textbf{read\_csv()} command. You get get the standard R help for this command using the code below in the R Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }\CommentTok{\# this actives the tidyverse commands}
+\NormalTok{?read\_csv}
+\end{Highlighting}
+\end{Shaded}
+
+This gives you help that looks like this:
+
+\includegraphics[width=0.7\linewidth]{ch_tidy_intro/images/screenshot_R_help}
+
+But you can obtain the better introverse documentation by typing the code below in the R Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(introverse) }\CommentTok{\# this actives the intoverse help}
+\FunctionTok{get\_help}\NormalTok{(}\StringTok{"read\_csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This gives you help that looks like this:
+
+\includegraphics[width=0.7\linewidth]{ch_tidy_intro/images/screenshot_introverse_help}
+
+Most importantly, when you scroll down on the introverse help pages - it gives you code examples that are easy to follow. If at any point during this course you want more information about how a command works use the introverse get\_help() command.
+
+The get\_help() command is especially valuable because it tells you which package (of the many tidyverse packages) a particular command comes from. For example, you can see the read\_csv() command is from the readr package when you inspect the introverse help above.
+
 \hypertarget{basic-tidyverse-commands}{%
 \section{Basic tidyverse commands}\label{basic-tidyverse-commands}}
 
-If you inspect the Files tab on the lower-right panel in R Studio you will see the file data\_okcupid.csv. The code below loads that file.
+If you inspect the Files tab on the lower-right panel in R Studio you will see the file data\_okcupid.csv. The code below loads that file. Recall you should tpe this code into the R Console.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2342,7 +2395,7 @@ Use geom\_col() to put each boxoffice column value into a bar.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-101-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-106-1}
 
 Next, we want to put the boxoffice revenue above each bar so it easier to interpret. In R terms, we are putting a label above each bar. We want the contents for the labels to come from the boxoffice column. Therefore, we add the geom\_text() command below:
 
@@ -2360,7 +2413,7 @@ Next, we want to put the boxoffice revenue above each bar so it easier to interp
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-102-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-107-1}
 
 Unfortunately, when we position the text at the exact height of each column it overlaps with the column making it difficult to read. We fix this on the next page using nudge\_y.
 
@@ -2382,7 +2435,7 @@ We can nudge each label higher on the y-axis using the \emph{nudge\_y} command. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-103-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-108-1}
 
 \hypertarget{graphing-efficiently}{%
 \section{Graphing efficiently}\label{graphing-efficiently}}
@@ -2404,7 +2457,7 @@ Examine the code below and compare it to the code above. Notice how in the geom\
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-104-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-109-1}
 
 \hypertarget{aesthetics}{%
 \section{Aesthetics}\label{aesthetics}}
@@ -2434,7 +2487,7 @@ You might want to influence the color of the bars in the graph such that the bar
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-105-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-110-1}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{ch_graphing/images/mapping_fill} \caption{Adding a fill column to the internal data}\label{fig:addfill}
@@ -2463,7 +2516,7 @@ Fortunately, if we simply put ``mapping = aes(label = tomatoes\_aud)'' within th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-106-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-111-1}
 
 Notice that we have the same problem as before with the text being difficult to read because it overlaps with the bar. We add ``nudge\_y = 400'' to move the text higher than the boxoffice text/label. Don't forget the units used by nudge\_y are the units on the y-axis.
 
@@ -2482,7 +2535,7 @@ Notice that we have the same problem as before with the text being difficult to 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-107-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-112-1}
 
 \newpage
 
@@ -2508,7 +2561,7 @@ Use theme\_classic() to make the graph apear in APA style. We use theme\_classic
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-108-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-113-1}
 
 \hypertarget{axes}{%
 \section{Axes}\label{axes}}
@@ -2537,7 +2590,7 @@ We use the coord\_cartesian() command to adjust range of axes. In the code below
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-109-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-114-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the range of both the x- and y-axes like this:
 
@@ -2572,7 +2625,7 @@ We use the scale\_y\_continuous() command to adjust the ticks on the y-axis. We 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-111-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-116-1}
 
 Note that if you had a continuous variable on the x-axis (we do not in this example), you could set the ticks of the x-axis like the code below using scale\_x\_continuous:
 
@@ -2613,7 +2666,7 @@ We use the labs() command to set the labels for the x- and y-axes:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-114-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-119-1}
 
 \hypertarget{axis-values}{%
 \section{Axis values}\label{axis-values}}
@@ -2661,7 +2714,7 @@ The values along the x-axis come from the short\_title column which is a factor.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-115-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-120-1}
 
 \hypertarget{method-2-longer-label-columns}{%
 \subsubsection{Method 2: Longer label columns}\label{method-2-longer-label-columns}}
@@ -2691,7 +2744,7 @@ With our movie data we don't need to use scale\_x\_discrete() because we have a 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-116-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-121-1}
 
 \hypertarget{angle}{%
 \subsection{Angle}\label{angle}}
@@ -2723,7 +2776,7 @@ Use theme() to adjust the angle of x-axis labels. Notice, however, that the long
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-117-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-122-1}
 
 \hypertarget{alignment}{%
 \subsection{Alignment}\label{alignment}}
@@ -2754,7 +2807,7 @@ Use theme() and the hjust argument to adjust the alignment of the x-axis labels.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-118-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-123-1}
 
 \hypertarget{order}{%
 \subsection{Order}\label{order}}
@@ -2796,7 +2849,7 @@ We can make the movie bars go left to right in lowest to highest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-120-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-125-1}
 
 \hypertarget{decreasing-order}{%
 \subsubsection{Decreasing order}\label{decreasing-order}}
@@ -2834,7 +2887,7 @@ We can make the movie bars go left to right in highest to lowest box office rece
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-122-1}
+\includegraphics[width=0.65\linewidth]{bookdown_files/figure-latex/unnamed-chunk-127-1}
 
 \hypertarget{custom-order}{%
 \subsubsection{Custom order}\label{custom-order}}
@@ -5153,7 +5206,7 @@ As with the other statistics reviewed, for sample correlations (\(r\)) you can c
 \hypertarget{required-packages}{%
 \section{Required Packages}\label{required-packages}}
 
-The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
+The data files below are used in this chapter.
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -5357,8 +5410,13 @@ Regardless of the approach, it is critical to name your variables appropriately.
 
 Although failure to take this thoughtful approach at the data collection stage can be overcome - it is only overcome with substantial manual effort. Therefore, as noted previously, we strongly encourage you to follow the naming conventions we espouse here when you set up your data recording regime. Additionally, we encourage you to give careful thought in advance to the codes you will use to record missing data.
 
-\hypertarget{naming-conventions}{%
-\subsection{Naming conventions}\label{naming-conventions}}
+\hypertarget{file-naming-conventions}{%
+\subsection{File naming conventions}\label{file-naming-conventions}}
+
+I \textbf{strongly} suggest you check out these excellent \href{https://slides.djnavarro.net/project-structure/\#1}{slides} by Danielle Navarro on file name convention best practices.
+
+\hypertarget{data-column-naming-conventions}{%
+\subsection{Data column naming conventions}\label{data-column-naming-conventions}}
 
 To make your life easier down the road, it is critical you set up your spreadsheet or online survey such that it uses a naming convention prior to data collection. The naming conventions suggested here are adapted from the tidyverse \href{https://style.tidyverse.org}{style guide}.
 
@@ -5366,7 +5424,7 @@ To make your life easier down the road, it is critical you set up your spreadshe
 \item
   Lowercase letters only
 \item
-  If two word column names are necessary, only use the underscore ("\_") character to separate words in the name.
+  If using multiple words in a name (a good idea), only use the underscore ("\_") character to separate words in the name.
 \item
   Avoid short decontextualized variable names like q1, q2, q3, etc.
 \item
@@ -8207,7 +8265,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-337-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-342-1.pdf}
 
 We can see the information conveyed in the graph above for an independent groups \(t\)-test in table form using the code below.
 
@@ -8318,7 +8376,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-339-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-344-1.pdf}
 
 We can see the information conveyed in the graph above for an independent groups \(t\)-test in table form using the code below.
 
@@ -8582,7 +8640,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-347-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-352-1.pdf}
 
 We can see the information conveyed in the graph above for an repeated measures \(t\)-test in table form using the code below.
 
@@ -8693,7 +8751,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-349-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-354-1.pdf}
 
 We can see the information conveyed in the graph above for an repeated measures \(t\)-test in table form using the code below.
 
@@ -8946,7 +9004,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-357-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-362-1.pdf}
 
 We can see the information conveyed in the graph above for our proposed correlation study in table form using the code below.
 
@@ -9043,7 +9101,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-359-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-364-1.pdf}
 
 We can see the information conveyed in the graph above for a correlation study in table form using the code below.
 
@@ -10131,101 +10189,123 @@ Thus, if you obtained a significant \emph{p}-value in this scenario there is onl
 \hypertarget{a-tale-of-two-methods}{%
 \section{A tale of two methods}\label{a-tale-of-two-methods}}
 
-In this chapter, we focus on describing the sampling distribution of the mean. Our goal is to understand the logic behind two different methods for estimating the variance of the sampling distribution of the mean. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
+In this chapter, we focus on describing the distribution of sample means. Our goal is to understand the logic behind two different methods for estimating the variance of distribution of sample means. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
 
 \hypertarget{a-student-population}{%
 \section{A student population}\label{a-student-population}}
 
-Consider a scenario where there is a large university with 50,000 students and we have the heights of all 50,000 students. The mean height of all 50,000 students is 172.50 cm and the variance is 156.3236 cm\(^2\). The heights of all the university students are illustrated in Figure 1A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
+Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm\(^2\). The heights of all the university students are illustrated in Figure \ref{fig:chdeepfigure1}A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 100,000 people the mean is \(\mu_{people}=172.50\) and the variance is \(\sigma_{people}^2=156.3236\).
 
-The mean of the population people's heights (in cm) is calculated as below (where N = 50,000).
+The mean of a population of 100,000 individuals is calculated using Equation \eqref{eq:popmeanchdeep} below.
 
-\[
-\begin{aligned} 
-\mu_{people} &= \frac{\sum_{i=1}^{N=50000}{X_i}}{N}\\
-&= 172.50\\
-\end{aligned} 
-\]
+\begin{equation} 
+\mu_{people} = \frac{\sum_{i=1}^{N=100000}{X_i}}{N}
+      \label{eq:popmeanchdeep}
+\end{equation}
 
-The variance of the population people's heights (in cm\(^2\)) is calculated as below (where N = 50,000).
+The variance of a population of 100,000 individuals is calculated using Equation \eqref{eq:popvardeep} below.
 
-\[
-\begin{aligned} 
-\sigma_{people}^2 &= \frac{\sum_{i=1}^{N=50000}{(X_i - \bar{X})^2}}{N}\\
-&= 156.3236\\
-\end{aligned} 
-\]
+\begin{equation} 
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \mu_{people})^2}}{N}
+      \label{eq:popvardeep}
+\end{equation}
 
 \hypertarget{random-sampling-process}{%
 \section{Random sampling process}\label{random-sampling-process}}
 
-Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the university. Indeed, imagine that we obtained a sample of \(n\) = 25 students and calculated a sample mean (\(\bar{x}\)). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an \textbf{infinite number of sample means} is conceptually illustrated in Figure 1B and we refer to it as the \emph{sampling distribution of the mean}. Moreover, \textbf{because we sampled from a single population} the variability in sample means is due only to the \textbf{random sampling error} that occurs when the sample size is 25 (\(n = 25\)) and the population variance is 156.3236 (i.e., \(\sigma_{people}^2 =156.3236\)).
+Now imagine that we are interested in studying the random sampling process. Specifically we are interested in examining the variability in sample means that occurs when taking random samples of students from the population of people (see Figure \ref{fig:chdeepfigure1}). Indeed, imagine that we obtained a sample of \(n\) = 5 students and calculated a sample mean (\(\bar{x}\)). Then we repeated this sampling process an infinite number of times such that we have an infinite number of sample means. This set of an \textbf{infinite number of sample means} is conceptually illustrated in Figure \ref{fig:chdeepfigure1}B and we refer to it as the \emph{sampling distribution of the mean}. Moreover, \textbf{because we sampled from a single population} the variability in sample means is due only to the \textbf{random sampling error} that occurs when the sample size is 5 (\(n = 5\)) and the population variance is 156.3236 (i.e., \(\sigma_{people}^2 =156.3236\)).
 
-{[}Figure 1A and 1B goes here{]}
+\hfill\break
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{ch_deep_sampling/images/figure1} \caption{The distributions of people and the sample means can both be considered populations.}\label{fig:chdeepfigure1}
+\end{figure}
 
 \hypertarget{population-whats-in-a-name}{%
 \section{Population: What's in a name}\label{population-whats-in-a-name}}
 
-Typically, in psychology, when we use the word ``population'' we are referring to a population of people - such as those illustrated in Figure 1A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure 1A as a population to \textbf{also} thinking of the distribution of sample mean in Figure 1B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).
+Typically, in psychology, when we use the word ``population'' we are referring to a population of people - such as those illustrated in Figure \ref{fig:chdeepfigure1}A. However, in statistics, a population is simply set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure \ref{fig:chdeepfigure1}A as a population to \textbf{also} thinking of the distribution of sample mean in Figure \ref{fig:chdeepfigure1}B as a population. Doing so may seem counter intuitive but it the logical foundation for Analysis of Variance (ANOVA).
 
 \hypertarget{sample-means-in-context}{%
 \subsection{Sample means in context}\label{sample-means-in-context}}
 
-Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word ``population''. Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure 1A), we use \(N\) to indicate the number people in the population and \(n\) to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure 1B), we use \(A\) to indicate the number sample means in the population and \(a\) to refer to the number of sample means in a subset of the population.
+Thinking of the distribution of sample mean as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word ``population''. Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure \ref{fig:chdeepfigure1}A), we use \(N\) to indicate the number people in the population and \(n\) to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure \ref{fig:chdeepfigure1}B), we use \(A\) to indicate the number sample means in the population and \(a\) to refer to the number of sample means in a subset of the population.
 
-Consider a concrete example. When we obtain a sample of people (\(n\) = 25) we can think those people as being subset of the population of people (\(N\)=50,000), see Figure 1A. If we calculate a sample mean (\(\bar{x}\)) based on those 25 people we can think of that single sample mean (\(a\) = 1) a being subset of a population of sample means (\(A = \infty\)), see Figure 1B. Alternatively, imagine we obtained three samples from the population of people, Figure 1A, each composed of 25 people (\(n\) = 25 for each sample). Then we calculated the sample mean (\(\bar{x}\)) for each of the three samples. We could think of those three sample means (\(a\) = 3) as being a subset of a population of sample means (\(A = \infty\)), see Figure 1B.
+Consider a concrete example. When we obtain a sample of people (\(n\) = 5) we can think those people as being subset of the population of people (\(N\)=100,000), see Figure \ref{fig:chdeepfigure1}A. If we calculate a sample mean (\(\bar{x}\)) based on those 5 people we can think of that single sample mean (\(a\) = 1) a being subset of a population of sample means (\(A = \infty\)), see Figure \ref{fig:chdeepfigure1}B. Alternatively, imagine we obtained three samples from the population of people, Figure \ref{fig:chdeepfigure1}A, each composed of 5 people (\(n\) = 5 for each sample). Then we calculated the sample mean (\(\bar{x}\)) for each of the three samples. We could think of those three sample means (\(a\) = 3) as being a subset of a population of sample means (\(A = \infty\)), see Figure \ref{fig:chdeepfigure1}B.
 
 \hypertarget{distribution-of-sample-means-as-a-population}{%
 \subsection{Distribution of sample means as a population}\label{distribution-of-sample-means-as-a-population}}
 
-Because we are thinking of the distribution of sample means as a population we can calculate a mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below. Notice that we used the symbol, \(\mu_{\bar{x}}\), to represented this value. Further notice, the little \(\bar{x}\) beside the \(\mu\) in \(\mu_{\bar{x}}\) which indicates it is sample means that are being averaged. As noted previously, we use \(A\) instead of \(N\) to represent the number of sample means (where \(A\) = infinity, because there are an infinite number of sample means in the distribution)\footnote{I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an \emph{expected value}. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.}
+Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \eqref{eq:popmeanxbardeep}. Notice that we used the symbol, \(\mu_{\bar{x}}\), to represented this value. Further notice, the little \(\bar{x}\) beside the \(\mu\) in \(\mu_{\bar{x}}\) which indicates it is sample means that are being averaged. As noted previously, we use \(A\) instead of \(N\) to represent the number of sample means (where \(A\) = infinity, because there are an infinite number of sample means in the distribution)\footnote{I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an \emph{expected value}. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.}. Notice the similarity between the formula for the mean of a distribution of people, Equation \eqref{eq:popmeanchdeep} above, and the formula for the mean of a distribution of sample means, Equation \eqref{eq:popmeanxbardeep}.
 
-\[
-\begin{aligned} 
-\mu_{\bar{x}} &= \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}\\
-&= 172.50\\
-\end{aligned} 
-\]
+\begin{equation} 
+\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}
+      \label{eq:popmeanxbardeep}
+\end{equation}
 
-The mean of the sample means, \(\mu_{\bar{x}}\), will always be the same as that of the people's heights, \(\mu_{people}\). Consequently, any conclusions we make about \emph{population means} based on Figure 1B (i.e., \(\mu_{\bar{x}}\)) will also apply to Figure 1A (i.e., \(\mu_{people}\)). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., \(\mu_{people}\)) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure 1B (i.e., \(\mu_{\bar{x}}\)).
+Using Equation \eqref{eq:popmeanxbardeep} we find that the mean of the sample means is 172.50 cm (i.e., \(\mu_{\bar{x}} = 172.50\)).
 
-\hypertarget{variance-of-the-distribution-of-sampling-means}{%
-\section{Variance of the distribution of sampling means}\label{variance-of-the-distribution-of-sampling-means}}
+A key point to remember is that the mean of the sample means, \(\mu_{\bar{x}}\), will always be the same as that of the people's heights, \(\mu_{people}\). Consequently, any conclusions we make about \emph{population means} based on Figure \ref{fig:chdeepfigure1}B (i.e., \(\mu_{\bar{x}}\)) will also apply to Figure \ref{fig:chdeepfigure1}A (i.e., \(\mu_{people}\)). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., \(\mu_{people}\)) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample mean in Figure \ref{fig:chdeepfigure1}B (i.e., \(\mu_{\bar{x}}\)).
 
-When there is \emph{one} \textbf{population of people} there is a single distribution of sample means that corresponds to that population. There are two methods for calculating the variance of this distribution of sample means.
+\hypertarget{sample-mean-distribution-variance}{%
+\section{Sample mean distribution variance}\label{sample-mean-distribution-variance}}
+
+When there is \emph{one} \textbf{population of people} (see Figure \ref{fig:chdeepfigure1}A) there is a single distribution of sample means that corresponds to that population (see Figure \ref{fig:chdeepfigure1}B). There are two methods for calculating the variance of this distribution of sample means.
 
 \hypertarget{method-1-calculate-the-variance-of-infinite-sample-means}{%
 \subsection{Method 1: Calculate the variance of infinite sample means}\label{method-1-calculate-the-variance-of-infinite-sample-means}}
 
-In this first method, we use an infinite number of sample means and simply calculate the variance. Obviously, this is an impractical solution because we could never obtain an infinite number of samples and then calculate the variance for each sample. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations \footnote{As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.}
+In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation \eqref{eq:popvarxbardeep} below.
+
+\begin{equation} 
+\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}
+      \label{eq:popvarxbardeep}
+\end{equation}
+
+Notice how Equation \eqref{eq:popvarxbardeep} for the variance of sample means in Figure \ref{fig:chdeepfigure1}B, is similar to the formula we use the variance of people, Equation \eqref{eq:popvardeep}, in Figure \ref{fig:chdeepfigure1}A. The formula for the variance of sample means, Equation \eqref{eq:popvarxbardeep}, differs because we are using on sample means (\(\bar{x}\)) instead of attributes of people (\(X\)). As well, we use \(A\) to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than \(N\).
+
+Obviously, using Equation \eqref{eq:popvarxbardeep} to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations \footnote{As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.}
+
+But imagine if we could obtain the full infinite set of sample means - then we could use the formula as below:
 
 \[
 \begin{aligned} 
-\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}\\
-&= 6.252944\\
+\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}\\
+&= 31.26472\\
 \end{aligned} 
 \]
 
-Notice how this is similar to population formula when we are dealing with people. This formula differs for the typical formula because we are using on sample means (\(\bar{x}\)) instead of attributes of people (\(X\)). As well, we just use \(A\) to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than \(N\).
+Thus, the ``population'' variance of the distribution of sample means (\(\sigma_{\bar{x}}^2\), see Figure \ref{fig:chdeepfigure1}B) is \textbf{calculated}, based an infinite number of sample means (\(A = \infty\)) using Method 1, to be \(\sigma_{\bar{x}}^2 = 31.26472\).
 
 \textbf{When there is only one population of people} this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We'll discuss that situation in a future chapter.
 
-\hypertarget{method-2-clt-shortcut-with-variance-and-sample-size}{%
-\subsection{Method 2: CLT Shortcut with variance and sample size}\label{method-2-clt-shortcut-with-variance-and-sample-size}}
+\hypertarget{method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means}{%
+\subsection{\texorpdfstring{Method 2: CLT shortcut: \emph{Calculation} of variance of infinite sample means}{Method 2: CLT shortcut: Calculation of variance of infinite sample means}}\label{method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means}}
 
-Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means. There is a ``shortcut formula'' we can used based on the Central Limit Theorem (CLT). More specifically, the variance of the distribution of sample means depends on both the number of people in each sample (\(n\)) and the variability in the people's heights in the population (\(\sigma_{people}^2\)).
+Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure \ref{fig:chdeepfigure1}B. There is a ``shortcut formula'' we can used based on the Central Limit Theorem (CLT), see Equation \eqref{eq:popvarCLTxbardeep} below.
 
-\[
-\begin{aligned} 
-\sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n}\\
-&= \frac{156.3236}{25}\\
-&= 6.252944\\
-\end{aligned} 
-\]
+\begin{equation} 
+\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\\
+      \label{eq:popvarCLTxbardeep}
+\end{equation}
+
+An inspection of Equation \eqref{eq:popvarCLTxbardeep} reveals the variance of the distribution of sample means (see Figure \ref{fig:chdeepfigure1}B) depends on both the number of people in each sample (\(n\)) and the variability in the people's heights in the population (see Figure \ref{fig:chdeepfigure1}B, \(\sigma_{people}^2\)).
 
 The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you \href{https://archive.org/details/statisticsfifthe00will}{consult} \citep{hays1994statistics} who provides a statistical proof for the Central Limit Theorem.
 
 It's helpful, moving forward to, think of this formula (\(\frac{\sigma_{people}^2}{n}\)) as representing the \emph{variability in means due to random sampling}. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.
+
+Previously, we learned that the variance of the distribution of people in Figure \ref{fig:chdeepfigure1}A is \(\sigma_{people}^2=156.3236\). Consequently, we can use Equation \eqref{eq:popvarCLTxbardeep} to calculate the variance of the distribution of sample means in Figure \ref{fig:chdeepfigure1}B:
+
+\[
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n}\\
+&= \frac{156.3236}{5}\\
+&= 31.26472\\
+\end{aligned} 
+\]
+
+Thus, the ``population'' variance of the distribution of sample means (\(\sigma_{\bar{x}}^2\), see Figure \ref{fig:chdeepfigure1}B) is \textbf{calculated}, using Method 2 the CLT shortcut, to be \(\sigma_{\bar{x}}^2 = 31.26472\).
 
 \hypertarget{ratio-comparison-of-two-methods}{%
 \subsection{Ratio comparison of two methods}\label{ratio-comparison-of-two-methods}}
@@ -10241,84 +10321,89 @@ Thus, far we have calculated the variance of the distribution of sample means us
 
 Although we can just look at the numbers resulting from these two methods and compare them, that's not how statisticians typically handle such comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00. If the ratio is larger than 1.00 it means the number on the top was bigger than the number on the bottom.
 
-You can see the ratio comparing these two methods below is 1.00 - so we conclude two methods produced the same result.
+\hfill\break
 
 \[
 \begin{aligned} 
 \text{ratio comparing methods} &= \frac{\text{variance of sample means calculated using sample means}}{\text{variance of sample means calculated using CLT shortcut formula}}\\
-&=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
-&=\frac{6.252944}{6.252944}\\
+&=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
+&=\frac{31.26472}{31.26472}\\
 &= 1.00\\
 \end{aligned} 
 \]
 
-In this section, we focused on actually \textbf{calculating} the variance of the distribution of sample means using two methods. But to actually calculate this variance we needed an infinite number of sample means (method 1) or knowledge of the population variance (method 2). Both are unrealistic methods to determining this value.
+You can see the ratio comparing these two methods below is 1.00 - so we conclude two methods produced the same result. If the number on the top of the ratio was the \emph{larger} of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the \emph{smaller} of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpet the value of a ratio using these rules before continuing.
+
+In this section, we focused on actually \textbf{calculating} the variance of the distribution of sample means using two methods. But to actually calculate this variance we needed an infinite number of sample means (Method 1) or knowledge of the population variance (Method 2). Both are unrealistic methods to determining this value.
 
 In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on \textbf{estimating} the variance of the distribution of sample means. An estimated value is an approximation of the actual value that will differ due to the effects of random sampling.
 
 \hypertarget{estimating-sample-mean-distribution-variance}{%
 \section{Estimating sample mean distribution variance}\label{estimating-sample-mean-distribution-variance}}
 
-In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each \(n\) = 25) from the population of people illustrated in Figure 1A. The statistics for those three sample are presented below.
+In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each \(n\) = 5) from the population of people illustrated in Figure \ref{fig:chdeepfigure1}A. The statistics for those three sample are presented below.
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.15}}
-  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.32}}
-  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.53}}@{}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.07}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.49}}@{}}
 \toprule
-Sample Number & Mean (\(\frac{\Sigma x_i}{n}\)) & Variance (\(\frac{\Sigma (x_i - \bar{x})^2}{n-1}\)) \\
+Sample Number & Sample size (\(n\)) & Mean (\(\bar{x} = \frac{\Sigma x_i}{n}\)) & Variance (\(s_{people}^2=\frac{\Sigma (x_i - \bar{x})^2}{n-1}\)) \\
 \midrule
 \endhead
-1 & x & xx \\
-2 & x & xx \\
-3 & x & xx \\
+1 & 5 & 185 & 168 \\
+2 & 5 & 169.2 & 146.7 \\
+3 & 5 & 170 & 346 \\
 \bottomrule
 \end{longtable}
 
-\hypertarget{method-1-estimation-using-sample-means}{%
-\subsection{Method 1: Estimation using sample means}\label{method-1-estimation-using-sample-means}}
+\hypertarget{method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means}{%
+\subsection{Method 1: Estimate the variance of infinite sample means using 3 sample means}\label{method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means}}
 
 We can use the sample means presented in the table above to estimate the variance of the distribution of sample mean as illustrated in the formula below. Recall, we use the lower case ``\(a\)'' to represent the number of sample means (in the case because we have 3 sample means \(a = 3\)).
 
-\[
-\begin{aligned} 
-s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
-\end{aligned} 
-\]
+\begin{equation} 
+s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
+      \label{eq:estpopvarxbardeep}
+\end{equation}
 
-In this example (see table above), we have 3 sample means (each based on n = 25) so \(a = 3\). Let's estimate the variance of the distribution of sample means (Figure 1B) using these three sample means.
+In this example (see table above), we have 3 sample means (each based on n = 5) so \(a = 3\). Let's estimate the variance of the distribution of sample means (Figure \ref{fig:chdeepfigure1}B) using these three sample means.
 
-First, we calculate the mean of the three sample means (\(\bar{\bar{x}}\)) because we will need that in the variance formula.
+First, we calculate the mean of the three sample means (\(\mu_{\bar{x}}\)) because we will need that in the variance formula.
 
 \[
 \begin{aligned} 
 \bar{\bar{x}} &= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
 &= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{a}\\
-&= \frac{\bar{x}_1+\bar{x}_2+\bar{x}_3}{3}\\
+&= \frac{185 + 169.2  + 170 }{3}\\
+&= 524.2
 \end{aligned} 
 \]
 
-Second, we estimate the variance of the population of sample means (\(s_{\bar{x}}^2\), see Figure 1B) using the set of sample means. Notice the use of ``-1'' in the denominator - \href{https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html\#estimating-sigma2}{which we discussed previously in the sample accuracy chapter}. The use of the ``-1'' in the denominator means we are not calculating the variance of these three sample means. Rather, when we use ``-1'' in the denominator we are \textbf{estimating} the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure 1B).
+Second, we estimate the variance of the population of sample means (\(s_{\bar{x}}^2\), see Figure \ref{fig:chdeepfigure1}B) using the set of sample means. Notice the use of ``-1'' in the denominator - \href{https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html\#estimating-sigma2}{which we discussed previously in the sample accuracy chapter}. The use of the ``-1'' in the denominator means we are not calculating the variance of these three sample means. Rather, when we use ``-1'' in the denominator we are \textbf{estimating} the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure \ref{fig:chdeepfigure1}B).
 
 \[
 \begin{aligned} 
 s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 &= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{a-1}\\
-&= \frac{(\bar{x_1}- \bar{\bar{x}})^2+(\bar{x_2}- \bar{\bar{x}})^2+(\bar{x_3}- \bar{\bar{x}})^2}{3-1}\\
+&= \frac{(185 - 524.2)^2+(169.2  - 524.2)^2+(170 - 524.2)^2}{3-1}\\
+&= 79.213
 \end{aligned} 
 \]
 
-Thus, using Method 1: Sample Means, our estimate of the variance of the distribution of sample means is XXX.
+Thus, the ``population'' variance of the distribution of sample means (\(\sigma_{\bar{x}}^2\), see Figure \ref{fig:chdeepfigure1}B) is \textbf{estimated}, based on three sample means (\(a = 3\)) using Method 1, to be \(s_{\bar{x}}^2 = 79.213\). Remember though 79.213 is just an \emph{estimate} of the population value (\(\sigma_{\bar{x}}^2\)) based on three sample means.
 
-\hypertarget{method-2-estimation-using-clt-shortcut}{%
-\subsection{Method 2: Estimation using CLT shortcut}\label{method-2-estimation-using-clt-shortcut}}
+\hypertarget{method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means}{%
+\subsection{\texorpdfstring{Method 2: CLT shortcut: \emph{Estimation} of variance of infinite sample means}{Method 2: CLT shortcut: Estimation of variance of infinite sample means}}\label{method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means}}
 
-We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT).
+We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation \eqref{eq:popvarCLTxbardeep} above, repeated below for clarity.
+.
 
 \[
-\begin{aligned} 
+\begin{aligned}
 \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n}\\
-\end{aligned} 
+\end{aligned}
 \]
 
 \hypertarget{estimating-sigma_people2-with-s_people2}{%
@@ -10331,7 +10416,11 @@ The problem with the formula above is that you need to know the variance of the 
 s_{people}^2 &= MSE_{people}\\
 &= \frac{\sum_{i=1}^{a=3}(n_i-1)s_i^2}{\sum_{i=1}^{a}(n_i-1)} \\
 &= \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2 + (n_3-1)s_3^2}{(n_1-1)+(n_2-1)+(n_3-1)} \\
-&= \frac{(25-1)s_1^2 + (25-1)s_2^2 + (25-1)s_3^2}{(25-1)+(25-1)+(25-1)} \\
+&= \frac{(5-1)s_1^2 + (5-1)s_2^2 + (5-1)s_3^2}{(5-1)+(5-1)+(5-1)} \\
+&= \frac{(5-1)168 + (5-1)146.7 +(5-1)346}{(5-1) + (5-1) + (5-1)} \\
+&= \frac{672 + 586.8 + 1384}{15 -3} \\
+&= \frac{2642.8}{12} \\
+&= 220.2333 \\
 \end{aligned}
 \]
 
@@ -10341,33 +10430,94 @@ When the three sample sizes are the same the above formula just boils down to an
 \begin{aligned}
 s_{people}^2 &= MSE_{people}\\
 &= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
+&= \frac{168 + 146.7 + 346 }{3} \\
+&= \frac{660.7}{3} \\
+&= 220.2333 \\
 \end{aligned}
 \]
 
-We use different names to refer to the resulting variance number - we could just call it a better estimate of the population variance (\(s_{people}^2\)). But statisticians also use the term pooled variance (\(s_{pooled}^2\)) to refer it. Other times statistician use the term Mean Square Error (\(MSE\)) to refer to it. You should realize that these are all just synonyms for variance: \(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\).
+The number we just calculated, \(s_{people}^2 =220.2333\), is an estimate of the variance of the population of people illustrated in Figure \ref{fig:chdeepfigure1}A. You could think of this number as an average variance estimate.
 
-Armed with the estimate of the variance of the people in the population (\(s_{people}^2\)) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means.
+We created the average variance estimate,\(s_{people}^2 =220.2333\), by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( \(s_{people}^2 =220.2333\)) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).
+
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (\(s_{people}^2\)). But statisticians also use the term pooled variance (\(s_{pooled}^2\)) to refer it. Other times statisticians use the term Mean Square Error (\(MSE\)) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \ref{fig:chdeepfigure1}A: \(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\).
+
+\hypertarget{estimating-sigma_barx2-with-clt}{%
+\subsubsection{\texorpdfstring{Estimating \(\sigma_{\bar{x}}^2\) with CLT}{Estimating \textbackslash sigma\_\{\textbackslash bar\{x\}\}\^{}2 with CLT}}\label{estimating-sigma_barx2-with-clt}}
+
+Armed with the estimate of the variance of the people in the population (\(s_{people}^2\)) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means using Equation \eqref{eq:estpopvarmeansclt} below.
+
+\begin{equation} 
+s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
+      \label{eq:estpopvarmeansclt}
+\end{equation}
+
+Putting in values:
 
 \[
 \begin{aligned} 
 s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
+&= \frac{220.2333 }{5}\\
+&= 44.0467
 \end{aligned} 
 \]
 
-Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is XXX.
+Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is \(s_{\bar{x}}^2 = 44.0467\).
 
 \hypertarget{ratio-comparison-of-two-methods-1}{%
 \subsection{Ratio comparison of two methods}\label{ratio-comparison-of-two-methods-1}}
 
-We revisit the ratio comparison methods and see that we are using estimates that the
+The table below summarizes our work so far.
 
-But on average it will be one.
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.30}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}@{}}
+\toprule
+Attribute & Unknown Parameter & Estimate of Parameter \\
+\midrule
+\endhead
+Method 1: Variance & \(\sigma_{\bar{x}}^2 =31.26472\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\) \\
+Method 2 CLT: Variance & \(\sigma_{\bar{x}}^2 =31.26472\) & \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\) \\
+\bottomrule
+\end{longtable}
 
-See this simulation with 6 cols (m/var est), 2 col (both calcs), 1 col ratio.
+You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from ``the truth'' (31.26472) due to sampling error. Consquently, when we construct a ratio based on those variance estimate (\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\) and \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)) the ratio will differ from ``the truth'' (1.00) due to sampling error.
 
-When everything comes from 1 population on average\ldots..
+\hfill\break
 
-Show ratio with formulas and numbers
+\[
+\begin{aligned} 
+\text{ratio comparing methods} &= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
+&=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&=\frac{79.213}{44.0467}\\
+&= 1.7984\\
+\end{aligned} 
+\]
+
+We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on \(n =5\)).
+
+\hypertarget{summary-table}{%
+\section{Summary table}\label{summary-table}}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.26}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}@{}}
+\toprule
+Distribution & Attribute & Parameter Calculation & Estimate of Parameter \\
+\midrule
+\endhead
+People & Mean & \(\mu_{people} = \frac{\sum_{i=1}^{N}{X_i}}{N}\) & \(\bar{x}_{people} = M = \frac{\sum_{i=1}^{n}{x_i}}{n}\) \\
+People & Variance & \(\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}\) & \(s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}\) \\
+People & Standard Deviation & \(\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}}\) & \(s_{people} = SD = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}}\) \\
+Sample Means & Mean & \(\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}\) & \(\bar{\bar{x}} = \frac{\sum_{i=1}^{a}{\bar{x}_i}}{a}\) \\
+Sample Means & Method 1: Variance & \(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\) \\
+Sample Means & Method 2 CLT: Variance & \(\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\) & \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}\) \\
+Sample Means & Method 2 CLT: Standard Error & \(\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}\) & \(s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}\) \\
+\bottomrule
+\end{longtable}
 
 \hypertarget{walk-away-points}{%
 \section{Walk away points}\label{walk-away-points}}
@@ -10381,6 +10531,14 @@ Show ratio with formulas and numbers
 \item
   the findings we illustrate here only hold when there is only one population the sample means come from that one population.
 \end{itemize}
+
+We are interested in the variance of the distribute of sample means (Figure \ref{fig:chdeepfigure1}B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution.
+
+We used two different approaches to estimating the variance of the distribution of sample means. With our ``all knowing cap'' on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample means.
+
+Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means (\(a=3\)) to estimate the variance of an infinite set of sample means (\(A = \infty\)). Because we used such a small subset of sample means (3 of \(\infty\)) our estimate will differ from 31.26472 due to sampling error.
+
+Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people (\(\sigma_{people}^2\)) to determine the variance of the distribution of sample means. We had to estimate \(\sigma_{people}^2\) using \(s_{people}^2\). Because we used such a small subset of people (\(n = 15\), 5 from each sample) from the distribution of people (\(N = 100000\)) for our estimate, \(s_{people}^2\), it will differ from \(\sigma_{people}^2\) due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.
 
 \hypertarget{regression-and-correlation}{%
 \chapter{Regression and correlation}\label{regression-and-correlation}}
@@ -11382,7 +11540,7 @@ You should always check for curvilinear relations when reporting correlations vi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-435-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-441-1.pdf}
 
 You can think of each bivariate correlation as the shaded areas on the figure below. In this type of figure the degree of overlap between two circles is determined by the correlation squared (i.r., \(r^2\)). The value you obtain for \(r^2\) indicates the proportion of the criterion that is covered by the predictor. For example, if \(r\) = .50 then \(r^2\) = .25 which indicates 25\% of the criterion should be covered by the circle representing that predictor.
 
@@ -11955,7 +12113,7 @@ Try the interactive version of the graph below. Caveat, sometimes it doesn't app
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-469-1.png}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-475-1.png}
 
 \hypertarget{sample-size-for-multiple-regression}{%
 \chapter{Sample size for multiple regression}\label{sample-size-for-multiple-regression}}
@@ -12354,7 +12512,7 @@ You can obtain the 3D graph (which can be rotated) using the code:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-488-1.png}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-494-1.png}
 
 \hypertarget{unformatted-2d-graph}{%
 \subsection{Unformatted 2D graph}\label{unformatted-2d-graph}}
@@ -12369,7 +12527,7 @@ You can obtain the 2D graph (cross-section of the 3D surface) with the code belo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-489-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-495-1.pdf}
 
 \hypertarget{tables}{%
 \subsection{Tables}\label{tables}}
@@ -12398,7 +12556,7 @@ We inspect the Table output and find the value for -1/+1 SD of the moderator (ag
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-491-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-497-1.pdf}
 
 \hypertarget{saving-1}{%
 \subsubsection{Saving}\label{saving-1}}
@@ -12712,7 +12870,7 @@ The chapter provide a series of ``Cookbook'' receipes for starting different typ
 \hypertarget{required-packages-1}{%
 \section{Required Packages}\label{required-packages-1}}
 
-The data files below are used in this chapter. The files are available at: \url{https://github.com/dstanley4/psyc6060bookdown}
+The data files below are used in this chapter.
 
 \begin{longtable}[]{@{}l@{}}
 \toprule

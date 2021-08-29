@@ -8,7 +8,7 @@ output:
 
 ## A tale of two methods
 
-In this chapter, we focus on describing the sampling distribution of the mean. Our goal is to understand the logic behind two different methods for estimating the variance of the sampling distribution of the mean. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
+In this chapter, we focus on describing the distribution of sample means. Our goal is to understand the logic behind two different methods for estimating the variance of distribution of sample means. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
 
 ## A student population
 
@@ -24,7 +24,7 @@ The mean of a population of 100,000 individuals is calculated using Equation \@r
 The variance of a population of 100,000 individuals is calculated using Equation \@ref(eq:popvardeep) below.
 
 \begin{equation} 
-\sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \bar{X})^2}}{N}
+\sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \mu_{people})^2}}{N}
       (\#eq:popvardeep)
 \end{equation}
 
@@ -78,7 +78,7 @@ When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1
 In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation \@ref(eq:popvarxbardeep) below. 
 
 \begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}
+\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}
       (\#eq:popvarxbardeep)
 \end{equation} 
 
@@ -93,7 +93,7 @@ But imagine if we could obtain the full infinite set of sample means - then we c
 
 $$
 \begin{aligned} 
-\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}\\
+\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}\\
 &= 31.26472\\
 \end{aligned} 
 $$
@@ -146,7 +146,7 @@ Although we can just look at the numbers resulting from these two methods and co
 $$
 \begin{aligned} 
 \text{ratio comparing methods} &= \frac{\text{variance of sample means calculated using sample means}}{\text{variance of sample means calculated using CLT shortcut formula}}\\
-&=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
+&=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
 &=\frac{31.26472}{31.26472}\\
 &= 1.00\\
 \end{aligned} 
@@ -227,7 +227,7 @@ est_mean_var_clt <- est_pop_var_pooled/n_sample
 
 In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each $n$ = 5) from the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. The statistics for those three sample are presented below.
 
-| Sample Number | Sample size ($n$) | Mean ($\bar{x} = \frac{\Sigma x_i}{n}$) | Variance ($s^2=\frac{\Sigma (x_i - \bar{x})^2}{n-1}$) |
+| Sample Number | Sample size ($n$) | Mean ($\bar{x} = \frac{\Sigma x_i}{n}$) | Variance ($s_{people}^2=\frac{\Sigma (x_i - \bar{x})^2}{n-1}$) |
 |:-------------:|:-----:|:-----------------------------:|:------------------------------------------------:|
 | 1             |  5 | `r sample_mean`      | `r est_pop_var`                         |
 | 2             |  5 | `r sample_mean2`     | `r est_pop_var2`                        |
@@ -245,7 +245,7 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 
 In this example (see table above), we have 3 sample means (each based on n = 5) so $a = 3$. Let's estimate the variance of the distribution of sample means (Figure \@ref(fig:chdeepfigure1)B) using these three sample means.
 
-First, we calculate the mean of the three sample means ($\bar{\bar{x}}$) because we will need that in the variance formula.
+First, we calculate the mean of the three sample means ($\mu_{\bar{x}}$) because we will need that in the variance formula.
 
 $$
 \begin{aligned} 
@@ -382,7 +382,7 @@ We can use the R code below to determine the extent to which this ratio will dif
 | People     |  Variance           | $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}$        | $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}$  |
 | People     |  Standard Deviation | $\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \bar{X})^2}}{N}}$   | $s_{people} = SD = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}}$  |
 | Sample Means |  Mean             | $\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}$             |  $\bar{\bar{x}} = \frac{\sum_{i=1}^{a}{\bar{x}_i}}{a}$                             | 
-| Sample Means |  Method 1: Variance| $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \bar{\bar{x}})^2}}{A}$ |  $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$ |
+| Sample Means |  Method 1: Variance| $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}$ |  $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$ |
 | Sample Means |  Method 2 CLT: Variance| $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$ |  $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$ |
 | Sample Means |  Method 2 CLT: Standard Error| $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |  $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$ |
 
