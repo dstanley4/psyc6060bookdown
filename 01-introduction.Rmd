@@ -220,7 +220,7 @@ view(okcupid_profiles)
 ```
 
 
-### print(): See you data in the Console
+### print(): See your data in the Console
 You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print() command below in the Console:
 
 ```{r}
@@ -257,9 +257,9 @@ tail(okcupid_profiles, 3)
 
 ### summary(): Quick summaries
 
-You can a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.
+You can create a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.
 
-Try the command below in the Console. You will see that summary() give the mean and median for each of the numeric variables (age and height).
+Try the command below in the Console. You will see that summary() gives the mean and median for each of the numeric variables (age and height).
 
 ```{r}
 summary(okcupid_profiles)
@@ -299,14 +299,15 @@ Source (without Echo) is not designed for the typical analysis workflow. It is m
 
 The Source with Echo command runs all of the contents of a script and presents the output in the R console. This is the approach you should use to running your scripts in most cases.
 
-Prior to running Source with Echo (or just Source), it's always a good idea to restart R. This makes sure you clear the computer memory of any errors from any previous runs. 
+Prior to running Source with Echo (or just Source), it's always a good idea do do two things: 1) Save your script. 2) Use the menu item: *Session > Restart R*. This makes sure you clear the computer memory of any errors from any previous runs. 
 
 So you should do the following EVERY time you run your script.
 
-1.  Use the menu item: **Session > Restart R**
-2.  Click the down arrow beside the Source button, and click on Source With Echo
+1.  Save your script
+2.  Use the menu item: **Session > Restart R**
+3.  Click the down arrow beside the Source button, and click on Source With Echo
 
-This will clear potentially problematic previous stats, run the script commands, and display the output in the Console.  Moving forward we will use this approach for running scripts. Once you have used Source with Echo once, you can just click the Source button and it will use Source with Echo automatically (without the need to use the pull down option for selecting Source with Echo).
+This will clear potentially problematic previous stats and variables from memory, run the script commands, and display the output in the Console.  Moving forward we will use this approach for running scripts. Once you have used Source with Echo once, you can just click the Source button and it will use Source with Echo automatically (without the need to use the pull down option for selecting Source with Echo).
 
 
 ```{block2, type='rmdcaution'}
@@ -416,7 +417,7 @@ print(my_list$office_number)
 
 ## Revisiting read_csv()
 
-In the text above we learned about vectors of characters. This information can be used handle missing values in the read_csv() command. Consider a data set where for many participants we did not get a response to a question. We might have that represented in various ways within the data file. The value for that question might simply be omitted (i.e., represented by nothing -- ""), represented by NA for not available, or maybe simply be something like -777. 
+In the text above we learned about vectors of characters. This information can be used to handle missing values in the read_csv() command. Consider a data set where for many participants we did not get a response to a question. We might have that represented in various ways within the data file. The value for that question might simply be omitted (i.e., represented by nothing -- ""), represented by NA for not available, or maybe simply be something like -777. 
 
 When we load data with read_csv() we can indicate to the computer how missing values are represented. This ensures the computer sees something like -777 as a missing value rather than an actual value. We do so in the read_csv() command below using the **na** argument (not available). Note: use SHIFT-RETURN or SHIFT-ENTER to move the next line within the read_csv() command. Failure to indicate the missing value codes within read_csv() will result in incorrect answers in most scenarios with missing data.
 
