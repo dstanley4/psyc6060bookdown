@@ -272,6 +272,9 @@ $$
 Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **estimated**, based on three sample means ($a = 3$) using Method 1, to be  $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
 
 
+**IMPORTANT:** The denominator of this variance calculation is $2$ (i.e., $3-1$). Therefore, we say there are 2 degrees of freedom associated with this estimate of the variance of the infinite number of sample means.
+
+
 ### Method 2: CLT shortcut: *Estimation* of variance of infinite sample means
 
 We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation \@ref(eq:popvarCLTxbardeep) above, repeated below for clarity.
@@ -300,6 +303,10 @@ s_{people}^2 &= MSE_{people}\\
 \end{aligned}
 $$
 
+**IMPORTANT:** The denominator of this variance calculation is $12$ (i.e., a(n-1)=3(5-1)=3(4)=12$). Therefore, we say there are 12 degrees of freedom associated with this estimate of the variance of the people in the population.
+
+
+
 When the three sample sizes are the same the above formula just boils down to an average:
 
 $$
@@ -315,7 +322,7 @@ $$
 
 The number we just calculated,  $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. You could think of this number as an average variance estimate.
 
-We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).
+We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) to compared to a individual sample estimate (with only 4 degrees of freedom).
 
 We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
@@ -341,6 +348,10 @@ s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
 $$
 
 Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is $s_{\bar{x}}^2 =  `r est_mean_var_clt`$. 
+
+
+**IMPORTANT:** This esimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
+
 
 ### Ratio comparison of two methods
 
@@ -475,6 +486,9 @@ extreme_cut_off3 <- var_ratio3_sorted[100000*.95]
 extreme_cut_off3 <- round(extreme_cut_off3, 2)
 print(extreme_cut_off3)
 ```
+
+Thus, $F_{critical}$(2, 12) = 3.88.
+
 
 Compare to an $F$-table.
 
