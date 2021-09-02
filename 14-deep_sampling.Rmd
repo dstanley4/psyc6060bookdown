@@ -355,10 +355,6 @@ You can see in the table above, that the estimates for the variance of the distr
 
 \
 
-
-
-
-
 $$
 \begin{aligned} 
 \text{ratio comparing methods} &= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
@@ -368,10 +364,123 @@ $$
 \end{aligned} 
 $$
 
+
+
+## Simulation 1 population
+
 We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on $n =5$).
 
+```{r, eval = FALSE}
+library(learnSampling)
+pop1 <- make_population(mean = 172.50, variance = 156.3236)
+
+data_ratios <- get_mean_samples_ratio(pop1,
+                                      a = 3, 
+                                      number.of.trials = 100000)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+save(data_ratios, file = "ch_deep_sampling/data_ratio_1pop.RData")
+```
+
+```{r, eval = TRUE, echo = FALSE}
+load(file = "ch_deep_sampling/data_ratio_1pop.RData")
+```
+
+```{r, eval = FALSE}
+library(skimr)
+skim(data_ratios)
+```
+
+```{r, echo = FALSE, out.width="90%"}
+knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
+```
+
+An inspection of the output in Figure XX above illustrates that, on average (over many trials),  both Method 1 and Method 2 produce the save result as our calculations above.
+
+You may be suprised to see that the ratio - is 1.20 on average and not 1.00. This occurs because the ratio is constructed base on each trial of the simulation (rather than the overal shown in the output). If you were to make a histograph of method_1_var_est values and histogram of the method_2_clt_est values you would see they have different shapes. As a result, the mean ratio is 1.20 rather than 1.00. But that's ok, we just need to remember that the ratio is **roughly** 1.00 when the two methods are used on the same popualtion. 
+
+What's more interesting is thinking about how large this ratio of variances can get.
+Let's look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:
+
+```{r, out.width="100%"}
+library(ggplot2)
+
+ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
+  geom_histogram(breaks = seq(0, 10, by = .5)) +
+  scale_x_continuous(breaks = seq(0,10, by = .5)) +
+  coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
+  xlab("Variance Ratio: (method_1_var / method_2_clt)") +
+  ylab("Frequency") +
+  theme_classic()
+```
+
+Describe the graph here. Range etc.
 
 
+
+## Simulation 3 identical populations
+
+```{r, eval = FALSE}
+library(learnSampling)
+pop1 <- make_population(mean = 172.50, variance = 156.3236)
+pop2 <- pop1
+pop3 <- pop1
+
+data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
+                                      number.of.trials = 100000)
+```
+
+```{r, eval = FALSE, echo = FALSE}
+save(data_ratios3, file = "ch_deep_sampling/data_ratio_3pop.RData")
+```
+
+```{r, eval = TRUE, echo = FALSE}
+load(file = "ch_deep_sampling/data_ratio_3pop.RData")
+```
+
+```{r, eval = FALSE}
+library(skimr)
+skim(data_ratios3)
+```
+
+```{r, echo = FALSE, out.width="90%"}
+#knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
+```
+
+
+
+What's more interesting is thinking about how large this ratio of variances can get.
+Let's look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:
+
+```{r, out.width="100%"}
+library(ggplot2)
+
+ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
+  geom_histogram(breaks = seq(0, 10, by = .5)) +
+  geom_vline(xintercept = 3.88, color = "blue", size = 1) +
+  scale_x_continuous(breaks = seq(0,10, by = .5)) +
+  coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
+  xlab("Variance Ratio: (method_1_var / method_2_clt)") +
+  ylab("Frequency") +
+  theme_classic()
+```
+
+Describe the graph here. Range etc.
+
+
+```{r}
+var_ratio3_sorted <- sort(data_ratios3$var_ratio)
+extreme_cut_off3 <- var_ratio3_sorted[100000*.95]
+extreme_cut_off3 <- round(extreme_cut_off3, 2)
+print(extreme_cut_off3)
+```
+
+Compare to an $F$-table.
+
+```{r, echo = FALSE, out.width="90%"}
+knitr::include_graphics("ch_deep_sampling/images/ftable.png")
+```
 
 
 ## Summary table

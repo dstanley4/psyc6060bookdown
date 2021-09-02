@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-01" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,15 +33,15 @@
   
 <link rel="prev" href="positive-predictive-value.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -51,15 +51,8 @@
 
 
 
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -540,8 +533,10 @@ div.csl-indent {
 <li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.7</b> Summary table</a></li>
-<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.8</b> Walk away points</a></li>
+<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-1-population"><i class="fa fa-check"></i><b>14.7</b> Simulation 1 population</a></li>
+<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a></li>
+<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.9</b> Summary table</a></li>
+<li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.10</b> Walk away points</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>15</b> Regression and correlation</a>
 <ul>
@@ -817,7 +812,7 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
       \tag{14.5}
 \end{equation}\]</span></p>
 <p>An inspection of Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
-<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">W. L. Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
+<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
 <p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
 <p>Previously, we learned that the variance of the distribution of people in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>. Consequently, we can use Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate the variance of the distribution of sample means in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B:</p>
 <p><span class="math display">\[
@@ -940,7 +935,7 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{(5-1)168 + (5-1)146.7 +(5-1)346}{(5-1) + (5-1) + (5-1)} \\
 &amp;= \frac{672 + 586.8 + 1384}{15 -3} \\
 &amp;= \frac{2642.8}{12} \\
-&amp;= 220.2333 \\
+&amp;= 220.2333333 \\
 \end{aligned}
 \]</span></p>
 <p>When the three sample sizes are the same the above formula just boils down to an average:</p>
@@ -950,11 +945,11 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
 &amp;= \frac{168 + 146.7 + 346 }{3} \\
 &amp;= \frac{660.7}{3} \\
-&amp;= 220.2333 \\
+&amp;= 220.2333333 \\
 \end{aligned}
 \]</span></p>
-<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333\)</span>, is an estimate of the variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. You could think of this number as an average variance estimate.</p>
-<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333\)</span>) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).</p>
+<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333333\)</span>, is an estimate of the variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. You could think of this number as an average variance estimate.</p>
+<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333333\)</span>) is based on 75 people - people from all three samples (i.e., 72 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculate is a better estimate because of the higher degrees of freedom (72) to compared to a individual sample estimate (with only 24 degrees of freedom).</p>
 <p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
 </div>
 <div id="estimating-sigma_barx2-with-clt" class="section level4" number="14.6.2.2">
@@ -968,11 +963,11 @@ s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
-&amp;= \frac{220.2333 }{5}\\
-&amp;= 44.0467
+&amp;= \frac{220.2333333 }{5}\\
+&amp;= 44.0466667
 \end{aligned} 
 \]</span></p>
-<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0467\)</span>.</p>
+<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0466667\)</span>.</p>
 </div>
 </div>
 <div id="ratio-comparison-of-two-methods-1" class="section level3" number="14.6.3">
@@ -1000,26 +995,86 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <tr class="even">
 <td align="center">Method 2 CLT: Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
-<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span></td>
+<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0466667\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from “the truth” (31.26472) due to sampling error. Consquently, when we construct a ratio based on those variance estimate (<span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span> and <span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span>) the ratio will differ from “the truth” (1.00) due to sampling error.</p>
+<p>You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from “the truth” (31.26472) due to sampling error. Consquently, when we construct a ratio based on those variance estimate (<span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span> and <span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0466667\)</span>) the ratio will differ from “the truth” (1.00) due to sampling error.</p>
 <p><br />
 </p>
 <p><span class="math display">\[
 \begin{aligned} 
 \text{ratio comparing methods} &amp;= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
 &amp;=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
-&amp;=\frac{79.213}{44.0467}\\
-&amp;= 1.7984\\
+&amp;=\frac{79.213}{44.0466667}\\
+&amp;= 1.7983881\\
 \end{aligned} 
 \]</span></p>
+</div>
+</div>
+<div id="simulation-1-population" class="section level2" number="14.7">
+<h2><span class="header-section-number">14.7</span> Simulation 1 population</h2>
 <p>We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on <span class="math inline">\(n =5\)</span>).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="deep-dive-sampling-distributions-draft.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb1-2"><a href="deep-dive-sampling-distributions-draft.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb1-3"><a href="deep-dive-sampling-distributions-draft.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="deep-dive-sampling-distributions-draft.html#cb1-4" aria-hidden="true" tabindex="-1"></a>data_ratios <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1,</span>
+<span id="cb1-5"><a href="deep-dive-sampling-distributions-draft.html#cb1-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">a =</span> <span class="dv">3</span>, </span>
+<span id="cb1-6"><a href="deep-dive-sampling-distributions-draft.html#cb1-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="deep-dive-sampling-distributions-draft.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb2-2"><a href="deep-dive-sampling-distributions-draft.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
+<p><img src="ch_deep_sampling/images/skim_screenshot.png" width="90%" /></p>
+<p>An inspection of the output in Figure XX above illustrates that, on average (over many trials), both Method 1 and Method 2 produce the save result as our calculations above.</p>
+<p>You may be suprised to see that the ratio - is 1.20 on average and not 1.00. This occurs because the ratio is constructed base on each trial of the simulation (rather than the overal shown in the output). If you were to make a histograph of method_1_var_est values and histogram of the method_2_clt_est values you would see they have different shapes. As a result, the mean ratio is 1.20 rather than 1.00. But that’s ok, we just need to remember that the ratio is <strong>roughly</strong> 1.00 when the two methods are used on the same popualtion.</p>
+<p>What’s more interesting is thinking about how large this ratio of variances can get.
+Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="deep-dive-sampling-distributions-draft.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="deep-dive-sampling-distributions-draft.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="deep-dive-sampling-distributions-draft.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_ratios, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> var_ratio)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="deep-dive-sampling-distributions-draft.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="deep-dive-sampling-distributions-draft.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="deep-dive-sampling-distributions-draft.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40000</span>)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="deep-dive-sampling-distributions-draft.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variance Ratio: (method_1_var / method_2_clt)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="deep-dive-sampling-distributions-draft.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="deep-dive-sampling-distributions-draft.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-7-1.png" width="100%" /></p>
+<p>Describe the graph here. Range etc.</p>
 </div>
+<div id="simulation-3-identical-populations" class="section level2" number="14.8">
+<h2><span class="header-section-number">14.8</span> Simulation 3 identical populations</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="deep-dive-sampling-distributions-draft.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb4-2"><a href="deep-dive-sampling-distributions-draft.html#cb4-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb4-3"><a href="deep-dive-sampling-distributions-draft.html#cb4-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb4-4"><a href="deep-dive-sampling-distributions-draft.html#cb4-4" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb4-5"><a href="deep-dive-sampling-distributions-draft.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="deep-dive-sampling-distributions-draft.html#cb4-6" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
+<span id="cb4-7"><a href="deep-dive-sampling-distributions-draft.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="deep-dive-sampling-distributions-draft.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb5-2"><a href="deep-dive-sampling-distributions-draft.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
+<p>What’s more interesting is thinking about how large this ratio of variances can get.
+Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="deep-dive-sampling-distributions-draft.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-2"><a href="deep-dive-sampling-distributions-draft.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="deep-dive-sampling-distributions-draft.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_ratios3, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> var_ratio)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="deep-dive-sampling-distributions-draft.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="deep-dive-sampling-distributions-draft.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">3.88</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="deep-dive-sampling-distributions-draft.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="deep-dive-sampling-distributions-draft.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40000</span>)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="deep-dive-sampling-distributions-draft.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variance Ratio: (method_1_var / method_2_clt)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="deep-dive-sampling-distributions-draft.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="deep-dive-sampling-distributions-draft.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-13-1.png" width="100%" /></p>
+<p>Describe the graph here. Range etc.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="deep-dive-sampling-distributions-draft.html#cb7-1" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
+<span id="cb7-2"><a href="deep-dive-sampling-distributions-draft.html#cb7-2" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> var_ratio3_sorted[<span class="dv">100000</span><span class="sc">*</span>.<span class="dv">95</span>]</span>
+<span id="cb7-3"><a href="deep-dive-sampling-distributions-draft.html#cb7-3" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
+<span id="cb7-4"><a href="deep-dive-sampling-distributions-draft.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
+<pre><code>## [1] 3.88</code></pre>
+<p>Compare to an <span class="math inline">\(F\)</span>-table.</p>
+<p><img src="ch_deep_sampling/images/ftable.png" width="90%" /></p>
 </div>
-<div id="summary-table" class="section level2" number="14.7">
-<h2><span class="header-section-number">14.7</span> Summary table</h2>
+<div id="summary-table" class="section level2" number="14.9">
+<h2><span class="header-section-number">14.9</span> Summary table</h2>
 <table>
 <colgroup>
 <col width="14%" />
@@ -1081,8 +1136,8 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </tbody>
 </table>
 </div>
-<div id="walk-away-points" class="section level2" number="14.8">
-<h2><span class="header-section-number">14.8</span> Walk away points</h2>
+<div id="walk-away-points" class="section level2" number="14.10">
+<h2><span class="header-section-number">14.10</span> Walk away points</h2>
 <ul>
 <li>Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize</li>
 <li>think of var/n as representing the variability in sample means due to random sampling</li>
@@ -1117,15 +1172,15 @@ Hays, William L. 1994. <em>Statistics (5th Edn)</em>. Holt, Rinehart &amp; Winst
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

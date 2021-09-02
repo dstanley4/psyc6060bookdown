@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-01" />
+<meta name="date" content="2021-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -540,8 +540,10 @@ div.csl-indent {
 <li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.7</b> Summary table</a></li>
-<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.8</b> Walk away points</a></li>
+<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-1-population"><i class="fa fa-check"></i><b>14.7</b> Simulation 1 population</a></li>
+<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a></li>
+<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.9</b> Summary table</a></li>
+<li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.10</b> Walk away points</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>15</b> Regression and correlation</a>
 <ul>
@@ -799,11 +801,11 @@ div.csl-indent {
 <p>You may also find the <a href="https://github.com/crsh/papaja">papaja package</a> by Frederik Aust helpful. It’s an easy way to use rmarkdown. It is a based on the rmarkdown extension called bookdown. This package is specifically designed to make it easy to use rmarkdown/bookdown to make an APA style paper. Indeed that’s the basis for the odd package name: <strong>Preparing APA Journal Articles</strong> (papaja).</p>
 <p>I suggest you read the extensive papaja (documentation)[<a href="https://crsh.github.io/papaja_man/introduction.html" class="uri">https://crsh.github.io/papaja_man/introduction.html</a>]. It will be worth your while!</p>
 <p>The only slight complication with papaja is the fact it is not on the CRAN and can’t be installed in the usual way. But it’s still straight forward. You can install papaja with the commands below - taken from the papaja website.</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="next-step-resources.html#cb627-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install devtools package if necessary</span></span>
-<span id="cb627-2"><a href="next-step-resources.html#cb627-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;devtools&quot;</span> <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())) <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb627-3"><a href="next-step-resources.html#cb627-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb627-4"><a href="next-step-resources.html#cb627-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the stable development verions from GitHub</span></span>
-<span id="cb627-5"><a href="next-step-resources.html#cb627-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb637-1"><a href="next-step-resources.html#cb637-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install devtools package if necessary</span></span>
+<span id="cb637-2"><a href="next-step-resources.html#cb637-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="st">&quot;devtools&quot;</span> <span class="sc">%in%</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())) <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb637-3"><a href="next-step-resources.html#cb637-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb637-4"><a href="next-step-resources.html#cb637-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the stable development verions from GitHub</span></span>
+<span id="cb637-5"><a href="next-step-resources.html#cb637-5" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;crsh/papaja&quot;</span>)</span></code></pre></div>
 <p>Indeed, once papaja is installed - you simply have to select the APA template before you enter your rmarkdown, as illustrated below:</p>
 <p><img src="ch_tools/images/papaja_template.png" width="60%" /></p>
 </div>
