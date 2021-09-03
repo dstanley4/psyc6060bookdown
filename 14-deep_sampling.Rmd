@@ -384,6 +384,13 @@ save(data_ratios, file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```{r, eval = TRUE, echo = FALSE}
 load(file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```
+The result is data_ratios3. We can see the first few rows below.
+
+```{r}
+head(data_ratios)
+```
+
+We obtain the summary statistics with the skim command:
 
 ```{r, eval = FALSE}
 library(skimr)
@@ -409,6 +416,7 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
   coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
   xlab("Variance Ratio: (method_1_var / method_2_clt)") +
   ylab("Frequency") +
+  ggtitle("Samples from one population") +
   theme_classic()
 ```
 
@@ -420,13 +428,22 @@ Describe the graph here. Range etc.
 knitr::include_graphics("ch_deep_sampling/images/figure3.png")
 ```
 
+We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
 
 ```{r, eval = FALSE}
 library(learnSampling)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
 pop2 <- pop1
 pop3 <- pop1
+```
 
+
+Then obtain a sample from each population of people and calculate a sample mean. When we use Method 1 Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($A = \infty$). The variance of the three sample means is an estimate of the variance of the distibution of sample mean. When we use Method 2 CLT we use the people from the three sample sto estimate the variance of the population of people. We use our estimate of the variance of the population of people in CLT formula to estimate the variance of the distribution of sample means. Then we calcualte the ratio of Method 1 variance divided by Method 2 CLT.
+
+**Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.**
+
+
+```{r, eval = FALSE}
 data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
                                       number.of.trials = 100000)
 ```
@@ -439,13 +456,21 @@ save(data_ratios3, file = "ch_deep_sampling/data_ratio_3pop.RData")
 load(file = "ch_deep_sampling/data_ratio_3pop.RData")
 ```
 
+The result is data_ratios3. We can see the first few rows below.
+
+```{r}
+head(data_ratios3)
+```
+
+We obtain the summary statistics with the skim command:
+
 ```{r, eval = FALSE}
 library(skimr)
 skim(data_ratios3)
 ```
 
 ```{r, echo = FALSE, out.width="90%"}
-#knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
+knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 ```
 
 What's more interesting is thinking about how large this ratio of variances can get. Let's look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:
@@ -460,6 +485,7 @@ ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
   coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
   xlab("Variance Ratio: (method_1_var / method_2_clt)") +
   ylab("Frequency") +
+  ggtitle("Samples from three identical populations") +
   theme_classic()
 ```
 
