@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-02" />
+<meta name="date" content="2021-09-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -534,7 +534,10 @@ div.csl-indent {
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-1-population"><i class="fa fa-check"></i><b>14.7</b> Simulation 1 population</a></li>
-<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a></li>
+<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a>
+<ul>
+<li class="chapter" data-level="14.8.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#extreme-ratio-values"><i class="fa fa-check"></i><b>14.8.1</b> Extreme ratio values</a></li>
+</ul></li>
 <li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.9</b> Summary table</a></li>
 <li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.10</b> Walk away points</a></li>
 </ul></li>
@@ -741,15 +744,15 @@ div.csl-indent {
 <h2><span class="header-section-number">14.2</span> A student population</h2>
 <p>Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm<span class="math inline">\(^2\)</span>. The heights of all the university students are illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. For these 100,000 people the mean is <span class="math inline">\(\mu_{people}=172.50\)</span> and the variance is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>.</p>
 <p>The mean of a population of 100,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanchdeep">(14.1)</a> below.</p>
-<p><span class="math display" id="eq:popmeanchdeep">\[\begin{equation} 
+<span class="math display" id="eq:popmeanchdeep">\[\begin{equation} 
 \mu_{people} = \frac{\sum_{i=1}^{N=100000}{X_i}}{N}
       \tag{14.1}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>The variance of a population of 100,000 individuals is calculated using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a> below.</p>
-<p><span class="math display" id="eq:popvardeep">\[\begin{equation} 
+<span class="math display" id="eq:popvardeep">\[\begin{equation} 
 \sigma_{people}^2 = \frac{\sum_{i=1}^{N=100000}{(X_i - \mu_{people})^2}}{N}
       \tag{14.2}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 </div>
 <div id="random-sampling-process" class="section level2" number="14.3">
 <h2><span class="header-section-number">14.3</span> Random sampling process</h2>
@@ -774,10 +777,10 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 <div id="distribution-of-sample-means-as-a-population" class="section level3" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Distribution of sample means as a population</h3>
 <p>Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanxbardeep">(14.3)</a>. Notice that we used the symbol, <span class="math inline">\(\mu_{\bar{x}}\)</span>, to represented this value. Further notice, the little <span class="math inline">\(\bar{x}\)</span> beside the <span class="math inline">\(\mu\)</span> in <span class="math inline">\(\mu_{\bar{x}}\)</span> which indicates it is sample means that are being averaged. As noted previously, we use <span class="math inline">\(A\)</span> instead of <span class="math inline">\(N\)</span> to represent the number of sample means (where <span class="math inline">\(A\)</span> = infinity, because there are an infinite number of sample means in the distribution)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Notice the similarity between the formula for the mean of a distribution of people, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanchdeep">(14.1)</a> above, and the formula for the mean of a distribution of sample means, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanxbardeep">(14.3)</a>.</p>
-<p><span class="math display" id="eq:popmeanxbardeep">\[\begin{equation} 
+<span class="math display" id="eq:popmeanxbardeep">\[\begin{equation} 
 \mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}
       \tag{14.3}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popmeanxbardeep">(14.3)</a> we find that the mean of the sample means is 172.50 cm (i.e., <span class="math inline">\(\mu_{\bar{x}} = 172.50\)</span>).</p>
 <p>A key point to remember is that the mean of the sample means, <span class="math inline">\(\mu_{\bar{x}}\)</span>, will always be the same as that of the people’s heights, <span class="math inline">\(\mu_{people}\)</span>. Consequently, any conclusions we make about <em>population means</em> based on Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>) will also apply to Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A (i.e., <span class="math inline">\(\mu_{people}\)</span>). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., <span class="math inline">\(\mu_{people}\)</span>) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample means in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B (i.e., <span class="math inline">\(\mu_{\bar{x}}\)</span>).</p>
 </div>
@@ -788,10 +791,10 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 <div id="method-1-calculate-the-variance-of-infinite-sample-means" class="section level3" number="14.5.1">
 <h3><span class="header-section-number">14.5.1</span> Method 1: Calculate the variance of infinite sample means</h3>
 <p>In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> below.</p>
-<p><span class="math display" id="eq:popvarxbardeep">\[\begin{equation} 
+<span class="math display" id="eq:popvarxbardeep">\[\begin{equation} 
 \sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}
       \tag{14.4}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Notice how Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> for the variance of sample means in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B, is similar to the formula we use the variance of people, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvardeep">(14.2)</a>, in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. The formula for the variance of sample means, Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a>, differs because we are using on sample means (<span class="math inline">\(\bar{x}\)</span>) instead of attributes of people (<span class="math inline">\(X\)</span>). As well, we use <span class="math inline">\(A\)</span> to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than <span class="math inline">\(N\)</span>.</p>
 <p>Obviously, using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarxbardeep">(14.4)</a> to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it’s good to keep this calculation method in mind - since it reminds us of principles we’ve already learned about the variance of populations<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>But imagine if we could obtain the full infinite set of sample means - then we could use the formula as below:</p>
@@ -807,10 +810,10 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 <div id="method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means" class="section level3" number="14.5.2">
 <h3><span class="header-section-number">14.5.2</span> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</h3>
 <p>Fortunately we don’t need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B. There is a “shortcut formula” we can used based on the Central Limit Theorem (CLT), see Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> below.</p>
-<p><span class="math display" id="eq:popvarCLTxbardeep">\[\begin{equation} 
+<span class="math display" id="eq:popvarCLTxbardeep">\[\begin{equation} 
 \sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\\
       \tag{14.5}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>An inspection of Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
 <p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
 <p>It’s helpful, moving forward to, think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.</p>
@@ -852,10 +855,10 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 <p>In this section we focus on estimating the variance of the distribution of sample means using sample data. Imagine that we obtained three samples (each <span class="math inline">\(n\)</span> = 5) from the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>A. The statistics for those three sample are presented below.</p>
 <table>
 <colgroup>
-<col width="14%" />
-<col width="6%" />
-<col width="30%" />
-<col width="48%" />
+<col width="10%" />
+<col width="13%" />
+<col width="29%" />
+<col width="46%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -889,10 +892,10 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 <div id="method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means" class="section level3" number="14.6.1">
 <h3><span class="header-section-number">14.6.1</span> Method 1: Estimate the variance of infinite sample means using 3 sample means</h3>
 <p>We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case “<span class="math inline">\(a\)</span>” to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>).</p>
-<p><span class="math display" id="eq:estpopvarxbardeep">\[\begin{equation} 
+<span class="math display" id="eq:estpopvarxbardeep">\[\begin{equation} 
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
       \tag{14.6}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>In this example (see table above), we have 3 sample means (each based on n = 5) so <span class="math inline">\(a = 3\)</span>. Let’s estimate the variance of the distribution of sample means (Figure <a href="deep-dive-sampling-distributions-draft.html#fig:chdeepfigure1">14.1</a>B) using these three sample means.</p>
 <p>First, we calculate the mean of the three sample means (<span class="math inline">\(\mu_{\bar{x}}\)</span>) because we will need that in the variance formula.</p>
 <p><span class="math display">\[
@@ -917,8 +920,7 @@ s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 </div>
 <div id="method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means" class="section level3" number="14.6.2">
 <h3><span class="header-section-number">14.6.2</span> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</h3>
-<p>We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> above, repeated below for clarity.
-.</p>
+<p>We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> above, repeated below for clarity. .</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{n}\\
@@ -957,10 +959,10 @@ s_{people}^2 &amp;= MSE_{people}\\
 <div id="estimating-sigma_barx2-with-clt" class="section level4" number="14.6.2.2">
 <h4><span class="header-section-number">14.6.2.2</span> Estimating <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> with CLT</h4>
 <p>Armed with the estimate of the variance of the people in the population (<span class="math inline">\(s_{people}^2\)</span>) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means using Equation <a href="deep-dive-sampling-distributions-draft.html#eq:estpopvarmeansclt">(14.7)</a> below.</p>
-<p><span class="math display" id="eq:estpopvarmeansclt">\[\begin{equation} 
+<span class="math display" id="eq:estpopvarmeansclt">\[\begin{equation} 
 s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
       \tag{14.7}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Putting in values:</p>
 <p><span class="math display">\[
 \begin{aligned} 
@@ -978,10 +980,10 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <p>The table below summarizes our work so far.</p>
 <table>
 <colgroup>
-<col width="24%" />
-<col width="28%" />
-<col width="28%" />
-<col width="18%" />
+<col width="12%" />
+<col width="17%" />
+<col width="50%" />
+<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -1021,6 +1023,7 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </div>
 <div id="simulation-1-population" class="section level2" number="14.7">
 <h2><span class="header-section-number">14.7</span> Simulation 1 population</h2>
+<p><img src="ch_deep_sampling/images/figure2.png" width="100%" /></p>
 <p>We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on <span class="math inline">\(n =5\)</span>).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="deep-dive-sampling-distributions-draft.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
 <span id="cb1-2"><a href="deep-dive-sampling-distributions-draft.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
@@ -1033,62 +1036,45 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <p><img src="ch_deep_sampling/images/skim_screenshot.png" width="90%" /></p>
 <p>An inspection of the output in Figure XX above illustrates that, on average (over many trials), both Method 1 and Method 2 produce the save result as our calculations above.</p>
 <p>You may be suprised to see that the ratio - is 1.20 on average and not 1.00. This occurs because the ratio is constructed base on each trial of the simulation (rather than the overal shown in the output). If you were to make a histograph of method_1_var_est values and histogram of the method_2_clt_est values you would see they have different shapes. As a result, the mean ratio is 1.20 rather than 1.00. But that’s ok, we just need to remember that the ratio is <strong>roughly</strong> 1.00 when the two methods are used on the same popualtion.</p>
-<p>What’s more interesting is thinking about how large this ratio of variances can get.
-Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="deep-dive-sampling-distributions-draft.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="deep-dive-sampling-distributions-draft.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="deep-dive-sampling-distributions-draft.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_ratios, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> var_ratio)) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="deep-dive-sampling-distributions-draft.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="deep-dive-sampling-distributions-draft.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="deep-dive-sampling-distributions-draft.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40000</span>)) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="deep-dive-sampling-distributions-draft.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variance Ratio: (method_1_var / method_2_clt)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="deep-dive-sampling-distributions-draft.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="deep-dive-sampling-distributions-draft.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-7-1.png" width="100%" /></p>
+<p>What’s more interesting is thinking about how large this ratio of variances can get. Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-8-1.png" width="100%" /></p>
 <p>Describe the graph here. Range etc.</p>
 </div>
 <div id="simulation-3-identical-populations" class="section level2" number="14.8">
 <h2><span class="header-section-number">14.8</span> Simulation 3 identical populations</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="deep-dive-sampling-distributions-draft.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb4-2"><a href="deep-dive-sampling-distributions-draft.html#cb4-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb4-3"><a href="deep-dive-sampling-distributions-draft.html#cb4-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
-<span id="cb4-4"><a href="deep-dive-sampling-distributions-draft.html#cb4-4" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span>
-<span id="cb4-5"><a href="deep-dive-sampling-distributions-draft.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="deep-dive-sampling-distributions-draft.html#cb4-6" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
-<span id="cb4-7"><a href="deep-dive-sampling-distributions-draft.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="deep-dive-sampling-distributions-draft.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb5-2"><a href="deep-dive-sampling-distributions-draft.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
-<p>What’s more interesting is thinking about how large this ratio of variances can get.
-Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="deep-dive-sampling-distributions-draft.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-2"><a href="deep-dive-sampling-distributions-draft.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="deep-dive-sampling-distributions-draft.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_ratios3, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> var_ratio)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="deep-dive-sampling-distributions-draft.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="deep-dive-sampling-distributions-draft.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">3.88</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="deep-dive-sampling-distributions-draft.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>, <span class="at">by =</span> .<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="deep-dive-sampling-distributions-draft.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">40000</span>)) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="deep-dive-sampling-distributions-draft.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Variance Ratio: (method_1_var / method_2_clt)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-9"><a href="deep-dive-sampling-distributions-draft.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="deep-dive-sampling-distributions-draft.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-13-1.png" width="100%" /></p>
+<p><img src="ch_deep_sampling/images/figure3.png" width="100%" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="deep-dive-sampling-distributions-draft.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb3-2"><a href="deep-dive-sampling-distributions-draft.html#cb3-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb3-3"><a href="deep-dive-sampling-distributions-draft.html#cb3-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb3-4"><a href="deep-dive-sampling-distributions-draft.html#cb3-4" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb3-5"><a href="deep-dive-sampling-distributions-draft.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="deep-dive-sampling-distributions-draft.html#cb3-6" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
+<span id="cb3-7"><a href="deep-dive-sampling-distributions-draft.html#cb3-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="deep-dive-sampling-distributions-draft.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb4-2"><a href="deep-dive-sampling-distributions-draft.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
+<p>What’s more interesting is thinking about how large this ratio of variances can get. Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-15-1.png" width="100%" /></p>
 <p>Describe the graph here. Range etc.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="deep-dive-sampling-distributions-draft.html#cb7-1" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
-<span id="cb7-2"><a href="deep-dive-sampling-distributions-draft.html#cb7-2" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> var_ratio3_sorted[<span class="dv">100000</span><span class="sc">*</span>.<span class="dv">95</span>]</span>
-<span id="cb7-3"><a href="deep-dive-sampling-distributions-draft.html#cb7-3" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
-<span id="cb7-4"><a href="deep-dive-sampling-distributions-draft.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
+<div id="extreme-ratio-values" class="section level3" number="14.8.1">
+<h3><span class="header-section-number">14.8.1</span> Extreme ratio values</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="deep-dive-sampling-distributions-draft.html#cb5-1" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
+<span id="cb5-2"><a href="deep-dive-sampling-distributions-draft.html#cb5-2" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> var_ratio3_sorted[<span class="dv">100000</span><span class="sc">*</span>.<span class="dv">95</span>]</span>
+<span id="cb5-3"><a href="deep-dive-sampling-distributions-draft.html#cb5-3" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
+<span id="cb5-4"><a href="deep-dive-sampling-distributions-draft.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
 <pre><code>## [1] 3.88</code></pre>
 <p>Thus, <span class="math inline">\(F_{critical}\)</span>(2, 12) = 3.88.</p>
 <p>Compare to an <span class="math inline">\(F\)</span>-table.</p>
 <p><img src="ch_deep_sampling/images/ftable.png" width="90%" /></p>
 </div>
+</div>
 <div id="summary-table" class="section level2" number="14.9">
 <h2><span class="header-section-number">14.9</span> Summary table</h2>
 <table>
 <colgroup>
-<col width="14%" />
-<col width="25%" />
-<col width="29%" />
-<col width="29%" />
+<col width="6%" />
+<col width="13%" />
+<col width="41%" />
+<col width="38%" />
 </colgroup>
 <thead>
 <tr class="header">
