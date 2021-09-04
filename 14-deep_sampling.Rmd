@@ -367,16 +367,25 @@ $$
 
 ## Simulation 1 population
 
-```{r, out.width = "100%", echo=FALSE}
+```{r sim1pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from 1 population"}
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
 ```
 
-We can use the R code below to determine the extent to which this ratio will differ from 1.00 for the current context (3 means each based on $n =5$).
+The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data  to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples.
+
+
+We begin by creating the population in R:
+
 
 ```{r, eval = FALSE}
 library(learnSampling)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
+```
 
+
+Then we run a simulation were we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
+
+```{r, eval = FALSE}
 data_ratios <- get_mean_samples_ratio(pop1,
                                       a = 3, 
                                       number.of.trials = 100000)
@@ -389,13 +398,13 @@ save(data_ratios, file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```{r, eval = TRUE, echo = FALSE}
 load(file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```
-The result is data_ratios3. We can see the first few rows below.
+The results of the 100,000 simulations is placed in data_ratios3. We can see the first few rows of these data below.
 
 ```{r}
 head(data_ratios)
 ```
 
-In the first row of the above table we obtained 3 samples from the population of people and then used that data  to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data  to **estimate** the variance of the sampling distribution of means using Method 1 and Method 2 (method_1_var_est and method_2_clt_est, respectively). Then we created a ratio of those two values (method_1_var_est/method_2_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 
 We obtain the summary statistics with the skim command:
