@@ -533,14 +533,13 @@ div.csl-indent {
 <li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#simulation-1-population"><i class="fa fa-check"></i><b>14.7</b> Simulation 1 population</a></li>
-<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a>
+<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#frame-of-reference-random-sampling-only"><i class="fa fa-check"></i><b>14.7</b> Frame of reference: Random sampling only</a>
 <ul>
-<li class="chapter" data-level="14.8.1" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#extreme-ratio-values"><i class="fa fa-check"></i><b>14.8.1</b> Extreme ratio values</a></li>
-<li class="chapter" data-level="14.8.2" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#its-an-f-value"><i class="fa fa-check"></i><b>14.8.2</b> It’s an F-value</a></li>
+<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#simulation-1-population"><i class="fa fa-check"></i><b>14.7.1</b> Simulation 1 population</a></li>
+<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.7.2</b> Simulation 3 identical populations</a></li>
 </ul></li>
-<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#summary-table"><i class="fa fa-check"></i><b>14.9</b> Summary table</a></li>
-<li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.10</b> Walk away points</a></li>
+<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#summary-table"><i class="fa fa-check"></i><b>14.8</b> Summary table</a></li>
+<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-early-draft.html"><a href="deep-dive-sampling-distributions-early-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.9</b> Walk away points</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>15</b> Regression and correlation</a>
 <ul>
@@ -895,12 +894,12 @@ FIGURE 14.1: The distributions of people and the sample means can both be consid
 </table>
 <div id="method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means" class="section level3" number="14.6.1">
 <h3><span class="header-section-number">14.6.1</span> Method 1: Estimate the variance of infinite sample means using 3 sample means</h3>
-<p>We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case “<span class="math inline">\(a\)</span>” to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>). We think of these three sample means as a subset of the distribution of an infinite number of sample means (<span class="math inline">\(A=infty\)</span>) illustrated in Figure <span class="citation">(<a href="#ref-ref" role="doc-biblioref"><strong>ref?</strong></a>)</span>(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e. a population of sample means) subset of those elements (i.e., a sample of sample means) by including “-1” in the denominator of the variance formula, see Equation <a href="deep-dive-sampling-distributions-early-draft.html#eq:estpopvarxbardeep">(14.6)</a>.</p>
+<p>We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case “<span class="math inline">\(a\)</span>” to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, <span class="math inline">\(A=\infty\)</span>) illustrated in Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:chdeepfigure1">14.1</a>B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e. a population of sample means) subset of those elements (i.e., a sample of sample means) by including “-1” in the denominator of the variance formula, see Equation <a href="deep-dive-sampling-distributions-early-draft.html#eq:estpopvarxbardeep">(14.6)</a> below.</p>
 <span class="math display" id="eq:estpopvarxbardeep">\[\begin{equation} 
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
       \tag{14.6}
 \end{equation}\]</span>
-<p>First, we calculate the mean of the three sample means (<span class="math inline">\(\bar\bar{x}}\)</span>) because we will need that in the variance formula.</p>
+<p>First, we calculate the mean of the three sample means (<span class="math inline">\(\bar{\bar{x}}\)</span>) because we will need that in the variance formula.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 \bar{\bar{x}} &amp;= \frac{\sum_{i=1}^{a=3}{\bar{x}_i}}{a}\\
@@ -909,7 +908,7 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 &amp;= 524.2
 \end{aligned} 
 \]</span></p>
-<p>Second, we estimate the variance of the population of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:chdeepfigure1">14.1</a>B) using the set of sample means. Notice the use of “-1” in the denominator - <a href="https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2">which we discussed previously in the sample accuracy chapter</a>. The use of the “-1” in the denominator means we are not calculating the variance of these three sample means. Rather, when we use “-1” in the denominator we are <strong>estimating</strong> the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:chdeepfigure1">14.1</a>B).</p>
+<p>Second, we estimate the variance of the population of sample means (<span class="math inline">\(s_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:chdeepfigure1">14.1</a>B) using the set of sample means. Again, notice the use of “-1” in the denominator - <a href="https://dstanley4.github.io/psyc6060bookdown/sampling-accuracy.html#estimating-sigma2">which we discussed previously in the sample accuracy chapter</a>. The use of the “-1” in the denominator means we are not calculating the variance of these three sample means. Rather, when we use “-1” in the denominator we are <strong>estimating</strong> the variance of the population of sample means from which they were obtained (i.e., the distribution of sample means depicted in Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:chdeepfigure1">14.1</a>B).</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
@@ -975,7 +974,7 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 \end{aligned} 
 \]</span></p>
 <p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0466667\)</span>.</p>
-<p><strong>IMPORTANT:</strong> This esimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
+<p><strong>IMPORTANT:</strong> This estimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
 </div>
 </div>
 <div id="ratio-comparison-of-two-methods-1" class="section level3" number="14.6.3">
@@ -1024,8 +1023,10 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 \]</span></p>
 </div>
 </div>
-<div id="simulation-1-population" class="section level2" number="14.7">
-<h2><span class="header-section-number">14.7</span> Simulation 1 population</h2>
+<div id="frame-of-reference-random-sampling-only" class="section level2" number="14.7">
+<h2><span class="header-section-number">14.7</span> Frame of reference: Random sampling only</h2>
+<div id="simulation-1-population" class="section level3" number="14.7.1">
+<h3><span class="header-section-number">14.7.1</span> Simulation 1 population</h3>
 <div class="figure"><span id="fig:sim1pop"></span>
 <img src="ch_deep_sampling/images/figure2.png" alt="Sampling from one population" width="100%" />
 <p class="caption">
@@ -1064,8 +1065,8 @@ FIGURE 14.3: Variance ratio when there is one population of people
 </div>
 <p>This graph illustrates the range of ratio values that can occur when there is a single population and <span class="math inline">\(a = 3\)</span> and <span class="math inline">\(n = 5\)</span> (or more formally, there are 2, <span class="math inline">\((a -1)\)</span>, and 12, <span class="math inline">\(a(n-1)\)</span>, degrees of freedom).</p>
 </div>
-<div id="simulation-3-identical-populations" class="section level2" number="14.8">
-<h2><span class="header-section-number">14.8</span> Simulation 3 identical populations</h2>
+<div id="simulation-3-identical-populations" class="section level3" number="14.7.2">
+<h3><span class="header-section-number">14.7.2</span> Simulation 3 identical populations</h3>
 <div class="figure"><span id="fig:sim3pop"></span>
 <img src="ch_deep_sampling/images/figure3.png" alt="Sampling from three identical population" width="100%" />
 <p class="caption">
@@ -1105,8 +1106,8 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 </div>
 <p>Keep in mind that this is the range of ratios that can occur when all three populations have the same mean. In the above graph we use a vertical blue line to distinguish between the lower 95% of ratio values and the upper 5% of ratios values.</p>
 <p>How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.</p>
-<div id="extreme-ratio-values" class="section level3" number="14.8.1">
-<h3><span class="header-section-number">14.8.1</span> Extreme ratio values</h3>
+<div id="extreme-ratio-values" class="section level4" number="14.7.2.1">
+<h4><span class="header-section-number">14.7.2.1</span> Extreme ratio values</h4>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="deep-dive-sampling-distributions-early-draft.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the variance ratios smallest to largest</span></span>
 <span id="cb11-2"><a href="deep-dive-sampling-distributions-early-draft.html#cb11-2" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
 <span id="cb11-3"><a href="deep-dive-sampling-distributions-early-draft.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1120,16 +1121,17 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 <span id="cb11-11"><a href="deep-dive-sampling-distributions-early-draft.html#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
 <pre><code>## [1] 3.88</code></pre>
 </div>
-<div id="its-an-f-value" class="section level3" number="14.8.2">
-<h3><span class="header-section-number">14.8.2</span> It’s an F-value</h3>
+<div id="its-an-f-value" class="section level4" number="14.7.2.2">
+<h4><span class="header-section-number">14.7.2.2</span> It’s an F-value</h4>
 <p>Most importantly, we don’t usually refer to this ratio as a variance ratio. We refer to it as the F-ratio.</p>
 <p>We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as <span class="math inline">\(F_{critical}\)</span>. Thus, <span class="math inline">\(F_{critical}\)</span>(2, 12) = 3.88.</p>
 <p>Compare the value we obtained to the values in <span class="math inline">\(F\)</span>-table. A F-table is a table of <span class="math inline">\(F_{critical}\)</span> values. You can see the value in the table is 3.89 compared to our estimate of 3.88.</p>
 <p><img src="ch_deep_sampling/images/ftable.png" width="60%" /></p>
 </div>
 </div>
-<div id="summary-table" class="section level2" number="14.9">
-<h2><span class="header-section-number">14.9</span> Summary table</h2>
+</div>
+<div id="summary-table" class="section level2" number="14.8">
+<h2><span class="header-section-number">14.8</span> Summary table</h2>
 <table>
 <colgroup>
 <col width="6%" />
@@ -1191,8 +1193,8 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 </tbody>
 </table>
 </div>
-<div id="walk-away-points" class="section level2" number="14.10">
-<h2><span class="header-section-number">14.10</span> Walk away points</h2>
+<div id="walk-away-points" class="section level2" number="14.9">
+<h2><span class="header-section-number">14.9</span> Walk away points</h2>
 <ul>
 <li>Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize</li>
 <li>think of var/n as representing the variability in sample means due to random sampling</li>

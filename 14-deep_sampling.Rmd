@@ -242,7 +242,7 @@ In this section we focus on estimating the variance of the distribution of sampl
 
 ### Method 1: Estimate the variance of infinite sample means using 3 sample means
 
-We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case "$a$" to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $A=infty$) illustrated in Figure @ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e. a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
+We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case "$a$" to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $A=\infty$) illustrated in Figure \@ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e. a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -252,7 +252,7 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 ```
 
 
-First, we calculate the mean of the three sample means ($\bar\bar{x}}$) because we will need that in the variance formula.
+First, we calculate the mean of the three sample means ($\bar{\bar{x}}$) because we will need that in the variance formula.
 
 $$
 \begin{aligned} 
@@ -347,7 +347,7 @@ $$
 
 Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is $s_{\bar{x}}^2 = `r est_mean_var_clt`$.
 
-**IMPORTANT:** This esimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
+**IMPORTANT:** This estimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
 
 ### Ratio comparison of two methods
 
@@ -371,7 +371,10 @@ $$
 \end{aligned} 
 $$
 
-## Simulation 1 population
+
+## Frame of reference: Random sampling only
+
+### Simulation 1 population
 
 ```{r sim1pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from one population"}
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
@@ -445,7 +448,7 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
 This graph illustrates the range of ratio values that can occur when there is a single population and $a = 3$ and $n = 5$ (or more formally, there are 2, $(a -1)$, and 12, $a(n-1)$, degrees of freedom).
 
 
-## Simulation 3 identical populations
+### Simulation 3 identical populations
 
 ```{r sim3pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three identical population"}
 knitr::include_graphics("ch_deep_sampling/images/figure3.png")
@@ -521,7 +524,7 @@ Keep in mind that this is the range of ratios that can occur when all three popu
 How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.
 
 
-### Extreme ratio values
+#### Extreme ratio values
 
 ```{r}
 # sort the variance ratios smallest to largest
@@ -538,7 +541,7 @@ print(extreme_cut_off3)
 ```
 
 
-### It's an F-value
+#### It's an F-value
 Most importantly, we don't usually refer to this ratio as a variance ratio. We refer to it as the F-ratio. 
 
 We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$. Thus, $F_{critical}$(2, 12) = 3.88. 
