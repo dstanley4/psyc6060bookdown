@@ -537,6 +537,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8</b> Simulation 3 identical populations</a>
 <ul>
 <li class="chapter" data-level="14.8.1" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#extreme-ratio-values"><i class="fa fa-check"></i><b>14.8.1</b> Extreme ratio values</a></li>
+<li class="chapter" data-level="14.8.2" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#its-an-f-value"><i class="fa fa-check"></i><b>14.8.2</b> It’s an F-value</a></li>
 </ul></li>
 <li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#summary-table"><i class="fa fa-check"></i><b>14.9</b> Summary table</a></li>
 <li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions-draft.html"><a href="deep-dive-sampling-distributions-draft.html#walk-away-points"><i class="fa fa-check"></i><b>14.10</b> Walk away points</a></li>
@@ -1040,15 +1041,15 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 ## 4     4         8.920000         22.07333 0.40410752
 ## 5     5         9.693333         35.68000 0.27167414
 ## 6     6        84.853333         21.42000 3.96140678</code></pre>
+<p>In the first row of the above table we obtained 3 samples from the population of people and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="deep-dive-sampling-distributions-draft.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb4-2"><a href="deep-dive-sampling-distributions-draft.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot.png" width="90%" /></p>
-<p>An inspection of the output in Figure XX above illustrates that, on average (over many trials), both Method 1 and Method 2 produce the save result as our calculations above.</p>
-<p>You may be suprised to see that the ratio - is 1.20 on average and not 1.00. This occurs because the ratio is constructed base on each trial of the simulation (rather than the overal shown in the output). If you were to make a histograph of method_1_var_est values and histogram of the method_2_clt_est values you would see they have different shapes. As a result, the mean ratio is 1.20 rather than 1.00. But that’s ok, we just need to remember that the ratio is <strong>roughly</strong> 1.00 when the two methods are used on the same popualtion.</p>
-<p>What’s more interesting is thinking about how large this ratio of variances can get. Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the blue box.</p>
+<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio.</p>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
-<p>Describe the graph here. Range etc.</p>
+<p>This graph illustrates the range of ratio values that can occur when there is a single population and <span class="math inline">\(a = 3\)</span> and <span class="math inline">\(n = 5\)</span> (or more formally, there are 2, <span class="math inline">\((a -1)\)</span>, and 12, <span class="math inline">\(a(n-1)\)</span>, degrees of freedom).</p>
 </div>
 <div id="simulation-3-identical-populations" class="section level2" number="14.8">
 <h2><span class="header-section-number">14.8</span> Simulation 3 identical populations</h2>
@@ -1071,13 +1072,16 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 ## 4     4         8.920000         22.07333 0.40410752
 ## 5     5         9.693333         35.68000 0.27167414
 ## 6     6        84.853333         21.42000 3.96140678</code></pre>
+<p>In the first row of the above table we obtained 3 samples (one from each population) and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="deep-dive-sampling-distributions-draft.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb9-2"><a href="deep-dive-sampling-distributions-draft.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot_pop3.png" width="90%" /></p>
-<p>What’s more interesting is thinking about how large this ratio of variances can get. Let’s look a graph of the values in the var_ratio column. We can graph the variance ratios with the code below:</p>
+<p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the green box.</p>
+<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio.</p>
 <p><img src="bookdown_files/figure-html/unnamed-chunk-18-1.png" width="100%" /></p>
-<p>Describe the graph here. Range etc.</p>
+<p>Keep in mind that this is the range of ratios that can occur when all three populations have the same mean. In the above graph we use a vertical blue line to distinguish between the lower 95% of ratio values and the upper 5% of ratios values.</p>
+<p>How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.</p>
 <div id="extreme-ratio-values" class="section level3" number="14.8.1">
 <h3><span class="header-section-number">14.8.1</span> Extreme ratio values</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="deep-dive-sampling-distributions-draft.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the variance ratios smallest to largest</span></span>
@@ -1092,8 +1096,12 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <span id="cb10-10"><a href="deep-dive-sampling-distributions-draft.html#cb10-10" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
 <span id="cb10-11"><a href="deep-dive-sampling-distributions-draft.html#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
 <pre><code>## [1] 3.88</code></pre>
-<p>Thus, <span class="math inline">\(F_{critical}\)</span>(2, 12) = 3.88.</p>
-<p>Compare to an <span class="math inline">\(F\)</span>-table.</p>
+</div>
+<div id="its-an-f-value" class="section level3" number="14.8.2">
+<h3><span class="header-section-number">14.8.2</span> It’s an F-value</h3>
+<p>Most importantly, we don’t usually refer to this ratio as a variance ratio. We refer to it as the F-ratio.</p>
+<p>We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as <span class="math inline">\(F_{critical}\)</span>. Thus, <span class="math inline">\(F_{critical}\)</span>(2, 12) = 3.88.</p>
+<p>Compare the value we obtained to the values in <span class="math inline">\(F\)</span>-table. A F-table is a table of <span class="math inline">\(F_{critical}\)</span> values. You can see the value in the table is 3.89 compared to our estimate of 3.88.</p>
 <p><img src="ch_deep_sampling/images/ftable.png" width="60%" /></p>
 </div>
 </div>
