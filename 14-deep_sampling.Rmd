@@ -418,12 +418,12 @@ skim(data_ratios)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box. 
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box. 
 
-Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio. 
+Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph1pop), you can see the range of values that occur with this ratio. This
 
 
-```{r, out.width="100%", echo=FALSE}
+```{r graph1pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when  there is one population of people"}
 library(ggplot2)
 
 ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
@@ -432,7 +432,6 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
   coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
   xlab("Variance Ratio: (method_1_var / method_2_clt)") +
   ylab("Frequency") +
-  ggtitle("Samples from one population") +
   theme_classic()
 ```
 
@@ -496,9 +495,9 @@ knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 
 Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box. 
 
-Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio. 
+Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph3pop), you can see the range of values that occur with this ratio. 
 
-```{r, out.width="100%", echo=FALSE}
+```{r graph3pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when there are three identical populations of people"}
 library(ggplot2)
 
 ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
@@ -508,7 +507,6 @@ ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
   coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
   xlab("Variance Ratio: (method_1_var / method_2_clt)") +
   ylab("Frequency") +
-  ggtitle("Samples from three identical populations") +
   theme_classic()
 ```
 

@@ -1054,9 +1054,14 @@ FIGURE 14.2: Sampling from 1 population
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="deep-dive-sampling-distributions-early-draft.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb5-2"><a href="deep-dive-sampling-distributions-early-draft.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot.png" width="90%" /></p>
-<p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-early-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the blue box.</p>
-<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio.</p>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
+<p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-early-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the Method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the blue box.</p>
+<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:graph1pop">14.3</a>, you can see the range of values that occur with this ratio. This</p>
+<div class="figure"><span id="fig:graph1pop"></span>
+<img src="bookdown_files/figure-html/graph1pop-1.png" alt="Variance ratio when  there is one population of people" width="100%" />
+<p class="caption">
+FIGURE 14.3: Variance ratio when there is one population of people
+</p>
+</div>
 <p>This graph illustrates the range of ratio values that can occur when there is a single population and <span class="math inline">\(a = 3\)</span> and <span class="math inline">\(n = 5\)</span> (or more formally, there are 2, <span class="math inline">\((a -1)\)</span>, and 12, <span class="math inline">\(a(n-1)\)</span>, degrees of freedom).</p>
 </div>
 <div id="simulation-3-identical-populations" class="section level2" number="14.8">
@@ -1086,8 +1091,13 @@ FIGURE 14.2: Sampling from 1 population
 <span id="cb10-2"><a href="deep-dive-sampling-distributions-early-draft.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot_pop3.png" width="90%" /></p>
 <p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-early-draft.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the green box.</p>
-<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below you can see the range of values that occur with this ratio.</p>
-<p><img src="bookdown_files/figure-html/unnamed-chunk-18-1.png" width="100%" /></p>
+<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions-early-draft.html#fig:graph3pop">14.4</a>, you can see the range of values that occur with this ratio.</p>
+<div class="figure"><span id="fig:graph3pop"></span>
+<img src="bookdown_files/figure-html/graph3pop-1.png" alt="Variance ratio when there are three identical populations of people" width="100%" />
+<p class="caption">
+FIGURE 14.4: Variance ratio when there are three identical populations of people
+</p>
+</div>
 <p>Keep in mind that this is the range of ratios that can occur when all three populations have the same mean. In the above graph we use a vertical blue line to distinguish between the lower 95% of ratio values and the upper 5% of ratios values.</p>
 <p>How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.</p>
 <div id="extreme-ratio-values" class="section level3" number="14.8.1">
