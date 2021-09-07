@@ -72,6 +72,10 @@ Using Equation \@ref(eq:popmeanxbardeep) we find that the mean of the sample mea
 
 A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as the mean of people's heights, $\mu_{people}$. Consequently, any conclusions we make the mean of sample means, $\mu_{\bar{x}}$ see Figure \@ref(fig:chdeepfigure1)B, will also apply to the mean of people, $\mu_{people}$ see Figure \@ref(fig:chdeepfigure1)A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$).
 
+
+
+
+
 ## Sample mean distribution variance
 
 When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two methods for calculating the variance of this distribution of sample means.
@@ -87,6 +91,14 @@ In this first method, we use an infinite number of sample means and simply calcu
 \end{equation}
 ```
 Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use for the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$.
+
+
+| Distribution |          Attribute           |                                  Parameter Calculation                                   |                               Estimate of Parameter                               |
+|:------------:|:----------------------------:|:----------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
+|    People    |           Variance           |          $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}$          |   $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}$   |
+| Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
+
+
 
 Obviously, using Equation \@ref(eq:popvarxbardeep) to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
 
@@ -573,6 +585,9 @@ Much of what we have learned is summarized in the table below.
 | Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
 | Sample Means |    Method 2 CLT: Variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      |
 | Sample Means | Method 2 CLT: Standard Error | $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |   $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$    |
+
+
+
 
 ## Walk away points
 
