@@ -10,22 +10,19 @@ output:
 
 In this chapter, we focus on describing the distribution of sample means. Our goal is to understand the logic behind two different methods for estimating the variance of distribution of sample means. A thorough understanding of both of these two estimation methods lays the foundation for understanding Analysis of Variance (ANOVA).
 
-Understanding the logic behind both methods for estimating the variance of the distribution of sample means is critical. In this chapter, where there is one population of people, the two methods estimate the same thing - variabilty in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two methods estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both methods in the simple case - where there is a single population of people. 
+Understanding the logic behind both methods for estimating the variance of the distribution of sample means is critical. In this chapter, where there is one population of people, the two methods estimate the same thing - variabilty in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two methods estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both methods in the simple case - where there is a single population of people.
 
 **What we learn in this chapter (and the pattern of results we obtain) will serve as frame-of-reference for interpreting more complex situations in future chapters.**
 
-
 ## A student population
 
-Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure \@ref(fig:chdeepfigure1)A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people. 
-
+Consider a scenario where there is a large university with 100,000 students and we have the heights of all 100,000 students. The mean height of all 100,000 students is 172.50 cm and the variance is 156.3236 cm$^2$. The heights of all the university students are illustrated in Figure \@ref(fig:chdeepfigure1)A. This figure is shaded with stick figures wearing trousers that remind us this distribution represents people.
 
 \
 
 ```{r chdeepfigure1, echo=FALSE, out.width="60%", fig.cap= "A distributionof people (A.) and a corresponding distribution of sample means (B.) can both be considered populations in some sense."}
 knitr::include_graphics("ch_deep_sampling/images/figure1.png")
 ```
-
 
 The mean of a population of 100,000 individuals is calculated using Equation \@ref(eq:popmeanchdeep) below.
 
@@ -43,8 +40,7 @@ The variance of a population of 100,000 individuals is calculated using Equation
       (\#eq:popvardeep)
 \end{equation}
 ```
-
-**For these 100,000 people the mean is $\mu_{people}=172.50$ and the variance is $\sigma_{people}^2=156.3236$.**
+**For these 100,000 people the mean is** $\mu_{people}=172.50$ and the variance is $\sigma_{people}^2=156.3236$.
 
 ## Random sampling process
 
@@ -74,11 +70,11 @@ Because we are thinking of the distribution of sample means as a population we c
 ```
 Using Equation \@ref(eq:popmeanxbardeep) we find that the mean of the sample means is 172.50 cm (i.e., $\mu_{\bar{x}} = 172.50$).
 
-A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as that of the people's heights, $\mu_{people}$. Consequently, any conclusions we make about *population means* based on Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$) will also apply to Figure \@ref(fig:chdeepfigure1)A (i.e., $\mu_{people}$). This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of distribution of sample means in Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$).
+A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as the mean of people's heights, $\mu_{people}$. Consequently, any conclusions we make the mean of sample means, $\mu_{\bar{x}}$ see Figure \@ref(fig:chdeepfigure1)B, will also apply to the mean of people, $\mu_{people}$ see Figure \@ref(fig:chdeepfigure1)A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$).
 
 ## Sample mean distribution variance
 
-When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because random sampling. There are two methods for calculating the variance of this distribution of sample means.
+When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two methods for calculating the variance of this distribution of sample means.
 
 ### Method 1: Calculate the variance of infinite sample means
 
@@ -90,7 +86,7 @@ In this first method, we use an infinite number of sample means and simply calcu
       (\#eq:popvarxbardeep)
 \end{equation}
 ```
-Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using on sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$.
+Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use for the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$.
 
 Obviously, using Equation \@ref(eq:popvarxbardeep) to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
 
@@ -111,7 +107,7 @@ Thus, the "population" variance of the distribution of sample means ($\sigma_{\b
 
 ### Method 2: CLT shortcut: *Calculation* of variance of infinite sample means
 
-Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure \@ref(fig:chdeepfigure1)B. There is a "shortcut formula" we can used based on the Central Limit Theorem (CLT), see Equation \@ref(eq:popvarCLTxbardeep) below.
+Fortunately we don't need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure \@ref(fig:chdeepfigure1)B. There is a "shortcut formula" we can use based on the Central Limit Theorem (CLT), see Equation \@ref(eq:popvarCLTxbardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -123,7 +119,7 @@ An inspection of Equation \@ref(eq:popvarCLTxbardeep) reveals the variance of th
 
 The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you [consult](https://archive.org/details/statisticsfifthe00will) [@hays1994statistics] who provides a statistical proof for the Central Limit Theorem.
 
-It's helpful, moving forward to, think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the *variability in means due to random sampling*. No matter the situation - this formula will always reflects the variability in sample means due ONLY to random sampling.
+It's helpful, moving forward, to think of this formula ($\frac{\sigma_{people}^2}{n}$) as representing the *variability in means due to random sampling*. No matter the situation - this formula will always reflect the variability in sample means due ONLY to random sampling.
 
 Previously, we learned that the variance of the distribution of people in Figure \@ref(fig:chdeepfigure1)A is $\sigma_{people}^2=156.3236$. Consequently, we can use Equation \@ref(eq:popvarCLTxbardeep) to calculate the variance of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B:
 
@@ -241,7 +237,7 @@ In this section we focus on estimating the variance of the distribution of sampl
 
 ### Method 1: Estimate the variance of infinite sample means using 3 sample means
 
-We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use the lower case "$a$" to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $A=\infty$) illustrated in Figure \@ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e. a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
+We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use a lower case character, $a$, to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $A=\infty$) illustrated in Figure \@ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e., a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -249,8 +245,6 @@ s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
       (\#eq:estpopvarxbardeep)
 \end{equation}
 ```
-
-
 First, we calculate the mean of the three sample means ($\bar{\bar{x}}$) because we will need that in the variance formula.
 
 $$
@@ -279,7 +273,7 @@ Thus, the "population" variance of the distribution of sample means ($\sigma_{\b
 
 ### Method 2: CLT shortcut: *Estimation* of variance of infinite sample means
 
-We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation \@ref(eq:popvarCLTxbardeep) above, repeated below for clarity. .
+We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall that than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation \@ref(eq:popvarCLTxbardeep) above, repeated below for clarity.
 
 $$
 \begin{aligned}
@@ -320,9 +314,9 @@ $$
 
 The number we just calculated, $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. You could think of this number as an average variance estimate.
 
-We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) to compared to a individual sample estimate (with only 4 degrees of freedom).
+We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).
 
-We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But, statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times, statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
 #### Estimating $\sigma_{\bar{x}}^2$ with CLT
 
@@ -346,7 +340,7 @@ $$
 
 Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is $s_{\bar{x}}^2 = `r est_mean_var_clt`$.
 
-**IMPORTANT:** This estimate of the variance of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
+**IMPORTANT:** This estimate of the variance of the distribution of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
 
 ### Ratio comparison of two methods
 
@@ -357,7 +351,7 @@ The table below summarizes our work so far.
 |   Method 1: Variance   | $\sigma_{\bar{x}}^2 =31.26472$ | $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ |                 2                  |
 | Method 2 CLT: Variance | $\sigma_{\bar{x}}^2 =31.26472$ |                $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$                 |                 12                 |
 
-You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from "the truth" (31.26472) due to sampling error. Consquently, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
+You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from "the truth" (31.26472) due to sampling error. Consequently, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
 
 \
 
@@ -370,7 +364,6 @@ $$
 \end{aligned} 
 $$
 
-
 ## Frame of reference: Random sampling only
 
 In this section we focus on using simulations to establish a frame of reference for interpretting the variance ratio when random sampling is the only reason sample means differ from each other.
@@ -381,17 +374,14 @@ In this section we focus on using simulations to establish a frame of reference 
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
 ```
 
-The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data  to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples.
-
+The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of the table shows a case where we did this same thing with three new samples.
 
 We begin by creating the population in R:
-
 
 ```{r, eval = FALSE}
 library(learnSampling)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
 ```
-
 
 Then we run a simulation were we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
 
@@ -408,14 +398,14 @@ save(data_ratios, file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```{r, eval = TRUE, echo = FALSE}
 load(file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```
+
 The results of the 100,000 simulations is placed in data_ratios3. We can see the first few rows of these data below.
 
 ```{r}
 head(data_ratios)
 ```
 
-When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data  to **estimate** the variance of the sampling distribution of means using Method 1 and Method 2 (method_1_var_est and method_2_clt_est, respectively). Then we created a ratio of those two values (method_1_var_est/method_2_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
-
+When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Method 1 and Method 2 (method_1\_var_est and method_2\_clt_est, respectively). Then we created a ratio of those two values (method_1\_var_est/method_2\_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -428,10 +418,9 @@ skim(data_ratios)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box. 
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
 
 Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph1pop), you can see the range of values that occur with this ratio. This
-
 
 ```{r graph1pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when  there is one population of people"}
 library(ggplot2)
@@ -445,9 +434,7 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
   theme_classic()
 ```
 
-
 This graph illustrates the range of ratio values that can occur when there is a single population and $a = 3$ and $n = 5$ (or more formally, there are 2, $(a -1)$, and 12, $a(n-1)$, degrees of freedom).
-
 
 ### Simulation 3 identical populations
 
@@ -464,11 +451,9 @@ pop2 <- pop1
 pop3 <- pop1
 ```
 
-
 Then obtain a sample from each population of people and calculate a sample mean. When we use Method 1 Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($A = \infty$). The variance of the three sample means is an estimate of the variance of the distibution of sample mean. When we use Method 2 CLT we use the people from the three sample sto estimate the variance of the population of people. We use our estimate of the variance of the population of people in CLT formula to estimate the variance of the distribution of sample means. Then we calcualte the ratio of Method 1 variance divided by Method 2 CLT.
 
 **Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.**
-
 
 ```{r, eval = FALSE}
 data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
@@ -491,7 +476,6 @@ head(data_ratios3)
 
 In the first row of the above table we obtained 3 samples (one from each population) and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
-
 We obtain the summary statistics with the skim command:
 
 ```{r, eval = FALSE}
@@ -503,9 +487,9 @@ skim(data_ratios3)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box. 
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
 
-Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph3pop), you can see the range of values that occur with this ratio. 
+Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph3pop), you can see the range of values that occur with this ratio.
 
 ```{r graph3pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when there are three identical populations of people"}
 library(ggplot2)
@@ -524,7 +508,6 @@ Keep in mind that this is the range of ratios that can occur when all three popu
 
 How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.
 
-
 #### Extreme ratio values
 
 ```{r}
@@ -541,14 +524,13 @@ extreme_cut_off3 <- round(extreme_cut_off3, 2)
 print(extreme_cut_off3)
 ```
 
-
 #### It's an F-value
-Most importantly, we don't usually refer to this ratio as a variance ratio. We refer to it as the F-ratio. 
 
-We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$. Thus, $F_{critical}$(2, 12) = 3.88. 
+Most importantly, we don't usually refer to this ratio as a variance ratio. We refer to it as the F-ratio.
 
-Compare the value we obtained to the values in $F$-table. A F-table is a table of $F_{critical}$ values. You can see the value in the table is 3.89 compared to our estimate of 3.88. 
+We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$. Thus, $F_{critical}$(2, 12) = 3.88.
 
+Compare the value we obtained to the values in $F$-table. A F-table is a table of $F_{critical}$ values. You can see the value in the table is 3.89 compared to our estimate of 3.88.
 
 ```{r, echo = FALSE, out.width="60%"}
 knitr::include_graphics("ch_deep_sampling/images/ftable.png")
