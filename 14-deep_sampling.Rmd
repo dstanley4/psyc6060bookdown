@@ -60,7 +60,7 @@ Consider a concrete example. When we obtain a sample of people ($n$ = 5) we can 
 
 Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
 
-[^deep_sampling-1]: I know it doesn't make sense the divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
+[^deep_sampling-1]: I realize that it doesn't make sense to divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
 
 ```{=tex}
 \begin{equation} 
@@ -90,7 +90,7 @@ Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in
 
 Obviously, using Equation \@ref(eq:popvarxbardeep) to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations [^deep_sampling-2]
 
-[^deep_sampling-2]: As noted previously, the notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divide by infinity to make the linkages to other equations clear.
+[^deep_sampling-2]: As noted previously, this notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divided by infinity to make the linkages to other equations clear.
 
 But imagine if we could obtain the full infinite set of sample means - then we could use the formula as below:
 
@@ -538,11 +538,11 @@ print(extreme_cut_off3)
 
 #### It's really an $F$-value
 
-Most importantly, we don't usually refer to this ratio we have been examining as a variance ratio. We refer to it as an $F$-ratio or $F$-value.
+Most importantly, we don't usually refer to the ratio we have been examining as a variance ratio. We refer to it as an $F$-ratio or $F$-value.
 
-We used this simulation to see the range of $F$-ratios that occur when we KNOW all the population means are equal. You can see that this range of $F$-ratio values is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of $F$-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$ when $\alpha = .05$. Thus, $F_{critical}$(2, 12) = 3.88.
+We used this simulation to see the range of $F$-ratios that occur when we KNOW all the population means are equal. From the graph, you can see that this range of $F$-ratio values is quite wide. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of $F$-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$ when $\alpha = .05$. Thus, $F_{critical}$(2, 12) = 3.88.
 
-Compare the value we obtained to the values in $F$-table at 2 and 12 degrees of freedom. An $F$-table is a table of $F_{critical}$ values. You can see the value in the table is 3.89 - this is the correct value. Our estimate is 3.88 which is very close to the correct value of 3.89. Our value of 3.88 is off a bit from the 3.89 in the $F$-table because we only use 100,000 samples and not an infinite number of samples.
+Compare the $F$-ratio we obtained (3.88) to the values in $F$-table at 2 and 12 degrees of freedom for $\alpha=.05$. An $F$-table is a table of $F_{critical}$ values. You can see that the value in the table is 3.89 - this is the correct value. Our estimate is 3.88 which is very close to the correct value of 3.89. Our value of 3.88 is off a bit from the 3.89 in the $F$-table because we only use 100,000 samples and not an infinite number of samples.
 
 ```{r, echo = FALSE, out.width="60%"}
 knitr::include_graphics("ch_deep_sampling/images/ftable.png")
@@ -577,13 +577,13 @@ Much of what we have learned is summarized in the table below.
 ## Walk away points
 
 -   Sometimes we need to shift our thinking and conceptualize the distribution of sample means as the population to which we are trying to generalize
--   think of var/n as representing the variability in sample means due to random sampling
--   the findings we illustrate here only hold when there is only one population the sample means come from that one population.
+-   think of var/n as representing the variability in the distribution of sample means due to random sampling
+-   the findings that we illustrate here only hold when there is only one population the sample means come from that one population.
 
-We are interested in the variance of the distribute of sample means (Figure \@ref(fig:chdeepfigure1)B). If we were all knowing we would know that the variance of the distribution is 31.26472. But we are not all knowing, and need to rely on sample data to estimate the variance of this distribution.
+We are interested in the variance of the distribution of sample means (Figure \@ref(fig:chdeepfigure1)B). If we were "all knowing" we would know that the variance of the distribution is 31.26472. But we are not "all knowing", and so need to rely on sample data to estimate the variance of this distribution.
 
-We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of mean - we can never know the actual variance of the distribution of sample means.
+We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of means - we can never know the actual variance of the distribution of sample means.
 
 Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error.
 
-Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this values, differs fron 31.26472 due to sampling error.
+Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.
