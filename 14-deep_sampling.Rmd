@@ -374,7 +374,7 @@ In this section we focus on using simulations to establish a frame of reference 
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
 ```
 
-The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of the table shows a case where we did this same thing with three new samples.
+The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data to **estimate** the variance of the distribution of sample means using Method 1 and Method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of the table shows a case where we did this same thing with three new samples.
 
 We begin by creating the population in R:
 
@@ -383,7 +383,7 @@ library(learnSampling)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
 ```
 
-Then we run a simulation were we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
+Then we run a simulation where we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
 
 ```{r, eval = FALSE}
 data_ratios <- get_mean_samples_ratio(pop1,
@@ -399,7 +399,7 @@ save(data_ratios, file = "ch_deep_sampling/data_ratio_1pop.RData")
 load(file = "ch_deep_sampling/data_ratio_1pop.RData")
 ```
 
-The results of the 100,000 simulations is placed in data_ratios3. We can see the first few rows of these data below.
+The results of the 100,000 simulations are placed in the data set called data_ratios. We can see the first few rows of these data below.
 
 ```{r}
 head(data_ratios)
@@ -418,7 +418,7 @@ skim(data_ratios)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
 
 Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph1pop), you can see the range of values that occur with this ratio. This
 
@@ -451,7 +451,7 @@ pop2 <- pop1
 pop3 <- pop1
 ```
 
-Then obtain a sample from each population of people and calculate a sample mean. When we use Method 1 Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($A = \infty$). The variance of the three sample means is an estimate of the variance of the distibution of sample mean. When we use Method 2 CLT we use the people from the three sample sto estimate the variance of the population of people. We use our estimate of the variance of the population of people in CLT formula to estimate the variance of the distribution of sample means. Then we calcualte the ratio of Method 1 variance divided by Method 2 CLT.
+Then, we obtain a sample from each population of people and calculate a sample mean. When we use Method 1: Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($A = \infty$). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Method 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Method 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Method 1: Variance divided by Method 2: CLT Shortcut.
 
 **Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.**
 
@@ -468,13 +468,13 @@ save(data_ratios3, file = "ch_deep_sampling/data_ratio_3pop.RData")
 load(file = "ch_deep_sampling/data_ratio_3pop.RData")
 ```
 
-The result is data_ratios3. We can see the first few rows below.
+The results of the 100,000 simulations are placed in the data set called data_ratios3. We can see the first few rows of these data below.
 
 ```{r}
 head(data_ratios3)
 ```
 
-In the first row of the above table we obtained 3 samples (one from each population) and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+In the first row of the above table we obtained 3 samples (one from each population) and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (Method 1/Method 2). Each additional row of table shows a case where were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -504,11 +504,24 @@ ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
   theme_classic()
 ```
 
+#### Extreme ratio values
+
 Keep in mind that this is the range of ratios that can occur when all three populations have the same mean. In the above graph we use a vertical blue line to distinguish between the lower 95% of ratio values and the upper 5% of ratios values.
 
-How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list. Just follow the code below to see the details.
+How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list.  To obtain the 95% percentile in of the sorted list of 100,000 ratios we just mutiple the total number of ratios (100,000) by .95. We 95000 (i.e., $.95*100000=95000$) which indicates that 95% of ratios are below the value in this spot. Likewise, 5% of ratios are above the value at this spot.
 
-#### Extreme ratio values
+The ratio value in the spot 95,000 of the sorted list of 100,000 ratio values is 3.88. How do you interpret this value? 
+
+In the situation where:
+
+a. the variance estimate the numerator has 2 degrees of freedom
+b. the variance estimate the denominator has 12 degrees of freedom
+c. the population variances are the same 
+d. the population means are the same
+
+we will obtain an variance ratio above 3.88 only 5% of the time. 
+We obtain this 3.88 value with the code below.
+
 
 ```{r}
 # sort the variance ratios smallest to largest
@@ -524,7 +537,7 @@ extreme_cut_off3 <- round(extreme_cut_off3, 2)
 print(extreme_cut_off3)
 ```
 
-#### It's an F-value
+#### It's really an F-value
 
 Most importantly, we don't usually refer to this ratio as a variance ratio. We refer to it as the F-ratio.
 
