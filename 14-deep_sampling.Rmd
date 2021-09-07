@@ -519,8 +519,7 @@ b. the variance estimate the denominator has 12 degrees of freedom
 c. the population variances are the same 
 d. the population means are the same
 
-we will obtain an variance ratio above 3.88 only 5% of the time. 
-We obtain this 3.88 value with the code below.
+When the above situation is the case, we will obtain an variance ratio above 3.88 only 5% of the time. We obtain this 3.88 value with the R-code below.
 
 
 ```{r}
@@ -539,17 +538,31 @@ print(extreme_cut_off3)
 
 #### It's really an F-value
 
-Most importantly, we don't usually refer to this ratio as a variance ratio. We refer to it as the F-ratio.
+Most importantly, we don't usually refer to this ratio we have been examining as a variance ratio. We refer to it as an F-ratio.
 
-We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$. Thus, $F_{critical}$(2, 12) = 3.88.
+We used this simulation to see the range of F-ratios that occur when we KNOW all the population means are equal. You can see that this range of F-ratio value is quite wide from the graph. But, we estimated that when all three populations means are equal (and n = 5) that only 5% of F-ratios will fall above a value we estimated to be 3.88. This value is what we refer to as $F_{critical}$ when $\alpha = .05$. Thus, $F_{critical}$(2, 12) = 3.88.
 
-Compare the value we obtained to the values in $F$-table. A F-table is a table of $F_{critical}$ values. You can see the value in the table is 3.89 compared to our estimate of 3.88.
+Compare the value we obtained to the values in $F$-table. A F-table is a table of $F_{critical}$ values. You can see the value in the table is 3.89 compared to our estimate of 3.88. Our value of 3.88 is off a bit from the one in the table because we only use 100,000 samples and not an infinite number of samples.
 
 ```{r, echo = FALSE, out.width="60%"}
 knitr::include_graphics("ch_deep_sampling/images/ftable.png")
 ```
 
+#### Making your own $F$-table
+
+Congratuations you have just learned how to create the values in the $F$-table from scratch! To ensure you understand everything you have learned in this exercise think through how you would do the following:
+
+* Obtain $F_{critical}$(2, 12) for $\alpha=.01$
+
+* Obtain $F_{critical}$(3, 27) for $\alpha=.05$. Look at the degrees of freedom and alpha. How many populations would you use (i.e., what would value would you use for $a$)? How many people would you use in each sample (i.e., what value would you use for $n$)? What position would you look at in the list of **sorted** variance ratios?
+
+* Obtain $F_{critical}$(3, 25) for $\alpha=.01$ Look at the degrees of freedom and alpha. How many populations would you use (i.e., what would value would you use for $a$)? How many people would you use in each sample (i.e., what value would you use for $n$)? What position would you look at in the list of **sorted** variance ratios?
+
+
+
 ## Summary table
+
+Much of what we have learned is summarized in the table below.
 
 | Distribution |          Attribute           |                                  Parameter Calculation                                   |                               Estimate of Parameter                               |
 |:------------:|:----------------------------:|:----------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
