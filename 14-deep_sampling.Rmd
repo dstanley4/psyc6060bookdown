@@ -4,7 +4,7 @@ output:
   html_document: default
 ---
 
-# Deep Dive: Sampling Distributions
+# Deep Dive: Sampling Distributions (Equal population means)
 
 ## A tale of two methods
 
@@ -52,19 +52,19 @@ Typically, in psychology, when we use the word "population" we are referring to 
 
 ### Sample means in context
 
-Thinking of the distribution of sample means as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word "population". Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure \@ref(fig:chdeepfigure1)A), we use $N$ to indicate the number people in the population and $n$ to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure \@ref(fig:chdeepfigure1)B), we use $A$ to indicate the number of sample means in the population and $a$ to refer to the number of sample means in a subset of the population.
+Thinking of the distribution of sample means as a population can be a bit tricky - since there are two populations that we could be referring to when we use the word "population". Notation helps to keep things straight. In this book, when we are talking about a distribution of people (see Figure \@ref(fig:chdeepfigure1)A), we use $N$ to indicate the number people in the population and $n$ to refer to the number of people in a subset of the population (what we typically refer to as a sample). Likewise, when we are talking about a distribution of sample means (see Figure \@ref(fig:chdeepfigure1)B), we use $K$ to indicate the number of sample means in the population and $a$ to refer to the number of sample means in a subset of the population. I know it seems odd to use two different letters to indicate the number of sample means for the population ($K$) and the subset of the population ($a$) - but the reason for this approach will become clear in the next chapter.
 
-Consider a concrete example. When we obtain a sample of people ($n$ = 5) we can think of the people in the sample as a subset of the population of people ($N$=100,000), see Figure \@ref(fig:chdeepfigure1)A. If we calculate a sample mean ($\bar{x}$) based on those 5 people we can think of that single sample mean ($a$ = 1) as being a subset of the population of sample means ($A = \infty$), see Figure \@ref(fig:chdeepfigure1)B. Alternatively, imagine that we obtained three samples from the population of people, Figure \@ref(fig:chdeepfigure1)A, each composed of 5 people ($n = 5$ for each sample). Then we calculated the sample mean ($\bar{x}$) for each of the three samples. We could think of those three sample means ($a$ = 3) as a subset of the population of sample means ($A = \infty$), see Figure \@ref(fig:chdeepfigure1)B.
+Consider a concrete example. When we obtain a sample of people ($n$ = 5) we can think of the people in the sample as a subset of the population of people ($N$=100,000), see Figure \@ref(fig:chdeepfigure1)A. If we calculate a sample mean ($\bar{x}$) based on those 5 people we can think of that single sample mean ($a$ = 1) as being a subset of the population of sample means ($K = \infty$), see Figure \@ref(fig:chdeepfigure1)B. Alternatively, imagine that we obtained three samples from the population of people, Figure \@ref(fig:chdeepfigure1)A, each composed of 5 people ($n = 5$ for each sample). Then we calculated the sample mean ($\bar{x}$) for each of the three samples. We could think of those three sample means ($a$ = 3) as a subset of the population of sample means ($K = \infty$), see Figure \@ref(fig:chdeepfigure1)B.
 
 ### Distribution of sample means as a population
 
-Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $A$ instead of $N$ to represent the number of sample means (where $A$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
+Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $K$ instead of $N$ to represent the number of sample means (where $K$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
 
 [^deep_sampling-1]: I realize that it doesn't make sense to divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
 
 ```{=tex}
 \begin{equation} 
-\mu_{\bar{x}} = \frac{\sum_{i=1}^{A=\infty}{\bar{x}_i}}{A}
+\mu_{\bar{x}} = \frac{\sum_{i=1}^{K=\infty}{\bar{x}_i}}{K}
       (\#eq:popmeanxbardeep)
 \end{equation}
 ```
@@ -86,17 +86,17 @@ In this first method, we use an infinite number of sample means and simply calcu
 
 ```{=tex}
 \begin{equation} 
-\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}
+\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}
       (\#eq:popvarxbardeep)
 \end{equation}
 ```
-Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use for the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $A$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$.
+Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in Figure \@ref(fig:chdeepfigure1)B, is similar to the formula we use for the variance of people, Equation \@ref(eq:popvardeep), in Figure \@ref(fig:chdeepfigure1)A. The formula for the variance of sample means, Equation \@ref(eq:popvarxbardeep), differs because we are using sample means ($\bar{x}$) instead of attributes of people ($X$). As well, we use $K$ to indicate the number of elements used (i.e., an infinite number of sample means) in the calculation rather than $N$.
 
 
 | Distribution |          Attribute           |                                  Parameter Calculation                                   |                               Estimate of Parameter                               |
 |:------------:|:----------------------------:|:----------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
 |    People    |           Variance           |          $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}$          |   $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}$   |
-| Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
+| Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
 
 
 
@@ -108,12 +108,12 @@ But imagine if we could obtain the full infinite set of sample means - then we c
 
 $$
 \begin{aligned} 
-\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}\\
+\sigma_{\bar{x}}^2 &= \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\\
 &= 31.26472\\
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, based an infinite number of sample means ($A = \infty$) using Method 1, to be $\sigma_{\bar{x}}^2 = 31.26472$.
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, based an infinite number of sample means ($K = \infty$) using Method 1, to be $\sigma_{\bar{x}}^2 = 31.26472$.
 
 **When there is only one population of people** this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We'll discuss that situation in a future chapter.
 
@@ -249,7 +249,7 @@ In this section we focus on estimating the variance of the distribution of sampl
 
 ### Method 1: Estimate the variance of infinite sample means using 3 sample means
 
-We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use a lower case character, $a$, to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $A=\infty$) illustrated in Figure \@ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e., a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
+We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use a lower case character, $a$, to represent the number of sample means (in the case because we have 3 sample means $a = 3$). We think of these three sample means as a subset of the distribution of an infinite number of sample means (i.e., a population of sample means, $K=\infty$) illustrated in Figure \@ref(fig:chdeepfigure1)B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e., a population of sample means) subset of those elements (i.e., a sample of sample means) by including "-1" in the denominator of the variance formula, see Equation \@ref(eq:estpopvarxbardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -446,15 +446,25 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
   theme_classic()
 ```
 
-This graph illustrates the range of ratio values that can occur when there is a single population and $a = 3$ and $n = 5$ (or more formally, there are 2, $(a -1)$, and 12, $a(n-1)$, degrees of freedom).
+This graph illustrates the range of ratio values that can occur when there is a single population when we use 3 samples, $ a =3$, and a sample size of 5, $n = 5$.  More formally, there are 2, $(a -1)$, and 12, $a(n-1)$, degrees of freedom.
 
 ### Simulation 3 identical populations
 
-```{r sim3pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three identical population"}
+```{r sim3pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
 knitr::include_graphics("ch_deep_sampling/images/figure3.png")
 ```
 
-In this section we see that when you have three identical populations of people, see Figure \@ref(fig:sim3pop), that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
+
+| Population |  Mean        | Variance        |
+|:----------:|:------------:|:----------------|
+| 1          | $\mu_{A1_{people}}= 172.50$ |  $\sigma_{A1_{people}}^2= 156.3236$ |
+| 2          | $\mu_{A2_{people}}= 172.50$ |  $\sigma_{A2_{people}}^2= 156.3236$ |
+| 3          | $\mu_{A3_{people}}= 172.50$ |  $\sigma_{A3_{people}}^2= 156.3236$ |
+
+
+In this section, instead of using one population, we use three identical populations. We also introduce the captial letter $A$ to indicate the number of populations. We continue to use the little letter $a$ to represent the number of samples. Typically, $A = a$. That is we use $A =3$ when indicating there are three populations. In contrast, we use $a=3$ when we are indicating we have three sample means (one from each population).
+
+You will see in this section that when you have three identical populations of people, see Figure \@ref(fig:sim3pop), that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
 
 ```{r, eval = FALSE}
 library(learnSampling)
@@ -463,7 +473,7 @@ pop2 <- pop1
 pop3 <- pop1
 ```
 
-Then, we obtain a sample from each population of people and calculate a sample mean. When we use Method 1: Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($A = \infty$). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Method 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Method 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Method 1: Variance divided by Method 2: CLT Shortcut.
+Then, we obtain a sample from each population of people and calculate a sample mean. When we use Method 1: Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($K = \infty$). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Method 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Method 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Method 1: Variance divided by Method 2: CLT Shortcut.
 
 **Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.**
 
