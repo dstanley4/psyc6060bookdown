@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-14" />
+<meta name="date" content="2021-09-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,15 +33,15 @@
   
 <link rel="prev" href="about-the-author.html"/>
 <link rel="next" href="handling-data-with-the-tidyverse.html"/>
-<script src="libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -51,8 +51,15 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/plotly-binding/plotly.js"></script>
+<script src="libs/typedarray/typedarray.min.js"></script>
+<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -120,6 +127,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -995,14 +1024,14 @@ the results of an analysis, or anything else.</p>
 <p>You can create a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.</p>
 <p>Try the command below in the Console. You will see that summary() gives the mean and median for each of the numeric variables (age and height).</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="introduction.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
-<pre><code>##       age             diet               height    
-##  Min.   : 18.00   Length:59946       Min.   : 1.0  
-##  1st Qu.: 26.00   Class :character   1st Qu.:66.0  
-##  Median : 30.00   Mode  :character   Median :68.0  
-##  Mean   : 32.34                      Mean   :68.3  
-##  3rd Qu.: 37.00                      3rd Qu.:71.0  
-##  Max.   :110.00                      Max.   :95.0  
-##                                      NA&#39;s   :3     
+<pre><code>##       age            diet               height    
+##  Min.   : 18.0   Length:59946       Min.   : 1.0  
+##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
+##  Median : 30.0   Mode  :character   Median :68.0  
+##  Mean   : 32.3                      Mean   :68.3  
+##  3rd Qu.: 37.0                      3rd Qu.:71.0  
+##  Max.   :110.0                      Max.   :95.0  
+##                                     NA&#39;s   :3     
 ##      pets               sex               status         
 ##  Length:59946       Length:59946       Length:59946      
 ##  Class :character   Class :character   Class :character  
@@ -1111,14 +1140,14 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 ## 5    27 mostly anything     73 likes dogs and … m     single
 ## 6    39 &lt;NA&gt;                68 likes dogs and … m     single</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="introduction.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
-<pre><code>##       age             diet               height    
-##  Min.   : 18.00   Length:59946       Min.   : 1.0  
-##  1st Qu.: 26.00   Class :character   1st Qu.:66.0  
-##  Median : 30.00   Mode  :character   Median :68.0  
-##  Mean   : 32.34                      Mean   :68.3  
-##  3rd Qu.: 37.00                      3rd Qu.:71.0  
-##  Max.   :110.00                      Max.   :95.0  
-##                                      NA&#39;s   :3     
+<pre><code>##       age            diet               height    
+##  Min.   : 18.0   Length:59946       Min.   : 1.0  
+##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
+##  Median : 30.0   Mode  :character   Median :68.0  
+##  Mean   : 32.3                      Mean   :68.3  
+##  3rd Qu.: 37.0                      3rd Qu.:71.0  
+##  Max.   :110.0                      Max.   :95.0  
+##                                     NA&#39;s   :3     
 ##      pets               sex               status         
 ##  Length:59946       Length:59946       Length:59946      
 ##  Class :character   Class :character   Class :character  
@@ -1204,15 +1233,15 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 <a href="handling-data-with-the-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/lunr.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
