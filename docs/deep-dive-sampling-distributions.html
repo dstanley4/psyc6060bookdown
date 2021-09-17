@@ -1116,6 +1116,12 @@ FIGURE 14.3: Variance ratio when there is one population of people
 </div>
 <div id="simulation-3-identical-populations" class="section level3" number="14.8.2">
 <h3><span class="header-section-number">14.8.2</span> Simulation 3 identical populations</h3>
+<div class="figure"><span id="fig:sim3pop"></span>
+<img src="ch_deep_sampling/images/figure3.png" alt="Sampling from three populations with the same mean (and variance)" width="100%" />
+<p class="caption">
+FIGURE 14.4: Sampling from three populations with the same mean (and variance)
+</p>
+</div>
 <table>
 <thead>
 <tr class="header">
@@ -1143,7 +1149,7 @@ FIGURE 14.3: Variance ratio when there is one population of people
 </tbody>
 </table>
 <p>In this section, instead of using one population, we use three identical populations. We also introduce the captial letter <span class="math inline">\(A\)</span> to indicate the number of populations. We continue to use the little letter <span class="math inline">\(a\)</span> to represent the number of samples. Typically, <span class="math inline">\(A = a\)</span>. That is we use <span class="math inline">\(A =3\)</span> when indicating there are three populations. In contrast, we use <span class="math inline">\(a=3\)</span> when we are indicating we have three sample means (one from each population).</p>
-<p>You will see in this section that when you have three identical populations of people, see Figure <a href="#fig:sim3pop"><strong>??</strong></a>, that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.</p>
+<p>You will see in this section that when you have three identical populations of people, see Figure <a href="deep-dive-sampling-distributions.html#fig:sim3pop">14.4</a>, that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.</p>
 <div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="deep-dive-sampling-distributions.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
 <span id="cb530-2"><a href="deep-dive-sampling-distributions.html#cb530-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
 <span id="cb530-3"><a href="deep-dive-sampling-distributions.html#cb530-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
@@ -1167,11 +1173,11 @@ FIGURE 14.3: Variance ratio when there is one population of people
 <span id="cb534-2"><a href="deep-dive-sampling-distributions.html#cb534-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot_pop3.png" width="90%" /></p>
 <p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the green box.</p>
-<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions.html#fig:graph3pop">14.4</a>, you can see the range of values that occur with this ratio.</p>
+<p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions.html#fig:graph3pop">14.5</a>, you can see the range of values that occur with this ratio.</p>
 <div class="figure"><span id="fig:graph3pop"></span>
 <img src="bookdown_files/figure-html/graph3pop-1.png" alt="Variance ratio when there are three identical populations of people" width="100%" />
 <p class="caption">
-FIGURE 14.4: Variance ratio when there are three identical populations of people
+FIGURE 14.5: Variance ratio when there are three identical populations of people
 </p>
 </div>
 <div id="extreme-ratio-values" class="section level4" number="14.8.2.1">
