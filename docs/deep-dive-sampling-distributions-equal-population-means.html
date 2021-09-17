@@ -33,15 +33,15 @@
   
 <link rel="prev" href="positive-predictive-value.html"/>
 <link rel="next" href="deeper-sampling-under-construction.html"/>
-<script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -51,15 +51,8 @@
 
 
 
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -861,7 +854,7 @@ FIGURE 14.1: A distributionof people (A.) and a corresponding distribution of sa
       \tag{14.5}
 \end{equation}\]</span>
 <p>An inspection of Equation <a href="deep-dive-sampling-distributions-equal-population-means.html#eq:popvarCLTxbardeep">(14.5)</a> reveals the variance of the distribution of sample means (see Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>B) depends on both the number of people in each sample (<span class="math inline">\(n\)</span>) and the variability in the people’s heights in the population (see Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>B, <span class="math inline">\(\sigma_{people}^2\)</span>).</p>
-<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">W. L. Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
+<p>The reason this formula works should not be obvious - at all. If you are looking at this formula trying to figure out why it works - I suggest you stop and just accept that it does work. If you want to understand why it works, I suggest you <a href="https://archive.org/details/statisticsfifthe00will">consult</a> <span class="citation">(<a href="#ref-hays1994statistics" role="doc-biblioref">Hays 1994</a>)</span> who provides a statistical proof for the Central Limit Theorem.</p>
 <p>It’s helpful, moving forward, to think of this formula (<span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>) as representing the <em>variability in means due to random sampling</em>. No matter the situation - this formula will always reflect the variability in sample means due ONLY to random sampling.</p>
 <p>Previously, we learned that the variance of the distribution of people in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>A is <span class="math inline">\(\sigma_{people}^2=156.3236\)</span>. Consequently, we can use Equation <a href="deep-dive-sampling-distributions-equal-population-means.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate the variance of the distribution of sample means in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>B:</p>
 <p><span class="math display">\[
@@ -983,7 +976,7 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{(5-1)168 + (5-1)146.7 +(5-1)346}{(5-1) + (5-1) + (5-1)} \\
 &amp;= \frac{672 + 586.8 + 1384}{15 -3} \\
 &amp;= \frac{2642.8}{12} \\
-&amp;= 220.2333 \\
+&amp;= 220.2333333 \\
 \end{aligned}
 \]</span></p>
 <p><strong>IMPORTANT:</strong> The denominator of this variance calculation is <span class="math inline">\(12\)</span> (i.e., <span class="math inline">\(a(n-1)=3(5-1)=3(4)=12\)</span>). Therefore, we say there are 12 degrees of freedom associated with this estimate of the variance of the people in the population.</p>
@@ -994,11 +987,11 @@ s_{people}^2 &amp;= MSE_{people}\\
 &amp;= \frac{s_1^2 + s_2^2 + s_3^2}{3} \\
 &amp;= \frac{168 + 146.7 + 346 }{3} \\
 &amp;= \frac{660.7}{3} \\
-&amp;= 220.2333 \\
+&amp;= 220.2333333 \\
 \end{aligned}
 \]</span></p>
-<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333\)</span>, is an estimate of the variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>A. You could think of this number as an average variance estimate.</p>
-<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333\)</span>) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).</p>
+<p>The number we just calculated, <span class="math inline">\(s_{people}^2 =220.2333333\)</span>, is an estimate of the variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>A. You could think of this number as an average variance estimate.</p>
+<p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333333\)</span>) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).</p>
 <p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But, statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times, statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:chdeepfigure1">14.1</a>A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
 </div>
 <div id="estimating-sigma_barx2-with-clt" class="section level4" number="14.6.2.2">
@@ -1012,12 +1005,12 @@ s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
-&amp;= \frac{220.2333 }{5}\\
-&amp;= 44.0467
+&amp;= \frac{220.2333333 }{5}\\
+&amp;= 44.0466667
 \end{aligned} 
 \]</span></p>
-<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0467\)</span>.</p>
-<p><strong>IMPORTANT:</strong> This estimate of the variance of the distribution of sample means was based on using an estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
+<p>Thus, using Method 2: CLT shortcut, our estimate of the variance of the distribution of sample means is <span class="math inline">\(s_{\bar{x}}^2 = 44.0466667\)</span>.</p>
+<p><strong>IMPORTANT:</strong> This estimate of the variance of the distribution of sample means was based on using an estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
 </div>
 </div>
 <div id="ratio-comparison-of-two-methods-1" class="section level3" number="14.6.3">
@@ -1048,20 +1041,20 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 <tr class="even">
 <td align="center">Method 2 CLT: Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
-<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span></td>
+<td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0466667\)</span></td>
 <td align="center">12</td>
 </tr>
 </tbody>
 </table>
-<p>You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from “the truth” (31.26472) due to sampling error. Consequently, when we construct a ratio based on those variance estimate (<span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span> and <span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span>) the ratio will differ from “the truth” (1.00) due to sampling error.</p>
+<p>You can see in the table above, that the estimates for the variance of the distribution of sample means differ from each other and from “the truth” (31.26472) due to sampling error. Consequently, when we construct a ratio based on those variance estimate (<span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span> and <span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0466667\)</span>) the ratio will differ from “the truth” (1.00) due to sampling error.</p>
 <p><br />
 </p>
 <p><span class="math display">\[
 \begin{aligned} 
 \text{ratio comparing methods} &amp;= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
 &amp;=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
-&amp;=\frac{79.213}{44.0467}\\
-&amp;= 1.7984\\
+&amp;=\frac{79.213}{44.0466667}\\
+&amp;= 1.7983881\\
 \end{aligned} 
 \]</span></p>
 </div>
@@ -1079,25 +1072,25 @@ FIGURE 14.2: Sampling from one population
 </div>
 <p>The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:sim1pop">14.2</a> above. In this scenario, we obtain 3 samples from the population of people and then used that data to <strong>estimate</strong> the variance of the distribution of sample means using Method 1 and Method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of the table shows a case where we did this same thing with three new samples.</p>
 <p>We begin by creating the population in R:</p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb525-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb525-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb525-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb1-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb1-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span></code></pre></div>
 <p>Then we run a simulation where we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.</p>
-<div class="sourceCode" id="cb526"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb526-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb526-1" aria-hidden="true" tabindex="-1"></a>data_ratios <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1,</span>
-<span id="cb526-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb526-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">a =</span> <span class="dv">3</span>, </span>
-<span id="cb526-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb526-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb2-1" aria-hidden="true" tabindex="-1"></a>data_ratios <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1,</span>
+<span id="cb2-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb2-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">a =</span> <span class="dv">3</span>, </span>
+<span id="cb2-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb2-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
 <p>The results of the 100,000 simulations are placed in the data set called data_ratios. We can see the first few rows of these data below.</p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb527-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_ratios)</span></code></pre></div>
-<pre><code>##   trial method_1_var_est method_2_clt_est var_ratio
-## 1     1          117.973            34.20   3.44951
-## 2     2           45.853            44.61   1.02795
-## 3     3            2.573            48.56   0.05299
-## 4     4            8.920            22.07   0.40411
-## 5     5            9.693            35.68   0.27167
-## 6     6           84.853            21.42   3.96141</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_ratios)</span></code></pre></div>
+<pre><code>##   trial method_1_var_est method_2_clt_est  var_ratio
+## 1     1       117.973333         34.20000 3.44951267
+## 2     2        45.853333         44.60667 1.02794799
+## 3     3         2.573333         48.56000 0.05299286
+## 4     4         8.920000         22.07333 0.40410752
+## 5     5         9.693333         35.68000 0.27167414
+## 6     6        84.853333         21.42000 3.96140678</code></pre>
 <p>When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using Method 1 and Method 2 (method_1_var_est and method_2_clt_est, respectively). Then we created a ratio of those two values (method_1_var_est/method_2_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb529-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb529-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb529-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb5-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot.png" width="90%" /></p>
 <p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-equal-population-means.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in the table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the Method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the blue box.</p>
 <p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:graph1pop">14.3</a>, you can see the range of values that occur with this ratio. This</p>
@@ -1145,27 +1138,27 @@ FIGURE 14.4: Sampling from three populations with the same mean (and variance)
 </table>
 <p>In this section, instead of using one population, we use three identical populations. We also introduce the captial letter <span class="math inline">\(A\)</span> to indicate the number of populations. We continue to use the little letter <span class="math inline">\(a\)</span> to represent the number of samples. Typically, <span class="math inline">\(A = a\)</span>. That is we use <span class="math inline">\(A =3\)</span> when indicating there are three populations. In contrast, we use <span class="math inline">\(a=3\)</span> when we are indicating we have three sample means (one from each population).</p>
 <p>You will see in this section that when you have three identical populations of people, see Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:sim3pop">14.4</a>, that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb530-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb530-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb530-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb530-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
-<span id="cb530-4"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb530-4" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb6-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb6-2" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb6-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb6-3" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb6-4"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb6-4" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span></code></pre></div>
 <p>Then, we obtain a sample from each population of people and calculate a sample mean. When we use Method 1: Variance we think of these three sample means as being a random sample (<span class="math inline">\(a = 3\)</span>) of the infinite distribution of sample means (<span class="math inline">\(K = \infty\)</span>). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Method 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Method 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Method 1: Variance divided by Method 2: CLT Shortcut.</p>
 <p><strong>Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.</strong></p>
-<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb531-1" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
-<span id="cb531-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb531-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb7-1" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
+<span id="cb7-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb7-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
 <p>The results of the 100,000 simulations are placed in the data set called data_ratios3. We can see the first few rows of these data below.</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb532-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_ratios3)</span></code></pre></div>
-<pre><code>##   trial method_1_var_est method_2_clt_est var_ratio
-## 1     1          117.973            34.20   3.44951
-## 2     2           45.853            44.61   1.02795
-## 3     3            2.573            48.56   0.05299
-## 4     4            8.920            22.07   0.40411
-## 5     5            9.693            35.68   0.27167
-## 6     6           84.853            21.42   3.96141</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_ratios3)</span></code></pre></div>
+<pre><code>##   trial method_1_var_est method_2_clt_est  var_ratio
+## 1     1       117.973333         34.20000 3.44951267
+## 2     2        45.853333         44.60667 1.02794799
+## 3     3         2.573333         48.56000 0.05299286
+## 4     4         8.920000         22.07333 0.40410752
+## 5     5         9.693333         35.68000 0.27167414
+## 6     6        84.853333         21.42000 3.96140678</code></pre>
 <p>In the first row of the above table we obtained 3 samples (one from each population) and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (Method 1/Method 2). Each additional row of table shows a case where were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
-<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb534-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb534-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb10-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_ratios3)</span></code></pre></div>
 <p><img src="ch_deep_sampling/images/skim_screenshot_pop3.png" width="90%" /></p>
 <p>Recall that previously, we used Equation <a href="deep-dive-sampling-distributions-equal-population-means.html#eq:popvarCLTxbardeep">(14.5)</a> to calculate <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>. Each row in table above presents two estimates (i.e., <span class="math inline">\(s_{\bar{x}}^2\)</span>) of <span class="math inline">\(\sigma_{\bar{x}}^2\)</span>. You can see that the method 1 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining <span class="math inline">\(s_{\bar{x}}^2\)</span> was on average correct because of the 31.3 value in the green box.</p>
 <p>Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure <a href="deep-dive-sampling-distributions-equal-population-means.html#fig:graph3pop">14.5</a>, you can see the range of values that occur with this ratio.</p>
@@ -1188,17 +1181,17 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 <li>the population means are the same</li>
 </ol>
 <p>When the above situation is the case, we will obtain an variance ratio above 3.88 only 5% of the time. We obtain this 3.88 value with the R-code below.</p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the variance ratios smallest to largest</span></span>
-<span id="cb535-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-2" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
-<span id="cb535-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb535-4"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-4" aria-hidden="true" tabindex="-1"></a><span class="co"># in order list, obtain the 95th percentile </span></span>
-<span id="cb535-5"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-5" aria-hidden="true" tabindex="-1"></a><span class="co"># values beyond this point are in the upper 5% of variances ratios</span></span>
-<span id="cb535-6"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that occur when the population means are equal</span></span>
-<span id="cb535-7"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-7" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> var_ratio3_sorted[<span class="dv">100000</span><span class="sc">*</span>.<span class="dv">95</span>]</span>
-<span id="cb535-8"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb535-9"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-9" aria-hidden="true" tabindex="-1"></a><span class="co"># round the result and print it</span></span>
-<span id="cb535-10"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-10" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
-<span id="cb535-11"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb535-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sort the variance ratios smallest to largest</span></span>
+<span id="cb11-2"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-2" aria-hidden="true" tabindex="-1"></a>var_ratio3_sorted <span class="ot">&lt;-</span> <span class="fu">sort</span>(data_ratios3<span class="sc">$</span>var_ratio)</span>
+<span id="cb11-3"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># in order list, obtain the 95th percentile </span></span>
+<span id="cb11-5"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># values beyond this point are in the upper 5% of variances ratios</span></span>
+<span id="cb11-6"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># that occur when the population means are equal</span></span>
+<span id="cb11-7"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-7" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> var_ratio3_sorted[<span class="dv">100000</span><span class="sc">*</span>.<span class="dv">95</span>]</span>
+<span id="cb11-8"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># round the result and print it</span></span>
+<span id="cb11-10"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-10" aria-hidden="true" tabindex="-1"></a>extreme_cut_off3 <span class="ot">&lt;-</span> <span class="fu">round</span>(extreme_cut_off3, <span class="dv">2</span>)</span>
+<span id="cb11-11"><a href="deep-dive-sampling-distributions-equal-population-means.html#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extreme_cut_off3)</span></code></pre></div>
 <pre><code>## [1] 3.88</code></pre>
 </div>
 <div id="its-really-an-f-value" class="section level4" number="14.7.2.2">
@@ -1326,15 +1319,15 @@ Hays, William L. 1994. <em>Statistics (5th Edn)</em>. Holt, Rinehart &amp; Winst
 <a href="deeper-sampling-under-construction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
