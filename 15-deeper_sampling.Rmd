@@ -4,11 +4,9 @@ output:
   html_document: default
 ---
 
-# Deeper sampling [under construction]
+# Deeper dive sampling [under construction]
 
-## Deeper Dive: Sampling Distributions (Unequal population means)
-
-## Previously
+## Previously: Equal Population Means
 
 In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. We created a scenario where the sample means differed to random sampling only when we created three populations with identical means (and variances). This situation is depicted in the scenario below.
 
@@ -22,6 +20,7 @@ knitr::include_graphics("ch_deeper_sampling/images/pop_equal_means.png")
 | 2          | $\mu_{A2_{people}}= 172.50$ |  $\sigma_{2_{people}}^2= 156.3236$ |
 | 3          | $\mu_{A3_{people}}= 172.50$ |  $\sigma_{3_{people}}^2= 156.3236$ |
 
+### Mean of population means (equal)
 
 We can think of there mean a mean of the population means:
 
@@ -35,6 +34,7 @@ $$
 \end{aligned}
 $$
 
+### Variance of population means (equal)
 
 $$
 \begin{aligned} 
@@ -45,7 +45,33 @@ $$
 \end{aligned}
 $$
 
+### Variance due to sampling error (equal)
 
+$$
+\begin{aligned} 
+\frac{\sigma_{people}^2}{n} &= \frac{156.3236}{5}\\
+&= 31.26472\\
+\end{aligned}
+$$
+
+### Overall variance in sample mean (equal)
+
+$$
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
+&= \frac{156.3236}{5} + 0\\
+&= 31.26472 + 0\\
+&= 31.26472\\
+\end{aligned} 
+$$
+
+## Now: Unequal Population Means
+
+
+
+```{r sim3poprepeatunequal, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
+knitr::include_graphics("ch_deeper_sampling/images/pop_unequal_means.png")
+```
 
 
 | Population |  Mean        | Variance        |
@@ -53,6 +79,12 @@ $$
 | 1          | $\mu_{1_{people}}= 152.50$ |  $\sigma_{1_{people}}^2= 156.3236$ |
 | 2          | $\mu_{2_{people}}= 172.50$ |  $\sigma_{2_{people}}^2= 156.3236$ |
 | 3          | $\mu_{3_{people}}= 192.50$ |  $\sigma_{3_{people}}^2= 156.3236$ |
+
+
+
+### Mean of population means (unequal)
+
+We can think of there mean a mean of the population means:
 
 $$
 \begin{aligned} 
@@ -64,23 +96,41 @@ $$
 \end{aligned}
 $$
 
+### Variance of population means (unequal)
 
 $$
 \begin{aligned} 
 \sigma_{\mu_A}^2 &=  \frac{\sum (\mu_{A_i}-\mu_{\mu_A})^2}{A} \\
-&=  \frac{(152.50 - 172.50)^2 + (172.50 - 172.50)^2 + (162.50 - 172.50)^2}{3} \\
-&=  \frac{20^2 + 0 + 20^2}{3} \\
-&=  0\\
+&=  \frac{(152.50 - 172.50)^2 + (172.50 - 172.50)^2 + (192.50 - 172.50)^2}{3} \\
+&=  \frac{(-20)^2 + (0)^2 + (20)^2}{3} \\
+&=  \frac{400 + 0 + 400}{3} \\
+&=  \frac{800}{3} \\
+&=  266.6667\\
 \end{aligned}
 $$
 
-
+### Variance due to sampling error (unequal)
 
 $$
-\sigma_{\bar{x}}^2= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2
+\begin{aligned} 
+\frac{\sigma_{people}^2}{n} &= \frac{156.3236}{5}\\
+&= 31.26472\\
+\end{aligned}
+$$
+
+### Overall variance in sample mean (unequal)
+
+$$
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
+&= \frac{156.3236}{5} + 266.6667\\
+&= 31.26472 + 266.6667\\
+&= 297.9314\\
+\end{aligned} 
 $$
 
 
+##  Summary
 
 
 Recall that when we c
