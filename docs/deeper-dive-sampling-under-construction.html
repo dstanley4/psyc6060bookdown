@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-23" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -407,6 +407,11 @@ div.csl-indent {
 <li class="chapter" data-level="8.4.3" data-path="qualtrics.html"><a href="qualtrics.html#convert-to-analytic-data"><i class="fa fa-check"></i><b>8.4.3</b> Convert to analytic data</a></li>
 <li class="chapter" data-level="8.4.4" data-path="qualtrics.html"><a href="qualtrics.html#complete-script"><i class="fa fa-check"></i><b>8.4.4</b> Complete script</a></li>
 </ul></li>
+<li class="chapter" data-level="8.5" data-path="qualtrics.html"><a href="qualtrics.html#extra-help"><i class="fa fa-check"></i><b>8.5</b> Extra Help</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="qualtrics.html"><a href="qualtrics.html#qualtrics-1"><i class="fa fa-check"></i><b>8.5.1</b> Qualtrics</a></li>
+<li class="chapter" data-level="8.5.2" data-path="qualtrics.html"><a href="qualtrics.html#surveys"><i class="fa fa-check"></i><b>8.5.2</b> Surveys</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="effect-sizes-from-publications.html"><a href="effect-sizes-from-publications.html"><i class="fa fa-check"></i><b>9</b> Effect sizes from publications</a>
 <ul>
@@ -558,6 +563,7 @@ div.csl-indent {
 <li class="chapter" data-level="15.1.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#population-means-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.2</b> Population means: Variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 <li class="chapter" data-level="15.1.3" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#sample-means-sampling-error-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.3</b> Sample means: Sampling error variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 <li class="chapter" data-level="15.1.4" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#sample-means-overall-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.4</b> Sample means: Overall variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
+<li class="chapter" data-level="15.1.5" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#simulation-overall-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.5</b> Simulation: Overall variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 </ul></li>
 <li class="chapter" data-level="15.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#now-unequal-population-means"><i class="fa fa-check"></i><b>15.2</b> Now: Unequal Population Means</a>
 <ul>
@@ -843,6 +849,40 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 &amp;= 31.26472\\
 \end{aligned} 
 \]</span></p>
+</div>
+<div id="simulation-overall-variance-equal-mu" class="section level3" number="15.1.5">
+<h3><span class="header-section-number">15.1.5</span> Simulation: Overall variance (equal <span class="math inline">\(\mu\)</span>)</h3>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="deeper-dive-sampling-under-construction.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb537-2"><a href="deeper-dive-sampling-under-construction.html#cb537-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb537-3"><a href="deeper-dive-sampling-under-construction.html#cb537-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb537-4"><a href="deeper-dive-sampling-under-construction.html#cb537-4" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb537-5"><a href="deeper-dive-sampling-under-construction.html#cb537-5" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb537-6"><a href="deeper-dive-sampling-under-construction.html#cb537-6" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span>
+<span id="cb537-7"><a href="deeper-dive-sampling-under-construction.html#cb537-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb537-8"><a href="deeper-dive-sampling-under-construction.html#cb537-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb537-9"><a href="deeper-dive-sampling-under-construction.html#cb537-9" aria-hidden="true" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
+<span id="cb537-10"><a href="deeper-dive-sampling-under-construction.html#cb537-10" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">number.of.trials =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<pre><code>## Number of populations: 3</code></pre>
+<pre><code>## Using a = 3</code></pre>
+<p>We created a data set called many_samples that has many sample means in it.</p>
+<p>You can see the first rows of many_samples with the command below.</p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="deeper-dive-sampling-under-construction.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(many_samples)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 6
+##   study     n sample_mean sample_var_n sample_var_n_1
+##   &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;          &lt;dbl&gt;
+## 1     1    10        174.         27.8           30.9
+## 2     2    10        162.         83.4           92.6
+## 3     3    10        173.        139.           155. 
+## 4     4    10        180         322.           358. 
+## 5     5    10        173.        161.           179. 
+## 6     6    10        172         160.           177. 
+## # … with 1 more variable: est_se2 &lt;dbl&gt;</code></pre>
+<p>We can calculate the variance of the sample_mean column using the var() command.</p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="deeper-dive-sampling-under-construction.html#cb542-1" aria-hidden="true" tabindex="-1"></a>many_samples <span class="sc">%&gt;%</span> </span>
+<span id="cb542-2"><a href="deeper-dive-sampling-under-construction.html#cb542-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_sample_means =</span> <span class="fu">var</span>(sample_mean)) <span class="sc">%&gt;%</span> </span>
+<span id="cb542-3"><a href="deeper-dive-sampling-under-construction.html#cb542-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div>
+<pre><code>##   var_sample_means
+## 1            15.73</code></pre>
 </div>
 </div>
 <div id="now-unequal-population-means" class="section level2" number="15.2">

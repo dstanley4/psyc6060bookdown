@@ -67,6 +67,47 @@ $$
 \end{aligned} 
 $$
 
+
+### Simulation: Overall variance (equal $\mu$)
+
+```{r, echo=FALSE}
+set.seed(1234)
+```
+
+```{r}
+library(tidyverse)
+library(learnSampling)
+
+pop1 <- make_population(mean = 172.50, variance = 156.3236)
+pop2 <- pop1
+pop3 <- pop1
+
+
+data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
+                                      number.of.trials = 1000)
+
+
+```
+
+
+We created a data set called many_samples that has many sample means in it.
+
+You can see the first rows of many_samples with the command below.
+
+```{r}
+head(many_samples)
+```
+
+We can calculate the variance of the sample_mean column using the var() command.
+
+```{r}
+many_samples %>% 
+  summarise(var_sample_means = var(sample_mean)) %>% 
+  as.data.frame()
+```
+
+
+
 ## Now: Unequal Population Means
 
 

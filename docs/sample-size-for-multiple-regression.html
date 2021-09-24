@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-23" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -407,6 +407,11 @@ div.csl-indent {
 <li class="chapter" data-level="8.4.3" data-path="qualtrics.html"><a href="qualtrics.html#convert-to-analytic-data"><i class="fa fa-check"></i><b>8.4.3</b> Convert to analytic data</a></li>
 <li class="chapter" data-level="8.4.4" data-path="qualtrics.html"><a href="qualtrics.html#complete-script"><i class="fa fa-check"></i><b>8.4.4</b> Complete script</a></li>
 </ul></li>
+<li class="chapter" data-level="8.5" data-path="qualtrics.html"><a href="qualtrics.html#extra-help"><i class="fa fa-check"></i><b>8.5</b> Extra Help</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="qualtrics.html"><a href="qualtrics.html#qualtrics-1"><i class="fa fa-check"></i><b>8.5.1</b> Qualtrics</a></li>
+<li class="chapter" data-level="8.5.2" data-path="qualtrics.html"><a href="qualtrics.html#surveys"><i class="fa fa-check"></i><b>8.5.2</b> Surveys</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="effect-sizes-from-publications.html"><a href="effect-sizes-from-publications.html"><i class="fa fa-check"></i><b>9</b> Effect sizes from publications</a>
 <ul>
@@ -558,6 +563,7 @@ div.csl-indent {
 <li class="chapter" data-level="15.1.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#population-means-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.2</b> Population means: Variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 <li class="chapter" data-level="15.1.3" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#sample-means-sampling-error-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.3</b> Sample means: Sampling error variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 <li class="chapter" data-level="15.1.4" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#sample-means-overall-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.4</b> Sample means: Overall variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
+<li class="chapter" data-level="15.1.5" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#simulation-overall-variance-equal-mu"><i class="fa fa-check"></i><b>15.1.5</b> Simulation: Overall variance (equal <span class="math inline">\(\mu\)</span>)</a></li>
 </ul></li>
 <li class="chapter" data-level="15.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#now-unequal-population-means"><i class="fa fa-check"></i><b>15.2</b> Now: Unequal Population Means</a>
 <ul>
@@ -779,8 +785,8 @@ div.csl-indent {
 f^2=\frac{R^2}{1-R^2}
 \]</span></p>
 <p>So in R we type:</p>
-<div class="sourceCode" id="cb614"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb614-1"><a href="sample-size-for-multiple-regression.html#cb614-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">20</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
-<span id="cb614-2"><a href="sample-size-for-multiple-regression.html#cb614-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="sample-size-for-multiple-regression.html#cb621-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">20</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
+<span id="cb621-2"><a href="sample-size-for-multiple-regression.html#cb621-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p>Thus, <span class="math inline">\(f^2=.25\)</span>.</p>
 </div>
@@ -793,10 +799,10 @@ f^2=\frac{R^2}{1-R^2}
 <h3><span class="header-section-number">18.1.3</span> Calculate sample size</h3>
 <p>With multiple regression we send R the effect size (.25) the degrees of freedom for the predictor (3). The output provide returns the degrees of freedom for the denominator - which requires a bit of work to convert to sample size.</p>
 <p>We begin with the R code below:</p>
-<div class="sourceCode" id="cb616"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb616-1"><a href="sample-size-for-multiple-regression.html#cb616-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb616-2"><a href="sample-size-for-multiple-regression.html#cb616-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">3</span>,</span>
-<span id="cb616-3"><a href="sample-size-for-multiple-regression.html#cb616-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> .<span class="dv">25</span>,</span>
-<span id="cb616-4"><a href="sample-size-for-multiple-regression.html#cb616-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="sample-size-for-multiple-regression.html#cb623-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb623-2"><a href="sample-size-for-multiple-regression.html#cb623-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">3</span>,</span>
+<span id="cb623-3"><a href="sample-size-for-multiple-regression.html#cb623-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> .<span class="dv">25</span>,</span>
+<span id="cb623-4"><a href="sample-size-for-multiple-regression.html#cb623-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
@@ -809,8 +815,8 @@ f^2=\frac{R^2}{1-R^2}
 <p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1\)</span> therefore <span class="math inline">\(N = u + v + 1\)</span>.</p>
 <p>We know <span class="math inline">\(u = 3\)</span> because there were three predictors. Our power analysis revealed we need <span class="math inline">\(v = 57\)</span> in our study.</p>
 <p>Therefore <span class="math inline">\(N = u + v + 1 = 3 + 57 + 1\)</span></p>
-<div class="sourceCode" id="cb618"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb618-1"><a href="sample-size-for-multiple-regression.html#cb618-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">57</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb618-2"><a href="sample-size-for-multiple-regression.html#cb618-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="sample-size-for-multiple-regression.html#cb625-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">57</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb625-2"><a href="sample-size-for-multiple-regression.html#cb625-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
 <pre><code>## [1] 61</code></pre>
 <p>Thus we want an N of 61 in our study.</p>
 </div>
@@ -831,18 +837,18 @@ f^2=\frac{R^2}{1-R^2}
 f^2=\frac{sr^2}{1-R^2}
 \]</span></p>
 <p>So we type:</p>
-<div class="sourceCode" id="cb620"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb620-1"><a href="sample-size-for-multiple-regression.html#cb620-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">02</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
-<span id="cb620-2"><a href="sample-size-for-multiple-regression.html#cb620-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb620-3"><a href="sample-size-for-multiple-regression.html#cb620-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="sample-size-for-multiple-regression.html#cb627-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">02</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
+<span id="cb627-2"><a href="sample-size-for-multiple-regression.html#cb627-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb627-3"><a href="sample-size-for-multiple-regression.html#cb627-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
 <pre><code>## [1] 0.025</code></pre>
 </div>
 <div id="calculate-power" class="section level3" number="18.2.3">
 <h3><span class="header-section-number">18.2.3</span> Calculate power</h3>
 <p>We can calculate the required degrees of freedom with the command below:</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb622-1"><a href="sample-size-for-multiple-regression.html#cb622-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb622-2"><a href="sample-size-for-multiple-regression.html#cb622-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
-<span id="cb622-3"><a href="sample-size-for-multiple-regression.html#cb622-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>,</span>
-<span id="cb622-4"><a href="sample-size-for-multiple-regression.html#cb622-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="sample-size-for-multiple-regression.html#cb629-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb629-2"><a href="sample-size-for-multiple-regression.html#cb629-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
+<span id="cb629-3"><a href="sample-size-for-multiple-regression.html#cb629-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>,</span>
+<span id="cb629-4"><a href="sample-size-for-multiple-regression.html#cb629-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
@@ -854,8 +860,8 @@ f^2=\frac{sr^2}{1-R^2}
 <p>Thus, degrees of freedom error (i.e., <span class="math inline">\(v\)</span>) is 421</p>
 <p>We then calculate <span class="math inline">\(N = u + v + 1\)</span></p>
 <p>In R we type:</p>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb624-1"><a href="sample-size-for-multiple-regression.html#cb624-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">421</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb624-2"><a href="sample-size-for-multiple-regression.html#cb624-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="sample-size-for-multiple-regression.html#cb631-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">421</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb631-2"><a href="sample-size-for-multiple-regression.html#cb631-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
 <pre><code>## [1] 423</code></pre>
 <p>Thus, you need an <span class="math inline">\(N\)</span> of 423.</p>
 </div>
@@ -869,9 +875,9 @@ f^2=\frac{sr^2}{1-R^2}
 <p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1 = 75 - 1 - 1 = 73\)</span>.</p>
 <p>In terms of effect size:</p>
 <p><span class="math inline">\(f^2=\frac{sr^2}{1-R^2} = \frac{.02}{1-.20}=.025\)</span>.</p>
-<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb626-1"><a href="sample-size-for-multiple-regression.html#cb626-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
-<span id="cb626-2"><a href="sample-size-for-multiple-regression.html#cb626-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">v =</span> <span class="dv">73</span>,</span>
-<span id="cb626-3"><a href="sample-size-for-multiple-regression.html#cb626-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb633-1"><a href="sample-size-for-multiple-regression.html#cb633-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
+<span id="cb633-2"><a href="sample-size-for-multiple-regression.html#cb633-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">v =</span> <span class="dv">73</span>,</span>
+<span id="cb633-3"><a href="sample-size-for-multiple-regression.html#cb633-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
