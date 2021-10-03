@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Deeper dive sampling [under construction] | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Deeper dive sampling [under construction] | Welcome!" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-09-30" />
+<meta name="date" content="2021-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,7 +34,8 @@
 <link rel="prev" href="deep-dive-sampling-distributions.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
 <script src="libs/header-attrs/header-attrs.js"></script>
-<script src="libs/jquery/jquery.min.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -772,7 +772,7 @@ div.csl-indent {
 <div id="previously-equal-population-means" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Previously: Equal Population Means</h2>
 <p>In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. We created a scenario where the sample means differed to random sampling only when we created three populations with identical means (and variances). This situation is depicted in the scenario below.</p>
-<div class="figure"><span id="fig:sim3poprepeat"></span>
+<div class="figure"><span style="display:block;" id="fig:sim3poprepeat"></span>
 <img src="ch_deeper_sampling/images/pop_equal_means.png" alt="Sampling from three populations with the same mean (and variance)" width="100%" />
 <p class="caption">
 FIGURE 15.1: Sampling from three populations with the same mean (and variance)
@@ -887,7 +887,7 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 </div>
 <div id="now-unequal-population-means" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Now: Unequal Population Means</h2>
-<div class="figure"><span id="fig:sim3poprepeatunequal"></span>
+<div class="figure"><span style="display:block;" id="fig:sim3poprepeatunequal"></span>
 <img src="ch_deeper_sampling/images/pop_unequal_means.png" alt="Sampling from three populations with the same mean (and variance)" width="100%" />
 <p class="caption">
 FIGURE 15.2: Sampling from three populations with the same mean (and variance)
@@ -1012,7 +1012,6 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
 <script src="libs/gitbook/js/clipboard.min.js"></script>
 <script src="libs/gitbook/js/plugin-search.js"></script>
 <script src="libs/gitbook/js/plugin-sharing.js"></script>
@@ -1052,6 +1051,10 @@ gitbook.start({
 "text": null
 },
 "download": ["bookdown.pdf", "bookdown.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "none"
 }
