@@ -8,11 +8,122 @@ output:
 
 ## Previously: Equal Population Means
 
-In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. We created a scenario where the sample means differed to random sampling only when we created three populations with identical means (and variances). This situation is depicted in the scenario below.
+In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. In this chapter, examine the scenario with multiple populations where the population means are different. We specifically focus on the variance of the distribution of sample means because that is theoretical foundation for Analysis of Variance (ANOVA). We begin, however, in the simple situation of a single population.
 
-```{r sim3poprepeat, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
-knitr::include_graphics("ch_deeper_sampling/images/pop_equal_means.png")
+
+## Theory sample mean variance 
+
+### Single population (theory)
+
+Recall that when there is a single population we express the variance in sample means using the formula below. This formula is conceptual one that calculates the variance in sample means due to sampling error for a given population variance and sample size.
+
+$$
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &= \text{variance due to sampling error}\\
+&= \frac{\sigma_{people}^2}{n}\\
+\end{aligned}
+$$
+
+
+### Multiple populations (theory)
+
+When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. 
+
+$$
+\begin{aligned} 
+\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
+\end{aligned}
+$$
+
+
+However, when there are multiple populations we also have to take into account the **variability in population means** when determining the *variance of sample means*. We use $A$ to indicate the number of populations. If there are three populations then $A = 3$. We use the formula below to calculate the variance of the population means:
+
+$$
+\begin{aligned} 
+\text{variance in population means} &= \sigma_{\mu_A}^2 \\
+&= \frac{\sum (\mu_{A_i}-\mu_{\mu_A})^2}{A} \\
+\end{aligned}
+$$
+
+
+where 
+
+$$
+\begin{aligned} 
+\mu_{\mu_A} &=  \frac{\sum{\mu_A}}{A}
+\end{aligned} 
+$$
+
+
+So when there are multiple populations the variability in sample means is due to both sampling error and the variability in population means.
+
+$$
+\begin{aligned} 
+\sigma_{\bar{x}}^2 &= \text{variance due to sampling error} + \text{variance in population means} \\
+&= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
+\end{aligned}
+$$
+
+
+Importantly, if the populations all have the same mean then  $\sigma_{\mu_A}^2=0$. When this happens, sample means differ only due to sampling error. 
+
+## Practice sample mean variance 
+
+
+### Single population (practice)
+
+Let's quickly revisit the scenario where there is a single population with a mean of 172.50 and a variance of 156.3236. Sample means (n = 5) will only differ due to sampling error. We can calculate the variance due to sampling error with the equation below.
+
+$$
+\begin{aligned} 
+\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
+&= 156.3236 / 5\\
+&= 31.26472\\
+\end{aligned}
+$$
+
+Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The variance in the sample means will be 31.26472.
+
+
+We can confirm this with the R code below. We create a population and then take 9,000 sample means.
+
+
+```{r,include = FALSE}
+library(tidyverse)
 ```
+
+```{r}
+library(tidyverse)
+library(learnSampling)
+
+set.seed(1)
+pop1 <- make_population(mean = 172.50, variance = 156.3236)
+
+set.seed(1)
+sample_means <- get_mean_samples(pop1,
+                                 n = 5,
+                                 number.of.trials = 9000)
+```
+
+The first few rows of the data set with 9,000 sample mean is below:
+
+```{r}
+head(sample_means)
+```
+
+The trial column indicate which trial (of the 10,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.
+
+```{r}
+sample_means %>%
+  summarise(var_means = var(sample_mean))
+```
+
+We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)
+
+### Multiples population, equal $\mu$ (practice)
+
+Now let's see what happens when we have three populations with different means - as illustrated in the table and figure below. Notice the mean for all three populations is 172.50 in the table below.
+
 
 | Population |  Mean        | Variance        |
 |:----------:|:------------:|:----------------|
@@ -20,9 +131,26 @@ knitr::include_graphics("ch_deeper_sampling/images/pop_equal_means.png")
 | 2          | $\mu_{A2_{people}}= 172.50$ |  $\sigma_{2_{people}}^2= 156.3236$ |
 | 3          | $\mu_{A3_{people}}= 172.50$ |  $\sigma_{3_{people}}^2= 156.3236$ |
 
-### Mean of population means (equal $\mu$)
 
-We can think of there mean a mean of the population means:
+We created a scenario where the sample means differed to random sampling only when we created three populations with identical means (and variances). This situation is depicted in the scenario below.
+
+```{r sim3poprepeat, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
+knitr::include_graphics("ch_deeper_sampling/images/pop_equal_means.png")
+```
+
+
+Because the populations have equal variances we calculate the variance due to sampling error the way we did previously:
+
+$$
+\begin{aligned} 
+\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
+&= 156.3236 / 5\\
+&= 31.26472\\
+\end{aligned}
+$$
+
+
+But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the mean of the population means. This value is calculated below - it's simply the average of 172.50 repeated three times:
 
 $$
 \begin{aligned} 
@@ -34,7 +162,7 @@ $$
 \end{aligned}
 $$
 
-### Population means:  Variance (equal $\mu$)
+We use this value to calculate the variance of the population means. Which we find to be 0 because the population means are all the same.
 
 $$
 \begin{aligned} 
@@ -46,76 +174,64 @@ $$
 \end{aligned}
 $$
 
-### Sample means: Sampling error variance (equal $\mu$)
+So the total variance is sample means is:
 
 $$
 \begin{aligned} 
-\frac{\sigma_{people}^2}{n} &= \frac{156.3236}{5}\\
-&= 31.26472\\
+\sigma_{\bar{x}}^2 &= \text{variance due to sampling error} + \text{variance in population means} \\
+&= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
+&= 31.26472 + 0
+&= 31.26472
 \end{aligned}
 $$
 
-### Sample means: Overall variance (equal $\mu$)
-
-$$
-\begin{aligned} 
-\sigma_{\bar{x}}^2 &= \text{Variance from random sampling} + \text{Variance in population means} 
-&= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
-&= \frac{156.3236}{5} + 0\\
-&= 31.26472 + 0\\
-&= 31.26472\\
-\end{aligned} 
-$$
-
-
-### Simulation: Overall variance (equal $\mu$)
-
-```{r, echo=FALSE}
-set.seed(1234)
-```
+We can confirm this with the simulation below. **In this simulation we still take 9000 sample means but its 3000 from each of the three populations**.
 
 ```{r}
 library(tidyverse)
 library(learnSampling)
 
+set.seed(1)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
-pop2 <- pop1
-pop3 <- pop1
+pop2 <- pop1 # populations are identical
+pop3 <- pop1 # populations are identical
 
-
-data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
-                                      number.of.trials = 1000)
-
-
+set.seed(1)
+sample_means <- get_mean_samples(pop1, pop2, pop3,
+                                 n = 5,
+                                 number.of.trials = 9000)
 ```
 
-
-We created a data set called many_samples that has many sample means in it.
-
-You can see the first rows of many_samples with the command below.
+The first few rows of the data set with 9,000 sample mean is below:
 
 ```{r}
-head(many_samples)
+head(sample_means)
 ```
 
-We can calculate the variance of the sample_mean column using the var() command.
+The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.
 
 ```{r}
-many_samples %>% 
-  summarise(var_sample_means = var(sample_mean)) %>% 
-  as.data.frame()
+sample_means %>%
+  summarise(var_means = var(sample_mean))
 ```
 
 
-
-## Now: Unequal Population Means
-
+We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.) 
 
 
-```{r sim3poprepeatunequal, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
-knitr::include_graphics("ch_deeper_sampling/images/pop_unequal_means.png")
-```
+**That is, when multiple populations have identical means, the variance of sample means from those populations is due entirely to sampling error. That variance of sample means is represented by the formula below:**
 
+$$
+\begin{aligned} 
+\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
+\end{aligned}
+$$
+
+
+
+### Multiples population, different $\mu$ (practice)
+
+Now let's see what happens when we have three populations with different means - as illustrated in the table and figure below.
 
 | Population |  Mean        | Variance        |
 |:----------:|:------------:|:----------------|
@@ -125,9 +241,23 @@ knitr::include_graphics("ch_deeper_sampling/images/pop_unequal_means.png")
 
 
 
-### Mean of population means (unequal $\mu$)
+```{r sim3poprepeatunequal, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
+knitr::include_graphics("ch_deeper_sampling/images/pop_unequal_means.png")
+```
 
-We can think of there mean a mean of the population means:
+
+Because the populations have equal variances (even if the means are different) we calculate the variance due to sampling error the way we did previously:
+
+$$
+\begin{aligned} 
+\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
+&= 156.3236 / 5\\
+&= 31.26472\\
+\end{aligned}
+$$
+
+
+But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the mean of the population means. This value is calculated below - notice that we are simply averaging the three population means: 152.5, 172.5, and 192.5.
 
 $$
 \begin{aligned} 
@@ -139,7 +269,7 @@ $$
 \end{aligned}
 $$
 
-### Population means:  Variance (unequal $\mu$)
+We use this value to calculate the variance of the population means. Which we find to be 0 because the population means are all the same.
 
 $$
 \begin{aligned} 
@@ -153,26 +283,57 @@ $$
 \end{aligned}
 $$
 
-### Sample means: Sampling error variance (unequal $\mu$)
+So the total variance is sample means is:
 
 $$
 \begin{aligned} 
-\frac{\sigma_{people}^2}{n} &= \frac{156.3236}{5}\\
-&= 31.26472\\
+\sigma_{\bar{x}}^2 &= \text{variance due to sampling error} + \text{variance in population means} \\
+&= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
+&= 31.26472 + 266.6667\\
+&= 297.9314\\
 \end{aligned}
 $$
 
-### Sample means: Overall variance (unequal $\mu$)
+We can confirm this with the simulation below. **In this simulation we still take 9000 sample means but its 3000 from each of the three populations**.
+
+```{r}
+library(tidyverse)
+library(learnSampling)
+
+set.seed(1)
+pop1 <- make_population(mean = 172.50, variance = 156.3236)
+pop2 <- make_population(mean = 152.50, variance = 156.3236)
+pop3 <- make_population(mean = 192.50, variance = 156.3236)
+
+set.seed(1)
+sample_means <- get_mean_samples(pop1, pop2, pop3,
+                                 n = 5,
+                                 number.of.trials = 9000)
+```
+
+The first few rows of the data set with 9,000 sample mean is below:
+
+```{r}
+head(sample_means)
+```
+
+The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.
+
+```{r}
+sample_means %>%
+  summarise(var_means = var(sample_mean))
+```
+
+
+We take the variance of all of those sample means and get a value of 297.7683 which closely approximately the actual value of 297.9314 (which we get when using an infinite number of sample means.)
+
+**That is, when multiple populations have different means, the variance of sample means from those populations is due to both sampling error and the variance of the population means. That variance of sample means is represented by the formula below:**
 
 $$
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
-&= \frac{156.3236}{5} + 266.6667\\
-&= 31.26472 + 266.6667\\
-&= 297.9314\\
-\end{aligned} 
+\end{aligned}
 $$
-
 
 ##  Summary
 
