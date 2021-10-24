@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 # Deep Dive: Sampling Distributions 
@@ -403,7 +403,8 @@ Then we run a simulation where we estimate the variance using the distribution o
 
 ```{r, eval = FALSE}
 data_ratios <- get_mean_samples_ratio(pop1,
-                                      a = 3, 
+                                      a = 3,
+                                      n = 5,
                                       number.of.trials = 100000)
 ```
 
@@ -485,7 +486,8 @@ Then, we obtain a sample from each population of people and calculate a sample m
 
 ```{r, eval = FALSE}
 data_ratios3 <- get_mean_samples_ratio(pop1, pop2, pop3,
-                                      number.of.trials = 100000)
+                                       n = 5,
+                                       number.of.trials = 100000)
 ```
 
 ```{r, eval = FALSE, echo = FALSE}
