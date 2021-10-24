@@ -337,7 +337,7 @@ $$
 
 ## Back to ANOVA
 
-### Conceptual 
+### Conceptual/Expected F-values
 
 In the preceding simulations we saw how the variance of the distribution of sample means was different in the a) population means the same scenario and b) population means different scenario. That is, when the population means were different the variance of the distribution of sample means was larger.  Think about this finding in terms of an experiment.
 
@@ -367,11 +367,49 @@ Conceptually, an F-value represents the comparison of these two approaches:
 
 $$
 \begin{aligned} 
-F &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
+F &= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}
+&= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 $$
 
-But some textbooks show it in another form - which doesn't make sense conceptually but is mathematically the same. Below I show you how the conceptually meaningful approach used above can be converted to the format shown in most books. Note the change in notation in the last line.
+### Two scenarios
+
+Consider what happens to the above F-value when the population means are **all the same**. In this case the variance in population means is zero, $\sigma_{\mu_A}^2=0$. When this happens, the numerator and denominator are the same - so the expected F-value is 1.00.
+
+Now consider what happens to the above F-value when the population means are **different**. In this case, the variance of population means is larger than zero, $\sigma_{\mu_A}^2 > 0$. When this happens, the numerator is larger than the denominator - so the expected F-value is greater than 1.00.
+
+## Calculation
+
+The F-value formulas presented above are for the expected values. How do we calculate F-values in practice. The formula below estimates the variance in sample means due to all sources (sampling error and the variance in population means): 
+
+$$
+\begin{aligned} 
+s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
+\end{aligned}
+$$
+
+
+In contrast, the formula below estimate the variance due to sampling error alone:
+
+$$
+\begin{aligned} 
+s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
+\end{aligned}
+$$
+
+
+Consequently, in practice we calculate F-values using the equation below.
+
+$$
+\begin{aligned} 
+F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
+\end{aligned}
+$$
+
+
+## A confusing rearrangement
+
+Unfortunately, most textbooks don't present F-values in the conceptually easy to follow way presented above. Instead, they use an algebraic rearrangement presented below. This rearrangment is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when rearranged in the manner below - it's hard to understand the equation.
 
 $$
 \begin{aligned} 
@@ -383,7 +421,17 @@ F &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}
 \end{aligned}
 $$
 
-## Formula
+Likewise, the calculation version is often presented in a different way:
+
+$$
+\begin{aligned} 
+F &= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}*1\\
+&= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}*\frac{n}{n}\\
+&= \frac{n \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{n \frac{s_{people}^2}{n}}\\
+&= \frac{\frac{n \sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{s_{people}^2}\\
+\end{aligned}
+$$
 
 
 
