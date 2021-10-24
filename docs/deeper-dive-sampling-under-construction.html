@@ -571,7 +571,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="15.4" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#back-to-anova"><i class="fa fa-check"></i><b>15.4</b> Back to ANOVA</a>
 <ul>
-<li class="chapter" data-level="15.4.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#conceptualexpected-f-values"><i class="fa fa-check"></i><b>15.4.1</b> Conceptual/Expected F-values</a></li>
+<li class="chapter" data-level="15.4.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#conceptualexpected-f-values"><i class="fa fa-check"></i><b>15.4.1</b> Conceptual/Expected <span class="math inline">\(F\)</span>-values</a></li>
 <li class="chapter" data-level="15.4.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#two-scenarios"><i class="fa fa-check"></i><b>15.4.2</b> Two scenarios</a></li>
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#calculation-1"><i class="fa fa-check"></i><b>15.5</b> Calculation</a></li>
@@ -1087,7 +1087,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <div id="back-to-anova" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Back to ANOVA</h2>
 <div id="conceptualexpected-f-values" class="section level3" number="15.4.1">
-<h3><span class="header-section-number">15.4.1</span> Conceptual/Expected F-values</h3>
+<h3><span class="header-section-number">15.4.1</span> Conceptual/Expected <span class="math inline">\(F\)</span>-values</h3>
 <p>In the preceding simulations we saw how the variance of the distribution of sample means was different in the a) population means the same scenario and b) population means different scenario. That is, when the population means were different the variance of the distribution of sample means was larger. Think about this finding in terms of an experiment.</p>
 <p>Consider a scenario where you are interested in examining the effect of crowding on aggressive behavior. Your dependent variable is aggressive behavior. Your indpendent variable is Crowding with three levels: low, medium, and high. Your study has 5 people in each of these three conditions. The 5 people’s aggression scores in the low crowding condition represent a sample aggression scores from a low crowding population. Likewise, the 5 people’s aggression scores in the medium crowding condition represent a sample aggression scores from a medium crowding population. Finally, the 5 people people’s aggression scores in the high crowding condition represent a sample aggression scores from a high crowding population.</p>
 <p>You calculate a sample mean for each of the three conditions. You are asking if there is an effect of crowding on aggression. To answer this question we need to think of the distribution of sample means that would occur if you repeats the study thousands of times. If you repeated the study thousand of times, and crowding had now effect on aggression the distribution of sample means differ only due to sampling error and be described by the formula below. We think of this formula as describing the distribution of sample means under the Null Hypothesis (i.e., the scenario where the population means are equal.)</p>
@@ -1104,7 +1104,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 &amp;= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
 \end{aligned}
 \]</span></p>
-<p>Conceptually, an F-value represents the comparison of these two approaches:</p>
+<p>Conceptually, an <span class="math inline">\(F\)</span>-value represents the comparison of these two approaches:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 F &amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}
@@ -1114,25 +1114,25 @@ F &amp;= \frac{\text{variance due to sampling error} + \text{variance in populat
 </div>
 <div id="two-scenarios" class="section level3" number="15.4.2">
 <h3><span class="header-section-number">15.4.2</span> Two scenarios</h3>
-<p>Consider what happens to the above F-value when the population means are <strong>all the same</strong>. In this case the variance in population means is zero, <span class="math inline">\(\sigma_{\mu_A}^2=0\)</span>. When this happens, the numerator and denominator are the same - so the expected F-value is 1.00.</p>
-<p>Now consider what happens to the above F-value when the population means are <strong>different</strong>. In this case, the variance of population means is larger than zero, <span class="math inline">\(\sigma_{\mu_A}^2 &gt; 0\)</span>. When this happens, the numerator is larger than the denominator - so the expected F-value is greater than 1.00.</p>
+<p>Consider what happens to the above <span class="math inline">\(F\)</span>-value when the population means are <strong>all the same</strong>. In this case the variance in population means is zero, <span class="math inline">\(\sigma_{\mu_A}^2=0\)</span>. When this happens, the numerator and denominator are the same - so the expected <span class="math inline">\(F\)</span>-value is 1.00.</p>
+<p>Now consider what happens to the above <span class="math inline">\(F\)</span>-value when the population means are <strong>different</strong>. In this case, the variance of population means is larger than zero, <span class="math inline">\(\sigma_{\mu_A}^2 &gt; 0\)</span>. When this happens, the numerator is larger than the denominator - so the expected <span class="math inline">\(F\)</span>-value is greater than 1.00.</p>
 </div>
 </div>
 <div id="calculation-1" class="section level2" number="15.5">
 <h2><span class="header-section-number">15.5</span> Calculation</h2>
-<p>The F-value formulas presented above are for the expected values. How do we calculate F-values in practice. The formula below estimates the variance in sample means due to all sources (sampling error and the variance in population means):</p>
+<p>The <span class="math inline">\(F\)</span>-value formulas presented above are for the expected values. How do we calculate <span class="math inline">\(F\)</span>-values in practice? The formula below estimates the variance in sample means due to all sources (sampling error and the variance in population means):</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 \end{aligned}
 \]</span></p>
-<p>In contrast, the formula below estimate the variance due to sampling error alone:</p>
+<p>In contrast, the formula below estimates the variance due to sampling error alone:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
 \end{aligned}
 \]</span></p>
-<p>Consequently, in practice we calculate F-values using the equation below.</p>
+<p>Consequently, in practice we calculate <span class="math inline">\(F\)</span>-values using the equation below.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
@@ -1141,7 +1141,7 @@ F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{
 </div>
 <div id="a-confusing-rearrangement" class="section level2" number="15.6">
 <h2><span class="header-section-number">15.6</span> A confusing rearrangement</h2>
-<p>Unfortunately, most textbooks don’t present F-values in the conceptually easy to follow way presented above. Instead, they use an algebraic rearrangement presented below. This rearrangment is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when rearranged in the manner below - it’s hard to understand the equation.</p>
+<p>Unfortunately, most textbooks don’t present <span class="math inline">\(F\)</span>-values in the conceptually easy to follow way presented above. Instead, they use the algebraic rearrangement presented below. The rearrangment is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when the rearranged in used - it’s hard to understand the equation.</p>
 <p><span class="math display">\[
 \begin{aligned} 
 F &amp;= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}*1\\
@@ -1151,7 +1151,7 @@ F &amp;= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{peo
 &amp;= \frac{\sigma_{error}^2 + n \sigma_{\mu_A}^2}{ \sigma_{error}^2}\\
 \end{aligned}
 \]</span></p>
-<p>Likewise, the calculation version is often presented in a different way:</p>
+<p>Likewise, the calculation version is often presented in a different way - which is also harder to understand:</p>
 <p><span class="math display">\[
 \begin{aligned} 
 F &amp;= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
