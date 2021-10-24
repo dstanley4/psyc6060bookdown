@@ -365,16 +365,23 @@ $$
 
 Conceptually, an F-value represents the comparison of these two approaches:
 
-
 $$
 \begin{aligned} 
-F &= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}//
+F &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 $$
 
+But some textbooks show it in another form - which doesn't make sense conceptually but is mathematically the same. Below I show you how the conceptually meaningful approach used above can be converted to the format shown in most books. Note the change in notation in the last line.
 
-
-
+$$
+\begin{aligned} 
+F &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}*1\\
+&= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}*\frac{n}{n}\\
+&= \frac{n(\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2)}{n(\frac{\sigma_{people}^2}{n})}\\
+&= \frac{\sigma_{people}^2 + n \sigma_{\mu_A}^2}{ \sigma_{people}^2}\\
+&= \frac{\sigma_{error}^2 + n \sigma_{\mu_A}^2}{ \sigma_{error}^2}\\
+\end{aligned}
+$$
 
 ## Formula
 
