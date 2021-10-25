@@ -77,7 +77,7 @@ Let's quickly revisit the scenario where there is a single population with a mea
 $$
 \begin{aligned} 
 \text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
-&= 156.3236 / 5\\
+&= \frac{156.3236}{5}\\
 &= 31.26472\\
 \end{aligned}
 $$
@@ -144,7 +144,7 @@ Because the populations have equal variances we calculate the variance due to sa
 $$
 \begin{aligned} 
 \text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
-&= 156.3236 / 5\\
+&= \frac{156.3236}{5}\\
 &= 31.26472\\
 \end{aligned}
 $$
@@ -180,8 +180,8 @@ $$
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &= \text{variance due to sampling error} + \text{variance in population means} \\
 &= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
-&= 31.26472 + 0
-&= 31.26472
+&= 31.26472 + 0\\
+&= 31.26472\\
 \end{aligned}
 $$
 
@@ -251,7 +251,7 @@ Because the populations have equal variances (even if the means are different) w
 $$
 \begin{aligned} 
 \text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
-&= 156.3236 / 5\\
+&= \frac{156.3236}{5}\\
 &= 31.26472\\
 \end{aligned}
 $$
@@ -367,7 +367,7 @@ Conceptually, an $F$-value represents the comparison of these two approaches:
 
 $$
 \begin{aligned} 
-F &= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}
+F &= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
 &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 $$
@@ -432,6 +432,66 @@ F &= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_
 &= \frac{\frac{n \sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{s_{people}^2}\\
 \end{aligned}
 $$
+
+## Worked example
+
+A researcher was interested in people's reactions to video game feedback. Participants were randomly assigned to each of three conditions: negative feedback (subjects were insulted for their lack of ability to learn the game by a person over a loudspeaker who was reported to be in a control booth monitoring their performance), positive feedback (subjects were encouraged at how well they were doing), and a control condition in which subjects did not receive feedback. The dependent measure was video game score.
+
+| Feedback  |  Mean        | Variance        |      n          |
+|:----------:|:------------:|:----------------:|:----------------:|
+| negative          | $\bar{x}_{negative}= 17498.97959$ |  $s_{negative}^2= 41157141$ | n = 196|
+| none          | $\bar{x}_{none}= 20196.90306$     |  $s_{none}^2= 37084531$ |n=196|
+| positive          | $\bar{x}_{positive}= 25003.62245$ |  $s_{positive}^2= 31086669$ |n=196|
+
+
+
+
+First, we estimate the population variance:
+
+$$
+\begin{aligned}
+\text{variance due to sampling error} &= \frac{s_{negative}^2+s_{none}^2+s_{positive}^2}{3}\\
+&= \frac{41157141+37084531+31086669}{3}\\
+&= 36442780\\
+\end{aligned}
+$$
+
+
+Second, we estimate the variance in sample means  as if sampling error was the only source of variability:
+
+$$
+\begin{aligned}
+s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
+&= \frac{36442780}{196}\\
+&= 185932.6\\
+\end{aligned}
+$$
+
+
+Third, we estimate the variance in the distribution of sample means due to all sources:
+
+$$
+\begin{aligned}
+\text{total variance in means} &= \text{variance due to sampling error} + \text{variance in population means}\\
+&= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+&= \frac{(17498.97959-20899.83503)^2+(20196.90306-20899.83503)^2+(25003.62245-20899.83503)^2}{3-1}\\
+&= 14450501.13
+\end{aligned}
+$$
+
+Third we compare those two estimate in a ratio:
+
+$$
+\begin{aligned}
+F &= \frac{\text{total variance in means}}{\text{variance due to sampling error}}\\
+&= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
+&= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&= \frac{14450501.13}{185932.6}\\
+&= 77.72\\
+\end{aligned}
+$$
+
+
 
 
 ##  Summary

@@ -24,7 +24,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2021-10-24" />
+<meta name="date" content="2021-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -576,7 +576,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="15.5" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#calculation-1"><i class="fa fa-check"></i><b>15.5</b> Calculation</a></li>
 <li class="chapter" data-level="15.6" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#a-confusing-rearrangement"><i class="fa fa-check"></i><b>15.6</b> A confusing rearrangement</a></li>
-<li class="chapter" data-level="15.7" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#summary"><i class="fa fa-check"></i><b>15.7</b> Summary</a></li>
+<li class="chapter" data-level="15.7" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#worked-example"><i class="fa fa-check"></i><b>15.7</b> Worked example</a></li>
+<li class="chapter" data-level="15.8" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#summary"><i class="fa fa-check"></i><b>15.8</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>16</b> Regression and correlation</a>
 <ul>
@@ -828,7 +829,7 @@ div.csl-indent {
 <p><span class="math display">\[
 \begin{aligned} 
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{n}\\
-&amp;= 156.3236 / 5\\
+&amp;= \frac{156.3236}{5}\\
 &amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
@@ -902,7 +903,7 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 <p><span class="math display">\[
 \begin{aligned} 
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{n}\\
-&amp;= 156.3236 / 5\\
+&amp;= \frac{156.3236}{5}\\
 &amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
@@ -931,8 +932,8 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 \begin{aligned} 
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} + \text{variance in population means} \\
 &amp;= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
-&amp;= 31.26472 + 0
-&amp;= 31.26472
+&amp;= 31.26472 + 0\\
+&amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
 <p>We can confirm this with the simulation below. <strong>In this simulation we still take 9000 sample means but its 3000 from each of the three populations</strong>.</p>
@@ -1011,7 +1012,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <p><span class="math display">\[
 \begin{aligned} 
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{n}\\
-&amp;= 156.3236 / 5\\
+&amp;= \frac{156.3236}{5}\\
 &amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
@@ -1107,7 +1108,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <p>Conceptually, an <span class="math inline">\(F\)</span>-value represents the comparison of these two approaches:</p>
 <p><span class="math display">\[
 \begin{aligned} 
-F &amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}
+F &amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
 &amp;= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 \]</span></p>
@@ -1162,8 +1163,77 @@ F &amp;= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\fra
 \end{aligned}
 \]</span></p>
 </div>
-<div id="summary" class="section level2" number="15.7">
-<h2><span class="header-section-number">15.7</span> Summary</h2>
+<div id="worked-example" class="section level2" number="15.7">
+<h2><span class="header-section-number">15.7</span> Worked example</h2>
+<p>A researcher was interested in people’s reactions to video game feedback. Participants were randomly assigned to each of three conditions: negative feedback (subjects were insulted for their lack of ability to learn the game by a person over a loudspeaker who was reported to be in a control booth monitoring their performance), positive feedback (subjects were encouraged at how well they were doing), and a control condition in which subjects did not receive feedback. The dependent measure was video game score.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Feedback</th>
+<th align="center">Mean</th>
+<th align="center">Variance</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">negative</td>
+<td align="center"><span class="math inline">\(\bar{x}_{negative}= 17498.97959\)</span></td>
+<td align="center"><span class="math inline">\(s_{negative}^2= 41157141\)</span></td>
+<td align="center">n = 196</td>
+</tr>
+<tr class="even">
+<td align="center">none</td>
+<td align="center"><span class="math inline">\(\bar{x}_{none}= 20196.90306\)</span></td>
+<td align="center"><span class="math inline">\(s_{none}^2= 37084531\)</span></td>
+<td align="center">n=196</td>
+</tr>
+<tr class="odd">
+<td align="center">positive</td>
+<td align="center"><span class="math inline">\(\bar{x}_{positive}= 25003.62245\)</span></td>
+<td align="center"><span class="math inline">\(s_{positive}^2= 31086669\)</span></td>
+<td align="center">n=196</td>
+</tr>
+</tbody>
+</table>
+<p>First, we estimate the population variance:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{variance due to sampling error} &amp;= \frac{s_{negative}^2+s_{none}^2+s_{positive}^2}{3}\\
+&amp;= \frac{41157141+37084531+31086669}{3}\\
+&amp;= 36442780\\
+\end{aligned}
+\]</span></p>
+<p>Second, we estimate the variance in sample means as if sampling error was the only source of variability:</p>
+<p><span class="math display">\[
+\begin{aligned}
+s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
+&amp;= \frac{36442780}{196}\\
+&amp;= 185932.6\\
+\end{aligned}
+\]</span></p>
+<p>Third, we estimate the variance in the distribution of sample means due to all sources:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{total variance in means} &amp;= \text{variance due to sampling error} + \text{variance in population means}\\
+&amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
+&amp;= \frac{(17498.97959-20899.83503)^2+(20196.90306-20899.83503)^2+(25003.62245-20899.83503)^2}{3-1}\\
+&amp;= 14450501.13
+\end{aligned}
+\]</span></p>
+<p>Third we compare those two estimate in a ratio:</p>
+<p><span class="math display">\[
+\begin{aligned}
+F &amp;= \frac{\text{total variance in means}}{\text{variance due to sampling error}}\\
+&amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
+&amp;= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
+&amp;= \frac{14450501.13}{185932.6}\\
+&amp;= 77.72\\
+\end{aligned}
+\]</span></p>
+</div>
+<div id="summary" class="section level2" number="15.8">
+<h2><span class="header-section-number">15.8</span> Summary</h2>
 <table>
 <colgroup>
 <col width="13%" />
