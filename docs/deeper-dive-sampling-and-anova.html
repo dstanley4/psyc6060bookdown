@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Deeper dive sampling [under construction] | Welcome!</title>
+  <title>Chapter 15 Deeper dive: Sampling and ANOVA | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Deeper dive sampling [under construction] | Welcome!" />
+  <meta property="og:title" content="Chapter 15 Deeper dive: Sampling and ANOVA | Welcome!" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="dstanley4/psyc6060bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Deeper dive sampling [under construction] | Welcome!" />
+  <meta name="twitter:title" content="Chapter 15 Deeper dive: Sampling and ANOVA | Welcome!" />
   
   <meta name="twitter:description" content="Course notes for PSYC 6060" />
   
@@ -31,18 +31,18 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="deep-dive-sampling-distributions.html"/>
+<link rel="prev" href="deep-dive-sampling-and-anova.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs/header-attrs.js"></script>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -51,8 +51,15 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<script src="libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="libs/plotly-binding/plotly.js"></script>
+<script src="libs/typedarray/typedarray.min.js"></script>
+<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -120,6 +127,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -494,61 +523,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13.6" data-path="positive-predictive-value.html"><a href="positive-predictive-value.html#calculating-ppv-for-your-study"><i class="fa fa-check"></i><b>13.6</b> Calculating PPV for your study</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html"><i class="fa fa-check"></i><b>14</b> Deep Dive: Sampling Distributions</a>
+<li class="chapter" data-level="14" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html"><i class="fa fa-check"></i><b>14</b> Deep dive: Sampling and ANOVA</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#equal-population-means"><i class="fa fa-check"></i><b>14.1</b> Equal population means</a></li>
-<li class="chapter" data-level="14.2" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#a-tale-of-two-methods"><i class="fa fa-check"></i><b>14.2</b> A tale of two methods</a></li>
-<li class="chapter" data-level="14.3" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#a-student-population"><i class="fa fa-check"></i><b>14.3</b> A student population</a></li>
-<li class="chapter" data-level="14.4" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#random-sampling-process"><i class="fa fa-check"></i><b>14.4</b> Random sampling process</a></li>
-<li class="chapter" data-level="14.5" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#population-whats-in-a-name"><i class="fa fa-check"></i><b>14.5</b> Population: What’s in a name</a>
+<li class="chapter" data-level="14.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#equal-population-means"><i class="fa fa-check"></i><b>14.1</b> Equal population means</a></li>
+<li class="chapter" data-level="14.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#a-tale-of-two-methods"><i class="fa fa-check"></i><b>14.2</b> A tale of two methods</a></li>
+<li class="chapter" data-level="14.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#a-student-population"><i class="fa fa-check"></i><b>14.3</b> A student population</a></li>
+<li class="chapter" data-level="14.4" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#random-sampling-process"><i class="fa fa-check"></i><b>14.4</b> Random sampling process</a></li>
+<li class="chapter" data-level="14.5" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#population-whats-in-a-name"><i class="fa fa-check"></i><b>14.5</b> Population: What’s in a name</a>
 <ul>
-<li class="chapter" data-level="14.5.1" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#sample-means-in-context"><i class="fa fa-check"></i><b>14.5.1</b> Sample means in context</a></li>
-<li class="chapter" data-level="14.5.2" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#distribution-of-sample-means-as-a-population"><i class="fa fa-check"></i><b>14.5.2</b> Distribution of sample means as a population</a></li>
+<li class="chapter" data-level="14.5.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#sample-means-in-context"><i class="fa fa-check"></i><b>14.5.1</b> Sample means in context</a></li>
+<li class="chapter" data-level="14.5.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#distribution-of-sample-means-as-a-population"><i class="fa fa-check"></i><b>14.5.2</b> Distribution of sample means as a population</a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Sample mean distribution variance</a>
+<li class="chapter" data-level="14.6" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#method-1-calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Method 1: Calculate the variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#ratio-comparison-of-two-methods"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
+<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#method-1-calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Method 1: Calculate the variance of infinite sample means</a></li>
+<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#method-2-clt-shortcut-calculation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.2</b> Method 2: CLT shortcut: <em>Calculation</em> of variance of infinite sample means</a></li>
+<li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-methods"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.7</b> Estimating sample mean distribution variance</a>
+<li class="chapter" data-level="14.7" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.7</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means"><i class="fa fa-check"></i><b>14.7.1</b> Method 1: Estimate the variance of infinite sample means using 3 sample means</a></li>
-<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.7.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.7.3" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.7.3</b> Ratio comparison of two methods</a></li>
+<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#method-1-estimate-the-variance-of-infinite-sample-means-using-3-sample-means"><i class="fa fa-check"></i><b>14.7.1</b> Method 1: Estimate the variance of infinite sample means using 3 sample means</a></li>
+<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#method-2-clt-shortcut-estimation-of-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.7.2</b> Method 2: CLT shortcut: <em>Estimation</em> of variance of infinite sample means</a></li>
+<li class="chapter" data-level="14.7.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-methods-1"><i class="fa fa-check"></i><b>14.7.3</b> Ratio comparison of two methods</a></li>
 </ul></li>
-<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#frame-of-reference-random-sampling-only"><i class="fa fa-check"></i><b>14.8</b> Frame of reference: Random sampling only</a>
+<li class="chapter" data-level="14.8" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#frame-of-reference-random-sampling-only"><i class="fa fa-check"></i><b>14.8</b> Frame of reference: Random sampling only</a>
 <ul>
-<li class="chapter" data-level="14.8.1" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#simulation-1-population"><i class="fa fa-check"></i><b>14.8.1</b> Simulation 1 population</a></li>
-<li class="chapter" data-level="14.8.2" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8.2</b> Simulation 3 identical populations</a></li>
+<li class="chapter" data-level="14.8.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#simulation-1-population"><i class="fa fa-check"></i><b>14.8.1</b> Simulation 1 population</a></li>
+<li class="chapter" data-level="14.8.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#simulation-3-identical-populations"><i class="fa fa-check"></i><b>14.8.2</b> Simulation 3 identical populations</a></li>
 </ul></li>
-<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#central-f-distributions"><i class="fa fa-check"></i><b>14.9</b> Central <span class="math inline">\(F\)</span>-distributions</a></li>
-<li class="chapter" data-level="14.10" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#summary-table"><i class="fa fa-check"></i><b>14.10</b> Summary table</a></li>
-<li class="chapter" data-level="14.11" data-path="deep-dive-sampling-distributions.html"><a href="deep-dive-sampling-distributions.html#walk-away-points"><i class="fa fa-check"></i><b>14.11</b> Walk away points</a></li>
+<li class="chapter" data-level="14.9" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#central-f-distributions"><i class="fa fa-check"></i><b>14.9</b> Central <span class="math inline">\(F\)</span>-distributions</a></li>
+<li class="chapter" data-level="14.10" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#summary-table"><i class="fa fa-check"></i><b>14.10</b> Summary table</a></li>
+<li class="chapter" data-level="14.11" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#walk-away-points"><i class="fa fa-check"></i><b>14.11</b> Walk away points</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html"><i class="fa fa-check"></i><b>15</b> Deeper dive sampling [under construction]</a>
+<li class="chapter" data-level="15" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html"><i class="fa fa-check"></i><b>15</b> Deeper dive: Sampling and ANOVA</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#previously-equal-population-means"><i class="fa fa-check"></i><b>15.1</b> Previously: Equal Population Means</a></li>
-<li class="chapter" data-level="15.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#theory-sample-mean-variance"><i class="fa fa-check"></i><b>15.2</b> Theory sample mean variance</a>
+<li class="chapter" data-level="15.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#previously-equal-population-means"><i class="fa fa-check"></i><b>15.1</b> Previously: Equal Population Means</a></li>
+<li class="chapter" data-level="15.2" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance"><i class="fa fa-check"></i><b>15.2</b> Theory sample mean variance</a>
 <ul>
-<li class="chapter" data-level="15.2.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#single-population-theory"><i class="fa fa-check"></i><b>15.2.1</b> Single population (theory)</a></li>
-<li class="chapter" data-level="15.2.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#multiple-populations-theory"><i class="fa fa-check"></i><b>15.2.2</b> Multiple populations (theory)</a></li>
+<li class="chapter" data-level="15.2.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#single-population-theory"><i class="fa fa-check"></i><b>15.2.1</b> Single population (theory)</a></li>
+<li class="chapter" data-level="15.2.2" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#multiple-populations-theory"><i class="fa fa-check"></i><b>15.2.2</b> Multiple populations (theory)</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#practice-sample-mean-variance"><i class="fa fa-check"></i><b>15.3</b> Practice sample mean variance</a>
+<li class="chapter" data-level="15.3" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#practice-sample-mean-variance"><i class="fa fa-check"></i><b>15.3</b> Practice sample mean variance</a>
 <ul>
-<li class="chapter" data-level="15.3.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#single-population-practice"><i class="fa fa-check"></i><b>15.3.1</b> Single population (practice)</a></li>
-<li class="chapter" data-level="15.3.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#multiples-population-equal-mu-practice"><i class="fa fa-check"></i><b>15.3.2</b> Multiples population, equal <span class="math inline">\(\mu\)</span> (practice)</a></li>
-<li class="chapter" data-level="15.3.3" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#multiples-population-different-mu-practice"><i class="fa fa-check"></i><b>15.3.3</b> Multiples population, different <span class="math inline">\(\mu\)</span> (practice)</a></li>
+<li class="chapter" data-level="15.3.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#single-population-practice"><i class="fa fa-check"></i><b>15.3.1</b> Single population (practice)</a></li>
+<li class="chapter" data-level="15.3.2" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#multiples-population-equal-mu-practice"><i class="fa fa-check"></i><b>15.3.2</b> Multiples population, equal <span class="math inline">\(\mu\)</span> (practice)</a></li>
+<li class="chapter" data-level="15.3.3" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#multiples-population-different-mu-practice"><i class="fa fa-check"></i><b>15.3.3</b> Multiples population, different <span class="math inline">\(\mu\)</span> (practice)</a></li>
 </ul></li>
-<li class="chapter" data-level="15.4" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#back-to-anova"><i class="fa fa-check"></i><b>15.4</b> Back to ANOVA</a>
+<li class="chapter" data-level="15.4" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#back-to-anova"><i class="fa fa-check"></i><b>15.4</b> Back to ANOVA</a>
 <ul>
-<li class="chapter" data-level="15.4.1" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#conceptualexpected-f-values"><i class="fa fa-check"></i><b>15.4.1</b> Conceptual/Expected <span class="math inline">\(F\)</span>-values</a></li>
-<li class="chapter" data-level="15.4.2" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#two-scenarios"><i class="fa fa-check"></i><b>15.4.2</b> Two scenarios</a></li>
+<li class="chapter" data-level="15.4.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#conceptualexpected-f-values"><i class="fa fa-check"></i><b>15.4.1</b> Conceptual/Expected <span class="math inline">\(F\)</span>-values</a></li>
+<li class="chapter" data-level="15.4.2" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#two-scenarios"><i class="fa fa-check"></i><b>15.4.2</b> Two scenarios</a></li>
 </ul></li>
-<li class="chapter" data-level="15.5" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#calculation-1"><i class="fa fa-check"></i><b>15.5</b> Calculation</a></li>
-<li class="chapter" data-level="15.6" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#a-confusing-rearrangement"><i class="fa fa-check"></i><b>15.6</b> A confusing rearrangement</a></li>
-<li class="chapter" data-level="15.7" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#worked-example"><i class="fa fa-check"></i><b>15.7</b> Worked example</a></li>
-<li class="chapter" data-level="15.8" data-path="deeper-dive-sampling-under-construction.html"><a href="deeper-dive-sampling-under-construction.html#summary"><i class="fa fa-check"></i><b>15.8</b> Summary</a></li>
+<li class="chapter" data-level="15.5" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#calculation-1"><i class="fa fa-check"></i><b>15.5</b> Calculation</a></li>
+<li class="chapter" data-level="15.6" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#a-confusing-rearrangement"><i class="fa fa-check"></i><b>15.6</b> A confusing rearrangement</a></li>
+<li class="chapter" data-level="15.7" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#worked-example"><i class="fa fa-check"></i><b>15.7</b> Worked example</a></li>
+<li class="chapter" data-level="15.8" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#summary"><i class="fa fa-check"></i><b>15.8</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>16</b> Regression and correlation</a>
 <ul>
@@ -743,8 +772,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="deeper-dive-sampling-under-construction" class="section level1" number="15">
-<h1><span class="header-section-number">Chapter 15</span> Deeper dive sampling [under construction]</h1>
+<div id="deeper-dive-sampling-and-anova" class="section level1" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Deeper dive: Sampling and ANOVA</h1>
 <div id="previously-equal-population-means" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Previously: Equal Population Means</h2>
 <p>In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. In this chapter, examine the scenario with multiple populations where the population means are different. We specifically focus on the variance of the distribution of sample means because that is theoretical foundation for Analysis of Variance (ANOVA). We begin, however, in the simple situation of a single population.</p>
@@ -806,20 +835,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The variance in the sample means will be 31.26472.</p>
 <p>We can confirm this with the R code below. We create a population and then take 9,000 sample means.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="deeper-dive-sampling-under-construction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="deeper-dive-sampling-under-construction.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb1-3"><a href="deeper-dive-sampling-under-construction.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="deeper-dive-sampling-under-construction.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-5"><a href="deeper-dive-sampling-under-construction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb1-6"><a href="deeper-dive-sampling-under-construction.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="deeper-dive-sampling-under-construction.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-8"><a href="deeper-dive-sampling-under-construction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1,</span>
-<span id="cb1-9"><a href="deeper-dive-sampling-under-construction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb1-10"><a href="deeper-dive-sampling-under-construction.html#cb1-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="deeper-dive-sampling-and-anova.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb537-2"><a href="deeper-dive-sampling-and-anova.html#cb537-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb537-3"><a href="deeper-dive-sampling-and-anova.html#cb537-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb537-4"><a href="deeper-dive-sampling-and-anova.html#cb537-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb537-5"><a href="deeper-dive-sampling-and-anova.html#cb537-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb537-6"><a href="deeper-dive-sampling-and-anova.html#cb537-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb537-7"><a href="deeper-dive-sampling-and-anova.html#cb537-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb537-8"><a href="deeper-dive-sampling-and-anova.html#cb537-8" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1,</span>
+<span id="cb537-9"><a href="deeper-dive-sampling-and-anova.html#cb537-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb537-10"><a href="deeper-dive-sampling-and-anova.html#cb537-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 1</code></pre>
 <pre><code>## Using a = 1</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="deeper-dive-sampling-under-construction.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="deeper-dive-sampling-and-anova.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 1       167.4
@@ -828,10 +857,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5     5                 1       174.0
 ## 6     6                 1       157.4</code></pre>
 <p>The trial column indicate which trial (of the 10,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="deeper-dive-sampling-under-construction.html#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="deeper-dive-sampling-under-construction.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="deeper-dive-sampling-and-anova.html#cb542-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb542-2"><a href="deeper-dive-sampling-and-anova.html#cb542-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
-## 1  30.80005</code></pre>
+## 1      30.8</code></pre>
 <p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
 </div>
 <div id="multiples-population-equal-mu-practice" class="section level3" number="15.3.2">
@@ -908,22 +937,22 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>We can confirm this with the simulation below. <strong>In this simulation we still take 9000 sample means but its 3000 from each of the three populations</strong>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="deeper-dive-sampling-under-construction.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-2"><a href="deeper-dive-sampling-under-construction.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb8-3"><a href="deeper-dive-sampling-under-construction.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="deeper-dive-sampling-under-construction.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb8-5"><a href="deeper-dive-sampling-under-construction.html#cb8-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb8-6"><a href="deeper-dive-sampling-under-construction.html#cb8-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
-<span id="cb8-7"><a href="deeper-dive-sampling-under-construction.html#cb8-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
-<span id="cb8-8"><a href="deeper-dive-sampling-under-construction.html#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="deeper-dive-sampling-under-construction.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb8-10"><a href="deeper-dive-sampling-under-construction.html#cb8-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
-<span id="cb8-11"><a href="deeper-dive-sampling-under-construction.html#cb8-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb8-12"><a href="deeper-dive-sampling-under-construction.html#cb8-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="deeper-dive-sampling-and-anova.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb544-2"><a href="deeper-dive-sampling-and-anova.html#cb544-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb544-3"><a href="deeper-dive-sampling-and-anova.html#cb544-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb544-4"><a href="deeper-dive-sampling-and-anova.html#cb544-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb544-5"><a href="deeper-dive-sampling-and-anova.html#cb544-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb544-6"><a href="deeper-dive-sampling-and-anova.html#cb544-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
+<span id="cb544-7"><a href="deeper-dive-sampling-and-anova.html#cb544-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
+<span id="cb544-8"><a href="deeper-dive-sampling-and-anova.html#cb544-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb544-9"><a href="deeper-dive-sampling-and-anova.html#cb544-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb544-10"><a href="deeper-dive-sampling-and-anova.html#cb544-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
+<span id="cb544-11"><a href="deeper-dive-sampling-and-anova.html#cb544-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb544-12"><a href="deeper-dive-sampling-and-anova.html#cb544-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 3</code></pre>
 <pre><code>## Using a = 3</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="deeper-dive-sampling-under-construction.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="deeper-dive-sampling-and-anova.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 2       167.4
@@ -932,10 +961,10 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 ## 5     5                 2       174.0
 ## 6     6                 3       157.4</code></pre>
 <p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="deeper-dive-sampling-under-construction.html#cb13-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="deeper-dive-sampling-under-construction.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="deeper-dive-sampling-and-anova.html#cb549-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb549-2"><a href="deeper-dive-sampling-and-anova.html#cb549-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
-## 1  30.80853</code></pre>
+## 1     30.81</code></pre>
 <p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
 <p><strong>That is, when multiple populations have identical means, the variance of sample means from those populations is due entirely to sampling error. That variance of sample means is represented by the formula below:</strong></p>
 <p><span class="math display">\[
@@ -1019,22 +1048,22 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>We can confirm this with the simulation below. <strong>In this simulation we still take 9000 sample means but its 3000 from each of the three populations</strong>.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="deeper-dive-sampling-under-construction.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb15-2"><a href="deeper-dive-sampling-under-construction.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb15-3"><a href="deeper-dive-sampling-under-construction.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="deeper-dive-sampling-under-construction.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb15-5"><a href="deeper-dive-sampling-under-construction.html#cb15-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb15-6"><a href="deeper-dive-sampling-under-construction.html#cb15-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">152.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb15-7"><a href="deeper-dive-sampling-under-construction.html#cb15-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">192.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb15-8"><a href="deeper-dive-sampling-under-construction.html#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="deeper-dive-sampling-under-construction.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb15-10"><a href="deeper-dive-sampling-under-construction.html#cb15-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
-<span id="cb15-11"><a href="deeper-dive-sampling-under-construction.html#cb15-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb15-12"><a href="deeper-dive-sampling-under-construction.html#cb15-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="deeper-dive-sampling-and-anova.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb551-2"><a href="deeper-dive-sampling-and-anova.html#cb551-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb551-3"><a href="deeper-dive-sampling-and-anova.html#cb551-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb551-4"><a href="deeper-dive-sampling-and-anova.html#cb551-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb551-5"><a href="deeper-dive-sampling-and-anova.html#cb551-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb551-6"><a href="deeper-dive-sampling-and-anova.html#cb551-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">152.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb551-7"><a href="deeper-dive-sampling-and-anova.html#cb551-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">192.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb551-8"><a href="deeper-dive-sampling-and-anova.html#cb551-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb551-9"><a href="deeper-dive-sampling-and-anova.html#cb551-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb551-10"><a href="deeper-dive-sampling-and-anova.html#cb551-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
+<span id="cb551-11"><a href="deeper-dive-sampling-and-anova.html#cb551-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb551-12"><a href="deeper-dive-sampling-and-anova.html#cb551-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 3</code></pre>
 <pre><code>## Using a = 3</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="deeper-dive-sampling-under-construction.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="deeper-dive-sampling-and-anova.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 2       147.4
@@ -1043,10 +1072,10 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 ## 5     5                 2       154.0
 ## 6     6                 3       177.4</code></pre>
 <p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="deeper-dive-sampling-under-construction.html#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="deeper-dive-sampling-under-construction.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="deeper-dive-sampling-and-anova.html#cb556-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb556-2"><a href="deeper-dive-sampling-and-anova.html#cb556-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
-## 1  297.7683</code></pre>
+## 1     297.8</code></pre>
 <p>We take the variance of all of those sample means and get a value of 297.7683 which closely approximately the actual value of 297.9314 (which we get when using an infinite number of sample means.)</p>
 <p><strong>That is, when multiple populations have different means, the variance of sample means from those populations is due to both sampling error and the variance of the population means. That variance of sample means is represented by the formula below:</strong></p>
 <p><span class="math display">\[
@@ -1111,9 +1140,9 @@ F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{
 \end{aligned}
 \]</span></p>
 <div class="figure"><span style="display:block;" id="fig:formulamap"></span>
-<img src="ch_deeper_sampling/images/screenshot_formula_map.png" alt="Linking conceptual and calculation formulas for the F-value)" width="100%" />
+<img src="ch_deeper_sampling/images/screenshot_formula_map.png" alt="Linking conceptual and calculation formulas for the F-value." width="100%" />
 <p class="caption">
-FIGURE 15.3: Linking conceptual and calculation formulas for the F-value)
+FIGURE 15.3: Linking conceptual and calculation formulas for the F-value.
 </p>
 </div>
 </div>
@@ -1264,18 +1293,18 @@ FIGURE 15.4: Mapping formulas to the F-table.
           </div>
         </div>
       </div>
-<a href="deep-dive-sampling-distributions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deep-dive-sampling-and-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
