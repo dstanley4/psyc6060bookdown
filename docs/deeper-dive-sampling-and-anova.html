@@ -838,20 +838,20 @@ div.csl-indent {
 \]</span></p>
 <p>Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The variance in the sample means will be 31.26472.</p>
 <p>We can confirm this with the R code below. We create a population and then take 9,000 sample means.</p>
-<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="deeper-dive-sampling-and-anova.html#cb540-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb540-2"><a href="deeper-dive-sampling-and-anova.html#cb540-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb540-3"><a href="deeper-dive-sampling-and-anova.html#cb540-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb540-4"><a href="deeper-dive-sampling-and-anova.html#cb540-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb540-5"><a href="deeper-dive-sampling-and-anova.html#cb540-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb540-6"><a href="deeper-dive-sampling-and-anova.html#cb540-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb540-7"><a href="deeper-dive-sampling-and-anova.html#cb540-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb540-8"><a href="deeper-dive-sampling-and-anova.html#cb540-8" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1,</span>
-<span id="cb540-9"><a href="deeper-dive-sampling-and-anova.html#cb540-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb540-10"><a href="deeper-dive-sampling-and-anova.html#cb540-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="deeper-dive-sampling-and-anova.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb534-2"><a href="deeper-dive-sampling-and-anova.html#cb534-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb534-3"><a href="deeper-dive-sampling-and-anova.html#cb534-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb534-4"><a href="deeper-dive-sampling-and-anova.html#cb534-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb534-5"><a href="deeper-dive-sampling-and-anova.html#cb534-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb534-6"><a href="deeper-dive-sampling-and-anova.html#cb534-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb534-7"><a href="deeper-dive-sampling-and-anova.html#cb534-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb534-8"><a href="deeper-dive-sampling-and-anova.html#cb534-8" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1,</span>
+<span id="cb534-9"><a href="deeper-dive-sampling-and-anova.html#cb534-9" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb534-10"><a href="deeper-dive-sampling-and-anova.html#cb534-10" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 1</code></pre>
 <pre><code>## Using a = 1</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb543"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb543-1"><a href="deeper-dive-sampling-and-anova.html#cb543-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb537-1"><a href="deeper-dive-sampling-and-anova.html#cb537-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 1       167.4
@@ -860,8 +860,8 @@ div.csl-indent {
 ## 5     5                 1       174.0
 ## 6     6                 1       157.4</code></pre>
 <p>The trial column indicate which trial (of the 10,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="deeper-dive-sampling-and-anova.html#cb545-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb545-2"><a href="deeper-dive-sampling-and-anova.html#cb545-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="deeper-dive-sampling-and-anova.html#cb539-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb539-2"><a href="deeper-dive-sampling-and-anova.html#cb539-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
 ## 1      30.8</code></pre>
 <p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
@@ -940,22 +940,22 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>We can confirm this with the simulation below. <strong>In this simulation we still take 9000 sample means but its 3000 from each of the three populations</strong>.</p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb547-1"><a href="deeper-dive-sampling-and-anova.html#cb547-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb547-2"><a href="deeper-dive-sampling-and-anova.html#cb547-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb547-3"><a href="deeper-dive-sampling-and-anova.html#cb547-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb547-4"><a href="deeper-dive-sampling-and-anova.html#cb547-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb547-5"><a href="deeper-dive-sampling-and-anova.html#cb547-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb547-6"><a href="deeper-dive-sampling-and-anova.html#cb547-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
-<span id="cb547-7"><a href="deeper-dive-sampling-and-anova.html#cb547-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
-<span id="cb547-8"><a href="deeper-dive-sampling-and-anova.html#cb547-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb547-9"><a href="deeper-dive-sampling-and-anova.html#cb547-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb547-10"><a href="deeper-dive-sampling-and-anova.html#cb547-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
-<span id="cb547-11"><a href="deeper-dive-sampling-and-anova.html#cb547-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb547-12"><a href="deeper-dive-sampling-and-anova.html#cb547-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb541-1"><a href="deeper-dive-sampling-and-anova.html#cb541-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb541-2"><a href="deeper-dive-sampling-and-anova.html#cb541-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb541-3"><a href="deeper-dive-sampling-and-anova.html#cb541-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb541-4"><a href="deeper-dive-sampling-and-anova.html#cb541-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb541-5"><a href="deeper-dive-sampling-and-anova.html#cb541-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb541-6"><a href="deeper-dive-sampling-and-anova.html#cb541-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
+<span id="cb541-7"><a href="deeper-dive-sampling-and-anova.html#cb541-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1 <span class="co"># populations are identical</span></span>
+<span id="cb541-8"><a href="deeper-dive-sampling-and-anova.html#cb541-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb541-9"><a href="deeper-dive-sampling-and-anova.html#cb541-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb541-10"><a href="deeper-dive-sampling-and-anova.html#cb541-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
+<span id="cb541-11"><a href="deeper-dive-sampling-and-anova.html#cb541-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb541-12"><a href="deeper-dive-sampling-and-anova.html#cb541-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 3</code></pre>
 <pre><code>## Using a = 3</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="deeper-dive-sampling-and-anova.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="deeper-dive-sampling-and-anova.html#cb544-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 2       167.4
@@ -964,8 +964,8 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 ## 5     5                 2       174.0
 ## 6     6                 3       157.4</code></pre>
 <p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="deeper-dive-sampling-and-anova.html#cb552-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb552-2"><a href="deeper-dive-sampling-and-anova.html#cb552-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="deeper-dive-sampling-and-anova.html#cb546-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb546-2"><a href="deeper-dive-sampling-and-anova.html#cb546-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
 ## 1     30.81</code></pre>
 <p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
@@ -1051,22 +1051,22 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>We can confirm this with the simulation below. <strong>In this simulation we still take 9000 sample means but its 3000 from each of the three populations</strong>.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="deeper-dive-sampling-and-anova.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb554-2"><a href="deeper-dive-sampling-and-anova.html#cb554-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
-<span id="cb554-3"><a href="deeper-dive-sampling-and-anova.html#cb554-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-4"><a href="deeper-dive-sampling-and-anova.html#cb554-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb554-5"><a href="deeper-dive-sampling-and-anova.html#cb554-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb554-6"><a href="deeper-dive-sampling-and-anova.html#cb554-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">152.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb554-7"><a href="deeper-dive-sampling-and-anova.html#cb554-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">192.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
-<span id="cb554-8"><a href="deeper-dive-sampling-and-anova.html#cb554-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-9"><a href="deeper-dive-sampling-and-anova.html#cb554-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb554-10"><a href="deeper-dive-sampling-and-anova.html#cb554-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
-<span id="cb554-11"><a href="deeper-dive-sampling-and-anova.html#cb554-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb554-12"><a href="deeper-dive-sampling-and-anova.html#cb554-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="deeper-dive-sampling-and-anova.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb548-2"><a href="deeper-dive-sampling-and-anova.html#cb548-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
+<span id="cb548-3"><a href="deeper-dive-sampling-and-anova.html#cb548-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-4"><a href="deeper-dive-sampling-and-anova.html#cb548-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb548-5"><a href="deeper-dive-sampling-and-anova.html#cb548-5" aria-hidden="true" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb548-6"><a href="deeper-dive-sampling-and-anova.html#cb548-6" aria-hidden="true" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">152.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb548-7"><a href="deeper-dive-sampling-and-anova.html#cb548-7" aria-hidden="true" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">192.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
+<span id="cb548-8"><a href="deeper-dive-sampling-and-anova.html#cb548-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-9"><a href="deeper-dive-sampling-and-anova.html#cb548-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb548-10"><a href="deeper-dive-sampling-and-anova.html#cb548-10" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">get_mean_samples</span>(pop1, pop2, pop3,</span>
+<span id="cb548-11"><a href="deeper-dive-sampling-and-anova.html#cb548-11" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb548-12"><a href="deeper-dive-sampling-and-anova.html#cb548-12" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 3</code></pre>
 <pre><code>## Using a = 3</code></pre>
 <p>The first few rows of the data set with 9,000 sample mean is below:</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="deeper-dive-sampling-and-anova.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="deeper-dive-sampling-and-anova.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
 ## 2     2                 2       147.4
@@ -1075,8 +1075,8 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 ## 5     5                 2       154.0
 ## 6     6                 3       177.4</code></pre>
 <p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="deeper-dive-sampling-and-anova.html#cb559-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
-<span id="cb559-2"><a href="deeper-dive-sampling-and-anova.html#cb559-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="deeper-dive-sampling-and-anova.html#cb553-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
+<span id="cb553-2"><a href="deeper-dive-sampling-and-anova.html#cb553-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
 ## 1     297.8</code></pre>
 <p>We take the variance of all of those sample means and get a value of 297.7683 which closely approximately the actual value of 297.9314 (which we get when using an infinite number of sample means.)</p>
