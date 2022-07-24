@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Welcome!</title>
+  <title>Chapter 16 Sampling and N-way ANOVA [Under Construction] | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Welcome!" />
+  <meta property="og:title" content="Chapter 16 Sampling and N-way ANOVA [Under Construction] | Welcome!" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for PSYC 6060" />
   <meta name="github-repo" content="dstanley4/psyc6060bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Welcome!" />
+  <meta name="twitter:title" content="Chapter 16 Sampling and N-way ANOVA [Under Construction] | Welcome!" />
   
   <meta name="twitter:description" content="Course notes for PSYC 6060" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="deeper-dive-sampling-and-anova.html"/>
+<link rel="next" href="regression-and-correlation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -718,19 +718,507 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="sampling-and-n-way-anova-under-construction" class="section level1 hasAnchor" number="16">
+<h1><span class="header-section-number">Chapter 16</span> Sampling and N-way ANOVA [Under Construction]<a href="sampling-and-n-way-anova-under-construction.html#sampling-and-n-way-anova-under-construction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="previously-one-way-anova" class="section level2 hasAnchor" number="16.1">
+<h2><span class="header-section-number">16.1</span> Previously: One-way ANOVA<a href="sampling-and-n-way-anova-under-construction.html#previously-one-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the last chapter, we considered a scenario where there was a single independent variable with multiple levels. For example, imagine that we are interested measuring the heights of students (a dependent variable). We might examine how those heights vary across three populations. That is, we could think of university as the independent variable and Waterloo, Western, and Guelph as the levels of that single independent variable, university. In this example, the independent variable (i.e., university) represents a SET of populations and the each level of the independent variable is a specific population (e.g., Waterloo).</p>
+</div>
+<div id="now-n-way-anova" class="section level2 hasAnchor" number="16.2">
+<h2><span class="header-section-number">16.2</span> Now: N-way ANOVA<a href="sampling-and-n-way-anova-under-construction.html#now-n-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variable. N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables combine to influence a dependent variable.</p>
+<p>Because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, we will examine two independent variables that affect how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
+<p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. A set of two populations. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We can never know about the population direction though. We rely on samples from each of these population and make population-level conclusions on inferences obtained from sample-level means.</p>
+<p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. A set of three populations. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. However, as before, we must base our population-level conclusions on inferences obtained from sample-level means.</p>
+<p>The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the combined effect of the two independent variables. You can see this in the diagram below - there are <strong>six cells</strong> each of which is created by the combination of one level of juggling and one level of preparation. We call this a fully-crossed design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this typically saw we are examining the <strong>interaction</strong> of the independent variables on the dependent variable.</p>
+<p><img src="ch_deeper_nway/images/nway_design_cells_design.png" width="80%" /></p>
+<p>Sometimes people use the world <strong>factor</strong> to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term <strong>Completely Randomized Factorial</strong> Design or <strong>CRF</strong>. So be aware there are many ways to refer to an ANOVA design.</p>
+<p>As well, do note that, that in some research areas, they use a different word for interaction, namely the synonym <strong>moderation</strong>. That is, although many research areas would say: “We examined how juggling and preparation interacted to influence the calmness”. Other research areas might phrase it as 1) “We examined how the effect of juggling on calmness was <strong>moderated</strong> by preparation” or, the other way around, 2) “We examined how the effect of preparation on calmness was <strong>moderated</strong> by juggling”. Mathematically, these three ways of describing the combined effect of the independent variables on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.</p>
+</div>
+<div id="multiple-frames-of-reference" class="section level2 hasAnchor" number="16.3">
+<h2><span class="header-section-number">16.3</span> Multiple frames of reference<a href="sampling-and-n-way-anova-under-construction.html#multiple-frames-of-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A complication many students experience with understanding the different frames of reference that can be used with N-way ANOVA is the notation. Particularly when it comes the different sample sizes involved in this design. Therefore, prior to continuing we’ll review some key notation.</p>
+<p>The notation is general in nature because each experiment will have different independent variables. A common way to refer to the first independent variable using symbolic notiation is by using an uppercase <span class="math inline">\(A\)</span>. Likewise, we refer to the number of levels in that independent variable using lowercase <span class="math inline">\(a\)</span>. Thus, for the first independent variable <span class="math inline">\(A\)</span> = “Juggling” and <span class="math inline">\(a = 2\)</span> because there are two levels of juggling (yes or no). So instead of saying we are examining the effect of juggling on calmness we might say we are examining the effect of Independent Variable <span class="math inline">\(A\)</span> on the dependent variable. For the second independent variable we use uppercase <span class="math inline">\(B\)</span> and lowercase <span class="math inline">\(b\)</span>, and so on. The table below illustrates how we represent both independent variables in this experiment.</p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="37%" />
+<col width="32%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Effect</th>
+<th align="center">Letter designation</th>
+<th align="center">Number of levels</th>
+<th align="center">Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Independent variable 1</td>
+<td align="center"><span class="math inline">\(A\)</span> = Juggling</td>
+<td align="center"><span class="math inline">\(a = 2\)</span></td>
+<td align="center">yes, no</td>
+</tr>
+<tr class="even">
+<td align="center">Independent variable 2</td>
+<td align="center"><span class="math inline">\(B\)</span> = Preparation</td>
+<td align="center"><span class="math inline">\(b = 3\)</span></td>
+<td align="center">low, medium, high</td>
+</tr>
+</tbody>
+</table>
+<p>There are three frames of reference we will use for this 2-way ANOVA. The key to understanding these frames of reference is to think in terms of <strong>populations</strong> that are represented in your experiment. These population were mentioned previously, but we’ll review them in more detail below.</p>
+</div>
+<div id="frame-1-cell-populations" class="section level2 hasAnchor" number="16.4">
+<h2><span class="header-section-number">16.4</span> Frame 1: Cell Populations<a href="sampling-and-n-way-anova-under-construction.html#frame-1-cell-populations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>With this first frame of reference we look at combinations of the <strong>levels</strong> of the <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent variables (i.e., juggling and preparation). Recall we refer to each combination of levels as a <strong>cell</strong>. For example, individuals that both juggled during breaks (i.e., <strong>yes</strong> level of juggling) and prepared for a low amount of time (i.e., <strong>low</strong> level of preparation), would be in one cell. As mentioned previously, be sure to think in terms of populations. The participants in each cell are a sample from a corresponding population.</p>
+<p>For example, there is a single population (Population 1) that is composed of people who juggled during breaks and prepared for a low amount of time. The participants in Cell 1 <strong>are a sample</strong> (<span class="math inline">\(n = 5\)</span> ) from the No Juggling Low Preparation Population. The six cell <strong>populations</strong> are illustrated below.</p>
+<p>We look at the means of these six cells when we are examining an <strong>interaction</strong> among the independent variables.</p>
+<p><img src="ch_deeper_nway/images/nway_design_cells_pop.png" width="80%" /></p>
+</div>
+<div id="frame-2-a-populations-juggling" class="section level2 hasAnchor" number="16.5">
+<h2><span class="header-section-number">16.5</span> Frame 2: A Populations (Juggling)<a href="sampling-and-n-way-anova-under-construction.html#frame-2-a-populations-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The second frame of reference we examine is that of the first independent variable (i.e., <span class="math inline">\(A\)</span>). We examine the effect of juggling on calmness ignoring the effect of preparation.</p>
+<p>Within this frame of reference we imagine that there are two populations of calmness scores; one for each level of juggling. Note that the sample size is different for this frame of reference. For each level of juggling, the sample size is 15. Thus, if you were comparing the <strong>yes juggling population</strong> to the <strong>no juggling population</strong> each sample mean would would be based on 15 people. This should be clear when you look at the diagram below.</p>
+<p><img src="ch_deeper_nway/images/nway_design_A_pop.png" width="80%" /></p>
+<p>Unfortunately, students often struggle when presented with the sample size as a calculation with symbolic notation. Recall that we we use <span class="math inline">\(n = 5\)</span> to refer the number of people in each cell, <span class="math inline">\(a = 2\)</span> to refer to the number of juggling levels, and <span class="math inline">\(b = 3\)</span> to refer to the number of preparation levels.</p>
+<p>When we want to know the sample size for an <span class="math inline">\(A\)</span> mean we simply multiply the cell size (<span class="math inline">\(n = 5\)</span>) by the number of levels of B (i.e., <span class="math inline">\(b = 3\)</span>) to obtain 15. This is confusing for some people because even though you want to calculate the sample size of the means for <span class="math inline">\(A\)</span> you use <span class="math inline">\(b\)</span> in the calculation. But if you look at the diagram above, it should be clear why this is the case.</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Sample Size A} &amp;= nb\\
+&amp;= 5\times3\\
+&amp;= 15\\
+\end{align}
+\]</span></p>
+<p>Note what when you examine the means for Juggling we refer to this using a few different phrases:</p>
+<ul>
+<li>Examining the <strong>Main effect</strong> of <span class="math inline">\(A\)</span></li>
+<li>Examining the <strong>Margin means</strong> for <span class="math inline">\(A\)</span></li>
+<li>Examining the <strong>Main effect</strong> of Juggling</li>
+<li>Examining the <strong>Margin means</strong> for Juggling</li>
+</ul>
+<p>But again remember we are using sample means to make inferences about population means. Never forget the conclusions we make are at the population level - not the sample level.</p>
+</div>
+<div id="frame-3-b-populations-preparation" class="section level2 hasAnchor" number="16.6">
+<h2><span class="header-section-number">16.6</span> Frame 3: B Populations (Preparation)<a href="sampling-and-n-way-anova-under-construction.html#frame-3-b-populations-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The third frame of reference we examine is that of the second independent variable (i.e., <span class="math inline">\(B\)</span>). We examine the effect of preparation ignoring the effect of juggling</p>
+<p>Within this frame of reference we imagine that there are three populations; one for each level of preparation. Note that the sample size is again different for this frame of reference. For each level of preparation, the sample size is 10. Thus, is you were comparing the mean for the low preparation population to the medium population each sample mean would would be based on 10 people. This should be clear when you look at the diagram below.</p>
+<p><img src="ch_deeper_nway/images/nway_design_B_pop.png" width="80%" /></p>
+<p>When we want to know the sample size for an <span class="math inline">\(B\)</span> mean we simply multiply the size size (<span class="math inline">\(n = 5\)</span>) by the number of levels of <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(a =2\)</span>). This is confusing for some people because even though you want to know the sample size of the means for <span class="math inline">\(B\)</span> you use <span class="math inline">\(a\)</span> in the calculation. But if you look the diagram above, it should be clear why this is the case.</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Sample Size B} &amp;= na\\
+&amp;= 5\times2\\
+&amp;= 10\\
+\end{align}
+\]</span></p>
+<p>Note what when you examine the means for Preparation we refer to this using a few different phrases:</p>
+<ul>
+<li>Examining the <strong>Main effect</strong> of <span class="math inline">\(B\)</span></li>
+<li>Examining the <strong>Margin means</strong> for <span class="math inline">\(B\)</span></li>
+<li>Examining the <strong>Main effect</strong> of Preparation</li>
+<li>Examining the <strong>Margin means</strong> for Preparation</li>
+</ul>
+<p>But again remember we are using sample means to make inferences about population means. Never forget the conclusions we make are at the population level - not the sample level.</p>
+</div>
+<div id="homogeneity-of-variance" class="section level2 hasAnchor" number="16.7">
+<h2><span class="header-section-number">16.7</span> Homogeneity of variance<a href="sampling-and-n-way-anova-under-construction.html#homogeneity-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we saw in the previous section, depending on the effect you are interested in, the relevant populations (i.e., frame of reference) can be quite different. However, regardless of the frame of reference, we assume we assume the variance of people’s calmness scores (<span class="math inline">\(\sigma_{people}^2\)</span>) is the same.</p>
+<p>For the cell frame of reference, we assume the variance of calmness scores in all six populations (<span class="math inline">\(\sigma_1^2,\sigma_2^2,\sigma_3^2,\sigma_4^2,\sigma_5^2,\sigma_6^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{cells}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the six cells:</p>
+<p><span class="math inline">\(\sigma_{cells}^2=\sigma_1^2=\sigma_2^2=\sigma_3^2=\sigma_4^2=\sigma_5^2=\sigma_6^2\)</span></p>
+<p>For the effect of <span class="math inline">\(A\)</span> frame of reference, we assume the variance of calmness scores in both juggling population (<span class="math inline">\(\sigma_{A1}^2,\sigma_{A2}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{A}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the both populations.</p>
+<p><span class="math inline">\(\sigma_{A}^2=\sigma_{A1}^2=\sigma_{A2}^2\)</span></p>
+<p>For the effect of <span class="math inline">\(B\)</span> frame of reference, we assume the variance of calmness scores in all three preparation population (<span class="math inline">\(\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{B}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the three populations.</p>
+<p><span class="math inline">\(\sigma_{B}^2=\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2\)</span></p>
+<p>But most importantly we assume the variance of calmness scores is the same across all three frames of reference. That is, there is a single value that represents the variance of population-level calmness scores regardless of the population. We refer to this as value the variance of people’s calmness score and represent it with the symbol: <span class="math inline">\(\sigma_{people}^2\)</span></p>
+<p>So:</p>
+<p><span class="math inline">\(\sigma_{people}^2 =\sigma_{cells}^2=\sigma_{A}^2=\sigma_{B}^2\)</span></p>
+<p>We typically refer to this as the <strong>homogeneity of POPULATION variances</strong> assumption.</p>
+</div>
+<div id="estimating-population-variance" class="section level2 hasAnchor" number="16.8">
+<h2><span class="header-section-number">16.8</span> Estimating population variance<a href="sampling-and-n-way-anova-under-construction.html#estimating-population-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s start by considering the cell frame of reference. Within this frame of reference there are six populations of calmness scores and we have a sample (<span class="math inline">\(n =5\)</span>) from each population. We can estimate each of the six population variances. To do so, however, we need the mean for each of the six cells. So we calculate those means (<span class="math inline">\(\bar{x}\)</span>) below:</p>
+<div id="sample-means" class="section level3 hasAnchor" number="16.8.1">
+<h3><span class="header-section-number">16.8.1</span> Sample means<a href="sampling-and-n-way-anova-under-construction.html#sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We calculate the sample means for each cell using the formula below.</p>
+<p><span class="math display">\[
+\bar{x} = \frac{\sum x_i}{n}
+\]</span></p>
+<p>We use this formula in each of the cells:</p>
+<p><img src="ch_deeper_nway/images/calc_cell_mean.png" width="100%" /></p>
+</div>
+<div id="population-variance-estimates" class="section level3 hasAnchor" number="16.8.2">
+<h3><span class="header-section-number">16.8.2</span> Population variance estimates<a href="sampling-and-n-way-anova-under-construction.html#population-variance-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that we have the mean for each cell we can estimate the variance of calmness scores for the six populations.</p>
+<p><span class="math display">\[
+s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}
+\]</span></p>
+<p>We use this formula in each of the cells:</p>
+<p><img src="ch_deeper_nway/images/calc_cell_var.png" width="100%" /></p>
+<p>As noted above, it’s important to remember that each sample variances (e.g., <span class="math inline">\(s_1^2\)</span>) is an estimate of the corresponding population variance (e.g., <span class="math inline">\(\sigma_1^2\)</span>). This is illustrated in the figure below.</p>
+<p><img src="ch_deeper_nway/images/nway_design_cells_sd.png" width="80%" /></p>
+</div>
+<div id="averaging-variances" class="section level3 hasAnchor" number="16.8.3">
+<h3><span class="header-section-number">16.8.3</span> Averaging variances<a href="sampling-and-n-way-anova-under-construction.html#averaging-variances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the previous section, we started from the premise that there were six populations. The populations variance (<span class="math inline">\(\sigma^2\)</span>) are unknown but we calculated estimate of population variance (<span class="math inline">\(s^2\)</span>) using sample data. These are presented in the table below:</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="38%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Cell</th>
+<th align="center">Juggling level</th>
+<th align="center">Preparation level</th>
+<th align="center">Population variance</th>
+<th align="center">Sample estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">yes</td>
+<td align="center">low</td>
+<td align="center"><span class="math inline">\(\sigma_1^2\)</span></td>
+<td align="center"><span class="math inline">\(s_1^2 = 30.3\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">yes</td>
+<td align="center">medium</td>
+<td align="center"><span class="math inline">\(\sigma_2^2\)</span></td>
+<td align="center"><span class="math inline">\(s_2^2 = 78.8\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">yes</td>
+<td align="center">high</td>
+<td align="center"><span class="math inline">\(\sigma_3^2\)</span></td>
+<td align="center"><span class="math inline">\(s_3^2 = 66.5\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">no</td>
+<td align="center">low</td>
+<td align="center"><span class="math inline">\(\sigma_4^2\)</span></td>
+<td align="center"><span class="math inline">\(s_4^2 = 9.8\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">no</td>
+<td align="center">medium</td>
+<td align="center"><span class="math inline">\(\sigma_5^2\)</span></td>
+<td align="center"><span class="math inline">\(s_5^2 = 58.3\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">no</td>
+<td align="center">high</td>
+<td align="center"><span class="math inline">\(\sigma_6^2\)</span></td>
+<td align="center"><span class="math inline">\(s_6^2 = 116.3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Recall, however, the homogeneity of population variances assumption. We assume
+<span class="math inline">\(\sigma_{people}^2=\sigma_1^2=\sigma_2^2=\sigma_3^2=\sigma_4^2=\sigma_5^2=\sigma_6^2=\sigma^2=?\)</span>.</p>
+<p>Consequently, the sample variance estimates (<span class="math inline">\(s_1^2\)</span>, <span class="math inline">\(s_2^2\)</span>, <span class="math inline">\(s_3^2\)</span>, <span class="math inline">\(s_4^2\)</span>, <span class="math inline">\(s_5^2\)</span>, <span class="math inline">\(s_6^2\)</span>) are estimates of the the same population value of calmness scores, <span class="math inline">\(\sigma_{people}^2\)</span>.</p>
+<p>Therefore, a better way to display the population variance estimates is with the table below.</p>
+<table>
+<colgroup>
+<col width="54%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Population Variance</th>
+<th align="center">Sample Estimates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
+<td align="center"><span class="math inline">\(s_1^2 = 30.3\)</span>, <span class="math inline">\(s_2^2 = 78.8\)</span>, <span class="math inline">\(s_3^2 = 66.5\)</span> <span class="math inline">\(s_4^2 = 9.8\)</span>, <span class="math inline">\(s_5^2 = 58.3\)</span>, <span class="math inline">\(s_6^2 = 116.3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>There are six estimate (<span class="math inline">\(s_1^2\)</span>, <span class="math inline">\(s_2^2\)</span>, <span class="math inline">\(s_3^2\)</span>, <span class="math inline">\(s_4^2\)</span>, <span class="math inline">\(s_5^2\)</span>, <span class="math inline">\(s_6^2\)</span>) of the same population value, <span class="math inline">\(\sigma_{people}^2\)</span>. So we can combined these estimates by averaging them to get a best estimate. In other words, we take the mean of these six sample estimate to get a best estimate (<span class="math inline">\(s_{people}^2\)</span>) of variance of the population of people’s calmness scores.</p>
+<p><span class="math display">\[\begin{align}
+s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &amp;= \frac{30.3 + 78.8 +66.5 +9.8 +58.3 +116.3 }{6} \\ &amp;= 60
+\end{align}\]</span></p>
+<p>Thus, our best sample-based estimate of the variance of calmness scores in the population is <span class="math inline">\(s_{people}^2 = 60.00\)</span>.</p>
+<p><strong>We averaged, or took the mean of, six sample based estimates to obtain <span class="math inline">\(s_{people}^2\)</span>. Most people refer to <span class="math inline">\(s_{people}^2\)</span> as Mean Squared Error or MSE. You can think of Mean Squared Error as a synonym for <em>estimated population variance.</em> </strong></p>
+<p><span class="math display">\[\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0\]</span></p>
+<p><strong>CRITICAL: Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the variance - this math is not presented for the sake of a simple narrative.</strong></p>
+<p>We now in the following situation:</p>
+<p><img src="ch_deeper_nway/images/summary_mse.png" width="100%" /></p>
+<p>Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., <span class="math inline">\(s_{people}^2\)</span>) we averaged 6 cell variance estimates (e.g., <span class="math inline">\(s_1^2\)</span>). Each of those six estimates had <span class="math inline">\(n-1\)</span> degrees for freedom. You know it’s <span class="math inline">\(n-1\)</span> degrees of freedom for each cell variance (e.g., <span class="math inline">\(s_1^2\)</span>) because that’s the denominator of the variance formula (<span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}\)</span>). So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(6(n-1)\)</span> which we express as <span class="math inline">\((3)(2)(n-1)\)</span> which is <span class="math inline">\(ab(n-1)\)</span>. So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(ab(n-1)\)</span>. It’s important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.</p>
+</div>
+</div>
+<div id="clt-sampling-error" class="section level2 hasAnchor" number="16.9">
+<h2><span class="header-section-number">16.9</span> CLT Sampling Error<a href="sampling-and-n-way-anova-under-construction.html#clt-sampling-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determining if the variability in sample means is greater than could be expected due to random sampling error. Consequently, we have to estimate how much random sampling error variance there would be (on average) in sample means for each of the three frames of reference (main effect of <span class="math inline">\(A\)</span> means, main effect of <span class="math inline">\(B\)</span> means, and cell means).</p>
+<p>To estimate the expected variability due to sampling error we need to have estimate (<span class="math inline">\(s_{people}^2\)</span>) of the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>). That’s why went spent so much time obtaining <span class="math inline">\(s_{people}^2\)</span> in the previous section. Recall the general form of the formula for sampling error variance from previous chapters:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Variance for means when there is no effect (i.e., sampling error variance)} = \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
+\end{align}
+\]</span></p>
+<div id="clt-a-juggling" class="section level3 hasAnchor" number="16.9.1">
+<h3><span class="header-section-number">16.9.1</span> CLT <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#clt-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the context of the juggling main effect means, each juggle mean is based on <span class="math inline">\(nb=(5)(3)=15\)</span> people.
+Therefore, for these juggling main effect means the general formula for the variance due to sampling error is below:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Sampling error variance for means for A} &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
+&amp;= \frac{\sigma_{people}^2}{nb}\\
+\end{align}
+\]</span></p>
+<p>We don’t know the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>) though, but we use an estimate below (<span class="math inline">\(s_{people}^2\)</span>):</p>
+<p><span class="math display">\[
+\begin{align}
+s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{nb}\\
+&amp;= \frac{s_{people}^2}{(5)(3)}\\
+&amp;= \frac{60.0}{15}\\
+&amp;= 4.0
+\end{align}
+\]</span></p>
+<p>Thus, when we have two juggling populationss from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.</p>
+<p><img src="ch_deeper_nway/images/pop_equal_means_a.png" width="80%" /></p>
+</div>
+<div id="clt-b-preparation" class="section level3 hasAnchor" number="16.9.2">
+<h3><span class="header-section-number">16.9.2</span> CLT <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#clt-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the context of the preparation main effect means, each preparation mean is based on <span class="math inline">\(na=(5)(2)=10\)</span> people.
+Therefore, for these preparation main effect means the general formula for the variance due to sampling error is below:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Sampling error variance for means for B} &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
+&amp;= \frac{\sigma_{people}^2}{na}\\
+\end{align}
+\]</span></p>
+<p>We don’t know the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>) though, but we use an estimate below (<span class="math inline">\(s_{people}^2\)</span>):</p>
+<p><span class="math display">\[
+\begin{align}
+s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{na}\\
+&amp;= \frac{s_{people}^2}{(5)(2)}\\
+&amp;= \frac{60.0}{10}\\
+&amp;= 6.0
+\end{align}
+\]</span></p>
+<p>Thus, when we have three preparation populations from which we obtained samples of 10 people, we would expect the variance of sample means to be 6.0; assuming the population means are the same.</p>
+<p><img src="ch_deeper_nway/images/pop_equal_means_b.png" width="80%" /></p>
+</div>
+<div id="clt-cells" class="section level3 hasAnchor" number="16.9.3">
+<h3><span class="header-section-number">16.9.3</span> CLT Cells<a href="sampling-and-n-way-anova-under-construction.html#clt-cells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the context of the cell means, each cell mean is based on <span class="math inline">\(n=5\)</span> people.
+Therefore, for these cell means the general formula for the variance due to sampling error is below:</p>
+<p><span class="math display">\[
+\begin{align}
+\text{Sampling error variance for cell means} = \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
+&amp;= \frac{\sigma_{people}^2}{n}\\
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
+&amp;= \frac{60.0}{5}\\
+&amp;= 12.0
+\end{align}
+\]</span></p>
+<p>I omit the diagram for cells populations and sampling error. This is because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one. But don’t worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.</p>
+</div>
+<div id="clt-summary" class="section level3 hasAnchor" number="16.9.4">
+<h3><span class="header-section-number">16.9.4</span> CLT Summary<a href="sampling-and-n-way-anova-under-construction.html#clt-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="ch_deeper_nway/images/summary_clt.png" width="100%" /></p>
+<p>You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.</p>
+<p>Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the <span class="math inline">\(s_{people}^2\)</span> calculation. Sampling error variance is just <span class="math inline">\(s_{people}^2\)</span> divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE, <span class="math inline">\(ab(n-1)\)</span>.</p>
+</div>
+</div>
+<div id="main-effect-variance" class="section level2 hasAnchor" number="16.10">
+<h2><span class="header-section-number">16.10</span> Main effect variance<a href="sampling-and-n-way-anova-under-construction.html#main-effect-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="means-a-juggling" class="section level3 hasAnchor" number="16.10.1">
+<h3><span class="header-section-number">16.10.1</span> Means <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#means-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Juggling</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2\)</span></td>
+<td align="center"><span class="math inline">\((a-1) = 1\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated variance sampling error</td>
+<td align="center"><span class="math inline">\(\frac{s_{people}^2}{nb} = 4.0\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{nb}\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{ \frac{s_{people}^2}{nb}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{ \frac{\sigma_{people}^2}{nb}}\)</span></td>
+<td align="center"><span class="math inline">\([(a-1),ab(n-1)]=[1,24]\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="means-b-preparation" class="section level3 hasAnchor" number="16.10.2">
+<h3><span class="header-section-number">16.10.2</span> Means <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#means-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Preparation</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{na} + \sigma_{B}^2\)</span></td>
+<td align="center"><span class="math inline">\((b-1) = 2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated variance sampling error</td>
+<td align="center"><span class="math inline">\(\frac{s_{people}^2}{na} = ?\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{na}\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{ \frac{s_{people}^2}{na}}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{ \frac{\sigma_{people}^2}{na}}\)</span></td>
+<td align="center"><span class="math inline">\([(b-1),ab(n-1)]=[2,24]\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="interaction-variance" class="section level2 hasAnchor" number="16.11">
+<h2><span class="header-section-number">16.11</span> Interaction variance<a href="sampling-and-n-way-anova-under-construction.html#interaction-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cell-means-vs.-marginal-means" class="section level3 hasAnchor" number="16.11.1">
+<h3><span class="header-section-number">16.11.1</span> Cell means vs. marginal means<a href="sampling-and-n-way-anova-under-construction.html#cell-means-vs.-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="residual-means" class="section level3 hasAnchor" number="16.11.2">
+<h3><span class="header-section-number">16.11.2</span> Residual means<a href="sampling-and-n-way-anova-under-construction.html#residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="variance-of-residual-means" class="section level3 hasAnchor" number="16.11.3">
+<h3><span class="header-section-number">16.11.3</span> Variance of residual means<a href="sampling-and-n-way-anova-under-construction.html#variance-of-residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="juggling-typical" class="section level3 hasAnchor" number="16.11.4">
+<h3><span class="header-section-number">16.11.4</span> Juggling Typical<a href="sampling-and-n-way-anova-under-construction.html#juggling-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Juggling</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sample size multiplied by estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2 + nb \sigma_{A}^2\)</span></td>
+<td align="center"><span class="math inline">\((a-1) = 1\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated population variance</td>
+<td align="center"><span class="math inline">\(s_{people}^2 =MSE= 60.0\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\((a-1) = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="preparation-typical" class="section level3 hasAnchor" number="16.11.5">
+<h3><span class="header-section-number">16.11.5</span> Preparation Typical<a href="sampling-and-n-way-anova-under-construction.html#preparation-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Juggling</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sample size multiplied by estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2 + na \sigma_{B}^2\)</span></td>
+<td align="center"><span class="math inline">\((b-1) = 2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated population variance</td>
+<td align="center"><span class="math inline">\(s_{people}^2 =MSE= 60.0\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\((b-2) = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="deeper-dive-sampling-and-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -761,7 +1249,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yihui/bookdown-crc/edit/master/%s",
+"link": "https://github.com/yihui/bookdown-crc/edit/master/16-sampling-nway.Rmd",
 "text": "Edit"
 },
 "history": {
