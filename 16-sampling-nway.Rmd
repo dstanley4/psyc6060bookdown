@@ -262,12 +262,18 @@ $$\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0$$
 
 We now in the following situation:
 
+```{r, echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_deeper_nway/images/summary_mse.png")
+```
 
+
+```{r, eval = F, echo =F}
   Calculation | A = Juggling | B = Preparation | Cells |
 :--------------:|:--------------:|:------------------:|:---------------:|
 Variance of people | $\sigma_{A}^2=\sigma_{people}^2= ?$ | $\sigma_{B}^2=\sigma_{people}^2= ?$ | $\sigma_{cells}^2=\sigma_{people}^2= ?$|
 Estimated variance (MSE) of calmness scores | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$|
 Degrees of freedom for MSE |$ab(n-1) = (2)(3)(5-1)=24$ |$ab(n-1) = (2)(3)(5-1)=24$ |$ab(n-1) = (2)(3)(5-1)=24$ |
+```
  
 Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., $s_{people}^2$) we averaged 6 cell variance estimates (e.g., $s_1^2$). Each of those six estimates had $n-1$ degrees for freedom. You know it's $n-1$ degrees of freedom for each cell variance (e.g., $s_1^2$) because that's the denominator of the variance formula ($s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}$). So the degrees of freedom for $s_{people}^2$  (i.e., MSE) is $6(n-1)$ which we express as $(3)(2)(n-1)$ which is $ab(n-1)$. So the degrees of freedom for $s_{people}^2$ (i.e., MSE) is $ab(n-1)$. It's important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.
 
@@ -373,16 +379,23 @@ I omit the diagram for cells populations and sampling error. This is because the
 
 ### CLT Summary
 
-  Calculation | A = Juggling | B = Preparation | Cells |
-:--------------:|:--------------:|:------------------:|:---------------:|
-Estimated variance of people's calmness scores | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$|
-Sample size for mean | $nb = (5)(3)=15$ | $na = (5)(2)=10$|$n=5$|
-Estimated sampling error variance for means| $\frac{s_{people}^2}{nb} = 4.0$ | $\frac{s_{people}^2}{na} = 6.0$ |$\frac{s_{people}^2}{n} = 12$|
-Degrees of freedom for sampling error estimate | $ab(n-1)=(2)(3)(5-1)=24$ | $ab(n-1)=(2)(3)(5-1)=24$ | $ab(n-1)=(2)(3)(5-1)=24$|
+```{r, eval = F, echo = F}
+#   Calculation | A = Juggling | B = Preparation | Cells |
+# :--------------:|:--------------:|:------------------:|:---------------:|
+# Estimated variance of people's calmness scores | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$ | $s_{people}^2 =MSE = 60.0$|
+# Sample size for mean | $nb = (5)(3)=15$ | $na = (5)(2)=10$|$n=5$|
+# Estimated sampling error variance for means| $\frac{s_{people}^2}{nb} = 4.0$ | $\frac{s_{people}^2}{na} = 6.0$ |$\frac{s_{people}^2}{n} = 12$|
+#Degrees of freedom for sampling error estimate | $ab(n-1)=(2)(3)(5-1)=24$ | $ab(n-1)=(2)(3)(5-1)=24$ | $ab(n-1)=(2)(3)(5-1)=24$|
+```
+
+```{r, echo = FALSE, out.width="100%"}
+knitr::include_graphics("ch_deeper_nway/images/summary_clt.png")
+```
 
 You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.
 
-Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the $s_{people}^2$ calculation. Recall when we calculated this value we averaged 6 cell variance estimates. Each of those six estimates had $n-1$ degrees for freedom. So the degrees of freedom for $s_{people}^2$  (i.e., MSE) is $6(n-1)$ which we express as $(3)(2)(n-1)$ which is $ab(n-1)$. So the degrees of freedom for $s_{people}^2$ is $ab(n-1)$. Sampling error variance is just $s_{people}^2$ divided by sample size. Consequently, the degrees for freedom for sampling error variance is also  $ab(n-1)$.
+
+Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the $s_{people}^2$ calculation. Sampling error variance is just $s_{people}^2$ divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
 
 ## Main effect variance
 

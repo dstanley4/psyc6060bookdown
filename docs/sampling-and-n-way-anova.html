@@ -954,42 +954,7 @@ s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &am
 <p><span class="math display">\[\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0\]</span></p>
 <p><strong>CRITICAL: Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the variance - this math is not presented for the sake of a simple narrative.</strong></p>
 <p>We now in the following situation:</p>
-<table>
-<colgroup>
-<col width="23%" />
-<col width="23%" />
-<col width="28%" />
-<col width="24%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Calculation</th>
-<th align="center">A = Juggling</th>
-<th align="center">B = Preparation</th>
-<th align="center">Cells</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Variance of people</td>
-<td align="center"><span class="math inline">\(\sigma_{A}^2=\sigma_{people}^2= ?\)</span></td>
-<td align="center"><span class="math inline">\(\sigma_{B}^2=\sigma_{people}^2= ?\)</span></td>
-<td align="center"><span class="math inline">\(\sigma_{cells}^2=\sigma_{people}^2= ?\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Estimated variance (MSE) of calmness scores</td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">Degrees of freedom for MSE</td>
-<td align="center"><span class="math inline">\(ab(n-1) = (2)(3)(5-1)=24\)</span></td>
-<td align="center"><span class="math inline">\(ab(n-1) = (2)(3)(5-1)=24\)</span></td>
-<td align="center"><span class="math inline">\(ab(n-1) = (2)(3)(5-1)=24\)</span></td>
-</tr>
-</tbody>
-</table>
+<p><img src="ch_deeper_nway/images/summary_mse.png" width="100%" /></p>
 <p>Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., <span class="math inline">\(s_{people}^2\)</span>) we averaged 6 cell variance estimates (e.g., <span class="math inline">\(s_1^2\)</span>). Each of those six estimates had <span class="math inline">\(n-1\)</span> degrees for freedom. You know it’s <span class="math inline">\(n-1\)</span> degrees of freedom for each cell variance (e.g., <span class="math inline">\(s_1^2\)</span>) because that’s the denominator of the variance formula (<span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}\)</span>). So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(6(n-1)\)</span> which we express as <span class="math inline">\((3)(2)(n-1)\)</span> which is <span class="math inline">\(ab(n-1)\)</span>. So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(ab(n-1)\)</span>. It’s important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.</p>
 </div>
 </div>
@@ -1067,50 +1032,9 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </div>
 <div id="clt-summary" class="section level3 hasAnchor" number="16.9.4">
 <h3><span class="header-section-number">16.9.4</span> CLT Summary<a href="sampling-and-n-way-anova.html#clt-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<table>
-<colgroup>
-<col width="23%" />
-<col width="23%" />
-<col width="28%" />
-<col width="24%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">Calculation</th>
-<th align="center">A = Juggling</th>
-<th align="center">B = Preparation</th>
-<th align="center">Cells</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Estimated variance of people’s calmness scores</td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-<td align="center"><span class="math inline">\(s_{people}^2 =MSE = 60.0\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Sample size for mean</td>
-<td align="center"><span class="math inline">\(nb = (5)(3)=15\)</span></td>
-<td align="center"><span class="math inline">\(na = (5)(2)=10\)</span></td>
-<td align="center"><span class="math inline">\(n=5\)</span></td>
-</tr>
-<tr class="odd">
-<td align="center">Estimated sampling error variance for means</td>
-<td align="center"><span class="math inline">\(\frac{s_{people}^2}{nb} = 4.0\)</span></td>
-<td align="center"><span class="math inline">\(\frac{s_{people}^2}{na} = 6.0\)</span></td>
-<td align="center"><span class="math inline">\(\frac{s_{people}^2}{n} = 12\)</span></td>
-</tr>
-<tr class="even">
-<td align="center">Degrees of freedom for sampling error estimate</td>
-<td align="center"><span class="math inline">\(ab(n-1)=(2)(3)(5-1)=24\)</span></td>
-<td align="center"><span class="math inline">\(ab(n-1)=(2)(3)(5-1)=24\)</span></td>
-<td align="center"><span class="math inline">\(ab(n-1)=(2)(3)(5-1)=24\)</span></td>
-</tr>
-</tbody>
-</table>
+<p><img src="ch_deeper_nway/images/summary_clt.png" width="100%" /></p>
 <p>You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.</p>
-<p>Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the <span class="math inline">\(s_{people}^2\)</span> calculation. Recall when we calculated this value we averaged 6 cell variance estimates. Each of those six estimates had <span class="math inline">\(n-1\)</span> degrees for freedom. So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(6(n-1)\)</span> which we express as <span class="math inline">\((3)(2)(n-1)\)</span> which is <span class="math inline">\(ab(n-1)\)</span>. So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> is <span class="math inline">\(ab(n-1)\)</span>. Sampling error variance is just <span class="math inline">\(s_{people}^2\)</span> divided by sample size. Consequently, the degrees for freedom for sampling error variance is also <span class="math inline">\(ab(n-1)\)</span>.</p>
+<p>Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the <span class="math inline">\(s_{people}^2\)</span> calculation. Sampling error variance is just <span class="math inline">\(s_{people}^2\)</span> divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE, <span class="math inline">\(ab(n-1)\)</span>.</p>
 </div>
 </div>
 <div id="main-effect-variance" class="section level2 hasAnchor" number="16.10">
