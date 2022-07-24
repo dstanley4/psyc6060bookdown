@@ -518,6 +518,8 @@
 <li class="chapter" data-level="16.11.1" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#cell-means-vs.-marginal-means"><i class="fa fa-check"></i><b>16.11.1</b> Cell means vs. marginal means</a></li>
 <li class="chapter" data-level="16.11.2" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#residual-means"><i class="fa fa-check"></i><b>16.11.2</b> Residual means</a></li>
 <li class="chapter" data-level="16.11.3" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#variance-of-residual-means"><i class="fa fa-check"></i><b>16.11.3</b> Variance of residual means</a></li>
+<li class="chapter" data-level="16.11.4" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#juggling-typical"><i class="fa fa-check"></i><b>16.11.4</b> Juggling Typical</a></li>
+<li class="chapter" data-level="16.11.5" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#preparation-typical"><i class="fa fa-check"></i><b>16.11.5</b> Preparation Typical</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>17</b> Regression and correlation</a>
@@ -1128,6 +1130,84 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </div>
 <div id="variance-of-residual-means" class="section level3 hasAnchor" number="16.11.3">
 <h3><span class="header-section-number">16.11.3</span> Variance of residual means<a href="sampling-and-n-way-anova.html#variance-of-residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="juggling-typical" class="section level3 hasAnchor" number="16.11.4">
+<h3><span class="header-section-number">16.11.4</span> Juggling Typical<a href="sampling-and-n-way-anova.html#juggling-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Juggling</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sample size multiplied by estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2 + nb \sigma_{A}^2\)</span></td>
+<td align="center"><span class="math inline">\((a-1) = 1\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated population variance</td>
+<td align="center"><span class="math inline">\(s_{people}^2 =MSE= 60.0\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\((a-1) = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="preparation-typical" class="section level3 hasAnchor" number="16.11.5">
+<h3><span class="header-section-number">16.11.5</span> Preparation Typical<a href="sampling-and-n-way-anova.html#preparation-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="28%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Juggling</th>
+<th align="center">Formula</th>
+<th align="center">Expected value</th>
+<th align="center">degrees of feedom</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Sample size multiplied by estimated total variance</td>
+<td align="center"><span class="math inline">\(\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2 + na \sigma_{B}^2\)</span></td>
+<td align="center"><span class="math inline">\((b-1) = 2\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Estimated population variance</td>
+<td align="center"><span class="math inline">\(s_{people}^2 =MSE= 60.0\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
+<td align="center"><span class="math inline">\(ab(n-1) = 24\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Comparison using <span class="math inline">\(F\)</span>-ratio</td>
+<td align="center"><span class="math inline">\(\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}\)</span></td>
+<td align="center"><span class="math inline">\((b-2) = 1\)</span></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
