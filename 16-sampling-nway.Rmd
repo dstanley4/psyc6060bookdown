@@ -6,15 +6,15 @@ In the last chapter, we considered a scenario where there was a single independe
 
 ## Now: N-way ANOVA
 
-In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variable. N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables combine to influence a dependent variable. 
+In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables combine to influence a dependent variable. 
 
 Because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter  (i.e., a 2-way ANOVA). Specifically, we will examine two independent variables that affect how calm students are before an exam. Calmness before the exam is the dependent variable. 
 
-The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: **yes** and **no**. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. A set of two populations. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We can never know about the population direction though. We rely on samples from each of these population and make population-level conclusions on inferences obtained from sample-level means.
+The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: **yes** and **no**. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. A set of two populations that we refer to using the label  **juggling**. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.
 
-The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: **low**, **medium**, and **high**. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. A set of three populations. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. However, as before, we must base our population-level conclusions on inferences obtained from sample-level means.
+The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: **low**, **medium**, and **high**. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. A set of three populations. We are interested in how preparation level (low/medium/high) influences the mean of these three  populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.
 
-The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the combined effect of the two independent variables. You can see this in the diagram below - there are **six cells** each of which is created by the combination of one level of juggling and one level of preparation. We call this a fully-crossed design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this typically saw we are examining the **interaction** of the independent variables on the dependent variable. 
+The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the combined effect of the two independent variables. You can see this in the diagram below - there are **six cells** each of which is created by the combination of one level of juggling and one level of preparation. We call this a fully-crossed design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables **interact** to influence the dependent variable. 
 
 
 
@@ -22,9 +22,9 @@ The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get t
 knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_design.png")
 ```
 
-Sometimes people use the world **factor** to refer to an independent variable. An implication of this  is that instead of using the term N-way ANOVA they use the term **Completely Randomized Factorial** Design or **CRF**. So be aware there are many ways to refer to an ANOVA design.
+Sometimes people use the world **factor** to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term **Completely Randomized Factorial** Design or **CRF** Design. So be aware there are many ways to refer to an ANOVA design.
 
-As well, do note that, that in some research areas, they use a different word for interaction, namely the synonym **moderation**. That is, although many research areas would say: "We examined how juggling and preparation interacted to influence the calmness". Other research areas might phrase it as 1) "We examined how the effect of juggling on calmness was **moderated** by preparation" or, the other way around, 2) "We examined how the effect of preparation on calmness was **moderated** by juggling". Mathematically, these three ways of describing the combined effect of the independent variables on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.
+Likewise, note that in some research areas, they use a different word for interaction, namely the synonym **moderation**. That is, although many research areas would say: "We examined how juggling and preparation interacted to influence calmness scores". Other research areas might phrase it as 1) "We examined how the effect of juggling on calmness scores was **moderated** by preparation" or, the other way around, 2) "We examined how the effect of preparation on calmness scores was **moderated** by juggling". Mathematically, these three ways of describing the combined effect of the independent variables (or factors) on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.
 
 ## Multiple frames of reference
 
@@ -191,9 +191,12 @@ no_juggle |$\bar{x_{4}}=\frac{\sum x_i}{n}\\=\frac{61+58+64+56+58}{5}\\= `r xbar
 knitr::include_graphics("ch_deeper_nway/images/calc_cell_mean.png")
 ```
 
+Each of these six cell means (i.e., sample means) is an estimate of the corresponding six population means.
+
+
 ### Population variance estimates
 
-Now that we have the mean for each cell we can estimate the variance of calmness scores for the six populations.
+Now that we have the mean for each cell we can estimate the variance of calmness scores for the six populations. We do this with the usual equation below:
 
 $$
 s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}
@@ -213,7 +216,7 @@ no_juggle |$s_4^2=\frac{\sum (x_i - \bar{x_4})^2}{n-1}\\=\frac{(61-`r xbar4`)^2+
 knitr::include_graphics("ch_deeper_nway/images/calc_cell_var.png")
 ```
 
-As noted above, it's important to remember that each sample variances (e.g., $s_1^2$) is an estimate of the corresponding population variance (e.g., $\sigma_1^2$). This is illustrated in the figure below.
+As noted above, it's important to remember that each sample variance (e.g., $s_1^2$) is an estimate of the corresponding population variance (e.g., $\sigma_1^2$). This is illustrated in the figure below.
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_sd.png")
@@ -221,7 +224,7 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_sd.png")
 
 ### Averaging variances
 
-In the previous section, we started from the premise that there were six populations. The populations variance ($\sigma^2$) are unknown but we calculated estimate of population variance ($s^2$) using sample data. These are presented in the table below:
+In the previous section, we started from the premise that there were six populations. The populations variances ($\sigma^2$) are unknown but we calculated an estimate of each population variance ($s^2$) using sample data. These are presented in the table below:
 
 Cell | Juggling level | Preparation level | Population variance | Sample estimate |
 :---:|:---:|:---:|:------------------:|:---------------:|
@@ -244,9 +247,9 @@ Therefore, a better way to display the population variance estimates is with the
 |:------------------:|:---------------:|
 | $\sigma_{people}^2$      | $s_1^2 = `r var1`$, $s_2^2 = `r var2`$, $s_3^2 = `r var3`$ $s_4^2 = `r var4`$, $s_5^2 = `r var5`$, $s_6^2 = `r var6`$|
 
-There are six estimate ($s_1^2$, $s_2^2$, $s_3^2$, $s_4^2$, $s_5^2$, $s_6^2$) of the same population value, $\sigma_{people}^2$. So we can combined these estimates by averaging them to get a best estimate. In other words, we take the mean of these six sample estimate to get a best estimate ($s_{people}^2$) of variance of the population of people's calmness scores.
+**CRITICAL:** When we ASSUME the six estimates ($s_1^2$, $s_2^2$, $s_3^2$, $s_4^2$, $s_5^2$, $s_6^2$) are all estimates of **the same** population value, $\sigma_{people}^2$, we can combine the sample estimates (i.e., average them) to get a best estimate of the population value (i.e., $s_{people}^2$). This makes sense because with the identical population variances assumption each sample variance estimate (i.e., $s_1^2$) only differs from the population variance ($\sigma_{people}^2$) due to random sampling error. By averaging the sample estimates we are "averaging out" the random sampling error.
 
-
+We use the formula below to average the cell variances **when the sample sizes for the 6 cells are identical.** That is, all $n = 5$.:
 
 \begin{align}
 s_{people}^2 &=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &= \frac{`r var1` + `r var2` +`r var3` +`r var4` +`r var5` +`r var6` }{6} \\ &= `r mean(var_all)`
@@ -258,7 +261,7 @@ Thus, our best sample-based estimate of the variance of calmness scores in the p
 
 $$\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0$$
 
-**CRITICAL: Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the variance - this math is not presented for the sake of a simple narrative.**  
+**CRITICAL:** Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the sample variance estimates - this math is not presented for the sake of a simple narrative.
 
 We now in the following situation:
 
@@ -281,11 +284,12 @@ Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e.,
 
 As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determining if the variability in sample means is greater than could be expected due to random sampling error. Consequently, we have to estimate how much random sampling error variance there would be (on average) in sample means for each of the three frames of reference (main effect of $A$ means, main effect of $B$ means, and cell means).
 
-To estimate the expected variability due to sampling error we need to have estimate ($s_{people}^2$) of the population variance ($\sigma_{people}^2$). That's why went spent so much time obtaining $s_{people}^2$ in the previous section. Recall the general form of the formula for sampling error variance from previous chapters:
+To estimate the expected variability in sample means due to sampling error we need an estimate ($s_{people}^2$) of the population variance ($\sigma_{people}^2$). That's why we spent so much time obtaining $s_{people}^2$ in the previous section. Recall the general form of the formula for the expected variance in sample means, due to sampling error, from previous chapters:
 
 $$
 \begin{align}
-\text{Variance for means when there is no effect (i.e., sampling error variance)} = \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
+\text{Sampling error variance for means} &= \sigma_{\bar{x}}^2 \\
+ &= \frac{\sigma_{people}^2}{\text{sample size}}\\
 \end{align}
 $$
 
@@ -308,7 +312,8 @@ We don't know the population variance ($\sigma_{people}^2$) though, but we use a
 
 $$
 \begin{align}
-s_{\bar{x}}^2 &= \frac{s_{people}^2}{nb}\\
+\text{Estimated sampling error variance for means for A} &= s_{\bar{x}}^2\\
+&= \frac{s_{people}^2}{nb}\\
 &= \frac{s_{people}^2}{(5)(3)}\\
 &= \frac{60.0}{15}\\
 &= 4.0
@@ -340,7 +345,8 @@ We don't know the population variance ($\sigma_{people}^2$) though, but we use a
 
 $$
 \begin{align}
-s_{\bar{x}}^2 &= \frac{s_{people}^2}{na}\\
+\text{Estimated sampling error variance for means for B} &= s_{\bar{x}}^2\\
+&= \frac{s_{people}^2}{na}\\
 &= \frac{s_{people}^2}{(5)(2)}\\
 &= \frac{60.0}{10}\\
 &= 6.0
@@ -367,14 +373,15 @@ $$
 
 $$
 \begin{align}
-s_{\bar{x}}^2 &= \frac{s_{people}^2}{n}\\
+\text{Estimated sampling error variance for cell means} &= s_{\bar{x}}^2\\
+&= \frac{s_{people}^2}{n}\\
 &= \frac{60.0}{5}\\
 &= 12.0
 \end{align}
 $$
 
 
-I omit the diagram for cells populations and sampling error. This is because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one. But don't worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.
+I omit the diagram for cells populations and sample mean distributions. This is done because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one diagram. But don't worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.
 
 
 ### CLT Summary
@@ -394,8 +401,7 @@ knitr::include_graphics("ch_deeper_nway/images/summary_clt.png")
 
 You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.
 
-
-Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom as based on the $s_{people}^2$ calculation. Sampling error variance is just $s_{people}^2$ divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
+Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the $s_{people}^2$ calculation. Sampling error variance is just $s_{people}^2$ divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
 
 ## Main effect variance
 
