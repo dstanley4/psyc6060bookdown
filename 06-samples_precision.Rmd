@@ -44,11 +44,12 @@ We can calculate the descriptive parameters for the population with the code bel
 
 
 ```{r}
+options(pillar.sigfig = 6)
+
 pop_data %>%
   summarise(pop_mean = mean(height),
             pop_var = var.pop(height),
-            pop_sd = sd.pop(height)) %>%
-  as.data.frame()
+            pop_sd = sd.pop(height)) 
 ```
 
 We see the mean of the population of heights is 172.5 ($\mu = 172.5$) and the variance is 157.5 ($\sigma^2 = 157.5$). Correspondingly, the standard deviation of the population of heights is 12.5 ($\sigma = 12.5$); simply the square root of the variance. 
@@ -123,9 +124,10 @@ If the variance of sample means is large, it indicates sample means differ consi
 We can calculate the variance of sample means below:
 
 ```{r}
+options(pillar.sigfig = 6)
+
 many_samples %>% 
-   summarise(var_of_means = var.pop(sample_mean)) %>%
-   as.data.frame()
+   summarise(var_of_means = var.pop(sample_mean))
 
 ```
 
@@ -133,10 +135,10 @@ many_samples %>%
 The standard error of sample mean is just the square root of this value:
 
 ```{r}
-many_samples %>% 
-   summarise(sd_of_means = sqrt(var.pop(sample_mean))) %>%
-   as.data.frame()
+options(pillar.sigfig = 6)
 
+many_samples %>% 
+   summarise(sd_of_means = sqrt(var.pop(sample_mean))) 
 ```
 
 Thus, we can indicate the precision with which sample means ($\bar{x}$) estimate the population mean ($\mu$) using the notation below. We use $\sigma_{\bar{x}}^2$ to refer to the variance of sample means and $\sigma_{\bar{x}}$ to refer to the standard error of sample means. Again notice in the notation that for both of these symbols there is a subscript with an $\bar{x}$ to remind us we are talking about the variability of sample means (and not people).
