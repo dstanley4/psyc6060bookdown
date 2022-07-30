@@ -47,20 +47,20 @@ There are three frames of reference we will use for this 2-way ANOVA. The key to
 
 ## Frame 1: Cell Populations
 
-With this first frame of reference we look at combinations of the **levels** of the $A$ and $B$ independent variables (i.e., juggling and preparation). Recall we refer to each combination of levels as a **cell**. For example, individuals that both juggled during breaks  (i.e., **yes** level of juggling) and prepared for a low amount of time (i.e., **low** level of preparation), would be in one cell. As mentioned previously, be sure to think in terms of populations. The participants in each cell are a sample from a corresponding population.
+With this first frame of reference we look at combinations of the **levels** of the $A$ and $B$ independent variables (i.e., juggling and preparation). Recall we refer to each combination of levels as a **cell**. For example, individuals that both juggled during breaks  (i.e., **yes** level of juggling) and prepared for a low amount of time (i.e., **low** level of preparation), would be in one cell. As mentioned previously, be sure to think in terms of populations. In this study, for this frame of reference, we can calculate the total number of populations by multiplying the number of levels for the independent variables. Here, $a = 2$ (two levels of jugglings) and $b =3$ (three levels of preparation). Thus, $ab=(2)(3)=6$, so there are six cell populations. The participants in each cell are a sample from a corresponding cell population. The six cell **populations** are illustrated below. 
 
-For example, there is a single population (Population 1) that is composed of people who juggled during breaks and prepared for a low amount of time.  The participants in Cell 1 **are a sample** ($n = 5$ ) from the No Juggling Low Preparation Population. The six cell **populations** are illustrated below. 
-
-We look at the means of these six cells when we are examining an **interaction** among the independent variables.
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_pop.png")
 ```
 
+For example, there is a single population (Population 1) that is composed of people who juggled during breaks and prepared for a low amount of time.  The participants in Cell 1 **are a sample** ($n = 5$ ) from the No Juggling Low Preparation Population. 
 
-## Frame 2: A Populations (Juggling)
+We look at the means of these six cells when we are examining an **interaction** among the independent variables.
 
-The second frame of reference we examine is that of the first independent variable (i.e., $A$). We examine the effect of juggling on calmness ignoring the effect of preparation.
+## Frame 2: $A$ Populations (Juggling)
+
+The second frame of reference we examine is that of the first independent variable (i.e., $A$). We examine the effect of juggling (i.e., $A$) on calmness ignoring the effect of preparation (i.e., $B$).
 
 Within this frame of reference we imagine that there are two populations of calmness scores; one for each level of juggling. Note that the sample size is different for this frame of reference. For each level of juggling, the sample size is 15. Thus, if you were comparing the **yes juggling population** to the **no juggling population** each sample mean would would be based on 15 people. This should be clear when you look at the diagram below.
 
@@ -81,7 +81,7 @@ $$
 $$
 
 
-Note what when you examine the means for Juggling we refer to this using a few different phrases:
+Note when you examine the means for Juggling we refer to this using a few different phrases:
 
 * Examining the **Main effect** of $A$
 * Examining the **Margin means** for $A$
@@ -91,17 +91,17 @@ Note what when you examine the means for Juggling we refer to this using a few d
 
 But again remember we are using sample means to make inferences about population means. Never forget the conclusions we make are at the population level - not the sample level.
 
-## Frame 3: B Populations (Preparation)
+## Frame 3: $B$ Populations (Preparation)
 
-The third frame of reference we examine is that of the second independent variable (i.e., $B$). We examine the effect of preparation ignoring the effect of juggling 
+The third frame of reference we examine is that of the second independent variable (i.e., $B$). That is, we examine the effect of preparation (i.e., $B$) ignoring the effect of juggling (i.e., $A$). 
 
-Within this frame of reference we imagine that there are three populations; one for each level of preparation. Note that the sample size is again different for this frame of reference. For each level of preparation, the sample size is 10. Thus, is you were comparing the mean for the low preparation population to the medium population each sample mean would would be based on 10 people. This should be clear when you look at the diagram below.
+Within this frame of reference we imagine that there are three populations; one for each level of preparation. Note that the sample size is again different for this frame of reference. For each level of preparation, the sample size is 10. Thus, if you were comparing the mean for the low preparation population to the medium population each sample mean would would be based on 10 people. This should be clear when you look at the diagram below.
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_B_pop.png")
 ```
 
-When we want to know the sample size for an $B$ mean we simply multiply the size size ($n = 5$) by the number of levels of $A$ (i.e., $a =2$). This is confusing for some people because even though you want to know the sample size of the means for $B$ you use $a$ in the calculation. But if you look the diagram above, it should be clear why this is the case.
+When we want to know the sample size for a $B$ mean we simply multiply the size size ($n = 5$) by the number of levels of $A$ (i.e., $a =2$). This is confusing for some people because even though you want to know the sample size of the means for $B$ you use $a$ in the calculation. But if you look the diagram above, it should be clear why this is the case.
 
 
 $$
@@ -112,7 +112,7 @@ $$
 \end{align}
 $$
 
-Note what when you examine the means for Preparation we refer to this using a few different phrases:
+Note when you examine the means for Preparation we refer to this using a few different phrases:
 
 * Examining the **Main effect** of $B$
 * Examining the **Margin means** for $B$
@@ -261,7 +261,7 @@ Therefore, a better way to display the population variance estimates is with the
 |:------------------:|:---------------:|
 | $\sigma_{people}^2$      | $s_1^2 = `r var1`$, $s_2^2 = `r var2`$, $s_3^2 = `r var3`$ $s_4^2 = `r var4`$, $s_5^2 = `r var5`$, $s_6^2 = `r var6`$|
 
-**CRITICAL:** When we ASSUME the six estimates ($s_1^2$, $s_2^2$, $s_3^2$, $s_4^2$, $s_5^2$, $s_6^2$) are all estimates of **the same** population value, $\sigma_{people}^2$, we can combine the sample estimates (i.e., average them) to get a best estimate of the population value (i.e., $s_{people}^2$). This makes sense because with the identical population variances assumption each sample variance estimate (i.e., $s_1^2$) only differs from the population variance ($\sigma_{people}^2$) due to random sampling error. By averaging the sample estimates we are "averaging out" the random sampling error.
+**CRITICAL:** When we ASSUME the six sample estimates ($s_1^2$, $s_2^2$, $s_3^2$, $s_4^2$, $s_5^2$, $s_6^2$) are all estimates of **the same** population value, $\sigma_{people}^2$, we can combine the sample estimates (i.e., average them) to get a best estimate of the population value (i.e., $s_{people}^2$). This makes sense because, with the identical population variances assumption, each sample variance estimate (e.g., $s_1^2$) only differs from the population variance ($\sigma_{people}^2$) due to random sampling error. By averaging the sample estimates ($s_1^2$, $s_2^2$, $s_3^2$, $s_4^2$, $s_5^2$, $s_6^2$) we are "averaging out" the random sampling error.
 
 We use the formula below to average the cell variances **when the sample sizes for the 6 cells are identical.** That is, all $n = 5$.:
 
@@ -275,7 +275,7 @@ Thus, our best sample-based estimate of the variance of calmness scores in the p
 
 $$\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0$$
 
-**CRITICAL:** Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the sample variance estimates - this math is not presented for the sake of a simple narrative.
+**CRITICAL:** Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the sample variance estimates - this math is not reviewed in detail for the sake of a simple narrative.
 
 We now in the following situation:
 
@@ -292,7 +292,10 @@ Estimated variance (MSE) of calmness scores | $s_{people}^2 =MSE = 60.0$ | $s_{p
 Degrees of freedom for MSE |$ab(n-1) = (2)(3)(5-1)=24$ |$ab(n-1) = (2)(3)(5-1)=24$ |$ab(n-1) = (2)(3)(5-1)=24$ |
 ```
  
-Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., $s_{people}^2$) we averaged 6 cell variance estimates (e.g., $s_1^2$). Each of those six estimates had $n-1$ degrees for freedom. You know it's $n-1$ degrees of freedom for each cell variance (e.g., $s_1^2$) because that's the denominator of the variance formula ($s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}$). So the degrees of freedom for $s_{people}^2$  (i.e., MSE) is $6(n-1)$ which we express as $(3)(2)(n-1)$ which is $ab(n-1)$. So the degrees of freedom for $s_{people}^2$ (i.e., MSE) is $ab(n-1)$. It's important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.
+Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., $s_{people}^2$) we averaged 6 cell variance estimates (e.g., $s_1^2$). Each of those six estimates had $n-1$ degrees for freedom. You know it's $n-1$ degrees of freedom for each cell variance (e.g., $s_1^2$) because that's the denominator of the variance formula ($s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}$). So the degrees of freedom for $s_{people}^2$  (i.e., MSE) is $6(n-1)$ because there were six cell estimates we combined.
+
+Symbolically, we express the calculation of degrees of freedom as $(3)(2)(n-1)$ which is $ab(n-1)$. So the degrees of freedom for $s_{people}^2$ (i.e., MSE) is $ab(n-1)$. It's important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.
+
 
 ## CLT Sampling Error
 
@@ -307,6 +310,8 @@ $$
 \end{align}
 $$
 
+The formula above, for the variability due to sampling error alone, is based on the Central Limit Theorem (CLT) and is reviewed extensively in past chapters.
+
 
 ### CLT $A$: Juggling
 
@@ -316,7 +321,9 @@ Therefore, for these juggling main effect means the general formula for the vari
 
 $$
 \begin{align}
-\text{Sampling error variance for means for A} &= \frac{\sigma_{people}^2}{\text{sample size}}\\
+\text{Sampling error variance for means for A} &=
+\sigma_{\bar{x}}^2 \\
+&= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{nb}\\
 \end{align}
 $$
@@ -350,7 +357,9 @@ Therefore, for these preparation main effect means the general formula for the v
 
 $$
 \begin{align}
-\text{Sampling error variance for means for B} &= \frac{\sigma_{people}^2}{\text{sample size}}\\
+\text{Sampling error variance for means for B} &=
+\sigma_{\bar{x}}^2 \\
+&= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{na}\\
 \end{align}
 $$
@@ -415,7 +424,7 @@ knitr::include_graphics("ch_deeper_nway/images/summary_clt.png")
 
 You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.
 
-Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the $s_{people}^2$ calculation. Sampling error variance is just $s_{people}^2$ divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
+Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the $s_{people}^2$ calculation (i.e., MSE calculation). Sampling error variance is just $s_{people}^2$ (i.e., MSE) divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
 
 ## Main effect variance
 
