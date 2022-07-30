@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-07-26" />
+<meta name="date" content="2022-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,15 +32,15 @@
   
 <link rel="prev" href="deeper-dive-sampling-and-anova.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,105 +49,12 @@
 
 
 
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -588,32 +495,33 @@ div.csl-indent {
 <li class="chapter" data-level="16.4" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#frame-1-cell-populations"><i class="fa fa-check"></i><b>16.4</b> Frame 1: Cell Populations</a></li>
 <li class="chapter" data-level="16.5" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#frame-2-a-populations-juggling"><i class="fa fa-check"></i><b>16.5</b> Frame 2: A Populations (Juggling)</a></li>
 <li class="chapter" data-level="16.6" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#frame-3-b-populations-preparation"><i class="fa fa-check"></i><b>16.6</b> Frame 3: B Populations (Preparation)</a></li>
-<li class="chapter" data-level="16.7" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>16.7</b> Homogeneity of variance</a></li>
-<li class="chapter" data-level="16.8" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#estimating-population-variance"><i class="fa fa-check"></i><b>16.8</b> Estimating population variance</a>
+<li class="chapter" data-level="16.7" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#anova-by-another-name"><i class="fa fa-check"></i><b>16.7</b> ANOVA by another name</a></li>
+<li class="chapter" data-level="16.8" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#homogeneity-of-variance"><i class="fa fa-check"></i><b>16.8</b> Homogeneity of variance</a></li>
+<li class="chapter" data-level="16.9" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#estimating-population-variance"><i class="fa fa-check"></i><b>16.9</b> Estimating population variance</a>
 <ul>
-<li class="chapter" data-level="16.8.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#sample-means"><i class="fa fa-check"></i><b>16.8.1</b> Sample means</a></li>
-<li class="chapter" data-level="16.8.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#population-variance-estimates"><i class="fa fa-check"></i><b>16.8.2</b> Population variance estimates</a></li>
-<li class="chapter" data-level="16.8.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#averaging-variances"><i class="fa fa-check"></i><b>16.8.3</b> Averaging variances</a></li>
+<li class="chapter" data-level="16.9.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#sample-means"><i class="fa fa-check"></i><b>16.9.1</b> Sample means</a></li>
+<li class="chapter" data-level="16.9.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#population-variance-estimates"><i class="fa fa-check"></i><b>16.9.2</b> Population variance estimates</a></li>
+<li class="chapter" data-level="16.9.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#averaging-variances"><i class="fa fa-check"></i><b>16.9.3</b> Averaging variances</a></li>
 </ul></li>
-<li class="chapter" data-level="16.9" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-sampling-error"><i class="fa fa-check"></i><b>16.9</b> CLT Sampling Error</a>
+<li class="chapter" data-level="16.10" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-sampling-error"><i class="fa fa-check"></i><b>16.10</b> CLT Sampling Error</a>
 <ul>
-<li class="chapter" data-level="16.9.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-a-juggling"><i class="fa fa-check"></i><b>16.9.1</b> CLT <span class="math inline">\(A\)</span>: Juggling</a></li>
-<li class="chapter" data-level="16.9.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-b-preparation"><i class="fa fa-check"></i><b>16.9.2</b> CLT <span class="math inline">\(B\)</span>: Preparation</a></li>
-<li class="chapter" data-level="16.9.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-cells"><i class="fa fa-check"></i><b>16.9.3</b> CLT Cells</a></li>
-<li class="chapter" data-level="16.9.4" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-summary"><i class="fa fa-check"></i><b>16.9.4</b> CLT Summary</a></li>
+<li class="chapter" data-level="16.10.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-a-juggling"><i class="fa fa-check"></i><b>16.10.1</b> CLT <span class="math inline">\(A\)</span>: Juggling</a></li>
+<li class="chapter" data-level="16.10.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-b-preparation"><i class="fa fa-check"></i><b>16.10.2</b> CLT <span class="math inline">\(B\)</span>: Preparation</a></li>
+<li class="chapter" data-level="16.10.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-cells"><i class="fa fa-check"></i><b>16.10.3</b> CLT Cells</a></li>
+<li class="chapter" data-level="16.10.4" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#clt-summary"><i class="fa fa-check"></i><b>16.10.4</b> CLT Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="16.10" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#main-effect-variance"><i class="fa fa-check"></i><b>16.10</b> Main effect variance</a>
+<li class="chapter" data-level="16.11" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#main-effect-variance"><i class="fa fa-check"></i><b>16.11</b> Main effect variance</a>
 <ul>
-<li class="chapter" data-level="16.10.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#means-a-juggling"><i class="fa fa-check"></i><b>16.10.1</b> Means <span class="math inline">\(A\)</span>: Juggling</a></li>
-<li class="chapter" data-level="16.10.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#means-b-preparation"><i class="fa fa-check"></i><b>16.10.2</b> Means <span class="math inline">\(B\)</span>: Preparation</a></li>
+<li class="chapter" data-level="16.11.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#means-a-juggling"><i class="fa fa-check"></i><b>16.11.1</b> Means <span class="math inline">\(A\)</span>: Juggling</a></li>
+<li class="chapter" data-level="16.11.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#means-b-preparation"><i class="fa fa-check"></i><b>16.11.2</b> Means <span class="math inline">\(B\)</span>: Preparation</a></li>
 </ul></li>
-<li class="chapter" data-level="16.11" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#interaction-variance"><i class="fa fa-check"></i><b>16.11</b> Interaction variance</a>
+<li class="chapter" data-level="16.12" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#interaction-variance"><i class="fa fa-check"></i><b>16.12</b> Interaction variance</a>
 <ul>
-<li class="chapter" data-level="16.11.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#cell-means-vs.-marginal-means"><i class="fa fa-check"></i><b>16.11.1</b> Cell means vs. marginal means</a></li>
-<li class="chapter" data-level="16.11.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#residual-means"><i class="fa fa-check"></i><b>16.11.2</b> Residual means</a></li>
-<li class="chapter" data-level="16.11.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#variance-of-residual-means"><i class="fa fa-check"></i><b>16.11.3</b> Variance of residual means</a></li>
-<li class="chapter" data-level="16.11.4" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#juggling-typical"><i class="fa fa-check"></i><b>16.11.4</b> Juggling Typical</a></li>
-<li class="chapter" data-level="16.11.5" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#preparation-typical"><i class="fa fa-check"></i><b>16.11.5</b> Preparation Typical</a></li>
+<li class="chapter" data-level="16.12.1" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#cell-means-vs.-marginal-means"><i class="fa fa-check"></i><b>16.12.1</b> Cell means vs. marginal means</a></li>
+<li class="chapter" data-level="16.12.2" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#residual-means"><i class="fa fa-check"></i><b>16.12.2</b> Residual means</a></li>
+<li class="chapter" data-level="16.12.3" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#variance-of-residual-means"><i class="fa fa-check"></i><b>16.12.3</b> Variance of residual means</a></li>
+<li class="chapter" data-level="16.12.4" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#juggling-typical"><i class="fa fa-check"></i><b>16.12.4</b> Juggling Typical</a></li>
+<li class="chapter" data-level="16.12.5" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html#preparation-typical"><i class="fa fa-check"></i><b>16.12.5</b> Preparation Typical</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>17</b> Regression and correlation</a>
@@ -820,14 +728,15 @@ div.csl-indent {
 </div>
 <div id="now-n-way-anova" class="section level2 hasAnchor" number="16.2">
 <h2><span class="header-section-number">16.2</span> Now: N-way ANOVA<a href="sampling-and-n-way-anova-under-construction.html#now-n-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables combine to influence a dependent variable.</p>
-<p>Because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, we will examine two independent variables that affect how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
-<p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. A set of two populations that we refer to using the label <strong>juggling</strong>. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.</p>
-<p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. A set of three populations. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.</p>
-<p>The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the combined effect of the two independent variables. You can see this in the diagram below - there are <strong>six cells</strong> each of which is created by the combination of one level of juggling and one level of preparation. We call this a fully-crossed design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables <strong>interact</strong> to influence the dependent variable.</p>
+<p>In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. I must stress, however, that you should probably limit the number of independent variables in you study to <strong>at most</strong> three independent variables. Cognitive psychology research has demonstrated that human beings have a <strong>very</strong> hard time wrapping their minds around the the complexity associated with four independent variables and interpreting five independent variables is practially impossible. My understanding is that, somewhat ironically, 4-way interactions are not uncommon in Cognitive psychology. Be sure to read the article below though so that you can avoid the problems associated with having too many independnet variables.</p>
+<p><a href="https://doi.org/10.1111/j.0956-7976.2005.00782.x">Halford, G. S., Baker, R., McCredden, J. E., &amp; Bain, J. D. (2005). How many variables can humans process?. Psychological science, 16(1), 70-76.
+Chicago.</a></p>
+<p>N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables <strong>combine</strong> to influence a dependent variable. When we look at these combined effects we are looking at an <strong>interaction</strong> (or <strong>moderation</strong>) effect.</p>
+<p>Additionally, because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, consider a ficticous example where we examine how two independent variables <strong>combine</strong> to influence how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
+<p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. We refer to this <strong>set</strong> of two populations (<em>yes</em> and <em>no</em> juggling) using the label <strong>juggling</strong>. Juggling is an <strong>independent variable</strong> or <strong>factor</strong> in our design. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.</p>
+<p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. We refer to this <strong>set</strong> of three populations (<em>low</em>, <em>medium</em>, and <em>high</em> preparation) using the label <strong>preparation</strong>. Preparation is an <em>independent variable</em> or <em>factor</em> in our design. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.</p>
+<p>As mentioned previously, an advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the <strong>combined</strong> effect of the two independent variables. You can see this in the diagram below - there are <strong>six cells</strong> each of which is created by the <strong>combination</strong> of one level of juggling and one level of preparation. We call this a <em>fully-crossed</em> design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables <strong>interact</strong> to influence the dependent variable. You can this of the six cells are another <strong>set</strong> of populations. We will see people that you can think of each set of populations as a frame of reference.</p>
 <p><img src="ch_deeper_nway/images/nway_design_cells_design.png" width="80%" /></p>
-<p>Sometimes people use the world <strong>factor</strong> to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term <strong>Completely Randomized Factorial</strong> Design or <strong>CRF</strong> Design. So be aware there are many ways to refer to an ANOVA design.</p>
-<p>Likewise, note that in some research areas, they use a different word for interaction, namely the synonym <strong>moderation</strong>. That is, although many research areas would say: “We examined how juggling and preparation interacted to influence calmness scores”. Other research areas might phrase it as 1) “We examined how the effect of juggling on calmness scores was <strong>moderated</strong> by preparation” or, the other way around, 2) “We examined how the effect of preparation on calmness scores was <strong>moderated</strong> by juggling”. Mathematically, these three ways of describing the combined effect of the independent variables (or factors) on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.</p>
 </div>
 <div id="multiple-frames-of-reference" class="section level2 hasAnchor" number="16.3">
 <h2><span class="header-section-number">16.3</span> Multiple frames of reference<a href="sampling-and-n-way-anova-under-construction.html#multiple-frames-of-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -917,26 +826,33 @@ div.csl-indent {
 </ul>
 <p>But again remember we are using sample means to make inferences about population means. Never forget the conclusions we make are at the population level - not the sample level.</p>
 </div>
-<div id="homogeneity-of-variance" class="section level2 hasAnchor" number="16.7">
-<h2><span class="header-section-number">16.7</span> Homogeneity of variance<a href="sampling-and-n-way-anova-under-construction.html#homogeneity-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As we saw in the previous section, depending on the effect you are interested in, the relevant populations (i.e., frame of reference) can be quite different. However, regardless of the frame of reference, we assume we assume the variance of people’s calmness scores (<span class="math inline">\(\sigma_{people}^2\)</span>) is the same.</p>
-<p>For the cell frame of reference, we assume the variance of calmness scores in all six populations (<span class="math inline">\(\sigma_1^2,\sigma_2^2,\sigma_3^2,\sigma_4^2,\sigma_5^2,\sigma_6^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{cells}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the six cells:</p>
+<div id="anova-by-another-name" class="section level2 hasAnchor" number="16.7">
+<h2><span class="header-section-number">16.7</span> ANOVA by another name<a href="sampling-and-n-way-anova-under-construction.html#anova-by-another-name" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>A rose by another name would smell as sweet</em></p>
+<p><em>ANOVA by another name would be just as useful</em></p>
+<p>As noted, some researchers use the world <strong>factor</strong> to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term <strong>Completely Randomized Factorial</strong> Design or <strong>CRF</strong> Design. So be aware there are many ways to refer to an ANOVA design.</p>
+<p>Likewise, note that in some research areas, they use a different word for interaction, namely the synonym <strong>moderation</strong>. That is, although many research areas would say: “We examined how juggling and preparation interacted to influence calmness scores”. Other research areas might phrase it as 1) “We examined how the effect of juggling on calmness scores was <strong>moderated</strong> by preparation” or, the other way around, 2) “We examined how the effect of preparation on calmness scores was <strong>moderated</strong> by juggling”. Mathematically, these three ways of describing the combined effect of the independent variables (or factors) on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.</p>
+</div>
+<div id="homogeneity-of-variance" class="section level2 hasAnchor" number="16.8">
+<h2><span class="header-section-number">16.8</span> Homogeneity of variance<a href="sampling-and-n-way-anova-under-construction.html#homogeneity-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we saw in previous sections, depending on the effect you are interested in, the relevant populations (i.e., frame of reference) can be quite different. However, regardless of the frame of reference, we assume the variance of people’s calmness scores (<span class="math inline">\(\sigma_{people}^2\)</span>) is the same across populations.</p>
+<p>For the cell frame of reference, we assume the variance of calmness scores in all six populations of calmness scores (<span class="math inline">\(\sigma_1^2,\sigma_2^2,\sigma_3^2,\sigma_4^2,\sigma_5^2,\sigma_6^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{cells}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the six cells:</p>
 <p><span class="math inline">\(\sigma_{cells}^2=\sigma_1^2=\sigma_2^2=\sigma_3^2=\sigma_4^2=\sigma_5^2=\sigma_6^2\)</span></p>
-<p>For the effect of <span class="math inline">\(A\)</span> frame of reference, we assume the variance of calmness scores in both juggling population (<span class="math inline">\(\sigma_{A1}^2,\sigma_{A2}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{A}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the both populations.</p>
+<p>For the effect of <span class="math inline">\(A\)</span> frame of reference (i.e., juggling), we assume the variance of calmness scores in both juggling populations (<span class="math inline">\(\sigma_{A1}^2,\sigma_{A2}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{A}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the both populations.</p>
 <p><span class="math inline">\(\sigma_{A}^2=\sigma_{A1}^2=\sigma_{A2}^2\)</span></p>
-<p>For the effect of <span class="math inline">\(B\)</span> frame of reference, we assume the variance of calmness scores in all three preparation population (<span class="math inline">\(\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{B}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the three populations.</p>
+<p>For the effect of <span class="math inline">\(B\)</span> frame of reference (i.e., preparation), we assume the variance of calmness scores in all three preparation populations (<span class="math inline">\(\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2\)</span>) is the same. Using symbols, we indicate that there a single value, <span class="math inline">\(\sigma_{B}^2\)</span>, for the variance of calmness scores <strong>at the population level</strong> across the three populations.</p>
 <p><span class="math inline">\(\sigma_{B}^2=\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2\)</span></p>
-<p>But most importantly we assume the variance of calmness scores is the same across all three frames of reference. That is, there is a single value that represents the variance of population-level calmness scores regardless of the population. We refer to this as value the variance of people’s calmness score and represent it with the symbol: <span class="math inline">\(\sigma_{people}^2\)</span></p>
+<p><strong>But most importantly</strong> we assume the variance of calmness scores is the same across all three frames of reference. That is, there is a single value that represents the variance of population-level calmness scores regardless of the population set. We refer to this as value the variance of people’s calmness score and represent it with the symbol: <span class="math inline">\(\sigma_{people}^2\)</span></p>
 <p>So:</p>
 <p><span class="math inline">\(\sigma_{people}^2 =\sigma_{cells}^2=\sigma_{A}^2=\sigma_{B}^2\)</span></p>
-<p>We typically refer to this as the <strong>homogeneity of POPULATION variances</strong> assumption.</p>
+<p>We typically refer to this as the <strong>homogeneity of POPULATION variances</strong> assumption. With this assumption, in this example, we are referring the the variance of <strong>participants calmness scores</strong> across the populations in the variance frames of reference.</p>
 </div>
-<div id="estimating-population-variance" class="section level2 hasAnchor" number="16.8">
-<h2><span class="header-section-number">16.8</span> Estimating population variance<a href="sampling-and-n-way-anova-under-construction.html#estimating-population-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s start by considering the cell frame of reference. Within this frame of reference there are six populations of calmness scores and we have a sample (<span class="math inline">\(n =5\)</span>) from each population. We can estimate each of the six population variances. To do so, however, we need the mean for each of the six cells. So we calculate those means (<span class="math inline">\(\bar{x}\)</span>) below:</p>
-<div id="sample-means" class="section level3 hasAnchor" number="16.8.1">
-<h3><span class="header-section-number">16.8.1</span> Sample means<a href="sampling-and-n-way-anova-under-construction.html#sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We calculate the sample means for each cell using the formula below.</p>
+<div id="estimating-population-variance" class="section level2 hasAnchor" number="16.9">
+<h2><span class="header-section-number">16.9</span> Estimating population variance<a href="sampling-and-n-way-anova-under-construction.html#estimating-population-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s start by considering the cell frame of reference. Within this frame of reference there are six populations of calmness scores and we have a sample (<span class="math inline">\(n =5\)</span>) from each population. We can estimate each of the six population variances using this data. To do so, however, we need the sample mean for each of the six cells. So we calculate those means (<span class="math inline">\(\bar{x}\)</span>) first.</p>
+<div id="sample-means" class="section level3 hasAnchor" number="16.9.1">
+<h3><span class="header-section-number">16.9.1</span> Sample means<a href="sampling-and-n-way-anova-under-construction.html#sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We calculate the sample means for each cell using the formula below:</p>
 <p><span class="math display">\[
 \bar{x} = \frac{\sum x_i}{n}
 \]</span></p>
@@ -944,8 +860,8 @@ div.csl-indent {
 <p><img src="ch_deeper_nway/images/calc_cell_mean.png" width="100%" /></p>
 <p>Each of these six cell means (i.e., sample means) is an estimate of the corresponding six population means.</p>
 </div>
-<div id="population-variance-estimates" class="section level3 hasAnchor" number="16.8.2">
-<h3><span class="header-section-number">16.8.2</span> Population variance estimates<a href="sampling-and-n-way-anova-under-construction.html#population-variance-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="population-variance-estimates" class="section level3 hasAnchor" number="16.9.2">
+<h3><span class="header-section-number">16.9.2</span> Population variance estimates<a href="sampling-and-n-way-anova-under-construction.html#population-variance-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now that we have the mean for each cell we can estimate the variance of calmness scores for the six populations. We do this with the usual equation below:</p>
 <p><span class="math display">\[
 s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}
@@ -955,8 +871,8 @@ s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}
 <p>As noted above, it’s important to remember that each sample variance (e.g., <span class="math inline">\(s_1^2\)</span>) is an estimate of the corresponding population variance (e.g., <span class="math inline">\(\sigma_1^2\)</span>). This is illustrated in the figure below.</p>
 <p><img src="ch_deeper_nway/images/nway_design_cells_sd.png" width="80%" /></p>
 </div>
-<div id="averaging-variances" class="section level3 hasAnchor" number="16.8.3">
-<h3><span class="header-section-number">16.8.3</span> Averaging variances<a href="sampling-and-n-way-anova-under-construction.html#averaging-variances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="averaging-variances" class="section level3 hasAnchor" number="16.9.3">
+<h3><span class="header-section-number">16.9.3</span> Averaging variances<a href="sampling-and-n-way-anova-under-construction.html#averaging-variances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the previous section, we started from the premise that there were six populations. The populations variances (<span class="math inline">\(\sigma^2\)</span>) are unknown but we calculated an estimate of each population variance (<span class="math inline">\(s^2\)</span>) using sample data. These are presented in the table below:</p>
 <table>
 <colgroup>
@@ -1056,8 +972,8 @@ s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &am
 <p>Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e., <span class="math inline">\(s_{people}^2\)</span>) we averaged 6 cell variance estimates (e.g., <span class="math inline">\(s_1^2\)</span>). Each of those six estimates had <span class="math inline">\(n-1\)</span> degrees for freedom. You know it’s <span class="math inline">\(n-1\)</span> degrees of freedom for each cell variance (e.g., <span class="math inline">\(s_1^2\)</span>) because that’s the denominator of the variance formula (<span class="math inline">\(s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}\)</span>). So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(6(n-1)\)</span> which we express as <span class="math inline">\((3)(2)(n-1)\)</span> which is <span class="math inline">\(ab(n-1)\)</span>. So the degrees of freedom for <span class="math inline">\(s_{people}^2\)</span> (i.e., MSE) is <span class="math inline">\(ab(n-1)\)</span>. It’s important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.</p>
 </div>
 </div>
-<div id="clt-sampling-error" class="section level2 hasAnchor" number="16.9">
-<h2><span class="header-section-number">16.9</span> CLT Sampling Error<a href="sampling-and-n-way-anova-under-construction.html#clt-sampling-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="clt-sampling-error" class="section level2 hasAnchor" number="16.10">
+<h2><span class="header-section-number">16.10</span> CLT Sampling Error<a href="sampling-and-n-way-anova-under-construction.html#clt-sampling-error" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determining if the variability in sample means is greater than could be expected due to random sampling error. Consequently, we have to estimate how much random sampling error variance there would be (on average) in sample means for each of the three frames of reference (main effect of <span class="math inline">\(A\)</span> means, main effect of <span class="math inline">\(B\)</span> means, and cell means).</p>
 <p>To estimate the expected variability in sample means due to sampling error we need an estimate (<span class="math inline">\(s_{people}^2\)</span>) of the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>). That’s why we spent so much time obtaining <span class="math inline">\(s_{people}^2\)</span> in the previous section. Recall the general form of the formula for the expected variance in sample means, due to sampling error, from previous chapters:</p>
 <p><span class="math display">\[
@@ -1066,8 +982,8 @@ s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &am
 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
 \end{align}
 \]</span></p>
-<div id="clt-a-juggling" class="section level3 hasAnchor" number="16.9.1">
-<h3><span class="header-section-number">16.9.1</span> CLT <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#clt-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="clt-a-juggling" class="section level3 hasAnchor" number="16.10.1">
+<h3><span class="header-section-number">16.10.1</span> CLT <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#clt-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the context of the juggling main effect means, each juggle mean is based on <span class="math inline">\(nb=(5)(3)=15\)</span> people.
 Therefore, for these juggling main effect means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
@@ -1089,8 +1005,8 @@ Therefore, for these juggling main effect means the general formula for the vari
 <p>Thus, when we have two juggling populationss from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.</p>
 <p><img src="ch_deeper_nway/images/pop_equal_means_a.png" width="80%" /></p>
 </div>
-<div id="clt-b-preparation" class="section level3 hasAnchor" number="16.9.2">
-<h3><span class="header-section-number">16.9.2</span> CLT <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#clt-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="clt-b-preparation" class="section level3 hasAnchor" number="16.10.2">
+<h3><span class="header-section-number">16.10.2</span> CLT <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#clt-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the context of the preparation main effect means, each preparation mean is based on <span class="math inline">\(na=(5)(2)=10\)</span> people.
 Therefore, for these preparation main effect means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
@@ -1112,8 +1028,8 @@ Therefore, for these preparation main effect means the general formula for the v
 <p>Thus, when we have three preparation populations from which we obtained samples of 10 people, we would expect the variance of sample means to be 6.0; assuming the population means are the same.</p>
 <p><img src="ch_deeper_nway/images/pop_equal_means_b.png" width="80%" /></p>
 </div>
-<div id="clt-cells" class="section level3 hasAnchor" number="16.9.3">
-<h3><span class="header-section-number">16.9.3</span> CLT Cells<a href="sampling-and-n-way-anova-under-construction.html#clt-cells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="clt-cells" class="section level3 hasAnchor" number="16.10.3">
+<h3><span class="header-section-number">16.10.3</span> CLT Cells<a href="sampling-and-n-way-anova-under-construction.html#clt-cells" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the context of the cell means, each cell mean is based on <span class="math inline">\(n=5\)</span> people.
 Therefore, for these cell means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
@@ -1132,17 +1048,17 @@ Therefore, for these cell means the general formula for the variance due to samp
 \]</span></p>
 <p>I omit the diagram for cells populations and sample mean distributions. This is done because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one diagram. But don’t worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.</p>
 </div>
-<div id="clt-summary" class="section level3 hasAnchor" number="16.9.4">
-<h3><span class="header-section-number">16.9.4</span> CLT Summary<a href="sampling-and-n-way-anova-under-construction.html#clt-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="clt-summary" class="section level3 hasAnchor" number="16.10.4">
+<h3><span class="header-section-number">16.10.4</span> CLT Summary<a href="sampling-and-n-way-anova-under-construction.html#clt-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><img src="ch_deeper_nway/images/summary_clt.png" width="100%" /></p>
 <p>You can see in the table above that we have estimated the variability we will see in the sample means for different effects. The estimated sampling error differs for each effect because the sample size differs for each effect.</p>
 <p>Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the <span class="math inline">\(s_{people}^2\)</span> calculation. Sampling error variance is just <span class="math inline">\(s_{people}^2\)</span> divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE, <span class="math inline">\(ab(n-1)\)</span>.</p>
 </div>
 </div>
-<div id="main-effect-variance" class="section level2 hasAnchor" number="16.10">
-<h2><span class="header-section-number">16.10</span> Main effect variance<a href="sampling-and-n-way-anova-under-construction.html#main-effect-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="means-a-juggling" class="section level3 hasAnchor" number="16.10.1">
-<h3><span class="header-section-number">16.10.1</span> Means <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#means-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="main-effect-variance" class="section level2 hasAnchor" number="16.11">
+<h2><span class="header-section-number">16.11</span> Main effect variance<a href="sampling-and-n-way-anova-under-construction.html#main-effect-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="means-a-juggling" class="section level3 hasAnchor" number="16.11.1">
+<h3><span class="header-section-number">16.11.1</span> Means <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova-under-construction.html#means-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <colgroup>
 <col width="23%" />
@@ -1180,8 +1096,8 @@ Therefore, for these cell means the general formula for the variance due to samp
 </tbody>
 </table>
 </div>
-<div id="means-b-preparation" class="section level3 hasAnchor" number="16.10.2">
-<h3><span class="header-section-number">16.10.2</span> Means <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#means-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="means-b-preparation" class="section level3 hasAnchor" number="16.11.2">
+<h3><span class="header-section-number">16.11.2</span> Means <span class="math inline">\(B\)</span>: Preparation<a href="sampling-and-n-way-anova-under-construction.html#means-b-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <colgroup>
 <col width="23%" />
@@ -1220,19 +1136,19 @@ Therefore, for these cell means the general formula for the variance due to samp
 </table>
 </div>
 </div>
-<div id="interaction-variance" class="section level2 hasAnchor" number="16.11">
-<h2><span class="header-section-number">16.11</span> Interaction variance<a href="sampling-and-n-way-anova-under-construction.html#interaction-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="cell-means-vs.-marginal-means" class="section level3 hasAnchor" number="16.11.1">
-<h3><span class="header-section-number">16.11.1</span> Cell means vs. marginal means<a href="sampling-and-n-way-anova-under-construction.html#cell-means-vs.-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interaction-variance" class="section level2 hasAnchor" number="16.12">
+<h2><span class="header-section-number">16.12</span> Interaction variance<a href="sampling-and-n-way-anova-under-construction.html#interaction-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cell-means-vs.-marginal-means" class="section level3 hasAnchor" number="16.12.1">
+<h3><span class="header-section-number">16.12.1</span> Cell means vs. marginal means<a href="sampling-and-n-way-anova-under-construction.html#cell-means-vs.-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="residual-means" class="section level3 hasAnchor" number="16.11.2">
-<h3><span class="header-section-number">16.11.2</span> Residual means<a href="sampling-and-n-way-anova-under-construction.html#residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="residual-means" class="section level3 hasAnchor" number="16.12.2">
+<h3><span class="header-section-number">16.12.2</span> Residual means<a href="sampling-and-n-way-anova-under-construction.html#residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="variance-of-residual-means" class="section level3 hasAnchor" number="16.11.3">
-<h3><span class="header-section-number">16.11.3</span> Variance of residual means<a href="sampling-and-n-way-anova-under-construction.html#variance-of-residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variance-of-residual-means" class="section level3 hasAnchor" number="16.12.3">
+<h3><span class="header-section-number">16.12.3</span> Variance of residual means<a href="sampling-and-n-way-anova-under-construction.html#variance-of-residual-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
-<div id="juggling-typical" class="section level3 hasAnchor" number="16.11.4">
-<h3><span class="header-section-number">16.11.4</span> Juggling Typical<a href="sampling-and-n-way-anova-under-construction.html#juggling-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="juggling-typical" class="section level3 hasAnchor" number="16.12.4">
+<h3><span class="header-section-number">16.12.4</span> Juggling Typical<a href="sampling-and-n-way-anova-under-construction.html#juggling-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <colgroup>
 <col width="23%" />
@@ -1270,8 +1186,8 @@ Therefore, for these cell means the general formula for the variance due to samp
 </tbody>
 </table>
 </div>
-<div id="preparation-typical" class="section level3 hasAnchor" number="16.11.5">
-<h3><span class="header-section-number">16.11.5</span> Preparation Typical<a href="sampling-and-n-way-anova-under-construction.html#preparation-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="preparation-typical" class="section level3 hasAnchor" number="16.12.5">
+<h3><span class="header-section-number">16.12.5</span> Preparation Typical<a href="sampling-and-n-way-anova-under-construction.html#preparation-typical" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <table>
 <colgroup>
 <col width="23%" />
@@ -1321,14 +1237,14 @@ Therefore, for these cell means the general formula for the variance due to samp
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({

@@ -6,25 +6,28 @@ In the last chapter, we considered a scenario where there was a single independe
 
 ## Now: N-way ANOVA
 
-In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables combine to influence a dependent variable. 
+In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. I must stress, however, that you should probably limit the number of independent variables in you study to **at most** three independent variables. Cognitive psychology research has demonstrated that human beings have a **very** hard time wrapping their minds around the the complexity associated with four independent variables and interpreting five independent variables is practially impossible. My understanding is that, somewhat ironically, 4-way interactions are not uncommon in Cognitive psychology. Be sure to read the article below though so that you can avoid the problems associated with having too many independnet variables.
 
-Because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter  (i.e., a 2-way ANOVA). Specifically, we will examine two independent variables that affect how calm students are before an exam. Calmness before the exam is the dependent variable. 
+[Halford, G. S., Baker, R., McCredden, J. E., & Bain, J. D. (2005). How many variables can humans process?. Psychological science, 16(1), 70-76.
+Chicago.](https://doi.org/10.1111/j.0956-7976.2005.00782.x)
 
-The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: **yes** and **no**. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. A set of two populations that we refer to using the label  **juggling**. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.
+N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables **combine** to influence a dependent variable. When we look at these combined effects we are looking at an **interaction** (or **moderation**) effect.
 
-The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: **low**, **medium**, and **high**. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. A set of three populations. We are interested in how preparation level (low/medium/high) influences the mean of these three  populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.
+Additionally, because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter  (i.e., a 2-way ANOVA). Specifically, consider a ficticous example where we examine how two independent variables **combine** to influence how calm students are before an exam. Calmness before the exam is the dependent variable. 
 
-The advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the combined effect of the two independent variables. You can see this in the diagram below - there are **six cells** each of which is created by the combination of one level of juggling and one level of preparation. We call this a fully-crossed design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables **interact** to influence the dependent variable. 
+The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: **yes** and **no**. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. We refer to this **set** of two populations (*yes* and *no* juggling) using the label **juggling**. Juggling is an **independent variable** or **factor** in our design. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.
 
+The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: **low**, **medium**, and **high**. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. We refer to this **set** of three populations (*low*, *medium*, and *high* preparation) using the label **preparation**. Preparation is an *independent variable* or *factor* in our design. We are interested in how preparation level (low/medium/high) influences the mean of these three  populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.
+
+
+As mentioned previously, an advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the **combined** effect of the two independent variables. You can see this in the diagram below - there are **six cells** each of which is created by the **combination** of one level of juggling and one level of preparation. We call this a *fully-crossed* design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables **interact** to influence the dependent variable. You can this of the six cells are another **set** of populations. We will see people that you can think of each set of populations as a frame of reference.
 
 
 ```{r, echo = FALSE, out.width="80%"}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_design.png")
 ```
 
-Sometimes people use the world **factor** to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term **Completely Randomized Factorial** Design or **CRF** Design. So be aware there are many ways to refer to an ANOVA design.
 
-Likewise, note that in some research areas, they use a different word for interaction, namely the synonym **moderation**. That is, although many research areas would say: "We examined how juggling and preparation interacted to influence calmness scores". Other research areas might phrase it as 1) "We examined how the effect of juggling on calmness scores was **moderated** by preparation" or, the other way around, 2) "We examined how the effect of preparation on calmness scores was **moderated** by juggling". Mathematically, these three ways of describing the combined effect of the independent variables (or factors) on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.
 
 ## Multiple frames of reference
 
@@ -118,33 +121,44 @@ Note what when you examine the means for Preparation we refer to this using a fe
 
 But again remember we are using sample means to make inferences about population means. Never forget the conclusions we make are at the population level - not the sample level.
 
+## ANOVA by another name
+
+*A rose by another name would smell as sweet*
+
+*ANOVA by another name would be just as useful*
+
+As noted, some researchers use the world **factor** to refer to an independent variable. An implication of this is that instead of using the term N-way ANOVA they use the term **Completely Randomized Factorial** Design or **CRF** Design. So be aware there are many ways to refer to an ANOVA design.
+
+Likewise, note that in some research areas, they use a different word for interaction, namely the synonym **moderation**. That is, although many research areas would say: "We examined how juggling and preparation interacted to influence calmness scores". Other research areas might phrase it as 1) "We examined how the effect of juggling on calmness scores was **moderated** by preparation" or, the other way around, 2) "We examined how the effect of preparation on calmness scores was **moderated** by juggling". Mathematically, these three ways of describing the combined effect of the independent variables (or factors) on the dependent variable are identical. Conceptually, the two moderation examples differ, but surprisingly not in the math we use to test them.
+
+
 ## Homogeneity of variance
 
-As we saw in the previous section, depending on the effect you are interested in, the relevant populations (i.e., frame of reference) can be quite different. However, regardless of the frame of reference, we assume we assume the variance of people's calmness scores ($\sigma_{people}^2$) is the same.
+As we saw in previous sections, depending on the effect you are interested in, the relevant populations (i.e., frame of reference) can be quite different. However, regardless of the frame of reference, we assume the variance of people's calmness scores ($\sigma_{people}^2$) is the same across populations.
 
-For the cell frame of reference, we assume the variance of calmness scores in all six populations ($\sigma_1^2,\sigma_2^2,\sigma_3^2,\sigma_4^2,\sigma_5^2,\sigma_6^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{cells}^2$, for the variance of calmness scores **at the population level** across the six cells:
+For the cell frame of reference, we assume the variance of calmness scores in all six populations of calmness scores ($\sigma_1^2,\sigma_2^2,\sigma_3^2,\sigma_4^2,\sigma_5^2,\sigma_6^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{cells}^2$, for the variance of calmness scores **at the population level** across the six cells:
 
 $\sigma_{cells}^2=\sigma_1^2=\sigma_2^2=\sigma_3^2=\sigma_4^2=\sigma_5^2=\sigma_6^2$
 
-For the effect of $A$ frame of reference, we assume the variance of calmness scores in both juggling population ($\sigma_{A1}^2,\sigma_{A2}^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{A}^2$, for the variance of calmness scores **at the population level** across the both populations.
+For the effect of $A$ frame of reference (i.e., juggling), we assume the variance of calmness scores in both juggling populations ($\sigma_{A1}^2,\sigma_{A2}^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{A}^2$, for the variance of calmness scores **at the population level** across the both populations.
 
 $\sigma_{A}^2=\sigma_{A1}^2=\sigma_{A2}^2$
 
-For the effect of $B$ frame of reference, we assume the variance of calmness scores in all three preparation population ($\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{B}^2$, for the variance of calmness scores **at the population level** across the three populations.
+For the effect of $B$ frame of reference (i.e., preparation), we assume the variance of calmness scores in all three preparation populations ($\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2$) is the same. Using symbols, we indicate that there a single value, $\sigma_{B}^2$, for the variance of calmness scores **at the population level** across the three populations.
 
 $\sigma_{B}^2=\sigma_{B1}^2=\sigma_{B2}^2=\sigma_{B3}^2$
 
-But most importantly we assume the variance of calmness scores is the same across all three frames of reference. That is, there is a single value that represents the variance of population-level calmness scores regardless of the population.  We refer to this as value the variance of people's calmness score and represent it with the symbol: $\sigma_{people}^2$
+**But most importantly** we assume the variance of calmness scores is the same across all three frames of reference. That is, there is a single value that represents the variance of population-level calmness scores regardless of the population set. We refer to this as value the variance of people's calmness score and represent it with the symbol: $\sigma_{people}^2$
 
 So:
 
 $\sigma_{people}^2 =\sigma_{cells}^2=\sigma_{A}^2=\sigma_{B}^2$
 
-We typically refer to this as the **homogeneity of POPULATION variances** assumption.
+We typically refer to this as the **homogeneity of POPULATION variances** assumption. With this assumption, in this example, we are referring the the variance of **participants calmness scores** across the populations in the variance frames of reference.
 
 ## Estimating population variance
 
-Let's start by considering the cell frame of reference. Within this frame of reference there are six populations of calmness scores and we have a sample ($n =5$) from each population. We can estimate each of the six population variances. To do so, however, we need the mean for each of the six cells. So we calculate those means ($\bar{x}$) below:
+Let's start by considering the cell frame of reference. Within this frame of reference there are six populations of calmness scores and we have a sample ($n =5$) from each population. We can estimate each of the six population variances using this data. To do so, however, we need the sample mean for each of the six cells. So we calculate those means ($\bar{x}$) first.
 
 
 ```{r, echo = F}
@@ -172,7 +186,7 @@ var_all = c(var1, var2, var3, var4, var5, var6)
 
 ### Sample means
 
-We calculate the sample means for each cell using the formula below.
+We calculate the sample means for each cell using the formula below:
 
 $$
 \bar{x} = \frac{\sum x_i}{n}
