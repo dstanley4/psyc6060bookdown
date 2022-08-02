@@ -20,7 +20,7 @@ In this chapter, we focus on describing the distribution of sample means. Our go
 | Approach 2: CLT |   $s_{\bar{x}}^2=\frac{s_{people}^2}{n}$  | Estimate the variance in sample mean due ONLY to random sampling error.|
 
 
-Understanding the logic behind both approaches for estimating the variance of the distribution of sample means is critical. In this chapter, where there is one population of people, the two approaches estimate the same thing - variabilty in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two methods estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both methods in the simple case - where there is a single population of people.
+Understanding the logic behind both approaches for estimating the variance of the distribution of sample means is critical. In this chapter, where there is one population of people, the two approaches estimate the same thing - variabilty in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two approaches estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both approaches in the simple case - where there is a single population of people.
 
 **What we learn in this chapter (and the pattern of results we obtain) will serve as frame-of-reference for interpreting more complex situations in future chapters.**
 
@@ -92,7 +92,7 @@ A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, w
 
 ## Sample mean distribution variance
 
-When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two methods for calculating the variance of this distribution of sample means.
+When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two approaches for calculating the variance of this distribution of sample means.
 
 ### Approach 1: Total: Calculate the variance of infinite sample means
 
@@ -110,7 +110,7 @@ Notice how Equation \@ref(eq:popvarxbardeep) for the variance of sample means in
 | Distribution |          Attribute           |                                  Parameter Calculation                                   |                               Estimate of Parameter                               |
 |:------------:|:----------------------------:|:----------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
 |    People    |           Variance           |          $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}$          |   $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}$   |
-| Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
+| Sample Means |      Approach 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
 
 
 
@@ -127,7 +127,7 @@ $$
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, based an infinite number of sample means ($K = \infty$) using Method 1, to be $\sigma_{\bar{x}}^2 = 31.26472$.
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, based an infinite number of sample means ($K = \infty$) using Approach 1, to be $\sigma_{\bar{x}}^2 = 31.26472$.
 
 **When there is only one population of people** this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We'll discuss that situation in a future chapter.
 
@@ -166,27 +166,27 @@ $$
 
 Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **calculated**, using Approach 2 the CLT shortcut, to be $\sigma_{\bar{x}}^2 = 31.26472$.
 
-### Ratio comparison of two methods
+### Ratio comparison of two approaches
 
-To begin, we are looking at a distribution of sampling means **where the means differ only due to random sampling error**. In this situation, we have calculated the variance of the distribution of sample means using two different methods.
+To begin, we are looking at a distribution of sampling means **where the means differ only due to random sampling error**. In this situation, we have calculated the variance of the distribution of sample means using two different approaches.
 
 -   Approach 1: Total variance of sample means calculated using sample means and the variance formula
 
 -   Approach 2: Variance of sample means, due to random sampling error, calculated using CLT shortcut formula
 
-Although we can just look at the numbers resulting from these two methods and compare them, that's not how statisticians typically handle such comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00. If the ratio is larger than 1.00 it means the number on the top was bigger than the number on the bottom.
+Although we can just look at the numbers resulting from these two approaches and compare them, that's not how statisticians typically handle such comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00. If the ratio is larger than 1.00 it means the number on the top was bigger than the number on the bottom.
 
 
 $$
 \begin{aligned} 
-\text{ratio comparing methods} &= \frac{\text{total variance of sample means }}{\text{variance of sample means due to random sampling error}}\\
+\text{ratio comparing approaches} &= \frac{\text{total variance of sample means }}{\text{variance of sample means due to random sampling error}}\\
 &=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
 &=\frac{31.26472}{31.26472}\\
 &= 1.00\\
 \end{aligned} 
 $$
 
-You can see the ratio comparing these two methods below is 1.00 - so we conclude two methods produced the same result. If the number on the top of the ratio was the *larger* of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the *smaller* of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpet the value of a ratio using these rules before continuing.
+You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result. If the number on the top of the ratio was the *larger* of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the *smaller* of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpet the value of a ratio using these rules before continuing.
 
 In this section, we focused on actually **calculating** the variance of the distribution of sample means using two approaches. But to actually **calculate** this variance we needed an infinite number of sample means (Approach 1) or knowledge of the population variance (Approach 2). Consequently, it's impractical to **calcualte** either quantity.
 
@@ -377,7 +377,7 @@ Thus, using Approach 2: CLT shortcut, our estimate of the variance of the distri
 
 **IMPORTANT:** This estimate of the variance of the distribution of sample means was based on using an estimate of the variance of the people in the population (i.e., $s_{people}^2 =`r est_pop_var_pooled`$). There were 12 degrees of freedom associated with $s_{people}^2$ which $s_{\bar{X}}^2$ depends upon. So we say there are 12 degrees of freedom associated with $s_{\bar{X}}^2$.
 
-### Ratio comparison of two methods
+### Ratio comparison of two approaches
 
 The table below summarizes our work so far.
 
@@ -388,9 +388,9 @@ The table below summarizes our work so far.
 
 In the table above, Approach 1, estimates the total variance (from all sources) in sample means. In contrast, Approach 2, estimates the variance in sample means due strictly to random sampling error. In this particular scenario **we know** the only source of variability in sample means is random sampling error. So...we do the two numbers differ?
 
-Recall, that in Approach 1, we didn't have all of the sample means in the infinity large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error -- because we only have 3 sample means - not the full infinite set of sample means.
+Recall, that in Approach 1 we didn't have all of the sample means in the infinity large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error -- because we only have 3 sample means - not the full infinite set of sample means.
 
-Likewise, recall that in Appraoch 2, we didn't know the variance of the population of people ($\sigma_{people}^2$) we had to rely on an esimate of that value ($s_{people}^2$), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.
+Likewise, recall that in Approach 2 we didn't know the variance of the population of people ($\sigma_{people}^2$). We had to rely on an esimate of that value ($s_{people}^2$), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.
 
 Because both Approach 1 and 2 will differ from the true due to random sampling error, when we construct a ratio, it too will differ from the truth due to random sampling error. That is, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
 
@@ -398,7 +398,7 @@ Because both Approach 1 and 2 will differ from the true due to random sampling e
 
 $$
 \begin{aligned} 
-\text{ratio comparing methods} &= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
+\text{ratio comparing approaches} &= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
 &=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
 &=\frac{`r method1_var`}{`r est_mean_var_clt`}\\
 &= `r method1_var/est_mean_var_clt`\\
@@ -415,7 +415,7 @@ In this section we focus on using simulations to establish a frame of reference 
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
 ```
 
-The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data to **estimate** the variance of the distribution of sample means using Method 1 and Method 2. Then we create a ratio of those two values (method 1/method 2). Each additional row of the table shows a case where we did this same thing with three new samples.
+The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure \@ref(fig:sim1pop) above. In this scenario, we obtain 3 samples from the population of people and then used that data to **estimate** the variance of the distribution of sample means using Approach 1 and Approach 2. Then we create a ratio of those two values (Approach 1/Approach 2). Each additional row of the table shows a case where we did this same thing with three new samples.
 
 We begin by creating the population in R:
 
@@ -424,7 +424,7 @@ library(learnSampling)
 pop1 <- make_population(mean = 172.50, variance = 156.3236)
 ```
 
-Then we run a simulation where we estimate the variance using the distribution of sample means using the information in the three sample via Method 1 and Method 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
+Then we run a simulation where we estimate the variance using the distribution of sample means using the information in the three sample via Approach 1 and Approach 2. We repeat this estimation process 100,000 times to see if it is accurate in the long run.
 
 ```{r, eval = FALSE}
 data_ratios <- get_mean_samples_ratio(pop1,
@@ -447,7 +447,7 @@ The results of the 100,000 simulations are placed in the data set called data_ra
 head(data_ratios)
 ```
 
-When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Method 1 and Method 2 (method_1\_var_est and method_2\_clt_est, respectively). Then we created a ratio of those two values (method_1\_var_est/method_2\_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2 (approach_1\_total_var_est and approach_2\_clt_est, respectively). Then we created a ratio of those two values (method_1\_var_est/method_2\_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -460,7 +460,7 @@ skim(data_ratios)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
 
 Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph1pop), you can see the range of values that occur with this ratio. This
 
@@ -505,7 +505,7 @@ pop2 <- pop1
 pop3 <- pop1
 ```
 
-Then, we obtain a sample from each population of people and calculate a sample mean. When we use Method 1: Variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($K = \infty$). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Method 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Method 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Method 1: Variance divided by Method 2: CLT Shortcut.
+Then, we obtain a sample from each population of people and calculate a sample mean. When we use Approach 1: Total variance we think of these three sample means as being a random sample ($a = 3$) of the infinite distribution of sample means ($K = \infty$). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Approach 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Approach 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Approach 1: Total variance divided by Approach 2: CLT Shortcut.
 
 **Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.**
 
@@ -529,7 +529,7 @@ The results of the 100,000 simulations are placed in the data set called data_ra
 head(data_ratios3)
 ```
 
-In the first row of the above table we obtained 3 samples (one from each population) and then used that data to **estimate** the variance of the sampling distribution of means using method 1 and method 2. Then we create a ratio of those two values (Method 1/Method 2). Each additional row of table shows a case where were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+In the first row of the above table we obtained 3 samples (one from each population) and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2. Then we create a ratio of those two values (Approach 1/Approach 2). Each additional row of table shows a case where were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -542,7 +542,7 @@ skim(data_ratios3)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the method 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the method 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
 
 Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph3pop), you can see the range of values that occur with this ratio.
 
@@ -633,9 +633,9 @@ Much of what we have learned is summarized in the table below.
 |    People    |           Variance           |          $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}$          |   $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}$   |
 |    People    |      Standard Deviation      |       $\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}}$        | $s_{people} = SD = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}}$ |
 | Sample Means |             Mean             |               $\mu_{\bar{x}} = \frac{\sum_{i=1}^{K=\infty}{\bar{x}_i}}{K}$               |               $\bar{\bar{x}} = \frac{\sum_{i=1}^{a}{\bar{x}_i}}{a}$               |
-| Sample Means |      Method 1: Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
-| Sample Means |    Method 2 CLT: Variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      |
-| Sample Means | Method 2 CLT: Standard Error | $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |   $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$    |
+| Sample Means |      Approach 1: TotalVariance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
+| Sample Means |    Approach 2 CLT: Random sampling variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      |
+| Sample Means | Approach 2 CLT: Standard Error | $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |   $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$    |
 
 
 
@@ -650,8 +650,8 @@ Much of what we have learned is summarized in the table below.
 
 We are interested in the variance of the distribution of sample means (Figure \@ref(fig:chdeepfigure1)B). If we were "all knowing" we would know that the variance of the distribution is 31.26472. But we are not "all knowing", and so need to rely on sample data to estimate the variance of this distribution.
 
-We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both methods produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of means - we can never know the actual variance of the distribution of sample means.
+We used two different approaches to estimating the variance of the distribution of sample means. With our "all knowing cap" on we can see, in the table above, that both approaches produce values that differ from the actual variance of the distribution. That's because the best we can do with sample data is obtain an estimate of the variance of the distribution of means - we can never know the actual variance of the distribution of sample means.
 
-Each variance estimate (Method 1 or Method 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Method 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error.
+Each variance estimate (Approach 1 or Approach 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Approach 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error.
 
-Likewise, the second estimate, Method 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.
+Likewise, the second estimate, Approach 2 CLT, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.
