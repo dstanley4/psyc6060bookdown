@@ -447,16 +447,105 @@ Notice that the degrees of freedom for the sampling error variance is the same f
 
 ### Means $A$: Juggling
 
-We might wonder if there is an effect of juggling on calmness scores ignoring the effect of prepartion. Said another way, we might wonder if the mean of the **yes** juggling population ($\mu_{A1}$) is different from the mean of the **no** juggling population ($\mu_{A2}$). We examine this question by looking the variance in the population means.
+We might wonder if there is an effect of juggling on calmness scores ignoring the effect of prepartion. Said another way, we might wonder if the mean of the **yes** juggling population ($\mu_{A1}$) is different from the mean of the **no** juggling population ($\mu_{A2}$). We examine this question by looking the variance in the population means. If we knew the population means we could:
+
+1) Calculate the grand mean (i.e., $\mu_A$). That is, the mean of the two juggling population means. Recall because there are two levels of juggling (i.e., two populations), $a = 2$.
+
+$$
+\begin{align}
+\text{Grand mean} = \mu_A &= \frac{\sum\mu_{A_i}}{a} \\
+&= \frac{\mu_{A_1}+\mu_{A_2}}{2}\\
+&= \frac{? + ?}{2}
+\end{align}
+$$
+
+But, as the question marks clearly illustrate - we  don't know the population means. We don't have everyone in the population. But if we did have the population means we could proceed as below.
 
 
+2) Use the grand mean to calculate the variance in the means:
 
+$$
+\begin{aligned} 
+\sigma_{\mu_A}^2 &=  \frac{\sum (\mu_{A_i}-\mu_{\mu_A})^2}{a} \\
+&=  \frac{(\mu_{A_1} - \mu_{\mu_A})^2 + (\mu_{A_2} - \mu_{\mu_A})^2}{2} \\
+&=  ?\\
+\end{aligned}
+$$
+
+As with the grand mean, we can't calculate this population level information.
+
+So we need to rely upon sample-level information to estimate the the variability in population means.  You can check out the sample-level means in the diagram below. As we discussed previously. For the $A$ independent variable, these means have a sample size of $15$.
+
+INSERT DIAGRAM HERE
+
+1) We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using $\bar{bar{bar}}$. There are two bars about the $x$ to indicate that it is the mean of means.
+
+$$
+\begin{align}
+\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{A_i}}{a} \\
+&= \frac{\bar{x}_{A_1}+\bar{x}_{A_2}}{2}\\
+&= \frac{77.33333 + 55.8}{2} \\
+&= 66.56667\\
+\end{align}
+$$
+
+2) Now estimate the variability in populations means:
+
+$$
+\begin{aligned} 
+s_{\mu_A}^2 &=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
+&=  \frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1} \\
+&=  \frac{(77.33333 - 66.56667)^2 + (55.8 - 66.56667)^2}{2-1} \\
+&= 231.8422
+\end{aligned}
+$$
+
+Unfortunately, when you use sample-level information to estimate population-level variance the number you calculate with reflect two things.
+
+1) The variance of the population means $\sigma_{\mu_A}^2$
+2) Random sampling error variance: $\frac{\sigma_{people}^2}{nb}$
+
+In mathematical terms we say the Expected Mean Square is:
+
+$\text{Expected Mean Square} = \frac{\sigma_{people}^2}{nb} +  \sigma_{\mu_A}^2$
+
+### Calculating the F-value for $A$
+
+Recall that we now have two estimates for the variability in juggling means.
+
+1) In the section immediately above, we obtained a variance $\frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1}=231.8422$. This value reflects random sampling error variance and the variance of the population mean.
+
+2) Previously, we obtained a variance of estimate of $\frac{s_{people}^2}{nb} = 4.0$. This value reflects random sampling variance only.
+
+These two values are summarized in the table below.
+
+
+  Juggling| Formula | Expected value | degrees of feedom |
+:--------------:|:--------------:|:------------------:|:---------------:|
+Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=231.8422$ |$\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2$ | $(a-1) = 1$
+Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sigma_{people}^2}{nb}$ | $ab(n-1) = 24$
+
+
+We calculate an F-value to compare these two values:
+
+$$
+\begin{align}
+F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+&=  \frac{231.8422}{4}\\
+&= 57.96\\
+\end{align}
+$$
+
+
+This estimate tells us that, with these data, the **estimated** total variance is juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word **estimate(d)** in the previous sentance. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.
+
+We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{A}^2=0$)
 
 
 
   Juggling| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}$ |$\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2$ | $(a-1) = 1$
+Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=231.8422$ |$\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2$ | $(a-1) = 1$
 Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sigma_{people}^2}{nb}$ | $ab(n-1) = 24$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{                  \frac{s_{people}^2}{nb}}$ |  $\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{    \frac{\sigma_{people}^2}{nb}}$ | $[(a-1),ab(n-1)]=[1,24]$
 
