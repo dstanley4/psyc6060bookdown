@@ -301,7 +301,7 @@ s_{\bar{x}}^2 &= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\\
 \end{aligned} 
 $$
 
-Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **estimated**, based on three sample means ($a = 3$) using Method 1, to be $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
+Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **estimated**, based on three sample means ($a = 3$) using Approach 1, to be $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
 
 **IMPORTANT:** The denominator of this variance calculation is $2$ (i.e., $3-1$). Therefore, we say there are 2 degrees of freedom associated with this estimate of the variance of the infinite number of sample means.
 
@@ -409,9 +409,10 @@ $$
 
 ## Frame of reference: Random sampling only
 
-In this section we focus on using simulations to establish a frame of reference for interpretting the variance ratio when random sampling is the only reason sample means differ from each other.
+In this section we focus on using simulations to establish a frame of reference for interpreting the variance ratio in a scenario where random sampling is the only reason sample means differ from each other. Because random sampling is the only reasons the sample means differ both formulas are estimating the same thing. However, due to random sampling error, the the formulas may differ.
 
-### Simulation 1 population
+
+### Simulation of 1 population
 
 ```{r sim1pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from one population"}
 knitr::include_graphics("ch_deep_sampling/images/figure2.png")
@@ -449,7 +450,7 @@ The results of the 100,000 simulations are placed in the data set called data_ra
 head(data_ratios)
 ```
 
-When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2 (approach_1\_total_var_est and approach_2\_clt_est, respectively). Then we created a ratio of those two values (method_1\_var_est/method_2\_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2 (approach_1\_total_var_est and approach_2\_clt_est, respectively). Then we created a ratio of those two values (approach_1\_var_est/approach_2\_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -464,7 +465,15 @@ knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 
 Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
 
-Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph1pop), you can see the range of values that occur with this ratio. This
+**Graphing the ratios.** Although each estimate was **on average correct**, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. Due to random sampling error on some trials the numerator of the ratio was larger and on other trials the denominator of the ratio was larger. As a result, on some trials the ratio was larger than 1.0 and on other trials the ratio was smaller than 1.0.
+
+Below I present a graph of these ratios, Figure \@ref(fig:graph1pop). You can see there is a wide range of ratio that occur. Note that this is shape of the distributions when we have:
+
+a) A single population - so sampling error is the only reason means differ
+b) Total variance estimate is based on 3 sample means (i.e., $a-1$ degrees)
+c) Sampling error variance estimate created using a population of people variance estimate dervied from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
+
+This type of graph is helpful, because it allows us to understand, when these conditions are true, the range of ratio values that can occur. FYI - as we'll discuss more later, this is an **F-ratio**.
 
 ```{r graph1pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when  there is one population of people"}
 library(ggplot2)
@@ -480,7 +489,7 @@ ggplot(data = data_ratios, mapping = aes(x = var_ratio)) +
 
 This graph illustrates the range of ratio values that can occur when there is a single population when we use 3 samples, $a =3$, and a sample size of 5, $n = 5$.  More formally, there are 2, $(a -1)$, and 12, $a(n-1)$, degrees of freedom.
 
-### Simulation 3 identical populations
+### Simulation of 3 identical populations
 
 
 ```{r sim3pop, out.width = "100%", echo=FALSE, fig.cap= "Sampling from three populations with the same mean (and variance)"}
@@ -496,7 +505,7 @@ knitr::include_graphics("ch_deep_sampling/images/figure3.png")
 | 3          | $\mu_{A3_{people}}= 172.50$ |  $\sigma_{A3_{people}}^2= 156.3236$ |
 
 
-In this section, instead of using one population, we use three identical populations. We also introduce the captial letter $A$ to indicate the number of populations. We continue to use the little letter $a$ to represent the number of samples. Typically, $A = a$. That is we use $A =3$ when indicating there are three populations. In contrast, we use $a=3$ when we are indicating we have three sample means (one from each population).
+In this section, instead of using one population, we use three identical populations. That is, $a = 3$. We use $A1$, $A2$, and $A3$ to refer to these three identical populations.
 
 You will see in this section that when you have three identical populations of people, see Figure \@ref(fig:sim3pop), that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
 
@@ -546,7 +555,16 @@ knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 
 Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
 
-Although each estimate was on average correct, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. In the graph below, Figure \@ref(fig:graph3pop), you can see the range of values that occur with this ratio.
+**Graphing the ratios.** Although each estimate was **on average correct**, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. Due to random sampling error on some trials the numerator of the ratio was larger and on other trials the denominator of the ratio was larger. As a result, on some trials the ratio was larger than 1.0 and on other trials the ratio was smaller than 1.0.
+
+Below I present a graph of these ratios, Figure \@ref(fig:graph3pop). You can see there is a wide range of ratio that occur. Note that this is shape of the distributions when we have:
+
+a) Three identical population - so sampling error is the only reason means differ
+b) Total variance estimate is based on 3 sample means (i.e., $a-1$ degrees)
+c) Sampling error variance estimate created using a population of people variance estimate dervied from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
+
+This type of graph is helpful, because it allows us to understand, when these conditions are true, the range of ratio values that can occur. Again remember, these are called **F-ratios**.
+
 
 ```{r graph3pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when there are three identical populations of people"}
 library(ggplot2)
