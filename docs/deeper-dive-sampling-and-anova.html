@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-08-03" />
+<meta name="date" content="2022-08-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -529,7 +529,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html"><i class="fa fa-check"></i><b>15</b> Deeper dive: Sampling and ANOVA</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#previously-equal-population-means"><i class="fa fa-check"></i><b>15.1</b> Previously: Equal Population Means</a></li>
+<li class="chapter" data-level="15.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#now-different-population-means"><i class="fa fa-check"></i><b>15.1</b> Now: Different Population Means</a></li>
 <li class="chapter" data-level="15.2" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance"><i class="fa fa-check"></i><b>15.2</b> Theory sample mean variance</a>
 <ul>
 <li class="chapter" data-level="15.2.1" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#single-population-theory"><i class="fa fa-check"></i><b>15.2.1</b> Single population (theory)</a></li>
@@ -787,15 +787,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="deeper-dive-sampling-and-anova" class="section level1 hasAnchor" number="15">
 <h1><span class="header-section-number">Chapter 15</span> Deeper dive: Sampling and ANOVA<a href="deeper-dive-sampling-and-anova.html#deeper-dive-sampling-and-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="previously-equal-population-means" class="section level2 hasAnchor" number="15.1">
-<h2><span class="header-section-number">15.1</span> Previously: Equal Population Means<a href="deeper-dive-sampling-and-anova.html#previously-equal-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the last chapter, we examined the scenario where there was distribution of sample means where the sample means differed due to random sampling only. In this chapter, examine the scenario with multiple populations where the population means are different. We specifically focus on the variance of the distribution of sample means because that is theoretical foundation for Analysis of Variance (ANOVA). We begin, however, in the simple situation of a single population.</p>
+<div id="now-different-population-means" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Now: Different Population Means<a href="deeper-dive-sampling-and-anova.html#now-different-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance and b) random sampling variance were estimates of the <strong>same</strong> quantity.</p>
+<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error. This means the formulas for a) total variance and b) random sampling variance are estimates of <strong>different</strong> quantities.</p>
 </div>
 <div id="theory-sample-mean-variance" class="section level2 hasAnchor" number="15.2">
 <h2><span class="header-section-number">15.2</span> Theory sample mean variance<a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="single-population-theory" class="section level3 hasAnchor" number="15.2.1">
 <h3><span class="header-section-number">15.2.1</span> Single population (theory)<a href="deeper-dive-sampling-and-anova.html#single-population-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Recall that when there is a single population we express the variance in sample means using the formula below. This formula is conceptual one that calculates the variance in sample means due to sampling error for a given population variance and sample size.</p>
+<p>Although the focus of this chapter is multiple populations, we begin with a single population. Recall that when there is a single population we express the variance in sample means using the formula below. This formula is conceptual one that calculates the variance in sample means due to sampling error for a given population variance and sample size.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error}\\
