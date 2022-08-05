@@ -549,7 +549,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.5" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#calculation-1"><i class="fa fa-check"></i><b>15.5</b> Calculation</a></li>
 <li class="chapter" data-level="15.6" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#a-confusing-rearrangement"><i class="fa fa-check"></i><b>15.6</b> A confusing rearrangement</a></li>
 <li class="chapter" data-level="15.7" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#worked-example"><i class="fa fa-check"></i><b>15.7</b> Worked example</a></li>
-<li class="chapter" data-level="15.8" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#summary"><i class="fa fa-check"></i><b>15.8</b> Summary</a></li>
+<li class="chapter" data-level="15.8" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#p-value"><i class="fa fa-check"></i><b>15.8</b> p-value</a></li>
+<li class="chapter" data-level="15.9" data-path="deeper-dive-sampling-and-anova.html"><a href="deeper-dive-sampling-and-anova.html#summary"><i class="fa fa-check"></i><b>15.9</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="sampling-and-n-way-anova-under-construction.html"><a href="sampling-and-n-way-anova-under-construction.html"><i class="fa fa-check"></i><b>16</b> Sampling and N-way ANOVA [Under Construction]</a>
 <ul>
@@ -1169,7 +1170,8 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <p>Conceptually, an <span class="math inline">\(F\)</span>-value represents the comparison of these two approaches:</p>
 <p><span class="math display">\[
 \begin{aligned}
-F &amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
+F &amp;= \frac{\text{total variance}}{\text{variance due to sampling error}}\\
+&amp;= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
 &amp;= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 \]</span></p>
@@ -1197,7 +1199,7 @@ s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
 <p>Consequently, in practice we calculate <span class="math inline">\(F\)</span>-values using the equation below.</p>
 <p><span class="math display">\[
 \begin{aligned}
-F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
+F &amp;= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
 \end{aligned}
 \]</span></p>
 <div class="figure"><span style="display:block;" id="fig:formulamap"></span>
@@ -1209,7 +1211,7 @@ FIGURE 15.3: Linking conceptual and calculation formulas for the F-value.
 </div>
 <div id="a-confusing-rearrangement" class="section level2 hasAnchor" number="15.6">
 <h2><span class="header-section-number">15.6</span> A confusing rearrangement<a href="deeper-dive-sampling-and-anova.html#a-confusing-rearrangement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Unfortunately, most textbooks don’t present <span class="math inline">\(F\)</span>-values in the conceptually easy to follow way presented above. Instead, they use the algebraic rearrangement presented below. The rearrangement is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when the rearrangement is used - it’s hard to understand the equation.</p>
+<p>Unfortunately, most textbooks don’t present <span class="math inline">\(F\)</span>-values in the conceptually easy to follow way presented above. Instead, they use the algebraic rearrangement presented below. The rearrangement is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when the rearrangement is used - it’s hard to understand the equation. Below we show the <strong>conceptual</strong> rearrangement of the formula (i.e., the rearrangement of the expected values).</p>
 <p><span class="math display">\[
 \begin{aligned}
 F &amp;= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}*1\\
@@ -1311,7 +1313,7 @@ F &amp;= \frac{ \frac{(n)\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{
 &amp;= 77.72\\
 \end{aligned}
 \]</span></p>
-<p>Below we see this formula mapped to the <span class="math inline">\(F\)</span>-table:</p>
+<p>Below we see this formula mapped to the <span class="math inline">\(F\)</span>-table. Pay attention to the <strong>feedback</strong> line of this table.</p>
 <div class="figure"><span style="display:block;" id="fig:ftablelabeled"></span>
 <img src="ch_deeper_sampling/images/ftable_desc.png" alt="Mapping formulas to the F-table." width="100%" />
 <p class="caption">
@@ -1319,8 +1321,29 @@ FIGURE 15.4: Mapping formulas to the F-table.
 </p>
 </div>
 </div>
-<div id="summary" class="section level2 hasAnchor" number="15.8">
-<h2><span class="header-section-number">15.8</span> Summary<a href="deeper-dive-sampling-and-anova.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="p-value" class="section level2 hasAnchor" number="15.8">
+<h2><span class="header-section-number">15.8</span> p-value<a href="deeper-dive-sampling-and-anova.html#p-value" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Notice on the <strong>feedback</strong> line of the output that the <span class="math inline">\(p-value\)</span> is very small <span class="math inline">\(p&lt;.001\)</span>. How did we obtain this value?</p>
+<p>The F-value is obtained by creating a simulation where there is no effect. We do as we did in the last chapter. First, we assume the population means were identical. Second, we assume the population variances are identical. Third, we imagine taking three samples (<span class="math inline">\(a = 3\)</span>), one for each population, each <span class="math inline">\(n = 5\)</span>. Fourth, we imagine creating an F-value from the data. Fifth, we imagine repeating this process a large number of times. The results is the distribution of F-values that you would obtain if there was no effect. Then we see how the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) fits into this distribution.</p>
+<p>In the previous chapter, we created this exact distribution. See it presented again below. Notice the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) can’t fit on this axis range.</p>
+<div class="figure"><span style="display:block;" id="fig:graph3pop"></span>
+<img src="bookdown_files/figure-html/graph3pop-1.png" alt="Variance ratio when there are three identical populations of people" width="100%" />
+<p class="caption">
+FIGURE 15.5: Variance ratio when there are three identical populations of people
+</p>
+</div>
+<p>So we make the graph again, with a wider x-axis. Now we can see the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) is quite unlikely when the means and variances for the three populations are all the same. The F-value from our study is indicated by the vertical red line.</p>
+<div class="figure"><span style="display:block;" id="fig:graph3popnewaxis"></span>
+<img src="bookdown_files/figure-html/graph3popnewaxis-1.png" alt="Next axes: variance ratio when there are three identical populations of people" width="100%" />
+<p class="caption">
+FIGURE 15.6: Next axes: variance ratio when there are three identical populations of people
+</p>
+</div>
+<p>Because the red line is so extreme, our <span class="math inline">\(p-value\)</span> is very low <span class="math inline">\(p&lt;.0001\)</span>. <strong>This is the probability of our data (or more extreme data), assuming the population means are all the same.</strong></p>
+<p>Consequently, we say the ANOVA is significant. That is, we begin by assuming the population means are all the same, our find our study result is incredibly unlikely. Consequently, we reject the assumption, that the population means are all the same.</p>
+</div>
+<div id="summary" class="section level2 hasAnchor" number="15.9">
+<h2><span class="header-section-number">15.9</span> Summary<a href="deeper-dive-sampling-and-anova.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="13%" />

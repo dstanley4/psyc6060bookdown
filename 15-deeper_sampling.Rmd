@@ -381,7 +381,8 @@ Conceptually, an $F$-value represents the comparison of these two approaches:
 
 $$
 \begin{aligned} 
-F &= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
+F &= \frac{\text{total variance}}{\text{variance due to sampling error}}\\
+&= \frac{\text{variance due to sampling error} + \text{variance in population means}}{\text{variance due to sampling error}}\\
 &= \frac{\frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2}{\frac{\sigma_{people}^2}{n}}\\
 \end{aligned}
 $$
@@ -416,7 +417,7 @@ Consequently, in practice we calculate $F$-values using the equation below.
 
 $$
 \begin{aligned} 
-F = \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
+F &= \frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}
 \end{aligned}
 $$
 
@@ -427,7 +428,7 @@ knitr::include_graphics("ch_deeper_sampling/images/screenshot_formula_map.png")
 
 ## A confusing rearrangement
 
-Unfortunately, most textbooks don't present $F$-values in the conceptually easy to follow way presented above. Instead, they use the algebraic rearrangement presented below. The rearrangement is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when the rearrangement is used - it's hard to understand the equation.
+Unfortunately, most textbooks don't present $F$-values in the conceptually easy to follow way presented above. Instead, they use the algebraic rearrangement presented below. The rearrangement is important, however, because it is the basis for how information is presented in an ANOVA table. Unfortunately, when the rearrangement is used - it's hard to understand the equation. Below we show the **conceptual** rearrangement of the formula (i.e., the rearrangement of the expected values).
 
 $$
 \begin{aligned} 
@@ -518,11 +519,55 @@ F &= \frac{ \frac{(n)\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{s_{p
 \end{aligned}
 $$
 
-Below we see this formula mapped to the $F$-table:
+Below we see this formula mapped to the $F$-table. Pay attention to the **feedback** line of this table.
 
 ```{r ftablelabeled, out.width = "100%", echo=FALSE, fig.cap= "Mapping formulas to the F-table."}
 knitr::include_graphics("ch_deeper_sampling/images/ftable_desc.png")
 ```
+
+## p-value
+
+Notice on the **feedback** line of the output that the $p-value$ is very small $p<.001$. How did we obtain this value?
+
+The F-value is obtained by creating a simulation where there is no effect. We do as we did in the last chapter. First, we assume the population means were identical. Second, we assume the population variances are identical. Third, we imagine taking three samples ($a = 3$), one for each population, each $n = 5$. Fourth, we imagine creating an F-value from the data. Fifth, we imagine repeating this process a large number of times. The results is the distribution of F-values that you would obtain if there was no effect. Then we see how the F-value from our study ($F = 77.72$) fits into this distribution. 
+
+In the previous chapter, we created this exact distribution. See it presented again below. Notice the F-value from our study ($F = 77.72$) can't fit on this axis range.
+
+```{r, eval = TRUE, echo = FALSE}
+load(file = "ch_deep_sampling/data_ratio_3pop.RData")
+```
+
+```{r graph3pop, out.width="100%", echo=FALSE, fig.cap ="Variance ratio when there are three identical populations of people"}
+library(ggplot2)
+
+ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
+  geom_histogram(breaks = seq(0, 10, by = .5)) +
+  scale_x_continuous(breaks = seq(0,10, by = .5)) +
+  coord_cartesian(xlim = c(0,10), ylim = c(0, 40000)) +
+  xlab("Variance Ratio: (approach_1_total_var / approach_2_clt)") +
+  ylab("Frequency") +
+  theme_classic()
+```
+
+So we make the graph again, with a wider x-axis. Now we can see the F-value from our study ($F = 77.72$) is quite unlikely when the means and variances for the three populations are all the same. The F-value from our study is indicated by the vertical red line.
+
+```{r graph3popnewaxis, out.width="100%", echo=FALSE, fig.cap ="Next axes: variance ratio when there are three identical populations of people"}
+library(ggplot2)
+
+ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
+  geom_histogram(breaks = seq(0, 10, by = .5)) +
+  geom_vline(xintercept = 77.72, color = "red", size = 1) +
+  scale_x_continuous(breaks = seq(0,80, by = 5)) +
+  coord_cartesian(xlim = c(0,80), ylim = c(0, 40000)) +
+  xlab("Variance Ratio: (approach_1_total_var / approach_2_clt)") +
+  ylab("Frequency") +
+  theme_classic()
+```
+
+Because the red line is so extreme, our $p-value$ is very low $p<.0001$. **This is the probability of our data (or more extreme data), assuming the population means are all the same.**
+
+Consequently, we say the ANOVA is significant. That is, we begin by assuming the population means are all the same, our find our study result is incredibly unlikely. Consequently, we reject the assumption, that the population means are all the same.
+
 
 
 ##  Summary
