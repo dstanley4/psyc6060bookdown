@@ -533,7 +533,7 @@ In mathematical terms we say the Expected Mean Square is:
 
 $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{nb} +  \sigma_{\mu_A}^2$
 
-### Calculating the F-value for $A$
+#### Calculating the F-value for $A$
 
 Recall that we now have two estimates for the variability in juggling means.
 
@@ -565,7 +565,7 @@ This estimate tells us that, with these data, the **estimated** total variance i
 
 We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{A}^2=0$)
 
-
+#### $A$ conceptual (juggling)
 
   Juggling| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
@@ -574,8 +574,19 @@ Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sig
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{                  \frac{s_{people}^2}{nb}}$ |  $\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{    \frac{\sigma_{people}^2}{nb}}$ | $[(a-1),ab(n-1)]=[1,24]$
 
 
+#### $A$ typical (juggling)
+
+  Juggling| Formula | Expected value | degrees of feedom |
+:--------------:|:--------------:|:------------------:|:---------------:|
+Sample size multiplied by estimated total variance| $\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}$ |$\sigma_{people}^2 + nb \sigma_{A}^2$ | $(a-1) = 1$
+Estimated population variance | $s_{people}^2 =MSE= 60.0$ |$\sigma_{people}^2$ | $ab(n-1) = 24$
+Comparison using $F$-ratio | $\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}$ | $(a-1) = 1$      | $[(a-1),ab(n-1)]=[1,24]$
 
 ### Means $B$: Preparation 
+
+#### Calculating the F-value for $B$
+
+#### $B$ conceptual (preparation)
 
 Preparation| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
@@ -583,10 +594,18 @@ Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}$ |$\frac
 Estimated variance sampling error | $\frac{s_{people}^2}{na} = ?$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1) = 24$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{                  \frac{s_{people}^2}{na}}$ |  $\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{    \frac{\sigma_{people}^2}{na}}$ | $[(b-1),ab(n-1)]=[2,24]$
 
+#### $B$ typical (preparation)
+
+  Juggling| Formula | Expected value | degrees of feedom |
+:--------------:|:--------------:|:------------------:|:---------------:|
+Sample size multiplied by estimated total variance| $\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1) = 2$
+Estimated population variance | $s_{people}^2 =MSE= 60.0$ |$\sigma_{people}^2$ | $ab(n-1) = 24$
+Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $(b-2) = 1$      | $[(b-1),ab(n-1)]=[2,24]$
 
 ## Interaction variance
 
-### Subtract $A$ marginal means
+### Obtaining residualized means
+#### Subtract $A$ marginal means
 
  Effect  | low_prep  | medium_prep| high_prep| 
 :-------:|:---------:|:----------:|:-----:|
@@ -594,7 +613,7 @@ yes_juggle| $`r xbar1` - `r round(mean_a1,2)` = `r round(ra1,2)`$ | $`r xbar2` -
 no_juggle| $`r xbar4` - `r mean_a2` = `r round(ra4,2)`$ | $`r xbar5` - `r mean_a2` = `r round(ra5,2)`$ | $`r xbar6` - `r mean_a2` = `r round(ra6,2)`$ | 
 
 
-### Subtract $B$ marginal means
+#### Subtract $B$ marginal means
 
  Effect  | low_prep  | medium_prep| high_prep| 
 :-------:|---------|----------|-----|
@@ -602,17 +621,14 @@ yes_juggle | $`r round(ra1,2)` - `r round(mean_b1,2)` = `r round(rb1,2)`$ | $`r 
 no_juggle | $`r round(ra4,2)` - `r round(mean_b1,2)` = `r round(rb4,2)`$ | $`r round(ra5,2)` - `r round(mean_b2,2)` = `r round(rb5,2)`$ | $`r round(ra6,2)` - `r round(mean_b3,2)` = `r round(rb6,2)`$ |
 
 
-### Add grand mean
+#### Add grand mean
 
  Effect  | low_prep  | medium_prep| high_prep| 
 :-------:|--------|----------|-----|
 yes_juggle | $`r round(rb1,2)` + `r round(mean_grand,2)` = `r round(rg1,2)`$ | $`r round(rb2,2)` + `r round(mean_grand,2)` = `r round(rg2,2)`$ | $`r round(rb3,2)` + `r round(mean_grand,2)` = `r round(rg3,2)`$ |
 no_juggle | $`r round(rb4,2)` + `r round(mean_grand,2)` = `r round(rg4,2)`$ | $`r round(rb5,2)` + `r round(mean_grand,2)` = `r round(rg5,2)`$ | $`r round(rb6,2)` + `r round(mean_grand,2)` = `r round(rg6,2)`$ |
 
-
-
-
-### Final residualized means
+#### Final residualized means
 
  Effect  | low_prep  | medium_prep| high_prep| 
 :-------:|---------|---------|----|
@@ -643,22 +659,23 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 \end{align}
 
 
+#### $AB$ conceptual (interaction)
 
-### Juggling Typical
+Preparation| Formula | Expected value | degrees of feedom |
+:--------------:|:--------------:|:------------------:|:---------------:|
+Estimated total variance | $\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}$ |$\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2$ | $(a-1)(b-1)$
+Estimated variance sampling error | $\frac{s_{people}^2}{n}$ |$\frac{\sigma_{people}^2}{n}$ | $ab(n-1)$
+Comparison using $F$-ratio |$\frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{                  \frac{s_{people}^2}{n}}$  |  $\frac{\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2}{    \frac{\sigma_{people}^2}{n}}$ | $[(a-1)(b-1),ab(n-1)]$
+
+#### $B$ typical (interaction)
 
   Juggling| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Sample size multiplied by estimated total variance| $\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}$ |$\sigma_{people}^2 + nb \sigma_{A}^2$ | $(a-1) = 1$
-Estimated population variance | $s_{people}^2 =MSE= 60.0$ |$\sigma_{people}^2$ | $ab(n-1) = 24$
-Comparison using $F$-ratio | $\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}$ | $(a-1) = 1$      | $[(a-1),ab(n-1)]=[1,24]$
+Sample size multiplied by estimated total variance| $\frac{n\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}$ |$\sigma_{people}^2 + n \sigma_{AB}^2$ | $(a-1)(b-1)$
+Estimated population variance | $s_{people}^2$ |$\sigma_{people}^2$ | $ab(n-1)$
+Comparison using $F$-ratio | $\frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + n \sigma_{AB}^2}{\sigma_{people}^2}$ | $[(a-1)(b-1),ab(n-1)]$
 
 
-### Preparation Typical
 
-  Juggling| Formula | Expected value | degrees of feedom |
-:--------------:|:--------------:|:------------------:|:---------------:|
-Sample size multiplied by estimated total variance| $\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1) = 2$
-Estimated population variance | $s_{people}^2 =MSE= 60.0$ |$\sigma_{people}^2$ | $ab(n-1) = 24$
-Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $(b-2) = 1$      | $[(b-1),ab(n-1)]=[2,24]$
 
 
