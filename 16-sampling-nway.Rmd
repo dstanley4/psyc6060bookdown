@@ -182,6 +182,7 @@ var5 = var(x5)
 var6 = var(x6)
 
 var_all = c(var1, var2, var3, var4, var5, var6)
+mse = mean(var_all)
 
 mean_a1 = mean(c(x1, x2, x3))
 mean_a2 = mean(c(x4, x5, x6))
@@ -199,6 +200,29 @@ mean_b2s = sprintf("%1.2f", mean_b2)
 mean_b3s = sprintf("%1.2f", mean_b3)
 mean_grands = sprintf("%1.2f", mean_grand)
 
+
+ra1 = xbar1 - mean_a1
+ra2 = xbar2 - mean_a1
+ra3 = xbar3 - mean_a1
+ra4 = xbar4 - mean_a2
+ra5 = xbar5 - mean_a2
+ra6 = xbar6 - mean_a2
+
+rb1 = ra1 - mean_b1
+rb2 = ra2 - mean_b2
+rb3 = ra3 - mean_b3
+rb4 = ra4 - mean_b1
+rb5 = ra5 - mean_b2
+rb6 = ra6 - mean_b3
+
+rg1 = rb1 + mean_grand
+rg2 = rb2 + mean_grand
+rg3 = rb3 + mean_grand
+rg4 = rb4 + mean_grand
+rg5 = rb5 + mean_grand
+rg6 = rb6 + mean_grand
+
+all_res = c(rg1, rg2, rg3, rg4, rg5, rg6)
 ```
 
 ### Sample means
@@ -562,11 +586,62 @@ Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}
 
 ## Interaction variance
 
-### Cell means vs. marginal means
+### Subtract $A$ marginal means
 
-### Residual means
+ Effect  | low_prep  | medium_prep| high_prep| 
+:-------:|:---------:|:----------:|:-----:|
+yes_juggle| $`r xbar1` - `r round(mean_a1,2)` = `r round(ra1,2)`$ | $`r xbar2` - `r round(mean_a1,2)` = `r round(ra2,2)`$ |  $`r xbar3` - `r round(mean_a1,2)` = `r round(ra3,2)`$ | 
+no_juggle| $`r xbar4` - `r mean_a2` = `r round(ra4,2)`$ | $`r xbar5` - `r mean_a2` = `r round(ra5,2)`$ | $`r xbar6` - `r mean_a2` = `r round(ra6,2)`$ | 
 
-### Variance of residual means
+
+### Subtract $B$ marginal means
+
+ Effect  | low_prep  | medium_prep| high_prep| 
+:-------:|---------|----------|-----|
+yes_juggle | $`r round(ra1,2)` - `r round(mean_b1,2)` = `r round(rb1,2)`$ | $`r round(ra2,2)` - `r round(mean_b2,2)` = `r round(rb2,2)`$ |  $`r round(ra3,2)` - `r round(mean_b3,2)` = `r round(rb3,2)`$|
+no_juggle | $`r round(ra4,2)` - `r round(mean_b1,2)` = `r round(rb4,2)`$ | $`r round(ra5,2)` - `r round(mean_b2,2)` = `r round(rb5,2)`$ | $`r round(ra6,2)` - `r round(mean_b3,2)` = `r round(rb6,2)`$ |
+
+
+### Add grand mean
+
+ Effect  | low_prep  | medium_prep| high_prep| 
+:-------:|--------|----------|-----|
+yes_juggle | $`r round(rb1,2)` + `r round(mean_grand,2)` = `r round(rg1,2)`$ | $`r round(rb2,2)` + `r round(mean_grand,2)` = `r round(rg2,2)`$ | $`r round(rb3,2)` + `r round(mean_grand,2)` = `r round(rg3,2)`$ |
+no_juggle | $`r round(rb4,2)` + `r round(mean_grand,2)` = `r round(rg4,2)`$ | $`r round(rb5,2)` + `r round(mean_grand,2)` = `r round(rg5,2)`$ | $`r round(rb6,2)` + `r round(mean_grand,2)` = `r round(rg6,2)`$ |
+
+
+
+
+### Final residualized means
+
+ Effect  | low_prep  | medium_prep| high_prep| 
+:-------:|---------|---------|----|
+yes_juggle | $`r round(rg1,2)`$ | $`r round(rg2,2)`$ | $`r round(rg3,2)`$ |
+no_juggle | $`r round(rg4,2)`$ |  $`r round(rg5,2)`$ | $`r round(rg6,2)`$ |
+
+
+$$
+s_{residual}^2 = \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}
+$$
+
+\begin{align}
+s_{residual}^2 &= \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}\\
+&= \frac{(`r round(rg1,2)` - 0)^2 + (`r round(rg2,2)` - 0)^2 + (`r round(rg3,2)` - 0)^2 + (`r round(rg4,2)` - 0)^2 + (`r round(rg5,2)` - 0)^2 + (`r round(rg6,2)` - 0)^2}{(2-1)(3-1)} \\
+&= \frac{(`r round(rg1,2)`)^2 + (`r round(rg2,2)`)^2 + (`r round(rg3,2)`)^2 + (`r round(rg4,2)`)^2 + (`r round(rg5,2)`)^2 + (`r round(rg6,2)`)^2}{(2-1)(3-1)} \\
+&= \frac{)^2}{2} \\
+&= \frac{`r round(sum(all_res^2),2)`}{2}
+&= 53.92667
+\end{align}
+
+Now F-value:
+
+\begin{align}
+F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
+&= \frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{\frac{s_{people}^2}{n}}\\
+&= \frac{53.92667}{\frac{60}{5}}\\
+&=  4.49\\
+\end{align}
+
 
 
 ### Juggling Typical
