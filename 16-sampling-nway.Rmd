@@ -555,7 +555,9 @@ We calculate an F-value to compare these two values:
 $$
 \begin{align}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
-&=  \frac{231.8422}{4}\\
+&=\frac{231.8422}{\frac{60}{(5)(3)}}\\
+&=\frac{231.8422}{\frac{60}{15}}\\
+&=\frac{231.8422}{4}\\
 &= 57.96\\
 \end{align}
 $$
@@ -575,6 +577,34 @@ Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}
 
 
 #### $A$ typical (juggling)
+
+But this formula is typically rearranged in ANOVA output - due to the fact in the old days it made hand calculations somewhat easier. This typical rearrangement does obscure the conceptual meaning of the calculation though. But it is relatively simply algebra (see below). Note, the F-value does not change.
+
+
+$$
+\begin{align}
+F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times 1\\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times \frac{nb}{nb}\\
+&= \frac{nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}\\
+&=  \frac{(5)(3)(231.8422)}{60}\\
+&=  \frac{(15)(231.8422)}{60}\\
+&=  \frac{3477.633}{60}\\
+&= 57.96\\
+\end{align}
+$$
+
+From this rearrangment we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above.
+
+$MS_{juggling} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}$
+
+and 
+
+$MSE = s_{people}^2$
+
+
+Summarized below:
+
 
   Juggling| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
