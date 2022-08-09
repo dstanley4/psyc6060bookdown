@@ -596,11 +596,11 @@ $$
 
 From this rearrangment we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above.
 
-$MS_{juggling} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}$
+$MS_{juggling} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1} = 3477.633$
 
 and 
 
-$MSE = s_{people}^2$
+$MSE = s_{people}^2 = 60.0$
 
 
 Summarized below:
@@ -614,23 +614,144 @@ Comparison using $F$-ratio | $\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1
 
 ### Means $B$: Preparation 
 
-#### Calculating the F-value for $B$
+Let's look at the other independent variable: preparation. As before, we might wonder if there is an effect of preparation on calmness scores ignoring the effect of juggling. Said another way, we might wonder if the means of the three preparation populations (low [$\mu_{B1}$], medium [$\mu_{B2}$], high [$\mu_{B3}$]) are different from each other. We examine this question by looking the variance in the population means. If we knew the population means we could:
+
+1) Calculate the grand mean (i.e., $\mu_B$). That is, the mean of the three preparation population means. Recall because there are three levels of preparation (i.e., three populations), $b = 3$. Note that this is the same as the taking the mean of **all participants from the three populations** (assuming equal population sizes). 
+
+$$
+\begin{align}
+\text{Grand mean} = \mu_B &= \frac{\sum\mu_{B_i}}{b} \\
+&= \frac{\mu_{B_1}+\mu_{B_2}+\mu_{B_3}}{3}\\
+&= \frac{? + ? + ?}{3}
+\end{align}
+$$
+
+But, as the question marks clearly illustrate - we  don't know the population means. We don't have everyone in the population. But if we did have the population means we could proceed as below.
+
+
+2) Use the grand mean to calculate the variance in the means:
+
+$$
+\begin{aligned} 
+\sigma_{\mu_B}^2 &=  \frac{\sum (\mu_{B_i}-\mu_{\mu_B})^2}{b} \\
+&=  \frac{(\mu_{B_1} - \mu_{\mu_B})^2 + (\mu_{B_2} - \mu_{\mu_B})^2 (\mu_{B_3} - \mu_{\mu_B})^2}{3} \\
+&=  ?\\
+\end{aligned}
+$$
+
+As with the grand mean, we can't calculate this population level information.
+
+So we need to rely upon sample-level information to estimate the the variability in population means.  You can check out the sample-level means in the diagram below. As we discussed previously. For the $B$ independent variable, these means have a sample size of $10$.
+
+INSERT DIAGRAM HERE
+
+1) We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using $\bar{bar{bar}}$. There are two bars about the $x$ to indicate that it is the mean of means. **Note that this "grand mean" of particpants is the same as taking the mean of all participants (assuming equal cell sizes).**
+
+$$
+\begin{align}
+\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{B_i}}{b} \\
+&= \frac{\bar{x}_{B_1}+\bar{x}_{B_2} +\bar{x}_{B_3} }{3}\\
+&= \frac{65.4 + 62.6 + 71.7}{3} \\
+&= 66.56667\\
+\end{align}
+$$
+
+2) Now estimate the total variance in populations means:
+
+$$
+\begin{aligned} 
+s_{\mu_A}^2 &=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
+&=  \frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1} \\
+&=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{2-1} \\
+&= 21.72333
+\end{aligned}
+$$
+
+When you estimate the variance is sample means this way (using the total variance formula) the number you obtain will reflect two things.
+
+1) Random sampling error variance: $\frac{\sigma_{people}^2}{na}$
+2) The variance of the population means $\sigma_{\mu_B}^2$
+
+In mathematical terms we say the Expected Mean Square is:
+
+$\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} +  \sigma_{\mu_B}^2$
+
+#### Calculating the F-value for $A$
+
+Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
+
+1) In the section immediately above, we obtained a variance $\frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1}=21.72333$. This value reflects random sampling error variance and the variance of the population mean.
+
+2) Previously, we obtained a variance of estimate of $\frac{s_{people}^2}{na} = 6.0$. This value reflects random sampling variance only.
+
+These two values are summarized in the table below.
+
+
+  Juggling| Formula | Expected value | degrees of feedom |
+:--------------:|:--------------:|:------------------:|:---------------:|
+Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333$ |$\frac{\sigma_{people}^2}{na} + \sigma_{B}^2$ | $(b-1) = 2$
+Estimated variance sampling error | $\frac{s_{people}^2}{na} = 6.0$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1) = 24$
+
+
+We calculate an F-value to compare these two values:
+
+$$
+\begin{align}
+F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+&=\frac{21.72333}{\frac{60}{(5)(2)}}\\
+&=\frac{21.72333}{\frac{60}{10}}\\
+&=\frac{21.72333}{6}\\
+&= 3.62\\
+\end{align}
+$$
+
+
+This estimate tells us that, with these data, the **estimated** total variance is preparation means is 3.62 times larger than than we would **estimate** due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word **estimate(d)** in the previous sentances. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.
+
+We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{B}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = .042$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = .042$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.
 
 #### $B$ conceptual (preparation)
 
 Preparation| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}$ |$\frac{\sigma_{people}^2}{na} + \sigma_{B}^2$ | $(b-1)$
-Estimated variance sampling error | $\frac{s_{people}^2}{na}$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1)$
-Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{                  \frac{s_{people}^2}{na}}$ |  $\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{    \frac{\sigma_{people}^2}{na}}$ | $[(b-1),ab(n-1)$
+Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333$ |$\frac{\sigma_{people}^2}{na} + \sigma_{B}^2$ | $(b-1)$
+Estimated variance sampling error | $\frac{s_{people}^2}{na}=6.0$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1)$
+Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{                  \frac{s_{people}^2}{na}} = \frac{21.72333}{6.0}=3.62$ |  $\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{    \frac{\sigma_{people}^2}{na}}$ | $[(b-1),ab(n-1)$
 
 #### $B$ typical (preparation)
 
-  Juggling| Formula | Expected value | degrees of feedom |
+But this formula is typically rearranged in ANOVA output - due to the fact in the old days it made hand calculations somewhat easier. This typical rearrangement does obscure the conceptual meaning of the calculation though. But it is relatively simply algebra (see below). Note, the F-value does not change.
+
+
+$$
+\begin{align}
+F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times \frac{na}{na}\\
+&= \frac{na\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\\
+&=  \frac{(5)(2)(231.8422)}{60}\\
+&=  \frac{(10)(21.72333)}{60}\\
+&=  \frac{217.2333}{60}\\
+&= 3.62\\
+\end{align}
+$$
+
+From this rearrangment we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above.
+
+$MS_{preparation} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1} = 217.2333$
+
+and 
+
+$MSE = s_{people}^2 = 60.0$
+
+
+Summarized below:
+
+  Preparation| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Sample size multiplied by estimated total variance| $\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1)$
-Estimated population variance | $s_{people}^2$ |$\sigma_{people}^2$ | $ab(n-1)$
-Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $[(b-1),ab(n-1)]$
+Sample size multiplied by estimated total variance| $\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}= 217.2333$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1)$
+Estimated population variance | $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
+Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2} = \frac{217.2333}{60}=3.62$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $[(b-1),ab(n-1)]$
 
 ## Interaction variance
 
