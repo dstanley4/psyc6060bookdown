@@ -800,6 +800,23 @@ The final residualized cell means we use for the interaction calculation are bel
 yes_juggle | $`r round(rg1,2)`$ | $`r round(rg2,2)`$ | $`r round(rg3,2)`$ |
 no_juggle | $`r round(rg4,2)`$ |  $`r round(rg5,2)`$ | $`r round(rg6,2)`$ |
 
+### Population-level residual
+
+It's important to remember that the above table of residualized cell means is a table of **sample-level** residualized means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.
+
+Consider two situations, at the population-level, where:
+  1) There is no interaction, only main effects
+  2) There is an interaction
+  
+
+Imagine the population-level scenario where there is no interaction and only main effects. In this scenario, the values in the population-level cells are entirely the result of the main effects. Further imagine that we  we subtracted out the main effects -- and created population-level residualized means (as we did above, but at the population-level). In this scenario, the population-level residualized cells means would all have a value of exactly zero. That value is zero, because the only thing influence scores is the main effects and when the main effects are removed there's nothing left.
+
+In contrast, the population-level scenario where there is an interaction. In this case, when we create residualized population-level cell means, they would not all be equal to zero. That's because there is more going on than the main effects.
+
+The interpretational problem occurs when we move to the sample level. When we examine sample-level residualized cell means it's more complicated. It could be the case there is no population-level interaction. That is, all the population-level the residualized cell means are all zero. However, the the sample level, due to sampling error, the cell means are not zero. Alterantively, we could obtain non-zero sample-level residualized cell means because there is an interaction. 
+
+To help distinguish betweeen these two situations we calculate a p-value. The p-value tells us how likely we are to have sample-level cell means this large (or larger) if the population-level residualized cell means are zero. So let's go about calculating that p-value.
+
 
 #### Degrees of freedom for total variance
 
@@ -813,7 +830,7 @@ $\text{Degrees of freedom for total variance} = (a-1)(b-1)=(2-1)(3-1)=(1)(2)=2$
 
 #### Total variance
 
-We use this degrees of freedom in the total variance formula:
+We use this degrees of freedom in the total variance formula. This is the same total variance formula we've used before but adjusted to use the residualized cell means.  
 
 
 $$
@@ -851,11 +868,7 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 \end{align}
 
 
-
-
-
-
-
+We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{AB}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = 022$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = 022$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.
 
 
 
