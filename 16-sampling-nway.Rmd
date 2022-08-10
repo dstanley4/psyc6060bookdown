@@ -27,6 +27,49 @@ As mentioned previously, an advantage of conducting a 2-way ANOVA over two 1-way
 knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_design.png")
 ```
 
+## Output
+
+```{r, include=F}
+library(tidyverse)
+library(apaTables)
+```
+
+We begin by activating the packages and loading the data:
+
+```{r, warning=F, message=F}
+library(tidyverse)
+library(apaTables)
+
+nway_data = read_csv("data_crf.csv")
+
+# Turn character columns into factors
+nway_data  <- nway_data %>%
+  mutate_if(is.character, as.factor)
+```
+
+Next we conduct the analysis:
+
+```{r, warning=F, message=F}
+# set contrasts to values match SPSS
+options(contrasts = c("contr.sum", "contr.poly"))
+
+# Conduct analysis
+lm_nway <- lm(calm ~ preparation*juggling, 
+              data = nway_data)
+```
+
+Then we create the output using apaTables:
+
+```{r, eval = F}
+apa.aov.table(lm_nway, 
+              filename = "my_table.doc")
+```
+
+```{r, out.width="80%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/nway_table_clean.png")
+```
+
+
 
 
 ## Multiple frames of reference
