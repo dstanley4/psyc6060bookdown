@@ -510,7 +510,7 @@ You can see in the table above that we have estimated the variability we will se
 
 Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the $s_{people}^2$ calculation (i.e., MSE calculation). Sampling error variance is just $s_{people}^2$ (i.e., MSE) divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
 
-## Main effect variance
+## Main effect calculations
 
 ### Means $A$: Juggling
 
@@ -797,7 +797,7 @@ Sample size multiplied by estimated total variance (i.e., $MS_{preparation}$) | 
 Estimated population variance (i.e., $MSE$)| $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2} = \frac{217.2333}{60}=3.62$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $[(b-1),ab(n-1)]$
 
-## Interaction variance
+## Preparing for the interaction calculations
 
 Interaction calculations are similar to main effect calculations. However, there is a substantial amount of work we need to do before being able to do those calculations. When we say two variable **interact** to predict the dependent variable we are saying there is more going on than the two main effects. So when we seek to determine if there is an interaction we work with **residualized** cell means. That is, cell means were the main effects have been removed. That's the work we need to do before proceeding with the calculations used above. In the section below we create the residualized means. In the subsequent section we return to the familiar calculations we used for main effects.
 
@@ -843,7 +843,8 @@ The final residualized cell means we use for the interaction calculation are bel
 yes_juggle | $`r round(rg1,2)`$ | $`r round(rg2,2)`$ | $`r round(rg3,2)`$ |
 no_juggle | $`r round(rg4,2)`$ |  $`r round(rg5,2)`$ | $`r round(rg6,2)`$ |
 
-### Population-level residual
+## Interaction calculations
+
 
 It's important to remember that the above table of residualized cell means is a table of **sample-level** residualized means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.
 
