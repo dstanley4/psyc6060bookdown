@@ -796,11 +796,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="now-n-way-anova" class="section level2 hasAnchor" number="16.2">
 <h2><span class="header-section-number">16.2</span> Now: N-way ANOVA<a href="sampling-and-n-way-anova.html#now-n-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. I must stress, however, that you should probably limit the number of independent variables in you study to <strong>at most</strong> three independent variables. Cognitive psychology research has demonstrated that human beings have a <strong>very</strong> hard time wrapping their minds around the the complexity associated with four independent variables and interpreting five independent variables is practially impossible. My understanding is that, somewhat ironically, 4-way interactions are not uncommon in Cognitive psychology. Be sure to read the article below though so that you can avoid the problems associated with having too many independnet variables.</p>
+<p>In this chapter, we consider a scenario where there are multiple independent variables. We call it N-way because the N- refers to the number of independent variables. I must stress, however, that you should probably limit the number of independent variables in you study to <strong>at most</strong> three independent variables. Cognitive psychology research has demonstrated that human beings have a <strong>very</strong> hard time wrapping their minds around the the complexity associated with four independent variables and interpreting five independent variables is practically impossible. My understanding is that, somewhat ironically, 4-way interactions are not uncommon in Cognitive psychology. Be sure to read the article below though so that you can avoid the problems associated with having too many independent variables.</p>
 <p><a href="https://doi.org/10.1111/j.0956-7976.2005.00782.x">Halford, G. S., Baker, R., McCredden, J. E., &amp; Bain, J. D. (2005). How many variables can humans process?. Psychological science, 16(1), 70-76.
 Chicago.</a></p>
 <p>N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables <strong>combine</strong> to influence a dependent variable. When we look at these combined effects we are looking at an <strong>interaction</strong> (or <strong>moderation</strong>) effect.</p>
-<p>Additionally, because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, consider a ficticous example where we examine how two independent variables <strong>combine</strong> to influence how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
+<p>Additionally, because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, consider a fictitious example where we examine how two independent variables <strong>combine</strong> to influence how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
 <p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. We refer to this <strong>set</strong> of two populations (<em>yes</em> and <em>no</em> juggling) using the label <strong>juggling</strong>. Juggling is an <strong>independent variable</strong> or <strong>factor</strong> in our design. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our study as samples from these two populations.</p>
 <p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. We refer to this <strong>set</strong> of three populations (<em>low</em>, <em>medium</em>, and <em>high</em> preparation) using the label <strong>preparation</strong>. Preparation is an <em>independent variable</em> or <em>factor</em> in our design. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. We consider the participants in our study as samples from these three populations.</p>
 <p>As mentioned previously, an advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the <strong>combined</strong> effect of the two independent variables. You can see this in the diagram below - there are <strong>six cells</strong> each of which is created by the <strong>combination</strong> of one level of juggling and one level of preparation. We call this a <em>fully-crossed</em> design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables <strong>interact</strong> to influence the dependent variable. You can this of the six cells are another <strong>set</strong> of populations. We will see people that you can think of each set of populations as a frame of reference.</p>
@@ -808,7 +808,7 @@ Chicago.</a></p>
 </div>
 <div id="output" class="section level2 hasAnchor" number="16.3">
 <h2><span class="header-section-number">16.3</span> Output<a href="sampling-and-n-way-anova.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We begin by activating the packages and loading the data:</p>
+<p>We begin by creating the output for this design in R. First we activate the required packages:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sampling-and-n-way-anova.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="sampling-and-n-way-anova.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb1-3"><a href="sampling-and-n-way-anova.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -824,10 +824,11 @@ Chicago.</a></p>
 <span id="cb2-4"><a href="sampling-and-n-way-anova.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
 <span id="cb2-5"><a href="sampling-and-n-way-anova.html#cb2-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
 <span id="cb2-6"><a href="sampling-and-n-way-anova.html#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
-<p>Then we create the output using apaTables:</p>
+<p>Then we create the output using å:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sampling-and-n-way-anova.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
 <span id="cb3-2"><a href="sampling-and-n-way-anova.html#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
 <p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
+<p>Notice the preparation, juggling, and preparation x juggling rows on this table. In particular, the F-value for each of these rows. In the remainder of the chapter we will review how these values are obtained - and their conceptual meaning.</p>
 </div>
 <div id="multiple-frames-of-reference" class="section level2 hasAnchor" number="16.4">
 <h2><span class="header-section-number">16.4</span> Multiple frames of reference<a href="sampling-and-n-way-anova.html#multiple-frames-of-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -867,7 +868,7 @@ Chicago.</a></p>
 </div>
 <div id="frame-1-cell-populations" class="section level2 hasAnchor" number="16.5">
 <h2><span class="header-section-number">16.5</span> Frame 1: Cell Populations<a href="sampling-and-n-way-anova.html#frame-1-cell-populations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>With this first frame of reference we look at combinations of the <strong>levels</strong> of the <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent variables (i.e., juggling and preparation). Recall we refer to each combination of levels as a <strong>cell</strong>. For example, individuals that both juggled during breaks (i.e., <strong>yes</strong> level of juggling) and prepared for a low amount of time (i.e., <strong>low</strong> level of preparation), would be in one cell. As mentioned previously, be sure to think in terms of populations. In this study, for this frame of reference, we can calculate the total number of populations by multiplying the number of levels for the independent variables. Here, <span class="math inline">\(a = 2\)</span> (two levels of jugglings) and <span class="math inline">\(b =3\)</span> (three levels of preparation). Thus, <span class="math inline">\(ab=(2)(3)=6\)</span>, so there are six cell populations. The participants in each cell are a sample from a corresponding cell population. The six cell <strong>populations</strong> are illustrated below.</p>
+<p>With this first frame of reference we look at combinations of the <strong>levels</strong> of the <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> independent variables (i.e., juggling and preparation). Recall we refer to each combination of levels as a <strong>cell</strong>. For example, individuals that both juggled during breaks (i.e., <strong>yes</strong> level of juggling) and prepared for a low amount of time (i.e., <strong>low</strong> level of preparation), would be in one cell. As mentioned previously, be sure to think in terms of populations. In this study, for this frame of reference, we can calculate the total number of populations by multiplying the number of levels for the independent variables. Here, <span class="math inline">\(a = 2\)</span> (two levels of juggling) and <span class="math inline">\(b =3\)</span> (three levels of preparation). Thus, <span class="math inline">\(ab=(2)(3)=6\)</span>, so there are six cell populations. The participants in each cell are a sample from a corresponding cell population. The six cell <strong>populations</strong> are illustrated below.</p>
 <p><img src="ch_deeper_nway/images/nway_design_cells_pop.png" width="80%" /></p>
 <p>For example, there is a single population (Population 1) that is composed of people who juggled during breaks and prepared for a low amount of time. The participants in Cell 1 <strong>are a sample</strong> (<span class="math inline">\(n = 5\)</span> ) from the No Juggling Low Preparation Population.</p>
 <p>We look at the means of these six cells when we are examining an <strong>interaction</strong> among the independent variables.</p>
@@ -1097,7 +1098,7 @@ Therefore, for these juggling main effect means the general formula for the vari
 &amp;= 4.0
 \end{align}
 \]</span></p>
-<p>Thus, when we have two juggling populationss from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.</p>
+<p>Thus, when we have two juggling populations from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.</p>
 <p><img src="ch_deeper_nway/images/pop_equal_means_a.png" width="80%" /></p>
 </div>
 <div id="clt-b-preparation" class="section level3 hasAnchor" number="16.11.2">
@@ -1156,7 +1157,7 @@ Therefore, for these cell means the general formula for the variance due to samp
 <h2><span class="header-section-number">16.12</span> Main effect calculations<a href="sampling-and-n-way-anova.html#main-effect-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="means-a-juggling" class="section level3 hasAnchor" number="16.12.1">
 <h3><span class="header-section-number">16.12.1</span> Means <span class="math inline">\(A\)</span>: Juggling<a href="sampling-and-n-way-anova.html#means-a-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We might wonder if there is an effect of juggling on calmness scores ignoring the effect of prepartion. Said another way, we might wonder if the mean of the <strong>yes</strong> juggling population (<span class="math inline">\(\mu_{A1}\)</span>) is different from the mean of the <strong>no</strong> juggling population (<span class="math inline">\(\mu_{A2}\)</span>). We examine this question by looking the variance in the population means. If we knew the population means we could:</p>
+<p>We might wonder if there is an effect of juggling on calmness scores ignoring the effect of preparation. Said another way, we might wonder if the mean of the <strong>yes</strong> juggling population (<span class="math inline">\(\mu_{A1}\)</span>) is different from the mean of the <strong>no</strong> juggling population (<span class="math inline">\(\mu_{A2}\)</span>). We examine this question by looking the variance in the population means. If we knew the population means we could:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate the grand mean (i.e., <span class="math inline">\(\mu_A\)</span>). That is, the mean of the two juggling population means. Recall because there are two levels of juggling (i.e., two populations), <span class="math inline">\(a = 2\)</span>. Note that this is the same as the taking the mean of <strong>all participants from both populations</strong> (assuming equal population sizes).</li>
 </ol>
@@ -1182,7 +1183,7 @@ Therefore, for these cell means the general formula for the variance due to samp
 <p>So we need to rely upon sample-level information to estimate the the variability in population means. You can check out the sample-level means in the diagram below. As we discussed previously. For the <span class="math inline">\(A\)</span> independent variable, these means have a sample size of <span class="math inline">\(15\)</span>.</p>
 <p>INSERT DIAGRAM HERE</p>
 <ol style="list-style-type: decimal">
-<li>We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of particpants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
+<li>We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of participants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
 </ol>
 <p><span class="math display">\[
 \begin{align}
@@ -1230,7 +1231,7 @@ s_{\mu_A}^2 &amp;=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
 <th align="center">Juggling</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1259,8 +1260,8 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 &amp;= 57.96\\
 \end{align}
 \]</span></p>
-<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentances. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
-<p>We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{A}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p &lt; .001\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p &lt; .001\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no jugglying) are equal. We conclude those population means <strong>may</strong> be different.</p>
+<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
+<p>We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{A}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p &lt; .001\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p &lt; .001\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means <strong>may</strong> be different.</p>
 </div>
 <div id="a-conceptual-juggling" class="section level4 hasAnchor" number="16.12.1.2">
 <h4><span class="header-section-number">16.12.1.2</span> <span class="math inline">\(A\)</span> conceptual (juggling)<a href="sampling-and-n-way-anova.html#a-conceptual-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1276,7 +1277,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 <th align="center">Juggling</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1316,7 +1317,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 &amp;= 57.96\\
 \end{align}
 \]</span></p>
-<p>From this rearrangment we use the labels below. Notice the inclusion of <span class="math inline">\(nb\)</span> in the <span class="math inline">\(MS_{juggling}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above.</p>
+<p>From this rearrangement we use the labels below. Notice the inclusion of <span class="math inline">\(nb\)</span> in the <span class="math inline">\(MS_{juggling}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above.</p>
 <p><span class="math inline">\(MS_{juggling} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1} = 3477.633\)</span></p>
 <p>and</p>
 <p><span class="math inline">\(MSE = s_{people}^2 = 60.0\)</span></p>
@@ -1333,7 +1334,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 <th align="center">Juggling</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1387,7 +1388,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 <p>So we need to rely upon sample-level information to estimate the the variability in population means. You can check out the sample-level means in the diagram below. As we discussed previously. For the <span class="math inline">\(B\)</span> independent variable, these means have a sample size of <span class="math inline">\(10\)</span>.</p>
 <p>INSERT DIAGRAM HERE</p>
 <ol style="list-style-type: decimal">
-<li>We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of particpants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
+<li>We ESTIMATE the grand mean using the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of participants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
 </ol>
 <p><span class="math display">\[
 \begin{align}
@@ -1435,7 +1436,7 @@ s_{\mu_B}^2 &amp;=  \frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1} \\
 <th align="center">Juggling</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1464,7 +1465,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 &amp;= 3.62\\
 \end{align}
 \]</span></p>
-<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is preparation means is 3.62 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentances. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
+<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is preparation means is 3.62 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
 <p>We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{B}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p = .042\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p = .042\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means <strong>may</strong> be different.</p>
 </div>
 <div id="b-conceptual-preparation" class="section level4 hasAnchor" number="16.12.2.2">
@@ -1481,7 +1482,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 <th align="center">Preparation</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1521,7 +1522,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 &amp;= 3.62\\
 \end{align}
 \]</span></p>
-<p>From this rearrangment we use the labels below. Notice the inclusion of <span class="math inline">\(nb\)</span> in the <span class="math inline">\(MS_{juggling}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above.</p>
+<p>From this rearrangement we use the labels below. Notice the inclusion of <span class="math inline">\(nb\)</span> in the <span class="math inline">\(MS_{juggling}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above.</p>
 <p><span class="math inline">\(MS_{preparation} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1} = 217.2333\)</span></p>
 <p>and</p>
 <p><span class="math inline">\(MSE = s_{people}^2 = 60.0\)</span></p>
@@ -1538,7 +1539,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 <th align="center">Preparation</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1567,7 +1568,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </div>
 <div id="preparing-for-the-interaction-calculations" class="section level2 hasAnchor" number="16.13">
 <h2><span class="header-section-number">16.13</span> Preparing for the interaction calculations<a href="sampling-and-n-way-anova.html#preparing-for-the-interaction-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Interaction calculations are similar to main effect calculations. However, there is a substantial amount of work we need to do before being able to do those calculations. When we say two variable <strong>interact</strong> to predict the dependent variable we are saying there is more going on than the two main effects. So when we seek to determine if there is an interaction we work with <strong>residualized</strong> cell means. That is, cell means were the main effects have been removed. That’s the work we need to do before proceeding with the calculations used above. In the section below we create the residualized means. In the subsequent section we return to the familiar calculations we used for main effects.</p>
+<p>Interaction calculations are similar to main effect calculations. However, there is a substantial amount of work we need to do before being able to do those calculations. When we say two variable <strong>interact</strong> to predict the dependent variable we are saying there is more going on than the two main effects. So when we seek to determine if there is an interaction we work with <strong>residual</strong> cell means. That is, cell means were the main effects have been removed. That’s the work we need to do before proceeding with the calculations used above. In the section below we create the residual means. In the subsequent section we return to the familiar calculations we used for main effects.</p>
 <div id="obtaining-residualized-means" class="section level3 hasAnchor" number="16.13.1">
 <h3><span class="header-section-number">16.13.1</span> Obtaining residualized means<a href="sampling-and-n-way-anova.html#obtaining-residualized-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="subtract-a-marginal-means" class="section level4 hasAnchor" number="16.13.1.1">
@@ -1606,7 +1607,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </div>
 <div id="subtract-b-marginal-means" class="section level4 hasAnchor" number="16.13.1.2">
 <h4><span class="header-section-number">16.13.1.2</span> Subtract <span class="math inline">\(B\)</span> marginal means<a href="sampling-and-n-way-anova.html#subtract-b-marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Next, we take the residualized. means from the previous step and remove the main effect of <span class="math inline">\(B\)</span>. Recall the marginal means for low, medium, and high preparation were 55.8, 62.6, and 71.7, respectively. We subtract these main effect means from the residualized. means from the previous step.</p>
+<p>Next, we take the residual. means from the previous step and remove the main effect of <span class="math inline">\(B\)</span>. Recall the marginal means for low, medium, and high preparation were 55.8, 62.6, and 71.7, respectively. We subtract these main effect means from the residual. means from the previous step.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="27%" />
@@ -1674,7 +1675,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </div>
 <div id="final-residualized-means" class="section level4 hasAnchor" number="16.13.1.4">
 <h4><span class="header-section-number">16.13.1.4</span> Final residualized means<a href="sampling-and-n-way-anova.html#final-residualized-means" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>The final residualized cell means we use for the interaction calculation are below:</p>
+<p>The final residual cell means we use for the interaction calculation are below:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1704,28 +1705,28 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </div>
 <div id="interaction-ab-calculations" class="section level2 hasAnchor" number="16.14">
 <h2><span class="header-section-number">16.14</span> Interaction (<span class="math inline">\(AB\)</span>) calculations<a href="sampling-and-n-way-anova.html#interaction-ab-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>It’s important to remember that the above table of residualized cell means is a table of <strong>sample-level</strong> residualized means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.</p>
+<p>It’s important to remember that the above table of residual cell means is a table of <strong>sample-level</strong> residual means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.</p>
 <p>Consider two situations, at the population-level, where:
 1) There is no interaction, only main effects
 2) There is an interaction</p>
-<p>Imagine the population-level scenario where there is no interaction and only main effects. In this scenario, the values in the population-level cells are entirely the result of the main effects. Further imagine that we we subtracted out the main effects – and created population-level residualized means (as we did above, but at the population-level). In this scenario, the population-level residualized cells means would all have a value of exactly zero. That value is zero, because the only thing influence scores is the main effects and when the main effects are removed there’s nothing left.</p>
-<p>In contrast, the population-level scenario where there is an interaction. In this case, when we create residualized population-level cell means, they would not all be equal to zero. That’s because there is more going on than the main effects.</p>
-<p>The interpretational problem occurs when we move to the sample level. When we examine sample-level residualized cell means it’s more complicated. It could be the case there is no population-level interaction. That is, all the population-level the residualized cell means are all zero. However, the the sample level, due to sampling error, the cell means are not zero. Alterantively, we could obtain non-zero sample-level residualized cell means because there is an interaction.</p>
-<p>To help distinguish betweeen these two situations we calculate a p-value. The p-value tells us how likely we are to have sample-level cell means this large (or larger) if the population-level residualized cell means are zero. So let’s go about calculating that p-value.</p>
+<p>Imagine the population-level scenario where there is no interaction and only main effects. In this scenario, the values in the population-level cells are entirely the result of the main effects. Further imagine that we we subtracted out the main effects – and created population-level residual means (as we did above, but at the population-level). In this scenario, the population-level residual cells means would all have a value of exactly zero. That value is zero, because the only thing influence scores is the main effects and when the main effects are removed there’s nothing left.</p>
+<p>In contrast, the population-level scenario where there is an interaction. In this case, when we create residual population-level cell means, they would not all be equal to zero. That’s because there is more going on than the main effects.</p>
+<p>The interpretation problem occurs when we move to the sample level. When we examine sample-level residual cell means it’s more complicated. It could be the case there is no population-level interaction. That is, all the population-level the residual cell means are all zero. However, the the sample level, due to sampling error, the cell means are not zero. Alternatively, we could obtain non-zero sample-level residual cell means because there is an interaction.</p>
+<p>To help distinguish between these two situations we calculate a p-value. The p-value tells us how likely we are to have sample-level cell means this large (or larger) if the population-level residual cell means are zero. So let’s go about calculating that p-value.</p>
 <div id="degrees-of-freedom-for-total-variance" class="section level4 hasAnchor" number="16.14.0.1">
 <h4><span class="header-section-number">16.14.0.1</span> Degrees of freedom for total variance<a href="sampling-and-n-way-anova.html#degrees-of-freedom-for-total-variance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Recall how we calculated the total number of cells. There were two levels of juggling so <span class="math inline">\(a = 2\)</span>. There were three levels of preparation so <span class="math inline">\(b = 3\)</span>.</p>
 <p><span class="math inline">\(\text{Total number of cells} = ab = (2)(3) = 6\)</span></p>
-<p>We use the same logic when determining the degrees of freedom for the interaction. The degrees of freedom for jugglings is <span class="math inline">\(a-1\)</span> where as the degrees of freedom for preparation are <span class="math inline">\(b-1\)</span>. We use the same general approach to the total degrees of freedom:</p>
+<p>We use the same logic when determining the degrees of freedom for the interaction. The degrees of freedom for juggling is <span class="math inline">\(a-1\)</span> where as the degrees of freedom for preparation are <span class="math inline">\(b-1\)</span>. We use the same general approach to the total degrees of freedom:</p>
 <p><span class="math inline">\(\text{Degrees of freedom for total variance} = (a-1)(b-1)=(2-1)(3-1)=(1)(2)=2\)</span></p>
 </div>
 <div id="total-variance" class="section level4 hasAnchor" number="16.14.0.2">
 <h4><span class="header-section-number">16.14.0.2</span> Total variance<a href="sampling-and-n-way-anova.html#total-variance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>We use this degrees of freedom in the total variance formula. This is the same total variance formula we’ve used before but adjusted to use the residualized cell means.</p>
+<p>We use this degrees of freedom in the total variance formula. This is the same total variance formula we’ve used before but adjusted to use the residual cell means.</p>
 <p><span class="math display">\[
 s_{residual}^2 = \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}
 \]</span></p>
-<p>We apply the formula above the means in the residualized mean table. These are the cell means with the main effects removed.
+<p>We apply the formula above the means in the residual mean table. These are the cell means with the main effects removed.
 The estimated population variance is:</p>
 <p><span class="math display">\[\begin{align}
 s_{residual}^2 &amp;= \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}\\
@@ -1734,7 +1735,7 @@ s_{residual}^2 &amp;= \frac{\sum (\overline{x_{residual_i}} - \overline{\overlin
 &amp;= \frac{107.85}{2}
 &amp;= 53.92667
 \end{align}\]</span></p>
-<p>Each residualized mean is based on <span class="math inline">\(n=5\)</span>. Therefore, the estimated variance due to sampling error is:</p>
+<p>Each residual mean is based on <span class="math inline">\(n=5\)</span>. Therefore, the estimated variance due to sampling error is:</p>
 <p><span class="math display">\[
 \frac{s_{people}^2}{n}
 \]</span></p>
@@ -1761,7 +1762,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <th align="center">Preparation</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
@@ -1800,7 +1801,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <th align="center">Juggling</th>
 <th align="center">Formula</th>
 <th align="center">Expected value</th>
-<th align="center">degrees of feedom</th>
+<th align="center">degrees of freedom</th>
 </tr>
 </thead>
 <tbody>
