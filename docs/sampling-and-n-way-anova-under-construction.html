@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-08-09" />
+<meta name="date" content="2022-08-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -636,6 +636,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.10.2" data-path="multiple-regression.html"><a href="multiple-regression.html#old-school"><i class="fa fa-check"></i><b>18.10.2</b> Old school</a></li>
 </ul></li>
 <li class="chapter" data-level="18.11" data-path="multiple-regression.html"><a href="multiple-regression.html#graphing-2"><i class="fa fa-check"></i><b>18.11</b> Graphing</a></li>
+<li class="chapter" data-level="18.12" data-path="multiple-regression.html"><a href="multiple-regression.html#control-variables"><i class="fa fa-check"></i><b>18.12</b> Control variables</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="sample-size-for-multiple-regression.html"><a href="sample-size-for-multiple-regression.html"><i class="fa fa-check"></i><b>19</b> Sample size for multiple regression</a>
 <ul>
@@ -1397,9 +1398,9 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 </ol>
 <p><span class="math display">\[
 \begin{aligned}
-s_{\mu_A}^2 &amp;=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
-&amp;=  \frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1} \\
-&amp;=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{2-1} \\
+s_{\mu_B}^2 &amp;=  \frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1} \\
+&amp;=  \frac{(\bar{x}_{B_1} - \bar{\bar{x}})^2 + (\bar{x}_{B_2} - \bar{\bar{x}})^2+ (\bar{x}_{B_3} - \bar{\bar{x}})^2}{b-1} \\
+&amp;=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1} \\
 &amp;= 21.72333
 \end{aligned}
 \]</span></p>
@@ -1410,8 +1411,8 @@ s_{\mu_A}^2 &amp;=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
 </ol>
 <p>In mathematical terms we say the Expected Mean Square is:</p>
 <p><span class="math inline">\(\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} + \sigma_{\mu_B}^2\)</span></p>
-<div id="calculating-the-f-value-for-a-1" class="section level4 hasAnchor" number="16.12.2.1">
-<h4><span class="header-section-number">16.12.2.1</span> Calculating the F-value for <span class="math inline">\(A\)</span><a href="sampling-and-n-way-anova-under-construction.html#calculating-the-f-value-for-a-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="calculating-the-f-value-for-b" class="section level4 hasAnchor" number="16.12.2.1">
+<h4><span class="header-section-number">16.12.2.1</span> Calculating the F-value for <span class="math inline">\(B\)</span><a href="sampling-and-n-way-anova-under-construction.html#calculating-the-f-value-for-b" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).</p>
 <ol style="list-style-type: decimal">
 <li><p>In the section immediately above, we obtained a variance <span class="math inline">\(\frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1}=21.72333\)</span>. This value reflects random sampling error variance and the variance of the population mean.</p></li>
@@ -1451,7 +1452,8 @@ s_{\mu_A}^2 &amp;=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
 <p>We calculate an F-value to compare these two values:</p>
 <p><span class="math display">\[
 \begin{align}
-F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+&amp;=\frac{\frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1}}{\frac{60}{(5)(2)}}\\
 &amp;=\frac{21.72333}{\frac{60}{(5)(2)}}\\
 &amp;=\frac{21.72333}{\frac{60}{10}}\\
 &amp;=\frac{21.72333}{6}\\
@@ -1509,7 +1511,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
 &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times \frac{na}{na}\\
 &amp;= \frac{na\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\\
-&amp;=  \frac{(5)(2)(231.8422)}{60}\\
+&amp;=  \frac{(5)(2)(21.72333)}{60}\\
 &amp;=  \frac{(10)(21.72333)}{60}\\
 &amp;=  \frac{217.2333}{60}\\
 &amp;= 3.62\\
@@ -1537,13 +1539,13 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Sample size multiplied by estimated total variance</td>
+<td align="center">Sample size multiplied by estimated total variance (i.e., <span class="math inline">\(MS_{preparation}\)</span>)</td>
 <td align="center"><span class="math inline">\(\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}= 217.2333\)</span></td>
 <td align="center"><span class="math inline">\(\sigma_{people}^2 + na \sigma_{B}^2\)</span></td>
 <td align="center"><span class="math inline">\((b-1)\)</span></td>
 </tr>
 <tr class="even">
-<td align="center">Estimated population variance</td>
+<td align="center">Estimated population variance (i.e., <span class="math inline">\(MSE\)</span>)</td>
 <td align="center"><span class="math inline">\(s_{people}^2=60.0\)</span></td>
 <td align="center"><span class="math inline">\(\sigma_{people}^2\)</span></td>
 <td align="center"><span class="math inline">\(ab(n-1)\)</span></td>

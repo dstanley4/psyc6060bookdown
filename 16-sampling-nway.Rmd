@@ -703,9 +703,9 @@ $$
 
 $$
 \begin{aligned} 
-s_{\mu_A}^2 &=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
-&=  \frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1} \\
-&=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{2-1} \\
+s_{\mu_B}^2 &=  \frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1} \\
+&=  \frac{(\bar{x}_{B_1} - \bar{\bar{x}})^2 + (\bar{x}_{B_2} - \bar{\bar{x}})^2+ (\bar{x}_{B_3} - \bar{\bar{x}})^2}{b-1} \\
+&=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1} \\
 &= 21.72333
 \end{aligned}
 $$
@@ -719,7 +719,7 @@ In mathematical terms we say the Expected Mean Square is:
 
 $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} +  \sigma_{\mu_B}^2$
 
-#### Calculating the F-value for $A$
+#### Calculating the F-value for $B$
 
 Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
 
@@ -740,7 +740,8 @@ We calculate an F-value to compare these two values:
 
 $$
 \begin{align}
-F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+&=\frac{\frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1}}{\frac{60}{(5)(2)}}\\
 &=\frac{21.72333}{\frac{60}{(5)(2)}}\\
 &=\frac{21.72333}{\frac{60}{10}}\\
 &=\frac{21.72333}{6}\\
@@ -772,7 +773,7 @@ F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}
 &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
 &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times \frac{na}{na}\\
 &= \frac{na\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\\
-&=  \frac{(5)(2)(231.8422)}{60}\\
+&=  \frac{(5)(2)(21.72333)}{60}\\
 &=  \frac{(10)(21.72333)}{60}\\
 &=  \frac{217.2333}{60}\\
 &= 3.62\\
@@ -792,8 +793,8 @@ Summarized below:
 
   Preparation| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Sample size multiplied by estimated total variance| $\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}= 217.2333$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1)$
-Estimated population variance | $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
+Sample size multiplied by estimated total variance (i.e., $MS_{preparation}$) | $\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}= 217.2333$ |$\sigma_{people}^2 + na \sigma_{B}^2$ | $(b-1)$
+Estimated population variance (i.e., $MSE$)| $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2} = \frac{217.2333}{60}=3.62$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $[(b-1),ab(n-1)]$
 
 ## Interaction variance
