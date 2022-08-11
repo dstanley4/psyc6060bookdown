@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-08-10" />
+<meta name="date" content="2022-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,15 +32,15 @@
   
 <link rel="prev" href="deeper-dive-sampling-and-anova.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,16 +49,9 @@
 
 
 
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -126,28 +119,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -615,7 +586,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="16.13.1" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#obtaining-residualized-means"><i class="fa fa-check"></i><b>16.13.1</b> Obtaining residualized means</a></li>
 </ul></li>
-<li class="chapter" data-level="16.14" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#interaction-calculations"><i class="fa fa-check"></i><b>16.14</b> Interaction calculations</a></li>
+<li class="chapter" data-level="16.14" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#interaction-ab-calculations"><i class="fa fa-check"></i><b>16.14</b> Interaction (<span class="math inline">\(AB\)</span>) calculations</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="regression-and-correlation.html"><a href="regression-and-correlation.html"><i class="fa fa-check"></i><b>17</b> Regression and correlation</a>
 <ul>
@@ -816,9 +787,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="sampling-and-n-way-anova" class="section level1 hasAnchor" number="16">
 <h1><span class="header-section-number">Chapter 16</span> Sampling and N-way ANOVA<a href="sampling-and-n-way-anova.html#sampling-and-n-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>UNDERCONSTRUCTION
-UNDERCONSTRUCTION
-UNDERCONSTRUCTION</p>
+<p>UNDERCONSTRUCTION</p>
+<p>UNDERCONSTRUCTION</p>
+<p>UNDERCONSTRUCTION</p>
 <div id="previously-one-way-anova" class="section level2 hasAnchor" number="16.1">
 <h2><span class="header-section-number">16.1</span> Previously: One-way ANOVA<a href="sampling-and-n-way-anova.html#previously-one-way-anova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the last chapter, we considered a scenario where there was a single independent variable with multiple levels. For example, imagine that we are interested measuring the heights of students (a dependent variable). We might examine how those heights vary across three populations. That is, we could think of university as the independent variable and Waterloo, Western, and Guelph as the levels of that single independent variable, university. In this example, the independent variable (i.e., university) represents a SET of populations and the each level of the independent variable is a specific population (e.g., Waterloo).</p>
@@ -830,38 +801,38 @@ UNDERCONSTRUCTION</p>
 Chicago.</a></p>
 <p>N-way ANOVA differs from one-way ANOVA because you can look how the multiple independent variables <strong>combine</strong> to influence a dependent variable. When we look at these combined effects we are looking at an <strong>interaction</strong> (or <strong>moderation</strong>) effect.</p>
 <p>Additionally, because there are multiple independent variables there are multiple sets of populations to consider. For simplicity, we will focus on only two independent variables for this chapter (i.e., a 2-way ANOVA). Specifically, consider a ficticous example where we examine how two independent variables <strong>combine</strong> to influence how calm students are before an exam. Calmness before the exam is the dependent variable.</p>
-<p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. We refer to this <strong>set</strong> of two populations (<em>yes</em> and <em>no</em> juggling) using the label <strong>juggling</strong>. Juggling is an <strong>independent variable</strong> or <strong>factor</strong> in our design. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our juggling levels as samples from these two populations.</p>
-<p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. We refer to this <strong>set</strong> of three populations (<em>low</em>, <em>medium</em>, and <em>high</em> preparation) using the label <strong>preparation</strong>. Preparation is an <em>independent variable</em> or <em>factor</em> in our design. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. We consider the participants in our preparation levels as samples from these three populations.</p>
+<p>The first independent variable is juggling (yes/no) during study breaks. This independent variable has two levels: <strong>yes</strong> and <strong>no</strong>. So we think of there being two populations of calmness scores obtained before the exam: 1) a population of calmness scores for students who learned to juggling during study breaks and 2) a population of calmness scores for students who did not learn to juggle during study breaks. We refer to this <strong>set</strong> of two populations (<em>yes</em> and <em>no</em> juggling) using the label <strong>juggling</strong>. Juggling is an <strong>independent variable</strong> or <strong>factor</strong> in our design. We are interested in how juggling level (yes/no) influences the mean of these two populations of calmness scores. We consider the participants in our study as samples from these two populations.</p>
+<p>The second independent variable is preparation (low/medium/high) time before the exam. That is, how much students studied before the exam. This independent variable has three levels: <strong>low</strong>, <strong>medium</strong>, and <strong>high</strong>. So we think of there being three populations of calmness scores obtained before the exam: 1) a population of calmness scores where students prepared a low amount of time, 2) a population of calmness scores where students prepared a medium amount of time, and 3) a population of calmness scores where students prepared a high amount of time. We refer to this <strong>set</strong> of three populations (<em>low</em>, <em>medium</em>, and <em>high</em> preparation) using the label <strong>preparation</strong>. Preparation is an <em>independent variable</em> or <em>factor</em> in our design. We are interested in how preparation level (low/medium/high) influences the mean of these three populations of calmness scores. We consider the participants in our study as samples from these three populations.</p>
 <p>As mentioned previously, an advantage of conducting a 2-way ANOVA over two 1-way ANOVAs is that we get to look at how calmness scores are influenced by the <strong>combined</strong> effect of the two independent variables. You can see this in the diagram below - there are <strong>six cells</strong> each of which is created by the <strong>combination</strong> of one level of juggling and one level of preparation. We call this a <em>fully-crossed</em> design because there are people at every combination of juggling and preparation levels. When we examine cells we are looking at the combined effect of independent variables on the dependent variable. When we do this, we typically say we are examining how the independent variables <strong>interact</strong> to influence the dependent variable. You can this of the six cells are another <strong>set</strong> of populations. We will see people that you can think of each set of populations as a frame of reference.</p>
 <p><img src="ch_deeper_nway/images/nway_design_cells_design.png" width="80%" /></p>
 </div>
 <div id="output" class="section level2 hasAnchor" number="16.3">
 <h2><span class="header-section-number">16.3</span> Output<a href="sampling-and-n-way-anova.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We begin by activating the packages and loading the data:</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="sampling-and-n-way-anova.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb554-2"><a href="sampling-and-n-way-anova.html#cb554-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb554-3"><a href="sampling-and-n-way-anova.html#cb554-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-4"><a href="sampling-and-n-way-anova.html#cb554-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
-<span id="cb554-5"><a href="sampling-and-n-way-anova.html#cb554-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-6"><a href="sampling-and-n-way-anova.html#cb554-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
-<span id="cb554-7"><a href="sampling-and-n-way-anova.html#cb554-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
-<span id="cb554-8"><a href="sampling-and-n-way-anova.html#cb554-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sampling-and-n-way-anova.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="sampling-and-n-way-anova.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb1-3"><a href="sampling-and-n-way-anova.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="sampling-and-n-way-anova.html#cb1-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
+<span id="cb1-5"><a href="sampling-and-n-way-anova.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="sampling-and-n-way-anova.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
+<span id="cb1-7"><a href="sampling-and-n-way-anova.html#cb1-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="sampling-and-n-way-anova.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
 <p>Next we conduct the analysis:</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="sampling-and-n-way-anova.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
-<span id="cb555-2"><a href="sampling-and-n-way-anova.html#cb555-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
-<span id="cb555-3"><a href="sampling-and-n-way-anova.html#cb555-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb555-4"><a href="sampling-and-n-way-anova.html#cb555-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
-<span id="cb555-5"><a href="sampling-and-n-way-anova.html#cb555-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
-<span id="cb555-6"><a href="sampling-and-n-way-anova.html#cb555-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sampling-and-n-way-anova.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
+<span id="cb2-2"><a href="sampling-and-n-way-anova.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb2-3"><a href="sampling-and-n-way-anova.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="sampling-and-n-way-anova.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
+<span id="cb2-5"><a href="sampling-and-n-way-anova.html#cb2-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
+<span id="cb2-6"><a href="sampling-and-n-way-anova.html#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
 <p>Then we create the output using apaTables:</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="sampling-and-n-way-anova.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
-<span id="cb556-2"><a href="sampling-and-n-way-anova.html#cb556-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sampling-and-n-way-anova.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
+<span id="cb3-2"><a href="sampling-and-n-way-anova.html#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
 <p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
 </div>
 <div id="multiple-frames-of-reference" class="section level2 hasAnchor" number="16.4">
 <h2><span class="header-section-number">16.4</span> Multiple frames of reference<a href="sampling-and-n-way-anova.html#multiple-frames-of-reference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A complication many students experience with understanding the different frames of reference that can be used with N-way ANOVA is the notation. Particularly when it comes the different sample sizes involved in this design. Therefore, prior to continuing we’ll review some key notation.</p>
-<p>The notation is general in nature because each experiment will have different independent variables. A common way to refer to the first independent variable using symbolic notiation is by using an uppercase <span class="math inline">\(A\)</span>. Likewise, we refer to the number of levels in that independent variable using lowercase <span class="math inline">\(a\)</span>. Thus, for the first independent variable <span class="math inline">\(A\)</span> = “Juggling” and <span class="math inline">\(a = 2\)</span> because there are two levels of juggling (yes or no). So instead of saying we are examining the effect of juggling on calmness we might say we are examining the effect of Independent Variable <span class="math inline">\(A\)</span> on the dependent variable. For the second independent variable we use uppercase <span class="math inline">\(B\)</span> and lowercase <span class="math inline">\(b\)</span>, and so on. The table below illustrates how we represent both independent variables in this experiment.</p>
+<p>The notation is general in nature because each experiment will have different independent variables. A common way to refer to the first independent variable using symbolic notation is by using an uppercase <span class="math inline">\(A\)</span>. Likewise, we refer to the number of levels in that independent variable using lowercase <span class="math inline">\(a\)</span>. Thus, for the first independent variable <span class="math inline">\(A\)</span> = “Juggling” and <span class="math inline">\(a = 2\)</span> because there are two levels of juggling (yes or no). So instead of saying we are examining the effect of juggling on calmness we might say we are examining the effect of Independent Variable <span class="math inline">\(A\)</span> on the dependent variable. For the second independent variable we use uppercase <span class="math inline">\(B\)</span> and lowercase <span class="math inline">\(b\)</span>, and so on. The table below illustrates how we represent both independent variables in this experiment.</p>
 <table>
 <colgroup>
 <col width="16%" />
@@ -1731,8 +1702,8 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 </div>
 </div>
 </div>
-<div id="interaction-calculations" class="section level2 hasAnchor" number="16.14">
-<h2><span class="header-section-number">16.14</span> Interaction calculations<a href="sampling-and-n-way-anova.html#interaction-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="interaction-ab-calculations" class="section level2 hasAnchor" number="16.14">
+<h2><span class="header-section-number">16.14</span> Interaction (<span class="math inline">\(AB\)</span>) calculations<a href="sampling-and-n-way-anova.html#interaction-ab-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>It’s important to remember that the above table of residualized cell means is a table of <strong>sample-level</strong> residualized means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.</p>
 <p>Consider two situations, at the population-level, where:
 1) There is no interaction, only main effects
@@ -1866,14 +1837,14 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
