@@ -550,7 +550,7 @@ As with the grand mean, we can't calculate this population level information.
 
 So we need to rely upon sample-level information to estimate the the variability in population means.  You can check out the sample-level means in the diagram below. As we discussed previously. For the $A$ independent variable, these means have a sample size of $15$.
 
-```{r, out.width="80%", echo = FALSE}
+```{r, out.width="100%", echo = FALSE}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_A_sample.png")
 ```
 
@@ -699,7 +699,7 @@ As with the grand mean, we can't calculate this population level information.
 
 So we need to rely upon sample-level information to estimate the the variability in population means.  You can check out the sample-level means in the diagram below. As we discussed previously. For the $B$ independent variable, these means have a sample size of $10$.
 
-```{r, out.width="80%", echo = FALSE}
+```{r, out.width="100%", echo = FALSE}
 knitr::include_graphics("ch_deeper_nway/images/nway_design_B_sample.png")
 ```
 
@@ -825,6 +825,13 @@ Interaction calculations are similar to main effect calculations. However, there
 
 ### Obtaining residualized means
 
+We begin with the cell means:
+
+```{r, out.width="100%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_means.png")
+```
+
+
 #### Subtract $A$ marginal means
 
 The cell means are illustrated below. Recall the overall marginal mean for yes_juggling is `r round(mean_a1,2)` and the overall marginal mean for no_juggling is `r round(mean_a2,2)`. Be begin by removing these main effect means for $A$ from the marginal means. 
@@ -866,6 +873,11 @@ no_juggle | $`r round(rg4,2)`$ |  $`r round(rg5,2)`$ | $`r round(rg6,2)`$ |
 
 ## Interaction ($AB$) calculations
 
+The residual cell means calculated in the previous section are presented below -- as a starting point for the interaction calculations.
+
+```{r, out.width="100%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/nway_design_cells_rez_means.png")
+```
 
 It's important to remember that the above table of residual cell means is a table of **sample-level** residual means. That means, the values in the cells are influenced by both the population means (for the cell and the main effects) as well as sampling error.
 
