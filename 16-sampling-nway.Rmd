@@ -559,8 +559,8 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_A_sample.png")
 
 $$
 \begin{align}
-\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{A_i}}{a} \\
-&= \frac{\bar{x}_{A_1}+\bar{x}_{A_2}}{2}\\
+\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \overline{x_{A_i}}}{a} \\
+&= \frac{\overline{x_{A_1}}+\overline{x_{A_2}}}{2}\\
 &= \frac{77.33333 + 55.8}{2} \\
 &= 66.56667\\
 \end{align}
@@ -570,8 +570,8 @@ $$
 
 $$
 \begin{aligned} 
-s_{\mu_A}^2 &=  \frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1} \\
-&=  \frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1} \\
+s_{\mu_A}^2 &=  \frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1} \\
+&=  \frac{(\overline{x_{A_1}} - \bar{\bar{x}})^2 + (\overline{x_{A_2}} - \bar{\bar{x}})^2}{a-1} \\
 &=  \frac{(77.33333 - 66.56667)^2 + (55.8 - 66.56667)^2}{2-1} \\
 &= 231.8422
 \end{aligned}
@@ -590,7 +590,7 @@ $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{nb} +  \sigma_{\mu_A}^2$
 
 Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
 
-1) In the section immediately above, we obtained a variance $\frac{\sum (\bar{x}_{A_i}-\bar{\bar{x}})^2}{a-1}=231.8422$. This value reflects random sampling error variance and the variance of the population mean.
+1) In the section immediately above, we obtained a variance $\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}=231.8422$. This value reflects random sampling error variance and the variance of the population mean.
 
 2) Previously, we obtained a variance of estimate of $\frac{s_{people}^2}{nb} = 4.0$. This value reflects random sampling variance only.
 
@@ -608,8 +608,8 @@ We calculate an F-value to compare these two values:
 $$
 \begin{align}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
-&= \frac{\frac{\sum (\bar{x_{Ai}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
-&= \frac{\frac{(\bar{x}_{A_1} - \bar{\bar{x}})^2 + (\bar{x}_{A_2} - \bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+&= \frac{\frac{\sum (\overline{x_{Ai}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+&= \frac{\frac{(\overline{x_{A_1}} - \bar{\bar{x}})^2 + (\overline{x_{A_2}} - \bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &=\frac{\frac{(77.33333 - 66.56667)^2 + (55.8 - 66.56667)^2}{2-1}}{\frac{60}{(5)(3)}}\\
 &=\frac{231.8422}{\frac{60}{(5)(3)}}\\
 &=\frac{231.8422}{\frac{60}{15}}\\
@@ -622,6 +622,8 @@ $$
 This estimate tells us that, with these data, the **estimated** total variance is juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.
 
 We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{A}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p < .001$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p < .001$). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means **may** be different.
+
+
 
 #### $A$ conceptual (juggling)
 
@@ -640,9 +642,9 @@ But this formula is typically rearranged in ANOVA output - due to the fact in th
 $$
 \begin{align}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
-&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times 1\\
-&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times \frac{nb}{nb}\\
-&= \frac{nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}\\
+&= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times 1\\
+&= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times \frac{nb}{nb}\\
+&= \frac{nb\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}\\
 &=  \frac{(5)(3)(231.8422)}{60}\\
 &=  \frac{(15)(231.8422)}{60}\\
 &=  \frac{3477.633}{60}\\
@@ -652,12 +654,15 @@ $$
 
 From this rearrangement we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above.
 
-$MS_{juggling} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1} = 3477.633$
+$MS_{juggling} = nb\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1} = 3477.633$
 
 and 
 
 $MSE = s_{people}^2 = 60.0$
 
+```{r, out.width="100%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/ftable_main_a.png")
+```
 
 Summarized below:
 
@@ -708,7 +713,7 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_B_sample.png")
 $$
 \begin{align}
 \text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{B_i}}{b} \\
-&= \frac{\bar{x}_{B_1}+\bar{x}_{B_2} +\bar{x}_{B_3} }{3}\\
+&= \frac{\overline{x_{B_1}}+\overline{x_{B_2}} +\overline{x_{B_3}} }{3}\\
 &= \frac{65.4 + 62.6 + 71.7}{3} \\
 &= 66.56667\\
 \end{align}
@@ -718,8 +723,8 @@ $$
 
 $$
 \begin{aligned} 
-s_{\mu_B}^2 &=  \frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1} \\
-&=  \frac{(\bar{x}_{B_1} - \bar{\bar{x}})^2 + (\bar{x}_{B_2} - \bar{\bar{x}})^2+ (\bar{x}_{B_3} - \bar{\bar{x}})^2}{b-1} \\
+s_{\mu_B}^2 &=  \frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} \\
+&=  \frac{(\overline{x_{B_1}} - \bar{\bar{x}})^2 + (\overline{x_{B_2}} - \bar{\bar{x}})^2+ (\overline{x_{B_3}} - \bar{\bar{x}})^2}{b-1} \\
 &=  \frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1} \\
 &= 21.72333
 \end{aligned}
@@ -740,7 +745,7 @@ $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} +  \sigma_{\mu_B}^2$
 
 Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
 
-1) In the section immediately above, we obtained a variance $\frac{\sum (\bar{x}_{B_i}-\bar{\bar{x}})^2}{b-1}=21.72333$. This value reflects random sampling error variance and the variance of the population mean.
+1) In the section immediately above, we obtained a variance $\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}=21.72333$. This value reflects random sampling error variance and the variance of the population mean.
 
 2) Previously, we obtained a variance of estimate of $\frac{s_{people}^2}{na} = 6.0$. This value reflects random sampling variance only.
 
@@ -760,8 +765,8 @@ We calculate an F-value to compare these two values:
 $$
 \begin{align}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
-&= \frac{\frac{\sum (\bar{x_{Bi}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
-&= \frac{\frac{(\bar{x}_{B_1} - \bar{\bar{x}})^2 + (\bar{x}_{B_2} - \bar{\bar{x}})^2 + (\bar{x}_{B_3} - \bar{\bar{x}})^2 }{b-1}}{\frac{s_{people}^2}{na}}\\
+&= \frac{\frac{\sum (\overline{x_{Bi}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+&= \frac{\frac{(\overline{x_{B_1}} - \bar{\bar{x}})^2 + (\overline{x_{B_2}} - \bar{\bar{x}})^2 + (\overline{x_{B_3}} - \bar{\bar{x}})^2 }{b-1}}{\frac{s_{people}^2}{na}}\\
 &=\frac{\frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1}}{\frac{60}{(5)(2)}}\\
 &=\frac{21.72333}{\frac{60}{(5)(2)}}\\
 &=\frac{21.72333}{\frac{60}{10}}\\
@@ -774,6 +779,7 @@ $$
 This estimate tells us that, with these data, the **estimated** total variance is preparation means is 3.62 times larger than than we would **estimate** due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.
 
 We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{B}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = .042$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = .042$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.
+
 
 #### $B$ conceptual (preparation)
 
@@ -791,9 +797,10 @@ But this formula is typically rearranged in ANOVA output - due to the fact in th
 $$
 \begin{align}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
-&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
-&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times \frac{na}{na}\\
-&= \frac{na\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\\
+&= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+&= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
+&= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times \frac{na}{na}\\
+&= \frac{na\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2}\\
 &=  \frac{(5)(2)(21.72333)}{60}\\
 &=  \frac{(10)(21.72333)}{60}\\
 &=  \frac{217.2333}{60}\\
@@ -803,12 +810,16 @@ $$
 
 From this rearrangement we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above.
 
-$MS_{preparation} = nb\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1} = 217.2333$
+$MS_{preparation} = na\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} = 217.2333$
 
 and 
 
 $MSE = s_{people}^2 = 60.0$
 
+
+```{r, out.width="100%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/ftable_main_b.png")
+```
 
 Summarized below:
 
@@ -948,6 +959,8 @@ We know that the degrees of freedom for this F-value are (2,24). We we can ask t
 
 
 
+
+
 #### $AB$ conceptual (interaction)
 
 Preparation| Formula | Expected value | degrees of freedom |
@@ -957,6 +970,11 @@ Estimated variance sampling error | $\frac{s_{people}^2}{n}$ |$\frac{\sigma_{peo
 Comparison using $F$-ratio |$\frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{                  \frac{s_{people}^2}{n}}$  |  $\frac{\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2}{    \frac{\sigma_{people}^2}{n}}$ | $[(a-1)(b-1),ab(n-1)]$
 
 #### $AB$ typical (interaction)
+
+
+```{r, out.width="100%", echo = FALSE}
+knitr::include_graphics("ch_deeper_nway/images/ftable_ab.png")
+```
 
   Juggling| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
