@@ -388,7 +388,7 @@ Notice the degrees of freedom for MSE. Recall that when we calculated MSE (i.e.,
 Symbolically, we express the calculation of degrees of freedom as $(3)(2)(n-1)$ which is $ab(n-1)$. So the degrees of freedom for $s_{people}^2$ (i.e., MSE) is $ab(n-1)$. It's important to know this tidbit so that you will understand where all the numbers in a 2-way ANOVA table come from when we examine it later.
 
 
-## CLT Sampling Error
+## Random Sampling Variance
 
 As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determining if the variability in sample means is greater than could be expected due to random sampling error. Consequently, we have to estimate how much random sampling error variance there would be (on average) in sample means for each of the three frames of reference (main effect of $A$ means, main effect of $B$ means, and cell means).
 
@@ -517,9 +517,9 @@ You can see in the table above that we have estimated the variability we will se
 
 Notice that the degrees of freedom for the sampling error variance is the same for all the effects. This is because the degrees of freedom is based on the $s_{people}^2$ calculation (i.e., MSE calculation). Sampling error variance is just $s_{people}^2$ (i.e., MSE) divided by sample size. Consequently, the degrees for freedom for sampling error variance the same as MSE,  $ab(n-1)$.
 
-## Main effect calculations
+## Main Effect $A$: Juggling
 
-### Means $A$: Juggling
+### Total variance $A$
 
 We might wonder if there is an effect of juggling on calmness scores ignoring the effect of preparation. Said another way, we might wonder if the mean of the **yes** juggling population ($\mu_{A1}$) is different from the mean of the **no** juggling population ($\mu_{A2}$). We examine this question by looking the variance in the population means. If we knew the population means we could:
 
@@ -586,7 +586,7 @@ In mathematical terms we say the Expected Mean Square is:
 
 $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{nb} +  \sigma_{\mu_A}^2$
 
-#### Calculating the F-value for $A$
+### F-value for $A$
 
 Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
 
@@ -607,7 +607,8 @@ We calculate an F-value to compare these two values:
 
 $$
 \begin{align}
-F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
+F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &= \frac{\frac{\sum (\overline{x_{Ai}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &= \frac{\frac{(\overline{x_{A_1}} - \bar{\bar{x}})^2 + (\overline{x_{A_2}} - \bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &=\frac{\frac{(77.33333 - 66.56667)^2 + (55.8 - 66.56667)^2}{2-1}}{\frac{60}{(5)(3)}}\\
@@ -673,7 +674,9 @@ Sample size multiplied by estimated total variance (i.e., $MS_{juggling}$) | $\f
 Estimated population variance (i.e., $MSE$) | $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}=\frac{3477.633}{60}=57.96$ | $\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}$ | $[(a-1),ab(n-1)]$
 
-### Means $B$: Preparation 
+## Main Effect $B$: Preparation 
+
+### Total variance $B$
 
 Let's look at the other independent variable: preparation. As before, we might wonder if there is an effect of preparation on calmness scores ignoring the effect of juggling. Said another way, we might wonder if the means of the three preparation populations (low [$\mu_{B1}$], medium [$\mu_{B2}$], high [$\mu_{B3}$]) are different from each other. We examine this question by looking the variance in the population means. If we knew the population means we could:
 
@@ -741,7 +744,7 @@ In mathematical terms we say the Expected Mean Square is:
 
 $\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} +  \sigma_{\mu_B}^2$
 
-#### Calculating the F-value for $B$
+### F-value for $B$
 
 Recall that we now have two estimates for the variability in juggling means (total variance estimate, sampling variance estimate).
 
@@ -764,7 +767,8 @@ We calculate an F-value to compare these two values:
 
 $$
 \begin{align}
-F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
+F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
+&= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &= \frac{\frac{\sum (\overline{x_{Bi}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &= \frac{\frac{(\overline{x_{B_1}} - \bar{\bar{x}})^2 + (\overline{x_{B_2}} - \bar{\bar{x}})^2 + (\overline{x_{B_3}} - \bar{\bar{x}})^2 }{b-1}}{\frac{s_{people}^2}{na}}\\
 &=\frac{\frac{(65.4 - 66.56667)^2 + (62.6 - 66.56667)^2 + (71.7 - 66.56667)^2}{3-1}}{\frac{60}{(5)(2)}}\\
@@ -829,7 +833,7 @@ Sample size multiplied by estimated total variance (i.e., $MS_{preparation}$) | 
 Estimated population variance (i.e., $MSE$)| $s_{people}^2=60.0$ |$\sigma_{people}^2$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2} = \frac{217.2333}{60}=3.62$ | $\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}$ | $[(b-1),ab(n-1)]$
 
-## Preparing for the interaction calculations
+## Interaction Preparation
 
 Interaction calculations are similar to main effect calculations. However, there is a substantial amount of work we need to do before being able to do those calculations. When we say two variable **interact** to predict the dependent variable we are saying there is more going on than the two main effects. So when we seek to determine if there is an interaction we work with **residual** cell means. That is, cell means were the main effects have been removed. That's the work we need to do before proceeding with the calculations used above. In the section below we create the residual means. In the subsequent section we return to the familiar calculations we used for main effects.
 
@@ -882,7 +886,9 @@ The final residual cell means we use for the interaction calculation are below:
 yes_juggle | $`r round(rg1,2)`$ | $`r round(rg2,2)`$ | $`r round(rg3,2)`$ |
 no_juggle | $`r round(rg4,2)`$ |  $`r round(rg5,2)`$ | $`r round(rg6,2)`$ |
 
-## Interaction ($AB$) calculations
+## Interaction ($AB$)
+
+### Total variance $AB$
 
 The residual cell means calculated in the previous section are presented below -- as a starting point for the interaction calculations.
 
@@ -916,8 +922,6 @@ We use the same logic when determining the degrees of freedom for the interactio
 
 $\text{Degrees of freedom for total variance} = (a-1)(b-1)=(2-1)(3-1)=(1)(2)=2$
 
-#### Total variance
-
 We use this degrees of freedom in the total variance formula. This is the same total variance formula we've used before but adjusted to use the residual cell means.  
 
 
@@ -944,6 +948,7 @@ $$
 \frac{s_{people}^2}{n}
 $$
 
+### F-value for $AB$
 
 So F-ratio comparing these two estimates is:
 
