@@ -32,15 +32,15 @@
   
 <link rel="prev" href="deeper-dive-sampling-and-anova.html"/>
 <link rel="next" href="regression-and-correlation.html"/>
-<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -49,16 +49,9 @@
 
 
 
-<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections/anchor-sections.js"></script>
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -126,28 +119,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -854,24 +825,24 @@ Chicago.</a></p>
 <div id="output" class="section level2 hasAnchor" number="16.3">
 <h2><span class="header-section-number">16.3</span> Output<a href="sampling-and-n-way-anova.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We begin by creating the output for this design in R. First we activate the required packages:</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="sampling-and-n-way-anova.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb554-2"><a href="sampling-and-n-way-anova.html#cb554-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb554-3"><a href="sampling-and-n-way-anova.html#cb554-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-4"><a href="sampling-and-n-way-anova.html#cb554-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
-<span id="cb554-5"><a href="sampling-and-n-way-anova.html#cb554-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb554-6"><a href="sampling-and-n-way-anova.html#cb554-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
-<span id="cb554-7"><a href="sampling-and-n-way-anova.html#cb554-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
-<span id="cb554-8"><a href="sampling-and-n-way-anova.html#cb554-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="sampling-and-n-way-anova.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="sampling-and-n-way-anova.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb1-3"><a href="sampling-and-n-way-anova.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="sampling-and-n-way-anova.html#cb1-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
+<span id="cb1-5"><a href="sampling-and-n-way-anova.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="sampling-and-n-way-anova.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
+<span id="cb1-7"><a href="sampling-and-n-way-anova.html#cb1-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="sampling-and-n-way-anova.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
 <p>Next we conduct the analysis:</p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="sampling-and-n-way-anova.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
-<span id="cb555-2"><a href="sampling-and-n-way-anova.html#cb555-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
-<span id="cb555-3"><a href="sampling-and-n-way-anova.html#cb555-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb555-4"><a href="sampling-and-n-way-anova.html#cb555-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
-<span id="cb555-5"><a href="sampling-and-n-way-anova.html#cb555-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
-<span id="cb555-6"><a href="sampling-and-n-way-anova.html#cb555-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="sampling-and-n-way-anova.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
+<span id="cb2-2"><a href="sampling-and-n-way-anova.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb2-3"><a href="sampling-and-n-way-anova.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="sampling-and-n-way-anova.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
+<span id="cb2-5"><a href="sampling-and-n-way-anova.html#cb2-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
+<span id="cb2-6"><a href="sampling-and-n-way-anova.html#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
 <p>Then we create the output using å:</p>
-<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="sampling-and-n-way-anova.html#cb556-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
-<span id="cb556-2"><a href="sampling-and-n-way-anova.html#cb556-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="sampling-and-n-way-anova.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
+<span id="cb3-2"><a href="sampling-and-n-way-anova.html#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
 <p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
 <p>Notice the preparation, juggling, and preparation x juggling rows on this table. In particular, the F-value for each of these rows. In the remainder of the chapter we will review how these values are obtained - and their conceptual meaning.</p>
 </div>
@@ -1249,10 +1220,10 @@ s_{\mu_A}^2 &amp;=  \frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1} \\
 &amp;= 231.8422
 \end{aligned}
 \]</span></p>
-<p>When you estimate the variance is sample means this way (using the total variance formula) the number you obtain will reflect two things.</p>
+<p>When you estimate the variance is sample means this way (using the total variance formula) the number you obtain will reflect two things:</p>
 <ol style="list-style-type: decimal">
-<li>Random sampling error variance: <span class="math inline">\(\frac{\sigma_{people}^2}{nb}\)</span></li>
-<li>The variance of the population means <span class="math inline">\(\sigma_{\mu_A}^2\)</span></li>
+<li>Variability in sample means due to random sampling: <span class="math inline">\(\frac{\sigma_{people}^2}{nb}\)</span></li>
+<li>Variability in sample means due differences among the population means <span class="math inline">\(\sigma_{\mu_A}^2\)</span></li>
 </ol>
 <p>In mathematical terms we say the Expected Mean Square is:</p>
 <p><span class="math inline">\(\text{Expected Mean Square} = \frac{\sigma_{people}^2}{nb} + \sigma_{\mu_A}^2\)</span></p>
@@ -1309,7 +1280,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;= 57.96\\
 \end{align}
 \]</span></p>
-<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
+<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance of juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. <a href="https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions">Recall Central F-distributions from a previous chapter.</a></p>
 <p>We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{A}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p &lt; .001\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p &lt; .001\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means <strong>may</strong> be different.</p>
 <div id="a-conceptual-juggling" class="section level4 hasAnchor" number="16.12.2.1">
 <h4><span class="header-section-number">16.12.2.1</span> <span class="math inline">\(A\)</span> conceptual (juggling)<a href="sampling-and-n-way-anova.html#a-conceptual-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1461,10 +1432,10 @@ s_{\mu_B}^2 &amp;=  \frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} \\
 &amp;= 21.72333
 \end{aligned}
 \]</span></p>
-<p>When you estimate the variance is sample means this way (using the total variance formula) the number you obtain will reflect two things.</p>
+<p>When you estimate the variance is sample means this way (using the total variance formula) the number you obtain will reflect two things:</p>
 <ol style="list-style-type: decimal">
-<li>Random sampling error variance: <span class="math inline">\(\frac{\sigma_{people}^2}{na}\)</span></li>
-<li>The variance of the population means <span class="math inline">\(\sigma_{\mu_B}^2\)</span></li>
+<li>Variability in sample means due to random sampling: <span class="math inline">\(\frac{\sigma_{people}^2}{na}\)</span></li>
+<li>Variability in sample means due differences among the population means <span class="math inline">\(\sigma_{\mu_B}^2\)</span></li>
 </ol>
 <p>In mathematical terms we say the Expected Mean Square is:</p>
 <p><span class="math inline">\(\text{Expected Mean Square} = \frac{\sigma_{people}^2}{na} + \sigma_{\mu_B}^2\)</span></p>
@@ -1521,7 +1492,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;= 3.62\\
 \end{align}
 \]</span></p>
-<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance is preparation means is 3.62 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom.</p>
+<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance of preparation means is 3.62 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a larger number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. <a href="https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions">Recall Central F-distributions from a previous chapter.</a></p>
 <p>We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{B}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p = .042\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p = .042\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means <strong>may</strong> be different.</p>
 <div id="b-conceptual-preparation" class="section level4 hasAnchor" number="16.13.2.1">
 <h4><span class="header-section-number">16.13.2.1</span> <span class="math inline">\(B\)</span> conceptual (preparation)<a href="sampling-and-n-way-anova.html#b-conceptual-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1921,14 +1892,14 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
