@@ -65,7 +65,7 @@ lm_nway <- lm(calm ~ preparation*juggling,
               data = nway_data)
 ```
 
-Then we create the output using å:
+Then we create the output using:
 
 ```{r, eval = F}
 apa.aov.table(lm_nway, 
@@ -983,14 +983,11 @@ Consider two situations, at the population-level, where:
 
 Imagine the population-level scenario where there is no interaction and only main effects. In this scenario, the values in the population-level cells are entirely the result of the main effects. Further imagine that we  we subtracted out the main effects -- and created population-level residual means (as we did above, but at the population-level). In this scenario, the population-level residual cells means would all have a value of exactly zero. That value is zero, because the only thing influence scores is the main effects and when the main effects are removed there's nothing left.
 
-In contrast, the population-level scenario where there is an interaction. In this case, when we create residual population-level cell means, they would not all be equal to zero. That's because there is more going on than the main effects.
+Now consider the population-level scenario where there is an interaction. In this case, when we create residual population-level cell means, they would not all be equal to zero. That's because there is more going on than the main effects.
 
-The interpretation problem occurs when we move to the sample level. When we examine sample-level residual cell means it's more complicated. It could be the case there is no population-level interaction. That is, all the population-level the residual cell means are all zero. However, the the sample level, due to sampling error, the cell means are not zero. Alternatively, we could obtain non-zero sample-level residual cell means because there is an interaction. 
+The interpretation challenge occurs when we move to the sample level because the sample-level residuals may differ, due to random sampling, from the population-residuals. To help distinguish between these two situations we calculate a p-value. The p-value tells us how likely we are to have sample-level cell means this large (or larger) if the population-level residual cell means are zero. 
 
-To help distinguish between these two situations we calculate a p-value. The p-value tells us how likely we are to have sample-level cell means this large (or larger) if the population-level residual cell means are zero. So let's go about calculating that p-value.
-
-
-#### Degrees of freedom for total variance
+#### Degrees of freedom for $AB$ total variance
 
 Recall how we calculated the total number of cells. There were two levels of juggling so $a = 2$. There were three levels of preparation so $b = 3$.
 
@@ -1056,7 +1053,7 @@ ggplot(mdf, aes(x=fvalue)) +
   theme_classic(18)
 ```
 
-To assign a p-value to the F-value that we obtained, $F = 4.49$ we determine the proportion of the Central F-distribution (with 2 and 24 degrees of freedom) that is equal to, or more extreme, than the F-value we obtained in our study. The F-value we obtained is position in Central F-distribution below.
+To assign a p-value to the F-value that we obtained, $F = 4.49$ we determine the proportion of the Central F-distribution (with 2 and 24 degrees of freedom) that is equal to, or more extreme, than the F-value we obtained in our study. The F-value we obtained is positioned in Central F-distribution below.
 
 
 ```{r, echo = F}
