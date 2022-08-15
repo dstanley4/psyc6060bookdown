@@ -619,10 +619,47 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 \end{align}
 $$
 
+### p-value for $A$
 
-This estimate tells us that, with these data, the **estimated** total variance of juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
+This sample F-value tells us that, with these data, the **estimated** total variance of juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
 
-We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{A}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p < .001$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p < .001$). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means **may** be different.
+To interpret an F-value for the main effect of $A$, you need to think about all the F-values that could have occurred - when the population means are equal (i.e., $\sigma_{A}^2=0$). More specifically, we have to imagine all of the F-values with 1 and 24 degrees of freedom in the Central F-distribution. This distribution is illustrated below:
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=1, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  xlab("Central F-values (1, 24)") +
+  ylab("Frequency") +
+  theme_classic(18)
+```
+
+To assign a p-value to the F-value that we obtained, $F = 57.96$ we determine the proportion of the Central F-distribution (with 1 and 24 df) that is equal to, or more extreme, than the F-value we obtained in our study. If you inspect the Central F-distribuion above you can see that the current F-value of 57.96 doesn't even fit on the graph - since the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:
+
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=1, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,60)) +
+  scale_x_continuous(breaks = seq(0, 60, by = 10)) +
+  xlab("Central F-values (1, 24)") +
+  ylab("Frequency") +
+  geom_vline(xintercept = 57.96, color = "red") +
+  annotate(geom = "text", x = 55, y = 40000, label="F-value for A", color = "red", hjust = 1) +
+  theme_classic(18)
+```
+
+
+If this graph you can see the F-value we obtained (57.96) is completely to the right of Central F-distribution.  In fact, the proportion of the F-distribution that is equal to, or more extreme, that 57.96 is < .001. So we say the p-value is p < .001.
+
+Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p < .001$). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means **may** be different.
 
 
 
@@ -782,6 +819,38 @@ $$
 
 
 This estimate tells us that, with these data, the **estimated** total variance of preparation means is 3.62 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
+
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=2, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  xlab("Central F-values (2, 24)") +
+  ylab("Frequency") +
+  theme_classic(18)
+```
+
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=2, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  xlab("Central F-values (2, 24)") +
+  ylab("Frequency") +
+  geom_vline(xintercept = 3.62, color = "red") +
+  annotate(geom = "text", x = 4, y = 40000, label="F-value for B", color = "red", hjust = 0) +
+  theme_classic(18)
+```
+
+
 
 We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{B}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = .042$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = .042$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.
 
@@ -959,6 +1028,36 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 &= \frac{53.92667}{\frac{60}{5}}\\
 &=  4.49\\
 \end{align}
+
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=2, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  xlab("Central F-values (2, 24)") +
+  ylab("Frequency") +
+  theme_classic(18)
+```
+
+
+```{r, echo = F}
+fcentral = rf(n = 100000, df1=2, df2=24)
+mdf = data.frame(fvalue = fcentral)
+
+ggplot(mdf, aes(x=fvalue)) +
+  geom_histogram(boundary = 0, binwidth = 0.5) +
+  coord_cartesian(xlim = c(0,10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  xlab("Central F-values (2, 24)") +
+  ylab("Frequency") +
+  geom_vline(xintercept = 4.49, color = "red") +
+  annotate(geom = "text", x = 5, y = 40000, label="F-value for AB", color = "red", hjust = 0) +
+  theme_classic(18)
+```
 
 
 We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{AB}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = 022$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = 022$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.

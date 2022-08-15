@@ -581,6 +581,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="16.12.1" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#total-variance-a"><i class="fa fa-check"></i><b>16.12.1</b> Total variance <span class="math inline">\(A\)</span></a></li>
 <li class="chapter" data-level="16.12.2" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#f-value-for-a"><i class="fa fa-check"></i><b>16.12.2</b> F-value for <span class="math inline">\(A\)</span></a></li>
+<li class="chapter" data-level="16.12.3" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#p-value-for-a"><i class="fa fa-check"></i><b>16.12.3</b> p-value for <span class="math inline">\(A\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="16.13" data-path="sampling-and-n-way-anova.html"><a href="sampling-and-n-way-anova.html#main-effect-b-preparation"><i class="fa fa-check"></i><b>16.13</b> Main Effect <span class="math inline">\(B\)</span>: Preparation</a>
 <ul>
@@ -1280,10 +1281,18 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;= 57.96\\
 \end{align}
 \]</span></p>
-<p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance of juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. <a href="https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions">Recall Central F-distributions from a previous chapter.</a></p>
-<p>We know that the degrees of freedom for this F-value are (1,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{A}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p &lt; .001\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p &lt; .001\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means <strong>may</strong> be different.</p>
-<div id="a-conceptual-juggling" class="section level4 hasAnchor" number="16.12.2.1">
-<h4><span class="header-section-number">16.12.2.1</span> <span class="math inline">\(A\)</span> conceptual (juggling)<a href="sampling-and-n-way-anova.html#a-conceptual-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+</div>
+<div id="p-value-for-a" class="section level3 hasAnchor" number="16.12.3">
+<h3><span class="header-section-number">16.12.3</span> p-value for <span class="math inline">\(A\)</span><a href="sampling-and-n-way-anova.html#p-value-for-a" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This sample F-value tells us that, with these data, the <strong>estimated</strong> total variance of juggling means is 57.96 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. <a href="https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions">Recall Central F-distributions from a previous chapter.</a></p>
+<p>To interpret an F-value for the main effect of <span class="math inline">\(A\)</span>, you need to think about all the F-values that could have occurred - when the population means are equal (i.e., <span class="math inline">\(\sigma_{A}^2=0\)</span>). More specifically, we have to imagine all of the F-values with 1 and 24 degrees of freedom in the Central F-distribution. This distribution is illustrated below:</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>To assign a p-value to the F-value that we obtained, <span class="math inline">\(F = 57.96\)</span> we determine the proportion of the Central F-distribution (with 1 and 24 df) that is equal to, or more extreme, than the F-value we obtained in our study. If you inspect the Central F-distribuion above you can see that the current F-value of 57.96 doesn’t even fit on the graph - since the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:</p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>If this graph you can see the F-value we obtained (57.96) is completely to the right of Central F-distribution. In fact, the proportion of the F-distribution that is equal to, or more extreme, that 57.96 is &lt; .001. So we say the p-value is p &lt; .001.</p>
+<p>Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p &lt; .001\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means <strong>may</strong> be different.</p>
+<div id="a-conceptual-juggling" class="section level4 hasAnchor" number="16.12.3.1">
+<h4><span class="header-section-number">16.12.3.1</span> <span class="math inline">\(A\)</span> conceptual (juggling)<a href="sampling-and-n-way-anova.html#a-conceptual-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <table>
 <colgroup>
 <col width="23%" />
@@ -1321,8 +1330,8 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 </tbody>
 </table>
 </div>
-<div id="a-typical-juggling" class="section level4 hasAnchor" number="16.12.2.2">
-<h4><span class="header-section-number">16.12.2.2</span> <span class="math inline">\(A\)</span> typical (juggling)<a href="sampling-and-n-way-anova.html#a-typical-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="a-typical-juggling" class="section level4 hasAnchor" number="16.12.3.2">
+<h4><span class="header-section-number">16.12.3.2</span> <span class="math inline">\(A\)</span> typical (juggling)<a href="sampling-and-n-way-anova.html#a-typical-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>But this formula is typically rearranged in ANOVA output - due to the fact in the old days it made hand calculations somewhat easier. This typical rearrangement does obscure the conceptual meaning of the calculation though. But it is relatively simply algebra (see below). Note, the F-value does not change.</p>
 <p><span class="math display">\[
 \begin{align}
@@ -1493,6 +1502,8 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 \end{align}
 \]</span></p>
 <p>This estimate tells us that, with these data, the <strong>estimated</strong> total variance of preparation means is 3.62 times larger than than we would <strong>estimate</strong> due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word <strong>estimate(d)</strong> in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. <a href="https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions">Recall Central F-distributions from a previous chapter.</a></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{B}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p = .042\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p = .042\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means <strong>may</strong> be different.</p>
 <div id="b-conceptual-preparation" class="section level4 hasAnchor" number="16.13.2.1">
 <h4><span class="header-section-number">16.13.2.1</span> <span class="math inline">\(B\)</span> conceptual (preparation)<a href="sampling-and-n-way-anova.html#b-conceptual-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -1781,6 +1792,8 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;= \frac{53.92667}{\frac{60}{5}}\\
 &amp;=  4.49\\
 \end{align}\]</span></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="bookdown_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, <strong>when the population means are the same</strong> (i.e., <span class="math inline">\(\sigma_{AB}^2=0\)</span>) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small (<span class="math inline">\(p = 022\)</span>). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely (<span class="math inline">\(p = 022\)</span>). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means <strong>may</strong> be different.</p>
 <div id="ab-conceptual-interaction" class="section level4 hasAnchor" number="16.15.2.1">
 <h4><span class="header-section-number">16.15.2.1</span> <span class="math inline">\(AB\)</span> conceptual (interaction)<a href="sampling-and-n-way-anova.html#ab-conceptual-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
