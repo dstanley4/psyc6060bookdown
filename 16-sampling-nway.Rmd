@@ -621,7 +621,7 @@ $$
 
 ### p-value for $A$
 
-This sample F-value tells us that, with these data, the **estimated** total variance of juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
+This sample F-value tells us that, with these data, the **estimated** total variance of juggling means is 57.96 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is, when the population means are equal, in the context of the the number of populations and the sample sizes. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
 
 To interpret an F-value for the main effect of $A$, you need to think about all the F-values that could have occurred - when the population means are equal (i.e., $\sigma_{A}^2=0$). More specifically, we have to imagine all of the F-values with 1 and 24 degrees of freedom in the Central F-distribution. This distribution is illustrated below:
 
@@ -638,7 +638,7 @@ ggplot(mdf, aes(x=fvalue)) +
   theme_classic(18)
 ```
 
-To assign a p-value to the F-value that we obtained, $F = 57.96$ we determine the proportion of the Central F-distribution (with 1 and 24 df) that is equal to, or more extreme, than the F-value we obtained in our study. If you inspect the Central F-distribuion above you can see that the current F-value of 57.96 doesn't even fit on the graph - since the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:
+To assign a p-value to the F-value that we obtained, $F = 57.96$ we determine the proportion of the Central F-distribution (with 1 and 24 degrees of freedom) that is equal to, or more extreme, than the F-value we obtained in our study. If you inspect the Central F-distribution above you can see that the current F-value of 57.96 doesn't even fit on the graph - because the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:
 
 
 ```{r, echo = F}
@@ -657,13 +657,16 @@ ggplot(mdf, aes(x=fvalue)) +
 ```
 
 
-If this graph you can see the F-value we obtained (57.96) is completely to the right of Central F-distribution.  In fact, the proportion of the F-distribution that is equal to, or more extreme, that 57.96 is < .001. So we say the p-value is p < .001.
+In this graph you can see the F-value we obtained (57.96) is completely to the right of Central F-distribution.  In fact, the proportion of the F-distribution that is equal to, or more extreme, than 57.96 is < .001. So we say the p-value is p < .001.
 
-Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p < .001$). Therefore, we reject that starting assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means **may** be different.
+Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p < .001$). Therefore, we reject the assumption that the population means (i.e., the population means for yes and no juggling) are equal. We conclude those population means **may** be different.
 
 
+To assign a p-value to the F-value that we obtained, $F = 57.96$ we determine the proportion of the Central F-distribution (with 1 and 24 degrees of freedom) that is equal to, or more extreme, than the F-value we obtained in our study. If you inspect the Central F-distribution above you can see that the current F-value of 57.96 doesn't even fit on the graph - because the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:
 
-#### $A$ conceptual (juggling)
+Remember the p-value is the **probability of our data, or more extreme data** assuming the null hypothesis is true.
+
+### $A$ conceptual (juggling)
 
   Juggling| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
@@ -672,7 +675,7 @@ Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sig
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{                  \frac{s_{people}^2}{nb}}= \frac{231.8422}{4.0}= 57.96$ |  $\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{    \frac{\sigma_{people}^2}{nb}}$ | $[(a-1),ab(n-1)]=[1,24]$
 
 
-#### $A$ typical (juggling)
+### $A$ typical (juggling)
 
 But this formula is typically rearranged in ANOVA output - due to the fact in the old days it made hand calculations somewhat easier. This typical rearrangement does obscure the conceptual meaning of the calculation though. But it is relatively simply algebra (see below). Note, the F-value does not change.
 
@@ -817,9 +820,11 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 \end{align}
 $$
 
+### p-value for $B$
 
-This estimate tells us that, with these data, the **estimated** total variance of preparation means is 3.62 times larger than than we would **estimate** due to random sampling alone. This sounds like a large number - but it may not be. Notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is in the context of the the number of sampling means and the sample sizes. Said another way, we need to interpret this F-value in terms of its degrees of freedom. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
+This sample F-value tells us that, with these data, the **estimated** total variance of juggling means is 3.62 times larger than than we would **estimate** due to random sampling alone. Is this large or small? It's hard to tell. As well,  notice the use of word **estimate(d)** in the previous sentences. We are looking at estimates that themselves may vary due to random sampling error. So we need to know how likely this is, when the population means are equal, in the context of the the number of populations and the sample sizes. [Recall Central F-distributions from a previous chapter.](https://dstanley4.github.io/psyc6060bookdown/deep-dive-sampling-and-anova.html#central-f-distributions)
 
+To interpret an F-value for the main effect of $B$, you need to think about all the F-values that could have occurred - when the population means are equal (i.e., $\sigma_{B}^2=0$). More specifically, we have to imagine all of the F-values with 2 and 24 degrees of freedom in the Central F-distribution. This distribution is illustrated below:
 
 ```{r, echo = F}
 fcentral = rf(n = 100000, df1=2, df2=24)
@@ -834,6 +839,7 @@ ggplot(mdf, aes(x=fvalue)) +
   theme_classic(18)
 ```
 
+To assign a p-value to the F-value that we obtained, $F = 3.62$ we determine the proportion of the Central F-distribution (with 2 and 24 degrees of freedom) that is equal to, or more extreme, than the F-value we obtained in our study. The F-value we obtained is position in Central F-distribution below.
 
 ```{r, echo = F}
 fcentral = rf(n = 100000, df1=2, df2=24)
@@ -851,11 +857,13 @@ ggplot(mdf, aes(x=fvalue)) +
 ```
 
 
+In the graph above you can see the F-value we obtained (3.62) is somewhat to the right side of the Central F-distribution. In fact, the proportion of the F-distribution that is equal to, or more extreme, than 3.62 is .042 (i.e. 4.2%). So we say the p-value is $p = .042$.
 
-We know that the degrees of freedom for this F-value are (2,24). We we can ask the question, **when the population means are the same** (i.e., $\sigma_{B}^2=0$) how likely is it that would would obtain an F-value this large or larger. That is, what is the p-value for this F-value? It turns out the p-value is very small ($p = .042$). Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p  = .042$). Therefore, we reject that starting assumption that the population means (i.e., the population means for preparation) are equal. We conclude those population means **may** be different.
+Consequently, under the assumption of equal population means, our data (or more extreme data) is very unlikely ($p = .042$). Therefore, we reject the assumption that the population means (i.e., the population means for low, medium, and high preparation) are equal. We conclude those population means **may** be different.
 
+Remember the p-value is the **probability of our data, or more extreme data** assuming the null hypothesis is true.
 
-#### $B$ conceptual (preparation)
+### $B$ conceptual (preparation)
 
 Preparation| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
@@ -863,7 +871,7 @@ Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333
 Estimated variance sampling error | $\frac{s_{people}^2}{na}=6.0$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{                  \frac{s_{people}^2}{na}} = \frac{21.72333}{6.0}=3.62$ |  $\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{    \frac{\sigma_{people}^2}{na}}$ | $[(b-1),ab(n-1)$
 
-#### $B$ typical (preparation)
+### $B$ typical (preparation)
 
 But this formula is typically rearranged in ANOVA output - due to the fact in the old days it made hand calculations somewhat easier. This typical rearrangement does obscure the conceptual meaning of the calculation though. But it is relatively simply algebra (see below). Note, the F-value does not change.
 
