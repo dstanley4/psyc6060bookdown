@@ -1103,21 +1103,149 @@ Estimated population variance | $s_{people}^2$ |$\sigma_{people}^2$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + n \sigma_{AB}^2}{\sigma_{people}^2}$ | $[(a-1)(b-1),ab(n-1)]$
 
 
-## Confirmatory vs Exporatory
+## Confirmatory Comparisons
 
-## Simple main effects
-
-## Comparing means
 
 ### two means
 
-t-test with d-value
+#### t-test
 
-contrast with d-value
+If you have a comparison (with 2 means) that was planned prior to collecting data, one option to test the comparison is the t-test. This is perhaps the most frequently used approach in some research areas. Consider a scenario where you have a one-sided planned comparison (i.e., an a priori comparison) involving the cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You could proceed as follows.
 
-### weighted means
+**t-test and p-value calculation**
 
-contrast with effect size
+1) Obtain the sample data for these cells
+
+```{r}
+juggling_high_preparation <- nway_data %>%
+  filter(juggling == "yes")%>%
+  filter(preparation == "high")%>%
+  pull(calm)
+
+
+juggling_low_preparation <- nway_data %>%
+  filter(juggling == "yes")%>%
+  filter(preparation == "low")%>%
+  pull(calm)
+```
+
+
+2) Conduct a two-sided t-test
+
+```{r}
+tout<- t.test(juggling_high_preparation, juggling_low_preparation,
+       var.equal = TRUE,
+       alternative = "two.sided")
+
+print(tout)
+```
+
+
+3) Divide the p-value by 2 to obain the one-sided p-value.
+
+$0.005444/2=0.002722$
+
+4) t-test text:
+
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+
+Noteably, we are missing a d-value with confidence interval for the above, see the fix below:
+
+**effect size calculation**
+
+We can calculate the d-value with CI using:
+
+```{r}
+library(MBESS)
+ci.smd(ncp = tout$statistic, n.1 = 5, n.2 = 5)
+```
+
+5) Revised t-test text
+
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$, $d = 2.39$, 95% $CI[0.66, 4.04$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+
+
+| Approach | pooled variance | test  | effect size |
+|:--------:|:---------------:|:-----:|:-----------:|
+| t-test (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2}{2}$ | $t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}$ | $d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
+
+
+
+
+#### contrast
+
+**Calculate F value for contrast**
+
+```{r}
+contrast_means = c(xbar3, xbar1)
+
+mse = (summary(lm_nway)$sigma)^2 # or just 60 for MSE
+df1 = 2 -1 # two means - 1
+df2 = 24 # degrees of freedom for MSE
+n = 5 # 5 per cell
+
+Fvalue = var(contrast_means)/(mse/n)
+print(Fvalue)
+```
+
+
+**Calculate F value for contrast**
+
+```{r}
+pvalue_two_tail = pf(Fvalue,
+                     df1 = df1,
+                     df2 = df2,
+                     lower.tail = FALSE)
+
+pvalue_one_tail = pvalue_two_tail/2
+
+print(pvalue_one_tail)
+```
+
+**Calculate effect size for contrast**
+
+```{r}
+xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
+xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
+
+# Approach 1 s.anova
+mse = 60 #s2_people
+s_people = sqrt(mse)
+mse_n = 2*3*5
+
+# Approach 2 s.anova
+# re-use lm_nway from initial ANOVA
+s_people = summary(lm_nway)$sigma
+mse_n = 2*3*5
+
+ci.sc(means = c(xbar3, xbar1),
+      c.weights = c(1, -1),
+      n =c(5,5),
+      s.anova = s_people,
+      N = mse_n)
+```
+
+
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $sc = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+
+
+
+**SUMMARY**
+
+| Approach | pooled variance | test  | effect size |
+|:--------:|:---------------:|:-----:|:-----------:|
+| contrast (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}$ | $F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}} =  \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2$ | $sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
+| t-test (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2}{2}$ | $t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}$ | $d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
+
+You can see from the above table that when you are comparing two means the contrast and t-test approaches are very similar. The only difference between the two approaches is how the population variance estimate ($s_{people}^2$) is calculated.
+
+
+
+
+### contrasts with multiple means
+
+
+
 
 
 
