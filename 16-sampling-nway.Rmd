@@ -671,7 +671,7 @@ Remember the p-value is the **probability of our data, or more extreme data,** a
   Juggling| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
 Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=231.8422$ |$\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2$ | $(a-1) = 1$
-Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sigma_{people}^2}{nb}$ | $ab(n-1) = 24$
+Estimated variance sampling error | $\frac{s_{people}^2}{nb}=\frac{60}{15} = 4.0$ |$\frac{\sigma_{people}^2}{nb}$ | $ab(n-1) = 24$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{                  \frac{s_{people}^2}{nb}}= \frac{231.8422}{4.0}= 57.96$ |  $\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{    \frac{\sigma_{people}^2}{nb}}$ | $[(a-1),ab(n-1)]=[1,24]$
 
 
@@ -868,7 +868,7 @@ Remember the p-value is the **probability of our data, or more extreme data,** a
 Preparation| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
 Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333$ |$\frac{\sigma_{people}^2}{na} + \sigma_{B}^2$ | $(b-1)$
-Estimated variance sampling error | $\frac{s_{people}^2}{na}=6.0$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1)$
+Estimated variance sampling error | $\frac{s_{people}^2}{na}= \frac{60}{10}=6.0$ |$\frac{\sigma_{people}^2}{na}$ | $ab(n-1)$
 Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{                  \frac{s_{people}^2}{na}} = \frac{21.72333}{6.0}=3.62$ |  $\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{    \frac{\sigma_{people}^2}{na}}$ | $[(b-1),ab(n-1)$
 
 ### $B$ typical (preparation)
@@ -1085,9 +1085,9 @@ Remember the p-value is the **probability of our data, or more extreme data,** a
 
 Preparation| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Estimated total variance | $\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}$ |$\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2$ | $(a-1)(b-1)$
-Estimated variance sampling error | $\frac{s_{people}^2}{n}$ |$\frac{\sigma_{people}^2}{n}$ | $ab(n-1)$
-Comparison using $F$-ratio |$\frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{                  \frac{s_{people}^2}{n}}$  |  $\frac{\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2}{    \frac{\sigma_{people}^2}{n}}$ | $[(a-1)(b-1),ab(n-1)]$
+Estimated total variance | $\frac{\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)} = 53.92667$ |$\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2$ | $(a-1)(b-1)$
+Estimated variance sampling error | $\frac{s_{people}^2}{n}=\frac{60}{5}=12$ |$\frac{\sigma_{people}^2}{n}$ | $ab(n-1)$
+Comparison using $F$-ratio |$\frac{\frac{\sum (\overline{x_{residual_i}} )^2}{(a-1)(b-1)}}{                  \frac{s_{people}^2}{n}}=\frac{53.92667}{12}=4.49$  |  $\frac{\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2}{    \frac{\sigma_{people}^2}{n}}$ | $[(a-1)(b-1),ab(n-1)]$
 
 ### $AB$ typical (interaction)
 
@@ -1098,9 +1098,9 @@ knitr::include_graphics("ch_deeper_nway/images/ftable_ab.png")
 
   Juggling| Formula | Expected value | degrees of freedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Sample size multiplied by estimated total variance| $\frac{n\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}$ |$\sigma_{people}^2 + n \sigma_{AB}^2$ | $(a-1)(b-1)$
+Sample size multiplied by estimated total variance| $\frac{n\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)}$ |$\sigma_{people}^2 + n \sigma_{AB}^2$ | $(a-1)(b-1)$
 Estimated population variance | $s_{people}^2$ |$\sigma_{people}^2$ | $ab(n-1)$
-Comparison using $F$-ratio | $\frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + n \sigma_{AB}^2}{\sigma_{people}^2}$ | $[(a-1)(b-1),ab(n-1)]$
+Comparison using $F$-ratio | $\frac{\frac{\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)}}{s_{people}^2}$ | $\frac{\sigma_{people}^2 + n \sigma_{AB}^2}{\sigma_{people}^2}$ | $[(a-1)(b-1),ab(n-1)]$
 
 
 ## Confirmatory vs Exporatory
