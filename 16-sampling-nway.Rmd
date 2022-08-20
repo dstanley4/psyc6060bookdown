@@ -123,13 +123,12 @@ Unfortunately, students often struggle when presented with the sample size as a 
 When we want to know the sample size for an $A$ mean we simply multiply the cell size ($n = 5$) by the number of levels of B (i.e., $b = 3$) to obtain 15. This is confusing for some people because even though you want to calculate the sample size of the means for $A$ you use $b$ in the calculation. But if you look at the diagram above, it should be clear why this is the case.
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Sample Size A} &= nb\\
 &= 5\times3\\
 &= 15\\
-\end{align}
+\end{aligned}
 $$
-
 
 Note when you examine the means for Juggling we refer to this using a few different phrases:
 
@@ -153,13 +152,12 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_B_pop.png")
 
 When we want to know the sample size for a $B$ mean we simply multiply the size size ($n = 5$) by the number of levels of $A$ (i.e., $a =2$). This is confusing for some people because even though you want to know the sample size of the means for $B$ you use $a$ in the calculation. But if you look the diagram above, it should be clear why this is the case.
 
-
 $$
-\begin{align}
+\begin{aligned}
 \text{Sample Size B} &= na\\
 &= 5\times2\\
 &= 10\\
-\end{align}
+\end{aligned}
 $$
 
 Note when you examine the means for Preparation we refer to this using a few different phrases:
@@ -356,15 +354,17 @@ Therefore, a better way to display the population variance estimates is with the
 
 We use the formula below to average the cell variances **when the sample sizes for the 6 cells are identical.** That is, all $n = 5$.:
 
-\begin{align}
+$$
+\begin{aligned}
 s_{people}^2 &=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &= \frac{`r var1` + `r var2` +`r var3` +`r var4` +`r var5` +`r var6` }{6} \\ &= `r mean(var_all)`
-\end{align}
+\end{aligned}
+$$
 
 Thus, our best sample-based estimate of the variance of calmness scores in the population is $s_{people}^2 = 60.00$.
 
 **We averaged, or took the mean of, six sample based estimates to obtain $s_{people}^2$. Most people refer to $s_{people}^2$ as Mean Squared Error or MSE. You can think of Mean Squared Error as a synonym for *estimated population variance.* **
 
-$$\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0$$
+$\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0$
 
 **CRITICAL:** Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the sample variance estimates - this math is not reviewed in detail for the sake of a simple narrative.
 
@@ -395,10 +395,10 @@ As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determi
 To estimate the expected variability in sample means due to sampling error we need an estimate ($s_{people}^2$) of the population variance ($\sigma_{people}^2$). That's why we spent so much time obtaining $s_{people}^2$ in the previous section. Recall the general form of the formula for the expected variance in sample means, due to sampling error, from previous chapters:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means} &= \sigma_{\bar{x}}^2 \\
  &= \frac{\sigma_{people}^2}{\text{sample size}}\\
-\end{align}
+\end{aligned}
 $$
 
 The formula above, for the variability due to sampling error alone, is based on the Central Limit Theorem (CLT) and is reviewed extensively in past chapters.
@@ -409,29 +409,26 @@ The formula above, for the variability due to sampling error alone, is based on 
 In the context of the juggling main effect means, each juggle mean is based on $nb=(5)(3)=15$ people. 
 Therefore, for these juggling main effect means the general formula for the variance due to sampling error is below:
 
-
 $$
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means for A} &=
 \sigma_{\bar{x}}^2 \\
 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{nb}\\
-\end{align}
+\end{aligned}
 $$
-
 
 We don't know the population variance ($\sigma_{people}^2$) though, but we use an estimate below ($s_{people}^2$):
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for means for A} &= s_{\bar{x}}^2\\
 &= \frac{s_{people}^2}{nb}\\
 &= \frac{s_{people}^2}{(5)(3)}\\
 &= \frac{60.0}{15}\\
 &= 4.0
-\end{align}
+\end{aligned}
 $$
-
 
 Thus, when we have two juggling populations from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.
 
@@ -447,24 +444,24 @@ In the context of the preparation main effect means, each preparation mean is ba
 Therefore, for these preparation main effect means the general formula for the variance due to sampling error is below:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means for B} &=
 \sigma_{\bar{x}}^2 \\
 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{na}\\
-\end{align}
+\end{aligned}
 $$
 
 We don't know the population variance ($\sigma_{people}^2$) though, but we use an estimate below ($s_{people}^2$):
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for means for B} &= s_{\bar{x}}^2\\
 &= \frac{s_{people}^2}{na}\\
 &= \frac{s_{people}^2}{(5)(2)}\\
 &= \frac{60.0}{10}\\
 &= 6.0
-\end{align}
+\end{aligned}
 $$
 
 Thus, when we have three preparation populations from which we obtained samples of 10 people, we would expect the variance of sample means to be 6.0; assuming the population means are the same.
@@ -479,21 +476,20 @@ In the context of the cell means, each cell mean is based on $n=5$ people.
 Therefore, for these cell means the general formula for the variance due to sampling error is below:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for cell means} = \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{n}\\
-\end{align}
+\end{aligned}
 $$
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for cell means} &= s_{\bar{x}}^2\\
 &= \frac{s_{people}^2}{n}\\
 &= \frac{60.0}{5}\\
 &= 12.0
-\end{align}
+\end{aligned}
 $$
-
 
 I omit the diagram for cells populations and sample mean distributions. This is done because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one diagram. But don't worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.
 
@@ -529,11 +525,11 @@ If we knew the **population means** we could:
 1) Calculate the grand mean (i.e., $\mu_A$). That is, the mean of the two juggling population means. Recall because there are two levels of juggling (i.e., two populations), $a = 2$. Note that this is the same as the taking the mean of **all participants from both populations** (assuming equal population sizes).
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Grand mean} = \mu_A &= \frac{\sum\mu_{A_i}}{a} \\
 &= \frac{\mu_{A_1}+\mu_{A_2}}{2}\\
 &= \frac{? + ?}{2}
-\end{align}
+\end{aligned}
 $$
 
 But, as the question marks clearly illustrate - we  don't know the population means. We don't have everyone in the population. But if we did have the population means we could proceed as below.
@@ -561,13 +557,14 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_A_sample.png")
 1) We ESTIMATE the grand mean using the mean of the sample-level means. We refer to our grand mean estimate using $\bar{bar{bar}}$. There are two bars about the $x$ to indicate that it is the mean of means. **Note that this "grand mean" of participants is the same as taking the mean of all participants (assuming equal cell sizes).**
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \overline{x_{A_i}}}{a} \\
 &= \frac{\overline{x_{A_1}}+\overline{x_{A_2}}}{2}\\
 &= \frac{77.33333 + 55.8}{2} \\
 &= 66.56667\\
-\end{align}
+\end{aligned}
 $$
+
 
 2) Now estimate the total variance in populations means:
 
@@ -609,7 +606,7 @@ Estimated variance sampling error | $\frac{s_{people}^2}{nb} = 4.0$ |$\frac{\sig
 We calculate an $F$-value to compare these two values:
 
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &= \frac{\frac{\sum (\overline{x_{Ai}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
@@ -619,7 +616,7 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 &=\frac{231.8422}{\frac{60}{15}}\\
 &=\frac{231.8422}{4}\\
 &= 57.96\\
-\end{align}
+\end{aligned}
 $$
 
 ### $p$-value for $A$
@@ -688,7 +685,7 @@ The conceptual formula are algebraically rearranged in typical ANOVA output - du
 
 
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times 1\\
 &= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times \frac{nb}{nb}\\
@@ -697,7 +694,7 @@ F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}
 &=  \frac{(15)(231.8422)}{60}\\
 &=  \frac{3477.633}{60}\\
 &= 57.96\\
-\end{align}
+\end{aligned}
 $$
 
 From this rearrangement we use the labels below. Notice the inclusion of $nb$ in the $MS_{juggling}$ this is hard to explain unless you first understood the conceptual version of the equations above. Indeed, people who tend to explain ANOVA using a "between vs within" explanation usually need to skip over or "brush away" the $nb$ term in their explanations.
@@ -732,11 +729,11 @@ If we knew the **population** means we could:
 1) Calculate the grand mean (i.e., $\mu_B$). That is, the mean of the three preparation population means. Recall because there are three levels of preparation (i.e., three populations), $b = 3$. Note that this is the same as the taking the mean of **all participants from the three populations** (assuming equal population sizes). 
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Grand mean} = \mu_B &= \frac{\sum\mu_{B_i}}{b} \\
 &= \frac{\mu_{B_1}+\mu_{B_2}+\mu_{B_3}}{3}\\
 &= \frac{? + ? + ?}{3}
-\end{align}
+\end{aligned}
 $$
 
 But, as the question marks clearly illustrate - we  don't know the population means. We don't have everyone in the population. But if we did have the population means we could proceed as below.
@@ -763,12 +760,12 @@ knitr::include_graphics("ch_deeper_nway/images/nway_design_B_sample.png")
 1) We ESTIMATE the grand mean using the mean of the sample-level means. We refer to our grand mean estimate using $\bar{bar{bar}}$. There are two bars about the $x$ to indicate that it is the mean of means. **Note that this "grand mean" of participants is the same as taking the mean of all participants (assuming equal cell sizes).**
 
 $$
-\begin{align}
+\begin{aligned}
 \text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{B_i}}{b} \\
 &= \frac{\overline{x_{B_1}}+\overline{x_{B_2}} +\overline{x_{B_3}} }{3}\\
 &= \frac{65.4 + 62.6 + 71.7}{3} \\
 &= 66.56667\\
-\end{align}
+\end{aligned}
 $$
 
 2) Now estimate the total variance in populations means:
@@ -781,6 +778,7 @@ s_{\mu_B}^2 &=  \frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} \\
 &= 21.72333
 \end{aligned}
 $$
+
 
 
 
@@ -815,8 +813,9 @@ We calculate an $F$-value to compare these two values:
 
 
 
+
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &= \frac{\frac{\sum (\overline{x_{Bi}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
@@ -826,7 +825,7 @@ F &= \frac{\text{estimated total variance}}{\text{estimated variance due to rand
 &=\frac{21.72333}{\frac{60}{10}}\\
 &=\frac{21.72333}{6}\\
 &= 3.62\\
-\end{align}
+\end{aligned}
 $$
 
 ### $p$-value for $B$
@@ -887,7 +886,7 @@ Comparison using $F$-ratio | $\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}
 The conceptual formula are algebraically rearranged in typical ANOVA output - due to the fact in the "old days" it made hand calculations somewhat easier. This typical rearrangement obscures the conceptual meaning of the calculations though. But it is relatively simply algebra (see below). Note, the $F$-value does not change.
 
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
@@ -897,7 +896,7 @@ F &= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}
 &=  \frac{(10)(21.72333)}{60}\\
 &=  \frac{217.2333}{60}\\
 &= 3.62\\
-\end{align}
+\end{aligned}
 $$
 
 From this rearrangement we use the labels below. Notice the inclusion of $na$ in the $MS_{preparation}$ this is hard to explain unless you first understood the conceptual version of the equations above. Indeed, people who tend to explain ANOVA using a "between vs within" explanation usually need to skip over or "brush away" the $na$ term in their explanations.
@@ -1018,14 +1017,15 @@ $$
 We apply the formula above the means in the residual mean table. These are the cell means with the main effects removed. 
 The estimated population variance is:
 
-\begin{align}
+$$
+\begin{aligned}
 s_{residual}^2 &= \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}\\
 &= \frac{(`r round(rg1,2)` - 0)^2 + (`r round(rg2,2)` - 0)^2 + (`r round(rg3,2)` - 0)^2 + (`r round(rg4,2)` - 0)^2 + (`r round(rg5,2)` - 0)^2 + (`r round(rg6,2)` - 0)^2}{(2-1)(3-1)} \\
 &= \frac{(`r round(rg1,2)`)^2 + (`r round(rg2,2)`)^2 + (`r round(rg3,2)`)^2 + (`r round(rg4,2)`)^2 + (`r round(rg5,2)`)^2 + (`r round(rg6,2)`)^2}{(2-1)(3-1)} \\
 &= \frac{`r round(sum(all_res^2),2)`}{2}
 &= 53.92667
-\end{align}
-
+\end{aligned}
+$$
 
 Each residual mean is based on $n=5$. Therefore, the estimated variance due to sampling error is:
 
@@ -1037,12 +1037,14 @@ $$
 
 So F-ratio comparing these two estimates is:
 
-\begin{align}
+$$
+\begin{aligned}
 F &= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &= \frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{\frac{s_{people}^2}{n}}\\
 &= \frac{53.92667}{\frac{60}{5}}\\
 &=  4.49\\
-\end{align}
+\end{aligned}
+$$
 
 ### $p$-value for $AB$
 

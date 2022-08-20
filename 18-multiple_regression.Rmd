@@ -480,7 +480,7 @@ lm_object <- lm(video_game ~ age + iq,
 
 The lm_object has the three data point for each person (age, iq, video_game) embedded inside it. So we can use the lm_object to create the scatter plot with regression plane. We do so using the fastInteraction package. More specifically,  we use the fast.plot command as illustrated below.Note:  The fast.plot command uses the argument "moderator" which is not appropriate in our context. When you see moderator in the command below just think of it as another predictor. 
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, echo = TRUE, eval = knitr::is_html_output()}
 library(fastInteraction)
 
 surface_plot <- fast.plot(lm_object,
@@ -489,6 +489,7 @@ surface_plot <- fast.plot(lm_object,
                           moderator = age)
 
 ```
+
 
 Then just type:
 
@@ -507,7 +508,7 @@ All of the predicted scores fall on the regression surface. You can think of the
 Try the interactive version of the graph below. Caveat, sometimes it doesn't appear correctly on the web. If the graph appears incorrectly (e.g., no data points or no surface) try using the Chrome browser. Safari sometimes has problems with this web object. You can rotate the graph to see a better view of the surface. The graph illustrates that predicted video game scores (i.e., the surface) change as a function of both age and iq.
 
 
-```{r, eval= TRUE}
+```{r, include=knitr::is_html_output(), eval = knitr::is_html_output() }
 surface_plot
 ```
 

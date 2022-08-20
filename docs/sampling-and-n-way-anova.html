@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Sampling and N-way ANOVA | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Sampling and N-way ANOVA | Welcome!" />
   <meta property="og:type" content="book" />
@@ -933,11 +933,11 @@ Chicago.</a></p>
 <p>Unfortunately, students often struggle when presented with the sample size as a calculation with symbolic notation. Recall that we we use <span class="math inline">\(n = 5\)</span> to refer the number of people in each cell, <span class="math inline">\(a = 2\)</span> to refer to the number of juggling levels, and <span class="math inline">\(b = 3\)</span> to refer to the number of preparation levels.</p>
 <p>When we want to know the sample size for an <span class="math inline">\(A\)</span> mean we simply multiply the cell size (<span class="math inline">\(n = 5\)</span>) by the number of levels of B (i.e., <span class="math inline">\(b = 3\)</span>) to obtain 15. This is confusing for some people because even though you want to calculate the sample size of the means for <span class="math inline">\(A\)</span> you use <span class="math inline">\(b\)</span> in the calculation. But if you look at the diagram above, it should be clear why this is the case.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sample Size A} &amp;= nb\\
 &amp;= 5\times3\\
 &amp;= 15\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>Note when you examine the means for Juggling we refer to this using a few different phrases:</p>
 <ul>
@@ -955,11 +955,11 @@ Chicago.</a></p>
 <p><img src="ch_deeper_nway/images/nway_design_B_pop.png" width="80%" /></p>
 <p>When we want to know the sample size for a <span class="math inline">\(B\)</span> mean we simply multiply the size size (<span class="math inline">\(n = 5\)</span>) by the number of levels of <span class="math inline">\(A\)</span> (i.e., <span class="math inline">\(a =2\)</span>). This is confusing for some people because even though you want to know the sample size of the means for <span class="math inline">\(B\)</span> you use <span class="math inline">\(a\)</span> in the calculation. But if you look the diagram above, it should be clear why this is the case.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sample Size B} &amp;= na\\
 &amp;= 5\times2\\
 &amp;= 10\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>Note when you examine the means for Preparation we refer to this using a few different phrases:</p>
 <ul>
@@ -1104,12 +1104,14 @@ s^2 = \frac{\sum (x_i - \bar{x}^2)}{n-1}
 </table>
 <p><strong>CRITICAL:</strong> When we ASSUME the six sample estimates (<span class="math inline">\(s_1^2\)</span>, <span class="math inline">\(s_2^2\)</span>, <span class="math inline">\(s_3^2\)</span>, <span class="math inline">\(s_4^2\)</span>, <span class="math inline">\(s_5^2\)</span>, <span class="math inline">\(s_6^2\)</span>) are all estimates of <strong>the same</strong> population value, <span class="math inline">\(\sigma_{people}^2\)</span>, we can combine the sample estimates (i.e., average them) to get a best estimate of the population value (i.e., <span class="math inline">\(s_{people}^2\)</span>). This makes sense because, with the identical population variances assumption, each sample variance estimate (e.g., <span class="math inline">\(s_1^2\)</span>) only differs from the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>) due to random sampling error. By averaging the sample estimates (<span class="math inline">\(s_1^2\)</span>, <span class="math inline">\(s_2^2\)</span>, <span class="math inline">\(s_3^2\)</span>, <span class="math inline">\(s_4^2\)</span>, <span class="math inline">\(s_5^2\)</span>, <span class="math inline">\(s_6^2\)</span>) we are “averaging out” the random sampling error.</p>
 <p>We use the formula below to average the cell variances <strong>when the sample sizes for the 6 cells are identical.</strong> That is, all <span class="math inline">\(n = 5\)</span>.:</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{aligned}
 s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &amp;= \frac{30.3 + 78.8 +66.5 +9.8 +58.3 +116.3 }{6} \\ &amp;= 60
-\end{align}\]</span></p>
+\end{aligned}
+\]</span></p>
 <p>Thus, our best sample-based estimate of the variance of calmness scores in the population is <span class="math inline">\(s_{people}^2 = 60.00\)</span>.</p>
 <p><strong>We averaged, or took the mean of, six sample based estimates to obtain <span class="math inline">\(s_{people}^2\)</span>. Most people refer to <span class="math inline">\(s_{people}^2\)</span> as Mean Squared Error or MSE. You can think of Mean Squared Error as a synonym for <em>estimated population variance.</em> </strong></p>
-<p><span class="math display">\[\text{Mean Squared Error} = MSE = s_{people}^2  = 60.0\]</span></p>
+<p><span class="math inline">\(\text{Mean Squared Error} = MSE = s_{people}^2 = 60.0\)</span></p>
 <p><strong>CRITICAL:</strong> Note that averaging the sample variances estimates ONLY MAKES SENSE if we assume the six population variances are all the same. It only makes sense to average the sample variance estimates if they are all estimates of a single population value. Thus, calculation of Mean Squared Error only makes sense if the homogeneity of population variances assumption is true. Also note that when the cell sizes are unequal you need to created a weighted average of the sample variance estimates - this math is not reviewed in detail for the sake of a simple narrative.</p>
 <p>We now in the following situation:</p>
 <p><img src="ch_deeper_nway/images/summary_mse.png" width="100%" /></p>
@@ -1122,10 +1124,10 @@ s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &am
 <p>As we learned in the 1-way ANOVA chapters, an important part of ANOVA is determining if the variability in sample means is greater than could be expected due to random sampling error. Consequently, we have to estimate how much random sampling error variance there would be (on average) in sample means for each of the three frames of reference (main effect of <span class="math inline">\(A\)</span> means, main effect of <span class="math inline">\(B\)</span> means, and cell means).</p>
 <p>To estimate the expected variability in sample means due to sampling error we need an estimate (<span class="math inline">\(s_{people}^2\)</span>) of the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>). That’s why we spent so much time obtaining <span class="math inline">\(s_{people}^2\)</span> in the previous section. Recall the general form of the formula for the expected variance in sample means, due to sampling error, from previous chapters:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means} &amp;= \sigma_{\bar{x}}^2 \\
 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>The formula above, for the variability due to sampling error alone, is based on the Central Limit Theorem (CLT) and is reviewed extensively in past chapters.</p>
 <div id="clt-a-juggling" class="section level3 hasAnchor" number="16.11.1">
@@ -1133,22 +1135,22 @@ s_{people}^2 &amp;=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &am
 <p>In the context of the juggling main effect means, each juggle mean is based on <span class="math inline">\(nb=(5)(3)=15\)</span> people.
 Therefore, for these juggling main effect means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means for A} &amp;=
 \sigma_{\bar{x}}^2 \\
 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &amp;= \frac{\sigma_{people}^2}{nb}\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>We don’t know the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>) though, but we use an estimate below (<span class="math inline">\(s_{people}^2\)</span>):</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for means for A} &amp;= s_{\bar{x}}^2\\
 &amp;= \frac{s_{people}^2}{nb}\\
 &amp;= \frac{s_{people}^2}{(5)(3)}\\
 &amp;= \frac{60.0}{15}\\
 &amp;= 4.0
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>Thus, when we have two juggling populations from which we obtained samples of 15 people, we would expect the variance of sample means to be 4.0; assuming the population means are the same.</p>
 <p><img src="ch_deeper_nway/images/pop_equal_means_a.png" width="80%" /></p>
@@ -1158,22 +1160,22 @@ Therefore, for these juggling main effect means the general formula for the vari
 <p>In the context of the preparation main effect means, each preparation mean is based on <span class="math inline">\(na=(5)(2)=10\)</span> people.
 Therefore, for these preparation main effect means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for means for B} &amp;=
 \sigma_{\bar{x}}^2 \\
 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &amp;= \frac{\sigma_{people}^2}{na}\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>We don’t know the population variance (<span class="math inline">\(\sigma_{people}^2\)</span>) though, but we use an estimate below (<span class="math inline">\(s_{people}^2\)</span>):</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for means for B} &amp;= s_{\bar{x}}^2\\
 &amp;= \frac{s_{people}^2}{na}\\
 &amp;= \frac{s_{people}^2}{(5)(2)}\\
 &amp;= \frac{60.0}{10}\\
 &amp;= 6.0
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>Thus, when we have three preparation populations from which we obtained samples of 10 people, we would expect the variance of sample means to be 6.0; assuming the population means are the same.</p>
 <p><img src="ch_deeper_nway/images/pop_equal_means_b.png" width="80%" /></p>
@@ -1183,18 +1185,18 @@ Therefore, for these preparation main effect means the general formula for the v
 <p>In the context of the cell means, each cell mean is based on <span class="math inline">\(n=5\)</span> people.
 Therefore, for these cell means the general formula for the variance due to sampling error is below:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Sampling error variance for cell means} = \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &amp;= \frac{\sigma_{people}^2}{n}\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Estimated sampling error variance for cell means} &amp;= s_{\bar{x}}^2\\
 &amp;= \frac{s_{people}^2}{n}\\
 &amp;= \frac{60.0}{5}\\
 &amp;= 12.0
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>I omit the diagram for cells populations and sample mean distributions. This is done because there are so many different ways cells might be examined. There would be too many diagrams - and it would be misleading to present just one diagram. But don’t worry we will return to this issue, with diagrams, when we start talking about interactions in more detail.</p>
 </div>
@@ -1215,11 +1217,11 @@ Therefore, for these cell means the general formula for the variance due to samp
 <li>Calculate the grand mean (i.e., <span class="math inline">\(\mu_A\)</span>). That is, the mean of the two juggling population means. Recall because there are two levels of juggling (i.e., two populations), <span class="math inline">\(a = 2\)</span>. Note that this is the same as the taking the mean of <strong>all participants from both populations</strong> (assuming equal population sizes).</li>
 </ol>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Grand mean} = \mu_A &amp;= \frac{\sum\mu_{A_i}}{a} \\
 &amp;= \frac{\mu_{A_1}+\mu_{A_2}}{2}\\
 &amp;= \frac{? + ?}{2}
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>But, as the question marks clearly illustrate - we don’t know the population means. We don’t have everyone in the population. But if we did have the population means we could proceed as below.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -1239,12 +1241,12 @@ Therefore, for these cell means the general formula for the variance due to samp
 <li>We ESTIMATE the grand mean using the mean of the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of participants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
 </ol>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Grand mean estimate} = \bar{\bar{x}} &amp;= \frac{\sum \overline{x_{A_i}}}{a} \\
 &amp;= \frac{\overline{x_{A_1}}+\overline{x_{A_2}}}{2}\\
 &amp;= \frac{77.33333 + 55.8}{2} \\
 &amp;= 66.56667\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Now estimate the total variance in populations means:</li>
@@ -1305,7 +1307,7 @@ s_{\mu_A}^2 &amp;=  \frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1} \\
 </table>
 <p>We calculate an <span class="math inline">\(F\)</span>-value to compare these two values:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &amp;= \frac{\frac{\sum (\overline{x_{Ai}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
@@ -1315,7 +1317,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;=\frac{231.8422}{\frac{60}{15}}\\
 &amp;=\frac{231.8422}{4}\\
 &amp;= 57.96\\
-\end{align}
+\end{aligned}
 \]</span></p>
 </div>
 <div id="p-value-for-a" class="section level3 hasAnchor" number="16.12.3">
@@ -1375,7 +1377,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <h3><span class="header-section-number">16.12.5</span> <span class="math inline">\(A\)</span> typical (juggling)<a href="sampling-and-n-way-anova.html#a-typical-juggling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The conceptual formula are algebraically rearranged in typical ANOVA output - due to the fact in the “old days” it made hand calculations somewhat easier. This typical rearrangement obscures the conceptual meaning of the calculations though. But it is relatively simply algebra (see below). Note, the <span class="math inline">\(F\)</span>-value does not change.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}}\\
 &amp;= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times 1\\
 &amp;= \frac{\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}{nb}} \times \frac{nb}{nb}\\
@@ -1384,7 +1386,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 &amp;=  \frac{(15)(231.8422)}{60}\\
 &amp;=  \frac{3477.633}{60}\\
 &amp;= 57.96\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>From this rearrangement we use the labels below. Notice the inclusion of <span class="math inline">\(nb\)</span> in the <span class="math inline">\(MS_{juggling}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above. Indeed, people who tend to explain ANOVA using a “between vs within” explanation usually need to skip over or “brush away” the <span class="math inline">\(nb\)</span> term in their explanations.</p>
 <p><span class="math inline">\(MS_{juggling} = nb\frac{\sum (\overline{x_{A_i}}-\bar{\bar{x}})^2}{a-1} = 3477.633\)</span></p>
@@ -1440,11 +1442,11 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 <li>Calculate the grand mean (i.e., <span class="math inline">\(\mu_B\)</span>). That is, the mean of the three preparation population means. Recall because there are three levels of preparation (i.e., three populations), <span class="math inline">\(b = 3\)</span>. Note that this is the same as the taking the mean of <strong>all participants from the three populations</strong> (assuming equal population sizes).</li>
 </ol>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Grand mean} = \mu_B &amp;= \frac{\sum\mu_{B_i}}{b} \\
 &amp;= \frac{\mu_{B_1}+\mu_{B_2}+\mu_{B_3}}{3}\\
 &amp;= \frac{? + ? + ?}{3}
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>But, as the question marks clearly illustrate - we don’t know the population means. We don’t have everyone in the population. But if we did have the population means we could proceed as below.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -1464,12 +1466,12 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{\frac{s_{people}^2}
 <li>We ESTIMATE the grand mean using the mean of the sample-level means. We refer to our grand mean estimate using <span class="math inline">\(\bar{bar{bar}}\)</span>. There are two bars about the <span class="math inline">\(x\)</span> to indicate that it is the mean of means. <strong>Note that this “grand mean” of participants is the same as taking the mean of all participants (assuming equal cell sizes).</strong></li>
 </ol>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{Grand mean estimate} = \bar{\bar{x}} &amp;= \frac{\sum \bar{x}_{B_i}}{b} \\
 &amp;= \frac{\overline{x_{B_1}}+\overline{x_{B_2}} +\overline{x_{B_3}} }{3}\\
 &amp;= \frac{65.4 + 62.6 + 71.7}{3} \\
 &amp;= 66.56667\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Now estimate the total variance in populations means:</li>
@@ -1530,7 +1532,7 @@ s_{\mu_B}^2 &amp;=  \frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} \\
 </table>
 <p>We calculate an <span class="math inline">\(F\)</span>-value to compare these two values:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &amp;= \frac{\frac{\sum (\overline{x_{Bi}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
@@ -1540,7 +1542,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 &amp;=\frac{21.72333}{\frac{60}{10}}\\
 &amp;=\frac{21.72333}{6}\\
 &amp;= 3.62\\
-\end{align}
+\end{aligned}
 \]</span></p>
 </div>
 <div id="p-value-for-b" class="section level3 hasAnchor" number="16.13.3">
@@ -1598,7 +1600,7 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <h3><span class="header-section-number">16.13.5</span> <span class="math inline">\(B\)</span> typical (preparation)<a href="sampling-and-n-way-anova.html#b-typical-preparation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The conceptual formula are algebraically rearranged in typical ANOVA output - due to the fact in the “old days” it made hand calculations somewhat easier. This typical rearrangement obscures the conceptual meaning of the calculations though. But it is relatively simply algebra (see below). Note, the <span class="math inline">\(F\)</span>-value does not change.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &amp;= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}}\\
 &amp;= \frac{\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}{na}} \times 1\\
@@ -1608,7 +1610,7 @@ F &amp;= \frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{\frac{s_{people}^2}
 &amp;=  \frac{(10)(21.72333)}{60}\\
 &amp;=  \frac{217.2333}{60}\\
 &amp;= 3.62\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>From this rearrangement we use the labels below. Notice the inclusion of <span class="math inline">\(na\)</span> in the <span class="math inline">\(MS_{preparation}\)</span> this is hard to explain unless you first understood the conceptual version of the equations above. Indeed, people who tend to explain ANOVA using a “between vs within” explanation usually need to skip over or “brush away” the <span class="math inline">\(na\)</span> term in their explanations.</p>
 <p><span class="math inline">\(MS_{preparation} = na\frac{\sum (\overline{x_{B_i}}-\bar{\bar{x}})^2}{b-1} = 217.2333\)</span></p>
@@ -1818,13 +1820,15 @@ s_{residual}^2 = \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{
 \]</span></p>
 <p>We apply the formula above the means in the residual mean table. These are the cell means with the main effects removed.
 The estimated population variance is:</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{aligned}
 s_{residual}^2 &amp;= \frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}\\
 &amp;= \frac{(-4.77 - 0)^2 + (-0.77 - 0)^2 + (5.53 - 0)^2 + (4.77 - 0)^2 + (0.77 - 0)^2 + (-5.53 - 0)^2}{(2-1)(3-1)} \\
 &amp;= \frac{(-4.77)^2 + (-0.77)^2 + (5.53)^2 + (4.77)^2 + (0.77)^2 + (-5.53)^2}{(2-1)(3-1)} \\
 &amp;= \frac{107.85}{2}
 &amp;= 53.92667
-\end{align}\]</span></p>
+\end{aligned}
+\]</span></p>
 <p>Each residual mean is based on <span class="math inline">\(n=5\)</span>. Therefore, the estimated variance due to sampling error is:</p>
 <p><span class="math display">\[
 \frac{s_{people}^2}{n}
@@ -1834,12 +1838,14 @@ s_{residual}^2 &amp;= \frac{\sum (\overline{x_{residual_i}} - \overline{\overlin
 <div id="f-value-for-ab" class="section level3 hasAnchor" number="16.15.2">
 <h3><span class="header-section-number">16.15.2</span> <span class="math inline">\(F\)</span>-value for <span class="math inline">\(AB\)</span><a href="sampling-and-n-way-anova.html#f-value-for-ab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So F-ratio comparing these two estimates is:</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display">\[
+\begin{aligned}
 F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to random sampling}} \\
 &amp;= \frac{\frac{\sum (\overline{x_{residual_i}} - \overline{\overline{x_{residual}}})^2}{(a-1)(b-1)}}{\frac{s_{people}^2}{n}}\\
 &amp;= \frac{53.92667}{\frac{60}{5}}\\
 &amp;=  4.49\\
-\end{align}\]</span></p>
+\end{aligned}
+\]</span></p>
 </div>
 <div id="p-value-for-ab" class="section level3 hasAnchor" number="16.15.3">
 <h3><span class="header-section-number">16.15.3</span> <span class="math inline">\(p\)</span>-value for <span class="math inline">\(AB\)</span><a href="sampling-and-n-way-anova.html#p-value-for-ab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2200,7 +2206,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
