@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 20 Sample size for multiple regression | Welcome!</title>
+  <title>Chapter 17 N-way Cell Comparisons | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
   <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 20 Sample size for multiple regression | Welcome!" />
+  <meta property="og:title" content="Chapter 17 N-way Cell Comparisons | Welcome!" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Course notes for PSYC 6060" />
   <meta name="github-repo" content="dstanley4/psyc6060bookdown" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 20 Sample size for multiple regression | Welcome!" />
+  <meta name="twitter:title" content="Chapter 17 N-way Cell Comparisons | Welcome!" />
   
   <meta name="twitter:description" content="Course notes for PSYC 6060" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="multiple-regression.html"/>
-<link rel="next" href="moderated-multiple-regression.html"/>
+<link rel="prev" href="sampling-and-n-way-anova.html"/>
+<link rel="next" href="regression-and-correlation.html"/>
 <script src="libs/jquery/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook/css/style.css" rel="stylesheet" />
@@ -843,127 +843,366 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sample-size-for-multiple-regression" class="section level1 hasAnchor" number="20">
-<h1><span class="header-section-number">Chapter 20</span> Sample size for multiple regression<a href="sample-size-for-multiple-regression.html#sample-size-for-multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>When you conduct a multiple regression there are two ways to think about conducting a sample size analysis.</p>
-<ul>
-<li><p>Focus on having a sufficient power to the variance accounted for by the set of predictors (i.e. <span class="math inline">\(R^2\)</span>)</p></li>
-<li><p>Focus on having a sufficient power to the unique variance account for by a single predictor (i.e. <span class="math inline">\(sr^2\)</span>)</p></li>
-</ul>
-<div id="sample-size-using-r2" class="section level2 hasAnchor" number="20.1">
-<h2><span class="header-section-number">20.1</span> Sample size using <span class="math inline">\(R^2\)</span><a href="sample-size-for-multiple-regression.html#sample-size-using-r2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You want to run a multiple regression study in an existing research area using 3 predictors. A past study, <span class="math inline">\(N\)</span> = 100, found an <span class="math inline">\(R^2=.20\)</span>. How many people do you need in your study to have 80% power for the overall regression equation (i.e., <span class="math inline">\(R^2\)</span>).</p>
-<p>We need to determine two pieces of information to proceed: 1) the effect size as <span class="math inline">\(f^2\)</span> instead of <span class="math inline">\(R^2\)</span> and 2) the degrees of freedom for the predictors. We use these two pieces of information in the <em>pwr</em> command.</p>
-<div id="determining-f2" class="section level3 hasAnchor" number="20.1.1">
-<h3><span class="header-section-number">20.1.1</span> Determining <span class="math inline">\(f^2\)</span><a href="sample-size-for-multiple-regression.html#determining-f2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We need to represent <span class="math inline">\(R^2\)</span> as <span class="math inline">\(f^2\)</span>. We do this with the formula:</p>
+<div id="n-way-cell-comparisons" class="section level1 hasAnchor" number="17">
+<h1><span class="header-section-number">Chapter 17</span> N-way Cell Comparisons<a href="n-way-cell-comparisons.html#n-way-cell-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>UNDER CONSTRUCTION</p>
+<p>UNDER CONSTRUCTION</p>
+<p>UNDER CONSTRUCTION</p>
+<div id="previously" class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> Previously:<a href="n-way-cell-comparisons.html#previously" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="ch_deeper_nway/images/nway_design_cells_design.png" width="80%" /></p>
+</div>
+<div id="output-1" class="section level2 hasAnchor" number="17.2">
+<h2><span class="header-section-number">17.2</span> Output<a href="n-way-cell-comparisons.html#output-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We begin by creating the output for this design in R. First we activate the required packages:</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="n-way-cell-comparisons.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb557-2"><a href="n-way-cell-comparisons.html#cb557-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
+<span id="cb557-3"><a href="n-way-cell-comparisons.html#cb557-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb557-4"><a href="n-way-cell-comparisons.html#cb557-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
+<span id="cb557-5"><a href="n-way-cell-comparisons.html#cb557-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb557-6"><a href="n-way-cell-comparisons.html#cb557-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
+<span id="cb557-7"><a href="n-way-cell-comparisons.html#cb557-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb557-8"><a href="n-way-cell-comparisons.html#cb557-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
+<p>Next we conduct the analysis:</p>
+<div class="sourceCode" id="cb558"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb558-1"><a href="n-way-cell-comparisons.html#cb558-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
+<span id="cb558-2"><a href="n-way-cell-comparisons.html#cb558-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb558-3"><a href="n-way-cell-comparisons.html#cb558-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb558-4"><a href="n-way-cell-comparisons.html#cb558-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
+<span id="cb558-5"><a href="n-way-cell-comparisons.html#cb558-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
+<span id="cb558-6"><a href="n-way-cell-comparisons.html#cb558-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
+<p>Then we create the output using:</p>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="n-way-cell-comparisons.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
+<span id="cb559-2"><a href="n-way-cell-comparisons.html#cb559-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
+<p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
+<p>Notice the preparation, juggling, and preparation x juggling rows on this table. In particular, the <span class="math inline">\(F\)</span>-value for each of these rows. In the remainder of the chapter we will review how these values are obtained - and their conceptual meaning.</p>
+</div>
+<div id="confirmatory-comparisons" class="section level2 hasAnchor" number="17.3">
+<h2><span class="header-section-number">17.3</span> Confirmatory Comparisons<a href="n-way-cell-comparisons.html#confirmatory-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="t-test-1" class="section level3 hasAnchor" number="17.3.1">
+<h3><span class="header-section-number">17.3.1</span> t-test<a href="n-way-cell-comparisons.html#t-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you have a comparison (with 2 means) that was planned prior to collecting data, one option to test the comparison is the t-test. This is perhaps the most frequently used approach in some research areas. Consider a scenario where you have a one-sided planned comparison (i.e., an a priori comparison) involving the cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You could proceed as follows.</p>
+<p><strong>t-test and <span class="math inline">\(p\)</span>-value calculation</strong></p>
+<ol style="list-style-type: decimal">
+<li>Obtain the sample data for these cells</li>
+</ol>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="n-way-cell-comparisons.html#cb560-1" aria-hidden="true" tabindex="-1"></a>juggling_high_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb560-2"><a href="n-way-cell-comparisons.html#cb560-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb560-3"><a href="n-way-cell-comparisons.html#cb560-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;high&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb560-4"><a href="n-way-cell-comparisons.html#cb560-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb560-5"><a href="n-way-cell-comparisons.html#cb560-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb560-6"><a href="n-way-cell-comparisons.html#cb560-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb560-7"><a href="n-way-cell-comparisons.html#cb560-7" aria-hidden="true" tabindex="-1"></a>juggling_low_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb560-8"><a href="n-way-cell-comparisons.html#cb560-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb560-9"><a href="n-way-cell-comparisons.html#cb560-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;low&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb560-10"><a href="n-way-cell-comparisons.html#cb560-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Conduct a two-sided t-test</li>
+</ol>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="n-way-cell-comparisons.html#cb561-1" aria-hidden="true" tabindex="-1"></a>tout<span class="ot">&lt;-</span> <span class="fu">t.test</span>(juggling_high_preparation, juggling_low_preparation,</span>
+<span id="cb561-2"><a href="n-way-cell-comparisons.html#cb561-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb561-3"><a href="n-way-cell-comparisons.html#cb561-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb561-4"><a href="n-way-cell-comparisons.html#cb561-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb561-5"><a href="n-way-cell-comparisons.html#cb561-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tout)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  juggling_high_preparation and juggling_low_preparation
+## t = 3.8, df = 8, p-value = 0.005
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##   6.454 26.746
+## sample estimates:
+## mean of x mean of y 
+##      88.0      71.4</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Divide the <span class="math inline">\(p\)</span>-value by 2 to obain the one-sided <span class="math inline">\(p\)</span>-value.</li>
+</ol>
+<p><span class="math inline">\(0.005444/2=0.002722\)</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li>t-test text:</li>
+</ol>
+<p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, 95% <span class="math inline">\(CI[6.45, 26.75]\)</span>) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(t(8)=3.77\)</span>, <span class="math inline">\(p = .003\)</span>.</p>
+<p>Noteably, we are missing a <span class="math inline">\(d\)</span>-value with confidence interval for the above, see the fix below:</p>
+<p><strong>effect size calculation</strong></p>
+<p>We can calculate the <span class="math inline">\(d\)</span>-value with CI using:</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="n-way-cell-comparisons.html#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MBESS)</span>
+<span id="cb563-2"><a href="n-way-cell-comparisons.html#cb563-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.smd</span>(<span class="at">ncp =</span> tout<span class="sc">$</span>statistic, <span class="at">n.1 =</span> <span class="dv">5</span>, <span class="at">n.2 =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## $Lower.Conf.Limit.smd
+## [1] 0.6578
+## 
+## $smd
+##     t 
+## 2.386 
+## 
+## $Upper.Conf.Limit.smd
+## [1] 4.038</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Revised t-test text</li>
+</ol>
+<p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, 95% <span class="math inline">\(CI[6.45, 26.75]\)</span>, <span class="math inline">\(d = 2.39\)</span>, 95% <span class="math inline">\(CI[0.66, 4.04\)</span>]) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(t(8)=3.77\)</span>, <span class="math inline">\(p = .003\)</span>.</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="36%" />
+<col width="14%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Approach</th>
+<th align="center">pooled variance</th>
+<th align="center">test</th>
+<th align="center">effect size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">t-test (equal variances assumed)</td>
+<td align="center"><span class="math inline">\(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\)</span></td>
+<td align="center"><span class="math inline">\(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\)</span></td>
+<td align="center"><span class="math inline">\(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="contrast-2-means" class="section level3 hasAnchor" number="17.3.2">
+<h3><span class="header-section-number">17.3.2</span> contrast (2 means)<a href="n-way-cell-comparisons.html#contrast-2-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Obtain the sample data for these cells</p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="n-way-cell-comparisons.html#cb565-1" aria-hidden="true" tabindex="-1"></a>juggling_high_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb565-2"><a href="n-way-cell-comparisons.html#cb565-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb565-3"><a href="n-way-cell-comparisons.html#cb565-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;high&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb565-4"><a href="n-way-cell-comparisons.html#cb565-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb565-5"><a href="n-way-cell-comparisons.html#cb565-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb565-6"><a href="n-way-cell-comparisons.html#cb565-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb565-7"><a href="n-way-cell-comparisons.html#cb565-7" aria-hidden="true" tabindex="-1"></a>juggling_low_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb565-8"><a href="n-way-cell-comparisons.html#cb565-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb565-9"><a href="n-way-cell-comparisons.html#cb565-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;low&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb565-10"><a href="n-way-cell-comparisons.html#cb565-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
+<p><strong>Calculate F value for contrast</strong></p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="n-way-cell-comparisons.html#cb566-1" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">=</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb566-2"><a href="n-way-cell-comparisons.html#cb566-2" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">=</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb566-3"><a href="n-way-cell-comparisons.html#cb566-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-4"><a href="n-way-cell-comparisons.html#cb566-4" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar3, xbar1)</span>
+<span id="cb566-5"><a href="n-way-cell-comparisons.html#cb566-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-6"><a href="n-way-cell-comparisons.html#cb566-6" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">=</span> (<span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma)<span class="sc">^</span><span class="dv">2</span> <span class="co"># or just 60 for MSE</span></span>
+<span id="cb566-7"><a href="n-way-cell-comparisons.html#cb566-7" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">-</span><span class="dv">1</span> <span class="co"># two means - 1</span></span>
+<span id="cb566-8"><a href="n-way-cell-comparisons.html#cb566-8" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="dv">24</span> <span class="co"># degrees of freedom for MSE</span></span>
+<span id="cb566-9"><a href="n-way-cell-comparisons.html#cb566-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">5</span> <span class="co"># 5 per cell</span></span>
+<span id="cb566-10"><a href="n-way-cell-comparisons.html#cb566-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb566-11"><a href="n-way-cell-comparisons.html#cb566-11" aria-hidden="true" tabindex="-1"></a>Fvalue <span class="ot">=</span> <span class="fu">var</span>(means_to_compare)<span class="sc">/</span>(mse<span class="sc">/</span>n)</span>
+<span id="cb566-12"><a href="n-way-cell-comparisons.html#cb566-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Fvalue)</span></code></pre></div>
+<pre><code>## [1] 11.48</code></pre>
+<p><strong>Calculate F value for contrast</strong></p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="n-way-cell-comparisons.html#cb568-1" aria-hidden="true" tabindex="-1"></a>pvalue_two_tail <span class="ot">=</span> <span class="fu">pf</span>(Fvalue,</span>
+<span id="cb568-2"><a href="n-way-cell-comparisons.html#cb568-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df1 =</span> df1,</span>
+<span id="cb568-3"><a href="n-way-cell-comparisons.html#cb568-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df2 =</span> df2,</span>
+<span id="cb568-4"><a href="n-way-cell-comparisons.html#cb568-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb568-5"><a href="n-way-cell-comparisons.html#cb568-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb568-6"><a href="n-way-cell-comparisons.html#cb568-6" aria-hidden="true" tabindex="-1"></a>pvalue_one_tail <span class="ot">=</span> pvalue_two_tail<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb568-7"><a href="n-way-cell-comparisons.html#cb568-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb568-8"><a href="n-way-cell-comparisons.html#cb568-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue_one_tail)</span></code></pre></div>
+<pre><code>## [1] 0.001213</code></pre>
+<p><strong>Calculate effect size for contrast</strong></p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="n-way-cell-comparisons.html#cb570-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb570-2"><a href="n-way-cell-comparisons.html#cb570-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
+<span id="cb570-3"><a href="n-way-cell-comparisons.html#cb570-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-4"><a href="n-way-cell-comparisons.html#cb570-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-5"><a href="n-way-cell-comparisons.html#cb570-5" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">=</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb570-6"><a href="n-way-cell-comparisons.html#cb570-6" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">=</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb570-7"><a href="n-way-cell-comparisons.html#cb570-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-8"><a href="n-way-cell-comparisons.html#cb570-8" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar3, xbar1)</span>
+<span id="cb570-9"><a href="n-way-cell-comparisons.html#cb570-9" aria-hidden="true" tabindex="-1"></a>n_for_means <span class="ot">=</span> <span class="fu">c</span>(n_per_cell, n_per_cell)</span>
+<span id="cb570-10"><a href="n-way-cell-comparisons.html#cb570-10" aria-hidden="true" tabindex="-1"></a>comparison_weights <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb570-11"><a href="n-way-cell-comparisons.html#cb570-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-12"><a href="n-way-cell-comparisons.html#cb570-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 1 to s.anova</span></span>
+<span id="cb570-13"><a href="n-way-cell-comparisons.html#cb570-13" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">=</span> <span class="dv">60</span> <span class="co">#s2_people</span></span>
+<span id="cb570-14"><a href="n-way-cell-comparisons.html#cb570-14" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">sqrt</span>(mse)</span>
+<span id="cb570-15"><a href="n-way-cell-comparisons.html#cb570-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-16"><a href="n-way-cell-comparisons.html#cb570-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 2 to s.anova</span></span>
+<span id="cb570-17"><a href="n-way-cell-comparisons.html#cb570-17" aria-hidden="true" tabindex="-1"></a><span class="co"># re-use lm_nway from initial ANOVA</span></span>
+<span id="cb570-18"><a href="n-way-cell-comparisons.html#cb570-18" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma</span>
+<span id="cb570-19"><a href="n-way-cell-comparisons.html#cb570-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb570-20"><a href="n-way-cell-comparisons.html#cb570-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardizec contrast with CI</span></span>
+<span id="cb570-21"><a href="n-way-cell-comparisons.html#cb570-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.sc</span>(<span class="at">means =</span> means_to_compare,</span>
+<span id="cb570-22"><a href="n-way-cell-comparisons.html#cb570-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">c.weights =</span> comparison_weights,</span>
+<span id="cb570-23"><a href="n-way-cell-comparisons.html#cb570-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">rep</span>(n_per_cell, <span class="dv">2</span>),</span>
+<span id="cb570-24"><a href="n-way-cell-comparisons.html#cb570-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">s.anova =</span> s_people,</span>
+<span id="cb570-25"><a href="n-way-cell-comparisons.html#cb570-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">N =</span> mse_n)</span></code></pre></div>
+<pre><code>## $Lower.Conf.Limit.Standardized.Contrast
+## [1] 0.7674
+## 
+## $Standardized.contrast
+## [1] 2.143
+## 
+## $Upper.Conf.Limit.Standardized.Contrast
+## [1] 3.487</code></pre>
+<p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, <span class="math inline">\(sc = 2.14\)</span>, 95% <span class="math inline">\(CI[0.77, 3.49\)</span>]) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(F(1, 24)= 11.482\)</span>, <span class="math inline">\(p = .001\)</span>.</p>
+<p>But if you check out the SUMMARY table below - you can see the effect size is basically a <span class="math inline">\(d\)</span>-value in disguise. So some people might write this as:</p>
+<p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, <span class="math inline">\(d = 2.14\)</span>, 95% <span class="math inline">\(CI[0.77, 3.49\)</span>]) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(F(1, 24)= 11.482\)</span>, <span class="math inline">\(p = .001\)</span>.</p>
+<p>The fact that you could calculate a <span class="math inline">\(d\)</span>-value in two different ways (using difference variance calculations) illustrates why it is <strong>extremely</strong> important that you indicate in your paper (even in a footnote) the formula you used to calculate the <span class="math inline">\(d\)</span>-value and pooled variance terms.</p>
+<p><strong>SUMMARY</strong></p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="36%" />
+<col width="14%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Approach</th>
+<th align="center">pooled variance</th>
+<th align="center">test</th>
+<th align="center">effect size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">contrast (equal variances assumed)</td>
+<td align="center"><span class="math inline">\(s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}\)</span></td>
+<td align="center"><span class="math inline">\(F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}} = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2\)</span></td>
+<td align="center"><span class="math inline">\(sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">t-test (equal variances assumed)</td>
+<td align="center"><span class="math inline">\(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\)</span></td>
+<td align="center"><span class="math inline">\(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\)</span></td>
+<td align="center"><span class="math inline">\(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>You can see from the above table that when you are comparing two means the contrast and t-test approaches are very similar. The only difference between the two approaches is how the population variance estimate (<span class="math inline">\(s_{people}^2\)</span>) is calculated.</p>
+</div>
+<div id="contrast-multiple-means" class="section level3 hasAnchor" number="17.3.3">
+<h3><span class="header-section-number">17.3.3</span> contrast (multiple means)<a href="n-way-cell-comparisons.html#contrast-multiple-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The two contrast means (<span class="math inline">\(\bar{c_1}\)</span>, <span class="math inline">\(\bar{c_2}\)</span>}) are calculated as below”</p>
+<p>For the first mean, it’s just a cell mean, where <span class="math inline">\(n = 5\)</span>.</p>
 <p><span class="math display">\[
-f^2=\frac{R^2}{1-R^2}
+\bar{c_1} = \bar{x_1} = 71.4
 \]</span></p>
-<p>So in R we type:</p>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb656-1"><a href="sample-size-for-multiple-regression.html#cb656-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">20</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
-<span id="cb656-2"><a href="sample-size-for-multiple-regression.html#cb656-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
-<pre><code>## [1] 0.25</code></pre>
-<p>Thus, <span class="math inline">\(f^2=.25\)</span>.</p>
-</div>
-<div id="determine-degrees-of-freedom" class="section level3 hasAnchor" number="20.1.2">
-<h3><span class="header-section-number">20.1.2</span> Determine degrees of freedom<a href="sample-size-for-multiple-regression.html#determine-degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are degrees of freedom for the predictors (<span class="math inline">\(u\)</span>) and error (<span class="math inline">\(v\)</span>) in the original study. The degrees of freedom for the predictors is easy to compute:</p>
-<p>Degrees of Freedom Predictors: <span class="math inline">\(u =\)</span> number of predictors = 3.</p>
-</div>
-<div id="calculate-sample-size" class="section level3 hasAnchor" number="20.1.3">
-<h3><span class="header-section-number">20.1.3</span> Calculate sample size<a href="sample-size-for-multiple-regression.html#calculate-sample-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>With multiple regression we send R the effect size (.25) the degrees of freedom for the predictor (3). The output provide returns the degrees of freedom for the denominator - which requires a bit of work to convert to sample size.</p>
-<p>We begin with the R code below:</p>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="sample-size-for-multiple-regression.html#cb658-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb658-2"><a href="sample-size-for-multiple-regression.html#cb658-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">3</span>,</span>
-<span id="cb658-3"><a href="sample-size-for-multiple-regression.html#cb658-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> .<span class="dv">25</span>,</span>
-<span id="cb658-4"><a href="sample-size-for-multiple-regression.html#cb658-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
-<pre><code>## 
-##      Multiple regression power calculation 
-## 
-##               u = 3
-##               v = 56.75
-##              f2 = 0.25
-##       sig.level = 0.05
-##           power = 0.9</code></pre>
-<p>What does this output mean? It provides us with the degrees of freedom error (i.e., <span class="math inline">\(v\)</span>) for your study (not the original study). We need to use the degrees of freedom error to calculate the <span class="math inline">\(N\)</span> needed.</p>
-<p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1\)</span> therefore <span class="math inline">\(N = u + v + 1\)</span>.</p>
-<p>We know <span class="math inline">\(u = 3\)</span> because there were three predictors. Our power analysis revealed we need <span class="math inline">\(v = 57\)</span> in our study.</p>
-<p>Therefore <span class="math inline">\(N = u + v + 1 = 3 + 57 + 1\)</span></p>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="sample-size-for-multiple-regression.html#cb660-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">57</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb660-2"><a href="sample-size-for-multiple-regression.html#cb660-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
-<pre><code>## [1] 61</code></pre>
-<p>Thus we want an N of 61 in our study.</p>
-</div>
-</div>
-<div id="sample-size-using-sr2" class="section level2 hasAnchor" number="20.2">
-<h2><span class="header-section-number">20.2</span> Sample size using <span class="math inline">\(sr^2\)</span><a href="sample-size-for-multiple-regression.html#sample-size-using-sr2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You want to run a multiple regression study in an existing research area using 3 predictors (A, B, and C). A past study, <span class="math inline">\(N\)</span> = 100, found an <span class="math inline">\(R^2=.20\)</span>. You are particularly interested in one predictor (predictor C) that you think will account for 2% of the variance in the criterion above and beyond the other two predictors. Said another way you believe .02 of the .20 will be a result of the unique contribution of one predictor. What sample size do you need to ensure you have power of .90 for detecting this increment in variance.</p>
-<p>Let’s think about this scenario in terms of Blocks to make it a bit clear. You are describing a scenario where if you put predictors A and B are in Block 1 you would obtain an overall <span class="math inline">\(R^2 = .18\)</span>. Then when you put Predictor A, B, and C into Block 2 you would obtain an overall <span class="math inline">\(R^2 = .20\)</span>, an increment of .02 so <span class="math inline">\(sr^2\)</span> for predictor C is .02.</p>
-<p>We want to conduct a power analysis to determine how many people you need to ensure power of .90 for this incremental prediction effect.</p>
-<div id="determine-degrees-of-freedom-1" class="section level3 hasAnchor" number="20.2.1">
-<h3><span class="header-section-number">20.2.1</span> Determine degrees of freedom<a href="sample-size-for-multiple-regression.html#determine-degrees-of-freedom-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We are interested in the incremental prediction of one variable so <span class="math inline">\(u = 1\)</span>.</p>
-</div>
-<div id="determine-f2" class="section level3 hasAnchor" number="20.2.2">
-<h3><span class="header-section-number">20.2.2</span> Determine <span class="math inline">\(f^2\)</span><a href="sample-size-for-multiple-regression.html#determine-f2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We know <span class="math inline">\(sr^2=.02\)</span> and <span class="math inline">\(R^2 = .20\)</span>. We can use these to compute the needed <span class="math inline">\(f^2\)</span>.</p>
+<p>For the second mean, it’s the average of two means. Note for this combined mean <span class="math inline">\(n = 10\)</span>; because it was based on two cell means, each <span class="math inline">\(n=5\)</span>.</p>
 <p><span class="math display">\[
-f^2=\frac{sr^2}{1-R^2}
+\bar{c_2} = \frac{\bar{x_2} + \bar{x_3}}{2} = \frac{ 144}{2} = 80.3
 \]</span></p>
-<p>So we type:</p>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="sample-size-for-multiple-regression.html#cb662-1" aria-hidden="true" tabindex="-1"></a>my_f2 <span class="ot">&lt;-</span> .<span class="dv">02</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> .<span class="dv">20</span>)</span>
-<span id="cb662-2"><a href="sample-size-for-multiple-regression.html#cb662-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb662-3"><a href="sample-size-for-multiple-regression.html#cb662-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_f2)</span></code></pre></div>
-<pre><code>## [1] 0.025</code></pre>
-</div>
-<div id="calculate-power" class="section level3 hasAnchor" number="20.2.3">
-<h3><span class="header-section-number">20.2.3</span> Calculate power<a href="sample-size-for-multiple-regression.html#calculate-power" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can calculate the required degrees of freedom with the command below:</p>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="sample-size-for-multiple-regression.html#cb664-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb664-2"><a href="sample-size-for-multiple-regression.html#cb664-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
-<span id="cb664-3"><a href="sample-size-for-multiple-regression.html#cb664-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>,</span>
-<span id="cb664-4"><a href="sample-size-for-multiple-regression.html#cb664-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">power =</span> .<span class="dv">90</span>)</span></code></pre></div>
-<pre><code>## 
-##      Multiple regression power calculation 
+<p>But when we look at these two contrast means, the mean of the means is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{\bar{c}} &amp;= \frac{\sum \bar{c_i}}{2} \\
+&amp;= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&amp;= \frac{71.4 + 80.3}{2} \\
+&amp;= 75.85\\
+\end{aligned}
+\]</span></p>
+<p>We calculate the total variance:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{total variance} &amp;=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1} \\
+&amp;= 39.605
+\end{aligned}
+\]</span></p>
+<p>We calculate the variance due to random sampling:</p>
+<p>The calculation is bit more complicated for sampling error because the sample sizes are different for the two means.</p>
+<p>For first contrast mean, <span class="math inline">\(c_1\)</span>, is <span class="math inline">\(n = 5\)</span>. Therefore sampling error is:</p>
+<p><span class="math display">\[
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+\]</span></p>
+<p>For second contrast mean, <span class="math inline">\(c_2\)</span>, is <span class="math inline">\(n = 10\)</span>. Therefore sampling error is:</p>
+<p><span class="math display">\[
+\frac{s_{people}^2}{n + n} = \frac{MSE}{n + n} = \frac{60}{5 + 5} = \frac{60}{10} = 6  
+\]</span></p>
+<p>We use the average of these two sampling error calculations</p>
+<p><span class="math display">\[
+\text{random sampling variance} = \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} = 9
+\]</span></p>
+<p>The F-value is:</p>
+<p><span class="math display">\[
+\begin{align}
+F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
+&amp;= \frac{\frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1}}{\left[ \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} \right]}\\
+&amp;= \frac{\frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1}}{\left[ \frac{12 + 6}{2} \right]}\\
+&amp;= \frac{39.605}{\left[ 9 \right]}\\
+&amp;= 4.40
+\end{align}
+\]</span></p>
+<p>In R, it’s easy to get these numbers.</p>
+<p>We begin by getting the cell data:</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="n-way-cell-comparisons.html#cb572-1" aria-hidden="true" tabindex="-1"></a>juggling_high_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb572-2"><a href="n-way-cell-comparisons.html#cb572-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-3"><a href="n-way-cell-comparisons.html#cb572-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;high&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-4"><a href="n-way-cell-comparisons.html#cb572-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb572-5"><a href="n-way-cell-comparisons.html#cb572-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-6"><a href="n-way-cell-comparisons.html#cb572-6" aria-hidden="true" tabindex="-1"></a>juggling_medium_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb572-7"><a href="n-way-cell-comparisons.html#cb572-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-8"><a href="n-way-cell-comparisons.html#cb572-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;medium&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-9"><a href="n-way-cell-comparisons.html#cb572-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb572-10"><a href="n-way-cell-comparisons.html#cb572-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb572-11"><a href="n-way-cell-comparisons.html#cb572-11" aria-hidden="true" tabindex="-1"></a>juggling_low_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb572-12"><a href="n-way-cell-comparisons.html#cb572-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-13"><a href="n-way-cell-comparisons.html#cb572-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;low&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb572-14"><a href="n-way-cell-comparisons.html#cb572-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
+<p>Then calculate the cell means:</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="n-way-cell-comparisons.html#cb573-1" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb573-2"><a href="n-way-cell-comparisons.html#cb573-2" aria-hidden="true" tabindex="-1"></a>xbar2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_medium_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb573-3"><a href="n-way-cell-comparisons.html#cb573-3" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb573-4"><a href="n-way-cell-comparisons.html#cb573-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-5"><a href="n-way-cell-comparisons.html#cb573-5" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> xbar1</span>
+<span id="cb573-6"><a href="n-way-cell-comparisons.html#cb573-6" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">c</span>(xbar2, xbar3))</span>
+<span id="cb573-7"><a href="n-way-cell-comparisons.html#cb573-7" aria-hidden="true" tabindex="-1"></a>c_means <span class="ot">=</span> <span class="fu">c</span>(c1, c2)</span>
+<span id="cb573-8"><a href="n-way-cell-comparisons.html#cb573-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-9"><a href="n-way-cell-comparisons.html#cb573-9" aria-hidden="true" tabindex="-1"></a>total_var <span class="ot">=</span> <span class="fu">var</span>(c_means)</span>
+<span id="cb573-10"><a href="n-way-cell-comparisons.html#cb573-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-11"><a href="n-way-cell-comparisons.html#cb573-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span>  <span class="dv">5</span></span>
+<span id="cb573-12"><a href="n-way-cell-comparisons.html#cb573-12" aria-hidden="true" tabindex="-1"></a>sampling_var1 <span class="ot">&lt;-</span> mse<span class="sc">/</span>n</span>
+<span id="cb573-13"><a href="n-way-cell-comparisons.html#cb573-13" aria-hidden="true" tabindex="-1"></a>sampling_var2 <span class="ot">&lt;-</span> mse<span class="sc">/</span>(n <span class="sc">+</span> n)</span>
+<span id="cb573-14"><a href="n-way-cell-comparisons.html#cb573-14" aria-hidden="true" tabindex="-1"></a>sampling_var <span class="ot">=</span> <span class="fu">mean</span>( <span class="fu">c</span>(sampling_var1, sampling_var2))</span>
+<span id="cb573-15"><a href="n-way-cell-comparisons.html#cb573-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-16"><a href="n-way-cell-comparisons.html#cb573-16" aria-hidden="true" tabindex="-1"></a>Fvalue <span class="ot">=</span> total_var <span class="sc">/</span> sampling_var</span>
+<span id="cb573-17"><a href="n-way-cell-comparisons.html#cb573-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-18"><a href="n-way-cell-comparisons.html#cb573-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Fvalue)</span></code></pre></div>
+<pre><code>## [1] 4.401</code></pre>
+<p>Now the p-value</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="n-way-cell-comparisons.html#cb575-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb575-2"><a href="n-way-cell-comparisons.html#cb575-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="dv">24</span> <span class="co">#recall 24 df for MSE</span></span>
+<span id="cb575-3"><a href="n-way-cell-comparisons.html#cb575-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb575-4"><a href="n-way-cell-comparisons.html#cb575-4" aria-hidden="true" tabindex="-1"></a>pvalue_two_tail <span class="ot">=</span> <span class="fu">pf</span>(Fvalue,</span>
+<span id="cb575-5"><a href="n-way-cell-comparisons.html#cb575-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df1 =</span> df1,</span>
+<span id="cb575-6"><a href="n-way-cell-comparisons.html#cb575-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df2 =</span> df2,</span>
+<span id="cb575-7"><a href="n-way-cell-comparisons.html#cb575-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb575-8"><a href="n-way-cell-comparisons.html#cb575-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb575-9"><a href="n-way-cell-comparisons.html#cb575-9" aria-hidden="true" tabindex="-1"></a>pvalue_one_tail <span class="ot">=</span> pvalue_two_tail<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb575-10"><a href="n-way-cell-comparisons.html#cb575-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb575-11"><a href="n-way-cell-comparisons.html#cb575-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue_one_tail)</span></code></pre></div>
+<pre><code>## [1] 0.02332</code></pre>
+<p>So for <span class="math inline">\(F(1,24) = 4.40, p = .023\)</span>.</p>
+<p>Now the effect size.</p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="n-way-cell-comparisons.html#cb577-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb577-2"><a href="n-way-cell-comparisons.html#cb577-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
+<span id="cb577-3"><a href="n-way-cell-comparisons.html#cb577-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb577-4"><a href="n-way-cell-comparisons.html#cb577-4" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar1, xbar2, xbar3)</span>
+<span id="cb577-5"><a href="n-way-cell-comparisons.html#cb577-5" aria-hidden="true" tabindex="-1"></a>n_for_means <span class="ot">=</span> <span class="fu">c</span>(n_per_cell, n_per_cell, n_per_cell)</span>
+<span id="cb577-6"><a href="n-way-cell-comparisons.html#cb577-6" aria-hidden="true" tabindex="-1"></a>comparison_weights <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, .<span class="dv">5</span>, .<span class="dv">5</span>)</span>
+<span id="cb577-7"><a href="n-way-cell-comparisons.html#cb577-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb577-8"><a href="n-way-cell-comparisons.html#cb577-8" aria-hidden="true" tabindex="-1"></a><span class="co"># re-use lm_nway from initial ANOVA</span></span>
+<span id="cb577-9"><a href="n-way-cell-comparisons.html#cb577-9" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma</span>
+<span id="cb577-10"><a href="n-way-cell-comparisons.html#cb577-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb577-11"><a href="n-way-cell-comparisons.html#cb577-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardizec contrast with CI</span></span>
+<span id="cb577-12"><a href="n-way-cell-comparisons.html#cb577-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.sc</span>(<span class="at">means =</span> means_to_compare,</span>
+<span id="cb577-13"><a href="n-way-cell-comparisons.html#cb577-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">c.weights =</span> comparison_weights,</span>
+<span id="cb577-14"><a href="n-way-cell-comparisons.html#cb577-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> n_for_means,</span>
+<span id="cb577-15"><a href="n-way-cell-comparisons.html#cb577-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">s.anova =</span> s_people,</span>
+<span id="cb577-16"><a href="n-way-cell-comparisons.html#cb577-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">N =</span> mse_n)</span></code></pre></div>
+<pre><code>## $Lower.Conf.Limit.Standardized.Contrast
+## [1] 0.02316
 ## 
-##               u = 1
-##               v = 420.2
-##              f2 = 0.025
-##       sig.level = 0.05
-##           power = 0.9</code></pre>
-<p>Thus, degrees of freedom error (i.e., <span class="math inline">\(v\)</span>) is 421</p>
-<p>We then calculate <span class="math inline">\(N = u + v + 1\)</span></p>
-<p>In R we type:</p>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="sample-size-for-multiple-regression.html#cb666-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">1</span> <span class="sc">+</span> <span class="dv">421</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb666-2"><a href="sample-size-for-multiple-regression.html#cb666-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(N)</span></code></pre></div>
-<pre><code>## [1] 423</code></pre>
-<p>Thus, you need an <span class="math inline">\(N\)</span> of 423.</p>
-</div>
-</div>
-<div id="power-obtained-sr2" class="section level2 hasAnchor" number="20.3">
-<h2><span class="header-section-number">20.3</span> Power obtained <span class="math inline">\(sr^2\)</span><a href="sample-size-for-multiple-regression.html#power-obtained-sr2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Imagine your power analysis tells you that you need an <span class="math inline">\(N\)</span> of 423 but you only get an <span class="math inline">\(N\)</span> of 75. What is your power? Simply calculate the degrees of freedom for the predictors and error and run the command again. This time you leave out power. It will be calculated for you. You can do this before you collect your data if you know in advance you will have a low/restricted <span class="math inline">\(N\)</span> - as is the case for many theses.</p>
-<p>In this example, <span class="math inline">\(R^2=.20\)</span> and <span class="math inline">\(sr^2=.02\)</span> are the expected effect sizes.</p>
-<p>Degrees of Freedom Predictors: <span class="math inline">\(u = 1\)</span> as above (incremental prediction of one variable)</p>
-<p>In terms of error:</p>
-<p>Degrees of Freedom Error: <span class="math inline">\(v = N - u - 1 = 75 - 1 - 1 = 73\)</span>.</p>
-<p>In terms of effect size:</p>
-<p><span class="math inline">\(f^2=\frac{sr^2}{1-R^2} = \frac{.02}{1-.20}=.025\)</span>.</p>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="sample-size-for-multiple-regression.html#cb668-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>,</span>
-<span id="cb668-2"><a href="sample-size-for-multiple-regression.html#cb668-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">v =</span> <span class="dv">73</span>,</span>
-<span id="cb668-3"><a href="sample-size-for-multiple-regression.html#cb668-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">f2 =</span> <span class="fl">0.025</span>)</span></code></pre></div>
-<pre><code>## 
-##      Multiple regression power calculation 
+## $Standardized.contrast
+## [1] 1.149
 ## 
-##               u = 1
-##               v = 73
-##              f2 = 0.025
-##       sig.level = 0.05
-##           power = 0.2718</code></pre>
-<p>In this case, power is .27. Thus, there is only a 27% chance of finding the effect if it exists. Given this, would it make sense to spend the time and energy to run the study?</p>
+## $Upper.Conf.Limit.Standardized.Contrast
+## [1] 2.255</code></pre>
 
+</div>
 </div>
 </div>
             </section>
@@ -971,8 +1210,8 @@ f^2=\frac{sr^2}{1-R^2}
           </div>
         </div>
       </div>
-<a href="multiple-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="moderated-multiple-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sampling-and-n-way-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regression-and-correlation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook/js/app.min.js"></script>
@@ -1003,7 +1242,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/yihui/bookdown-crc/edit/master/20-mr_sample_size.Rmd",
+"link": "https://github.com/yihui/bookdown-crc/edit/master/17-sampling-nway-cells.Rmd",
 "text": "Edit"
 },
 "history": {
