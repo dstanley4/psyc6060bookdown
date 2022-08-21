@@ -2039,29 +2039,31 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 <span id="cb12-8"><a href="sampling-and-n-way-anova.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue_one_tail)</span></code></pre></div>
 <pre><code>## [1] 0.001212695</code></pre>
 <p><strong>Calculate effect size for contrast</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sampling-and-n-way-anova.html#cb14-1" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">=</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb14-2"><a href="sampling-and-n-way-anova.html#cb14-2" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">=</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="sampling-and-n-way-anova.html#cb14-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb14-2"><a href="sampling-and-n-way-anova.html#cb14-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
 <span id="cb14-3"><a href="sampling-and-n-way-anova.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="sampling-and-n-way-anova.html#cb14-4" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar3, xbar1)</span>
-<span id="cb14-5"><a href="sampling-and-n-way-anova.html#cb14-5" aria-hidden="true" tabindex="-1"></a>comparison_weights <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb14-6"><a href="sampling-and-n-way-anova.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="sampling-and-n-way-anova.html#cb14-7" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb14-8"><a href="sampling-and-n-way-anova.html#cb14-8" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
-<span id="cb14-9"><a href="sampling-and-n-way-anova.html#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="sampling-and-n-way-anova.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 1 to s.anova</span></span>
-<span id="cb14-11"><a href="sampling-and-n-way-anova.html#cb14-11" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">=</span> <span class="dv">60</span> <span class="co">#s2_people</span></span>
-<span id="cb14-12"><a href="sampling-and-n-way-anova.html#cb14-12" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">sqrt</span>(mse)</span>
-<span id="cb14-13"><a href="sampling-and-n-way-anova.html#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="sampling-and-n-way-anova.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 2 to s.anova</span></span>
-<span id="cb14-15"><a href="sampling-and-n-way-anova.html#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># re-use lm_nway from initial ANOVA</span></span>
-<span id="cb14-16"><a href="sampling-and-n-way-anova.html#cb14-16" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma</span>
-<span id="cb14-17"><a href="sampling-and-n-way-anova.html#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="sampling-and-n-way-anova.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardizec contrast with CI</span></span>
-<span id="cb14-19"><a href="sampling-and-n-way-anova.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.sc</span>(<span class="at">means =</span> means_to_compare,</span>
-<span id="cb14-20"><a href="sampling-and-n-way-anova.html#cb14-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">c.weights =</span> comparison_weights,</span>
-<span id="cb14-21"><a href="sampling-and-n-way-anova.html#cb14-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">rep</span>(n_per_cell, <span class="dv">2</span>),</span>
-<span id="cb14-22"><a href="sampling-and-n-way-anova.html#cb14-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">s.anova =</span> s_people,</span>
-<span id="cb14-23"><a href="sampling-and-n-way-anova.html#cb14-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">N =</span> mse_n)</span></code></pre></div>
+<span id="cb14-4"><a href="sampling-and-n-way-anova.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="sampling-and-n-way-anova.html#cb14-5" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">=</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="sampling-and-n-way-anova.html#cb14-6" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">=</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-7"><a href="sampling-and-n-way-anova.html#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="sampling-and-n-way-anova.html#cb14-8" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar3, xbar1)</span>
+<span id="cb14-9"><a href="sampling-and-n-way-anova.html#cb14-9" aria-hidden="true" tabindex="-1"></a>n_for_means <span class="ot">=</span> <span class="fu">c</span>(n_per_cell, n_per_cell)</span>
+<span id="cb14-10"><a href="sampling-and-n-way-anova.html#cb14-10" aria-hidden="true" tabindex="-1"></a>comparison_weights <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb14-11"><a href="sampling-and-n-way-anova.html#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="sampling-and-n-way-anova.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 1 to s.anova</span></span>
+<span id="cb14-13"><a href="sampling-and-n-way-anova.html#cb14-13" aria-hidden="true" tabindex="-1"></a>mse <span class="ot">=</span> <span class="dv">60</span> <span class="co">#s2_people</span></span>
+<span id="cb14-14"><a href="sampling-and-n-way-anova.html#cb14-14" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">sqrt</span>(mse)</span>
+<span id="cb14-15"><a href="sampling-and-n-way-anova.html#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="sampling-and-n-way-anova.html#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 2 to s.anova</span></span>
+<span id="cb14-17"><a href="sampling-and-n-way-anova.html#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co"># re-use lm_nway from initial ANOVA</span></span>
+<span id="cb14-18"><a href="sampling-and-n-way-anova.html#cb14-18" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma</span>
+<span id="cb14-19"><a href="sampling-and-n-way-anova.html#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="sampling-and-n-way-anova.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardizec contrast with CI</span></span>
+<span id="cb14-21"><a href="sampling-and-n-way-anova.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.sc</span>(<span class="at">means =</span> means_to_compare,</span>
+<span id="cb14-22"><a href="sampling-and-n-way-anova.html#cb14-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">c.weights =</span> comparison_weights,</span>
+<span id="cb14-23"><a href="sampling-and-n-way-anova.html#cb14-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="fu">rep</span>(n_per_cell, <span class="dv">2</span>),</span>
+<span id="cb14-24"><a href="sampling-and-n-way-anova.html#cb14-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">s.anova =</span> s_people,</span>
+<span id="cb14-25"><a href="sampling-and-n-way-anova.html#cb14-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">N =</span> mse_n)</span></code></pre></div>
 <pre><code>## $Lower.Conf.Limit.Standardized.Contrast
 ## [1] 0.7674366
 ## 
@@ -2110,6 +2112,132 @@ F &amp;= \frac{\text{estimated total variance}}{\text{estimated variance due to 
 </div>
 <div id="contrasts-with-multiple-means" class="section level3 hasAnchor" number="16.16.2">
 <h3><span class="header-section-number">16.16.2</span> contrasts with multiple means<a href="sampling-and-n-way-anova.html#contrasts-with-multiple-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The two contrast means (<span class="math inline">\(\bar{c_1}\)</span>, <span class="math inline">\(\bar{c_2}\)</span>}) are calculated as below”</p>
+<p>For the first mean, it’s just a cell mean, where <span class="math inline">\(n = 5\)</span>.</p>
+<p><span class="math display">\[
+\bar{c_1} = \bar{x_1} = 71.4
+\]</span></p>
+<p>For the second mean, it’s the average of two means. Note for this combined mean <span class="math inline">\(n = 10\)</span>; because it was based on two cell means, each <span class="math inline">\(n=5\)</span>.</p>
+<p><span class="math display">\[
+\bar{c_2} = \frac{\bar{x_2} + \bar{x_3}}{2} = \frac{ 144}{2} = 80.3
+\]</span></p>
+<p>But when we look at these two contrast means, the mean of the means is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{\bar{c}} &amp;= \frac{\sum \bar{c_i}}{2} \\
+&amp;= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&amp;= \frac{71.4 + 80.3}{2} \\
+&amp;= 75.85\\
+\end{aligned}
+\]</span></p>
+<p>We calculate the total variance:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{total variance} &amp;=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1} \\
+&amp;= 39.605
+\end{aligned}
+\]</span></p>
+<p>We calculate the variance due to random sampling:</p>
+<p>The calculation is bit more complicated for sampling error because the sample sizes are different for the two means.</p>
+<p>For first contrast mean, <span class="math inline">\(c_1\)</span>, is <span class="math inline">\(n = 5\)</span>. Therefore sampling error is:</p>
+<p><span class="math display">\[
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+\]</span></p>
+<p>For second contrast mean, <span class="math inline">\(c_2\)</span>, is <span class="math inline">\(n = 10\)</span>. Therefore sampling error is:</p>
+<p><span class="math display">\[
+\frac{s_{people}^2}{n + n} = \frac{MSE}{n + n} = \frac{60}{5 + 5} = \frac{60}{10} = 6  
+\]</span></p>
+<p>We use the average of these two sampling error calculations</p>
+<p><span class="math display">\[
+\text{random sampling variance} = \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} = 9
+\]</span></p>
+<p>The F-value is:</p>
+<p><span class="math display">\[
+\begin{align}
+F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
+&amp;= \frac{\frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1}}{\left[ \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} \right]}\\
+&amp;= \frac{\frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1}}{\left[ \frac{12 + 6}{2} \right]}\\
+&amp;= \frac{39.605}{\left[ 9 \right]}\\
+&amp;= 4.40
+\end{align}
+\]</span></p>
+<p>In R, it’s easy to get these numbers.</p>
+<p>We begin by getting the cell data:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sampling-and-n-way-anova.html#cb16-1" aria-hidden="true" tabindex="-1"></a>juggling_high_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="sampling-and-n-way-anova.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="sampling-and-n-way-anova.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;high&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="sampling-and-n-way-anova.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb16-5"><a href="sampling-and-n-way-anova.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="sampling-and-n-way-anova.html#cb16-6" aria-hidden="true" tabindex="-1"></a>juggling_medium_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="sampling-and-n-way-anova.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="sampling-and-n-way-anova.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;medium&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-9"><a href="sampling-and-n-way-anova.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span>
+<span id="cb16-10"><a href="sampling-and-n-way-anova.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="sampling-and-n-way-anova.html#cb16-11" aria-hidden="true" tabindex="-1"></a>juggling_low_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-12"><a href="sampling-and-n-way-anova.html#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="sampling-and-n-way-anova.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;low&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="sampling-and-n-way-anova.html#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
+<p>Then calculate the cell means:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sampling-and-n-way-anova.html#cb17-1" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="sampling-and-n-way-anova.html#cb17-2" aria-hidden="true" tabindex="-1"></a>xbar2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_medium_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-3"><a href="sampling-and-n-way-anova.html#cb17-3" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">&lt;-</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-4"><a href="sampling-and-n-way-anova.html#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="sampling-and-n-way-anova.html#cb17-5" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> xbar1</span>
+<span id="cb17-6"><a href="sampling-and-n-way-anova.html#cb17-6" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">c</span>(xbar2, xbar3))</span>
+<span id="cb17-7"><a href="sampling-and-n-way-anova.html#cb17-7" aria-hidden="true" tabindex="-1"></a>c_means <span class="ot">=</span> <span class="fu">c</span>(c1, c2)</span>
+<span id="cb17-8"><a href="sampling-and-n-way-anova.html#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="sampling-and-n-way-anova.html#cb17-9" aria-hidden="true" tabindex="-1"></a>total_var <span class="ot">=</span> <span class="fu">var</span>(c_means)</span>
+<span id="cb17-10"><a href="sampling-and-n-way-anova.html#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="sampling-and-n-way-anova.html#cb17-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span>  <span class="dv">5</span></span>
+<span id="cb17-12"><a href="sampling-and-n-way-anova.html#cb17-12" aria-hidden="true" tabindex="-1"></a>sampling_var1 <span class="ot">&lt;-</span> mse<span class="sc">/</span>n</span>
+<span id="cb17-13"><a href="sampling-and-n-way-anova.html#cb17-13" aria-hidden="true" tabindex="-1"></a>sampling_var2 <span class="ot">&lt;-</span> mse<span class="sc">/</span>(n <span class="sc">+</span> n)</span>
+<span id="cb17-14"><a href="sampling-and-n-way-anova.html#cb17-14" aria-hidden="true" tabindex="-1"></a>sampling_var <span class="ot">=</span> <span class="fu">mean</span>( <span class="fu">c</span>(sampling_var1, sampling_var2))</span>
+<span id="cb17-15"><a href="sampling-and-n-way-anova.html#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="sampling-and-n-way-anova.html#cb17-16" aria-hidden="true" tabindex="-1"></a>Fvalue <span class="ot">=</span> total_var <span class="sc">/</span> sampling_var</span>
+<span id="cb17-17"><a href="sampling-and-n-way-anova.html#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="sampling-and-n-way-anova.html#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Fvalue)</span></code></pre></div>
+<pre><code>## [1] 4.400556</code></pre>
+<p>Now the p-value</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="sampling-and-n-way-anova.html#cb19-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb19-2"><a href="sampling-and-n-way-anova.html#cb19-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="dv">24</span> <span class="co">#recall 24 df for MSE</span></span>
+<span id="cb19-3"><a href="sampling-and-n-way-anova.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="sampling-and-n-way-anova.html#cb19-4" aria-hidden="true" tabindex="-1"></a>pvalue_two_tail <span class="ot">=</span> <span class="fu">pf</span>(Fvalue,</span>
+<span id="cb19-5"><a href="sampling-and-n-way-anova.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df1 =</span> df1,</span>
+<span id="cb19-6"><a href="sampling-and-n-way-anova.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">df2 =</span> df2,</span>
+<span id="cb19-7"><a href="sampling-and-n-way-anova.html#cb19-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb19-8"><a href="sampling-and-n-way-anova.html#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="sampling-and-n-way-anova.html#cb19-9" aria-hidden="true" tabindex="-1"></a>pvalue_one_tail <span class="ot">=</span> pvalue_two_tail<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb19-10"><a href="sampling-and-n-way-anova.html#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="sampling-and-n-way-anova.html#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue_one_tail)</span></code></pre></div>
+<pre><code>## [1] 0.02331882</code></pre>
+<p>So for <span class="math inline">\(F(1,24) = 4.40, p = .023\)</span>.</p>
+<p>Now the effect size.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="sampling-and-n-way-anova.html#cb21-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb21-2"><a href="sampling-and-n-way-anova.html#cb21-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
+<span id="cb21-3"><a href="sampling-and-n-way-anova.html#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="sampling-and-n-way-anova.html#cb21-4" aria-hidden="true" tabindex="-1"></a>means_to_compare <span class="ot">=</span> <span class="fu">c</span>(xbar1, xbar2, xbar3)</span>
+<span id="cb21-5"><a href="sampling-and-n-way-anova.html#cb21-5" aria-hidden="true" tabindex="-1"></a>n_for_means <span class="ot">=</span> <span class="fu">c</span>(n_per_cell, n_per_cell, n_per_cell)</span>
+<span id="cb21-6"><a href="sampling-and-n-way-anova.html#cb21-6" aria-hidden="true" tabindex="-1"></a>comparison_weights <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, .<span class="dv">5</span>, .<span class="dv">5</span>)</span>
+<span id="cb21-7"><a href="sampling-and-n-way-anova.html#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="sampling-and-n-way-anova.html#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># re-use lm_nway from initial ANOVA</span></span>
+<span id="cb21-9"><a href="sampling-and-n-way-anova.html#cb21-9" aria-hidden="true" tabindex="-1"></a>s_people <span class="ot">=</span> <span class="fu">summary</span>(lm_nway)<span class="sc">$</span>sigma</span>
+<span id="cb21-10"><a href="sampling-and-n-way-anova.html#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="sampling-and-n-way-anova.html#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate standardizec contrast with CI</span></span>
+<span id="cb21-12"><a href="sampling-and-n-way-anova.html#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ci.sc</span>(<span class="at">means =</span> means_to_compare,</span>
+<span id="cb21-13"><a href="sampling-and-n-way-anova.html#cb21-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">c.weights =</span> comparison_weights,</span>
+<span id="cb21-14"><a href="sampling-and-n-way-anova.html#cb21-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> n_for_means,</span>
+<span id="cb21-15"><a href="sampling-and-n-way-anova.html#cb21-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">s.anova =</span> s_people,</span>
+<span id="cb21-16"><a href="sampling-and-n-way-anova.html#cb21-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">N =</span> mse_n)</span></code></pre></div>
+<pre><code>## $Lower.Conf.Limit.Standardized.Contrast
+## [1] 0.02316024
+## 
+## $Standardized.contrast
+## [1] 1.148985
+## 
+## $Upper.Conf.Limit.Standardized.Contrast
+## [1] 2.255169</code></pre>
 
 </div>
 </div>

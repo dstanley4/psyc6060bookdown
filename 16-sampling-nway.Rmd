@@ -1235,14 +1235,16 @@ print(pvalue_one_tail)
 **Calculate effect size for contrast**
 
 ```{r}
+n_per_cell = 5
+mse_n = 2*3*n_per_cell
+
+
 xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
 xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
 
 means_to_compare = c(xbar3, xbar1)
+n_for_means = c(n_per_cell, n_per_cell)
 comparison_weights = c(1, -1)
-
-n_per_cell = 5
-mse_n = 2*3*n_per_cell
 
 # Approach 1 to s.anova
 mse = 60 #s2_people
@@ -1282,11 +1284,189 @@ You can see from the above table that when you are comparing two means the contr
 ### contrasts with multiple means
 
 
+```{r, echo = FALSE}
+cond.means = c(xbar1, xbar2, xbar3)
+cond.sd = c(sqrt(var1), sqrt(var2), sqrt(var3))
+MS.w = 60
+n.pergroup = c(5,5,5)
+mse = 60
+
+my.weights<-c(-2,1,1) # Define contrast weights
+psi<-sum(my.weights*cond.means) # Calculate psi 
+
+Fvalue_psi<-(psi^2)/(sum((my.weights^2)/n.pergroup))/MS.w # Use MSw from omnibus ANOVA
+
+xcm1 = xbar1
+xcm2 = mean(c(xbar2, xbar3))
+xcm = c(xcm1, xcm2)
+xvar = var(xcm)
 
 
+svar1 = mse/5
+svar2 = mse/10
+svar = mean(c(svar1, svar2))
+
+```
+
+The two contrast means ($\bar{c_1}$, $\bar{c_2}$}) are calculated as below"
+
+For the first mean, it's just a cell mean, where $n = 5$.
+
+$$
+\bar{c_1} = \bar{x_1} = `r xbar1`
+$$
+
+For the second mean, it's the average of two means. Note for this combined mean $n = 10$; because it was based on two cell means, each $n=5$.
+
+$$
+\bar{c_2} = \frac{\bar{x_2} + \bar{x_3}}{2} = \frac{ `r (xbar1 + xbar2)`}{2} = `r xcm2`
+$$
 
 
+But when we look at these two contrast means, the mean of the means is:
 
+$$
+\begin{aligned}
+\bar{\bar{c}} &= \frac{\sum \bar{c_i}}{2} \\
+&= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&= \frac{`r xcm1` + `r xcm2`}{2} \\
+&= `r mean(c(xcm1, xcm2))`\\
+\end{aligned}
+$$
+
+We calculate the total variance:
+
+$$
+\begin{aligned} 
+\text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(`r xcm1`- `r mean(c(xcm1, xcm2))`)^2 + (`r xcm2` - `r mean(c(xcm1, xcm2))`)^2}{2-1} \\
+&= `r var(c(xcm1, xcm2))`
+\end{aligned}
+$$
+
+
+We calculate the variance due to random sampling:
+
+The calculation is bit more complicated for sampling error because the sample sizes are different for the two means.
+
+For first contrast mean, $c_1$, is $n = 5$. Therefore sampling error is:
+
+$$
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+$$
+
+
+For second contrast mean, $c_2$, is $n = 10$. Therefore sampling error is:
+
+$$
+\frac{s_{people}^2}{n + n} = \frac{MSE}{n + n} = \frac{60}{5 + 5} = \frac{60}{10} = 6  
+$$
+
+
+We use the average of these two sampling error calculations
+
+$$
+\text{random sampling variance} = \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} = 9
+$$
+
+
+The F-value is:
+
+$$
+\begin{align}
+F &= \frac{\text{total variance}}{\text{random sampling variance}}\\
+&= \frac{\frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1}}{\left[ \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} \right]}\\
+&= \frac{\frac{(`r xcm1`- `r mean(c(xcm1, xcm2))`)^2 + (`r xcm2` - `r mean(c(xcm1, xcm2))`)^2}{2-1}}{\left[ \frac{12 + 6}{2} \right]}\\
+&= \frac{`r var(c(xcm1, xcm2))`}{\left[ 9 \right]}\\
+&= 4.40
+\end{align}
+$$
+
+In R, it's easy to get these numbers.
+
+We begin by getting the cell data:
+
+```{r}
+juggling_high_preparation <- nway_data %>%
+  filter(juggling == "yes")%>%
+  filter(preparation == "high")%>%
+  pull(calm)
+
+juggling_medium_preparation <- nway_data %>%
+  filter(juggling == "yes")%>%
+  filter(preparation == "medium")%>%
+  pull(calm)
+
+juggling_low_preparation <- nway_data %>%
+  filter(juggling == "yes")%>%
+  filter(preparation == "low")%>%
+  pull(calm)
+
+```
+
+Then calculate the cell means:
+
+```{r}
+xbar1 <- mean(juggling_low_preparation, na.rm = TRUE)
+xbar2 <- mean(juggling_medium_preparation, na.rm = TRUE)
+xbar3 <- mean(juggling_high_preparation, na.rm = TRUE)
+
+c1 <- xbar1
+c2 <- mean( c(xbar2, xbar3))
+c_means = c(c1, c2)
+
+total_var = var(c_means)
+
+n <-  5
+sampling_var1 <- mse/n
+sampling_var2 <- mse/(n + n)
+sampling_var = mean( c(sampling_var1, sampling_var2))
+
+Fvalue = total_var / sampling_var
+
+print(Fvalue)
+```
+
+Now the p-value
+
+```{r}
+df1 = 1
+df2 = 24 #recall 24 df for MSE
+
+pvalue_two_tail = pf(Fvalue,
+                     df1 = df1,
+                     df2 = df2,
+                     lower.tail = FALSE)
+
+pvalue_one_tail = pvalue_two_tail/2
+
+print(pvalue_one_tail)
+```
+
+So for $F(1,24) = 4.40, p = .023$.
+
+Now the effect size.
+
+
+```{r}
+n_per_cell = 5
+mse_n = 2*3*n_per_cell
+
+means_to_compare = c(xbar1, xbar2, xbar3)
+n_for_means = c(n_per_cell, n_per_cell, n_per_cell)
+comparison_weights = c(-1, .5, .5)
+
+# re-use lm_nway from initial ANOVA
+s_people = summary(lm_nway)$sigma
+
+# Calculate standardizec contrast with CI
+ci.sc(means = means_to_compare,
+      c.weights = comparison_weights,
+      n = n_for_means,
+      s.anova = s_people,
+      N = mse_n)
+```
 
 
 
