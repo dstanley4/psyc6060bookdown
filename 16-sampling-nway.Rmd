@@ -1161,11 +1161,11 @@ $0.005444/2=0.002722$
 
 Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
 
-Noteably, we are missing a d-value with confidence interval for the above, see the fix below:
+Noteably, we are missing a $d$-value with confidence interval for the above, see the fix below:
 
 **effect size calculation**
 
-We can calculate the d-value with CI using:
+We can calculate the $d$-value with CI using:
 
 ```{r}
 library(MBESS)
@@ -1263,7 +1263,11 @@ ci.sc(means = means_to_compare,
 
 Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $sc = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
+But if you check out the SUMMARY table below - you can see the effect size is basically a $d$-value in disguise. So some people might write this as:
 
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $d = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+
+The fact that you could calculate a $d$-value in two different ways (using difference variance calculations) illustrates why it is **extremely** important that you indicate in your paper (even in a footnote) the formula you used to calculate the $d$-value and pooled variance terms.
 
 **SUMMARY**
 
