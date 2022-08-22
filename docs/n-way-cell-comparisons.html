@@ -971,17 +971,36 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <div id="contrast-statistic" class="section level4 hasAnchor" number="17.2.2.1">
 <h4><span class="header-section-number">17.2.2.1</span> contrast statistic<a href="n-way-cell-comparisons.html#contrast-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A contrast differs from a t-test primarily because of how the pooled variance term is calculated.</p>
-<p>In a contrast we use all 6 cells from the ANOVA to estimate <span class="math inline">\(s_{people}^2\)</span>.</p>
+<p>A t-test only uses the two cells involved in the comparison to estimate <span class="math inline">\(s_{people}^2\)</span>. A contrast uses a different approach. It uses all 6 cells from the ANOVA to estimate <span class="math inline">\(s_{people}^2\)</span>.</p>
 <p><span class="math display">\[
 s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
 \]</span></p>
-<p>Notice how the calculation of this <span class="math inline">\(F\)</span>-value below follows the general logic we have used with <span class="math inline">\(F\)</span>-values all along. The estimate of the total variance is divided by the estimate of the randon sampling variance.</p>
-<p>We calculate the total variance:</p>
-<p>(update numbers)</p>
+<p>Notice how the calculation of this <span class="math inline">\(F\)</span>-value below follows the general logic we have used with <span class="math inline">\(F\)</span>-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.</p>
+<p>We begin by refering to the means we will use in the contrast as contrast means.</p>
+<p>We use <span class="math inline">\(\bar{c_1}\)</span> to refer to the the mean in cell 1 (juggling yes, low preparation).</p>
+<p><span class="math display">\[
+\bar{c_1} = \bar{x_1} = 71.4
+\]</span></p>
+<p>We use <span class="math inline">\(\bar{c_2}\)</span> to refer to the the mean in cell 3 (juggling yes, high preparation).</p>
+<p><span class="math display">\[
+\bar{c_2} = \bar{x_3} = 88
+\]</span></p>
+<p>When we look at these two contrast means, the mean of the means is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\bar{\bar{c}} &amp;= \frac{\sum \bar{c_i}}{2} \\
+&amp;= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&amp;= \frac{71.4 + 88}{2} \\
+&amp;= 79.7\\
+\end{aligned}
+\]</span></p>
+<p>We estimate the total variance:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{total variance} &amp;=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
-&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(71.4- 79.7)^2 + (88 - 79.7)^2}{2-1} \\
+&amp;= 137.78
 \end{aligned}
 \]</span></p>
 <p>We calculate variance due to random sampling:</p>
@@ -1129,11 +1148,11 @@ sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 &amp;= 75.85\\
 \end{aligned}
 \]</span></p>
-<p>We calculate the total variance:</p>
+<p>We estimate the total variance:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{total variance} &amp;=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
-&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
 &amp;=  \frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1} \\
 &amp;= 39.605
 \end{aligned}

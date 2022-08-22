@@ -246,23 +246,52 @@ juggling_low_preparation <- nway_data %>%
 
 A contrast differs from a t-test primarily because of how the pooled variance term is calculated.
 
-In a contrast we use all 6 cells from the ANOVA to estimate $s_{people}^2$.
+A t-test only uses the two cells involved in the comparison to estimate $s_{people}^2$. A contrast uses a different approach. It uses all 6 cells from the ANOVA to estimate $s_{people}^2$. 
 
 $$
 s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
 $$ 
 
 
-Notice how the calculation of this $F$-value below follows the general logic we have used with $F$-values all along. The estimate of the total variance is divided by the estimate of the randon sampling variance.
+Notice how the calculation of this $F$-value below follows the general logic we have used with $F$-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.
 
-We calculate the total variance:
+We begin by refering to the means we will use in the contrast as contrast means.
 
-(update numbers)
+We use $\bar{c_1}$ to refer to the the mean in cell 1 (juggling yes, low preparation).
+
+$$
+\bar{c_1} = \bar{x_1} = `r xbar1`
+$$
+
+
+We use $\bar{c_2}$ to refer to the the mean in cell 3 (juggling yes, high preparation).
+
+$$
+\bar{c_2} = \bar{x_3} = `r xbar3`
+$$
+
+
+When we look at these two contrast means, the mean of the means is:
+
+$$
+\begin{aligned}
+\bar{\bar{c}} &= \frac{\sum \bar{c_i}}{2} \\
+&= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&= \frac{`r xbar1` + `r xbar3`}{2} \\
+&= `r mean(c(xbar1, xbar3))`\\
+\end{aligned}
+$$
+
+
+
+We estimate the total variance:
 
 $$
 \begin{aligned} 
 \text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
-&=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(`r xbar1`- `r  mean(c(xbar1, xbar3))`)^2 + (`r xbar3` - `r  mean(c(xbar1, xbar3))`)^2}{2-1} \\
+&= `r var(c(xbar1, xbar3))`
 \end{aligned}
 $$
 
@@ -433,12 +462,12 @@ $$
 \end{aligned}
 $$
 
-We calculate the total variance:
+We estimate the total variance:
 
 $$
 \begin{aligned} 
 \text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
-&=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
 &=  \frac{(`r xcm1`- `r mean(c(xcm1, xcm2))`)^2 + (`r xcm2` - `r mean(c(xcm1, xcm2))`)^2}{2-1} \\
 &= `r var(c(xcm1, xcm2))`
 \end{aligned}
