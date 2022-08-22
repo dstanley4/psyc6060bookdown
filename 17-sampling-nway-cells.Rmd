@@ -309,14 +309,14 @@ print(Fvalue)
 #### contrast p-value
 
 ```{r}
-pvalue_two_tail = pf(Fvalue,
+pvalue_nondirectional = pf(Fvalue,
                      df1 = df1,
                      df2 = df2,
                      lower.tail = FALSE)
 
-pvalue_one_tail = pvalue_two_tail/2
+pvalue_directional = pvalue_nondirectional/2
 
-print(pvalue_one_tail)
+print(pvalue_directional)
 ```
 
 #### contrast effect size
@@ -533,14 +533,14 @@ print(Fvalue)
 df1 = 1
 df2 = 24 #recall 24 df for MSE
 
-pvalue_two_tail = pf(Fvalue,
+pvalue_nondirectional = pf(Fvalue,
                      df1 = df1,
                      df2 = df2,
                      lower.tail = FALSE)
 
-pvalue_one_tail = pvalue_two_tail/2
+pvalue_directional = pvalue_nondirectional/2
 
-print(pvalue_one_tail)
+print(pvalue_directional)
 ```
 
 So for $F(1,24) = 4.40, p = .023$.
