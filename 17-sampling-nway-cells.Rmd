@@ -244,6 +244,52 @@ juggling_low_preparation <- nway_data %>%
 
 #### contrast statistic
 
+A contrast differs from a t-test primarily because of how the pooled variance term is calculated.
+
+In a contrast we use all 6 cells from the ANOVA to estimate $s_{people}^2$.
+
+$$
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
+$$ 
+
+
+Notice how the calculation of this $F$-value below follows the general logic we have used with $F$-values all along. The estimate of the total variance is divided by the estimate of the randon sampling variance.
+
+We calculate the total variance:
+
+(update numbers)
+
+$$
+\begin{aligned} 
+\text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+\end{aligned}
+$$
+
+We calculate variance due to random sampling:
+
+$$
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+$$
+
+And then we compare them with the F-ratio:
+
+$$
+F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}
+$$
+
+
+This $F$-value formula looks very different from the $t$-test formula we used previously. But we can rearrange the formula above to make it look like a t-test. 
+
+$$
+F = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2
+$$
+
+When it is rearranged, you can see the $F = t^2$. This rearrangement only works when there are two means. The important point is though that you can see that really the $t$-test and the contrast are the same except for the way the pooled variance term is calculated.
+
+
+We can calculate the contrast with the code below.
+
 ```{r}
 xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
 xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
@@ -274,6 +320,15 @@ print(pvalue_one_tail)
 ```
 
 #### contrast effect size
+
+We can calculate an effect size with a CI for this comparison using the formula below.
+
+ $$
+ sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
+ $$
+
+Again, notice the only difference from a d-value is that we calculated  $s_{people}$ based on 6 cells instead of 2. Consequently, some people call this value a $d$-value.
+
 
 ```{r}
 n_per_cell = 5
@@ -307,7 +362,7 @@ ci.sc(means = means_to_compare,
 
 Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $sc = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
-But if you check out the SUMMARY table below - you can see the effect size is basically a $d$-value in disguise. So some people might write this as:
+But, as noted, some people might just write this up calling the effect size a $d$-value:
 
 Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $d = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
@@ -317,7 +372,7 @@ The fact that you could calculate a $d$-value in two different ways (using diffe
 
 | Approach | pooled variance | test  | effect size |
 |:--------:|:---------------:|:-----:|:-----------:|
-| contrast (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}$ | $F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}} =  \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2$ | $sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
+| contrast (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}$ | $F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}$ | $sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
 | $t$-test (equal variances assumed) | $s_{people}^2 = \frac{s_1^2 + s_2^2}{2}$ | $t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}$ | $d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}$ |
 
 You can see from the above table that when you are comparing two means the contrast and $t$-test approaches are very similar. The only difference between the two approaches is how the population variance estimate ($s_{people}^2$) is calculated.
@@ -349,6 +404,8 @@ svar2 = mse/10
 svar = mean(c(svar1, svar2))
 
 ```
+
+#### contrast (mult) statistic
 
 The two contrast means ($\bar{c_1}$, $\bar{c_2}$}) are calculated as below"
 
@@ -413,7 +470,7 @@ $$
 $$
 
 
-The F-value is:
+The $F$-value is:
 
 $$
 \begin{align}
@@ -470,7 +527,7 @@ Fvalue = total_var / sampling_var
 print(Fvalue)
 ```
 
-Now the p-value
+#### contrast (mult) p-value
 
 ```{r}
 df1 = 1
@@ -487,6 +544,8 @@ print(pvalue_one_tail)
 ```
 
 So for $F(1,24) = 4.40, p = .023$.
+
+#### contrast (mult) effect size
 
 Now the effect size.
 
@@ -509,6 +568,9 @@ ci.sc(means = means_to_compare,
       s.anova = s_people,
       N = mse_n)
 ```
+
+#### contrast (mult) text
+
 
 
 

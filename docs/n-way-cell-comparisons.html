@@ -999,6 +999,34 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <span id="cb566-10"><a href="n-way-cell-comparisons.html#cb566-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
 <div id="contrast-statistic" class="section level4 hasAnchor" number="17.2.2.1">
 <h4><span class="header-section-number">17.2.2.1</span> contrast statistic<a href="n-way-cell-comparisons.html#contrast-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A contrast differs from a t-test primarily because of how the pooled variance term is calculated.</p>
+<p>In a contrast we use all 6 cells from the ANOVA to estimate <span class="math inline">\(s_{people}^2\)</span>.</p>
+<p><span class="math display">\[
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
+\]</span></p>
+<p>Notice how the calculation of this <span class="math inline">\(F\)</span>-value below follows the general logic we have used with <span class="math inline">\(F\)</span>-values all along. The estimate of the total variance is divided by the estimate of the randon sampling variance.</p>
+<p>We calculate the total variance:</p>
+<p>(update numbers)</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{total variance} &amp;=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&amp;=  \frac{(\bar{c_{1}} - \bar{\bar{x}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+\end{aligned}
+\]</span></p>
+<p>We calculate variance due to random sampling:</p>
+<p><span class="math display">\[
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+\]</span></p>
+<p>And then we compare them with the F-ratio:</p>
+<p><span class="math display">\[
+F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}
+\]</span></p>
+<p>This <span class="math inline">\(F\)</span>-value formula looks very different from the <span class="math inline">\(t\)</span>-test formula we used previously. But we can rearrange the formula above to make it look like a t-test.</p>
+<p><span class="math display">\[
+F = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2
+\]</span></p>
+<p>When it is rearranged, you can see the <span class="math inline">\(F = t^2\)</span>. This rearrangement only works when there are two means. The important point is though that you can see that really the <span class="math inline">\(t\)</span>-test and the contrast are the same except for the way the pooled variance term is calculated.</p>
+<p>We can calculate the contrast with the code below.</p>
 <div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="n-way-cell-comparisons.html#cb567-1" aria-hidden="true" tabindex="-1"></a>xbar3 <span class="ot">=</span> <span class="fu">mean</span>(juggling_high_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb567-2"><a href="n-way-cell-comparisons.html#cb567-2" aria-hidden="true" tabindex="-1"></a>xbar1 <span class="ot">=</span> <span class="fu">mean</span>(juggling_low_preparation, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb567-3"><a href="n-way-cell-comparisons.html#cb567-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1027,6 +1055,11 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 </div>
 <div id="contrast-effect-size" class="section level4 hasAnchor" number="17.2.2.3">
 <h4><span class="header-section-number">17.2.2.3</span> contrast effect size<a href="n-way-cell-comparisons.html#contrast-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can calculate an effect size with a CI for this comparison using the formula below.</p>
+<p><span class="math display">\[
+sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
+\]</span></p>
+<p>Again, notice the only difference from a d-value is that we calculated <span class="math inline">\(s_{people}\)</span> based on 6 cells instead of 2. Consequently, some people call this value a <span class="math inline">\(d\)</span>-value.</p>
 <div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="n-way-cell-comparisons.html#cb571-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb571-2"><a href="n-way-cell-comparisons.html#cb571-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
 <span id="cb571-3"><a href="n-way-cell-comparisons.html#cb571-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1064,7 +1097,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <div id="contrast-text" class="section level4 hasAnchor" number="17.2.2.4">
 <h4><span class="header-section-number">17.2.2.4</span> contrast text<a href="n-way-cell-comparisons.html#contrast-text" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, <span class="math inline">\(sc = 2.14\)</span>, 95% <span class="math inline">\(CI[0.77, 3.49\)</span>]) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(F(1, 24)= 11.482\)</span>, <span class="math inline">\(p = .001\)</span>.</p>
-<p>But if you check out the SUMMARY table below - you can see the effect size is basically a <span class="math inline">\(d\)</span>-value in disguise. So some people might write this as:</p>
+<p>But, as noted, some people might just write this up calling the effect size a <span class="math inline">\(d\)</span>-value:</p>
 <p>Among jugglers, high preparation students (<span class="math inline">\(M = 88.00\)</span>, <span class="math inline">\(SD = 8.15\)</span>) were calmer (<span class="math inline">\(M_{\text{diff}} = 16.6\)</span>, <span class="math inline">\(d = 2.14\)</span>, 95% <span class="math inline">\(CI[0.77, 3.49\)</span>]) than low preparation students,(<span class="math inline">\(M = 71.4\)</span>, <span class="math inline">\(SD = 5.50\)</span>), <span class="math inline">\(F(1, 24)= 11.482\)</span>, <span class="math inline">\(p = .001\)</span>.</p>
 <p>The fact that you could calculate a <span class="math inline">\(d\)</span>-value in two different ways (using difference variance calculations) illustrates why it is <strong>extremely</strong> important that you indicate in your paper (even in a footnote) the formula you used to calculate the <span class="math inline">\(d\)</span>-value and pooled variance terms.</p>
 </div>
@@ -1089,7 +1122,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <tr class="odd">
 <td align="center">contrast (equal variances assumed)</td>
 <td align="center"><span class="math inline">\(s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}\)</span></td>
-<td align="center"><span class="math inline">\(F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}} = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2\)</span></td>
+<td align="center"><span class="math inline">\(F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\)</span></td>
 <td align="center"><span class="math inline">\(sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\)</span></td>
 </tr>
 <tr class="even">
@@ -1105,6 +1138,8 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 </div>
 <div id="contrast-multiple-means" class="section level3 hasAnchor" number="17.2.3">
 <h3><span class="header-section-number">17.2.3</span> contrast (multiple means)<a href="n-way-cell-comparisons.html#contrast-multiple-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="contrast-mult-statistic" class="section level4 hasAnchor" number="17.2.3.1">
+<h4><span class="header-section-number">17.2.3.1</span> contrast (mult) statistic<a href="n-way-cell-comparisons.html#contrast-mult-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The two contrast means (<span class="math inline">\(\bar{c_1}\)</span>, <span class="math inline">\(\bar{c_2}\)</span>}) are calculated as below”</p>
 <p>For the first mean, it’s just a cell mean, where <span class="math inline">\(n = 5\)</span>.</p>
 <p><span class="math display">\[
@@ -1146,7 +1181,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <p><span class="math display">\[
 \text{random sampling variance} = \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} = 9
 \]</span></p>
-<p>The F-value is:</p>
+<p>The <span class="math inline">\(F\)</span>-value is:</p>
 <p><span class="math display">\[
 \begin{align}
 F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
@@ -1192,7 +1227,9 @@ F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
 <span id="cb574-17"><a href="n-way-cell-comparisons.html#cb574-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb574-18"><a href="n-way-cell-comparisons.html#cb574-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Fvalue)</span></code></pre></div>
 <pre><code>## [1] 4.401</code></pre>
-<p>Now the p-value</p>
+</div>
+<div id="contrast-mult-p-value" class="section level4 hasAnchor" number="17.2.3.2">
+<h4><span class="header-section-number">17.2.3.2</span> contrast (mult) p-value<a href="n-way-cell-comparisons.html#contrast-mult-p-value" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="n-way-cell-comparisons.html#cb576-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> <span class="dv">1</span></span>
 <span id="cb576-2"><a href="n-way-cell-comparisons.html#cb576-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="dv">24</span> <span class="co">#recall 24 df for MSE</span></span>
 <span id="cb576-3"><a href="n-way-cell-comparisons.html#cb576-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1206,6 +1243,9 @@ F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
 <span id="cb576-11"><a href="n-way-cell-comparisons.html#cb576-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvalue_one_tail)</span></code></pre></div>
 <pre><code>## [1] 0.02332</code></pre>
 <p>So for <span class="math inline">\(F(1,24) = 4.40, p = .023\)</span>.</p>
+</div>
+<div id="contrast-mult-effect-size" class="section level4 hasAnchor" number="17.2.3.3">
+<h4><span class="header-section-number">17.2.3.3</span> contrast (mult) effect size<a href="n-way-cell-comparisons.html#contrast-mult-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Now the effect size.</p>
 <div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="n-way-cell-comparisons.html#cb578-1" aria-hidden="true" tabindex="-1"></a>n_per_cell <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb578-2"><a href="n-way-cell-comparisons.html#cb578-2" aria-hidden="true" tabindex="-1"></a>mse_n <span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span>n_per_cell</span>
@@ -1231,7 +1271,11 @@ F &amp;= \frac{\text{total variance}}{\text{random sampling variance}}\\
 ## 
 ## $Upper.Conf.Limit.Standardized.Contrast
 ## [1] 2.255</code></pre>
+</div>
+<div id="contrast-mult-text" class="section level4 hasAnchor" number="17.2.3.4">
+<h4><span class="header-section-number">17.2.3.4</span> contrast (mult) text<a href="n-way-cell-comparisons.html#contrast-mult-text" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 
+</div>
 </div>
 </div>
 </div>
