@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Handling Data with the Tidyverse | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Handling Data with the Tidyverse | Welcome!" />
   <meta property="og:type" content="book" />
@@ -638,7 +638,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html"><i class="fa fa-check"></i><b>17</b> N-way Cell Comparisons</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#previous-output"><i class="fa fa-check"></i><b>17.1</b> Previous output</a></li>
+<li class="chapter" data-level="17.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#recap-and-next-directions"><i class="fa fa-check"></i><b>17.1</b> Recap and next directions</a></li>
 <li class="chapter" data-level="17.2" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#confirmatory-comparisons"><i class="fa fa-check"></i><b>17.2</b> Confirmatory Comparisons</a>
 <ul>
 <li class="chapter" data-level="17.2.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#t-test-1"><i class="fa fa-check"></i><b>17.2.1</b> <span class="math inline">\(t\)</span>-test</a></li>
@@ -945,7 +945,8 @@ div.csl-indent {
 ##  8    31 mostly anything       65 likes dogs a… f     single
 ##  9    24 strictly anything     67 likes dogs a… f     single
 ## 10    37 mostly anything       65 likes dogs a… m     single
-## # … with 59,936 more rows</code></pre>
+## # … with 59,936 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>But it’s also helpful just to see a list of the columns in the data with the glimpse() command:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="handling-data-with-the-tidyverse.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## Rows: 59,946
@@ -984,7 +985,8 @@ div.csl-indent {
 ##  8    31     65
 ##  9    24     67
 ## 10    37     65
-## # … with 59,936 more rows</code></pre>
+## # … with 59,936 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>Of course, it’s usually of little help to just print the subset of the data. It’s better to store it in a new data. In the command below we store the resulting data in a new data set called new_data.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="handling-data-with-the-tidyverse.html#cb69-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> okcupid_profiles <span class="sc">%&gt;%</span> </span>
 <span id="cb69-2"><a href="handling-data-with-the-tidyverse.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, height)</span></code></pre></div>
@@ -1501,7 +1503,8 @@ div.csl-indent {
 ##  8    31 mostly anything       65 likes dogs a… f     single
 ##  9    24 strictly anything     67 likes dogs a… f     single
 ## 10    37 mostly anything       65 likes dogs a… m     single
-## # … with 59,936 more rows</code></pre>
+## # … with 59,936 more rows
+## # ℹ Use `print(n = ...)` to see more rows</code></pre>
 <p>In short, you should always use tibbles (i.e., use read_csv() not read.csv()). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you when they occur.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="handling-data-with-the-tidyverse.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame from a tibble</span></span>
 <span id="cb158-2"><a href="handling-data-with-the-tidyverse.html#cb158-2" aria-hidden="true" tabindex="-1"></a>new_dataframe <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(my_tibble)</span></code></pre></div>
@@ -1575,7 +1578,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

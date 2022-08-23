@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 N-way Cell Comparisons | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 N-way Cell Comparisons | Welcome!" />
   <meta property="og:type" content="book" />
@@ -638,7 +638,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="17" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html"><i class="fa fa-check"></i><b>17</b> N-way Cell Comparisons</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#previous-output"><i class="fa fa-check"></i><b>17.1</b> Previous output</a></li>
+<li class="chapter" data-level="17.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#recap-and-next-directions"><i class="fa fa-check"></i><b>17.1</b> Recap and next directions</a></li>
 <li class="chapter" data-level="17.2" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#confirmatory-comparisons"><i class="fa fa-check"></i><b>17.2</b> Confirmatory Comparisons</a>
 <ul>
 <li class="chapter" data-level="17.2.1" data-path="n-way-cell-comparisons.html"><a href="n-way-cell-comparisons.html#t-test-1"><i class="fa fa-check"></i><b>17.2.1</b> <span class="math inline">\(t\)</span>-test</a></li>
@@ -848,8 +848,16 @@ div.csl-indent {
 <p>UNDER CONSTRUCTION</p>
 <p>UNDER CONSTRUCTION</p>
 <p>UNDER CONSTRUCTION</p>
-<div id="previous-output" class="section level2 hasAnchor" number="17.1">
-<h2><span class="header-section-number">17.1</span> Previous output<a href="n-way-cell-comparisons.html#previous-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="recap-and-next-directions" class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> Recap and next directions<a href="n-way-cell-comparisons.html#recap-and-next-directions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the last chapter we focused on the ANOVA itself. In this chapter we focus on comparing the means of cells within the ANOVA. These comparisons could be:</p>
+<ol style="list-style-type: lower-alpha">
+<li>planned comparisons based on hypotheses (i.e., confirmatory or a priori comparisons)</li>
+</ol>
+<p>or</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>exploratory comparisons to investigate an interaction.</li>
+</ol>
 <p>Previously we conducted an N-way ANOVA, where juggling (yes/no) and preparation (low/medium/high) were used to predict calmness scores before an exam. The analysis we conducted is repeated below:</p>
 <div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="n-way-cell-comparisons.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb557-2"><a href="n-way-cell-comparisons.html#cb557-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
@@ -870,14 +878,6 @@ div.csl-indent {
 <div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="n-way-cell-comparisons.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
 <span id="cb559-2"><a href="n-way-cell-comparisons.html#cb559-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
 <p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
-<p>In the last chapter we focused on the ANOVA itself. In this chapter we focus on comparing the means within cells of the ANOVA. These comparisons could be:</p>
-<ol style="list-style-type: lower-alpha">
-<li>planned comparisons based on hypotheses (i.e., confirmatory or a priori comparisons)</li>
-</ol>
-<p>or</p>
-<ol start="2" style="list-style-type: lower-alpha">
-<li>exploratory comparisons to investigate an interaction.</li>
-</ol>
 </div>
 <div id="confirmatory-comparisons" class="section level2 hasAnchor" number="17.2">
 <h2><span class="header-section-number">17.2</span> Confirmatory Comparisons<a href="n-way-cell-comparisons.html#confirmatory-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -987,7 +987,9 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 </div>
 <div id="contrast-2-means" class="section level3 hasAnchor" number="17.2.2">
 <h3><span class="header-section-number">17.2.2</span> contrast (2 means)<a href="n-way-cell-comparisons.html#contrast-2-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Obtain the sample data for these cells</p>
+<p>Although the t-test is a popular approach for comparing two cell means in an ANOVA, a <strong>contrast</strong> is actually more consistent with the underlying ANOVA framework. The big difference between a t-test and a contrast is how the calculate the pooled variance term. In fact, that’s the only difference. With a t-test the population variance of people’s calmness scores is estimated using only the two cells involved in the comparison. The contrast, in contrast, takes a different approach. Even though only two means are being compared in a contrast, the population variance of people’s calmness scores is estimated using all the cells in the ANOVA.</p>
+<p>Let’s walk thought the calculation process below. It initially seems more different than it is because it’s an F-test. But we’ll see how this is a superficial differences as we go through the process.</p>
+<p>We begin by obtaining the sample data for these cells</p>
 <div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="n-way-cell-comparisons.html#cb566-1" aria-hidden="true" tabindex="-1"></a>juggling_high_preparation <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
 <span id="cb566-2"><a href="n-way-cell-comparisons.html#cb566-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(juggling <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb566-3"><a href="n-way-cell-comparisons.html#cb566-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(preparation <span class="sc">==</span> <span class="st">&quot;high&quot;</span>)<span class="sc">%&gt;%</span></span>
@@ -1000,7 +1002,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <span id="cb566-10"><a href="n-way-cell-comparisons.html#cb566-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
 <div id="contrast-statistic" class="section level4 hasAnchor" number="17.2.2.1">
 <h4><span class="header-section-number">17.2.2.1</span> contrast statistic<a href="n-way-cell-comparisons.html#contrast-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A contrast differs from a t-test primarily because of how the pooled variance term is calculated.</p>
+<p>As noted, a contrast differs from a t-test primarily because of how the pooled variance term is calculated.</p>
 <p>A t-test only uses the two cells involved in the comparison to estimate <span class="math inline">\(s_{people}^2\)</span>. A contrast uses a different approach. It uses all 6 cells from the ANOVA to estimate <span class="math inline">\(s_{people}^2\)</span>.</p>
 <p><span class="math display">\[
 s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
@@ -1154,6 +1156,23 @@ sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 </tbody>
 </table>
 <p>You can see from the above table that when you are comparing two means the contrast and <span class="math inline">\(t\)</span>-test approaches are very similar. The only difference between the two approaches is how the population variance estimate (<span class="math inline">\(s_{people}^2\)</span>) is calculated.</p>
+</div>
+<div id="f-t2" class="section level4 hasAnchor" number="17.2.2.6">
+<h4><span class="header-section-number">17.2.2.6</span> <span class="math inline">\(F = t^2\)</span><a href="n-way-cell-comparisons.html#f-t2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In case you wanted to understand how and F-value and t-value can be the same with two groups here is the proof:</p>
+<p><span class="math display">\[
+\begin{align}
+F &amp;= \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\\
+&amp;= \frac{\frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{1}}{\frac{s_{people}^2}{n}}\\
+&amp;= \frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{\frac{s_{people}^2}{n}}; \text{With only two means they are equidistant from the grand mean}\\
+&amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}; \text{So we can change the numerator}\\
+&amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times 1\\
+&amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times \frac{2}{2}\\
+&amp;= \frac{(\bar{x_1} - \bar{x_2})^2}{2 \times \frac{s_{people}^2}{n}}\\
+&amp;= \frac{(\bar{x_1} - \bar{x_2})^2}{ \frac{s_{people}^2}{n} + \frac{s_{people}^2}{n}}\\
+&amp;= t^2
+\end{align}
+\]</span></p>
 </div>
 </div>
 <div id="contrast-multiple-means" class="section level3 hasAnchor" number="17.2.3">
@@ -1365,7 +1384,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
