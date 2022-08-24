@@ -137,7 +137,8 @@ If you have a comparison (with 2 means) that was planned prior to collecting dat
 
 Consider a scenario where you have a directional hypothesis (i.e., you believe on cell mean is higher than an other). This is also known as a one-sided test.
 
-In this particular scenario, your planned directional comparison involves comparing cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You believe the mean for cell 3 will be higher than cell 1. This belief is based on theory and your registered it at [osf.io](osf.io) prior to collecting data. 
+In this particular scenario, your planned directional comparison involves comparing cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You believe the mean for cell 3 will be higher than cell 1. That is, you have a directional hypothesis (i.e., one-tailed or one-sided hypothesis). This belief is based on theory and you registered your hypothesis at [osf.io](osf.io) prior to collecting data. 
+
 
 #### $t$-test statistic 
 
@@ -166,7 +167,7 @@ $$
  t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}
 $$
  
-Note that when we conduct a $t$-test the estimate of the population variance of calmness scores ($ s_{people}^2$) is based on only the two cells involved in the comparison (see below). Recall though that in the ANOVA this estimated was based on all six cells.
+Note that when we conduct a $t$-test the estimate of the population variance of calmness scores ($ s_{people}^2$) is based on only the two cells involved in the comparison (see below). Recall though that in the ANOVA this estimate was based on all six cells.
  
  $$
  s_{people}^2 = \frac{s_1^2 + s_2^2}{2}
@@ -186,15 +187,15 @@ print(tout)
 
 #### $t$-test p-value
 
-Divide the two-sided $p$-value by 2 to obain the one-sided $p$-value.
+Divide the two-sided $p$-value by 2 to obtain the one-sided or directional $p$-value.
 
 $0.005444/2=0.002722$
 
 Your output text now stands as:
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
 
-Notably, we are missing an effect size, $d$-value with confidence interval, for the above.
+Notably, we are missing a standardized effect size, $d$-value with confidence interval, for the above.
 
 #### $t$-test effect size
 
@@ -219,7 +220,7 @@ ci.smd(ncp = tout$statistic, n.1 = 5, n.2 = 5)
 
 #### $t$-test text
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$, $d = 2.39$, 95% $CI[0.66, 4.04$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$, $d = 2.39$, 95% $CI[0.66, 4.04$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
 
 
 | Approach | pooled variance | test  | effect size |
@@ -229,11 +230,11 @@ Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer
 
 ### contrast (2 means)
 
-Although the t-test is a popular approach for comparing two cell means in an ANOVA, a **contrast** is actually more consistent with the underlying ANOVA framework. The big difference between a t-test and a contrast is how the calculate the pooled variance term. In fact, that's the only difference. With a t-test the population variance of people's calmness scores is estimated using only the two cells involved in the comparison. The contrast, in contrast, takes a different approach. Even though only two means are being compared in a contrast, the  population variance of people's calmness scores is estimated using all the cells in the ANOVA.
+As we did with the t-test, consider a scenario where you planned a directional comparison involves comparing cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You believe the mean for cell 3 will be higher than cell 1. That is, you have a directional hypothesis (i.e., one-tailed or one-sided hypothesis). This belief is based on theory and you registered your hypothesis at [osf.io](osf.io) prior to collecting data. 
+
+Although the t-test is a popular approach for comparing two cell means in an ANOVA, a **contrast** is actually more consistent with the underlying ANOVA framework. The big difference between a t-test and a contrast is how they calculate the pooled variance term. In fact, that's the only difference. With a t-test the population variance of people's calmness scores is estimated using only the two cells involved in the comparison. The contrast, the contrast-test, takes a different approach. Even though only two cell means are being compared in a contrast, the population variance of people's calmness scores is estimated using all the cells in the ANOVA.
 
 Let's walk thought the calculation process below. It initially seems more different than it is because it's an F-test. But we'll see how this is a superficial differences as we go through the process.
-
-
 
 We begin by obtaining the sample data for these cells
 
@@ -257,13 +258,13 @@ As noted, a contrast differs from a t-test primarily because of how the pooled v
 A t-test only uses the two cells involved in the comparison to estimate $s_{people}^2$. A contrast uses a different approach. It uses all 6 cells from the ANOVA to estimate $s_{people}^2$. 
 
 $$
-s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6} = MSE = 60
 $$ 
 
 
-Notice how the calculation of this $F$-value below follows the general logic we have used with $F$-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.
+Notice how, below, the calculation of this $F$-value below follows the general logic we have used with $F$-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.
 
-We begin by refering to the means we will use in the contrast as contrast means.
+We begin by referring to the means we will use in the contrast as contrast means. That is, instead of using the original lables ($\bar{x_1}$ and $\bar{x_3|$}) we use new labels with the indices 1 and 2 to refer to the first and second means involved in the contrast. The relabelling is described below:
 
 We use $\bar{c_1}$ to refer to the the mean in cell 1 (juggling yes, low preparation).
 
@@ -279,7 +280,8 @@ $$
 $$
 
 
-When we look at these two contrast means, the mean of the means is:
+We imagine there are only these two populations ([juggling yes, low preparation],[juggling yes, high preparation]) and there there is a population-level grand mean create by averaging the two population means. We estimate that population-level grand mean using sample-level data:
+
 
 $$
 \begin{aligned}
@@ -291,7 +293,7 @@ $$
 $$
 
 
-We estimate the total variance:
+We estimate the total variance (as we did with the ANOVA):
 
 $$
 \begin{aligned} 
@@ -302,13 +304,13 @@ $$
 \end{aligned}
 $$
 
-We calculate variance due to random sampling:
+We estimate variance due to random sampling:
 
 $$
 \frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
 $$
 
-And then we compare them with the F-ratio:
+And then we compare these two estimates with the F-ratio:
 
 $$
 F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}
@@ -321,10 +323,9 @@ $$
 F = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2
 $$
 
-When it is rearranged, you can see the $F = t^2$. This rearrangement only works when there are two means. The important point is though that you can see that really the $t$-test and the contrast are the same except for the way the pooled variance term is calculated.
+When it is rearranged, you can see the $F = t^2$. This rearrangement only works when there are two means. The important point is though that you can see that really the $t$-test and the contrast are the same except for the way the pooled variance term is calculated. The t-test used a pooled variance estimate based on the two cells involved in the comparison whereas the contrast used a pooled variance estimate based on all the cells in the ANOVA.
 
-
-We can calculate the contrast with the code below.
+In R, we can calculate the contrast with the code below.
 
 ```{r}
 xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
@@ -342,6 +343,7 @@ print(Fvalue)
 ```
 
 
+
 #### contrast p-value
 
 ```{r}
@@ -355,16 +357,41 @@ pvalue_directional = pvalue_nondirectional/2
 print(pvalue_directional)
 ```
 
+Your output text now stands as:
+
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+
+Notably, we are missing a standardized effect size, with confidence interval, for the above.
+
 #### contrast effect size
 
 We can calculate an effect size with a CI for this comparison using the formula below.
 
- $$
- sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
- $$
+$$
+sc = \frac{\bar{c_2} - \bar{c_1}}{s_{people}}
+$$
 
-Again, notice the only difference from a d-value is that we calculated  $s_{people}$ based on 6 cells instead of 2. Consequently, some people call this value a $d$-value.
+Again, notice the only difference from a d-value is that we calculated  $s_{people}$ based on 6 cells instead of 2. Consequently, some people call this value a $d$-value. So in this calculation, the denominator is determined:
 
+By calculating $s_{people}^2$:
+
+$$
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6} = MSE = 60
+$$ 
+
+Turning it into $s_{people}$:
+$$
+s_{people}=\sqrt{s_{people}^2}=\sqrt{MSE}=\sqrt{60}
+$$
+
+Then using the resulting value in the calculation
+
+
+$$
+sc = \frac{`r xbar3` - `r xbar1`}{\sqrt{60}} = 2.14
+$$
+
+In R, we use the code below to obtain the effect size:
 
 ```{r}
 n_per_cell = 5
@@ -374,7 +401,11 @@ mse_n = 2*3*n_per_cell
 xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
 xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
 
-means_to_compare = c(xbar3, xbar1)
+xbar_c2 = xbar3
+xbar_c1 = xbar1
+
+
+means_to_compare = c(xbar_c2, xbar_c1)
 n_for_means = c(n_per_cell, n_per_cell)
 comparison_weights = c(1, -1)
 
