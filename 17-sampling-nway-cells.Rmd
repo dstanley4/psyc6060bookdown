@@ -321,10 +321,10 @@ When it is rearranged, you can see the $F = t^2$. This rearrangement only works 
 In R, we can calculate the contrast with the code below.
 
 ```{r}
-xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
-xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
+mean_cell1 = mean(juggling_low_preparation, na.rm = TRUE)
+mean_cell3 = mean(juggling_high_preparation, na.rm = TRUE)
 
-means_to_compare = c(xbar3, xbar1)
+means_to_compare = c(mean_cell3, mean_cell1)
 
 mse = (summary(lm_nway)$sigma)^2 # or just 60 for MSE
 df1 = 2 -1 # two means - 1
@@ -390,11 +390,11 @@ In R, we use the code below to obtain the effect size:
 n_per_cell = 5
 mse_n = 2*3*n_per_cell
 
-mean_cell3 = mean(juggling_high_preparation, na.rm = TRUE)
 mean_cell1 = mean(juggling_low_preparation, na.rm = TRUE)
+mean_cell3 = mean(juggling_high_preparation, na.rm = TRUE)
 
-mean_c2 = mean_cell3
 mean_c1 = mean_cell1
+mean_c2 = mean_cell3
 
 means_to_compare = c(mean_c2, mean_c1)
 n_for_means = c(n_per_cell, n_per_cell)
