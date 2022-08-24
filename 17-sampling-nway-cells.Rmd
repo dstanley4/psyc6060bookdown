@@ -193,7 +193,7 @@ $0.005444/2=0.002722$
 
 Your output text now stands as:
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$) than low preparation students,($M = 71.40$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
 
 Notably, we are missing a standardized effect size, $d$-value with confidence interval, for the above.
 
@@ -220,7 +220,7 @@ ci.smd(ncp = tout$statistic, n.1 = 5, n.2 = 5)
 
 #### $t$-test text
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$, $d = 2.39$, 95% $CI[0.66, 4.04$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer, on average, ($M_{\text{diff}} = 16.6$, 95% $CI[6.45, 26.75]$, $d = 2.39$, 95% $CI[0.66, 4.04$]) than low preparation students,($M = 71.40$, $SD = 5.50$), $t(8)=3.77$, $p = .003$.
 
 
 | Approach | pooled variance | test  | effect size |
@@ -359,7 +359,7 @@ print(pvalue_directional)
 
 Your output text now stands as:
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.60$) than low preparation students,($M = 71.40$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
 Notably, we are missing a standardized effect size, with confidence interval, for the above.
 
@@ -425,11 +425,11 @@ ci.sc(means = means_to_compare,
 
 #### contrast text
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $sc = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.60$, $sc = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.40$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
 But, as noted, some people might just write this up calling the effect size a $d$-value:
 
-Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.6$, $d = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.4$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
+Among jugglers, high preparation students ($M = 88.00$, $SD = 8.15$) were calmer ($M_{\text{diff}} = 16.60$, $d = 2.14$, 95% $CI[0.77, 3.49$]) than low preparation students,($M = 71.40$, $SD = 5.50$), $F(1, 24)= 11.482$, $p = .001$.
 
 The fact that you could calculate a $d$-value in two different ways (using difference variance calculations) illustrates why it is **extremely** important that you indicate in your paper (even in a footnote) the formula you used to calculate the $d$-value and pooled variance terms.
 
@@ -463,6 +463,14 @@ $$
 
 ### contrast (multiple means)
 
+
+Sometimes we might want to combine cells for a comparison. For example, imagine we hypothesized the mean of cells 2 and 3 was higher than the mean of cell 1. Illustrated below:
+
+$$
+\frac{\bar{x_2} + \bar{x_3}}{2} \text{ vs }\bar{x_1}
+$$
+
+How do we go about conducting this comparison?
 
 ```{r, echo = FALSE}
 cond.means = c(xbar1, xbar2, xbar3)
@@ -505,7 +513,7 @@ $$
 $$
 
 
-But when we look at these two contrast means, the mean of the means is:
+But when we look at these two contrast means, the estimate of the "grand mean" is:
 
 $$
 \begin{aligned}
@@ -516,7 +524,7 @@ $$
 \end{aligned}
 $$
 
-We estimate the total variance:
+**We estimate the total variance:**
 
 $$
 \begin{aligned} 
@@ -527,8 +535,7 @@ $$
 \end{aligned}
 $$
 
-
-We calculate the variance due to random sampling:
+**We estimate the variance due to random sampling:**
 
 The calculation is bit more complicated for sampling error because the sample sizes are different for the two means.
 
@@ -634,11 +641,40 @@ pvalue_directional = pvalue_nondirectional/2
 print(pvalue_directional)
 ```
 
-So for $F(1,24) = 4.40, p = .023$.
+Among jugglers, the combined mean of calmness for high and medium preparation students ($M = 80.30$) was higher than the mean ($M_{\text{diff}} = 8.90$) for low preparation students,($M = 71.40$), $F(1,24) = 4.40, p = .023$.
+
+But we would still like to put an effect size in this sentence.
 
 #### contrast (mult) effect size
 
-Now the effect size.
+Now the effect size. To calculate the effect size we need to use a rather odd notation. But this odd notation is commonly used with contrasts. We assign weights to the contrasts using a few rules.
+
+* All of the cell means involved in one contrast mean (e.g., $\bar{c_1}$) receive a negative number for the weight.
+
+* All of the cell means involved in the other contrast mean (e.g., $\bar{c_2}$) receive a positive number for the weight. 
+
+* All of the negative weights must add up to negative one (i.e., -1.0)
+
+* All of the positive weights must add up to positive one (i.e., 1.0)
+
+So if we think of the cell means in order:
+
+$$
+x_1, x_2, x_3
+$$
+
+If we want $x_1$ compared to the average of cells two ($x_2$ and $x_3$) then we would use the weights
+
+$$
+-1, 0.5, 0.5
+$$
+
+This results in the following comparison:
+
+$$
+\frac{\bar{x_2} + \bar{x_3}}{2} - \bar{x_1}
+$$
+
 
 ```{r}
 n_per_cell = 5
@@ -661,10 +697,14 @@ ci.sc(means = means_to_compare,
 
 #### contrast (mult) text
 
+Among jugglers, the combined mean of calmness for high and medium preparation students ($M = 80.30$) was higher than the mean ($M_{\text{diff}} = 8.90$, $sc = 1.15$, 95% $CI[.02, 2.26]$) for low preparation students,($M = 71.40$), $F(1,24) = 4.40, p = .023$.
 
 #### contrasts in practice
 
-See book Maxwell et al.
+The computations presented here are designed to present the conceptual basis for contrasts. In particular, I aimed to emphasize how the logic used is the same as that used in ANOVA. I strongly encourage you to check out the excellent computational treatment of this topic provided in the book below:
+
+[Maxwell, S. E., Delaney, H. D., & Kelley, K. (2017). Designing experiments and analyzing data: A model comparison perspective. Routledge. Chicago](https://www.amazon.ca/Designing-Experiments-Analyzing-Data-Perspective/dp/1138892289/ref=sr_1_1?crid=1QJPZWX9P6APB&keywords=designing+experiments+Maxwell+delany&qid=1661367007&sprefix=designing+experiments+maxwell+delany%2Caps%2C85&sr=8-1)
+
 
 
 
