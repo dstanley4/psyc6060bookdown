@@ -607,10 +607,9 @@ total_var = var(contrast_means)
 n_per_cell = 5
 n = n_per_cell
 
-
-sampling_var1 <- mse/n
-sampling_var2 <- mse/(n + n)
-sampling_var = mean( c(sampling_var1, sampling_var2))
+sampling_var_c1 <- mse/n
+sampling_var_c2 <- mse/(n + n)
+sampling_var = mean( c(sampling_var_c1, sampling_var_c2) )
 
 # compare the estimates with a ratio
 Fvalue = total_var / sampling_var
@@ -622,8 +621,8 @@ print(Fvalue)
 #### contrast (mult) p-value
 
 ```{r}
-df1 = 1
-df2 = 24 #recall 24 df for MSE
+df1 = 1   # two means being compared to 2 - 1
+df2 = 24 #recall 24 df for MSE:  ab(n-1)
 
 pvalue_nondirectional = pf(Fvalue,
                      df1 = df1,
