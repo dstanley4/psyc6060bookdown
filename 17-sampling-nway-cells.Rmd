@@ -397,15 +397,13 @@ In R, we use the code below to obtain the effect size:
 n_per_cell = 5
 mse_n = 2*3*n_per_cell
 
+mean_cell3 = mean(juggling_high_preparation, na.rm = TRUE)
+mean_cell1 = mean(juggling_low_preparation, na.rm = TRUE)
 
-xbar3 = mean(juggling_high_preparation, na.rm = TRUE)
-xbar1 = mean(juggling_low_preparation, na.rm = TRUE)
+mean_c2 = mean_cell3
+mean_c1 = mean_cell1
 
-xbar_c2 = xbar3
-xbar_c1 = xbar1
-
-
-means_to_compare = c(xbar_c2, xbar_c1)
+means_to_compare = c(mean_c2, mean_c1)
 n_for_means = c(n_per_cell, n_per_cell)
 comparison_weights = c(1, -1)
 
@@ -592,25 +590,34 @@ juggling_low_preparation <- nway_data %>%
 Then calculate the cell means:
 
 ```{r}
-xbar1 <- mean(juggling_low_preparation, na.rm = TRUE)
-xbar2 <- mean(juggling_medium_preparation, na.rm = TRUE)
-xbar3 <- mean(juggling_high_preparation, na.rm = TRUE)
+mean_cell1 <- mean(juggling_low_preparation, na.rm = TRUE)
+mean_cell2 <- mean(juggling_medium_preparation, na.rm = TRUE)
+mean_cell3 <- mean(juggling_high_preparation, na.rm = TRUE)
 
-c1 <- xbar1
-c2 <- mean( c(xbar2, xbar3))
-c_means = c(c1, c2)
 
-total_var = var(c_means)
+# estimate total variance
+mean_c1 <- mean_cell1
+mean_c2 <- mean( c(mean_cell2, mean_cell3) )
+contrast_means = c(mean_c1, mean_c2)
 
-n <-  5
+total_var = var(contrast_means)
+
+
+# estimate variance due to sampling error
+n_per_cell = 5
+n = n_per_cell
+
+
 sampling_var1 <- mse/n
 sampling_var2 <- mse/(n + n)
 sampling_var = mean( c(sampling_var1, sampling_var2))
 
+# compare the estimates with a ratio
 Fvalue = total_var / sampling_var
 
 print(Fvalue)
 ```
+
 
 #### contrast (mult) p-value
 
