@@ -873,7 +873,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-10"><a href="n-way-cell-comparisons.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(calm)</span></code></pre></div>
 <p>Conduct a two-sided <span class="math inline">\(t\)</span>-test with the formula (equal variances assumed):</p>
 <p><span class="math display">\[
-t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}
+t = \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}
 \]</span></p>
 <p>Note that when we conduct a <span class="math inline">\(t\)</span>-test the estimate of the population variance of calmness scores ($ s_{people}^2$) is based on only the two cells involved in the comparison (see below). Recall though that in the ANOVA this estimate was based on all six cells.</p>
 <p><span class="math display">\[
@@ -949,7 +949,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 <tr class="odd">
 <td align="center"><span class="math inline">\(t\)</span>-test (equal variances assumed)</td>
 <td align="center"><span class="math inline">\(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\)</span></td>
-<td align="center"><span class="math inline">\(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\)</span></td>
+<td align="center"><span class="math inline">\(t = \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\)</span></td>
 <td align="center"><span class="math inline">\(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\)</span></td>
 </tr>
 </tbody>
@@ -980,7 +980,7 @@ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
 s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6} = MSE = 60
 \]</span></p>
 <p>Notice how, below, the calculation of this <span class="math inline">\(F\)</span>-value below follows the general logic we have used with <span class="math inline">\(F\)</span>-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.</p>
-<p>We begin by referring to the means we will use in the contrast as contrast means. That is, instead of using the original lables (<span class="math inline">\(\bar{x_1}\)</span> and <span class="math inline">\(\bar{x_3|\)</span>}) we use new labels with the indices 1 and 2 to refer to the first and second means involved in the contrast. The relabelling is described below:</p>
+<p>We begin by referring to the means we will use in the contrast as contrast means. That is, instead of using the original lables (<span class="math inline">\(\bar{x_1}\)</span> and <span class="math inline">\(\bar{x_3}\)</span>}) we use new labels with the indices 1 and 2 to refer to the first and second means involved in the contrast. The relabelling is described below:</p>
 <p>We use <span class="math inline">\(\bar{c_1}\)</span> to refer to the the mean in cell 1 (juggling yes, low preparation).</p>
 <p><span class="math display">\[
 \bar{c_1} = \bar{x_1} = 71.4
@@ -1155,7 +1155,7 @@ sc = \frac{88 - 71.4}{\sqrt{60}} = 2.14
 F &amp;= \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\\
 &amp;= \frac{\frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{1}}{\frac{s_{people}^2}{n}}\\
 &amp;= \frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{\frac{s_{people}^2}{n}}; \text{With only two means they are equidistant from the grand mean}\\
-&amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}; \text{So we can change the numerator}\\
+&amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}; \text{So we can change the numerator because:} (\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2 = \frac{(\bar{x_1} - \bar{x_2})^2}{2}\\
 &amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times 1\\
 &amp;= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times \frac{2}{2}\\
 &amp;= \frac{(\bar{x_1} - \bar{x_2})^2}{2 \times \frac{s_{people}^2}{n}}\\
