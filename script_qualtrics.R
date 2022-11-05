@@ -2,7 +2,7 @@
 # Name: your name here
 # Example: Single occasion survey
 
-# Load data
+# Load data section
 library(tidyverse)
 library(janitor)
 library(skimr)
