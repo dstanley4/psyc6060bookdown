@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Welcome!" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-11-13" />
+<meta name="date" content="2023-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -982,16 +982,17 @@ the results of an analysis, or anything else.</p>
 <h3><span class="header-section-number">1.6.3</span> Background about the tidyverse<a href="introduction.html#background-about-the-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are generally two broad ways of using R, the older way and the newer way. Using R the older way is referred to as using base R. A more modern approach to using R is the tidyverse. The tidyverse represents a collection of packages that work together to give R a modern workflow. These packages do many things to help the data analyst (loading data, rearranging data, graphing, etc.). We will use the tidyverse approach to R in this guide.</p>
 <p>As noted, the tidyverse is a collection of packages. Each package adds new commands to R. The number of packages and correspondingly the number of new commands added to R by the tidyverse is large. Below is a list of the tidyverse packages:</p>
-<pre><code>##  [1] &quot;broom&quot;         &quot;cli&quot;           &quot;crayon&quot;       
+<pre><code>##  [1] &quot;broom&quot;         &quot;conflicted&quot;    &quot;cli&quot;          
 ##  [4] &quot;dbplyr&quot;        &quot;dplyr&quot;         &quot;dtplyr&quot;       
 ##  [7] &quot;forcats&quot;       &quot;ggplot2&quot;       &quot;googledrive&quot;  
 ## [10] &quot;googlesheets4&quot; &quot;haven&quot;         &quot;hms&quot;          
 ## [13] &quot;httr&quot;          &quot;jsonlite&quot;      &quot;lubridate&quot;    
 ## [16] &quot;magrittr&quot;      &quot;modelr&quot;        &quot;pillar&quot;       
-## [19] &quot;purrr&quot;         &quot;readr&quot;         &quot;readxl&quot;       
-## [22] &quot;reprex&quot;        &quot;rlang&quot;         &quot;rstudioapi&quot;   
-## [25] &quot;rvest&quot;         &quot;stringr&quot;       &quot;tibble&quot;       
-## [28] &quot;tidyr&quot;         &quot;xml2&quot;          &quot;tidyverse&quot;</code></pre>
+## [19] &quot;purrr&quot;         &quot;ragg&quot;          &quot;readr&quot;        
+## [22] &quot;readxl&quot;        &quot;reprex&quot;        &quot;rlang&quot;        
+## [25] &quot;rstudioapi&quot;    &quot;rvest&quot;         &quot;stringr&quot;      
+## [28] &quot;tibble&quot;        &quot;tidyr&quot;         &quot;xml2&quot;         
+## [31] &quot;tidyverse&quot;</code></pre>
 <p>Before you can use a package it needs to be installed – this is the same as downloading an app from the App Store. Normally, you can install a <strong>single</strong> package with the install.packages command. Previously, you needed to run an install.package command for every package in the tidyverse as illustrated below (though we no longer use this approach).</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introduction.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The old way of installing the tidyverse packages</span></span>
 <span id="cb8-2"><a href="introduction.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Like downloading apps from the app store</span></span>
@@ -1014,14 +1015,16 @@ the results of an analysis, or anything else.</p>
 <div id="activate-tidyverse-auto-complete-for-your-script" class="section level3 hasAnchor" number="1.6.5">
 <h3><span class="header-section-number">1.6.5</span> Activate tidyverse auto-complete for your script<a href="introduction.html#activate-tidyverse-auto-complete-for-your-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this “runs” the selected text. After you click the Run button you should see text like the following in the Console panel:</p>
-<pre><code>## ── Attaching packages ─────────────────────────────── tidyverse 1.3.2 ──
-## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
-## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
-## ── Conflicts ────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Attaching core tidyverse packages ──────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.1     
+## ── Conflicts ────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <p>When you use library(tidyverse) to activate the tidyverse you activate the most commonly used subset of the tidyverse packages. In the output you see checkmarks beside names of the tidyverse packages you have activated.</p>
 <p>By activating these packages you have added new commands to R that you will use. Sometimes these packages replace older versions of commands in R. The “Conflicts” section in the output shows you where the packages you activated replaced older R commands with newer R commands. You can activate the other tidyverse packages by running a library command for each package – if needed. No need to do so now.</p>
 <p>Most importantly, running the library(tidyverse) prior to entering the rest of your script allows R Studio to present auto-complete options when typing your text. Remember to start each script with the library(tidyverse) command and then Run it so you get the autocomplete options for the rest of the commands your enter.</p>
@@ -1036,7 +1039,7 @@ the results of an analysis, or anything else.</p>
 <p>Note: If you are not in the class, the data file is available here: <a href="data_okcupid.csv">data_okcupid.csv</a></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction.html#cb12-1" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 59946 Columns: 6
-## ── Column specification ────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
@@ -1071,7 +1074,7 @@ the results of an analysis, or anything else.</p>
 ##  8    31 mostly anything       65 likes dogs a… f     single
 ##  9    24 strictly anything     67 likes dogs a… f     single
 ## 10    37 mostly anything       65 likes dogs a… m     single
-## # … with 59,936 more rows</code></pre>
+## # ℹ 59,936 more rows</code></pre>
 </div>
 <div id="head-check-out-the-first-few-rows-of-data" class="section level3 hasAnchor" number="1.8.3">
 <h3><span class="header-section-number">1.8.3</span> head(): Check out the first few rows of data<a href="introduction.html#head-check-out-the-first-few-rows-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1210,7 +1213,7 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 <span id="cb28-4"><a href="introduction.html#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-5"><a href="introduction.html#cb28-5" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 59946 Columns: 6
-## ── Column specification ────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height

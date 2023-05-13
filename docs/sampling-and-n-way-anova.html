@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 16 Sampling and N-way ANOVA | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 16 Sampling and N-way ANOVA | Welcome!" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2022-11-13" />
+<meta name="date" content="2023-05-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -866,24 +866,24 @@ Chicago.</a></p>
 <div id="output" class="section level2 hasAnchor" number="16.3">
 <h2><span class="header-section-number">16.3</span> Output<a href="sampling-and-n-way-anova.html#output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We begin by creating the output for this design in R. First we activate the required packages:</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb549-1"><a href="sampling-and-n-way-anova.html#cb549-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb549-2"><a href="sampling-and-n-way-anova.html#cb549-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
-<span id="cb549-3"><a href="sampling-and-n-way-anova.html#cb549-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb549-4"><a href="sampling-and-n-way-anova.html#cb549-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
-<span id="cb549-5"><a href="sampling-and-n-way-anova.html#cb549-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb549-6"><a href="sampling-and-n-way-anova.html#cb549-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
-<span id="cb549-7"><a href="sampling-and-n-way-anova.html#cb549-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
-<span id="cb549-8"><a href="sampling-and-n-way-anova.html#cb549-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
-<p>Next we conduct the analysis:</p>
-<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="sampling-and-n-way-anova.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
-<span id="cb550-2"><a href="sampling-and-n-way-anova.html#cb550-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="sampling-and-n-way-anova.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb550-2"><a href="sampling-and-n-way-anova.html#cb550-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span>
 <span id="cb550-3"><a href="sampling-and-n-way-anova.html#cb550-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb550-4"><a href="sampling-and-n-way-anova.html#cb550-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
-<span id="cb550-5"><a href="sampling-and-n-way-anova.html#cb550-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
-<span id="cb550-6"><a href="sampling-and-n-way-anova.html#cb550-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
+<span id="cb550-4"><a href="sampling-and-n-way-anova.html#cb550-4" aria-hidden="true" tabindex="-1"></a>nway_data <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_crf.csv&quot;</span>)</span>
+<span id="cb550-5"><a href="sampling-and-n-way-anova.html#cb550-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb550-6"><a href="sampling-and-n-way-anova.html#cb550-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn character columns into factors</span></span>
+<span id="cb550-7"><a href="sampling-and-n-way-anova.html#cb550-7" aria-hidden="true" tabindex="-1"></a>nway_data  <span class="ot">&lt;-</span> nway_data <span class="sc">%&gt;%</span></span>
+<span id="cb550-8"><a href="sampling-and-n-way-anova.html#cb550-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.character, as.factor)</span></code></pre></div>
+<p>Next we conduct the analysis:</p>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="sampling-and-n-way-anova.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set contrasts to values match SPSS</span></span>
+<span id="cb551-2"><a href="sampling-and-n-way-anova.html#cb551-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts =</span> <span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb551-3"><a href="sampling-and-n-way-anova.html#cb551-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb551-4"><a href="sampling-and-n-way-anova.html#cb551-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Conduct analysis</span></span>
+<span id="cb551-5"><a href="sampling-and-n-way-anova.html#cb551-5" aria-hidden="true" tabindex="-1"></a>lm_nway <span class="ot">&lt;-</span> <span class="fu">lm</span>(calm <span class="sc">~</span> preparation<span class="sc">*</span>juggling, </span>
+<span id="cb551-6"><a href="sampling-and-n-way-anova.html#cb551-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> nway_data)</span></code></pre></div>
 <p>Then we create the output using:</p>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="sampling-and-n-way-anova.html#cb551-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
-<span id="cb551-2"><a href="sampling-and-n-way-anova.html#cb551-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb552-1"><a href="sampling-and-n-way-anova.html#cb552-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.aov.table</span>(lm_nway, </span>
+<span id="cb552-2"><a href="sampling-and-n-way-anova.html#cb552-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">filename =</span> <span class="st">&quot;my_table.doc&quot;</span>)</span></code></pre></div>
 <p><img src="ch_deeper_nway/images/nway_table_clean.png" width="80%" /></p>
 <p>Notice the preparation, juggling, and preparation x juggling rows on this table. In particular, the <span class="math inline">\(F\)</span>-value for each of these rows. In the remainder of the chapter we will review how these values are obtained - and their conceptual meaning.</p>
 </div>
