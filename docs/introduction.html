@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Welcome!</title>
   <meta name="description" content="Course notes for PSYC 6060" />
-  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Welcome!" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2023-06-07" />
+<meta name="date" content="2023-07-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -126,6 +126,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -939,12 +943,12 @@ FIGURE 1.4: R Studio interface
 <div id="console-panel" class="section level3 hasAnchor" number="1.5.1">
 <h3><span class="header-section-number">1.5.1</span> Console panel<a href="introduction.html#console-panel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When you first start R, the Console panel is on the left side of the screen. Sometimes there are two panels on the left side (one above the other); if so, the Console panel is the lower one (and labeled accordingly). We can use R a bit like a calculator. Try typing the following into the Console window: 8 + 6 + 7 + 5. You can see that R immediately produced the result on a line preceded by two hashtags (##).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">+</span> <span class="dv">6</span> <span class="sc">+</span> <span class="dv">7</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" tabindex="-1"></a><span class="dv">8</span> <span class="sc">+</span> <span class="dv">6</span> <span class="sc">+</span> <span class="dv">7</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 26</code></pre>
 <p>We can also put the result into a variable to store it. Later we can use the print command to see that result. In the example below we add the numbers 3, 0, and 9 and store the result in the variable my_sum. The text “&lt;-” indicate you are putting what is on the right side of the arrow into the variable on the left side of the arrow. You can think of a variable as a cup into which you can put different things. In this case, imagine a real-world cup with my_sum written on the outside and inside the cup we have stored the sum of 3, 0, and 9 (i.e., 12).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction.html#cb3-1" aria-hidden="true" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">9</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="introduction.html#cb3-1" tabindex="-1"></a>my_sum <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">0</span> <span class="sc">+</span> <span class="dv">9</span></span></code></pre></div>
 <p>We can inspect the contents of the my_sum variable (i.e., my_sum cup) with the print command:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_sum)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="introduction.html#cb4-1" tabindex="-1"></a><span class="fu">print</span>(my_sum)</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
 <p>Variables are very useful in R. We will use them to store a single number, an entire data set,
 the results of an analysis, or anything else.</p>
@@ -973,8 +977,8 @@ the results of an analysis, or anything else.</p>
 <p>In the previous section you created your first script. We begin by adding a comment to the script. A comment is something that will be read by humans rather than the computer/R. You make comments for other people that will read your code and need to understand what you have done. However, realize that you are also making comments for your future self as illustrated in an <a href="https://xkcd.com/1421/">XKCD cartoon</a>.</p>
 <p><img src="ch_introduction/images/future_self_2x.png" width="40%" /></p>
 <p>A good way to start every script is with a comment that includes the date of your script (or even better when you installed your packages, more on this later). Like smartphone apps, packages are updated regularly. Sometimes after a package is updated it will no longer work with an older script. Fortunately, the <a href="https://cran.r-project.org/web/packages/checkpoint/index.html">checkpoint package</a> lets users role back the clock and use older versions of packages. Adding a comment with the date of your script will help future users (including you) to use your script with the same version of the package used when you wrote the script. Dating your script is an important part of an effective and reproducible workflow.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
-<span id="cb6-2"><a href="introduction.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># By: John Smith</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="introduction.html#cb6-1" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
+<span id="cb6-2"><a href="introduction.html#cb6-2" tabindex="-1"></a><span class="co"># By: John Smith</span></span></code></pre></div>
 <p>Moving forward, I suggest you use comments to make your own personal notes in your own code as you write it. Note that in the above comment I used the internationally accepted date format order Year/Month/Day created by the <a href="https://www.iso.org/home.html">International Organization for Standardization</a> (ISO). Some people use the mnemonic <em>You’re My Dream</em> to remember the <strong>Y</strong>ear <strong>M</strong>onth <strong>D</strong>ay order. Wikipedia provides more information about this <a href="https://en.wikipedia.org/wiki/ISO_8601">International Date Format (ISO 8601)</a>. An <a href="https://xkcd.com/1179/">XKCD</a> cartoon highlights the ISO date format:</p>
 <p><img src="ch_introduction/images/iso8601.png" width="40%" /></p>
 </div>
@@ -994,34 +998,34 @@ the results of an analysis, or anything else.</p>
 ## [28] &quot;tibble&quot;        &quot;tidyr&quot;         &quot;xml2&quot;         
 ## [31] &quot;tidyverse&quot;</code></pre>
 <p>Before you can use a package it needs to be installed – this is the same as downloading an app from the App Store. Normally, you can install a <strong>single</strong> package with the install.packages command. Previously, you needed to run an install.package command for every package in the tidyverse as illustrated below (though we no longer use this approach).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introduction.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The old way of installing the tidyverse packages</span></span>
-<span id="cb8-2"><a href="introduction.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Like downloading apps from the app store</span></span>
-<span id="cb8-3"><a href="introduction.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="introduction.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;broom&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-5"><a href="introduction.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;cli&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-6"><a href="introduction.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-7"><a href="introduction.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># etc</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="introduction.html#cb8-1" tabindex="-1"></a><span class="co"># The old way of installing the tidyverse packages</span></span>
+<span id="cb8-2"><a href="introduction.html#cb8-2" tabindex="-1"></a><span class="co"># Like downloading apps from the app store</span></span>
+<span id="cb8-3"><a href="introduction.html#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="introduction.html#cb8-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;broom&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-5"><a href="introduction.html#cb8-5" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;cli&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-6"><a href="introduction.html#cb8-6" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-7"><a href="introduction.html#cb8-7" tabindex="-1"></a><span class="co"># etc</span></span></code></pre></div>
 <p>Fortunately, the tidyverse packages can now be installed with a single install.packages command. Specifically, the install.packages command below will install all of the packages listed above.</p>
 <p><strong>Class note: For the “First Lab”, I’ve done the install.packages for you. So there is no need to use the install.packages command below in this first lab.</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="introduction.html#cb9-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="at">dep =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="add-librarytidyverse-to-your-script" class="section level3 hasAnchor" number="1.6.4">
 <h3><span class="header-section-number">1.6.4</span> Add library(tidyverse) to your script<a href="introduction.html#add-librarytidyverse-to-your-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The tidyverse is now installed, so we need to activate it. We do that with the library command. Put the library line below at the top of your script file (below your comment):</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introduction.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
-<span id="cb10-2"><a href="introduction.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
-<span id="cb10-3"><a href="introduction.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="introduction.html#cb10-1" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
+<span id="cb10-2"><a href="introduction.html#cb10-2" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
+<span id="cb10-3"><a href="introduction.html#cb10-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="activate-tidyverse-auto-complete-for-your-script" class="section level3 hasAnchor" number="1.6.5">
 <h3><span class="header-section-number">1.6.5</span> Activate tidyverse auto-complete for your script<a href="introduction.html#activate-tidyverse-auto-complete-for-your-script" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this “runs” the selected text. After you click the Run button you should see text like the following in the Console panel:</p>
-<pre><code>## ── Attaching core tidyverse packages ─────────────────────── tidyverse 2.0.0 ──
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.2     ✔ readr     2.1.4
 ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
 ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
 ## ✔ purrr     1.0.1     
-## ── Conflicts ───────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
@@ -1037,9 +1041,9 @@ the results of an analysis, or anything else.</p>
 <p>If you inspect the Files pane on the right of the screen you see the <strong>data_okcupid.csv</strong> data file in our project directory. We will load this data with the commands below. If you followed the steps above, you should have auto-complete for the tidyverse commands you type from now on – in the current R session. Enter the command below into your script. As you start to type read_csv you will likely be presented with an auto-complete option. You can use the arrow keys to move up and down the list of options to select the one you want - then press tab to select it.</p>
 <p>Once your command looks like the one below select the text and click on the “Run” button.</p>
 <p>Note: If you are not in the class, the data file is available here: <a href="data_okcupid.csv">data_okcupid.csv</a></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction.html#cb12-1" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="introduction.html#cb12-1" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 59946 Columns: 6
-## ── Column specification ───────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
@@ -1055,12 +1059,12 @@ the results of an analysis, or anything else.</p>
 <div id="view-see-a-spreadsheet-view-of-your-data" class="section level3 hasAnchor" number="1.8.1">
 <h3><span class="header-section-number">1.8.1</span> view(): See a spreadsheet view of your data<a href="introduction.html#view-see-a-spreadsheet-view-of-your-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can inspect your data in a spreadsheet view by using the view command. Do NOT add this command to your script file – EVER. Adding it to the script can cause substantial problems. Type this command in the Console.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introduction.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="introduction.html#cb14-1" tabindex="-1"></a><span class="fu">view</span>(okcupid_profiles)</span></code></pre></div>
 </div>
 <div id="print-see-your-data-in-the-console" class="section level3 hasAnchor" number="1.8.2">
 <h3><span class="header-section-number">1.8.2</span> print(): See your data in the Console<a href="introduction.html#print-see-your-data-in-the-console" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can inspect the first few rows of your data with the print() command. It is OK to add a print command to your script. Try the print() command below in the Console:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="introduction.html#cb15-1" tabindex="-1"></a><span class="fu">print</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## # A tibble: 59,946 × 6
 ##      age diet              height pets          sex   status
 ##    &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; 
@@ -1079,7 +1083,7 @@ the results of an analysis, or anything else.</p>
 <div id="head-check-out-the-first-few-rows-of-data" class="section level3 hasAnchor" number="1.8.3">
 <h3><span class="header-section-number">1.8.3</span> head(): Check out the first few rows of data<a href="introduction.html#head-check-out-the-first-few-rows-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can inspect the first few rows of your data with the head() command. Try the command below in the Console:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="introduction.html#cb17-1" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##     age diet              height pets           sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; 
@@ -1090,7 +1094,7 @@ the results of an analysis, or anything else.</p>
 ## 5    29 &lt;NA&gt;                  66 likes dogs an… m     single
 ## 6    29 mostly anything       67 likes cats     m     single</code></pre>
 <p>You can be even more specific and indicate you only want the first three row of your data with the head() command. Try the command below in the Console:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="introduction.html#cb19-1" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
 ##     age diet              height pets           sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; 
@@ -1101,7 +1105,7 @@ the results of an analysis, or anything else.</p>
 <div id="tail-check-out-the-last-few-rows-of-data" class="section level3 hasAnchor" number="1.8.4">
 <h3><span class="header-section-number">1.8.4</span> tail(): Check out the last few rows of data<a href="introduction.html#tail-check-out-the-last-few-rows-of-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can inspect the last few rows of your data with the tail() command. Try the command below in the Console:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="introduction.html#cb21-1" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##     age diet            height pets             sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; 
@@ -1112,7 +1116,7 @@ the results of an analysis, or anything else.</p>
 ## 5    27 mostly anything     73 likes dogs and … m     single
 ## 6    39 &lt;NA&gt;                68 likes dogs and … m     single</code></pre>
 <p>You can be even more specific and indicate you only want the last three row of your data with the tail() command. Try the command below in the Console:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introduction.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles, <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="introduction.html#cb23-1" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
 ##     age diet            height pets             sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; 
@@ -1124,7 +1128,7 @@ the results of an analysis, or anything else.</p>
 <h3><span class="header-section-number">1.8.5</span> summary(): Quick summaries<a href="introduction.html#summary-quick-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can create a short summary of your data with the summary() command. Note that we will use the summary() command in many places in the guide. The output of the summary() command changes depending on what you give it - that is put inside the brackets. You can give the summary() command many things such as data, the results of a regression analysis, etc.</p>
 <p>Try the command below in the Console. You will see that summary() gives the mean and median for each of the numeric variables (age and height).</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introduction.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="introduction.html#cb25-1" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>##       age            diet               height    
 ##  Min.   : 18.0   Length:59946       Min.   : 1.0  
 ##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
@@ -1190,37 +1194,37 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 <div id="trying-source-with-echo" class="section level2 hasAnchor" number="1.10">
 <h2><span class="header-section-number">1.10</span> Trying Source with Echo<a href="introduction.html#trying-source-with-echo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Put the head(), tail(), and summary() command we used previously into your script. Then save your script using using the File &gt; Save menu. You script should appear as below.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="introduction.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
-<span id="cb27-2"><a href="introduction.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
-<span id="cb27-3"><a href="introduction.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb27-4"><a href="introduction.html#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-5"><a href="introduction.html#cb27-5" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span>
-<span id="cb27-6"><a href="introduction.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="introduction.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span>
-<span id="cb27-8"><a href="introduction.html#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="introduction.html#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span>
-<span id="cb27-10"><a href="introduction.html#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="introduction.html#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="introduction.html#cb27-1" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
+<span id="cb27-2"><a href="introduction.html#cb27-2" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
+<span id="cb27-3"><a href="introduction.html#cb27-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-4"><a href="introduction.html#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="introduction.html#cb27-5" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span>
+<span id="cb27-6"><a href="introduction.html#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="introduction.html#cb27-7" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span>
+<span id="cb27-8"><a href="introduction.html#cb27-8" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="introduction.html#cb27-9" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span>
+<span id="cb27-10"><a href="introduction.html#cb27-10" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="introduction.html#cb27-11" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
 <p>Now do the following:</p>
 <ol style="list-style-type: decimal">
 <li>Use the menu item: <strong>Session &gt; Restart R</strong></li>
 <li>Click the down arrow beside the Source button, and click on Source With Echo</li>
 </ol>
 <p>You should see the output below:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introduction.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
-<span id="cb28-2"><a href="introduction.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
-<span id="cb28-3"><a href="introduction.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb28-4"><a href="introduction.html#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="introduction.html#cb28-5" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="introduction.html#cb28-1" tabindex="-1"></a><span class="co"># Code written on: YYYY/MM/DD </span></span>
+<span id="cb28-2"><a href="introduction.html#cb28-2" tabindex="-1"></a><span class="co"># By: John Smith</span></span>
+<span id="cb28-3"><a href="introduction.html#cb28-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb28-4"><a href="introduction.html#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="introduction.html#cb28-5" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 59946 Columns: 6
-## ── Column specification ───────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introduction.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="introduction.html#cb30-1" tabindex="-1"></a><span class="fu">head</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##     age diet              height pets           sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; 
@@ -1230,7 +1234,7 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 ## 4    23 vegetarian            71 likes cats     m     single
 ## 5    29 &lt;NA&gt;                  66 likes dogs an… m     single
 ## 6    29 mostly anything       67 likes cats     m     single</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introduction.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="introduction.html#cb32-1" tabindex="-1"></a><span class="fu">tail</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 6
 ##     age diet            height pets             sex   status
 ##   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; 
@@ -1240,7 +1244,7 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 ## 4    42 mostly anything     71 &lt;NA&gt;             m     single
 ## 5    27 mostly anything     73 likes dogs and … m     single
 ## 6    39 &lt;NA&gt;                68 likes dogs and … m     single</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introduction.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="introduction.html#cb34-1" tabindex="-1"></a><span class="fu">summary</span>(okcupid_profiles)</span></code></pre></div>
 <pre><code>##       age            diet               height    
 ##  Min.   : 18.0   Length:59946       Min.   : 1.0  
 ##  1st Qu.: 26.0   Class :character   1st Qu.:66.0  
@@ -1265,34 +1269,34 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 <div id="vector-of-numbers" class="section level4 hasAnchor" number="1.11.0.1">
 <h4><span class="header-section-number">1.11.0.1</span> Vector of numbers<a href="introduction.html#vector-of-numbers" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can create a vector of only numbers using the “c” function - which you can think of as being short for “combine” (or concatenate). In the commands below we create a vector of a few even numbers called “even_numbers”.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introduction.html#cb36-1" aria-hidden="true" tabindex="-1"></a>even_numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introduction.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(even_numbers)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="introduction.html#cb36-1" tabindex="-1"></a>even_numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="introduction.html#cb37-1" tabindex="-1"></a><span class="fu">print</span>(even_numbers)</span></code></pre></div>
 <pre><code>## [1]  2  4  6  8 10</code></pre>
 <p>We can obtain the second number in the vector using the following notation:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introduction.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(even_numbers[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="introduction.html#cb39-1" tabindex="-1"></a><span class="fu">print</span>(even_numbers[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
 <div id="vector-of-characters" class="section level4 hasAnchor" number="1.11.0.2">
 <h4><span class="header-section-number">1.11.0.2</span> Vector of characters<a href="introduction.html#vector-of-characters" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We can also create vectors using only characters. Note that I use <strong>SHIFT RETURN</strong> after each comma to move to the next line.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introduction.html#cb41-1" aria-hidden="true" tabindex="-1"></a>favourite_things <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;copper kettles&quot;</span>,</span>
-<span id="cb41-2"><a href="introduction.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;woolen mittens&quot;</span>,</span>
-<span id="cb41-3"><a href="introduction.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;brown paper packages&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(favourite_things)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="introduction.html#cb41-1" tabindex="-1"></a>favourite_things <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;copper kettles&quot;</span>,</span>
+<span id="cb41-2"><a href="introduction.html#cb41-2" tabindex="-1"></a>                      <span class="st">&quot;woolen mittens&quot;</span>,</span>
+<span id="cb41-3"><a href="introduction.html#cb41-3" tabindex="-1"></a>                      <span class="st">&quot;brown paper packages&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="introduction.html#cb42-1" tabindex="-1"></a><span class="fu">print</span>(favourite_things)</span></code></pre></div>
 <pre><code>## [1] &quot;copper kettles&quot;       &quot;woolen mittens&quot;      
 ## [3] &quot;brown paper packages&quot;</code></pre>
 <p>As before, you can obtain the second item in the vector using the following notation:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(favourite_things[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="introduction.html#cb44-1" tabindex="-1"></a><span class="fu">print</span>(favourite_things[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;woolen mittens&quot;</code></pre>
 </div>
 <div id="lists" class="section level3 hasAnchor" number="1.11.1">
 <h3><span class="header-section-number">1.11.1</span> Lists<a href="introduction.html#lists" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Lists are similar to vectors in that you can create them and access items by their numeric position. Vectors must be all characters or all numbers. Lists can be a mix of characters or numbers. Most importantly items in lists can be accessed by their label. Note that I use <strong>SHIFT RETURN</strong> after each comma to move to the next line in the code below.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction.html#cb46-1" aria-hidden="true" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">last_name =</span> <span class="st">&quot;Smith&quot;</span>,</span>
-<span id="cb46-2"><a href="introduction.html#cb46-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">first_name =</span> <span class="st">&quot;John&quot;</span>,</span>
-<span id="cb46-3"><a href="introduction.html#cb46-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">office_number =</span> <span class="dv">1913</span>)</span>
-<span id="cb46-4"><a href="introduction.html#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="introduction.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="introduction.html#cb46-1" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">last_name =</span> <span class="st">&quot;Smith&quot;</span>,</span>
+<span id="cb46-2"><a href="introduction.html#cb46-2" tabindex="-1"></a>                <span class="at">first_name =</span> <span class="st">&quot;John&quot;</span>,</span>
+<span id="cb46-3"><a href="introduction.html#cb46-3" tabindex="-1"></a>                <span class="at">office_number =</span> <span class="dv">1913</span>)</span>
+<span id="cb46-4"><a href="introduction.html#cb46-4" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="introduction.html#cb46-5" tabindex="-1"></a><span class="fu">print</span>(my_list)</span></code></pre></div>
 <pre><code>## $last_name
 ## [1] &quot;Smith&quot;
 ## 
@@ -1302,13 +1306,13 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 ## $office_number
 ## [1] 1913</code></pre>
 <p>You can access an item in a list using double brackets:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="introduction.html#cb48-1" tabindex="-1"></a><span class="fu">print</span>(my_list[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## $first_name
 ## [1] &quot;John&quot;</code></pre>
 <p>You can access an item in a list by its label/name using the dollar sign:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>last_name)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="introduction.html#cb50-1" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>last_name)</span></code></pre></div>
 <pre><code>## [1] &quot;Smith&quot;</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>office_number)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="introduction.html#cb52-1" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>office_number)</span></code></pre></div>
 <pre><code>## [1] 1913</code></pre>
 </div>
 </div>
@@ -1316,8 +1320,8 @@ Using Restart R before you run a script, or R code in general, is a critical wor
 <h2><span class="header-section-number">1.12</span> Revisiting read_csv()<a href="introduction.html#revisiting-read_csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the text above we learned about vectors of characters. This information can be used to handle missing values in the read_csv() command. Consider a data set where for many participants we did not get a response to a question. We might have that represented in various ways within the data file. The value for that question might simply be omitted (i.e., represented by nothing – ““), represented by NA for not available, or maybe simply be something like -777.</p>
 <p>When we load data with read_csv() we can indicate to the computer how missing values are represented. This ensures the computer sees something like -777 as a missing value rather than an actual value. We do so in the read_csv() command below using the <strong>na</strong> argument (not available). Note: use SHIFT-RETURN or SHIFT-ENTER to move the next line within the read_csv() command. Failure to indicate the missing value codes within read_csv() will result in incorrect answers in most scenarios with missing data.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction.html#cb54-1" aria-hidden="true" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>,</span>
-<span id="cb54-2"><a href="introduction.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;-777&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="introduction.html#cb54-1" tabindex="-1"></a>okcupid_profiles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>,</span>
+<span id="cb54-2"><a href="introduction.html#cb54-2" tabindex="-1"></a>                             <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;-777&quot;</span>))</span></code></pre></div>
 </div>
 <div id="importing-to-rstudio-cloud" class="section level2 hasAnchor" number="1.13">
 <h2><span class="header-section-number">1.13</span> Importing to RStudio Cloud<a href="introduction.html#importing-to-rstudio-cloud" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1349,12 +1353,12 @@ FIGURE 1.7: Select file window
 <li><p>Click the OK button. The data_ratings.csv will appear the Files tab.</p></li>
 <li><p>Now load the file using the read_csv() command:</p></li>
 </ol>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introduction.html#cb55-1" aria-hidden="true" tabindex="-1"></a>data_ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_ratings.csv&quot;</span>,</span>
-<span id="cb55-2"><a href="introduction.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;-777&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="introduction.html#cb55-1" tabindex="-1"></a>data_ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_ratings.csv&quot;</span>,</span>
+<span id="cb55-2"><a href="introduction.html#cb55-2" tabindex="-1"></a>                         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>, <span class="st">&quot;-777&quot;</span>))</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Glimpse() the data you loaded.</li>
 </ol>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data_ratings)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="introduction.html#cb56-1" tabindex="-1"></a><span class="fu">glimpse</span>(data_ratings)</span></code></pre></div>
 <pre><code>## Rows: 30
 ## Columns: 7
 ## $ rating     &lt;dbl&gt; 43, 63, 71, 61, 81, 43, 58, 71, 72, 67,…

@@ -6,16 +6,19 @@
 \documentclass[
 ]{krantz}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -45,13 +48,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.33,0.33,0.33}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.61,0.61,0.61}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
@@ -59,7 +62,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.14,0.14,0.14}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.06,0.06,0.06}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.27,0.27,0.27}{\textbf{#1}}}
@@ -68,7 +71,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.43,0.43,0.43}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.5,0.5,0.5}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0,0,0}{#1}}
@@ -195,7 +198,7 @@
 \bibliographystyle{apalike}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Welcome!},
   pdfauthor={David J. Stanley},
@@ -208,7 +211,7 @@
 
 \title{Welcome!}
 \author{David J. Stanley}
-\date{2022-08-20}
+\date{2023-07-09}
 
 \begin{document}
 \maketitle
@@ -223,7 +226,7 @@
 \begin{center}
 To my students,
 
-from whom I've learn so much about teaching.
+from whom I've learned so much about teaching.
 %\includegraphics{images/dedication.pdf}
 \end{center}
 
@@ -249,7 +252,7 @@ These notes are a resource for students in my PSYC 6060 class. The notes are a s
 \chapter*{About the Author}\label{about-the-author}}
 
 
-David J. Stanley is an Associate Professor of Industrial and Organizational Psychology at the University of Guelph in Canada. He obtained a BA in \href{https://uwaterloo.ca/psychology/}{Psychology}, with a Minor in \href{https://uwaterloo.ca/math/}{Statistics}, from University of Waterloo and his PhD in \href{https://psychology.uwo.ca}{Psychology} from Western University in London, Ontario. David has published articles in Advances in Methods and Practices in Psychological Science, Organizational Research Methods, Journal of Applied Psychology, Perspectives in Psychological Science, Journal of Business and Psychology, Journal of Vocational Behaviour, Journal of Personality and Social Psychology, Behavior Research Methods, Industrial and Organizational Psychology, and Emotion among other journals. David also created the \href{https://CRAN.R-project.org/package=apaTables}{apaTables} \emph{R} package.
+David J. Stanley is an Associate Professor of Industrial and Organizational Psychology at the University of Guelph in Canada. He obtained a BA in \href{https://uwaterloo.ca/psychology/}{Psychology}, with a Minor in \href{https://uwaterloo.ca/math/}{Statistics}, from University of Waterloo and his PhD in \href{https://psychology.uwo.ca}{Psychology} from Western University in London, Ontario. David has published articles in Advances in Methods and Practices in Psychological Science, Organizational Research Methods, Journal of Applied Psychology, Perspectives in Psychological Science, Journal of Business and Psychology, Journal of Vocational Behaviour, Journal of Personality and Social Psychology, Behavior Research Methods, Industrial and Organizational Psychology, and Emotion among other journals. David also created the \href{https://CRAN.R-project.org/package=apaTables}{apaTables} and \href{https://cran.r-project.org/package=predictionInterval}{predictionInterval} \emph{R} packages.
 
 \mainmatter
 
@@ -441,16 +444,17 @@ There are generally two broad ways of using R, the older way and the newer way. 
 As noted, the tidyverse is a collection of packages. Each package adds new commands to R. The number of packages and correspondingly the number of new commands added to R by the tidyverse is large. Below is a list of the tidyverse packages:
 
 \begin{verbatim}
-##  [1] "broom"         "cli"           "crayon"       
+##  [1] "broom"         "conflicted"    "cli"          
 ##  [4] "dbplyr"        "dplyr"         "dtplyr"       
 ##  [7] "forcats"       "ggplot2"       "googledrive"  
 ## [10] "googlesheets4" "haven"         "hms"          
 ## [13] "httr"          "jsonlite"      "lubridate"    
 ## [16] "magrittr"      "modelr"        "pillar"       
-## [19] "purrr"         "readr"         "readxl"       
-## [22] "reprex"        "rlang"         "rstudioapi"   
-## [25] "rvest"         "stringr"       "tibble"       
-## [28] "tidyr"         "xml2"          "tidyverse"
+## [19] "purrr"         "ragg"          "readr"        
+## [22] "readxl"        "reprex"        "rlang"        
+## [25] "rstudioapi"    "rvest"         "stringr"      
+## [28] "tibble"        "tidyr"         "xml2"         
+## [31] "tidyverse"
 \end{verbatim}
 
 Before you can use a package it needs to be installed -- this is the same as downloading an app from the App Store. Normally, you can install a \textbf{single} package with the install.packages command. Previously, you needed to run an install.package command for every package in the tidyverse as illustrated below (though we no longer use this approach).
@@ -496,14 +500,16 @@ The tidyverse is now installed, so we need to activate it. We do that with the l
 Select the library(tidyverse) text with your mouse/track-pad so that it is highlighted. Then click the Run button in the upper right of the Script panel. Doing this ``runs'' the selected text. After you click the Run button you should see text like the following in the Console panel:
 
 \begin{verbatim}
-## -- Attaching packages ------------------- tidyverse 1.3.2 --
-## v ggplot2 3.3.6     v purrr   0.3.4
-## v tibble  3.1.8     v dplyr   1.0.9
-## v tidyr   1.2.0     v stringr 1.4.0
-## v readr   2.1.2     v forcats 0.5.2
-## -- Conflicts ---------------------- tidyverse_conflicts() --
+## -- Attaching core tidyverse packages -------------------------------- tidyverse 2.0.0 --
+## v dplyr     1.1.2     v readr     2.1.4
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.2     v tibble    3.2.1
+## v lubridate 1.9.2     v tidyr     1.3.0
+## v purrr     1.0.1     
+## -- Conflicts -------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 \end{verbatim}
 
 When you use library(tidyverse) to activate the tidyverse you activate the most commonly used subset of the tidyverse packages. In the output you see checkmarks beside names of the tidyverse packages you have activated.
@@ -532,7 +538,7 @@ Note: If you are not in the class, the data file is available here: \url{data_ok
 
 \begin{verbatim}
 ## Rows: 59946 Columns: 6
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
@@ -584,7 +590,7 @@ You can inspect the first few rows of your data with the print() command. It is 
 ##  8    31 mostly anything       65 likes dogs a~ f     single
 ##  9    24 strictly anything     67 likes dogs a~ f     single
 ## 10    37 mostly anything       65 likes dogs a~ m     single
-## # ... with 59,936 more rows
+## # i 59,936 more rows
 \end{verbatim}
 
 \hypertarget{head-check-out-the-first-few-rows-of-data}{%
@@ -811,7 +817,7 @@ You should see the output below:
 
 \begin{verbatim}
 ## Rows: 59946 Columns: 6
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
@@ -1140,36 +1146,39 @@ In this chapter we focus on teaching you foundational skills for data preparatio
 The data files below are used in this chapter. Right click to save each file.
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_okcupid.csv} \\
 \url{data_experiment.csv} \\
-\bottomrule()
 \end{longtable}
 
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 remotes \\
-\bottomrule()
 \end{longtable}
 
 The following GitHub package must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required GitHub Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 sjspielman/introverse \\
-\bottomrule()
 \end{longtable}
 
 After the remotes package is installed, it can be used to install the introverse package from GitHub (an alternative ``App Store''). If you get asked if you would like to install more recent versions of packages on your machine press ``1'' and Return to indicate ``All'' (if you are asked, you may not be). Note that if you do encounter installation problems with the \emph{introverse} below - don't worry. The \emph{introverse} is just additional documentation.
@@ -1257,7 +1266,7 @@ You can see the first few rows of the data using the print() command. Each row p
 ##  8    31 mostly anything       65 likes dogs a~ f     single
 ##  9    24 strictly anything     67 likes dogs a~ f     single
 ## 10    37 mostly anything       65 likes dogs a~ m     single
-## # ... with 59,936 more rows
+## # i 59,936 more rows
 \end{verbatim}
 
 But it's also helpful just to see a list of the columns in the data with the glimpse() command:
@@ -1322,7 +1331,7 @@ The select() command allows you to obtain a subset of the columns in your data. 
 ##  8    31     65
 ##  9    24     67
 ## 10    37     65
-## # ... with 59,936 more rows
+## # i 59,936 more rows
 \end{verbatim}
 
 Of course, it's usually of little help to just print the subset of the data. It's better to store it in a new data. In the command below we store the resulting data in a new data set called new\_data.
@@ -1558,8 +1567,8 @@ Fortunately, it's possible to use more than one grouping variable with the group
 \end{Shaded}
 
 \begin{verbatim}
-## `summarise()` has grouped output by 'sex'. You can override
-## using the `.groups` argument.
+## `summarise()` has grouped output by 'sex'. You can override using the `.groups`
+## argument.
 \end{verbatim}
 
 \begin{verbatim}
@@ -1631,7 +1640,7 @@ We begin by loading a new data.
 
 \begin{verbatim}
 ## Rows: 6 Columns: 6
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr (1): sex
 ## dbl (5): id, t1_vomit, t1_aggression, t2_vomit, t2_aggre...
@@ -1849,6 +1858,20 @@ If we want to obtain the mean of all the columns that start with ``t1'' we use t
 \end{Shaded}
 
 \begin{verbatim}
+## Warning: There was 1 warning in `summarise()`.
+## i In argument: `across(.cols = starts_with("t1"), .fns = mean, na.rm = TRUE)`.
+## Caused by warning:
+## ! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+## Supply arguments directly to `.fns` through an anonymous function instead.
+## 
+##   # Previously
+##   across(a:b, mean, na.rm = TRUE)
+## 
+##   # Now
+##   across(a:b, \(x) mean(x, na.rm = TRUE))
+\end{verbatim}
+
+\begin{verbatim}
 ## # A tibble: 1 x 2
 ##   t1_vomit t1_aggression
 ##      <dbl>         <dbl>
@@ -1899,10 +1922,10 @@ Once you have created the list of descriptive statistics you want you can run th
 
 \begin{verbatim}
 ## # A tibble: 1 x 4
-##   t1_vomit_mean t1_vomit_sd t1_aggression_mean t1_aggressi~1
-##           <dbl>       <dbl>              <dbl>         <dbl>
-## 1       1.83333     1.16905                5.5       1.87083
-## # ... with abbreviated variable name 1: t1_aggression_sd
+##   t1_vomit_mean t1_vomit_sd t1_aggression_mean
+##           <dbl>       <dbl>              <dbl>
+## 1       1.83333     1.16905                5.5
+## # i 1 more variable: t1_aggression_sd <dbl>
 \end{verbatim}
 
 Consequently, we add the t() command (i.e., transpose command) to the end of the summarise request to get a more readable list of statistics:
@@ -2262,7 +2285,7 @@ When you read data into R using the command read\_csv() (with an underscore) you
 
 \begin{verbatim}
 ## Rows: 59946 Columns: 6
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height
@@ -2293,7 +2316,7 @@ The tibble is modern version of the data frame. Notice that when you print a tib
 ##  8    31 mostly anything       65 likes dogs a~ f     single
 ##  9    24 strictly anything     67 likes dogs a~ f     single
 ## 10    37 mostly anything       65 likes dogs a~ m     single
-## # ... with 59,936 more rows
+## # i 59,936 more rows
 \end{verbatim}
 
 In short, you should always use tibbles (i.e., use read\_csv() not read.csv()). The differences between data frames and tibbles run deeper than the superficial output provided here. On some rare occasions an old package or command may not work with a tibble so you need to make it a data frame. You can do so with the commands below. We will flag these rare occurances to you when they occur.
@@ -2316,36 +2339,39 @@ A great part of learning R is learning how to use ggplot2 which is part of the t
 The data files below are used in this chapter. Right click to save each file.
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_movies.csv} \\
-\bottomrule()
 \end{longtable}
 
 The following packages CRAN must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 RColorBrewer \\
 remotes \\
-\bottomrule()
 \end{longtable}
 
 The following GitHub packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required GitHub Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 dill/emoGG \\
-\bottomrule()
 \end{longtable}
 
 After the remotes package is installed, it can be used to install a package from GitHub:
@@ -2379,18 +2405,17 @@ Next we inspect movie\_data using the print() command. We see that each row of t
 
 \begin{verbatim}
 ## # A tibble: 8 x 7
-##   title           short~1  year  imdb tomat~2 boxof~3 studio
-##   <chr>           <chr>   <dbl> <dbl>   <dbl>   <dbl> <chr> 
-## 1 Iron Man        Iron     2008   7.9      96     585 Marvel
-## 2 Thor Ragnarok   Thor     2017   7.9      93     854 Marvel
-## 3 Avengers Infin~ AV3      2018   8.5      91    2048 Marvel
-## 4 Avengers Endga~ AV4      2019   8.7      91    2744 Marvel
-## 5 Man of Steel    Sup      2013   7.1      75     668 DC    
-## 6 Batman v Super~ BvS      2015   6.5      63     873 DC    
-## 7 Justice League  JL       2017   6.5      72     657 DC    
-## 8 Wonder Woman    WW       2017   7.5      88     821 DC    
-## # ... with abbreviated variable names 1: short_title,
-## #   2: tomatoes_aud, 3: boxoffice
+##   title       short_title  year  imdb tomatoes_aud boxoffice
+##   <chr>       <chr>       <dbl> <dbl>        <dbl>     <dbl>
+## 1 Iron Man    Iron         2008   7.9           96       585
+## 2 Thor Ragna~ Thor         2017   7.9           93       854
+## 3 Avengers I~ AV3          2018   8.5           91      2048
+## 4 Avengers E~ AV4          2019   8.7           91      2744
+## 5 Man of Ste~ Sup          2013   7.1           75       668
+## 6 Batman v S~ BvS          2015   6.5           63       873
+## 7 Justice Le~ JL           2017   6.5           72       657
+## 8 Wonder Wom~ WW           2017   7.5           88       821
+## # i 1 more variable: studio <chr>
 \end{verbatim}
 
 Next we use glimpse() to see the columns.
@@ -3401,6 +3426,15 @@ With a PC you need to use the INSERT menu and insert the graph as a picture in M
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{custom-themes}{%
+\section{Custom themes}\label{custom-themes}}
+
+Did you want to modify a theme more extensively? Here is a cheat sheet for doing so created by \href{https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf}{Clara Granell}. The PDF of the cheatsheet is available at this \href{https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf}{link}.
+
+You can see the sheet here:
+
+\includegraphics[width=0.9\linewidth]{ch_graphing/images/ggplot_theme_system_cheatsheet}
+
 \hypertarget{populations}{%
 \chapter{Populations}\label{populations}}
 
@@ -3485,12 +3519,25 @@ Likewise, the sum of the squared differences from the mean can be expressed usin
 \end{aligned} 
 \]
 
+\textbf{Why do we use squared differences instead of just differences?} Well, there are many reasons and it's too early to discuss them in detail. However, one easy to understand reason for using squared differences is that the if we were to just use differences (not squared) we would end up with a value of zero, as illustrated below. Which might be interpreted (incorrectly) as suggesting there is no variability in the numbers - when clearly there is variability. However, the full reasons for using squared differences are more complex than this simple example illustrates.
+
+\[
+\begin{aligned} 
+\sum{(X - \bar{X})} &= (X_1-\bar{X}) + (X_2-\bar{X}) + (X_3-\bar{X})\\ 
+&= (110-110) + (120-110) + (100-110)\\
+&= (0) + (10) + (-10) \\
+&= 0 \\
+\end{aligned} 
+\]
+
 \hypertarget{population-vs-samples}{%
 \section{Population vs samples}\label{population-vs-samples}}
 
-As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A population is the complete set of people/animals about which we want to make conclusions. A sample is a randomly selected subset of the population. In most scenarios it is impractical to work with an entire population and, for practical reasons, we study a subset of the population called a sample.
+As we move closer to conducting our own research it is critical to make a distinction between populations and samples. A population is the complete set of people/animals about which we want to make conclusions. A sample is a randomly selected subset of the population.
 
-Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to specific individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians or all humans. We study samples but typically wish to make conclusions that apply to the population. Thus, even if you are an experimental researcher it's critical that you think in terms of populations and not samples. Indeed, statistical tests (such as the \emph{t}-test) are a means of helping researchers use sample data to make conclusions at the population level.
+In most scenarios it is impractical to work with an entire population. When you want to obtain data from an entire population, you need a census which is extraordinarily expensive. Even the Canadian government only does a census every 5 years due to the cost. Consequently, for practical reasons, researchers typically study a subset of the population called a sample. We use the sample to estimate what is true at the population level.
+
+Researchers, and consumers of research, typically have little interest in making conclusions at the sample level. In general, we care about conclusions that generalize to the population but not conclusions that only apply to only the individuals in the sample. Consider the case of COVID-19. Imagine a research team creates a vaccine that they hope generates immunity to COVID-19. We care very little if the immunity only works for the specific individuals in the study. However, we care a great deal if the immunity works, or is likely to work, for all Canadians (a possible population) or all humans (a larger possible population). We study samples but typically wish to make conclusions that apply to a population. Thus, even if you are an experimental researcher it is critical that you think in terms of populations and not samples. Indeed, statistical tests (such as the \emph{t}-test) are a means of helping researchers use sample data to make conclusions at the population level.
 
 In this chapter, our focus is on describing populations. When we calculate a number that summarises an attribute of all of the people/animals in the population we refer to it as a \textbf{parameter}.
 
@@ -3585,14 +3632,15 @@ We want a number that indicates the quality of the cookie model. Specifically, w
 \textbf{Calculating Squared Differences/Errors.} To calculate variance (\(\sigma^2\)), we use the errors for the cookies -- how the cookies differ from the mean/model. The first step is to square the errors/differences Those squared numbers are referred to as the ``squared differences'' or ``squared errors''. The calculation of the squared error for each cookie weight is shown below. The squared errors (or squared differences) are 4, 0, and 4.
 
 \begin{longtable}[]{@{}lll@{}}
-\toprule()
+\toprule\noalign{}
 Cookie Weight & Model & Squared Difference/Error \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \(X_1 = 8\) & \(\mu = 10\) & \((X_1 - \mu)^2 =(8 - 10)^2= 4\) \\
 \(X_2 = 10\) & \(\mu = 10\) & \((X_2 - \mu)^2 =(10 - 10)^2= 0\) \\
 \(X_3 = 12\) & \(\mu = 10\) & \((X_3 - \mu)^2 =(12 - 10)^2= 4\) \\
-\bottomrule()
 \end{longtable}
 
 \textbf{Averaging Squared Errors.} To obtain variance we calculate the average of the squared errors. At the population level the variance is represented by the symbol \(\sigma^2\) see Formula \eqref{eq:popvarch4} below. In this formula, \(N\) refers to the number of people in the population. At the sample level a different notation is used.
@@ -3806,14 +3854,15 @@ You can visualize any \(\delta\) value (i.e., population \(d\)-value) using the 
 Cohen's benchmarks for standardized mean differences are displayed in the table below. These effect size labels should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
 
 \begin{longtable}[]{@{}cc@{}}
-\toprule()
+\toprule\noalign{}
 Cohen (1988) Label & Value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Small & \(\delta\) = .20 \\
 Medium & \(\delta\) = .50 \\
 Large & \(\delta\) = .80 \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{population-relations}{%
@@ -3852,14 +3901,15 @@ Therefore, make sure you ALWAYS graph your data. The numbers only tell part of t
 Plots of linear relations are presented in Figure \ref{fig:rhoplot}. The three graphs in this figure corresponds to Cohen's benchmarks for correlations (i.e., \(\rho\)), displayed in the table below.
 
 \begin{longtable}[]{@{}cc@{}}
-\toprule()
+\toprule\noalign{}
 Cohen (1988) Label & Value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Small & \(\rho\) = .10 \\
 Medium & \(\rho\) = .30 \\
 Large & \(\rho\) = .50 \\
-\bottomrule()
 \end{longtable}
 
 These effect size labels should be interpreted with caution. The magnitude of an effect is best considered in the context of the field of research and the consequences of an effect on individuals in both the short and long run.
@@ -3933,24 +3983,26 @@ These effect size labels should be interpreted with caution. The magnitude of an
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 remotes \\
-\bottomrule()
 \end{longtable}
 
 The following GitHub packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required GitHub Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 dstanley4/learnSampling \\
-\bottomrule()
 \end{longtable}
 
 A GitHub package can be installed using the code below:
@@ -3962,12 +4014,13 @@ A GitHub package can be installed using the code below:
 \end{Shaded}
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_cor_pop.csv} \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{overview}{%
@@ -4027,7 +4080,7 @@ The print() command can be used to confirm that the population contains 100,000 
 ##  8     8 male      173
 ##  9     9 female    172
 ## 10    10 male      193
-## # ... with 99,990 more rows
+## # i 99,990 more rows
 \end{verbatim}
 
 \hypertarget{notation-1}{%
@@ -4122,7 +4175,7 @@ We use the print() command to see the first few rows of the 50000 samples:
 ##  8     8    10       173.5      139.446         154.94
 ##  9     9    10       177.7      167.013         185.57
 ## 10    10    10       168.5      262.647         291.83
-## # ... with 49,990 more rows
+## # i 49,990 more rows
 \end{verbatim}
 
 Each row of many\_samples represents a sample of 10 people. Each column of many\_samples indicates a sample statistic. You can see that for each sample/row we indicate ``n'' (the sample size) and ``sample\_mean'' (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample\_mean column vary across samples/rows.
@@ -4535,7 +4588,7 @@ We can examine the contents of many\_samples using the print() command. Each row
 ##  8         10 188     211.56 160.8   204.62  1.89       1.81
 ##  9         10 185.3    54.68 165.8    91.51  2.28       2.18
 ## 10         10 179.3    69.34 161.9    55.43  2.2        2.11
-## # ... with 49,990 more rows
+## # i 49,990 more rows
 \end{verbatim}
 
 Recall the population-level standardized mean difference, \(\delta\), was 1.49. We can see the extent to which the average of the sample-level \(d\) and \(d_{unbiased}\) values compare to this population-level value.
@@ -4608,7 +4661,7 @@ We have the height and weight for 300000 people that comprise our population (fi
 
 \begin{verbatim}
 ## Rows: 300000 Columns: 2
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## dbl (2): weight, height
 ## 
@@ -4638,7 +4691,7 @@ The print() command reveals there are 300000 rows and two columns (weight and he
 ##  8  152.9  178.9
 ##  9  150.8  177.2
 ## 10  146.5  166.7
-## # ... with 299,990 more rows
+## # i 299,990 more rows
 \end{verbatim}
 
 We can obtain the population correlation, \(\rho\), by correlating the weight and height columns:
@@ -4690,7 +4743,7 @@ We can examine the first few rows of many\_samples using the print() command. Th
 ##  8             8    75  0.4 
 ##  9             9    75  0.59
 ## 10            10    75  0.5 
-## # ... with 49,990 more rows
+## # i 49,990 more rows
 \end{verbatim}
 
 If you examine the first row carefully you see a sample correlation of \(r = .38\) based on \(n\) = 75. This sample correlation is illustrated in Figure \ref{fig:rdistplot}B and it is just one of the 50000 sample correlations. The distribution of the 50000 sample correlations is illustrated in in Figure \ref{fig:rdistplot}C.
@@ -4748,15 +4801,17 @@ In this chapter we have illustrated how population parameters can be estimated b
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Parameter
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Estimated by this statistic
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Mean & \(\mu = \frac{\sum{X}}{N}\) & \(\bar{x} = \frac{\sum{x}}{n}\) \\
 Variance & \(\sigma^2 = \frac{\sum{(X - \mu)^2}}{N}\) & \(s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}\) \\
 & & \(s_{pooled}^2 = \frac{(n_1 -1)s_1^2 + (n_2 -1)s_2^2}{n_1 + n_2-2}\) \\
@@ -4765,7 +4820,6 @@ Standard deviation & \(\sigma = \sqrt{\frac{\sum{(X - \mu)^2}}{N}}\) & \(s =\sqr
 Cohen's \(d\) or SMD & \(\delta= \frac{\mu_{1} - \mu_{2}}{\sigma}\) & \(d = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}}\) \\
 & & \(d_{unbiased} = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]\) \\
 Correlation & \(\rho = \frac{\Sigma (X - \mu_X)(Y - \mu_Y)}{\sqrt{\Sigma (X - \mu_X)^2\Sigma (Y - \mu_Y)^2}}\) & \(r = \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma (y - \bar{y})^2}}\) \\
-\bottomrule()
 \end{longtable}
 
 \singlespacing
@@ -5321,30 +5375,32 @@ As with the other statistics reviewed, for sample correlations (\(r\)) you can c
 The data files below are used in this chapter.
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_ex_between.csv} \\
 \url{data_ex_within.csv} \\
 \url{data_item_scoring.csv} \\
-\bottomrule()
 \end{longtable}
 
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 apaTables \\
 Hmisc \\
 janitor \\
 psych \\
 skimr \\
 tidyverse \\
-\bottomrule()
 \end{longtable}
 
 \textbf{Important Note:} You should NOT use library(psych) at any point! There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
@@ -5496,19 +5552,20 @@ Thus, a major problem with entering repeated measures data in the one row per pe
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5556}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4444}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Disadvantages one row per participant
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages one row per participant
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1) Predictor variable (\emph{occasion}) is hidden and spread over multiple columns & 1) Easy to enter this way \\
 2) Unclear that each month is a level of the predictor variable \emph{occasion} & \\
 3) Dependent variable (\emph{elapsed\_time}) is not indicated & \\
 4) Unclear that \emph{elapsed\_time} is the measurement in each month column & \\
-\bottomrule()
 \end{longtable}
 
 \newpage
@@ -5613,7 +5670,7 @@ To Begin:
 
 \begin{verbatim}
 ## Rows: 300 Columns: 14
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr  (2): sex, eye_color
 ## dbl (12): id, age, esteem1_likert5, esteem2_likert5, est...
@@ -5929,16 +5986,17 @@ In this data file all the reverse-keyed items were identified with the suffix ``
 To correct a reverse-keyed item where the lowest possible rating is 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest point possible on the scale (i.e., one more than 5). For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
 
 \begin{longtable}[]{@{}ccc@{}}
-\toprule()
+\toprule\noalign{}
 Original value & Math & Recoded value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & 6 - 1 & 5 \\
 2 & 6 - 2 & 4 \\
 3 & 6 - 3 & 3 \\
 4 & 6 - 4 & 2 \\
 5 & 6 - 5 & 1 \\
-\bottomrule()
 \end{longtable}
 
 The code below:
@@ -5996,16 +6054,17 @@ If your scale had used response options numbered 0 to 4 the math is different.
 For each item you would use subtract values from the highest possible point (i.e, 4) instead of one larger than the highest possible point.
 
 \begin{longtable}[]{@{}ccc@{}}
-\toprule()
+\toprule\noalign{}
 Original value & Math & Recoded value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 0 & 4 - 0 & 4 \\
 1 & 4 - 1 & 3 \\
 2 & 4 - 2 & 2 \\
 3 & 4 - 3 & 1 \\
 4 & 4 - 4 & 0 \\
-\bottomrule()
 \end{longtable}
 
 Thus, the mutate command would instead be:
@@ -6145,42 +6204,45 @@ The overall steps are quite simple and I walk you through each step in detail be
 The files below are used in this chapter. Right click to save each file.
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Relevant files \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{survey_codebook.csv} \\
 \url{items_qualtrics_format.txt} \\
 \url{data_qualtrics.csv} \\
 \url{script_qualtrics.R} \\
-\bottomrule()
 \end{longtable}
 
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 janitor \\
 remotes \\
-\bottomrule()
 \end{longtable}
 
 The following GitHub packages must be installed:
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 0\tabcolsep) * \real{1.0000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Required GitHub Packages
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \href{https://github.com/dstanley4/qualtricsMaker}{dstanley4/qualtricsMaker} \\
-\bottomrule()
 \end{longtable}
 
 A GitHub package can be installed using the code below:
@@ -6238,7 +6300,7 @@ The item\_text column contains the text for each item. Note that if you use comm
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3235}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3088}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3676}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Code for type column
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -6246,8 +6308,10 @@ Qualtrics Item Type
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Additional Information
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 matrix & matrix & If the first item in a block has type \emph{matrix} all items in the block will be used to construct the matrix question. \textbf{Unfortunately, importing item\_names for matrix questions is not supported by Qualtrics. You will need to manually restore your item\_names following the directions below for matrix items.} \\
 MC & multiple choice vertical format & \\
 MC\_horizontal & multiple choice horizontal format & \\
@@ -6255,7 +6319,6 @@ MC\_multi\_horizontal & multiple choice horizontal format multiple answers & \\
 MC\_select & select box & \\
 MC\_multi\_select & select multiple boxes & \\
 MC\_dropdown & dropdown & \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{response_options-column}{%
@@ -7642,13 +7705,14 @@ The complete script \url{script_qualtrics.R} for the data file \url{data_qualtri
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 MBESS \\
 cocor \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{objective-2}{%
@@ -7903,10 +7967,6 @@ Scenario: A researcher reports a repeated-measures \(d\) = .50 and \(n\) = 150. 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "The 0.95 confidence limits for the standardized mean are given as:"
-\end{verbatim}
-
-\begin{verbatim}
 ## $Lower.Conf.Limit.Standardized.Mean
 ## [1] 0.3295
 ## 
@@ -7943,10 +8003,6 @@ We tend to always report \(d\)-values as positive values so \(d\) = .50. We can 
 \FunctionTok{ci.sm}\NormalTok{(}\AttributeTok{sm =}\NormalTok{ .}\DecValTok{5}\NormalTok{, }\AttributeTok{N =}\DecValTok{150}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "The 0.95 confidence limits for the standardized mean are given as:"
-\end{verbatim}
 
 \begin{verbatim}
 ## $Lower.Conf.Limit.Standardized.Mean
@@ -8030,10 +8086,6 @@ The \(d\)-value is 2.22 but we need a confidence interval:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "The 0.95 confidence limits for the standardized mean are given as:"
-\end{verbatim}
-
-\begin{verbatim}
 ## $Lower.Conf.Limit.Standardized.Mean
 ## [1] 1.852
 ## 
@@ -8069,10 +8121,6 @@ We can use the N and \(t\)-value to calculate the \(d\)-value and CI using the c
 \FunctionTok{ci.sm}\NormalTok{(}\AttributeTok{ncp =} \FloatTok{6.23}\NormalTok{, }\AttributeTok{N =} \DecValTok{41}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "The 0.95 confidence limits for the standardized mean are given as:"
-\end{verbatim}
 
 \begin{verbatim}
 ## $Lower.Conf.Limit.Standardized.Mean
@@ -8169,13 +8217,14 @@ From this output you see that in Study 1 \(r\) = .32 and in Study 2 \(r\) = .51.
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 MBESS \\
 pwr \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{overview-4}{%
@@ -8409,7 +8458,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-348-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-349-1.pdf}
 
 We can see the information conveyed in the graph above for an independent groups \(t\)-test in table form using the code below.
 
@@ -8520,7 +8569,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-350-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-351-1.pdf}
 
 We can see the information conveyed in the graph above for an independent groups \(t\)-test in table form using the code below.
 
@@ -8614,10 +8663,6 @@ With this approach you use the lower bound of the 95\% confidence interval as th
 \FunctionTok{ci.sm}\NormalTok{(}\AttributeTok{sm =}\NormalTok{ .}\DecValTok{45}\NormalTok{ , }\AttributeTok{N =} \DecValTok{50}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "The 0.95 confidence limits for the standardized mean are given as:"
-\end{verbatim}
 
 \begin{verbatim}
 ## $Lower.Conf.Limit.Standardized.Mean
@@ -8784,7 +8829,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-358-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-359-1.pdf}
 
 We can see the information conveyed in the graph above for an repeated measures \(t\)-test in table form using the code below.
 
@@ -8895,7 +8940,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-360-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-361-1.pdf}
 
 We can see the information conveyed in the graph above for an repeated measures \(t\)-test in table form using the code below.
 
@@ -9148,7 +9193,7 @@ But what happens to our power if we get a greater/fewer number of participants? 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-368-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-369-1.pdf}
 
 We can see the information conveyed in the graph above for our proposed correlation study in table form using the code below.
 
@@ -9245,7 +9290,7 @@ Sample size calculations use an estimate of the unknown population effect size. 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-370-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-371-1.pdf}
 
 We can see the information conveyed in the graph above for a correlation study in table form using the code below.
 
@@ -9329,13 +9374,14 @@ This indicates that with a sample size of 261 that only sample correlations grea
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 MBESS \\
 TOSTER \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{interpreting-non-significant-findings}{%
@@ -9743,13 +9789,14 @@ Notice how much clearer and stronger this results section is with the inclusion 
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 MBESS \\
 TOSTER \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{overview-5}{%
@@ -9860,13 +9907,14 @@ You can read more about planning for precision in \citet{rothman2018planning}.
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 pwr \\
 TOSTER \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{overview-6}{%
@@ -10368,7 +10416,7 @@ In this chapter, we focus on describing the distribution of sample means. Our go
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4444}}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2222}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Approach
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -10376,11 +10424,12 @@ Estimation Formula
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Goal
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Approach 1: Total & \(s_{\bar{x}}^2=\frac{\sum (\bar{x}-\bar{\bar{x}})^2}{a-1}\) & Estimate the variance of the sampling distribution. That is, estimate variance of sample mean due to all sources (population differences, random sampling error, etc.). \\
 Approach 2: CLT & \(s_{\bar{x}}^2=\frac{s_{people}^2}{n}\) & Estimate the variance in sample mean due ONLY to random sampling error. \\
-\bottomrule()
 \end{longtable}
 
 Understanding the logic behind both approaches for estimating the variance of the distribution of sample means is critical. In this chapter, where there is one population of people, the two approaches estimate the same thing - variabilty in sample means \textbf{due to random sampling}. However, in future chapters, where there are multiple populations of people with different means, the two approaches estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both approaches in the simple case - where there is a single population of people.
@@ -10471,7 +10520,7 @@ Notice how Equation \eqref{eq:popvarxbardeep} for the variance of sample means i
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1382}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4147}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3825}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Distribution
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -10481,11 +10530,12 @@ Parameter Calculation
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Estimate of Parameter
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 People & Variance & \(\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}\) & \(s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}\) \\
 Sample Means & Approach 1: Variance & \(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\) \\
-\bottomrule()
 \end{longtable}
 
 Obviously, using Equation \eqref{eq:popvarxbardeep} to calculate the variance of an infinite set of sample means is an impractical solution because we could never obtain the infinite number of samples and then calculate the variance for this set. Conceptually, however, it's good to keep this calculation method in mind - since it reminds us of principles we've already learned about the variance of populations \footnote{As noted previously, this notation is incorrect and I should really have expressed this as an expected value to be correct. But for conceptual clarity I divided by infinity to make the linkages to other equations clear.}
@@ -10578,7 +10628,7 @@ In this section we focus on estimating the variance of the distribution of sampl
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1367}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2950}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4604}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Sample Number
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -10588,12 +10638,13 @@ Mean (\(\bar{x} = \frac{\Sigma x_i}{n}\))
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Variance (\(s_{people}^2=\frac{\Sigma (x_i - \bar{x})^2}{n-1}\))
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & 5 & 185 & 168 \\
 2 & 5 & 169.2 & 146.7 \\
 3 & 5 & 170 & 346 \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{approach-1-estimate-the-total-variance-of-infinite-sample-means-using-3-sample-means}{%
@@ -10717,7 +10768,7 @@ The table below summarizes our work so far.
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1720}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5054}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1935}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Attribute
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -10727,11 +10778,12 @@ Estimate of Parameter
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 \(s_{\bar{x}}^2\) degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Approach 1: Total variance & \(\sigma_{\bar{x}}^2 =31.26472\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\) & \(a-1=3-1=2\) \\
 Approach 2: CLT Random sampling variance & \(\sigma_{\bar{x}}^2 =31.26472\) & \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\) & \(a(n-1)=3(5-1)=12\) \\
-\bottomrule()
 \end{longtable}
 
 In the table above, Approach 1, estimates the total variance (from all sources) in sample means. In contrast, Approach 2, estimates the variance in sample means due strictly to random sampling error. In this particular scenario \textbf{we know} the only source of variability in sample means is random sampling error. So\ldots we do the two numbers differ?
@@ -10854,7 +10906,7 @@ This graph illustrates the range of ratio values that can occur when there is a 
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2791}}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3256}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3953}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Population
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -10862,12 +10914,13 @@ Mean
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Variance
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & \(\mu_{A1_{people}}= 172.50\) & \(\sigma_{A1_{people}}^2= 156.3236\) \\
 2 & \(\mu_{A2_{people}}= 172.50\) & \(\sigma_{A2_{people}}^2= 156.3236\) \\
 3 & \(\mu_{A3_{people}}= 172.50\) & \(\sigma_{A3_{people}}^2= 156.3236\) \\
-\bottomrule()
 \end{longtable}
 
 In this section, instead of using one population, we use three identical populations. That is, \(a = 3\). We use \(A1\), \(A2\), and \(A3\) to refer to these three identical populations.
@@ -11041,7 +11094,7 @@ Much of what we have learned is summarized in the table below.
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1382}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4147}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3825}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Distribution
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11051,8 +11104,10 @@ Parameter Calculation
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Estimate of Parameter
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 People & Mean & \(\mu_{people} = \frac{\sum_{i=1}^{N}{X_i}}{N}\) & \(\bar{x}_{people} = M = \frac{\sum_{i=1}^{n}{x_i}}{n}\) \\
 People & Variance & \(\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}\) & \(s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}\) \\
 People & Standard Deviation & \(\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}}\) & \(s_{people} = SD = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}}\) \\
@@ -11060,7 +11115,6 @@ Sample Means & Mean & \(\mu_{\bar{x}} = \frac{\sum_{i=1}^{K=\infty}{\bar{x}_i}}{
 Sample Means & Approach 1: TotalVariance & \(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\) \\
 Sample Means & Approach 2 CLT: Random sampling variance & \(\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\) & \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}\) \\
 Sample Means & Approach 2 CLT: Standard Error & \(\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}\) & \(s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{walk-away-points}{%
@@ -11133,9 +11187,7 @@ However, when there are multiple populations we also have to take into account t
 where
 
 \[
-\begin{aligned} 
-\mu_{\mu_A} &=  \frac{\sum{\mu_A}}{a}
-\end{aligned} 
+\mu_{\mu_A} =  \frac{\sum{\mu_A}}{a}
 \]
 
 So when there are multiple populations the variability in sample means is due to both sampling error and the variability in population means.
@@ -11154,7 +11206,7 @@ Importantly, if the populations all have the same mean then \(\sigma_{\mu_A}^2=0
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Goal
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11164,11 +11216,12 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of feedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}\) & \(\frac{\sigma_{people}^2}{n} + \sigma_{A}^2\) & \(a-1\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{n}\) & \(\frac{\sigma_{people}^2}{n}\) & \(n-1\) \\
-\bottomrule()
 \end{longtable}
 
 The table above summarizes the different estimate goals of the two formulas. Consider the ``Expected value'' (or Expected Mean Square) column. When the populations means are the same then \(\sigma_{A}^2 = 0\). When the population means are different, then \(\sigma_{A}^2>0\).
@@ -11263,7 +11316,7 @@ Now let's see what happens when we have three populations with different means -
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2791}}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3256}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3953}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Population
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11271,12 +11324,13 @@ Mean
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Variance
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & \(\mu_{A1_{people}}= 172.50\) & \(\sigma_{1_{people}}^2= 156.3236\) \\
 2 & \(\mu_{A2_{people}}= 172.50\) & \(\sigma_{2_{people}}^2= 156.3236\) \\
 3 & \(\mu_{A3_{people}}= 172.50\) & \(\sigma_{3_{people}}^2= 156.3236\) \\
-\bottomrule()
 \end{longtable}
 
 We created a scenario where the sample means differed to random sampling only when we created three populations with identical means (and variances). This situation is depicted in the scenario below.
@@ -11396,9 +11450,7 @@ We take the variance of all of those sample means and get a value of 30.80005 wh
 \textbf{That is, when multiple populations have identical means, the variance of sample means from those populations is due entirely to sampling error. That variance of sample means is represented by the formula below:}
 
 \[
-\begin{aligned} 
-\text{variance due to sampling error} &= \frac{\sigma_{people}^2}{n}\\
-\end{aligned}
+\text{variance due to sampling error} = \frac{\sigma_{people}^2}{n}\\
 \]
 
 \hypertarget{multiples-population-different-mu-practice}{%
@@ -11410,7 +11462,7 @@ Now let's see what happens when we have three populations with different means -
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2791}}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3256}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3953}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Population
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11418,12 +11470,13 @@ Mean
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Variance
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & \(\mu_{A1_{people}}= 152.50\) & \(\sigma_{1_{people}}^2= 156.3236\) \\
 2 & \(\mu_{A2_{people}}= 172.50\) & \(\sigma_{2_{people}}^2= 156.3236\) \\
 3 & \(\mu_{A3_{people}}= 192.50\) & \(\sigma_{3_{people}}^2= 156.3236\) \\
-\bottomrule()
 \end{longtable}
 
 \begin{figure}
@@ -11452,7 +11505,7 @@ But we also have to calculate the variance in population means. But to calculate
 \end{aligned}
 \]
 
-We use this value to calculate the variance of the population means. Which we find to be 0 because the population means are all the same.
+We use this value to calculate the variance of the population means. \textbf{Which we find to be larger than zero because the population means are different.}
 
 \[
 \begin{aligned} 
@@ -11543,9 +11596,7 @@ We take the variance of all of those sample means and get a value of 297.7683 wh
 \textbf{That is, when multiple populations have different means, the variance of sample means from those populations is due to both sampling error and the variance of the population means. That variance of sample means is represented by the formula below:}
 
 \[
-\begin{aligned} 
-\sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
-\end{aligned}
+\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
 \]
 
 \hypertarget{back-to-anova}{%
@@ -11599,9 +11650,7 @@ Now consider what happens to the above \(F\)-value when the population means are
 The \(F\)-value formulas presented above are for the expected values. How do we calculate \(F\)-values in practice? The formula below estimates the variance in sample means due to all sources (sampling error and the variance in population means):
 
 \[
-\begin{aligned} 
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
-\end{aligned}
 \]
 
 In contrast, the formula below estimates the variance due to sampling error alone:
@@ -11661,7 +11710,7 @@ A researcher was interested in people's reactions to video game feedback. Partic
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2258}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2903}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2903}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Feedback
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11671,19 +11720,20 @@ Variance
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 n
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 negative & \(\bar{x}_{negative}= 17498.97959\) & \(s_{negative}^2= 41157141\) & n = 196 \\
 none & \(\bar{x}_{none}= 20196.90306\) & \(s_{none}^2= 37084531\) & n=196 \\
 positive & \(\bar{x}_{positive}= 25003.62245\) & \(s_{positive}^2= 31086669\) & n=196 \\
-\bottomrule()
 \end{longtable}
 
 First, we estimate the population variance:
 
 \[
 \begin{aligned}
-\text{variance due to sampling error} &= \frac{s_{negative}^2+s_{none}^2+s_{positive}^2}{3}\\
+s_{people}^2 &= \frac{s_{negative}^2+s_{none}^2+s_{positive}^2}{3}\\
 &= \frac{41157141+37084531+31086669}{3}\\
 &= 36442780\\
 \end{aligned}
@@ -11773,7 +11823,7 @@ Take a moment and think about all of the math and logic we've used to come to th
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4072}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3756}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0814}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Attribute
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11783,21 +11833,16 @@ Estimate of Parameter
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Reflects
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Method 1: Total Variance & \(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\) & \(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\) & Sampling Error \& Variance of Population Means \\
 Method 2 CLT: Variance & \(\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\) & \(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}\) & Just Sampling Error \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{sampling-and-n-way-anova}{%
 \chapter{Sampling and N-way ANOVA}\label{sampling-and-n-way-anova}}
-
-UNDER CONSTRUCTION
-
-UNDER CONSTRUCTION
-
-UNDER CONSTRUCTION
 
 \hypertarget{previously-one-way-anova}{%
 \section{Previously: One-way ANOVA}\label{previously-one-way-anova}}
@@ -11880,7 +11925,7 @@ The notation is general in nature because each experiment will have different in
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3774}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3208}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1321}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Effect
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -11890,11 +11935,12 @@ Number of levels
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Levels
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Independent variable 1 & \(A\) = Juggling & \(a = 2\) & yes, no \\
 Independent variable 2 & \(B\) = Preparation & \(b = 3\) & low, medium, high \\
-\bottomrule()
 \end{longtable}
 
 There are three frames of reference we will use for this 2-way ANOVA. The key to understanding these frames of reference is to think in terms of \textbf{populations} that are represented in your experiment. These population were mentioned previously, but we'll review them in more detail below.
@@ -12066,7 +12112,7 @@ In the previous section, we started from the premise that there were six populat
   >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0962}}
   >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3846}}
   >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3269}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Cell
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12078,15 +12124,16 @@ Population variance
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Sample estimate
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & yes & low & \(\sigma_1^2\) & \(s_1^2 = 30.3\) \\
 2 & yes & medium & \(\sigma_2^2\) & \(s_2^2 = 78.8\) \\
 3 & yes & high & \(\sigma_3^2\) & \(s_3^2 = 66.5\) \\
 4 & no & low & \(\sigma_4^2\) & \(s_4^2 = 9.8\) \\
 5 & no & medium & \(\sigma_5^2\) & \(s_5^2 = 58.3\) \\
 6 & no & high & \(\sigma_6^2\) & \(s_6^2 = 116.3\) \\
-\bottomrule()
 \end{longtable}
 
 Recall, however, the homogeneity of population variances assumption. We assume
@@ -12099,16 +12146,17 @@ Therefore, a better way to display the population variance estimates is with the
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5405}}
   >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4595}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Population Variance
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Sample Estimates
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \(\sigma_{people}^2\) & \(s_1^2 = 30.3\), \(s_2^2 = 78.8\), \(s_3^2 = 66.5\) \(s_4^2 = 9.8\), \(s_5^2 = 58.3\), \(s_6^2 = 116.3\) \\
-\bottomrule()
 \end{longtable}
 
 \textbf{CRITICAL:} When we ASSUME the six sample estimates (\(s_1^2\), \(s_2^2\), \(s_3^2\), \(s_4^2\), \(s_5^2\), \(s_6^2\)) are all estimates of \textbf{the same} population value, \(\sigma_{people}^2\), we can combine the sample estimates (i.e., average them) to get a best estimate of the population value (i.e., \(s_{people}^2\)). This makes sense because, with the identical population variances assumption, each sample variance estimate (e.g., \(s_1^2\)) only differs from the population variance (\(\sigma_{people}^2\)) due to random sampling error. By averaging the sample estimates (\(s_1^2\), \(s_2^2\), \(s_3^2\), \(s_4^2\), \(s_5^2\), \(s_6^2\)) we are ``averaging out'' the random sampling error.
@@ -12117,7 +12165,9 @@ We use the formula below to average the cell variances \textbf{when the sample s
 
 \[
 \begin{aligned}
-s_{people}^2 &=\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ &= \frac{30.3 + 78.8 +66.5 +9.8 +58.3 +116.3 }{6} \\ &= 60
+s_{people}^2 =\frac{s_1^2 + s_2^2 + s_3^2 + s_4^2 + s_5^2 + s_6^2}{6}\\ 
+&= \frac{30.3 + 78.8 +66.5 +9.8 +58.3 +116.3 }{6} \\ 
+&= 60
 \end{aligned}
 \]
 
@@ -12223,7 +12273,7 @@ Therefore, for these cell means the general formula for the variance due to samp
 
 \[
 \begin{aligned}
-\text{Sampling error variance for cell means} = \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
+\text{Sampling error variance for cell means} &= \sigma_{\bar{x}}^2 &= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &= \frac{\sigma_{people}^2}{n}\\
 \end{aligned}
 \]
@@ -12267,7 +12317,8 @@ If we knew the \textbf{population means} we could:
 
 \[
 \begin{aligned}
-\text{Grand mean} = \mu_A &= \frac{\sum\mu_{A_i}}{a} \\
+\text{Grand mean} &= \mu_A \\
+&= \frac{\sum\mu_{A_i}}{a} \\
 &= \frac{\mu_{A_1}+\mu_{A_2}}{2}\\
 &= \frac{? + ?}{2}
 \end{aligned}
@@ -12306,7 +12357,8 @@ Unfortunately, we don't have access to population-level means. So we need to rel
 
 \[
 \begin{aligned}
-\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \overline{x_{A_i}}}{a} \\
+\text{Grand mean estimate} &= \bar{\bar{x}} \\
+&= \frac{\sum \overline{x_{A_i}}}{a} \\
 &= \frac{\overline{x_{A_1}}+\overline{x_{A_2}}}{2}\\
 &= \frac{77.33333 + 55.8}{2} \\
 &= 66.56667\\
@@ -12365,7 +12417,7 @@ These two values are summarized in the table below.
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Juggling
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12375,11 +12427,12 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=231.8422\) & \(\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2\) & \((a-1) = 1\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{nb} = 4.0\) & \(\frac{\sigma_{people}^2}{nb}\) & \(ab(n-1) = 24\) \\
-\bottomrule()
 \end{longtable}
 
 We calculate an \(F\)-value to compare these two values:
@@ -12405,11 +12458,11 @@ This sample \(F\)-value tells us that, with these data, the \textbf{estimated} t
 
 To interpret an \(F\)-value for the main effect of \(A\), you need to think about all the \(F\)-values that could have occurred - when the population means are equal (i.e., \(\sigma_{A}^2=0\)). More specifically, we have to imagine all of the \(F\)-values with 1 and 24 degrees of freedom in the Central \(F\)-distribution. This distribution is illustrated below. \textbf{It reflects, for this main effect, all the \(F\)-values that could occur when the populations means are equal - due to the fact we are using random samples.}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-452-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-453-1.pdf}
 
 To assign a \(p\)-value to the \(F\)-value that we obtained, \(F = 57.96\) we determine the proportion of the Central \(F\)-distribution (with 1 and 24 degrees of freedom) that is equal to, or more extreme, than the \(F\)-value we obtained in our study. If you inspect the Central \(F\)-distribution above you can see that the current \(F\)-value of 57.96 doesn't even fit on the graph - because the x-axis only goes to 10. We need a new graph with a wider range of values on the x-axis. This graph is presented below:
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-453-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-454-1.pdf}
 
 In this graph you can see the \(F\)-value we obtained (57.96) is completely to the right of Central \(F\)-distribution. In fact, the proportion of the \(F\)-distribution that is equal to, or more extreme, than 57.96 is \textless{} .001. So we say the \(p\)-value is \(p < .001\).
 
@@ -12431,7 +12484,7 @@ A recap of the conceptual basis for the calculations we've done for juggling is 
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Juggling
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12441,12 +12494,13 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=231.8422\) & \(\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2\) & \((a-1) = 1\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{nb}=\frac{60}{15} = 4.0\) & \(\frac{\sigma_{people}^2}{nb}\) & \(ab(n-1) = 24\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{ \frac{s_{people}^2}{nb}}= \frac{231.8422}{4.0}= 57.96\) & \(\frac{\frac{\sigma_{people}^2}{nb} + \sigma_{A}^2}{ \frac{\sigma_{people}^2}{nb}}\) & \([(a-1),ab(n-1)]=[1,24]\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{a-typical-juggling}{%
@@ -12484,7 +12538,7 @@ Summarized below:
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Juggling
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12494,12 +12548,13 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Sample size multiplied by estimated total variance (i.e., \(MS_{juggling}\)) & \(\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}=3477.633\) & \(\sigma_{people}^2 + nb \sigma_{A}^2\) & \((a-1)\) \\
 Estimated population variance (i.e., \(MSE\)) & \(s_{people}^2=60.0\) & \(\sigma_{people}^2\) & \(ab(n-1)\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{nb\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}}{s_{people}^2}=\frac{3477.633}{60}=57.96\) & \(\frac{\sigma_{people}^2 + nb \sigma_{A}^2}{\sigma_{people}^2}\) & \([(a-1),ab(n-1)]\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{main-effect-b-preparation}{%
@@ -12521,7 +12576,8 @@ If we knew the \textbf{population} means we could:
 
 \[
 \begin{aligned}
-\text{Grand mean} = \mu_B &= \frac{\sum\mu_{B_i}}{b} \\
+\text{Grand mean} &= \mu_B \\
+&= \frac{\sum\mu_{B_i}}{b} \\
 &= \frac{\mu_{B_1}+\mu_{B_2}+\mu_{B_3}}{3}\\
 &= \frac{? + ? + ?}{3}
 \end{aligned}
@@ -12560,7 +12616,8 @@ Unfortunately, we don't have access to population-level means. So we need to rel
 
 \[
 \begin{aligned}
-\text{Grand mean estimate} = \bar{\bar{x}} &= \frac{\sum \bar{x}_{B_i}}{b} \\
+\text{Grand mean estimate} &= \bar{\bar{x}} \\
+&= \frac{\sum \bar{x}_{B_i}}{b} \\
 &= \frac{\overline{x_{B_1}}+\overline{x_{B_2}} +\overline{x_{B_3}} }{3}\\
 &= \frac{65.4 + 62.6 + 71.7}{3} \\
 &= 66.56667\\
@@ -12619,7 +12676,7 @@ These two values are summarized in the table below.
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Juggling
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12629,11 +12686,12 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333\) & \(\frac{\sigma_{people}^2}{na} + \sigma_{B}^2\) & \((b-1) = 2\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{na} = 6.0\) & \(\frac{\sigma_{people}^2}{na}\) & \(ab(n-1) = 24\) \\
-\bottomrule()
 \end{longtable}
 
 We calculate an \(F\)-value to compare these two values:
@@ -12659,11 +12717,11 @@ This sample \(F\)-value tells us that, with these data, the \textbf{estimated} t
 
 To interpret an \(F\)-value for the main effect of \(B\), you need to think about all the \(F\)-values that could have occurred - when the population means are equal (i.e., \(\sigma_{B}^2=0\)). More specifically, we have to imagine all of the \(F\)-values with 2 and 24 degrees of freedom in the Central \(F\)-distribution. This distribution is illustrated below. \textbf{It reflects, for this main effect, all the \(F\)-values that could occur when the populations means are equal - due to the fact we are using random samples.}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-456-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-457-1.pdf}
 
 To assign a \(p\)-value to the \(F\)-value that we obtained, \(F = 3.62\) we determine the proportion of the Central \(F\)-distribution (with 2 and 24 degrees of freedom) that is equal to, or more extreme, than the \(F\)-value we obtained in our study. The \(F\)-value we obtained is position in Central \(F\)-distribution below.
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-457-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-458-1.pdf}
 
 In the graph above you can see the \(F\)-value we obtained (3.62) is somewhat to the right side of the Central \(F\)-distribution. In fact, the proportion of the \(F\)-distribution that is equal to, or more extreme, than 3.62 is .042 (i.e.~4.2\%). So we say the \(p\)-value is \(p = .042\).
 
@@ -12681,7 +12739,7 @@ A recap of the conceptual basis for the calculations we've done for preparation 
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Preparation
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12691,12 +12749,13 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}=21.72333\) & \(\frac{\sigma_{people}^2}{na} + \sigma_{B}^2\) & \((b-1)\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{na}= \frac{60}{10}=6.0\) & \(\frac{\sigma_{people}^2}{na}\) & \(ab(n-1)\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{\sum (\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{ \frac{s_{people}^2}{na}} = \frac{21.72333}{6.0}=3.62\) & \(\frac{\frac{\sigma_{people}^2}{na} + \sigma_{B}^2}{ \frac{\sigma_{people}^2}{na}}\) & \([(b-1),ab(n-1)\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{b-typical-preparation}{%
@@ -12735,7 +12794,7 @@ Summarized below:
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Preparation
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12745,12 +12804,13 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Sample size multiplied by estimated total variance (i.e., \(MS_{preparation}\)) & \(\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}= 217.2333\) & \(\sigma_{people}^2 + na \sigma_{B}^2\) & \((b-1)\) \\
 Estimated population variance (i.e., \(MSE\)) & \(s_{people}^2=60.0\) & \(\sigma_{people}^2\) & \(ab(n-1)\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{na\sum(\bar{x_i}-\bar{\bar{x}})^2}{b-1}}{s_{people}^2} = \frac{217.2333}{60}=3.62\) & \(\frac{\sigma_{people}^2 + na \sigma_{B}^2}{\sigma_{people}^2}\) & \([(b-1),ab(n-1)]\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{interaction-preparation}{%
@@ -12775,7 +12835,7 @@ The cell means are illustrated below. Recall the overall marginal mean for yes\_
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2821}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3077}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1795}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Effect
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12785,11 +12845,12 @@ medium\_prep
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 high\_prep
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 yes\_juggle & \(71.4 - 77.33 = -5.93\) & \(72.6 - 77.33 = -4.73\) & \(88 - 77.33 = 10.67\) \\
 no\_juggle & \(59.4 - 55.8 = 3.6\) & \(52.6 - 55.8 = -3.2\) & \(55.4 - 55.8 = -0.4\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{subtract-b-marginal-means}{%
@@ -12802,7 +12863,7 @@ Next, we take the residual. means from the previous step and remove the main eff
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2727}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3030}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1515}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Effect
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -12812,11 +12873,12 @@ medium\_prep
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 high\_prep
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 yes\_juggle & \(-5.93 - 65.4 = -71.33\) & \(-4.73 - 62.6 = -67.33\) & \(10.67 - 71.7 = -61.03\) \\
 no\_juggle & \(3.6 - 65.4 = -61.8\) & \(-3.2 - 62.6 = -65.8\) & \(-0.4 - 71.7 = -72.1\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{add-grand-mean}{%
@@ -12829,7 +12891,7 @@ In the previous steps, we removed the main effect means for \(A\) and then we re
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3125}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1562}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Effect
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -12839,11 +12901,12 @@ medium\_prep
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 high\_prep
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 yes\_juggle & \(-71.33 + 66.57 = -4.77\) & \(-67.33 + 66.57 = -0.77\) & \(-61.03 + 66.57 = 5.53\) \\
 no\_juggle & \(-61.8 + 66.57 = 4.77\) & \(-65.8 + 66.57 = 0.77\) & \(-72.1 + 66.57 = -5.53\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{final-residualized-means}{%
@@ -12852,13 +12915,14 @@ no\_juggle & \(-61.8 + 66.57 = 4.77\) & \(-65.8 + 66.57 = 0.77\) & \(-72.1 + 66.
 The final residual cell means we use for the interaction calculation are below:
 
 \begin{longtable}[]{@{}clll@{}}
-\toprule()
+\toprule\noalign{}
 Effect & low\_prep & medium\_prep & high\_prep \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 yes\_juggle & \(-4.77\) & \(-0.77\) & \(5.53\) \\
 no\_juggle & \(4.77\) & \(0.77\) & \(-5.53\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{interaction-ab}{%
@@ -12940,11 +13004,11 @@ This sample \(F\)-value tells us that, with these data, the \textbf{estimated} t
 
 To interpret an \(F\)-value for the main effect of \(AB\), you need to think about all the \(F\)-values that could have occurred - when the population means are equal (i.e., \(\sigma_{AB}^2=0\)). More specifically, we have to imagine all of the \(F\)-values with 2 and 24 degrees of freedom in the Central \(F\)-distribution. This distribution is illustrated below:
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-461-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-462-1.pdf}
 
 To assign a \(p\)-value to the \(F\)-value that we obtained, \(F = 4.49\) we determine the proportion of the Central \(F\)-distribution (with 2 and 24 degrees of freedom) that is equal to, or more extreme, than the \(F\)-value we obtained in our study. The \(F\)-value we obtained is positioned in Central \(F\)-distribution below.
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-462-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-463-1.pdf}
 
 In the graph above you can see the \(F\)-value we obtained (4.49) is somewhat to the right side of the Central \(F\)-distribution. In fact, the proportion of the \(F\)-distribution that is equal to, or more extreme, than 4.49 is .022 (i.e.~2.2\%). So we say the \(p\)-value is \(p = .022\).
 
@@ -12962,7 +13026,7 @@ Remember the \(p\)-value is the \textbf{probability of our data, or more extreme
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Preparation
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -12972,12 +13036,13 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Estimated total variance & \(\frac{\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)} = 53.92667\) & \(\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2\) & \((a-1)(b-1)\) \\
 Estimated variance sampling error & \(\frac{s_{people}^2}{n}=\frac{60}{5}=12\) & \(\frac{\sigma_{people}^2}{n}\) & \(ab(n-1)\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{\sum (\overline{x_{residual_i}} )^2}{(a-1)(b-1)}}{ \frac{s_{people}^2}{n}}=\frac{53.92667}{12}=4.49\) & \(\frac{\frac{\sigma_{people}^2}{n} + \sigma_{AB}^2}{ \frac{\sigma_{people}^2}{n}}\) & \([(a-1)(b-1),ab(n-1)]\) \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{ab-typical-interaction}{%
@@ -12990,7 +13055,7 @@ Comparison using \(F\)-ratio & \(\frac{\frac{\sum (\overline{x_{residual_i}} )^2
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2319}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2899}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2464}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Juggling
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -13000,33 +13065,97 @@ Expected value
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 degrees of freedom
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Sample size multiplied by estimated total variance & \(\frac{n\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)}\) & \(\sigma_{people}^2 + n \sigma_{AB}^2\) & \((a-1)(b-1)\) \\
 Estimated population variance & \(s_{people}^2\) & \(\sigma_{people}^2\) & \(ab(n-1)\) \\
 Comparison using \(F\)-ratio & \(\frac{\frac{\sum (\overline{x_{residual_i}})^2}{(a-1)(b-1)}}{s_{people}^2}\) & \(\frac{\sigma_{people}^2 + n \sigma_{AB}^2}{\sigma_{people}^2}\) & \([(a-1)(b-1),ab(n-1)]\) \\
-\bottomrule()
 \end{longtable}
+
+\hypertarget{n-way-cell-comparisons}{%
+\chapter{N-way Cell Comparisons}\label{n-way-cell-comparisons}}
+
+\hypertarget{recap-and-next-directions}{%
+\section{Recap and next directions}\label{recap-and-next-directions}}
+
+In the last chapter we focused on the ANOVA itself. In this chapter we focus on comparing the means of cells within the ANOVA. These comparisons could be:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  planned comparisons based on hypotheses (i.e., confirmatory or a priori comparisons)
+\end{enumerate}
+
+or
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  exploratory comparisons to investigate an interaction.
+\end{enumerate}
+
+Previously we conducted an N-way ANOVA, where juggling (yes/no) and preparation (low/medium/high) were used to predict calmness scores before an exam. The analysis we conducted is repeated below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(apaTables)}
+
+\NormalTok{nway\_data }\OtherTok{=} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data\_crf.csv"}\NormalTok{)}
+
+\CommentTok{\# Turn character columns into factors}
+\NormalTok{nway\_data  }\OtherTok{\textless{}{-}}\NormalTok{ nway\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate\_if}\NormalTok{(is.character, as.factor)}
+\end{Highlighting}
+\end{Shaded}
+
+Next we conduct the analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# set contrasts to values match SPSS}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{contrasts =} \FunctionTok{c}\NormalTok{(}\StringTok{"contr.sum"}\NormalTok{, }\StringTok{"contr.poly"}\NormalTok{))}
+
+\CommentTok{\# Conduct analysis}
+\NormalTok{lm\_nway }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(calm }\SpecialCharTok{\textasciitilde{}}\NormalTok{ preparation}\SpecialCharTok{*}\NormalTok{juggling, }
+              \AttributeTok{data =}\NormalTok{ nway\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+Then we create the output using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apa.aov.table}\NormalTok{(lm\_nway, }
+              \AttributeTok{filename =} \StringTok{"my\_table.doc"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{ch_deeper_nway/images/nway_table_clean}
 
 \hypertarget{confirmatory-comparisons}{%
 \section{Confirmatory Comparisons}\label{confirmatory-comparisons}}
 
-\hypertarget{two-means}{%
-\subsection{two means}\label{two-means}}
-
 \hypertarget{t-test-1}{%
-\subsubsection{t-test}\label{t-test-1}}
+\subsection{\texorpdfstring{\(t\)-test}{t-test}}\label{t-test-1}}
 
-If you have a comparison (with 2 means) that was planned prior to collecting data, one option to test the comparison is the t-test. This is perhaps the most frequently used approach in some research areas. Consider a scenario where you have a one-sided planned comparison (i.e., an a priori comparison) involving the cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You could proceed as follows.
+If you have a comparison (with 2 means) that was planned prior to collecting data, one option to test the comparison is the \(t\)-test. This is perhaps the most frequently used approach in some research areas.
 
-\textbf{t-test and \(p\)-value calculation}
+Consider a scenario where you have a directional hypothesis (i.e., you believe on cell mean is higher than an other). This is also known as a one-sided test.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\tightlist
-\item
-  Obtain the sample data for these cells
-\end{enumerate}
+In this particular scenario, your planned directional comparison involves comparing cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You believe the mean for cell 3 will be higher than cell 1. That is, you have a directional hypothesis (i.e., one-tailed or one-sided hypothesis). This belief is based on theory and you registered your hypothesis at \url{osf.io} prior to collecting data.
+
+\hypertarget{t-test-statistic}{%
+\subsubsection{\texorpdfstring{\(t\)-test statistic}{t-test statistic}}\label{t-test-statistic}}
+
+You could proceed as follows.
+
+Obtain the data for these two cells:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13043,13 +13172,19 @@ If you have a comparison (with 2 means) that was planned prior to collecting dat
 \end{Highlighting}
 \end{Shaded}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Conduct a two-sided t-test
-\end{enumerate}
+Conduct a two-sided \(t\)-test with the formula (equal variances assumed):
+
+\[
+ t = \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}
+\]
+
+Note that when we conduct a \(t\)-test the estimate of the population variance of calmness scores (\$ s\_\{people\}\^{}2\$) is based on only the two cells involved in the comparison (see below). Recall though that in the ANOVA this estimate was based on all six cells.
+
+\[
+ s_{people}^2 = \frac{s_1^2 + s_2^2}{2}
+ \]
+
+Using the code below we make it a two-sided test to obtain the CI in format typically used in psychology. We convert it to a one-sided \(t\)-test below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13075,31 +13210,31 @@ If you have a comparison (with 2 means) that was planned prior to collecting dat
 ##      88.0      71.4
 \end{verbatim}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  Divide the \(p\)-value by 2 to obain the one-sided \(p\)-value.
-\end{enumerate}
+\hypertarget{t-test-p-value}{%
+\subsubsection{\texorpdfstring{\(t\)-test p-value}{t-test p-value}}\label{t-test-p-value}}
+
+Divide the two-sided \(p\)-value by 2 to obtain the one-sided or directional \(p\)-value.
 
 \(0.005444/2=0.002722\)
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{3}
-\tightlist
-\item
-  t-test text:
-\end{enumerate}
+Your output text now stands as:
 
-Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.6\), 95\% \(CI[6.45, 26.75]\)) than low preparation students,(\(M = 71.4\), \(SD = 5.50\)), \(t(8)=3.77\), \(p = .003\).
+Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer, on average, (\(M_{\text{diff}} = 16.6\), 95\% \(CI[6.45, 26.75]\)) than low preparation students,(\(M = 71.40\), \(SD = 5.50\)), \(t(8)=3.77\), \(p = .003\).
 
-Noteably, we are missing a d-value with confidence interval for the above, see the fix below:
+Notably, we are missing a standardized effect size, \(d\)-value with confidence interval, for the above.
 
-\textbf{effect size calculation}
+\hypertarget{t-test-effect-size}{%
+\subsubsection{\texorpdfstring{\(t\)-test effect size}{t-test effect size}}\label{t-test-effect-size}}
 
-We can calculate the d-value with CI using:
+We can calculate the \(d\)-value with a CI for this comparison using the formula below.
+
+\[
+ d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}
+ \]
+
+Not that in this formula, \(s_{people}\), was based on the two cells only.
+
+To obtain this effect size in R, we use t-test value as the non-centralty parameter in this command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13120,22 +13255,24 @@ We can calculate the d-value with CI using:
 ## [1] 4.038
 \end{verbatim}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi})}
-\setcounter{enumi}{4}
-\tightlist
-\item
-  Revised t-test text
-\end{enumerate}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# this is the came as typing:}
+\CommentTok{\# ci.smd(ncp = 3.77, n.1 = 5, n.2 = 5)}
+\end{Highlighting}
+\end{Shaded}
 
-Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.6\), 95\% \(CI[6.45, 26.75]\), \(d = 2.39\), 95\% \(CI[0.66, 4.04\){]}) than low preparation students,(\(M = 71.4\), \(SD = 5.50\)), \(t(8)=3.77\), \(p = .003\).
+\hypertarget{t-test-text}{%
+\subsubsection{\texorpdfstring{\(t\)-test text}{t-test text}}\label{t-test-text}}
+
+Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer, on average, (\(M_{\text{diff}} = 16.6\), 95\% \(CI[6.45, 26.75]\), \(d = 2.39\), 95\% \(CI[0.66, 4.04\){]}) than low preparation students,(\(M = 71.40\), \(SD = 5.50\)), \(t(8)=3.77\), \(p = .003\).
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2128}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3617}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1489}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2766}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Approach
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -13145,16 +13282,23 @@ test
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 effect size
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
-t-test (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\) & \(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\) & \(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
-\bottomrule()
+\bottomrule\noalign{}
+\endlastfoot
+\(t\)-test (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\) & \(t = \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\) & \(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
 \end{longtable}
 
-\hypertarget{contrast}{%
-\subsubsection{contrast}\label{contrast}}
+\hypertarget{contrast-2-means}{%
+\subsection{contrast (2 means)}\label{contrast-2-means}}
 
-Obtain the sample data for these cells
+As we did with the t-test, consider a scenario where you planned a directional comparison involves comparing cell 1 (yes juggling/low preparation) with cell 3 (yes juggling / high preparation). You believe the mean for cell 3 will be higher than cell 1. That is, you have a directional hypothesis (i.e., one-tailed or one-sided hypothesis). This belief is based on theory and you registered your hypothesis at \url{osf.io} prior to collecting data.
+
+Although the t-test is a popular approach for comparing two cell means in an ANOVA, a \textbf{contrast} is actually more consistent with the underlying ANOVA framework. The big difference between a t-test and a contrast is how they calculate the pooled variance term. In fact, that's the only difference. With a t-test the population variance of people's calmness scores is estimated using only the two cells involved in the comparison. The contrast, the contrast-test, takes a different approach. Even though only two cell means are being compared in a contrast, the population variance of people's calmness scores is estimated using all the cells in the ANOVA.
+
+Let's walk thought the calculation process below. It initially seems more different than it is because it's an F-test. But we'll see how this is a superficial differences as we go through the process.
+
+We begin by obtaining the sample data for these cells
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13171,14 +13315,83 @@ Obtain the sample data for these cells
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Calculate F value for contrast}
+\hypertarget{contrast-statistic}{%
+\subsubsection{contrast statistic}\label{contrast-statistic}}
+
+As noted, a contrast differs from a t-test primarily because of how the pooled variance term is calculated.
+
+A t-test only uses the two cells involved in the comparison to estimate \(s_{people}^2\). A contrast uses a different approach. It uses all 6 cells from the ANOVA to estimate \(s_{people}^2\).
+
+\[
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6} = MSE = 60
+\]
+
+Notice how, below, the calculation of this \(F\)-value below follows the general logic we have used with \(F\)-values all along. The estimate of the total variance is divided by the estimate of the random sampling variance.
+
+We begin by referring to the means we will use in the contrast as contrast means. That is, instead of using the original lables (\(\bar{x_1}\) and \(\bar{x_3}\)\}) we use new labels with the indices 1 and 2 to refer to the first and second means involved in the contrast. The relabelling is described below:
+
+We use \(\bar{c_1}\) to refer to the the mean in cell 1 (juggling yes, low preparation).
+
+\[
+\bar{c_1} = \bar{x_1} = 71.4
+\]
+
+We use \(\bar{c_2}\) to refer to the the mean in cell 3 (juggling yes, high preparation).
+
+\[
+\bar{c_2} = \bar{x_3} = 88
+\]
+
+We imagine there are only these two populations ({[}juggling yes, low preparation{]},{[}juggling yes, high preparation{]}) and there there is a population-level grand mean create by averaging the two population means. We estimate that population-level grand mean using sample-level data:
+
+\[
+\begin{aligned}
+\bar{\bar{c}} &= \frac{\sum \bar{c_i}}{2} \\
+&= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&= \frac{71.4 + 88}{2} \\
+&= 79.7\\
+\end{aligned}
+\]
+
+We estimate the total variance (as we did with the ANOVA):
+
+\[
+\begin{aligned} 
+\text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(71.4- 79.7)^2 + (88 - 79.7)^2}{2-1} \\
+&= 137.78
+\end{aligned}
+\]
+
+We estimate variance due to random sampling:
+
+\[
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+\]
+
+And then we compare these two estimates with the F-ratio:
+
+\[
+F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}
+\]
+
+This \(F\)-value formula looks very different from the \(t\)-test formula we used previously. But we can rearrange the formula above to make it look like a t-test.
+
+\[
+F = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2
+\]
+
+When it is rearranged, you can see the \(F = t^2\). This rearrangement only works when there are two means. The important point is though that you can see that really the \(t\)-test and the contrast are the same except for the way the pooled variance term is calculated. The t-test used a pooled variance estimate based on the two cells involved in the comparison whereas the contrast used a pooled variance estimate based on all the cells in the ANOVA.
+
+In R, we can calculate the contrast with the code below.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{xbar3 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_high\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{xbar1 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_low\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{mean\_cell1 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_low\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{mean\_cell3 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_high\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 
-\NormalTok{means\_to\_compare }\OtherTok{=} \FunctionTok{c}\NormalTok{(xbar3, xbar1)}
+\NormalTok{means\_to\_compare }\OtherTok{=} \FunctionTok{c}\NormalTok{(mean\_cell3, mean\_cell1)}
 
 \NormalTok{mse }\OtherTok{=}\NormalTok{ (}\FunctionTok{summary}\NormalTok{(lm\_nway)}\SpecialCharTok{$}\NormalTok{sigma)}\SpecialCharTok{\^{}}\DecValTok{2} \CommentTok{\# or just 60 for MSE}
 \NormalTok{df1 }\OtherTok{=} \DecValTok{2} \SpecialCharTok{{-}}\DecValTok{1} \CommentTok{\# two means {-} 1}
@@ -13194,18 +13407,19 @@ Obtain the sample data for these cells
 ## [1] 11.48
 \end{verbatim}
 
-\textbf{Calculate F value for contrast}
+\hypertarget{contrast-p-value}{%
+\subsubsection{contrast p-value}\label{contrast-p-value}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{pvalue\_two\_tail }\OtherTok{=} \FunctionTok{pf}\NormalTok{(Fvalue,}
+\NormalTok{pvalue\_nondirectional }\OtherTok{=} \FunctionTok{pf}\NormalTok{(Fvalue,}
                      \AttributeTok{df1 =}\NormalTok{ df1,}
                      \AttributeTok{df2 =}\NormalTok{ df2,}
                      \AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{)}
 
-\NormalTok{pvalue\_one\_tail }\OtherTok{=}\NormalTok{ pvalue\_two\_tail}\SpecialCharTok{/}\DecValTok{2}
+\NormalTok{pvalue\_directional }\OtherTok{=}\NormalTok{ pvalue\_nondirectional}\SpecialCharTok{/}\DecValTok{2}
 
-\FunctionTok{print}\NormalTok{(pvalue\_one\_tail)}
+\FunctionTok{print}\NormalTok{(pvalue\_directional)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -13213,18 +13427,56 @@ Obtain the sample data for these cells
 ## [1] 0.001213
 \end{verbatim}
 
-\textbf{Calculate effect size for contrast}
+Your output text now stands as:
+
+Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.60\)) than low preparation students,(\(M = 71.40\), \(SD = 5.50\)), \(F(1, 24)= 11.482\), \(p = .001\).
+
+Notably, we are missing a standardized effect size, with confidence interval, for the above.
+
+\hypertarget{contrast-standardized-effect-size}{%
+\subsubsection{contrast standardized effect size}\label{contrast-standardized-effect-size}}
+
+We can calculate an effect size with a CI for this comparison using the formula below.
+
+\[
+sc = \frac{\bar{c_2} - \bar{c_1}}{s_{people}}
+\]
+
+Again, notice the only difference from a d-value is that we calculated \(s_{people}\) based on 6 cells instead of 2. Consequently, some people call this value a \(d\)-value. So in this calculation, the denominator is determined:
+
+By calculating \(s_{people}^2\):
+
+\[
+s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6} = MSE = 60
+\]
+
+Turning it into \(s_{people}\):
+\[
+s_{people}=\sqrt{s_{people}^2}=\sqrt{MSE}=\sqrt{60}
+\]
+
+Then using the resulting value in the calculation
+
+\[
+sc = \frac{88 - 71.4}{\sqrt{60}} = 2.14
+\]
+
+In R, we use the code below to obtain the effect size:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{xbar3 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_high\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{xbar1 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_low\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-
-\NormalTok{means\_to\_compare }\OtherTok{=} \FunctionTok{c}\NormalTok{(xbar3, xbar1)}
-\NormalTok{comparison\_weights }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
-
 \NormalTok{n\_per\_cell }\OtherTok{=} \DecValTok{5}
 \NormalTok{mse\_n }\OtherTok{=} \DecValTok{2}\SpecialCharTok{*}\DecValTok{3}\SpecialCharTok{*}\NormalTok{n\_per\_cell}
+
+\NormalTok{mean\_cell1 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_low\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{mean\_cell3 }\OtherTok{=} \FunctionTok{mean}\NormalTok{(juggling\_high\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{mean\_c1 }\OtherTok{=}\NormalTok{ mean\_cell1}
+\NormalTok{mean\_c2 }\OtherTok{=}\NormalTok{ mean\_cell3}
+
+\NormalTok{means\_to\_compare }\OtherTok{=} \FunctionTok{c}\NormalTok{(mean\_c2, mean\_c1)}
+\NormalTok{n\_for\_means }\OtherTok{=} \FunctionTok{c}\NormalTok{(n\_per\_cell, n\_per\_cell)}
+\NormalTok{comparison\_weights }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
 
 \CommentTok{\# Approach 1 to s.anova}
 \NormalTok{mse }\OtherTok{=} \DecValTok{60} \CommentTok{\#s2\_people}
@@ -13254,16 +13506,74 @@ Obtain the sample data for these cells
 ## [1] 3.487
 \end{verbatim}
 
-Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.6\), \(sc = 2.14\), 95\% \(CI[0.77, 3.49\){]}) than low preparation students,(\(M = 71.4\), \(SD = 5.50\)), \(F(1, 24)= 11.482\), \(p = .001\).
+\hypertarget{contrast-raw-effect-size}{%
+\subsubsection{contrast raw effect size}\label{contrast-raw-effect-size}}
 
-\textbf{SUMMARY}
+A contrast can also be expressed as an effect size in original units. This type of effect size is often referenced by many names:
+
+\begin{itemize}
+\tightlist
+\item
+  original unit effect size
+\item
+  raw effect size
+\item
+  unstandardized effect size
+\end{itemize}
+
+Let's revisit our example data. Previously, we had two sample means: 71.4 and 88. The undstandardized effect size (i.e., original unit effect size) is simply the difference between these two means.
+
+\[
+\begin{aligned}
+\text{original unit effect size} &= M_{diff}\\
+&= \bar{c_2} - \bar{c_1}\\
+&= 88 - 71.4\\
+&= 16.6
+\end{aligned}
+\]
+We also want a confidence interval around this unstandardized effect size. We can obtain that interval with the code below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ci.c}\NormalTok{(}\AttributeTok{means =}\NormalTok{ means\_to\_compare,}
+      \AttributeTok{c.weights =}\NormalTok{ comparison\_weights,}
+      \AttributeTok{n =} \FunctionTok{rep}\NormalTok{(n\_per\_cell, }\DecValTok{2}\NormalTok{),}
+      \AttributeTok{s.anova =}\NormalTok{ s\_people,}
+      \AttributeTok{N =}\NormalTok{ mse\_n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Contrast
+## [1] 6.565
+## 
+## $Contrast
+## [1] 16.6
+## 
+## $Upper.Conf.Limit.Contrast
+## [1] 26.64
+\end{verbatim}
+
+\hypertarget{contrast-text}{%
+\subsubsection{contrast text}\label{contrast-text}}
+
+Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.60\), 95\% \(CI[6.56, 26.64]\), \(sc = 2.14\), 95\% \(CI[0.77, 3.49\){]}) than low preparation students,(\(M = 71.40\), \(SD = 5.50\)), \(F(1, 24)= 11.482\), \(p = .001\).
+
+But, as noted, some people might just write this up calling the effect size a \(d\)-value:
+
+Among jugglers, high preparation students (\(M = 88.00\), \(SD = 8.15\)) were calmer (\(M_{\text{diff}} = 16.60\), 95\% \(CI[6.56, 26.64]\), \(d = 2.14\), 95\% \(CI[0.77, 3.49\){]}) than low preparation students,(\(M = 71.40\), \(SD = 5.50\)), \(F(1, 24)= 11.482\), \(p = .001\).
+
+The fact that you could calculate a \(d\)-value in two different ways (using difference variance calculations) illustrates why it is \textbf{extremely} important that you indicate in your paper (even in a footnote) the formula you used to calculate the \(d\)-value and pooled variance terms.
+
+\hypertarget{comparison-with-t-test}{%
+\subsubsection{\texorpdfstring{Comparison with \(t\)-test}{Comparison with t-test}}\label{comparison-with-t-test}}
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2128}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3617}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1489}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2766}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Approach
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -13273,17 +13583,317 @@ test
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 effect size
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
-contrast (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}\) & \(F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}} = \left[ \frac{\bar{x_3} - \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}} \right] ^2\) & \(sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
-t-test (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\) & \(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\) & \(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
-\bottomrule()
+\bottomrule\noalign{}
+\endlastfoot
+contrast (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2 +s_3^2+s_4^2+s_5^2+s_6^2}{6}\) & \(F = \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\) & \(sc = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
+\(t\)-test (equal variances assumed) & \(s_{people}^2 = \frac{s_1^2 + s_2^2}{2}\) & \(t = \frac{\bar{x_3} \bar{x_1}}{\sqrt{\frac{s_{people}^2}{n_1}+\frac{s_{people}^2}{n_2}}}\) & \(d = \frac{\bar{x_3} - \bar{x_1}}{s_{people}}\) \\
 \end{longtable}
 
-You can see from the above table that when you are comparing two means the contrast and t-test approaches are very similar. The only difference between the two approaches is how the population variance estimate (\(s_{people}^2\)) is calculated.
+You can see from the above table that when you are comparing two means the contrast and \(t\)-test approaches are very similar. The only difference between the two approaches is how the population variance estimate (\(s_{people}^2\)) is calculated.
 
-\hypertarget{contrasts-with-multiple-means}{%
-\subsection{contrasts with multiple means}\label{contrasts-with-multiple-means}}
+\hypertarget{f-t2}{%
+\subsubsection{\texorpdfstring{\(F = t^2\)}{F = t\^{}2}}\label{f-t2}}
+
+In case you wanted to understand how and F-value and t-value can be the same with two groups here is the proof:
+
+\[
+\begin{aligned}
+F &= \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\\
+&= \frac{\frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{1}}{\frac{s_{people}^2}{n}}\\
+&= \frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{\frac{s_{people}^2}{n}}; \text{With only two means they are equidistant from the grand mean}\\
+&= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}; \text{So we can change the numerator because:} (\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2 = \frac{(\bar{x_1} - \bar{x_2})^2}{2}\\
+&= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times 1\\
+&= \frac{\frac{(\bar{x_1} - \bar{x_2})^2}{2}}{\frac{s_{people}^2}{n}}\times \frac{2}{2}\\
+&= \frac{(\bar{x_1} - \bar{x_2})^2}{2 \times \frac{s_{people}^2}{n}}\\
+&= \frac{(\bar{x_1} - \bar{x_2})^2}{ \frac{s_{people}^2}{n} + \frac{s_{people}^2}{n}}\\
+&= t^2
+\end{aligned}
+\]
+
+\hypertarget{contrast-multiple-means}{%
+\subsection{contrast (multiple means)}\label{contrast-multiple-means}}
+
+Sometimes we might want to combine cells for a comparison. For example, imagine we hypothesized the mean of cells 2 and 3 was higher than the mean of cell 1. Illustrated below:
+
+\[
+\frac{\bar{x_2} + \bar{x_3}}{2} \text{ vs }\bar{x_1}
+\]
+
+How do we go about conducting this comparison?
+
+\hypertarget{contrast-mult-statistic}{%
+\subsubsection{contrast (mult) statistic}\label{contrast-mult-statistic}}
+
+The two contrast means (\(\bar{c_1}\), \(\bar{c_2}\)\}) are calculated as below''
+
+For the first mean, it's just a cell mean, where \(n = 5\).
+
+\[
+\bar{c_1} = \bar{x_1} = 71.4
+\]
+
+For the second mean, it's the average of two means. Note for this combined mean \(n = 10\); because it was based on two cell means, each \(n=5\).
+
+\[
+\bar{c_2} = \frac{\bar{x_2} + \bar{x_3}}{2} = \frac{ 144}{2} = 80.3
+\]
+
+But when we look at these two contrast means, the estimate of the ``grand mean'' is:
+
+\[
+\begin{aligned}
+\bar{\bar{c}} &= \frac{\sum \bar{c_i}}{2} \\
+&= \frac{\bar{c_1}+\bar{c_2}}{2}\\
+&= \frac{71.4 + 80.3}{2} \\
+&= 75.85\\
+\end{aligned}
+\]
+
+\textbf{We estimate the total variance:}
+
+\[
+\begin{aligned} 
+\text{total variance} &=  \frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(\bar{c_{1}} - \bar{\bar{c}})^2 + (\bar{c_{2}} - \bar{\bar{c}})^2}{2-1} \\
+&=  \frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1} \\
+&= 39.605
+\end{aligned}
+\]
+
+\textbf{We estimate the variance due to random sampling:}
+
+The calculation is bit more complicated for sampling error because the sample sizes are different for the two means.
+
+For first contrast mean, \(c_1\), is \(n = 5\). Therefore sampling error is:
+
+\[
+\frac{s_{people}^2}{n} = \frac{MSE}{n} = \frac{60}{5} = 12  
+\]
+
+For second contrast mean, \(c_2\), is \(n = 10\). Therefore sampling error is:
+
+\[
+\frac{s_{people}^2}{n + n} = \frac{MSE}{n + n} = \frac{60}{5 + 5} = \frac{60}{10} = 6  
+\]
+
+We use the average of these two sampling error calculations
+
+\[
+\text{random sampling variance} = \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} = 9
+\]
+
+The \(F\)-value is:
+
+\[
+\begin{aligned}
+F &= \frac{\text{total variance}}{\text{random sampling variance}}\\
+&= \frac{\frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1}}{\left[ \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} \right]}\\
+&= \frac{\frac{(71.4- 75.85)^2 + (80.3 - 75.85)^2}{2-1}}{\left[ \frac{12 + 6}{2} \right]}\\
+&= \frac{39.605}{\left[ 9 \right]}\\
+&= 4.40
+\end{aligned}
+\]
+
+In R, it's easy to get these numbers.
+
+We begin by getting the cell data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{juggling\_high\_preparation }\OtherTok{\textless{}{-}}\NormalTok{ nway\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(juggling }\SpecialCharTok{==} \StringTok{"yes"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(preparation }\SpecialCharTok{==} \StringTok{"high"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(calm)}
+
+\NormalTok{juggling\_medium\_preparation }\OtherTok{\textless{}{-}}\NormalTok{ nway\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(juggling }\SpecialCharTok{==} \StringTok{"yes"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(preparation }\SpecialCharTok{==} \StringTok{"medium"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(calm)}
+
+\NormalTok{juggling\_low\_preparation }\OtherTok{\textless{}{-}}\NormalTok{ nway\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(juggling }\SpecialCharTok{==} \StringTok{"yes"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(preparation }\SpecialCharTok{==} \StringTok{"low"}\NormalTok{)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(calm)}
+\end{Highlighting}
+\end{Shaded}
+
+Then calculate the cell means:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_cell1 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(juggling\_low\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{mean\_cell2 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(juggling\_medium\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{mean\_cell3 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(juggling\_high\_preparation, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+
+\CommentTok{\# estimate total variance}
+\NormalTok{mean\_c1 }\OtherTok{\textless{}{-}}\NormalTok{ mean\_cell1}
+\NormalTok{mean\_c2 }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{( }\FunctionTok{c}\NormalTok{(mean\_cell2, mean\_cell3) )}
+\NormalTok{contrast\_means }\OtherTok{=} \FunctionTok{c}\NormalTok{(mean\_c1, mean\_c2)}
+
+\NormalTok{total\_var }\OtherTok{=} \FunctionTok{var}\NormalTok{(contrast\_means)}
+
+
+\CommentTok{\# estimate variance due to sampling error}
+\NormalTok{n\_per\_cell }\OtherTok{=} \DecValTok{5}
+\NormalTok{n }\OtherTok{=}\NormalTok{ n\_per\_cell}
+
+\NormalTok{sampling\_var\_c1 }\OtherTok{\textless{}{-}}\NormalTok{ mse}\SpecialCharTok{/}\NormalTok{n}
+\NormalTok{sampling\_var\_c2 }\OtherTok{\textless{}{-}}\NormalTok{ mse}\SpecialCharTok{/}\NormalTok{(n }\SpecialCharTok{+}\NormalTok{ n)}
+\NormalTok{sampling\_var }\OtherTok{=} \FunctionTok{mean}\NormalTok{( }\FunctionTok{c}\NormalTok{(sampling\_var\_c1, sampling\_var\_c2) )}
+
+\CommentTok{\# compare the estimates with a ratio}
+\NormalTok{Fvalue }\OtherTok{=}\NormalTok{ total\_var }\SpecialCharTok{/}\NormalTok{ sampling\_var}
+
+\FunctionTok{print}\NormalTok{(Fvalue)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.401
+\end{verbatim}
+
+\hypertarget{contrast-mult-p-value}{%
+\subsubsection{contrast (mult) p-value}\label{contrast-mult-p-value}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 }\OtherTok{=} \DecValTok{1}   \CommentTok{\# two means being compared so: 2 {-} 1 df}
+\NormalTok{df2 }\OtherTok{=} \DecValTok{24} \CommentTok{\#recall 24 df for MSE:  ab(n{-}1)}
+
+\NormalTok{pvalue\_nondirectional }\OtherTok{=} \FunctionTok{pf}\NormalTok{(Fvalue,}
+                     \AttributeTok{df1 =}\NormalTok{ df1,}
+                     \AttributeTok{df2 =}\NormalTok{ df2,}
+                     \AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{)}
+
+\NormalTok{pvalue\_directional }\OtherTok{=}\NormalTok{ pvalue\_nondirectional}\SpecialCharTok{/}\DecValTok{2}
+
+\FunctionTok{print}\NormalTok{(pvalue\_directional)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02332
+\end{verbatim}
+
+Among jugglers, the combined mean of calmness for high and medium preparation students (\(M = 80.30\)) was higher than the mean (\(M_{\text{diff}} = 8.90\)) for low preparation students,(\(M = 71.40\)), \(F(1,24) = 4.40, p = .023\).
+
+But we would still like to put an effect size in this sentence. Below we calculate the standardized and unstandardized effect sizes.
+
+\hypertarget{contrast-mult-standardized-effect-size}{%
+\subsubsection{contrast (mult) standardized effect size}\label{contrast-mult-standardized-effect-size}}
+
+Now the effect size. To calculate the effect size we need to use a rather odd notation. But this odd notation is commonly used with contrasts. We assign weights to the contrasts using a few rules.
+
+\begin{itemize}
+\item
+  All of the cell means involved in one contrast mean (e.g., \(\bar{c_1}\)) receive a negative number for the weight.
+\item
+  All of the cell means involved in the other contrast mean (e.g., \(\bar{c_2}\)) receive a positive number for the weight.
+\item
+  All of the negative weights must add up to negative one (i.e., -1.0)
+\item
+  All of the positive weights must add up to positive one (i.e., 1.0)
+\end{itemize}
+
+So if we think of the cell means in order:
+
+\[
+\bar{x_1}, \bar{x_2}, \bar{x_3}
+\]
+
+If we want \(x_1\) compared to the average of cells two (\(x_2\) and \(x_3\)) then we would use the weights
+
+\[
+-1, 0.5, 0.5
+\]
+
+This results in the following comparison:
+
+\[
+\frac{\bar{x_2} + \bar{x_3}}{2} - \bar{x_1}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{n\_per\_cell }\OtherTok{=} \DecValTok{5}
+\NormalTok{mse\_n }\OtherTok{=} \DecValTok{2}\SpecialCharTok{*}\DecValTok{3}\SpecialCharTok{*}\NormalTok{n\_per\_cell}
+
+\NormalTok{means\_to\_compare }\OtherTok{=} \FunctionTok{c}\NormalTok{(mean\_cell1, mean\_cell2, mean\_cell3)}
+\NormalTok{n\_for\_means }\OtherTok{=} \FunctionTok{c}\NormalTok{(n\_per\_cell, n\_per\_cell, n\_per\_cell)}
+\NormalTok{comparison\_weights }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, .}\DecValTok{5}\NormalTok{, .}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# re{-}use lm\_nway from initial ANOVA}
+\NormalTok{s\_people }\OtherTok{=} \FunctionTok{summary}\NormalTok{(lm\_nway)}\SpecialCharTok{$}\NormalTok{sigma}
+
+\CommentTok{\# Calculate standardizec contrast with CI}
+\FunctionTok{ci.sc}\NormalTok{(}\AttributeTok{means =}\NormalTok{ means\_to\_compare,}
+      \AttributeTok{c.weights =}\NormalTok{ comparison\_weights,}
+      \AttributeTok{n =}\NormalTok{ n\_for\_means,}
+      \AttributeTok{s.anova =}\NormalTok{ s\_people,}
+      \AttributeTok{N =}\NormalTok{ mse\_n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Standardized.Contrast
+## [1] 0.02316
+## 
+## $Standardized.contrast
+## [1] 1.149
+## 
+## $Upper.Conf.Limit.Standardized.Contrast
+## [1] 2.255
+\end{verbatim}
+
+\hypertarget{contrast-multi-raw-effect-size}{%
+\subsubsection{contrast (multi) raw effect size}\label{contrast-multi-raw-effect-size}}
+
+A contrast can also be expressed as an effect size in original units. Let's revisit our example data. Previously, we had two sample means: 80.3 and 71.4. The undstandardized effect size (i.e., original unit effect size) is simply the difference between these two means.
+
+\[
+\begin{aligned}
+\text{original unit effect size} = M_{diff} &= \bar{c_2} - \bar{c_1}\\
+&= 80.3 - 71.4\\
+&= 8.9
+\end{aligned}
+\]
+We also want a confidence interval around this unstandardized effect size. We can obtain that interval with the code below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ci.c}\NormalTok{(}\AttributeTok{means =}\NormalTok{ means\_to\_compare,}
+      \AttributeTok{c.weights =}\NormalTok{ comparison\_weights,}
+      \AttributeTok{n =}\NormalTok{ n\_for\_means,}
+      \AttributeTok{s.anova =}\NormalTok{ s\_people,}
+      \AttributeTok{N =}\NormalTok{ mse\_n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Lower.Conf.Limit.Contrast
+## [1] 0.1948
+## 
+## $Contrast
+## [1] 8.9
+## 
+## $Upper.Conf.Limit.Contrast
+## [1] 17.61
+\end{verbatim}
+
+\hypertarget{contrast-mult-text}{%
+\subsubsection{contrast (mult) text}\label{contrast-mult-text}}
+
+Among jugglers, the combined mean of calmness for high and medium preparation students (\(M = 80.30\)) was higher than the mean (\(M_{\text{diff}} = 8.90\), 95\% \(CI[0.19, 17.61]\), \(sc = 1.15\), 95\% \(CI[.02, 2.26]\)) for low preparation students,(\(M = 71.40\)), \(F(1,24) = 4.40, p = .023\).
+
+\hypertarget{contrasts-in-practice}{%
+\subsubsection{contrasts in practice}\label{contrasts-in-practice}}
+
+The calculations presented here are designed to present the conceptual basis for contrasts. In particular, I aimed to emphasize how the logic used is the same as that used in ANOVA. I strongly encourage you to check out the excellent computational treatment of this topic provided in the book below:
+
+\href{https://www.amazon.ca/Designing-Experiments-Analyzing-Data-Perspective/dp/1138892289/ref=sr_1_1?crid=1QJPZWX9P6APB\&keywords=designing+experiments+Maxwell+delany\&qid=1661367007\&sprefix=designing+experiments+maxwell+delany\%2Caps\%2C85\&sr=8-1}{Maxwell, S. E., Delaney, H. D., \& Kelley, K. (2017). Designing experiments and analyzing data: A model comparison perspective. Routledge. Chicago}
 
 \hypertarget{regression-and-correlation}{%
 \chapter{Regression and correlation}\label{regression-and-correlation}}
@@ -13291,25 +13901,27 @@ You can see from the above table that when you are comparing two means the contr
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 apaTables \\
 cocor \\
 janitor \\
 psych \\
-\bottomrule()
 \end{longtable}
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_cor_sample_video_game.csv} \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{population-example}{%
@@ -13379,14 +13991,15 @@ But how good is this model of the data? There are a variety of way of assessing 
 Cohen's benchmarks are below:
 
 \begin{longtable}[]{@{}cc@{}}
-\toprule()
+\toprule\noalign{}
 Cohen (1988) Label & Value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Small & \(\rho\) = .10 \\
 Medium & \(\rho\) = .30 \\
 Large & \(\rho\) = .50 \\
-\bottomrule()
 \end{longtable}
 
 An alternative, and more general, means of assessing the quality of statistical model is to use \(R^2\). This indexes the proportion of video game scores that are accounted for by a statistical model. One important attribute of \(R^2\) is that can be used when there are multiple predictors. When there is only one predictor, \(R^2\) is simply the correlation squared. Thus, at the population level, \textbf{when there is only one predictor}:
@@ -14166,27 +14779,29 @@ For men, there was a positive relation between agreeableness (a1) and extraversi
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 apaTables \\
 janitor \\
 remotes \\
 skimr \\
-\bottomrule()
 \end{longtable}
 
 The following GitHub packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required GitHub Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 dstanley4/fastInteraction \\
-\bottomrule()
 \end{longtable}
 
 After the remotes package is installed, it can be used to install a package from GitHub:
@@ -14294,7 +14909,7 @@ You should always check for curvilinear relations when reporting correlations vi
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdown_files/figure-latex/unnamed-chunk-515-1.pdf}
+\includegraphics{bookdown_files/figure-latex/unnamed-chunk-529-1.pdf}
 
 You can think of each bivariate correlation as the shaded areas on the figure below. In this type of figure the degree of overlap between two circles is determined by the correlation squared (i.r., \(r^2\)). The value you obtain for \(r^2\) indicates the proportion of the criterion that is covered by the predictor. For example, if \(r\) = .50 then \(r^2\) = .25 which indicates 25\% of the criterion should be covered by the circle representing that predictor.
 
@@ -15091,24 +15706,36 @@ In this case, power is .27. Thus, there is only a 27\% chance of finding the eff
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 tidyverse \\
 remotes \\
-\bottomrule()
+\end{longtable}
+
+\begin{longtable}[]{@{}l@{}}
+\toprule\noalign{}
+Data \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\url{data_endurance.csv} \\
 \end{longtable}
 
 The following GitHub packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required GitHub Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 dstanley4/fastInteraction \\
-\bottomrule()
 \end{longtable}
 
 After the remotes package is installed, it can be used to install a package from GitHub:
@@ -15356,6 +15983,8 @@ Also don't forget to pre-register any analyses involving control variables. Cont
 
 Be sure to check out the \href{http://www.shinyapps.org/apps/TransparencyChecklist/}{Transparency checklist}. This is a great tool to help you ensure your process is transparent.
 
+Also see \href{https://zenodo.org/record/7716153}{Open Science: A Practical Guide for Early-Career Researchers}.
+
 \hypertarget{helpful-web-apps}{%
 \section{Helpful web apps}\label{helpful-web-apps}}
 
@@ -15422,6 +16051,8 @@ Some other great resources:
 \item
   \href{https://pagedreport.rfortherestofus.com}{pagedreport}. If you are writing a consulting report this package could be very useful.
 \item
+  \href{https://shilaan.rbind.io/post/academic-conference-posters-using-posterdown/}{posterdown} Instructions in case you want to make an academic poster using rmarkdown.
+\item
   \href{https://bookdown.org/yihui/rmarkdown/}{R Markdown: The Definitive Guide} by Xie, Allaire, and Grolemund. Free.
 \item
   \href{https://bookdown.org/yihui/rmarkdown-cookbook/}{R Markdown Cookbook} by Xie, Dervieux, and Riederer. Free.
@@ -15431,10 +16062,24 @@ Some other great resources:
   Karl Broman's \href{https://kbroman.org/knitr_knutshell/}{website} has many helpful tips. Especially this \href{https://kbroman.org/knitr_knutshell/pages/Rmarkdown.html}{page}.
 \end{itemize}
 
+\hypertarget{latex}{%
+\subsection{LaTex}\label{latex}}
+
+As you learn more about creating PDF document using rmarkdown - you will eventually want to learn about using LaTex. You can insert LaTex codes into your rmarkdown document to adjust the formatting (e.g., font size, etc.). Here are a few LaTex resources.
+
+\begin{itemize}
+\item
+  \href{http://users.dickinson.edu/~richesod/latex/latexcheatsheet.pdf}{Cheatsheet}
+\item
+  \href{https://m.youtube.com/watch?v=NXW4cbHBthY}{Intro video}
+\item
+  \href{https://latex-tutorial.com/changing-font-size/}{Font size commands}
+\end{itemize}
+
 \hypertarget{papaja}{%
 \subsection{papaja}\label{papaja}}
 
-You may also find the \href{https://github.com/crsh/papaja}{papaja package} by Frederik Aust helpful. It's an easy way to use rmarkdown. It is a based on the rmarkdown extension called bookdown. This package is specifically designed to make it easy to use rmarkdown/bookdown to make an APA style paper. Indeed that's the basis for the odd package name: \textbf{Preparing APA Journal Articles} (papaja).
+You may also find the rmarkdown template \href{https://github.com/crsh/papaja}{papaja package} by Frederik Aust helpful. It's an easy way to use rmarkdown. It is a based on the rmarkdown extension called bookdown. This package is specifically designed to make it easy to use rmarkdown/bookdown to make an APA style paper. Indeed that's the basis for the odd package name: \textbf{Preparing APA Journal Articles} (papaja).
 
 I suggest you read the extensive papaja (documentation){[}\url{https://crsh.github.io/papaja_man/introduction.html}{]}. It will be worth your while!
 
@@ -15453,6 +16098,17 @@ The only slight complication with papaja is the fact it is not on the CRAN and c
 Indeed, once papaja is installed - you simply have to select the APA template before you enter your rmarkdown, as illustrated below:
 
 \includegraphics[width=0.6\linewidth]{ch_tools/images/papaja_template}
+
+\hypertarget{quarto}{%
+\subsection{Quarto}\label{quarto}}
+
+The rmarkdown language for document creation has evolved into \href{https://quarto.org}{Quarto}. Quarto is more or less the same but is cross-platform statistically (i.e., Python, Julia, etc.). It represents the next step in this approach to document creation. I suggest you check it out - but Quarto is still in the early days. There are not nearly as many blogs, posts, or YouTube videos on Quarto as there are on rmarkdown - yet. So right now, I suggest you still learn rmarkdown, but realize the future is a slightly tweaked version of rmarkdown called Quarto.
+
+Check out Mine Çetinkaya-Rundel's video \href{https://www.youtube.com/watch?v=_f3latmOhew}{Get started with Quarto}.
+
+Also see \href{https://www.youtube.com/watch?v=t8qtcDyCRFA}{Create \& Publish a Quarto Blog on Quarto Pub in 100 Seconds}.
+
+You might also want to check a package for \href{https://github.com/wjschne/apaquarto}{Quarto APA 7 papers}.
 
 \hypertarget{apatables}{%
 \subsection{apaTables}\label{apatables}}
@@ -15520,6 +16176,8 @@ If you want to learn more about statistics I suggest \citep{maxwell2017designing
   \href{https://www.amazon.ca/Serious-Stats-advanced-statistics-behavioral/dp/0230577180/ref=sr_1_1?dchild=1\&keywords=serious+stats\&qid=1629126084\&sr=8-1}{Baguley, T. (2012). Serious stats: A guide to advanced statistics for the behavioral sciences. Macmillan International Higher Education.} by Baguley. The book title tells you everything you need to know about this one.
 \item
   \href{https://www.amazon.ca/Introduction-Mediation-Moderation-Conditional-Analysis/dp/1609182308/ref=sr_1_3?dchild=1\&keywords=Introduction+to+mediation\%2C+moderation\%2C+and+conditional+process+analysis\%3A+A+regression-based+approach.+Guilford+publications.\&qid=1629717582\&sr=8-3}{Hayes, A. F. (2017). Introduction to mediation, moderation, and conditional process analysis: A regression-based approach. Guilford publications.}. Many people use the approach in this book when they have multiple mediators and moderators. The PROCESS {[}website{]}((\url{https://processmacro.org/index.html}) has the R-script for the PROCESS macro.
+\item
+  Check out Daniel Lakens great free book \href{https://lakens.github.io/statistical_inferences/}{Improving Your Statistical Inferences}.
 \end{itemize}
 
 \hypertarget{general-r-books}{%
@@ -15636,32 +16294,34 @@ The chapter provide a series of ``Cookbook'' receipes for starting different typ
 The data files below are used in this chapter.
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required Data \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \url{data_ex_between.csv} \\
 \url{data_ex_within.csv} \\
 \url{data_food.csv} \\
 \url{data_item_scoring.csv} \\
 \url{data_item_time.csv} \\
-\bottomrule()
 \end{longtable}
 
 The following CRAN packages must be installed:
 
 \begin{longtable}[]{@{}l@{}}
-\toprule()
+\toprule\noalign{}
 Required CRAN Packages \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 apaTables \\
 Hmisc \\
 janitor \\
 psych \\
 skimr \\
 tidyverse \\
-\bottomrule()
 \end{longtable}
 
 \textbf{Important Note:} You should NOT use library(psych) at any point! There are major conflicts between the psych package and the tidyverse. We will access the psych package commands by preceding each command with psych:: instead of using library(psych).
@@ -16009,7 +16669,7 @@ To Begin:
 
 \begin{verbatim}
 ## Rows: 6 Columns: 5
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr (1): sex
 ## dbl (4): id, march, may, july
@@ -16569,17 +17229,15 @@ The analytic data in its current form does not conform to the tidy data specific
 
 \begin{verbatim}
 ## # A tibble: 6 x 8
-##   id    sex    pizza_hot pizza_cold steak_~1 steak~2 burge~3
-##   <fct> <fct>      <dbl>      <dbl>    <dbl>   <dbl>   <dbl>
-## 1 1     male           7          6        6       3       7
-## 2 2     female         8          7        6       3       8
-## 3 3     male           7          5        7       4       7
-## 4 4     female         8          7        7       5       8
-## 5 5     male           7          6        8       7       7
-## 6 6     female         9          7        7       8       8
-## # ... with 1 more variable: burger_cold <dbl>, and
-## #   abbreviated variable names 1: steak_hot, 2: steak_cold,
-## #   3: burger_hot
+##   id    sex    pizza_hot pizza_cold steak_hot steak_cold
+##   <fct> <fct>      <dbl>      <dbl>     <dbl>      <dbl>
+## 1 1     male           7          6         6          3
+## 2 2     female         8          7         6          3
+## 3 3     male           7          5         7          4
+## 4 4     female         8          7         7          5
+## 5 5     male           7          6         8          7
+## 6 6     female         9          7         7          8
+## # i 2 more variables: burger_hot <dbl>, burger_cold <dbl>
 \end{verbatim}
 
 We need to restructure the data into the tidy data format so that we have a food\_type column and a temperature column to properly represent these predictors. As well, we need a column that contains all of the taste ratings that is clearly labeled taste. Doing all of these things will ensure we have one variable per column and one observation per row - consistent with the requirements of tidy data. The pivot\_longer() command below coverts our data to the tidy data format.
@@ -16619,7 +17277,7 @@ You can see the data in the new format below.
 ##  8 2     female pizza     cold            7
 ##  9 2     female steak     hot             6
 ## 10 2     female steak     cold            3
-## # ... with 26 more rows
+## # i 26 more rows
 \end{verbatim}
 
 Notice that the new column occasion is of the type character. We need it to be a factor. Use the code below to do so:
@@ -16685,7 +17343,7 @@ To Begin:
 
 \begin{verbatim}
 ## Rows: 300 Columns: 14
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr  (2): sex, eye_color
 ## dbl (12): id, age, esteem1_likert5, esteem2_likert5, est...
@@ -16986,16 +17644,17 @@ In this data file all the reverse-keyed items were identified with the suffix ``
 To correct a reverse-keyed item where the lowest possible rating is 1 (i.e, 1 on a 1 to 5 scale), we simply subtract all the scores from a value one more than the highest point possible on the scale (i.e., one more than 5). For example, if a 1 to 5 response scale was used we subtract each response from 6 to obtain the recoded value.
 
 \begin{longtable}[]{@{}ccc@{}}
-\toprule()
+\toprule\noalign{}
 Original value & Math & Recoded value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 1 & 6 - 1 & 5 \\
 2 & 6 - 2 & 4 \\
 3 & 6 - 3 & 3 \\
 4 & 6 - 4 & 2 \\
 5 & 6 - 5 & 1 \\
-\bottomrule()
 \end{longtable}
 
 The code below:
@@ -17053,16 +17712,17 @@ If your scale had used response options numbered 0 to 4 the math is different.
 For each item you would use subtract values from the highest possible point (i.e, 4) instead of one larger than the highest possible point.
 
 \begin{longtable}[]{@{}ccc@{}}
-\toprule()
+\toprule\noalign{}
 Original value & Math & Recoded value \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 0 & 4 - 0 & 4 \\
 1 & 4 - 1 & 3 \\
 2 & 4 - 2 & 2 \\
 3 & 4 - 3 & 1 \\
 4 & 4 - 4 & 0 \\
-\bottomrule()
 \end{longtable}
 
 Thus, the mutate command would instead be:
@@ -17192,7 +17852,7 @@ To Begin:
 
 \begin{verbatim}
 ## Rows: 300 Columns: 24
-## -- Column specification ------------------------------------
+## -- Column specification ----------------------------------------------------------------
 ## Delimiter: ","
 ## chr  (2): sex, eye_color
 ## dbl (22): id, age, t1_esteem1_likert5, t1_esteem2_likert...
@@ -17647,21 +18307,20 @@ Notice that a single column is not used to represent esteem, jobsat, or time. Ra
 
 \begin{verbatim}
 ## # A tibble: 300 x 8
-##    id      age sex   eye_c~1 estee~2 estee~3 jobsa~4 jobsa~5
-##    <fct> <dbl> <fct> <fct>     <dbl>   <dbl>   <dbl>   <dbl>
-##  1 1        23 male  blue        3.2     3.8    4       3.8 
-##  2 2        22 fema~ brown       3.8     4.4    5       4   
-##  3 3        18 male  hazel       3.8     4.4    4.4     4.6 
-##  4 4        23 fema~ blue        3       3.6    3.5     4.2 
-##  5 5        22 male  <NA>        3.4     4      4       3.75
-##  6 6        17 fema~ hazel       3.5     4.2    3.8     4   
-##  7 7        23 male  blue        3       3.6    3.6     4.2 
-##  8 8        22 fema~ brown       3.8     4.4    4.6     4.8 
-##  9 9        17 male  hazel       3.6     4.2    3.75    4   
-## 10 10       NA fema~ blue        3.6     4.2    3.8     4.5 
-## # ... with 290 more rows, and abbreviated variable names
-## #   1: eye_color, 2: esteem_t1, 3: esteem_t2, 4: jobsat_t1,
-## #   5: jobsat_t2
+##    id      age sex   eye_color esteem_t1 esteem_t2 jobsat_t1
+##    <fct> <dbl> <fct> <fct>         <dbl>     <dbl>     <dbl>
+##  1 1        23 male  blue            3.2       3.8      4   
+##  2 2        22 fema~ brown           3.8       4.4      5   
+##  3 3        18 male  hazel           3.8       4.4      4.4 
+##  4 4        23 fema~ blue            3         3.6      3.5 
+##  5 5        22 male  <NA>            3.4       4        4   
+##  6 6        17 fema~ hazel           3.5       4.2      3.8 
+##  7 7        23 male  blue            3         3.6      3.6 
+##  8 8        22 fema~ brown           3.8       4.4      4.6 
+##  9 9        17 male  hazel           3.6       4.2      3.75
+## 10 10       NA fema~ blue            3.6       4.2      3.8 
+## # i 290 more rows
+## # i 1 more variable: jobsat_t2 <dbl>
 \end{verbatim}
 
 The pivot\_longer() command below coverts our data to the tidy data format. In this command we specify the columns with data by using esteem\_t1:jobsat\_t2; this selects these two columns and all of the columns between them. Each of these columns represents a dependent variable at a particular time in the format ``variable\_time'' (e.g., esteem\_t1). The code names\_to = c(``.value'', ``time'') explains this format to R. It indicates that the first part of the column name (e.g., esteem) contains the name of the variable (expressed in the code as ``.value''). It also indicates that the second part of the column name represents time. The line names\_sep = ``\_'' tells the R that the underscore character is used to separate the first part of the name from the second part of the name. When this code is executed it creates a tidy version of data set stored in analytic\_survey\_tidy.
@@ -17697,7 +18356,7 @@ You can see the new data with the print() command. Notice that each participant 
 ##  8 4        23 female blue      t2       3.6   4.2 
 ##  9 5        22 male   <NA>      t1       3.4   4   
 ## 10 5        22 male   <NA>      t2       4     3.75
-## # ... with 590 more rows
+## # i 590 more rows
 \end{verbatim}
 
 You now have three data sets The data analytic\_occasion\_tidy is appropriate for conducting a repeated measures ANOVA or more complicated analyses. The data analytic\_data\_occasions is appropriate for calculating descriptive statistics and correlations. The data analytic\_occasions\_items is appropriate for calculating the reliability of the scales you constructed. These data are ready for analysis.

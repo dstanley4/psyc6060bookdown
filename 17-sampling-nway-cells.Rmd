@@ -429,7 +429,8 @@ Let's revisit our example data. Previously, we had two sample means: `r mean_c1`
 
 $$
 \begin{aligned}
-\text{original unit effect size} = M_{diff} &= \bar{c_2} - \bar{c_1}\\
+\text{original unit effect size} &= M_{diff}\\
+&= \bar{c_2} - \bar{c_1}\\
 &= `r mean_c2` - `r mean_c1`\\
 &= `r mean_c2 - mean_c1`
 \end{aligned}
@@ -470,7 +471,7 @@ You can see from the above table that when you are comparing two means the contr
 In case you wanted to understand how and F-value and t-value can be the same with two groups here is the proof:
 
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n}}\\
 &= \frac{\frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{1}}{\frac{s_{people}^2}{n}}\\
 &= \frac{(\bar{x_1} - \bar{\bar{x}})^2 + (\bar{x_2} - \bar{\bar{x}})^2}{\frac{s_{people}^2}{n}}; \text{With only two means they are equidistant from the grand mean}\\
@@ -480,7 +481,7 @@ F &= \frac{\frac{\sum (\bar{x_i} - \bar{\bar{x}})^2}{2-1}}{\frac{s_{people}^2}{n
 &= \frac{(\bar{x_1} - \bar{x_2})^2}{2 \times \frac{s_{people}^2}{n}}\\
 &= \frac{(\bar{x_1} - \bar{x_2})^2}{ \frac{s_{people}^2}{n} + \frac{s_{people}^2}{n}}\\
 &= t^2
-\end{align}
+\end{aligned}
 $$
 
 
@@ -586,13 +587,13 @@ $$
 The $F$-value is:
 
 $$
-\begin{align}
+\begin{aligned}
 F &= \frac{\text{total variance}}{\text{random sampling variance}}\\
 &= \frac{\frac{\sum (\bar{c_{i}}-\bar{\bar{c}})^2}{2-1}}{\left[ \frac{\frac{s_{people}^2}{5} + \frac{s_{people}^2}{10}}{2} \right]}\\
 &= \frac{\frac{(`r xcm1`- `r mean(c(xcm1, xcm2))`)^2 + (`r xcm2` - `r mean(c(xcm1, xcm2))`)^2}{2-1}}{\left[ \frac{12 + 6}{2} \right]}\\
 &= \frac{`r var(c(xcm1, xcm2))`}{\left[ 9 \right]}\\
 &= 4.40
-\end{align}
+\end{aligned}
 $$
 
 In R, it's easy to get these numbers.
