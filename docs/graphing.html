@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2023-09-23" />
+<meta name="date" content="2023-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -855,7 +855,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="graphing" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Graphing<a href="graphing.html#graphing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A great part of learning R is learning how to use ggplot2 which is part of the tidyverse. One way to learn ggplot2 is via the <a href="https://ggplot2-book.org/index.html">free ggplot book</a> - I encourage you to check it out. You might also check out this ggplot2 <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">cheatsheet</a>. As well, you might consult this <a href="https://tuowang.rbind.io/post/2021-04-25-color-in-ggplot2/">blog</a> to learn more about how themes and colors are handled in ggplot2. In this chapter we merely provide a brief overview of how ggplot2 works. You can also consult this free book on <a href="https://clauswilke.com/dataviz/">data visualization techniques</a>.</p>
+<p>A great part of learning R is learning how to use ggplot2 which is part of the tidyverse. One way to learn ggplot2 is via the <a href="https://ggplot2-book.org/index.html">free ggplot book</a> - I encourage you to check it out. You might also check out this ggplot2 <a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">cheatsheet</a>. As well, you might consult this <a href="https://tuowang.rbind.io/post/2021-04-25-color-in-ggplot2/">blog</a> to learn more about how themes and colors are handled in ggplot2. In this chapter we merely provide a brief overview of how ggplot2 works. You can also consult this free book on <a href="https://clauswilke.com/dataviz/">data visualization techniques</a>.</p>
 <div id="required-1" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Required<a href="graphing.html#required-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data files below are used in this chapter. Right click to save each file.</p>
@@ -937,7 +937,7 @@ div.csl-indent {
 ## $ boxoffice    &lt;dbl&gt; 585, 854, 2048, 2744, 668, 873, 657, …
 ## $ studio       &lt;chr&gt; &quot;Marvel&quot;, &quot;Marvel&quot;, &quot;Marvel&quot;, &quot;Marvel…</code></pre>
 <p>The title and short_title columns provide the full title and short title for each movie. Additionally, the IMDB rating, the Rotten Tomatoes Audience rating, and the Box Office Mojo revenue numbers are provided in the imdb, tomatoes_aud, and boxoffice columns, respectively. Finally, the last column, studio, indicates the studio that made the movie (Marvel or DC).</p>
-<p>It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as_factor command. The as_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variables using as_factor.</p>
+<p>It is extremely important for graphing and analyses that you tell R which columns are composed of categorical variables. We do that using the as_factor command. The as_factor command turns a column into a categorical column. We use the mutate command to replace the original column with the column that has been defined as a categorical variable using as_factor.</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="graphing.html#cb163-1" tabindex="-1"></a>movie_data <span class="ot">&lt;-</span> movie_data <span class="sc">%&gt;%</span> </span>
 <span id="cb163-2"><a href="graphing.html#cb163-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.character), </span>
 <span id="cb163-3"><a href="graphing.html#cb163-3" tabindex="-1"></a>                <span class="at">.fns =</span> as_factor))</span></code></pre></div>
@@ -1193,7 +1193,7 @@ FIGURE 3.2: Adding a fill column to the internal data
 </div>
 <div id="method-2-longer-label-columns" class="section level4 hasAnchor" number="3.8.1.2">
 <h4><span class="header-section-number">3.8.1.2</span> Method 2: Longer label columns<a href="graphing.html#method-2-longer-label-columns" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>With our movie data we don’t need to use scale_x_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the <em>mapping</em>for x from short_title to title. Notice that we still have the problem with overlapping labels on the x-axis!</p>
+<p>With our movie data we don’t need to use scale_x_discrete() because we have a column in the data with the full titles. Consequently, to use full length titles we just have to change the <em>mapping</em> for x from short_title to title. Notice that we still have the problem with overlapping labels on the x-axis!</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="graphing.html#cb180-1" tabindex="-1"></a>my_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> movie_data,</span>
 <span id="cb180-2"><a href="graphing.html#cb180-2" tabindex="-1"></a>           <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> title,</span>
 <span id="cb180-3"><a href="graphing.html#cb180-3" tabindex="-1"></a>                         <span class="at">y =</span> boxoffice,</span>
@@ -1462,7 +1462,7 @@ FIGURE 3.2: Adding a fill column to the internal data
 <div id="accessible-colors" class="section level2 hasAnchor" number="3.11">
 <h2><span class="header-section-number">3.11</span> Accessible Colors<a href="graphing.html#accessible-colors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The current version of the graph is much improved from where we started at the begining of the chapter. One notable improvement was the use of the “proper” colors for the Marvel and DC studios. Although using these colors was aethetically pleasing, a major consideration is ensuring your graphs are accessible to a wide audience.</p>
-<p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a momement to think about every graph as being composed of two parts that work together to create the colors overall image. We can think of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs <span class="citation">(see <a href="#ref-margulis2005photoshop">Margulis 2005</a>)</span>.</p>
+<p>Color blindness is an issue that affects approximately five percent of the population. A nuanced discussion of the different types of color blindness is beyond the scope of this chapter. We can, however, take a moment to think about every graph as being composed of two parts that work together to create the colors overall image. We can think of there being a lightness (i.e., light vs. dark) component and a hue component (e.g., magenta, yellow, etc.). Together these two components work together to create colors that we see. This distinction between lightness and hue is relevant to all images not just graphs <span class="citation">(see <a href="#ref-margulis2005photoshop">Margulis 2005</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:colorcomparison"></span>
 <img src="ch_graphing/images/nocolorcomparison.png" alt="Hue removed from current graph" width="75%" />
 <p class="caption">

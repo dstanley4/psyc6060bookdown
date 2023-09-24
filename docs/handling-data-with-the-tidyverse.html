@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2023-09-23" />
+<meta name="date" content="2023-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -859,7 +859,7 @@ div.csl-indent {
 <p>In this chapter we focus on teaching you foundational skills for data preparation. The skills taught in this chapter largely revolve around using the tidyverse packages to manage data that will eventually help with data cleaning in the <a href="https://dstanley4.github.io/psyc6060bookdown/an-emphasis-on-workflow.html">Workflow</a> and <a href="https://dstanley4.github.io/psyc6060bookdown/qualtrics.html">Qualtrics</a> chapters. There are some additional resources you may want to consult as you learn these tidyverse skills:</p>
 <ul>
 <li><p><a href="https://r4ds.had.co.nz">R for Data Science book</a>. This is an excellent free online book! But it does reflect an exploratory analysis mindset compared to the confirmatory mindset we typically use in Psychological science.</p></li>
-<li><p>You may find a <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a> helpful. Specifically, the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">Data Transformation</a> cheatsheet.</p></li>
+<li><p>You may find a <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheet</a> helpful. Specifically, the <a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">Data Transformation</a> cheatsheet.</p></li>
 <li><p><a href="https://www.tidyverse.org">tidyverse website</a></p></li>
 </ul>
 <div id="required" class="section level2 hasAnchor" number="2.1">
@@ -1109,8 +1109,8 @@ div.csl-indent {
 <span id="cb89-2"><a href="handling-data-with-the-tidyverse.html#cb89-2" tabindex="-1"></a>  <span class="fu">group_by</span>(sex, status) <span class="sc">%&gt;%</span></span>
 <span id="cb89-3"><a href="handling-data-with-the-tidyverse.html#cb89-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">age_mean =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb89-4"><a href="handling-data-with-the-tidyverse.html#cb89-4" tabindex="-1"></a>            <span class="at">age_sd =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You
+## can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 10 × 4
 ## # Groups:   sex [2]
 ##    sex   status         age_mean   age_sd
@@ -1153,7 +1153,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="handling-data-with-the-tidyverse.html#cb95-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb95-2"><a href="handling-data-with-the-tidyverse.html#cb95-2" tabindex="-1"></a>data_exp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_experiment.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 6 Columns: 6
-## ── Column specification ───────────────────────────────
+## ── Column specification ────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): sex
 ## dbl (5): id, t1_vomit, t1_aggression, t2_vomit, t2_aggre...
@@ -1261,11 +1261,12 @@ div.csl-indent {
 <span id="cb117-3"><a href="handling-data-with-the-tidyverse.html#cb117-3" tabindex="-1"></a>                   <span class="at">.fns =</span> mean,</span>
 <span id="cb117-4"><a href="handling-data-with-the-tidyverse.html#cb117-4" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span></code></pre></div>
 <pre><code>## Warning: There was 1 warning in `summarise()`.
-## ℹ In argument: `across(.cols = starts_with(&quot;t1&quot;), .fns
-##   = mean, na.rm = TRUE)`.
+## ℹ In argument: `across(.cols =
+##   starts_with(&quot;t1&quot;), .fns = mean, na.rm =
+##   TRUE)`.
 ## Caused by warning:
-## ! The `...` argument of `across()` is deprecated as of
-##   dplyr 1.1.0.
+## ! The `...` argument of `across()` is
+##   deprecated as of dplyr 1.1.0.
 ## Supply arguments directly to `.fns` through an
 ## anonymous function instead.
 ## 
@@ -1503,7 +1504,7 @@ div.csl-indent {
 <p>When you read data into R using the command read_csv() (with an underscore) you load the data into a tibble (tidyverse).</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="handling-data-with-the-tidyverse.html#cb152-1" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_okcupid.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 59946 Columns: 6
-## ── Column specification ───────────────────────────────
+## ── Column specification ────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (4): diet, pets, sex, status
 ## dbl (2): age, height

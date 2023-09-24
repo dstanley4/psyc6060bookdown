@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2023-09-23" />
+<meta name="date" content="2023-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -901,7 +901,7 @@ div.csl-indent {
 <div id="overview" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Overview<a href="sampling-accuracy.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.</p>
-<p>Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is random subset of the population data — with correspondingly fewer observations. This difference is typically refered to as <strong>sampling error</strong>.</p>
+<p>Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is a random subset of the population data — with correspondingly fewer observations. This difference is typically refered to as <strong>sampling error</strong>.</p>
 <p>Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic and the population parameter will vary randomly.</p>
 <p>Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased.</p>
 <p>Further complicating matters is the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.</p>
@@ -1141,7 +1141,7 @@ d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3
 <p>If we try to apply either <span class="math inline">\(d\)</span>-value formula (<a href="sampling-accuracy.html#eq:samplesmdch5">(5.9)</a> or <a href="sampling-accuracy.html#eq:samplesmdunbiasedch5">(5.10)</a>) to real data we quickly encounter a problem. We don’t have the pooled standard deviation, <span class="math inline">\(s_{pooled}\)</span></p>
 <div id="pooled-standard-deviation" class="section level3 hasAnchor" number="5.7.1">
 <h3><span class="header-section-number">5.7.1</span> Pooled standard deviation<a href="sampling-accuracy.html#pooled-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When we calculated the population-level standardized mean difference we knew the population variances where the same. Consequently, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.8)</a>, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact that both populations have the same standard deviation.</p>
+<p>When we calculated the population-level standardized mean difference we knew the population variances were the same. Consequently, there was only one standard deviation (i.e., only one variance). More specifically, the male and female populations both had a standard deviation but it was the same for both populations. The population-level formula for the standardized mean difference, Formula <a href="sampling-accuracy.html#eq:popsmdch5">(5.8)</a>, has only one standard deviation in it. This is because calculation of the standardized mean difference explicitly depends on the fact that both populations have the same standard deviation.</p>
 <p>Let’s consider hypothetical sample data to make the situation clear. More specifically, we will examine the sample-level statistics below for males and females. Notice that we have two standard deviations – one for males and one for females. Moreover, these two sample-level standard deviations (using <span class="math inline">\(n\)</span>-1) are not the same - they are different from each other. This initially seems problematic - calculation of standardized mean difference requires that population standard deviations are identical.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1318,7 +1318,7 @@ r =  \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="sampling-accuracy.html#cb237-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb237-2"><a href="sampling-accuracy.html#cb237-2" tabindex="-1"></a>pop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_cor_pop.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 300000 Columns: 2
-## ── Column specification ───────────────────────────────
+## ── Column specification ────────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (2): weight, height
 ## 
