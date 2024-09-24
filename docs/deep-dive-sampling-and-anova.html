@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2024-09-22" />
+<meta name="date" content="2024-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -547,14 +547,14 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-total-calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Approach 1: Total: Calculate the variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-clt-calculation-of-variance-due-to-sampling-error"><i class="fa fa-check"></i><b>14.6.2</b> Approach 2: CLT: <em>Calculation</em> of variance due to sampling error</a></li>
+<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-observed-variance-all-sources-of-variabilty"><i class="fa fa-check"></i><b>14.6.1</b> Approach 1: Observed Variance (all sources of variabilty)</a></li>
+<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-expected-variance-random-sampling-only"><i class="fa fa-check"></i><b>14.6.2</b> Approach 2: Expected Variance (random sampling only)</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-approaches"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.7</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-estimate-the-total-variance-of-infinite-sample-means-using-3-sample-means"><i class="fa fa-check"></i><b>14.7.1</b> Approach 1: Estimate the total variance of infinite sample means using 3 sample means</a></li>
-<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-clt-shortcut-estimation-of-variance-due-to-random-sampling-error"><i class="fa fa-check"></i><b>14.7.2</b> Approach 2: CLT shortcut: <em>Estimation</em> of variance due to random sampling error</a></li>
+<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-estimated-observed-variance-all-sources-variability"><i class="fa fa-check"></i><b>14.7.1</b> Approach 1: Estimated Observed Variance (all sources variability)</a></li>
+<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-estimated-expected-variance-random-sampling-only"><i class="fa fa-check"></i><b>14.7.2</b> Approach 2: Estimated Expected Variance ( random sampling only)</a></li>
 <li class="chapter" data-level="14.7.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-approaches-1"><i class="fa fa-check"></i><b>14.7.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.8" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#frame-of-reference-random-sampling-only"><i class="fa fa-check"></i><b>14.8</b> Frame of reference: Random sampling only</a>
@@ -878,12 +878,12 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Approach 1: Total</td>
+<td align="center">Approach 1: Estimated Observed Variance</td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2=\frac{\sum (\bar{x}-\bar{\bar{x}})^2}{a-1}\)</span></td>
 <td align="left">Estimate the variance of the sampling distribution. That is, estimate variance of sample mean due to all sources (population differences, random sampling error, etc.).</td>
 </tr>
 <tr class="even">
-<td align="center">Approach 2: CLT</td>
+<td align="center">Approach 2: Estimated Expected Variance</td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2=\frac{s_{people}^2}{n}\)</span></td>
 <td align="left">Estimate the variance in sample mean due ONLY to random sampling error.</td>
 </tr>
@@ -943,8 +943,8 @@ FIGURE 14.1: A distributionof people (A.) and a corresponding distribution of sa
 <div id="sample-mean-distribution-variance" class="section level2 hasAnchor" number="14.6">
 <h2><span class="header-section-number">14.6</span> Sample mean distribution variance<a href="deep-dive-sampling-and-anova.html#sample-mean-distribution-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When there is <em>one</em> <strong>population of people</strong> (see Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>A) there is a single distribution of sample means that corresponds to that population (see Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B). In this scenario, the sample means differ only because of random sampling. There are two approaches for calculating the variance of this distribution of sample means.</p>
-<div id="approach-1-total-calculate-the-variance-of-infinite-sample-means" class="section level3 hasAnchor" number="14.6.1">
-<h3><span class="header-section-number">14.6.1</span> Approach 1: Total: Calculate the variance of infinite sample means<a href="deep-dive-sampling-and-anova.html#approach-1-total-calculate-the-variance-of-infinite-sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="approach-1-observed-variance-all-sources-of-variabilty" class="section level3 hasAnchor" number="14.6.1">
+<h3><span class="header-section-number">14.6.1</span> Approach 1: Observed Variance (all sources of variabilty)<a href="deep-dive-sampling-and-anova.html#approach-1-observed-variance-all-sources-of-variabilty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation <a href="deep-dive-sampling-and-anova.html#eq:popvarxbardeep">(14.4)</a> below.</p>
 <span class="math display" id="eq:popvarxbardeep">\[\begin{equation}
 \sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}
@@ -992,8 +992,8 @@ FIGURE 14.1: A distributionof people (A.) and a corresponding distribution of sa
 <p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B) is <strong>calculated</strong>, based an infinite number of sample means (<span class="math inline">\(K = \infty\)</span>) using Approach 1, to be <span class="math inline">\(\sigma_{\bar{x}}^2 = 31.26472\)</span>.</p>
 <p><strong>When there is only one population of people</strong> this formula will reflect variability in sample means due to random sampling. When there is more than one population of people - it becomes more complicated. We’ll discuss that situation in a future chapter.</p>
 </div>
-<div id="approach-2-clt-calculation-of-variance-due-to-sampling-error" class="section level3 hasAnchor" number="14.6.2">
-<h3><span class="header-section-number">14.6.2</span> Approach 2: CLT: <em>Calculation</em> of variance due to sampling error<a href="deep-dive-sampling-and-anova.html#approach-2-clt-calculation-of-variance-due-to-sampling-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="approach-2-expected-variance-random-sampling-only" class="section level3 hasAnchor" number="14.6.2">
+<h3><span class="header-section-number">14.6.2</span> Approach 2: Expected Variance (random sampling only)<a href="deep-dive-sampling-and-anova.html#approach-2-expected-variance-random-sampling-only" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Fortunately, <strong>when sampling error is the ONLY source of variability in sample means</strong> there is a shortcut. We don’t need to obtain an infinite number of sample means to determine the variance of the distribution of an infinite number of sample means, Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B. There is a “shortcut formula” we can use based on the Central Limit Theorem (CLT), see the formula below.</p>
 <p><span class="math display">\[
 \sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{\text{sample size}}
@@ -1020,20 +1020,20 @@ FIGURE 14.1: A distributionof people (A.) and a corresponding distribution of sa
 <h3><span class="header-section-number">14.6.3</span> Ratio comparison of two approaches<a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-approaches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To begin, we are looking at a distribution of sampling means <strong>where the means differed only due to random sampling error</strong>. In this situation, we have calculated the variance of the distribution of sample means using two different approaches.</p>
 <ul>
-<li><p>Approach 1: Total variance of sample means calculated using sample means and the variance formula</p></li>
-<li><p>Approach 2: Variance of sample means, due to random sampling error, calculated using CLT shortcut formula</p></li>
+<li><p>Approach 1 Estimated Observed Variance: Total variance of sample means calculated using sample means and the variance formula</p></li>
+<li><p>Approach 2 Estimated Expected Variance: Variance of sample means, due to random sampling error, calculated using CLT shortcut formula</p></li>
 </ul>
 <p>Although we can just look at the numbers resulting from these two approaches and compare them, that’s not how statisticians typically handle such comparisons. The approach used by statisticians to compare two numbers is to create a ratio. That is, take one number and divide it by the other number. If the two numbers are the same the ratio will be 1.00. If the ratio is larger than 1.00 it means the number on the top was bigger than the number on the bottom.</p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{ratio comparing approaches} &amp;= \frac{\text{total variance of sample means }}{\text{variance of sample means due to random sampling error}}\\
+\text{ratio comparing approaches} &amp;= \frac{\text{Observed: total variance of sample means }}{\text{Expected: variance of sample means due to random sampling error}}\\
 &amp;=\frac{\frac{\sum_{i=1}^{A=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{A}}{\frac{\sigma_{people}^2}{n}}\\
 &amp;=\frac{31.26472}{31.26472}\\
 &amp;= 1.00\\
 \end{aligned}
 \]</span></p>
 <p>You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result. If the number on the top of the ratio was the <em>larger</em> of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the <em>smaller</em> of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpet the value of a ratio using these rules before continuing.</p>
-<p><strong>CRITICAL: Think about what this means.</strong> Both approaches produced the same number. The <strong>total variance approach</strong> resulted in the same number as the <strong>random samplingly only approach</strong>. <em>So we can conclude the only reason the sample means differed from each other was random sampling</em>. Go back and re-read this paragraph a few times until you are sure you understand this crucial point.</p>
+<p><strong>CRITICAL: Think about what this means.</strong> Both approaches produced the same number. The <strong>observed variance: total variance approach</strong> resulted in the same number as the <strong>expected variance: random sampling only approach</strong>. <em>So we can conclude the only reason the sample means differed from each other was random sampling</em>. Go back and re-read this paragraph a few times until you are sure you understand this crucial point.</p>
 <p><strong>CALCULATION VS ESTIMATION</strong>. In this section, we focused on actually <strong>calculating</strong> the variance of the distribution of sample means using two approaches. But to actually <strong>calculate</strong> this variance we needed an infinite number of sample means (Approach 1) or knowledge of the population of people variance (Approach 2). Consequently, it’s impractical to <strong>calculate</strong> either quantity.</p>
 <p>In the next section, below, we recognize that we can likely never know or calculate the variance of the distribution of sample means. Instead, we focus on <strong>estimating</strong> the variance of the distribution of sample means. An <strong>estimated value</strong> is an approximation of the actual value that will differ due to the effects of random sampling.</p>
 </div>
@@ -1077,8 +1077,8 @@ FIGURE 14.1: A distributionof people (A.) and a corresponding distribution of sa
 </tr>
 </tbody>
 </table>
-<div id="approach-1-estimate-the-total-variance-of-infinite-sample-means-using-3-sample-means" class="section level3 hasAnchor" number="14.7.1">
-<h3><span class="header-section-number">14.7.1</span> Approach 1: Estimate the total variance of infinite sample means using 3 sample means<a href="deep-dive-sampling-and-anova.html#approach-1-estimate-the-total-variance-of-infinite-sample-means-using-3-sample-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="approach-1-estimated-observed-variance-all-sources-variability" class="section level3 hasAnchor" number="14.7.1">
+<h3><span class="header-section-number">14.7.1</span> Approach 1: Estimated Observed Variance (all sources variability)<a href="deep-dive-sampling-and-anova.html#approach-1-estimated-observed-variance-all-sources-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can use the sample means presented in the table above to estimate the variance of the distribution of sample means as illustrated in the formula below. Recall, we use a lower case character, <span class="math inline">\(a\)</span>, to represent the number of sample means (in the case because we have 3 sample means <span class="math inline">\(a = 3\)</span>). We think of these three sample means as a subset (<span class="math inline">\(a = 3\)</span>) of the distribution of an infinite number of sample means (i.e., a population of sample means, <span class="math inline">\(K=\infty\)</span>) illustrated in Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B. Consequently, we use the standard approach of estimating the variance of a larger set of elements from a (i.e., a population of sample means) subset of those elements (i.e., a sample of sample means) by including “-1” in the denominator of the variance formula, see Equation <a href="deep-dive-sampling-and-anova.html#eq:estpopvarxbardeep">(14.6)</a> below.</p>
 <span class="math display" id="eq:estpopvarxbardeep">\[\begin{equation}
 s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
@@ -1105,9 +1105,9 @@ s_{\bar{x}}^2 &amp;= \frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}
 <p>Thus, the “population” variance of the distribution of sample means (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>, see Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B) is <strong>estimated</strong>, based on three sample means (<span class="math inline">\(a = 3\)</span>) using Approach 1, to be <span class="math inline">\(s_{\bar{x}}^2 = 79.213\)</span>. Remember though 79.213 is just an <em>estimate</em> of the population value (<span class="math inline">\(\sigma_{\bar{x}}^2\)</span>) based on three sample means.</p>
 <p><strong>IMPORTANT:</strong> The denominator of this variance calculation is <span class="math inline">\(2\)</span> (i.e., <span class="math inline">\(3-1\)</span>). Therefore, we say there are 2 degrees of freedom associated with this estimate of the variance of the infinite number of sample means.</p>
 </div>
-<div id="approach-2-clt-shortcut-estimation-of-variance-due-to-random-sampling-error" class="section level3 hasAnchor" number="14.7.2">
-<h3><span class="header-section-number">14.7.2</span> Approach 2: CLT shortcut: <em>Estimation</em> of variance due to random sampling error<a href="deep-dive-sampling-and-anova.html#approach-2-clt-shortcut-estimation-of-variance-due-to-random-sampling-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall that than another approach to calculating the variance of the distribution of sample means is to use the shortcut formula based on the Central Limit Theorem (CLT), Equation <a href="deep-dive-sampling-and-anova.html#eq:popvarCLTxbardeep">(14.5)</a> above, repeated below for clarity.</p>
+<div id="approach-2-estimated-expected-variance-random-sampling-only" class="section level3 hasAnchor" number="14.7.2">
+<h3><span class="header-section-number">14.7.2</span> Approach 2: Estimated Expected Variance ( random sampling only)<a href="deep-dive-sampling-and-anova.html#approach-2-estimated-expected-variance-random-sampling-only" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall that than another approach to calculating the variance of the distribution of sample means is to use Expected Variance, Equation <a href="deep-dive-sampling-and-anova.html#eq:popvarCLTxbardeep">(14.5)</a> above, repeated below for clarity.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \frac{\sigma_{people}^2}{n}\\
@@ -1143,10 +1143,10 @@ s_{people}^2 &amp;= MSE_{people}\\
 <p>We created the average variance estimate,<span class="math inline">\(s_{people}^2 =220.2333\)</span>, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( <span class="math inline">\(s_{people}^2 =220.2333\)</span>) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).</p>
 <p>We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance (<span class="math inline">\(s_{people}^2\)</span>). But, statisticians also use the term pooled variance (<span class="math inline">\(s_{pooled}^2\)</span>) to refer it. Other times, statisticians use the term Mean Square Error (<span class="math inline">\(MSE\)</span>) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>A: <span class="math inline">\(s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE\)</span>.</p>
 </div>
-<div id="estimating-sigma_barx2-with-clt" class="section level4 hasAnchor" number="14.7.2.2">
-<h4><span class="header-section-number">14.7.2.2</span> Estimating <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> with CLT<a href="deep-dive-sampling-and-anova.html#estimating-sigma_barx2-with-clt" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="estimating-sigma_barx2-with-expected-variance-approach" class="section level4 hasAnchor" number="14.7.2.2">
+<h4><span class="header-section-number">14.7.2.2</span> Estimating <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> with Expected Variance Approach<a href="deep-dive-sampling-and-anova.html#estimating-sigma_barx2-with-expected-variance-approach" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>If we assume that random sampling error is the only source of variance in the distribution of sample means</strong> we can estimate <span class="math inline">\(\sigma_{\bar{x}}^2\)</span> using the formula we derived from the Central Limit Theorem.</p>
-<p>More specifically, armed with the estimate of the variance of the people in the population (<span class="math inline">\(s_{people}^2\)</span>) we can use the CLT shortcut formula to obtain an estimate of the variance of the distribution of sample means using Equation <a href="deep-dive-sampling-and-anova.html#eq:estpopvarmeansclt">(14.7)</a> below.</p>
+<p>More specifically, armed with the estimate of the variance of the people in the population (<span class="math inline">\(s_{people}^2\)</span>) we can use the Estimated Expected Variance formula to obtain an estimate of the variance of the distribution of sample means using Equation <a href="deep-dive-sampling-and-anova.html#eq:estpopvarmeansclt">(14.7)</a> below.</p>
 <span class="math display" id="eq:estpopvarmeansclt">\[\begin{equation}
 s_{\bar{x}}^2 = \frac{s_{people}^2}{n}
       \tag{14.7}
@@ -1159,8 +1159,8 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 &amp;= 44.0467
 \end{aligned}
 \]</span></p>
-<p>Thus, using Approach 2: CLT shortcut, our estimate of the variance of the distribution of sample means, <strong>due to random sampling error</strong> is <span class="math inline">\(s_{\bar{x}}^2 = 44.0467\)</span>.</p>
-<p><strong>IMPORTANT:</strong> This estimate of the variance of the distribution of sample means was based on using an estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
+<p>Thus, using Approach 2: Estimated Expected Variance, our estimate of the variance of the distribution of sample means, <strong>due to random sampling error</strong> is <span class="math inline">\(s_{\bar{x}}^2 = 44.0467\)</span>.</p>
+<p><strong>IMPORTANT:</strong> This estimate of the variance of the distribution of sample means used estimate of the variance of the people in the population (i.e., <span class="math inline">\(s_{people}^2 =220.2333\)</span>). There were 12 degrees of freedom associated with <span class="math inline">\(s_{people}^2\)</span> which <span class="math inline">\(s_{\bar{X}}^2\)</span> depends upon. So we say there are 12 degrees of freedom associated with <span class="math inline">\(s_{\bar{X}}^2\)</span>.</p>
 </div>
 </div>
 <div id="ratio-comparison-of-two-approaches-1" class="section level3 hasAnchor" number="14.7.3">
@@ -1183,28 +1183,28 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Approach 1: Total variance</td>
+<td align="center">Approach 1: Estimated Observed Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span></td>
 <td align="center"><span class="math inline">\(a-1=3-1=2\)</span></td>
 </tr>
 <tr class="even">
-<td align="center">Approach 2: CLT Random sampling variance</td>
+<td align="center">Approach 2: Estimated Expected Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 =31.26472\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span></td>
 <td align="center"><span class="math inline">\(a(n-1)=3(5-1)=12\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>In the table above, Approach 1, estimates the total variance (from all sources) in sample means. In contrast, Approach 2, estimates the variance in sample means due strictly to random sampling error. In this particular scenario <strong>we know</strong> the only source of variability in sample means is random sampling error. So…we do the two numbers differ?</p>
-<p>Recall, that in Approach 1 we didn’t have all of the sample means in the infinity large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error – because we only have 3 sample means - not the full infinite set of sample means.</p>
-<p>Likewise, recall that in Approach 2 we didn’t know the variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>). We had to rely on an esimate of that value (<span class="math inline">\(s_{people}^2\)</span>), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.</p>
+<p>In the table above, Approach 1 Estimated Observed Variance, estimates the total variance (from all sources) in sample means. In contrast, Approach 2 Estimated Expected Variance, estimates the variance in sample means due only to random sampling error. In this particular scenario <strong>we know</strong> the only source of variability in sample means is random sampling error. So, do the two numbers differ?</p>
+<p>Recall, that in Approach 1 Estimated Observed Variance we didn’t have all of the sample means in the infinity large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error – because we only have 3 sample means - not the full infinite set of sample means.</p>
+<p>Likewise, recall that in Approach 2 Estimated Expected Variance we didn’t know the variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>). We had to rely on an esimate of that value (<span class="math inline">\(s_{people}^2\)</span>), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.</p>
 <p>Because both Approach 1 and 2 will differ from the true due to random sampling error, when we construct a ratio, it too will differ from the truth due to random sampling error. That is, when we construct a ratio based on those variance estimate (<span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= 79.213\)</span> and <span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=44.0467\)</span>) the ratio will differ from “the truth” (1.00) due to sampling error.</p>
 <p><br />
 </p>
 <p><span class="math display">\[
 \begin{aligned}
-\text{ratio comparing approaches} &amp;= \frac{\text{variance of sample means ESTIMATED using sample means}}{\text{variance of sample means ESTIMATED using CLT shortcut formula}}\\
+\text{ratio comparing approaches} &amp;= \frac{\text{variance of sample means using ESTIMATED Observed Variance}}{\text{variance of sample means using using ESTIMATED Expected Variance}}\\
 &amp;=\frac{\frac{\sum_{i=1}^{a=3}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}}{\frac{s_{people}^2}{n}}\\
 &amp;=\frac{79.213}{44.0467}\\
 &amp;= 1.7984\\
@@ -1214,7 +1214,7 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 </div>
 <div id="frame-of-reference-random-sampling-only" class="section level2 hasAnchor" number="14.8">
 <h2><span class="header-section-number">14.8</span> Frame of reference: Random sampling only<a href="deep-dive-sampling-and-anova.html#frame-of-reference-random-sampling-only" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this section we focus on using simulations to establish a frame of reference for interpreting the variance ratio in a scenario where random sampling is the only reason sample means differ from each other. Because random sampling is the only reasons the sample means differ both formulas are estimating the same thing. However, due to random sampling error, the the formulas may differ.</p>
+<p>In this section we focus on using simulations to establish a frame of reference for interpreting the variance ratio in a scenario where random sampling is the only reason sample means differ from each other. Because random sampling is the only reason the sample means differ both formulas are estimating the same thing. However, due to random sampling error, the numbers producted by the formulas may differ.</p>
 <div id="simulation-of-1-population" class="section level3 hasAnchor" number="14.8.1">
 <h3><span class="header-section-number">14.8.1</span> Simulation of 1 population<a href="deep-dive-sampling-and-anova.html#simulation-of-1-population" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="figure"><span style="display:block;" id="fig:sim1pop"></span>
@@ -1223,7 +1223,7 @@ s_{\bar{x}}^2 &amp;= \frac{s_{people}^2}{n}\\
 FIGURE 14.2: Sampling from one population
 </p>
 </div>
-<p>The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure <a href="deep-dive-sampling-and-anova.html#fig:sim1pop">14.2</a> above. In this scenario, we obtain 3 samples from the population of people and then used that data to <strong>estimate</strong> the variance of the distribution of sample means using Approach 1 and Approach 2. Then we create a ratio of those two values (Approach 1/Approach 2). Each additional row of the table shows a case where we did this same thing with three new samples.</p>
+<p>The simplest scenario to understand the estimation formulas we have discussed is the one illustrated in Figure <a href="deep-dive-sampling-and-anova.html#fig:sim1pop">14.2</a> above. In this scenario, we obtain 3 samples from the population of people and then used that data to <strong>estimate</strong> the variance of the distribution of sample means using Approach 1 Estimated Observed Variance and Approach 2 Estimated Expected Variance. Then we create a ratio of those two values (Approach 1/Approach 2). Each additional row of the table shows a case where we did this same thing with three new samples.</p>
 <p>We begin by creating the population in R:</p>
 <div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="deep-dive-sampling-and-anova.html#cb504-1" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>
 <span id="cb504-2"><a href="deep-dive-sampling-and-anova.html#cb504-2" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span></code></pre></div>
@@ -1241,7 +1241,7 @@ FIGURE 14.2: Sampling from one population
 ## 4     4               64.05         18.19    3.5220
 ## 5     5               19.85         25.55    0.7771
 ## 6     6               21.33         19.64    1.0862</code></pre>
-<p>When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using Approach 1 and Approach 2 (approach_1_total_var_est and approach_2_clt_est, respectively). Then we created a ratio of those two values (approach_1_var_est/approach_2_clt_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
+<p>When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using Approach 1 and Approach 2 (method_1_obs_var_est and method_2_exp_var_est, respectively). Then we created a ratio of those two values (method_1_obs_var_est/method_2_exp_var_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
 <div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="deep-dive-sampling-and-anova.html#cb508-1" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb508-2"><a href="deep-dive-sampling-and-anova.html#cb508-2" tabindex="-1"></a><span class="fu">skim</span>(data_ratios)</span></code></pre></div>
@@ -1308,20 +1308,20 @@ FIGURE 14.4: Sampling from three populations with the same mean (and variance)
 <span id="cb509-2"><a href="deep-dive-sampling-and-anova.html#cb509-2" tabindex="-1"></a>pop1 <span class="ot">&lt;-</span> <span class="fu">make_population</span>(<span class="at">mean =</span> <span class="fl">172.50</span>, <span class="at">variance =</span> <span class="fl">156.3236</span>)</span>
 <span id="cb509-3"><a href="deep-dive-sampling-and-anova.html#cb509-3" tabindex="-1"></a>pop2 <span class="ot">&lt;-</span> pop1</span>
 <span id="cb509-4"><a href="deep-dive-sampling-and-anova.html#cb509-4" tabindex="-1"></a>pop3 <span class="ot">&lt;-</span> pop1</span></code></pre></div>
-<p>Then, we obtain a sample from each population of people and calculate a sample mean. When we use Approach 1: Total variance we think of these three sample means as being a random sample (<span class="math inline">\(a = 3\)</span>) of the infinite distribution of sample means (<span class="math inline">\(K = \infty\)</span>). The variance of the three sample means is an estimate of the variance of the distribution of sample means. When we use Approach 2: CLT Shortcut we use the people from the three sample to estimate the variance of the population of people. We use our estimate of the variance of the population of people in the Approach 2: CLT Shortcut formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Approach 1: Total variance divided by Approach 2: CLT Shortcut.</p>
+<p>Then, we obtain a sample from each population of people and calculate a sample mean. When we use Approach 1: Observed variance we think of these three sample means as being a random sample (<span class="math inline">\(a = 3\)</span>) of the infinite distribution of sample means (<span class="math inline">\(K = \infty\)</span>). The variance of the three sample means is an estimate of the TOTAL variance of the distribution of sample means. When we use Approach 2: Expected Variance we use the people from the three sample to estimate the variance of the population of people. Then, we use our estimate of the variance of the population of people in the Approach 2: Expected Variance formula to estimate the variance of the distribution of sample means. Then we calculate the ratio of Approach 1: Estimated Observed Variance (total variance) divided by Approach 2: Expected Variance (random sampling)</p>
 <p><strong>Then we repeat this process 100,000 times to see how well this process works on average - via the R commands below.</strong></p>
 <div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="deep-dive-sampling-and-anova.html#cb510-1" tabindex="-1"></a>data_ratios3 <span class="ot">&lt;-</span> <span class="fu">get_mean_samples_ratio</span>(pop1, pop2, pop3,</span>
 <span id="cb510-2"><a href="deep-dive-sampling-and-anova.html#cb510-2" tabindex="-1"></a>                                       <span class="at">n =</span> <span class="dv">5</span>,</span>
 <span id="cb510-3"><a href="deep-dive-sampling-and-anova.html#cb510-3" tabindex="-1"></a>                                       <span class="at">number.of.trials =</span> <span class="dv">100000</span>)</span></code></pre></div>
 <p>The results of the 100,000 simulations are placed in the data set called data_ratios3. We can see the first few rows of these data below.</p>
 <div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="deep-dive-sampling-and-anova.html#cb511-1" tabindex="-1"></a><span class="fu">head</span>(data_ratios3)</span></code></pre></div>
-<pre><code>##   trial app_1_total_var_est app_2_clt_est var_ratio
-## 1     1             117.973         34.20   3.44951
-## 2     2              45.853         44.61   1.02795
-## 3     3               2.573         48.56   0.05299
-## 4     4               8.920         22.07   0.40411
-## 5     5               9.693         35.68   0.27167
-## 6     6              84.853         21.42   3.96141</code></pre>
+<pre><code>##   trial method_1_obs_var_est method_2_exp_var_est var_ratio
+## 1     1              117.973                34.20   3.44951
+## 2     2               45.853                44.61   1.02795
+## 3     3                2.573                48.56   0.05299
+## 4     4                8.920                22.07   0.40411
+## 5     5                9.693                35.68   0.27167
+## 6     6               84.853                21.42   3.96141</code></pre>
 <p>In the first row of the above table we obtained 3 samples (one from each population) and then used that data to <strong>estimate</strong> the variance of the sampling distribution of means using Approach 1 and Approach 2. Then we create a ratio of those two values (Approach 1/Approach 2). Each additional row of table shows a case where were did this same thing with three new samples. There are a total of 100,000 rows in this table.</p>
 <p>We obtain the summary statistics with the skim command:</p>
 <div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="deep-dive-sampling-and-anova.html#cb513-1" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
@@ -1438,19 +1438,19 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 </tr>
 <tr class="odd">
 <td align="center">Sample Means</td>
-<td align="center">Approach 1: TotalVariance</td>
+<td align="center">Approach 1 Observed Variance: TotalVariance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\)</span></td>
 </tr>
 <tr class="even">
 <td align="center">Sample Means</td>
-<td align="center">Approach 2 CLT: Random sampling variance</td>
+<td align="center">Approach 2 Expected Variance: Random sampling variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}\)</span></td>
 </tr>
 <tr class="odd">
 <td align="center">Sample Means</td>
-<td align="center">Approach 2 CLT: Standard Error</td>
+<td align="center">Approach 2 Standard Error: Random sampling standard deviation</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}\)</span></td>
 </tr>
@@ -1466,8 +1466,8 @@ FIGURE 14.5: Variance ratio when there are three identical populations of people
 </ul>
 <p>We are interested in the variance of the distribution of sample means (Figure <a href="deep-dive-sampling-and-anova.html#fig:chdeepfigure1">14.1</a>B). If we were “all knowing” we would know that the variance of the distribution is 31.26472. But we are not “all knowing”, and so need to rely on sample data to estimate the variance of this distribution.</p>
 <p>We used two different approaches to estimating the variance of the distribution of sample means. With our “all knowing cap” on we can see, in the table above, that both approaches produce values that differ from the actual variance of the distribution. That’s because the best we can do with sample data is obtain an estimate of the variance of the distribution of means - we can never know the actual variance of the distribution of sample means.</p>
-<p>Each variance estimate (Approach 1 or Approach 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Approach 1, differs from 31.26472 due to sampling error. That is, we used 3 sample means (<span class="math inline">\(a=3\)</span>) to estimate the variance of an infinite set of sample means (<span class="math inline">\(A = \infty\)</span>). Because we used such a small subset of sample means (3 of <span class="math inline">\(\infty\)</span>) our estimate will differ from 31.26472 due to sampling error.</p>
-<p>Likewise, the second estimate, Approach 2 CLT, used a formula that relies on knowledge of variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>) to determine the variance of the distribution of sample means. We had to estimate <span class="math inline">\(\sigma_{people}^2\)</span> using <span class="math inline">\(s_{people}^2\)</span>. Because we used such a small subset of people (<span class="math inline">\(n = 15\)</span>, 5 from each sample) from the distribution of people (<span class="math inline">\(N = 100000\)</span>) for our estimate, <span class="math inline">\(s_{people}^2\)</span>, it will differ from <span class="math inline">\(\sigma_{people}^2\)</span> due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.</p>
+<p>Each variance estimate (Approach 1 or Approach 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Approach 1 Observed Variance, differs from 31.26472 due to sampling error. That is, we used 3 sample means (<span class="math inline">\(a=3\)</span>) to estimate the variance of an infinite set of sample means (<span class="math inline">\(A = \infty\)</span>). Because we used such a small subset of sample means (3 of <span class="math inline">\(\infty\)</span>) our estimate will differ from 31.26472 due to sampling error.</p>
+<p>Likewise, the second estimate, Approach 2 Expected Variance, used a formula that relies on knowledge of variance of the population of people (<span class="math inline">\(\sigma_{people}^2\)</span>) to determine the variance of the distribution of sample means. We had to estimate <span class="math inline">\(\sigma_{people}^2\)</span> using <span class="math inline">\(s_{people}^2\)</span>. Because we used such a small subset of people (<span class="math inline">\(n = 15\)</span>, 5 from each sample) from the distribution of people (<span class="math inline">\(N = 100000\)</span>) for our estimate, <span class="math inline">\(s_{people}^2\)</span>, it will differ from <span class="math inline">\(\sigma_{people}^2\)</span> due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.</p>
 
 </div>
 </div>

@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2024-09-22" />
+<meta name="date" content="2024-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -547,14 +547,14 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="14.6" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.6</b> Sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-total-calculate-the-variance-of-infinite-sample-means"><i class="fa fa-check"></i><b>14.6.1</b> Approach 1: Total: Calculate the variance of infinite sample means</a></li>
-<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-clt-calculation-of-variance-due-to-sampling-error"><i class="fa fa-check"></i><b>14.6.2</b> Approach 2: CLT: <em>Calculation</em> of variance due to sampling error</a></li>
+<li class="chapter" data-level="14.6.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-observed-variance-all-sources-of-variabilty"><i class="fa fa-check"></i><b>14.6.1</b> Approach 1: Observed Variance (all sources of variabilty)</a></li>
+<li class="chapter" data-level="14.6.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-expected-variance-random-sampling-only"><i class="fa fa-check"></i><b>14.6.2</b> Approach 2: Expected Variance (random sampling only)</a></li>
 <li class="chapter" data-level="14.6.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-approaches"><i class="fa fa-check"></i><b>14.6.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.7" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#estimating-sample-mean-distribution-variance"><i class="fa fa-check"></i><b>14.7</b> Estimating sample mean distribution variance</a>
 <ul>
-<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-estimate-the-total-variance-of-infinite-sample-means-using-3-sample-means"><i class="fa fa-check"></i><b>14.7.1</b> Approach 1: Estimate the total variance of infinite sample means using 3 sample means</a></li>
-<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-clt-shortcut-estimation-of-variance-due-to-random-sampling-error"><i class="fa fa-check"></i><b>14.7.2</b> Approach 2: CLT shortcut: <em>Estimation</em> of variance due to random sampling error</a></li>
+<li class="chapter" data-level="14.7.1" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-1-estimated-observed-variance-all-sources-variability"><i class="fa fa-check"></i><b>14.7.1</b> Approach 1: Estimated Observed Variance (all sources variability)</a></li>
+<li class="chapter" data-level="14.7.2" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#approach-2-estimated-expected-variance-random-sampling-only"><i class="fa fa-check"></i><b>14.7.2</b> Approach 2: Estimated Expected Variance ( random sampling only)</a></li>
 <li class="chapter" data-level="14.7.3" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#ratio-comparison-of-two-approaches-1"><i class="fa fa-check"></i><b>14.7.3</b> Ratio comparison of two approaches</a></li>
 </ul></li>
 <li class="chapter" data-level="14.8" data-path="deep-dive-sampling-and-anova.html"><a href="deep-dive-sampling-and-anova.html#frame-of-reference-random-sampling-only"><i class="fa fa-check"></i><b>14.8</b> Frame of reference: Random sampling only</a>
@@ -1320,7 +1320,7 @@ r =  \frac{\Sigma (x - \bar{x})(y - \bar{y})}{\sqrt{\Sigma (x - \bar{x})^2\Sigma
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="sampling-accuracy.html#cb233-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb233-2"><a href="sampling-accuracy.html#cb233-2" tabindex="-1"></a>pop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;data_cor_pop.csv&quot;</span>)</span></code></pre></div>
 <pre><code>## Rows: 300000 Columns: 2
-## ── Column specification ──────────────
+## ── Column specification ───────────────────────
 ## Delimiter: &quot;,&quot;
 ## dbl (2): weight, height
 ## 
