@@ -2,9 +2,9 @@
 
 ## Now: Different Population Means
 
-In the last chapter, we examined a scenario with multiple populations where the **population means were identical**. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance and b) random sampling variance were estimates of the **same** quantity.
+In the last chapter, we examined a scenario with multiple populations where the **population means were identical**. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] were estimates of the **same** quantity.
 
-**In this chapter**, we examine a scenario with multiple populations where the **population means are different**.  Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error.  This means the formulas for a) total variance and b) random sampling variance are estimates of **different** quantities.
+**In this chapter**, we examine a scenario with multiple populations where the **population means are different**.  Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error.  This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of **different** quantities.
 
 ## Theory sample mean variance 
 
@@ -23,7 +23,7 @@ $$
 
 ### Multiple populations (theory)
 
-When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. 
+When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we ASSUME the various populations have the same variance - here we KNOW the multiple populations have the same variance (becausee we are creating them in the computer later).
 
 $$
 \begin{aligned} 
@@ -33,7 +33,7 @@ $$
 $$
 
 
-However, when there are multiple populations we also have to take into account the **variability in population means** when determining the *variance of sample means*. We use $a$ to indicate the number of populations. If there are three populations then $a = 3$. We use the formula below to calculate the variance of the population means:
+However, when there are multiple populations we also have to take into account the **variability in population means** when determining the *total variance of sample means*. We use $a$ to indicate the number of populations. If there are three populations then $a = 3$. We use the formula below to calculate the **variance of the population means**:
 
 $$
 \begin{aligned} 
@@ -50,7 +50,7 @@ $$
 $$
 
 
-So when there are multiple populations the variability in sample means is due to both sampling error and the variability in population means.
+When there are multiple populations the variability in sample means is due to both variability in population means (above) and sampling error.
 
 $$
 \begin{aligned} 
@@ -65,8 +65,8 @@ Importantly, if the populations all have the same mean then  $\sigma_{\mu_A}^2=0
 
   Goal| Formula | Expected value | degrees of feedom |
 :--------------:|:--------------:|:------------------:|:---------------:|
-Estimated total variance | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}$ |$\frac{\sigma_{people}^2}{n} + \sigma_{A}^2$ | $a-1$
-Estimated variance sampling error | $\frac{s_{people}^2}{n}$ |$\frac{\sigma_{people}^2}{n}$ | $n-1$
+Estimated total variance [observed variance] | $\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}$ |$\frac{\sigma_{people}^2}{n} + \sigma_{A}^2$ | $a-1$
+Estimated variance sampling error [expected variance] | $\frac{s_{people}^2}{n}$ |$\frac{\sigma_{people}^2}{n}$ | $n-1$
 
 The table above summarizes the different estimate goals of the two formulas. Consider the "Expected value" (or Expected Mean Square) column. When the populations means are the same then $\sigma_{A}^2  = 0$. When the population means are different, then $\sigma_{A}^2>0$. 
 
@@ -79,7 +79,7 @@ In this chapter, our final goal is to examine the multiple population scenario w
 
 ### Single population (practice)
 
-Let's quickly revisit the scenario where there is a single population with a mean of 172.50 and a variance of 156.3236. Sample means (n = 5) will only differ due to sampling error. We can calculate the variance due to sampling error with the equation below.
+Let's quickly revisit the scenario where there is a single population with a mean of 172.50 and a variance of 156.3236. Sample means (n = 5) will only differ due to sampling error. We can calculate the variance due to sampling error with the Expected Variance equation below.
 
 $$
 \begin{aligned} 
@@ -157,7 +157,7 @@ $$
 $$
 
 
-But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the mean of the population means. This value is calculated below - it's simply the average of 172.50 repeated three times:
+But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the **mean of the population means**. This value is calculated below - it's simply the average of 172.50 repeated three times:
 
 $$
 \begin{aligned} 
@@ -293,7 +293,7 @@ $$
 
 Thus, as indicated above, $\sigma_{A}^2>0$.
 
-So the total variance is sample means is:
+So the total variance is sample means is a combination of the variance in the population means and random sampling error:
 
 $$
 \begin{aligned} 
@@ -568,6 +568,6 @@ Take a moment and think about all of the math and logic we've used to come to th
 
 |          Attribute           |                                  Parameter Calculation                                   |                               Estimate of Parameter                               | Reflects         |
 |:----------------------------:|:----------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|:----------------:|
-|      Method 1: Total Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    | Sampling Error & Variance of Population Means |
-|    Method 2 CLT: Variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      | Just Sampling Error |
+|      Method 1: Observed Variance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    | Sampling Error & Variance of Population Means |
+|    Method 2: Expected Variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      | Just Sampling Error |
 

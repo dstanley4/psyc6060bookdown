@@ -858,8 +858,8 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 15</span> Deeper dive: Sampling and ANOVA<a href="deeper-dive-sampling-and-anova.html#deeper-dive-sampling-and-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="now-different-population-means" class="section level2 hasAnchor" number="15.1">
 <h2><span class="header-section-number">15.1</span> Now: Different Population Means<a href="deeper-dive-sampling-and-anova.html#now-different-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance and b) random sampling variance were estimates of the <strong>same</strong> quantity.</p>
-<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error. This means the formulas for a) total variance and b) random sampling variance are estimates of <strong>different</strong> quantities.</p>
+<p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] were estimates of the <strong>same</strong> quantity.</p>
+<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of <strong>different</strong> quantities.</p>
 </div>
 <div id="theory-sample-mean-variance" class="section level2 hasAnchor" number="15.2">
 <h2><span class="header-section-number">15.2</span> Theory sample mean variance<a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -876,14 +876,14 @@ div.csl-indent {
 </div>
 <div id="multiple-populations-theory" class="section level3 hasAnchor" number="15.2.2">
 <h3><span class="header-section-number">15.2.2</span> Multiple populations (theory)<a href="deeper-dive-sampling-and-anova.html#multiple-populations-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error.</p>
+<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we ASSUME the various populations have the same variance - here we KNOW the multiple populations have the same variance (becausee we are creating them in the computer later).</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
 &amp;= \frac{\sigma_{people}^2}{n}\\
 \end{aligned}
 \]</span></p>
-<p>However, when there are multiple populations we also have to take into account the <strong>variability in population means</strong> when determining the <em>variance of sample means</em>. We use <span class="math inline">\(a\)</span> to indicate the number of populations. If there are three populations then <span class="math inline">\(a = 3\)</span>. We use the formula below to calculate the variance of the population means:</p>
+<p>However, when there are multiple populations we also have to take into account the <strong>variability in population means</strong> when determining the <em>total variance of sample means</em>. We use <span class="math inline">\(a\)</span> to indicate the number of populations. If there are three populations then <span class="math inline">\(a = 3\)</span>. We use the formula below to calculate the <strong>variance of the population means</strong>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{variance in population means} &amp;= \sigma_{\mu_A}^2 \\
@@ -894,7 +894,7 @@ div.csl-indent {
 <p><span class="math display">\[
 \mu_{\mu_A} =  \frac{\sum{\mu_A}}{a}
 \]</span></p>
-<p>So when there are multiple populations the variability in sample means is due to both sampling error and the variability in population means.</p>
+<p>When there are multiple populations the variability in sample means is due to both variability in population means (above) and sampling error.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} + \text{variance in population means} \\
@@ -919,13 +919,13 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Estimated total variance</td>
+<td align="center">Estimated total variance [observed variance]</td>
 <td align="center"><span class="math inline">\(\frac{\sum(\bar{x_i}-\bar{\bar{x}})^2}{a-1}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{n} + \sigma_{A}^2\)</span></td>
 <td align="center"><span class="math inline">\(a-1\)</span></td>
 </tr>
 <tr class="even">
-<td align="center">Estimated variance sampling error</td>
+<td align="center">Estimated variance sampling error [expected variance]</td>
 <td align="center"><span class="math inline">\(\frac{s_{people}^2}{n}\)</span></td>
 <td align="center"><span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span></td>
 <td align="center"><span class="math inline">\(n-1\)</span></td>
@@ -941,7 +941,7 @@ div.csl-indent {
 <h2><span class="header-section-number">15.3</span> Practice sample mean variance<a href="deeper-dive-sampling-and-anova.html#practice-sample-mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="single-population-practice" class="section level3 hasAnchor" number="15.3.1">
 <h3><span class="header-section-number">15.3.1</span> Single population (practice)<a href="deeper-dive-sampling-and-anova.html#single-population-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let’s quickly revisit the scenario where there is a single population with a mean of 172.50 and a variance of 156.3236. Sample means (n = 5) will only differ due to sampling error. We can calculate the variance due to sampling error with the equation below.</p>
+<p>Let’s quickly revisit the scenario where there is a single population with a mean of 172.50 and a variance of 156.3236. Sample means (n = 5) will only differ due to sampling error. We can calculate the variance due to sampling error with the Expected Variance equation below.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{n}\\
@@ -1028,7 +1028,7 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 &amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
-<p>But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the mean of the population means. This value is calculated below - it’s simply the average of 172.50 repeated three times:</p>
+<p>But we also have to calculate the variance in population means. But to calculate the variance of the population means we need the <strong>mean of the population means</strong>. This value is calculated below - it’s simply the average of 172.50 repeated three times:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mu_{\mu_A} &amp;=  \frac{\sum{\mu_A}}{a} \\
@@ -1164,7 +1164,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>Thus, as indicated above, <span class="math inline">\(\sigma_{A}^2&gt;0\)</span>.</p>
-<p>So the total variance is sample means is:</p>
+<p>So the total variance is sample means is a combination of the variance in the population means and random sampling error:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} + \text{variance in population means} \\
@@ -1425,13 +1425,13 @@ FIGURE 15.6: Next axes: variance ratio when there are three identical population
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Method 1: Total Variance</td>
+<td align="center">Method 1: Observed Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\)</span></td>
 <td align="center">Sampling Error &amp; Variance of Population Means</td>
 </tr>
 <tr class="even">
-<td align="center">Method 2 CLT: Variance</td>
+<td align="center">Method 2: Expected Variance</td>
 <td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{s_{people}^2}{n}\)</span></td>
 <td align="center">Just Sampling Error</td>
