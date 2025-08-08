@@ -20,9 +20,9 @@ In this chapter, we focus on describing the distribution of sample means. Our go
 | Approach 2: Estimated Expected Variance |   $s_{\bar{x}}^2=\frac{s_{people}^2}{n}$  | Estimate the variance in sample mean due ONLY to random sampling error.|
 
 
-Understanding the logic behind both approaches for estimating the variance of the distribution of sample means is critical. **In this chapter, where there is one population of people**, the two approaches estimate the same thing - variabilty in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two approaches estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both approaches in the simple case - where there is a single population of people.
+Understanding the logic behind both approaches for estimating the variance of the distribution of sample means is critical. **In this chapter, where there is one population of people**, the two approaches estimate the same thing - variability in sample means **due to random sampling**. However, in future chapters, where there are multiple populations of people with different means, the two approaches estimate different things. Consequently, to prepare you for those more complex future chapters, it's important to understand the logic behind both approaches in the simple case - where there is a single population of people.
 
-**What we learn in this chapter (and the pattern of results we obtain) will serve as frame-of-reference for interpreting more complex situations in future chapters.**
+**What we learn in this chapter (and the pattern of results we obtain) will serve as a frame-of-reference for interpreting more complex situations in future chapters.**
 
 ## A student population
 
@@ -30,7 +30,7 @@ Consider a scenario where there is a large university with 100,000 students and 
 
 \
 
-```{r chdeepfigure1, echo=FALSE, out.width="60%", fig.cap= "A distributionof people (A.) and a corresponding distribution of sample means (B.) can both be considered populations in some sense."}
+```{r chdeepfigure1, echo=FALSE, out.width="60%", fig.cap= "A distribution of people (A.) and a corresponding distribution of sample means (B.) can both be considered populations in some sense."}
 knitr::include_graphics("ch_deep_sampling/images/figure1.png")
 ```
 
@@ -42,7 +42,7 @@ The mean of a population of 100,000 student heights is calculated using Equation
       (\#eq:popmeanchdeep)
 \end{equation}
 ```
-The variance of a population of 100,000 student heights is calculated using Equation \@ref(eq:popvardeep) below.
+The variance for a population of 100,000 student heights is calculated using Equation \@ref(eq:popvardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -58,7 +58,7 @@ Now imagine that we are interested in studying the random sampling process. Spec
 
 ## Population: What's in a name
 
-Typically, in psychology, when we use the word "population" we are referring to a population of people with respect to some dependent variable - such as the heights illustrated in Figure \@ref(fig:chdeepfigure1)A. However, in statistics, a population is simply a set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure \@ref(fig:chdeepfigure1)A as a population to **also** thinking of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B as a population. Doing so may seem counter intuitive but it is the logical foundation for Analysis of Variance (ANOVA).
+Typically, in psychology, when we use the word "population" we are referring to a population of people with respect to some dependent variable - such as the heights illustrated in Figure \@ref(fig:chdeepfigure1)A. However, in statistics, a population is simply a set of elements (often people) about which we wish to draw conclusions. In this chapter, we shift our focus from thinking of the distribution of people in Figure \@ref(fig:chdeepfigure1)A as a population to **also** thinking of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B as a population. Doing so may seem counterintuitive but it is the logical foundation for Analysis of Variance (ANOVA).
 
 ### Sample means in context
 
@@ -66,15 +66,15 @@ Thinking of the distribution of sample means as a population can be a bit tricky
 
 Consider a concrete example. When we obtain a sample of five people's heights ($n$ = 5) we can think of the **people** in the sample as a subset of the population of people ($N$=100,000), see Figure \@ref(fig:chdeepfigure1)A. 
 
-But we can also think of that single sample mean as mean a subset of an infinity large set of sample means,  see Figure \@ref(fig:chdeepfigure1)B. We use ($K = \infty$) to refer to the total number of sample mean in the population of sample means.
+But we can also think of that single sample mean as a subset of an infinitely large set of sample means,  see Figure \@ref(fig:chdeepfigure1)B. We use ($K = \infty$) to refer to the total number of sample means in the population of sample means.
 
-When we have one sample mean from this population of same mean we say $a = 1$. If we had three sample means from this population of sample means, \@ref(fig:chdeepfigure1)B, we would say $a = 3$.
+When we have one sample mean from this population of sample means we say $a = 1$. If we had three sample means from this population of sample means, \@ref(fig:chdeepfigure1)B, we would say $a = 3$.
 
 ### Distribution of sample means as a population
 
-Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represented this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $K$ instead of $N$ to represent the number of sample means (where $K$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
+Because we are thinking of the distribution of sample means as a population we can calculate the mean and variance for the distribution of sample means. The mean of the population of sample means is calculated as below in Equation \@ref(eq:popmeanxbardeep). Notice that we used the symbol, $\mu_{\bar{x}}$, to represent this value. Further notice, the little $\bar{x}$ beside the $\mu$ in $\mu_{\bar{x}}$ which indicates it is sample means that are being averaged. As noted previously, we use $K$ instead of $N$ to represent the number of sample means (where $K$ = infinity, because there are an infinite number of sample means in the distribution)[^deep_sampling-1]. Notice the similarity between the formula for the mean of a distribution of people, Equation \@ref(eq:popmeanchdeep) above, and the formula for the mean of a distribution of sample means, Equation \@ref(eq:popmeanxbardeep).
 
-[^deep_sampling-1]: I realize that it doesn't make sense to divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulted value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
+[^deep_sampling-1]: I realize that it doesn't make sense to divide by infinity; however, in formal mathematics we would write this up in a different way describing the resulting value as an *expected value*. I use dividing by infinity simply as a way to show consistency with other formulas with the aim of increasing conceptual clarity at the expense of correct notation.
 
 ```{=tex}
 \begin{equation} 
@@ -94,7 +94,7 @@ A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, w
 
 When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two approaches for calculating the variance of this distribution of sample means.
 
-### Approach 1: Observed Variance (all sources of variabilty)
+### Approach 1: Observed Variance (all sources of variability)
 
 In this first method, we use an infinite number of sample means and simply calculate the variance, see Equation \@ref(eq:popvarxbardeep) below.
 
@@ -139,7 +139,7 @@ $$
 \sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{\text{sample size}}
 $$
 
-Be we more often see it represented completely symbolically as per Equation \@ref(eq:popvarCLTxbardeep) below.
+But we more often see it represented completely symbolically as per Equation \@ref(eq:popvarCLTxbardeep) below.
 
 ```{=tex}
 \begin{equation} 
@@ -184,7 +184,7 @@ $$
 \end{aligned} 
 $$
 
-You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result. If the number on the top of the ratio was the *larger* of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the *smaller* of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpet the value of a ratio using these rules before continuing.
+You can see the ratio comparing these two approaches below is 1.00 - so we conclude two approaches produced the same result. If the number on the top of the ratio was the *larger* of the two, then the value of the ratio would be greater than 1.00. In contrast, if the number on the top of the ratio was the *smaller* of the two, then the value of the ratio would be less than 1.00. Be sure you understand how to interpret the value of a ratio using these rules before continuing.
 
 **CRITICAL: Think about what this means.** Both approaches produced the same number. The **observed variance: total variance approach** resulted in the same number as the **expected variance: random sampling only approach**. *So we can conclude the only reason the sample means differed from each other was random sampling*. Go back and re-read this paragraph a few times until you are sure you understand this crucial point.
 
@@ -305,7 +305,7 @@ Thus, the "population" variance of the distribution of sample means ($\sigma_{\b
 
 ### Approach 2: Estimated Expected Variance ( random sampling only)
 
-We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall that than another approach to calculating the variance of the distribution of sample means is to use Expected Variance, Equation \@ref(eq:popvarCLTxbardeep) above, repeated below for clarity.
+We can use the information presented in the table above in another way to estimate the variance of the distribution of sample means. Indeed, recall that another approach to calculating the variance of the distribution of sample means is to use Expected Variance, Equation \@ref(eq:popvarCLTxbardeep) above, repeated below for clarity.
 
 $$
 \begin{aligned}
@@ -315,7 +315,7 @@ $$
 
 #### Estimating $\sigma_{people}^2$ with $s_{people}^2$
 
-The problem with the formula above is that you need to know the variance of the all the people in the population ($\sigma_{people}^2$) - and we don't know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into a better (or average) estimate of the variance of the people ($s_{people}^2$) in the population using the formula below.
+The problem with the formula above is that you need to know the variance of all the people in the population ($\sigma_{people}^2$) - and we don't know the variance of all the people in the population. But, we do have three samples from that population of people. Because the three samples are from the same population of people - we know each sample provides an estimate of the same (single) variance of people in the population. Therefore, we can combine those variance estimates into a better (or average) estimate of the variance of the people ($s_{people}^2$) in the population using the formula below.
 
 $$
 \begin{aligned}
@@ -348,7 +348,7 @@ The number we just calculated, $s_{people}^2 =`r est_pop_var_pooled`$, is an est
 
 We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).
 
-We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But, statisticians also use the term pooled variance ($s_{pooled}^2$) to refer it. Other times, statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But, statisticians also use the term pooled variance ($s_{pooled}^2$) to refer to it. Other times, statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
 
 #### Estimating $\sigma_{\bar{x}}^2$ with Expected Variance Approach
 
@@ -388,11 +388,11 @@ The table below summarizes our work so far.
 
 In the table above, Approach 1 Estimated Observed Variance, estimates the total variance (from all sources) in sample means. In contrast, Approach 2 Estimated Expected Variance, estimates the variance in sample means due only to random sampling error. In this particular scenario **we know** the only source of variability in sample means is random sampling error. So, do the two numbers differ?
 
-Recall, that in Approach 1 Estimated Observed Variance we didn't have all of the sample means in the infinity large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error -- because we only have 3 sample means - not the full infinite set of sample means.
+Recall, that in Approach 1 Estimated Observed Variance, we didn't have all of the sample means in the infinitely large distribution of sample means. We based our estimate on only three of those means. So our estimate using, Approach 1, will differ from the truth due to sampling error -- because we only have 3 sample means - not the full infinite set of sample means.
 
-Likewise, recall that in Approach 2 Estimated Expected Variance we didn't know the variance of the population of people ($\sigma_{people}^2$). We had to rely on an esimate of that value ($s_{people}^2$), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.
+Likewise, recall that in Approach 2 Estimated Expected Variance we didn't know the variance of the population of people ($\sigma_{people}^2$). We had to rely on an estimate of that value ($s_{people}^2$), based on 15 people (three sets of 5). Consequently, Approach 2 will differ from the truth as well due to random sampling error.
 
-Because both Approach 1 and 2 will differ from the true due to random sampling error, when we construct a ratio, it too will differ from the truth due to random sampling error. That is, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
+Because both Approach 1 and 2 will differ from the truth due to random sampling error, when we construct a ratio, it too will differ from the truth due to random sampling error. That is, when we construct a ratio based on those variance estimate ($s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}= `r method1_var`$ and $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}=`r est_mean_var_clt`$) the ratio will differ from "the truth" (1.00) due to sampling error.
 
 \
 
@@ -407,7 +407,7 @@ $$
 
 ## Frame of reference: Random sampling only
 
-In this section we focus on using simulations to establish a frame of reference for interpreting the variance ratio in a scenario where random sampling is the only reason sample means differ from each other. Because random sampling is the only reason the sample means differ both formulas are estimating the same thing. However, due to random sampling error, the numbers producted by the formulas may differ.
+In this section we focus on using simulations to establish a frame of reference for interpreting the variance ratio in a scenario where random sampling is the only reason sample means differ from each other. Because random sampling is the only reason the sample means differ both formulas are estimating the same thing. However, due to random sampling error, the numbers produced by the formulas may differ.
 
 
 ### Simulation of 1 population
@@ -448,7 +448,7 @@ The results of the 100,000 simulations are placed in the data set called data_ra
 head(data_ratios)
 ```
 
-When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2 (method_1_obs_var_est and method_2_exp_var_est, respectively). Then we created a ratio of those two values (method_1_obs_var_est/method_2_exp_var_est) and placed that in the table (var_ratio). Each additional row of table shows a case were were did this same thing with three new samples. There are a total of 100,000 rows in this table.
+When you inspect the table above, recognize that for the first row of the table we obtained 3 random samples from the population of people and then used that data to **estimate** the variance of the sampling distribution of means using Approach 1 and Approach 2 (method_1_obs_var_est and method_2_exp_var_est, respectively). Then we created a ratio of those two values (method_1_obs_var_est/method_2_exp_var_est) and placed that in the table (var_ratio). Each additional row of table shows a case where we did this same thing with three new samples. There are a total of 100,000 rows in this table.
 
 We obtain the summary statistics with the skim command:
 
@@ -461,15 +461,15 @@ skim(data_ratios)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the blue box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in the table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the blue box.
 
 **Graphing the ratios.** Although each estimate was **on average correct**, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. Due to random sampling error on some trials the numerator of the ratio was larger and on other trials the denominator of the ratio was larger. As a result, on some trials the ratio was larger than 1.0 and on other trials the ratio was smaller than 1.0.
 
-Below I present a graph of these ratios, Figure \@ref(fig:graph1pop). You can see there is a wide range of ratio that occur. Note that this is shape of the distributions when we have:
+Below I present a graph of these ratios, Figure \@ref(fig:graph1pop). You can see there is a wide range of ratios that occur. Note that this is shape of the distributions when we have:
 
 a) A single population - so sampling error is the only reason means differ
 b) Total variance estimate is based on 3 sample means (i.e., $a-1$ degrees)
-c) Sampling error variance estimate created using a population of people variance estimate dervied from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
+c) Sampling error variance estimate created using a population of people variance estimate derived from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
 
 This type of graph is helpful, because it allows us to understand, when these conditions are true, the range of ratio values that can occur. FYI - as we'll discuss more later, this is an **F-ratio**.
 
@@ -551,7 +551,7 @@ skim(data_ratios3)
 knitr::include_graphics("ch_deep_sampling/images/skim_screenshot_pop3.png")
 ```
 
-Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct becase of the 31.3 value in the green box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
+Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculate $\sigma_{\bar{x}}^2 = 31.26472$. Each row in table above presents two estimates (i.e., $s_{\bar{x}}^2$) of $\sigma_{\bar{x}}^2$. You can see that the Approach 1 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box. Likewise, you can see that the Approach 2 approach for obtaining $s_{\bar{x}}^2$ was on average correct because of the 31.3 value in the green box.
 
 **Graphing the ratios.** Although each estimate was **on average correct**, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. Due to random sampling error on some trials the numerator of the ratio was larger and on other trials the denominator of the ratio was larger. As a result, on some trials the ratio was larger than 1.0 and on other trials the ratio was smaller than 1.0.
 
@@ -559,7 +559,7 @@ Below I present a graph of these ratios, Figure \@ref(fig:graph3pop). You can se
 
 a) Three identical population - so sampling error is the only reason means differ
 b) Total variance estimate is based on 3 sample means (i.e., $a-1$ degrees)
-c) Sampling error variance estimate created using a population of people variance estimate dervied from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
+c) Sampling error variance estimate created using a population of people variance estimate derived from 15 people (i.e., $a(n-1)=3(5-1)=12$ degrees of freedom)
 
 This type of graph is helpful, because it allows us to understand, when these conditions are true, the range of ratio values that can occur. Again remember, these are called **F-ratios**.
 
@@ -581,13 +581,13 @@ ggplot(data = data_ratios3, mapping = aes(x = var_ratio)) +
 
 Keep in mind that this is the range of ratios that can occur when all three populations have the same mean. In the above graph we use a vertical blue line to distinguish between the lower 95% of ratio values and the upper 5% of ratios values.
 
-How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list.  To obtain the 95% percentile in of the sorted list of 100,000 ratios we just mutiple the total number of ratios (100,000) by .95. We 95000 (i.e., $.95*100000=95000$) which indicates that 95% of ratios are below the value in this spot. Likewise, 5% of ratios are above the value at this spot.
+How did we know where to place this line? We simply sorted the ratios from smallest to largest. Then when to the 95% percentile spot in that list.  To obtain the 95% percentile in of the sorted list of 100,000 ratios we just multiple the total number of ratios (100,000) by .95. We 95000 (i.e., $.95*100000=95000$) which indicates that 95% of ratios are below the value in this spot. Likewise, 5% of ratios are above the value at this spot.
 
 The ratio value in the spot 95,000 of the sorted list of 100,000 ratio values is 3.88. How do you interpret this value? 
 
 In the situation where:
 
-a. the variance estimate the numerator has 2 degrees of freedom
+a. the variance estimate in the numerator has 2 degrees of freedom
 b. the variance estimate the denominator has 12 degrees of freedom
 c. the population variances are the same 
 d. the population means are the same
@@ -623,7 +623,7 @@ knitr::include_graphics("ch_deep_sampling/images/ftable.png")
 
 #### Making your own $F$-table
 
-Congratuations you have just learned how to create the values in the $F$-table from scratch! To ensure you understand everything you have learned in this exercise think through how you would do the following:
+Congratulations you have just learned how to create the values in the $F$-table from scratch! To ensure you understand everything you have learned in this exercise think through how you would do the following:
 
 * Obtain $F_{critical}$(2, 12) for $\alpha=.01$
 
@@ -639,7 +639,7 @@ We created a Central $F$-distribution with 2 and 12 degrees of freedom (i.e., $a
 
 You may, or may not, have realized that $F$-tables are just way of summarizing the **Family of Central $F$-distributions**. That is, when you look up a value at 2 and 12 degrees of freedom in an $F$-table are obtaining information about a specific Central $F$-distribution. Specifically,  you are looking up a "cut" point for extreme values in that particular Central $F$-distribution.
 
-Also note, that when we do significance testing we use the Null Hypothesis that the population means are all equal. This is the same assumption we use when creating a Central $F$-distribution. Consquently, some people refer to a Central $F$distribution (or Central $t$ distribution) as the **Sampling Distribution for the Null Hypothesis**.
+Also note, that when we do significance testing we use the Null Hypothesis that the population means are all equal. This is the same assumption we use when creating a Central $F$-distribution. Consequently, some people refer to a Central $F$-distribution (or Central $t$ distribution) as the **Sampling Distribution for the Null Hypothesis**.
 
 ## Summary table
 
@@ -672,4 +672,4 @@ We used two different approaches to estimating the variance of the distribution 
 
 Each variance estimate (Approach 1 or Approach 2) will likely produce values that differ from the actual variance of sample means. The first estimate, Approach 1 Observed Variance, differs from 31.26472 due to sampling error. That is, we used 3 sample means ($a=3$) to estimate the variance of an infinite set of sample means ($A = \infty$). Because we used such a small subset of sample means (3 of $\infty$) our estimate will differ from 31.26472 due to sampling error.
 
-Likewise, the second estimate, Approach 2 Expected Variance, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs fron 31.26472 due to sampling error.
+Likewise, the second estimate, Approach 2 Expected Variance, used a formula that relies on knowledge of variance of the population of people ($\sigma_{people}^2$) to determine the variance of the distribution of sample means. We had to estimate $\sigma_{people}^2$ using $s_{people}^2$. Because we used such a small subset of people ($n = 15$, 5 from each sample) from the distribution of people ($N = 100000$) for our estimate, $s_{people}^2$, it will differ from $\sigma_{people}^2$ due to sampling error. Consequently, our estimate of the variance of sample means, which relies on this value, differs from 31.26472 due to sampling error.
