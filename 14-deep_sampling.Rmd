@@ -12,7 +12,7 @@ In this chapter we build from a one population scenario to a three population sc
 
 ## A tale of two formulas
 
-In this chapter, we focus on describing the distribution of sample means. Our goal is to understand the logic behind two different formulas for estimating the variance of distribution of sample means. A thorough understanding of both of these two estimation approaches lays the foundation for understanding Analysis of Variance (ANOVA).
+In this chapter, we focus on describing the distribution of sample means. Our goal is to understand the logic behind two different formulas for estimating the variance of the *sampling distribution of the sample mean* (often denoted $\sigma_{\bar{x}}^2$), which quantifies how much sample means vary from sample to sample. A thorough understanding of both of these two estimation approaches lays the foundation for understanding Analysis of Variance (ANOVA).
 
 | Approach  | Estimation Formula | Goal  |
 :----------:|:----:|:--------|
@@ -78,10 +78,12 @@ Because we are thinking of the distribution of sample means as a population we c
 
 ```{=tex}
 \begin{equation} 
-\mu_{\bar{x}} = \frac{\sum_{i=1}^{K=\infty}{\bar{x}_i}}{K}
+\mu_{\bar{x}} = E[\bar{X}] = \lim_{K \to \infty} \frac{\sum_{i=1}^{K}{\bar{x}_i}}{K}
       (\#eq:popmeanxbardeep)
 \end{equation}
 ```
+
+
 Using Equation \@ref(eq:popmeanxbardeep) we find that the mean of the sample means is 172.50 cm (i.e., $\mu_{\bar{x}} = 172.50$).
 
 A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, will always be the same as the mean of people's heights, $\mu_{people}$. Consequently, any conclusions we make the mean of sample means, $\mu_{\bar{x}}$ see Figure \@ref(fig:chdeepfigure1)B, will also apply to the mean of people, $\mu_{people}$ see Figure \@ref(fig:chdeepfigure1)A. This is a crucial point to keep in mind as we proceed through this chapter. Although we are ultimately interested in making conclusion about the mean of the people (i.e., $\mu_{people}$) - all our work in this chapter (and in ANOVA) is based on the mean of the distribution of sample means in Figure \@ref(fig:chdeepfigure1)B (i.e., $\mu_{\bar{x}}$).
@@ -93,6 +95,9 @@ A key point to remember is that the mean of the sample means, $\mu_{\bar{x}}$, w
 ## Sample mean distribution variance
 
 When there is *one* **population of people** (see Figure \@ref(fig:chdeepfigure1)A) there is a single distribution of sample means that corresponds to that population (see Figure \@ref(fig:chdeepfigure1)B). In this scenario, the sample means differ only because of random sampling. There are two approaches for calculating the variance of this distribution of sample means.
+
+**Approach 1: Observed Variance** – Compute variance directly from a set of sample means (captures *all* variability among them, whether from sampling error or population differences).  
+**Approach 2: Expected Variance** – Compute variance via the formula $\sigma_{\bar{x}}^2 = \sigma_{\text{people}}^2 / n$ (captures *only* variability from random sampling).
 
 ### Approach 1: Observed Variance (all sources of variability)
 
@@ -301,7 +306,10 @@ $$
 
 Thus, the "population" variance of the distribution of sample means ($\sigma_{\bar{x}}^2$, see Figure \@ref(fig:chdeepfigure1)B) is **estimated**, based on three sample means ($a = 3$) using Approach 1, to be $s_{\bar{x}}^2 = `r method1_var`$. Remember though `r method1_var` is just an *estimate* of the population value ($\sigma_{\bar{x}}^2$) based on three sample means.
 
-**IMPORTANT:** The denominator of this variance calculation is $2$ (i.e., $3-1$). Therefore, we say there are 2 degrees of freedom associated with this estimate of the variance of the infinite number of sample means.
+**IMPORTANT:** TThe denominator of this variance estimate is $a - 1 = 3 - 1 = 2$, which are the numerator degrees of freedom in the corresponding $F$-test context. Therefore, we say there are 2 degrees of freedom associated with this estimate of the variance of the infinite number of sample means.
+
+
+
 
 ### Approach 2: Estimated Expected Variance ( random sampling only)
 
@@ -346,9 +354,9 @@ $$
 
 The number we just calculated, $s_{people}^2 =`r est_pop_var_pooled`$, is an estimate of the variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A. You could think of this number as an average variance estimate.
 
-We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom).
+We created the average variance estimate,$s_{people}^2 =`r est_pop_var_pooled`$, by combining three sample estimates of the variance of the population of people. Each sample estimate was based on 5 people (i.e., 4 degrees of freedom). But the average variance estimate we just calculated ( $s_{people}^2 =`r est_pop_var_pooled`$) is based on 15 people - people from all three samples (i.e., 12 degrees of freedom). Because we combined people from all three samples the average variance estimate is a better estimate of the variance of the population of people than any single sample estimate. In technical terms, we say the variance estimate we just calculated is a better estimate because of the higher degrees of freedom (12) compared to an individual sample estimate (with only 4 degrees of freedom). The average variance estimate typically has **lower sampling variability** than an estimate from a single sample because it is based on more degrees of freedom. “Better” here means more precise on average, not necessarily closer to the true value in every instance.
 
-We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But, statisticians also use the term pooled variance ($s_{pooled}^2$) to refer to it. Other times, statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$.
+We use different names to refer to the resulting average variance estimate - we could just call it a better estimate of the population variance ($s_{people}^2$). But, statisticians also use the term pooled variance ($s_{pooled}^2$) to refer to it. Other times, statisticians use the term Mean Square Error ($MSE$) to refer to it. You should realize that these are all just synonyms for variance of the population of people illustrated in Figure \@ref(fig:chdeepfigure1)A: $s_{people}^2 = s_{pooled}^2 = MSE_{people} = MSE$. 
 
 #### Estimating $\sigma_{\bar{x}}^2$ with Expected Variance Approach
 
@@ -465,7 +473,12 @@ Recall that previously, we used Equation \@ref(eq:popvarCLTxbardeep) to calculat
 
 **Graphing the ratios.** Although each estimate was **on average correct**, the two estimates were not always the same. Recall we compared the two estimates by making a ratio. Due to random sampling error on some trials the numerator of the ratio was larger and on other trials the denominator of the ratio was larger. As a result, on some trials the ratio was larger than 1.0 and on other trials the ratio was smaller than 1.0.
 
-Below I present a graph of these ratios, Figure \@ref(fig:graph1pop). You can see there is a wide range of ratios that occur. Note that this is shape of the distributions when we have:
+Below I present a graph of these ratios, Figure \@ref(fig:graph1pop). This histogram shows the distribution of the ratio:  
+$$
+\frac{\text{Variance estimate from sample means (Approach 1)}}{\text{Conceptual variance estimate based on pooled within-sample variance divided by n (Approach 2)}}
+$$
+
+When the null hypothesis of equal population means holds (as it does for this section), this ratio follows a central $F$-distribution. You can see there is a wide range of ratios that occur. Note that this is shape of the distributions when we have:
 
 a) A single population - so sampling error is the only reason means differ
 b) Total variance estimate is based on 3 sample means (i.e., $a-1$ degrees)
@@ -505,7 +518,7 @@ knitr::include_graphics("ch_deep_sampling/images/figure3.png")
 
 In this section, instead of using one population, we use three identical populations. That is, $a = 3$. We use $A1$, $A2$, and $A3$ to refer to these three identical populations.
 
-You will see in this section that when you have three identical populations of people, see Figure \@ref(fig:sim3pop), that the results are the same as when you have one population of people. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
+You will see in this section that when you have three identical populations of people, see Figure \@ref(fig:sim3pop), that the results are the same as when you have one population of people. That is, whether we think of this as “one population sampled three times” or “three distinct but statistically identical populations,” the variance decomposition is the same. This is because both situations satisfy the null hypothesis that all population means and variances are equal. We simulate the situation illustrated in the figure above. We start by creating three identical populations of people.
 
 ```{r, eval = FALSE}
 library(learnSampling)
@@ -641,7 +654,14 @@ You may, or may not, have realized that $F$-tables are just way of summarizing t
 
 Also note, that when we do significance testing we use the Null Hypothesis that the population means are all equal. This is the same assumption we use when creating a Central $F$-distribution. Consequently, some people refer to a Central $F$-distribution (or Central $t$ distribution) as the **Sampling Distribution for the Null Hypothesis**.
 
-## Summary table
+| Scenario | Source(s) of variability in sample means | Do Approach 1 and Approach 2 estimate same quantity? |
+|----------|-------------------------------------------|-------------------------------------------------------|
+| One population | Sampling error only | Yes |
+| Multiple identical populations | Sampling error only | Yes |
+| Multiple populations, different means | Sampling error + population differences | No |
+
+
+## Summary tables
 
 Much of what we have learned is summarized in the table below.
 
@@ -650,7 +670,7 @@ Much of what we have learned is summarized in the table below.
 |    People    |             Mean             |                      $\mu_{people} = \frac{\sum_{i=1}^{N}{X_i}}{N}$                      |              $\bar{x}_{people} = M = \frac{\sum_{i=1}^{n}{x_i}}{n}$               |
 |    People    |           Variance           |          $\sigma_{people}^2 = \frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}$          |   $s_{people}^2 = VAR = \frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}$   |
 |    People    |      Standard Deviation      |       $\sigma_{people} = \sqrt{\frac{\sum_{i=1}^{N}{(X_i - \mu_{people})^2}}{N}}$        | $s_{people} = SD = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x}_{people})^2}}{n-1}}$ |
-| Sample Means |             Mean             |               $\mu_{\bar{x}} = \frac{\sum_{i=1}^{K=\infty}{\bar{x}_i}}{K}$               |               $\bar{\bar{x}} = \frac{\sum_{i=1}^{a}{\bar{x}_i}}{a}$               |
+| Sample Means |             Mean             |               $\mu_{\bar{x}} = E[\bar{X}] = \lim_{K \to \infty} \frac{\sum_{i=1}^{K}{\bar{x}_i}}{K}$               |               $\bar{\bar{x}} = \frac{\sum_{i=1}^{a}{\bar{x}_i}}{a}$               |
 | Sample Means |      Approach 1 Observed Variance: TotalVariance      |  $\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}$   |    $s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}$    |
 | Sample Means |    Approach 2 Expected Variance: Random sampling variance    |                    $\sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n}$                    |                     $s_{\bar{x}}^2 = \frac{s_{people}^2}{n}$                      |
 | Sample Means | Approach 2 Standard Error: Random sampling standard deviation | $\sigma_{\bar{x}} = \sqrt{\frac{\sigma_{people}^2}{n}}=\frac{\sigma_{people}}{\sqrt{n}}$ |   $s_{\bar{x}} = SE=\sqrt{\frac{s_{people}^2}{n}}=\frac{s_{people}}{\sqrt{n}}$    |
