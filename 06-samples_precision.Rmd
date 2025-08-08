@@ -4,7 +4,7 @@
 
 In the previous chapter we focused on examining the extent to which we could estimate a population parameter from a statistic in an unbiased manner. That is, we focused on the fact that, due to sampling error, a sample estimate (i.e., a statistic) of a population parameter will likely be wrong. Sample statistics may overestimate, or underestimate, a population parameter - often substantially. Consequently, we learned to think about the accuracy of sample statistics. More specifically, we learned to think about accuracy not in terms of a single study, but rather in terms of whether sample statistics correctly estimate the population parameter on average over many studies (as illustrated in Figure \@ref(fig:showbias2)). When the average of many sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) there is no bias and the sample statistic can be considered accurate (on average). 
 
-In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we focus now on the precision of sample means as estimates of the population mean, see Figure \@ref(fig:showbias2). That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder, how much does my sample mean differ from the population mean? That's the question we address in this chapter. When we conduct a single study we can't know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample means differ from the population mean in general. We focus on two indices of precision -- variance of sample mean and standard error of sample means. By the end of the chapter you will understand how to a) conceptualize these indices with respect to a large number of samples/studies and  b) estimate them for a single study.
+In this chapter, we assume there is no bias and that sample means are, on average, accurate. In doing so, we focus now on the precision of sample means as estimates of the population mean, see Figure \@ref(fig:showbias2). That is, assuming no bias, when you conduct a single study you know the sample mean will differ from the population mean due to sampling error. You might wonder, how much does my sample mean differ from the population mean? That's the question we address in this chapter. When we conduct a single study we can't know how much that particular sample mean differs from the population mean, but we can estimate the extent to which sample means differ from the population mean in general. We focus on two indices of precision -- variance of sample means and standard error of sample means. By the end of the chapter you will understand how to a) conceptualize these indices with respect to a large number of samples/studies and  b) estimate them for a single study.
 
 
 ```{r showbias2, echo=FALSE, out.width = "80%", fig.cap = "Sampling accuracy and precision"}
@@ -34,7 +34,7 @@ The glimpse() command can be used to confirm that the population contains 100,00
 glimpse(pop_data)
 ```
 
-We can use the head() command to see the first 10 rows of the 100,00 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the height for everyone in the population.
+We can use the head() command to see the first 10 rows of the 100,000 rows. We see that each row in pop_data represents a single person. There is a column called height that contains the height for everyone in the population.
 
 ```{r}
 head(pop_data, 10)
@@ -95,13 +95,13 @@ many_samples %>%
 The 50000 means in the sample_mean column form a **sampling distribution**; specifically, the sampling distribution of the mean. It's critical to distinguish between a) the distribution of the sample means and b) the distribution of population heights. Examine Figure \@ref(fig:bothdist2) below. The top part of this figure illustrates the variability in the heights for the 100,000 people (represented by X’s). There are more people than X’s; the X’s are a reminder it is a distribution of people's heights. The bottom part of this figure illustrates the variability in sample means - each based on 10 people. Each sample mean is an estimate of the mean height of the population (172.5 cm). There are more sample means than $\bar{x}$’s; the $\bar{x}$’s are a reminder it is a distribution of sample means. When we describe how precisely sample means estimate the mean height for the population we are referring to the width of this distribution of means. 
 
 
-```{r bothdist2, echo = FALSE, out.width = "80%", fig.scap = "Sampling distribution of the mean.", fig.cap = "Sampling distribution of the mean. The population of individual height's is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)."}
+```{r bothdist2, echo = FALSE, out.width = "80%", fig.scap = "Sampling distribution of the mean.", fig.cap = "Sampling distribution of the mean. The population of individual heights is presented at the top and filled with X's to remind you they are individuals. There are more individuals than X's. The sampling distribution of means is presented in the bottom part of the graph. The sampling distribution of means is filled with $\\bar{x}$'s to remind you that sample means are being graphed. There are more means than $\\bar{x}$'s. The population mean (green line) and the mean of sample means (blue line) are in the same spot, indicating high accuracy (i.e., no bias)."}
 knitr::include_graphics("ch_samples_precision/images/sampling_dist.png")
 ```
 
 ## Precision indices
 
-The most common way of referring to the width of this distribution of sample means is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean  using Formula \@ref(eq:samplesechnext) below. We use $K$ in the formula to refer to the number of sample means in the distribution (i.e., $K = \infty$). Note that it doesn't really make sense to divide by infinity (i.e., $\infty$) so statistician's don't normally express the standard deviation of this distribution using the formula below - instead they talk about the **expected value** for the standard deviation. But for learning purposes - we present the formula below as means to bridge this learning with past learning.
+The most common way of referring to the width of this distribution of sample means is with the term standard error. Standard error is simply the standard deviation of the sample means. We calculate the standard error of the mean  using Formula \@ref(eq:samplesechnext) below. We use $K$ in the formula to refer to the number of sample means in the distribution (i.e., $K = \infty$). In theory this is infinite, but in practice we approximate it with a large number of samples in a simulation. It doesn't really make sense to literally divide by infinity (i.e., $\infty$) so statisticians don't normally express the standard deviation of this distribution using the formula below - instead they talk about the **expected value** for the standard deviation. But for learning purposes - we present the formula below as means to bridge this learning with past learning.
 
 \begin{equation} 
 \sigma_{\bar{x}} = \sqrt{\frac{\sum{(\bar{x} - \bar{\bar{x}})^2}}{K}}
@@ -162,7 +162,7 @@ In the previous section we used a computer simulation to calculate the variance 
 
 All those steps are a lot of work - and a lot of computer time. Interestingly, we don’t need to go to all that work to determine the variance of sample means. There is a quicker way to obtain the variance of sample means. That is, there is a quicker way to determine the precision with which sample means estimate the population mean when we use a sample size of $n$ = 10.
 
-Statisticians have created a short-cut formula for obtaining the variance of sample means. The equation by itself, see Formula \@ref(eq:samplevar2chnext) below, is extraordinarily simple to use. The formula, however, is not easy to understand. Over many years of teaching, we’ve seen students struggle to understand why the formula is structured in the way that it is - looking for a straightforward logic as to why the short-cut formula works. We encourage you to avoid going down that road. Understanding Formula \@ref(eq:samplevar2chnext) below is beyond the scope of this chapter and, likely, your mathematical background at this point. It was derived via a complex mathematical proof discussed in @hays1994 if you want more information. Simply accept that there is a short-cut formula and do not try to understand the logic of the formula. 
+Statisticians have created a shortcut formula for obtaining the variance of sample means. The equation by itself, see Formula \@ref(eq:samplevar2chnext) below, is extraordinarily simple to use. The formula, however, is not easy to understand. Over many years of teaching, we’ve seen students struggle to understand why the formula is structured in the way that it is - looking for a straightforward logic as to why the short-cut formula works. We encourage you to avoid going down that road. Understanding Formula \@ref(eq:samplevar2chnext) below is beyond the scope of this chapter and, likely, your mathematical background at this point. It was derived via a complex mathematical proof discussed in @hays1994 if you want more information. The shortcut arises from the fact that the sample mean is an average of $n$ independent observations, each with variance $\sigma^2$, so the variance of the mean is $\sigma^2 / n$. While a full derivation is beyond the scope of this chapter, this is the key statistical idea.
 
 Variance sample means:
 
@@ -171,7 +171,7 @@ Variance sample means:
       (\#eq:samplevar2chnext)
 \end{equation} 
 
-You can see that with this formula the variance of sample means, Formula \@ref(eq:samplevar2chnext), is simply the variance of heights of the individuals in the population divided by the sample size. Oddly, this short cut works and provides the variance of sample means. Notice that we don’t need to have the entire population, create thousands of samples, or go through any of the calculation work. All we need to know is the variance of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the variance of people's heights in the population is $\sigma^2=157.5$ and our sample size is $n$ = 10.
+You can see that with this formula the variance of sample means, Formula \@ref(eq:samplevar2chnext), is simply the variance of heights of the individuals in the population divided by the sample size. Oddly, this shortcut works and provides the variance of sample means. Notice that we don’t need to have the entire population, create thousands of samples, or go through any of the calculation work. All we need to know is the variance of the population and the sample size. In the context of the current example we can compute the variance of the sample means using this information. Recall the variance of people's heights in the population is $\sigma^2=157.5$ and our sample size is $n$ = 10.
 
 $$
 \begin{aligned} 
@@ -201,9 +201,9 @@ $$
  
 As wonderful as it is to have a short-cut formula for obtaining the variance of sample means (or standard error) there is a catch. The formula requires knowledge of the population variance  (or standard deviation). In a research scenario we don’t know the mean or standard deviation of the population - that's why we're conducting research. Consequently, we can’t directly calculate the variance of sample means (or standard error) using Formula \@ref(eq:samplevar2chnext) above.
 
-Fortunately, if we have only a single study, we can use the sample variance (with n-1 in the denominator) to estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e, the precision of sample means) using Formula \@ref(eq:samplevar2estchnext) below.
+Fortunately, if we have only a single study, we can use the sample variance (with n-1 in the denominator) to estimate the population variance. This estimate of the population variance may be higher or lower than the actual population variance - but it will, on average, be correct across many studies. With this estimate of the population variance in hand we can calculate an estimate of the variance of sample means (i.e., the precision of sample means) using Formula \@ref(eq:samplevar2estchnext) below.
 
-Estimated variance sample means:
+Estimated variance of sample means:
  
 \begin{equation} 
 s_{\bar{x}}^2 = \frac{s^2}{n}
@@ -256,7 +256,7 @@ $$
 
 At this point we don't know the precision of sample means when $n$ = 10; that is, we don't know $\sigma_{\bar{x}}^2$ or $\sigma_{\bar{x}}$. We do have an estimate of the precision of sample means (i.e., with via $s_{\bar{x}}^2$ and $s_{\bar{x}}$).  Whenever you calculate the variance of sample means, or standard error, based on sample data it is ALWAYS just an estimate of the actual variance of sample means or the actual standard error. 
 
-That fact that an estimate of the variance of sample means is the best you can do with sample data is evident when we calculate the estimate for the many samples. We do that with the R code below:
+The fact that an estimate of the variance of sample means is the best you can do with sample data is evident when we calculate the estimate for the many samples. We do that with the R code below:
 
 ```{r}
 many_samples <- many_samples %>% 
@@ -282,7 +282,7 @@ Inspect the est_se2 column. Notice how each of these values is an $s_{\bar{x}}^2
 
 ## Bias of precision estimates
 
-At this point, you might be a bit concerned about our ability to estimate the variance of sample means ( $\sigma_{\bar{x}}^2$ = 15.75). In the simulation above, we calculated an estimate of the variance of sample means ($s_{\bar{x}}^2$) and placed those values in the est_se2 column. We saw that the values in this column mostly differed from the actual variance of sample means (15.75). You might wonder if these estimates of the variance of sample means are themselves biased? The answer is no - they are not biased. Our estimate of the population variance (n-1 in the denominator) was not biased so there is no reason to suspect that the estimate of the variance of sample means is biased. But we can confirm this by averaging over the 50000 samples. If the average of the est_est2 column is 15.75 (or very close) than $s_{\bar{x}}^2$ is not a biased estimate of $\sigma_{\bar{x}}^2$ = 15.75.
+At this point, you might be a bit concerned about our ability to estimate the variance of sample means ( $\sigma_{\bar{x}}^2$ = 15.75). In the simulation above, we calculated an estimate of the variance of sample means ($s_{\bar{x}}^2$) and placed those values in the est_se2 column. We saw that the values in this column mostly differed from the actual variance of sample means (15.75). You might wonder if these estimates of the variance of sample means are themselves biased? The answer is no - they are not biased. Because $s^2$ (with $n-1$ in the denominator) is an unbiased estimator of $\sigma^2$, substituting $s^2$ into $\sigma^2/n$ produces an unbiased estimator of $\sigma_{\bar{x}}^2$. Therefore, there is no reason to suspect that the estimate of the variance of sample means is biased. But we can confirm this by averaging over the 50000 samples. If the average of the est_est2 column is 15.75 (or very close) than $s_{\bar{x}}^2$ is not a biased estimate of $\sigma_{\bar{x}}^2$ = 15.75.
 
 
 ```{r}
@@ -302,7 +302,7 @@ When we conduct a single study, we get a sample mean. We cannot estimate how pre
 
 ## Precision for means: Causes
 
-The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. 
+The formula for variance of the sampling distribution for the mean reveals that it is influenced only by the population variance and sample size. In a research scenario, we don't have any control over the population variance (it is what it is), but we do have control over sample size. Increasing the sample size decreases the variability in sample means - as illustrated in the formulas below. 
  
 
 $$
@@ -350,7 +350,7 @@ gridExtra::grid.arrange(pg,sdg, sd2g, nrow=3)
 dev.off()
 ```
 
-```{r threedist, echo = FALSE, out.width = "80%", fig.scap = "Two sampling distributions illustrating variability in sample means based on sample size", fig.cap = "Two sampling distributions illustrating variability in sample means based on sample size. The top graph show the variance of individual's heights in the population. The graph is filled with X's to remind you it is a graph of individuals. There are more individuals than X's. The bottom two graphs show variability in sample means due to random sampling. Each of the lower two graphs is a sampling distribution for a given sample size. Each sampling distribution contains 50000 sample means. Each sample mean is the average of the heights of individuals in a sample. The sampling distributions are filled with $\\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\\bar{x}$'s. You can see that by using a larger sample size ($n = 50$, for 50000 samples) there is less variability in sample means than when using a smaller sample size ($n = 10$), for 50000 samples."}
+```{r threedist, echo = FALSE, out.width = "80%", fig.scap = "Two sampling distributions illustrating variability in sample means based on sample size", fig.cap = "Two sampling distributions illustrating variability in sample means based on sample size. The top graph shows the variance of individual's heights in the population. The graph is filled with X's to remind you it is a graph of individuals. There are more individuals than X's. The bottom two graphs show variability in sample means due to random sampling. Each of the lower two graphs is a sampling distribution for a given sample size. Each sampling distribution contains 50000 sample means. Each sample mean is the average of the heights of individuals in a sample. The sampling distributions are filled with $\\bar{x}$'s to remind you that it is sample means being graphed. There are more means than $\\bar{x}$'s. You can see that by using a larger sample size ($n = 50$, for 50000 samples) there is less variability in sample means than when using a smaller sample size ($n = 10$), for 50000 samples."}
 knitr::include_graphics("ch_samples_precision/images/sampling_mdist.png")
 ```
 
@@ -358,28 +358,28 @@ Additionally, a larger sample size makes the sample estimate ($s^2$) of the popu
 
 **The precision of sample means is influenced by:**
 
-* population variance/standard deviation ($\sigma^2$ / $\sigma^2$)
+* population variance or standard deviation ($\sigma^2$ or $\sigma$)
 
-* sample size (%n%)
+* sample size ($n$)
 
 
 \newpage
 
 ## Precision for $d$-values: Causes
 
-Whenever we use a statistic (e.g., $\bar{x}$) to estimate a population-level parameter (e.g., $\mu$) the statistic will differ from the parameter due to sampling error. This is true of all statistics. Therefore, it is possible to generate a sampling distribution for all statistics. In this section we will focus on the factors that influence the precision with which a sample $d$-value estimates the population-level standardized mean difference ($\delta$). More specifically, we focus on how the sample size and the size of the population-level effect influence width of the sampling distribution.
+Whenever we use a statistic (e.g., $\bar{x}$) to estimate a population-level parameter (e.g., $\mu$) the statistic will differ from the parameter due to sampling error. This is true of all statistics. Therefore, it is possible to generate a sampling distribution for all statistics. In this section we will focus on the factors that influence the precision with which a sample $d$-value estimates the population-level standardized mean difference ($\delta$). More specifically, we focus on how the sample size and the size of the population-level effect influence the width of the sampling distribution.
 
 ### Sample size
 
 
 Consider the case of estimating the standardized mean difference (i.e., $\delta$) between the heights of males and females, illustrated in Figure \@ref(fig:ddistributions). The population-level height information is presented in Figure \@ref(fig:ddistributions)A. The sampling distribution for sample-level $d_{unbiased}$ values when you use 10 people per group (10 males, 10 females) is presented in Figure \@ref(fig:ddistributions)B. We could calculate the variance of $d_{unbiased}$ values or the standard error (i.e., standard deviation) of $d_{unbiased}$ values; just like we did for sample mean.
 
-You can see in Figure \@ref(fig:ddistributions)B that even though the population-level standardized mean difference is 1.49 ($\delta$ = 1.49) there was considerable variability in sample-level $d_{unbiased}$ values. Indeed, inspecting the sample-level data reveals when the population difference is $\delta$ = 1.49, the sample level differences range from $d_{unbiased}$ = -0.38 to $d_{unbiased}$ = 5.50. That's a considerable range. When $d_{unbiased}$ = -0.38 you would conclude, in your study, that the mean female height is .38 standard deviations higher than the mean male height. Yet a colleague, conducting exactly the same study, could obtain a sample that leads him to observe $d_{unbiased}$ = 5.50. This would indicate to him that the mean male height is 5.50 standard deviations higher than the mean female height; an opposite conclusion. The results of both your study and the colleague's study differ considerably from the truth that $\delta$ = 1.49 -- which indicates the mean male height is 1.49 standard deviations higher than the mean female height.
+You can see in Figure \@ref(fig:ddistributions)B that even though the population-level standardized mean difference is 1.49 ($\delta$ = 1.49) there was considerable variability in sample-level $d_{unbiased}$ values. Indeed, inspecting the sample-level data reveals when the population difference is $\delta$ = 1.49, the sample-level differences range from $d_{unbiased}$ = -0.38 to $d_{unbiased}$ = 5.50. This illustrates that with small samples, sampling variability can be so large that the estimated effect size reverses direction. That's a considerable range. When $d_{unbiased}$ = -0.38 you would conclude, in your study, that the mean female height is .38 standard deviations higher than the mean male height. Yet a colleague, conducting exactly the same study, could obtain a sample that leads him to observe $d_{unbiased}$ = 5.50. This would indicate to him that the mean male height is 5.50 standard deviations higher than the mean female height; an opposite conclusion. The results of both your study and the colleague's study differ considerably from the truth that $\delta$ = 1.49 -- which indicates the mean male height is 1.49 standard deviations higher than the mean female height.
 
 We investigated the extent to which study-level $d_{unbiased}$ values differ from the population $\delta$ = 1.49 when using 100 people per group for the comparison (i.e., 100 males, 100 females).
 You can see in Figure \@ref(fig:ddistributions)C that in this scenario the precision of the sample estimates ($d_{unbiased}$) of the population parameter ($\delta$) still vary considerably  - but substantially less than they did when it was 10 per group. With a 100 people per group, the $d_{unbiased}$ values range from 0.91 to 2.21.  For the lower end of this range, 0.91, a researcher would conclude that the mean for males is .91 standard deviations higher than the mean for females. At the upper end of this range, 2.21, a researcher would conclude that the mean for males is 2.21 standard deviations higher than the mean for females. The variability in $d_{unbiased}$ values is still large - but at least the conclusions are a) all in the same direction, and  b) would all be considered large (i.e, above 0.80) according to Cohen's standards.
 
-These simulations illustrate a few important points. First, drawing any conclusion from a single study is problematic. The findings for a single study may differ substantially from the population parameter. Second, increasing sample size increases the precision with which a sample statistic estimates a population parameter. Third, drawing conclusions from small sample size studies (e.g., $n$ = 10 per group) is extraordinarily problematic. Finally, we note that single studies (even with small sample size) are useful because they serve as data points for a future meta-analysis.
+These simulations illustrate a few important points. First, drawing any conclusion from a single study is problematic. The findings for a single study may differ substantially from the population parameter. Second, increasing sample size increases the precision with which a sample statistic estimates a population parameter. Third, drawing conclusions from small-sample-size studies (e.g., $n$ = 10 per group) is extraordinarily problematic. Finally, we note that single studies (even with small sample size) are useful because they serve as data points for a future meta-analysis.
 
 ```{r, echo = FALSE, eval = FALSE}
 
@@ -466,7 +466,7 @@ knitr::include_graphics("ch_samples_precision/images/d_distribs2.png")
 
 The precision with which sample $d$-values estimate the population standardized mean difference is influenced by the magnitude of the population standardized mean difference. This situation differs sharply from that of sample means. The magnitude of the population mean does not influence the shape of the distribution of sample means. The distribution of sample means is normal - regardless of whether the population mean is high or low. 
 
-In contrast, the shape of the the sampling distribution of $d$-values changes depending on the magnitude of the population effect (i.e., $\delta$). In Figure \@ref(fig:dvalueskew) we illustrate two scenarios. Both scenarios are based on a repeated measures design. For each scenario we created a population-level difference and then obtained 50000 sample $d$-values. The sample size, $n$ = 10 for each $d$-value, was held constant across the two scenarios. In contrast, the population standardized mean difference was different across the two scenarios. In Figure \@ref(fig:dvalueskew)A the population standardized mean difference was $\delta$ = 0.50. In contrast, in Figure \@ref(fig:dvalueskew)B the population standardized mean difference was $\delta$ = 2.00. Compare the shape of the distributions of $d$-values in Figure \@ref(fig:dvalueskew)A and Figure \@ref(fig:dvalueskew)B. You can see how the shape changes when the population level effect size changes. Consequently, the size of the population standardized mean difference influences the precision with which sample $d$-values estimate the population level effect ($\delta$).
+In contrast, the shape of the sampling distribution of $d$-values changes depending on the magnitude of the population effect (i.e., $\delta$). In Figure \@ref(fig:dvalueskew) we illustrate two scenarios. Both scenarios are based on a repeated measures design. For each scenario we created a population-level difference and then obtained 50000 sample $d$-values. The sample size, $n$ = 10 for each $d$-value, was held constant across the two scenarios. In contrast, the population standardized mean difference was different across the two scenarios. In Figure \@ref(fig:dvalueskew)A the population standardized mean difference was $\delta$ = 0.50. In contrast, in Figure \@ref(fig:dvalueskew)B the population standardized mean difference was $\delta$ = 2.00. Compare the shape of the distributions of $d$-values in Figure \@ref(fig:dvalueskew)A and Figure \@ref(fig:dvalueskew)B. You can see how the shape changes when the population level effect size changes. When $\delta$ is large relative to $n$, the sampling distribution of $d$ can become skewed, especially in small samples, due to the bounded nature of variance estimates in the denominator. Consequently, the size of the population standardized mean difference influences the precision with which sample $d$-values estimate the population-level effect ($\delta$).
 
 ```{r, include= FALSE, eval = FALSE}
 library(tidyverse)
@@ -544,7 +544,7 @@ There is a standard error for $d$-values (i.e., $SE_d$ or $SE_{d_{unbiased}}$). 
 
 ## Precision for sample correlations ($r$): Causes
 
-Sample correlations ($r$) are likely to differ from the population correlation ($\rho$) due to sampling error. The precision with which sample correlations estimate the population correlation is influenced by sample size and the magnitude of the population correlation. These are reviewed below.
+Sample correlations ($r$) are likely to differ from the population correlation ($\rho$) due to sampling error. The precision with which sample correlations estimate the population correlation is influenced by sample size and the magnitude of the population correlation. Because the sampling distribution of $r$ is skewed for values far from 0, precision is often assessed on the Fisher’s $z$-transformed scale, where standard errors are approximately constant. The effects of population value and sample size on untransformed values are reviewed below.
 
 
 ```{r, include= FALSE, eval=FALSE}

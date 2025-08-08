@@ -28,15 +28,15 @@ remotes::install_github("dstanley4/learnSampling")
 
 Researchers are usually interested in describing the attributes of a population; numbers that describe the population are called parameters. Two parameters that are frequently of interest are the mean and variance of the population. Unfortunately, it’s rarely possible to obtain information from every member of a population to calculate a parameter. Consequently, researchers use subsets of the population called samples to estimate parameters. Numbers calculated from sample data are called statistics. Typically, sample statistics are used to estimate population parameters.
 
-Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is a random subset of the population data — with correspondingly fewer observations. This difference is typically refered to as **sampling error**.
+Sample statistics, however, often differ from population parameters. The difference between a sample statistic and the population parameter occurs because the sample data is a random subset of the population data — with correspondingly fewer observations. This difference is typically referred to as **sampling error**.
 
 Sometimes a sample statistic will be higher than the population parameter; other times the sample statistic will be lower than the population parameter. Because random sampling is used to select the sample data the direction and magnitude of the difference between the sample statistic and the population parameter will vary randomly. 
 
-Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically used the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased. 
+Sample accuracy refers to the extent to which sample statistics correctly estimate the population parameter. We typically use the terms biased and unbiased to describe the accuracy of sample statistics. Consider a scenario where we take many thousands of samples from the same population. For each sample, we calculate a statistic (e.g., the mean). If the average of the sample statistics (e.g., sample means) equals the population parameter (e.g., population mean) then we refer to the statistic as being unbiased. In contrast, if the average of the sample statistics (e.g., sample means) does not equal the population parameter (e.g., population mean) then we refer to the statistic as being biased. 
 
 Further complicating matters is  the fact that the formula used for a sample statistic may, or may not, be the same as the formula used for the corresponding population parameter. This occurs because the purpose of the sample statistic is typically not to describe the sample. Rather the purpose of the sample statistic is to estimate the population parameter. Depending on the parameter, you may or may not be able to use the same formula with sample data as you would with population data.
 
-Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much large population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
+Also keep in mind that, even if you conduct experiments, the distinction between samples and populations is relevant to you. Consider a scenario where you run an experiment to test the effectiveness of a particular drug. Half the rats are assigned to a placebo condition (e.g., saline injection) whereas the other half of the rats are assigned to the drug condition (e.g., drug injection). Recognize that the placebo-condition rats are considered a sample from a much larger population of all rats who could have received the placebo. Likewise, the drug-condition rats are considered a sample of a much larger population of all rats who could have received the drug. Indeed, when you conduct your analyses on this experiment the results do not tell you about the rats in your study - rather they tell you about rats in general (i.e., the larger populations of rats). Therefore, when we discuss the importance of estimating a population parameter from a sample realize that it applies to both experimental and survey research.
 
 
 ## Data for the chapter
@@ -107,7 +107,7 @@ As noted previously, we rarely have access to data from an entire population. Co
       (\#eq:samplemeanch5)
 \end{equation} 
 
-Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which sample means are right, on average. That is, they are interested in the extent to which the mean of many sample means ($\bar{\bar{x}}$) corresponds to the population mean ($\mu$). The mean of many sample means can be calculated using Formula \@ref(eq:samplemeanmeanch5) below. In this formula, the letter $k$ corresponds to the number of sample means.
+Because a sample mean (a statistic) is calculated using a random subset of the population it is likely to differ from the population mean (a parameter). If you, inaccurately, believe that you can learn something meaningful from a single study, this fact may be disconcerting. Statisticians know, however, that rarely can you learn anything from a single study, or even a small set of studies. Consequently, they are more interested in the extent to which sample means are right, on average. That is, they are interested in the extent to which the mean of many sample means ($\bar{\bar{x}}$) corresponds to the population mean ($\mu$). That is, they are interested in the extent to which the mean of many sample means ($\bar{\bar{x}}$) corresponds to the population mean ($\mu$). In formal statistical terms, $\bar{\bar{x}}$ represents the expected value of the sample mean, $E[\bar{x}]$. The mean of many sample means can be calculated using Formula \@ref(eq:samplemeanmeanch5) below. In this formula, the letter $k$ corresponds to the number of sample means.
 
 
 \begin{equation} 
@@ -116,13 +116,16 @@ Because a sample mean (a statistic) is calculated using a random subset of the p
 \end{equation} 
 
 
-If the mean of the sample means, $\bar{\bar{x}}$, equals the population mean, $\mu$, then the sample mean is an unbiased (or accurate) estimate of the population mean. Figure \@ref(fig:showbias) illustrates the concept of accuracy/bias with a distribution of sample means (i.e., $\bar{x}$). Accuracy/bias is an index of the extent to which the mean of many sample means, $\bar{\bar{x}}$, deviates from the population mean, $\mu$. 
+
+If the mean of the sample means, $\bar{\bar{x}}$, equals the population mean, $\mu$, then the sample mean is an unbiased (or accurate) estimate of the population mean. When we say an estimator is unbiased, we mean that if we could repeat the sampling process many times, the average estimate would equal the true parameter. This does not mean that any single sample will yield the exact parameter. 
+
+Figure \@ref(fig:showbias) illustrates the concept of accuracy/bias with a distribution of sample means (i.e., $\bar{x}$). Accuracy/bias is an index of the extent to which the mean of many sample means, $\bar{\bar{x}}$, deviates from the population mean, $\mu$.  Accuracy refers to how close the average of our estimates is to the true parameter. Precision refers to how close our individual estimates are to each other, regardless of whether they center on the true value. High accuracy can occur with low precision, and vice versa.
 
 ```{r showbias, echo=FALSE, out.width = "80%", fig.cap = "Sampling accuracy and precision"}
 knitr::include_graphics("ch_samples/images/sampling_accuracy.png")
 ```
 
-We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 50000 samples to create an approximate sampling distribution of means. We use the code below to do so:
+We can assess bias, as illustrated in the above figure by drawing a large number of samples from a population with the code below. Our goal is to calculate a mean for each sample so that we have a sampling distribution of means. In theory, we should take an infinite number of samples, however, to be practical we will take 50000 samples to create an approximate sampling distribution of means. We use the code below to do so:
 
 ```{r, eval = FALSE}
 many_samples <- get_M_samples(pop.data = pop_data, 
@@ -143,7 +146,7 @@ We use the print() command to see the first few rows of the 50000 samples:
 print(many_samples)
 ```
 
-Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate "n" (the sample size) and "sample_mean" (the mean of the population), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample_mean column vary across samples/rows. 
+Each row of many_samples represents a sample of 10 people. Each column of many_samples indicates a sample statistic. You can see that for each sample/row we indicate "n" (the sample size) and "sample_mean" (the mean of the sample), and a few other statistics. Even though all the samples came from the same population you can see how the values in the sample_mean column vary across samples/rows. 
 
 
 ```{r, eval = FALSE, echo=FALSE}
@@ -188,7 +191,7 @@ many_samples %>%
   summarise(mean_of_sample_mean = mean(sample_mean)) 
 ```
 
-The value you obtain may be somewhat different than 172.47 due the fact your random samples were likely different.
+The value you obtain may be somewhat different than 172.47 due to the fact your random samples were likely different.
 
 We find that the average of the 50000 sample means is 172.47 which is very close to the population mean of 172.50. Note that when we did this, we used the same formula to calculate the sample mean (Formula \@ref(eq:samplemeanch5)) as we did the population mean (Formula \@ref(eq:popmeanch5)), although the notations differed. The average of the sample means was not identical to the population mean but it was very close - it would have been exactly the same with many more samples (i.e., an infinite number of samples). Therefore, we conclude the sample mean provides an unbiased estimate of the population mean. In other words, it makes sense to use the sample mean as an estimate of the population mean. If we try to estimate the population mean with a sample mean we will, on average, be correct; although any given sample/study mean might be "wrong".
 
@@ -235,7 +238,7 @@ many_samples %>%
 
 You can see the average of sample_var_n column (141.54) is much smaller than the population variance (157.5). That is, the average of the sample variances, using $n$ in the denominator, was smaller than the population variance. Consequently, sample variance (using $n$ in the denominator) provides a biased estimate of the population variance. If we try to estimate the population variance with sample variance (using $n$ in the denominator) we will, on average, be wrong.
 
-Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5). **The denominator of the formula below indicates the *degrees of freedom* associated with the variance estimate. More specifically, in this formula there are $n-1$ degrees of freedom associated with the variance estimate.**
+Fortunately, there is a sample-level formula that estimates the population variance without bias (see Hayes). An unbiased estimate of the population variance can be obtained if we calculate the sample variance but divide by $n - 1$ instead of $n$. The unbiased estimate is calculated using Formula \@ref(eq:samplevarn1ch5). **The denominator of the formula below indicates the *degrees of freedom* associated with the variance estimate. More specifically, in this formula there are $n-1$ degrees of freedom associated with the variance estimate. Degrees of freedom reflect the number of independent pieces of information available to estimate variability. Subtracting 1 accounts for the fact that we estimated the mean from the same data, which slightly reduces the independent information for estimating variance.**
 
 \begin{equation} 
 s^2 = \frac{\sum{(x - \bar{x})^2}}{n-1}
@@ -275,7 +278,7 @@ s = \sqrt{\frac{\sum{(x - \bar{x})^2}}{n-1}}
 
 ## Estimating $\delta$
 
-We are interested in the sample standardized mean difference ($d$) to the extent that it provides an estimate of the population standardized mean difference ($\delta$). The population standardized mean difference is calculated using Formula \@ref(eq:popsmdch5) when we work for the assumption that the two population have the same variance / standard deviation:
+We are interested in the sample standardized mean difference ($d$) to the extent that it provides an estimate of the population standardized mean difference ($\delta$). The population standardized mean difference is calculated using Formula \@ref(eq:popsmdch5) when we work for the assumption that the two populations have the same variance / standard deviation:
 
 \begin{equation} 
 \delta  = \frac{\mu_{1} - \mu_{2}}{\sigma} 
@@ -400,14 +403,14 @@ knitr::include_graphics("ch_samples/images/sex_pops.png")
 ```
 
 
-We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below -- when we assume the populations have equal variances. This value is known by many other names: $d$, Cohen's $d$, and Hedges' $g$. Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
+We typically need to estimate the population-level standardized mean difference from sample data because we rarely have access to data for an entire population. Many researchers estimate the population standardized mean difference from sample data using the Formula \@ref(eq:samplesmdch5) below -- when we assume the populations have equal variances. This value is known by many other names: $d$, Cohen's $d$, and Hedges' $g$. Hedges’ $g$ is simply the unbiased version of Cohen’s $d$ that includes a small-sample correction factor (as in Formula \@ref(eq:samplesmdunbiasedch5)). Notice that the sample-level formula, Formula \@ref(eq:samplesmdch5), below, is the same as the population-level formula, Formula \@ref(eq:popsmdch5), above, only the notation differs.
 
 \begin{equation} 
 d  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} 
       (\#eq:samplesmdch5)
 \end{equation} 
 
-Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardize mean difference ($\delta$). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5). This is one approach to calculating $d_{unbiased}$ -- there are others. 
+Unfortunately, Formula \@ref(eq:samplesmdch5) provides a biased estimate of the population standardized mean difference for small sample sizes. That is, on average, Formula \@ref(eq:samplesmdch5), provides $d$-values that overestimate the size of the population standardized mean difference ($\delta$). Fortunately, we can obtain an unbiased estimate of the population-level standardized mean difference from sample data using Formula \@ref(eq:samplesmdunbiasedch5). This is one approach to calculating $d_{unbiased}$ -- there are others. 
 
 \begin{equation} 
 d_{unbiased}  = \frac{\bar{x}_{1} - \bar{x}_{2}}{s_{pooled}} \times [1 - \frac{3}{4(n_1 + n_2)-9}]
@@ -663,7 +666,7 @@ many_samples <- get_r_samples_from_population_data(data = pop_data,
 many_samples <- readRDS("ch_samples/many_samples_r_n75_rho50.RDS")
 ```
 
-We can examine the first few rows of many_samples using the print() command. There are 50000 rows and each row represent a different sample of 75 people. The correlation between height and weight for each sample is presented in the $r$ column. 
+We can examine the first few rows of many_samples using the print() command. There are 50000 rows and each row represents a different sample of 75 people. The correlation between height and weight for each sample is presented in the $r$ column. 
 
 ```{r}
 print(many_samples)
@@ -689,7 +692,7 @@ many_samples %>%
   summarise(mean_r = mean(r))
 ```
 
-You can see that the mean of the sample-level correlations is $\bar{r} = .497$ which is very close to the population-level correlation $\rho = .50$ (.4999951 without rounding). Consequently, for practical purposes, we don't worry about the sample correlation being a biased estimator of the population correlation. On average, sample correlation are correct - even though any single sample correlation is likely incorrect due to sampling error (i.e., the fact it is based on a small subset of the population). 
+You can see that the mean of the sample-level correlations is $\bar{r} = .497$ which is very close to the population-level correlation $\rho = .50$ (.4999951 without rounding). Consequently, for practical purposes, we don't worry about the sample correlation being a biased estimator of the population correlation. On average, sample correlations are correct - even though any single sample correlation is likely incorrect due to sampling error (i.e., the fact it is based on a small subset of the population). 
 
 ```{r, include=FALSE, eval = FALSE}
 library(learnSampling)
@@ -797,7 +800,7 @@ In this chapter we have illustrated how population parameters can be estimated b
 
 ## Meta-analysis
 
-It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers who are aware of the enormous impact of sampling error know that single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is referred to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging all of the studies on that topic.
+It may seem odd that we used so many simulations to investigate the properties of statistics. Surely, researchers don't do that "in the real world". In fact, researchers who are aware of the enormous impact of sampling error know that single studies have little informational value. They recognize that any single study has a high probability of being misleading. Consequently, these individuals survey the literature and find all the studies on a single topic (possibly thousands of studies). An average of the results of all of the thousands of studies can then be calculated and reported. This process is referred to as conducting a meta-analysis; and it perfectly corresponds to the process we used in the simulations. A meta-analysis finds "the truth" of what is happening at the population level by averaging all of the studies on that topic. Keep in mind that meta-analyses go beyond using simple averages and used weighted averages (based on sample size on inverse-variance weighting).
 
 ## A joke
 
@@ -812,7 +815,7 @@ Now that you understand the logic for assessing bias, we present an old statisti
 
 2. Sample *statistics* estimate population *parameters*.
 
-3. Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that informational value of a single study is typically quite low.
+3. Due to the fact that sample statistics are based on a random subset of the population (i.e., a sample) they often differ substantially from the population parameter. This illustrates that the informational value of a single study is typically quite low.
 
 4. A statistic is unbiased if the average of the sample statistics, over many thousand of samples, equals the population parameter.
 
