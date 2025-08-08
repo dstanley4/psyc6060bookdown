@@ -861,13 +861,13 @@ div.csl-indent {
 <div id="now-different-population-means" class="section level2 hasAnchor" number="15.1">
 <h2><span class="header-section-number">15.1</span> Now: Different Population Means<a href="deeper-dive-sampling-and-anova.html#now-different-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] were estimates of the <strong>same</strong> quantity.</p>
-<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population mean and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of <strong>different</strong> quantities.</p>
+<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population means and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of <strong>different</strong> quantities.</p>
 </div>
 <div id="theory-sample-mean-variance" class="section level2 hasAnchor" number="15.2">
 <h2><span class="header-section-number">15.2</span> Theory sample mean variance<a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="single-population-theory" class="section level3 hasAnchor" number="15.2.1">
 <h3><span class="header-section-number">15.2.1</span> Single population (theory)<a href="deeper-dive-sampling-and-anova.html#single-population-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Although the focus of this chapter is multiple populations, we begin with a single population. Recall that when there is a single population we express the variance in sample means using the formula below. This formula is conceptual one that calculates the variance in sample means due to sampling error for a given population variance and sample size.</p>
+<p>Although the focus of this chapter is multiple populations, we begin with a single population. Recall that when there is a single population we express the variance in sample means using the formula below. This formula is a conceptual one that calculates the variance in sample means due to sampling error for a given population variance and sample size.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error}\\
@@ -878,7 +878,7 @@ div.csl-indent {
 </div>
 <div id="multiple-populations-theory" class="section level3 hasAnchor" number="15.2.2">
 <h3><span class="header-section-number">15.2.2</span> Multiple populations (theory)<a href="deeper-dive-sampling-and-anova.html#multiple-populations-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we ASSUME the various populations have the same variance - here we KNOW the multiple populations have the same variance (becausee we are creating them in the computer later).</p>
+<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we assume the various populations have equal variances (homoscedasticity). In this example, we know this assumption is true because we generate the populations ourselves with identical variances.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
@@ -1084,12 +1084,12 @@ FIGURE 15.1: Sampling from three populations with the same mean (and variance)
 ## 4     4                 1       175.8
 ## 5     5                 2       174.0
 ## 6     6                 3       157.4</code></pre>
-<p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
+<p>The trial column indicates which trial (of the 9,000) is represented in that row. The source population column indicate the population from which we obtained the sample (1 since we only had 1 population). The sample mean column indicates the sample mean in that trial.</p>
 <div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="deeper-dive-sampling-and-anova.html#cb524-1" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
 <span id="cb524-2"><a href="deeper-dive-sampling-and-anova.html#cb524-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
 ## 1     30.81</code></pre>
-<p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximately the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
+<p>We take the variance of all of those sample means and get a value of 30.80005 which closely approximates the actual value of 31.26472 (which we get when using an infinite number of sample means.)</p>
 <p><strong>That is, when multiple populations have identical means, the variance of sample means from those populations is due entirely to sampling error. That variance of sample means is represented by the formula below:</strong></p>
 <p><span class="math display">\[
 \text{variance due to sampling error} = \frac{\sigma_{people}^2}{n}\\
@@ -1166,7 +1166,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 \end{aligned}
 \]</span></p>
 <p>Thus, as indicated above, <span class="math inline">\(\sigma_{A}^2&gt;0\)</span>.</p>
-<p>So the total variance is sample means is a combination of the variance in the population means and random sampling error:</p>
+<p>So the total variance in sample means is a combination of the variance in the population means and random sampling error:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} + \text{variance in population means} \\
@@ -1190,7 +1190,7 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <span id="cb526-12"><a href="deeper-dive-sampling-and-anova.html#cb526-12" tabindex="-1"></a>                                 <span class="at">number.of.trials =</span> <span class="dv">9000</span>)</span></code></pre></div>
 <pre><code>## Number of populations: 3</code></pre>
 <pre><code>## Using a = 3</code></pre>
-<p>The first few rows of the data set with 9,000 sample mean is below:</p>
+<p>The first few rows of the data set with 9,000 sample mean are shown below:</p>
 <div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="deeper-dive-sampling-and-anova.html#cb529-1" tabindex="-1"></a><span class="fu">head</span>(sample_means)</span></code></pre></div>
 <pre><code>##   trial source_population sample_mean
 ## 1     1                 1       176.2
@@ -1199,12 +1199,12 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 ## 4     4                 1       175.8
 ## 5     5                 2       154.0
 ## 6     6                 3       177.4</code></pre>
-<p>The trial column indicate which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
+<p>The trial column indicates which trial (of the 9,000) is represented in that row. The source population column indicate the population we obtain the sample from (1 since we only had 1 population). The sample mean column indicate the sample mean in that trial.</p>
 <div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="deeper-dive-sampling-and-anova.html#cb531-1" tabindex="-1"></a>sample_means <span class="sc">%&gt;%</span></span>
 <span id="cb531-2"><a href="deeper-dive-sampling-and-anova.html#cb531-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var_means =</span> <span class="fu">var</span>(sample_mean))</span></code></pre></div>
 <pre><code>##   var_means
 ## 1     297.8</code></pre>
-<p>We take the variance of all of those sample means and get a value of 297.7683 which closely approximately the actual value of 297.9314 (which we get when using an infinite number of sample means.)</p>
+<p>We take the variance of all of those sample means and get a value of 297.7683 which closely approximates the actual value of 297.9314 (which we get when using an infinite number of sample means.)</p>
 <p><strong>That is, when multiple populations have different means, the variance of sample means from those populations is due to both sampling error and the variance of the population means. That variance of sample means is represented by the formula below:</strong></p>
 <p><span class="math display">\[
 \sigma_{\bar{x}}^2 = \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
@@ -1217,14 +1217,14 @@ FIGURE 15.2: Sampling from three populations with the same mean (and variance)
 <h3><span class="header-section-number">15.4.1</span> Conceptual/Expected <span class="math inline">\(F\)</span>-values<a href="deeper-dive-sampling-and-anova.html#conceptualexpected-f-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the preceding simulations we saw how the variance of the distribution of sample means was different in the a) population means the same scenario and b) population means different scenario. That is, when the population means were different the variance of the distribution of sample means was larger. Think about this finding in terms of an experiment.</p>
 <p>Consider a scenario where you are interested in examining the effect of crowding on aggressive behavior. Your dependent variable is aggressive behavior. Your independent variable is Crowding with three levels: low, medium, and high. Your study has 5 people in each of these three conditions. The 5 people’s aggression scores in the low crowding condition represent a sample aggression scores from a low crowding population. Likewise, the 5 people’s aggression scores in the medium crowding condition represent a sample aggression scores from a medium crowding population. Finally, the 5 people people’s aggression scores in the high crowding condition represent a sample aggression scores from a high crowding population.</p>
-<p>You calculate a sample mean for each of the three conditions. You are asking if there is an effect of crowding on aggression. To answer this question we need to think of the distribution of sample means that would occur if you repeats the study thousands of times. If you repeated the study thousand of times, and crowding had now effect on aggression the distribution of sample means differ only due to sampling error and be described by the formula below. We think of this formula as describing the distribution of sample means under the Null Hypothesis (i.e., the scenario where the population means are equal.)</p>
+<p>You calculate a sample mean for each of the three conditions. You are asking if there is an effect of crowding on aggression. To answer this question we need to think of the distribution of sample means that would occur if you repeats the study thousands of times. If you repeated the study thousand of times, and crowding had no effect on aggression the distribution of sample means would differ only due to sampling error and would be described by the formula below. We think of this formula as describing the distribution of sample means under the Null Hypothesis (i.e., the scenario where the population means are equal.)</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} \\
 &amp;= \frac{\sigma_{people}^2}{n} \\
 \end{aligned}
 \]</span></p>
-<p>In contrast, if the crowding manipulation did influence aggressive behavior, this means there are different population means for the three crowding conditions. If the population means are different, then means the variance for the distribution of sample means would correspond to:</p>
+<p>In contrast, if the crowding manipulation did influence aggressive behavior, this means there are different population means for the three crowding conditions. If the population means are different, then the variance for the distribution of sample means would correspond to:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma_{\bar{x}}^2 &amp;= \text{variance due to sampling error} + \text{variance in population means} \\
@@ -1386,7 +1386,7 @@ FIGURE 15.4: Mapping formulas to the F-table.
 <div id="p-value" class="section level2 hasAnchor" number="15.8">
 <h2><span class="header-section-number">15.8</span> p-value<a href="deeper-dive-sampling-and-anova.html#p-value" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Notice on the <strong>feedback</strong> line of the output that the <span class="math inline">\(p-value\)</span> is very small <span class="math inline">\(p&lt;.001\)</span>. How did we obtain this value?</p>
-<p>The F-value is obtained by creating a simulation where there is no effect. We do as we did in the last chapter. First, we assume the population means were identical. Second, we assume the population variances are identical. Third, we imagine taking three samples (<span class="math inline">\(a = 3\)</span>), one for each population, each <span class="math inline">\(n = 5\)</span>. Fourth, we imagine creating an F-value from the data. Fifth, we imagine repeating this process a large number of times. The results is the distribution of F-values that you would obtain if there was no effect. Then we see how the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) fits into this distribution.</p>
+<p>The F-value is obtained by creating a simulation where there is no effect. We do as we did in the last chapter. First, we assume the population means were identical. Second, we assume the population variances are identical. Third, we imagine taking three samples (<span class="math inline">\(a = 3\)</span>), one for each population, each <span class="math inline">\(n = 5\)</span>. Fourth, we imagine creating an F-value from the data. Fifth, we imagine repeating this process a large number of times. The result is the distribution of F-values that you would obtain if there was no effect. Then we see how the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) fits into this distribution.</p>
 <p>In the previous chapter, we created this exact distribution. See it presented again below. Notice the F-value from our study (<span class="math inline">\(F = 77.72\)</span>) can’t fit on this axis range.</p>
 <div class="figure"><span style="display:block;" id="fig:graph3popag"></span>
 <img src="bookdown_files/figure-html/graph3popag-1.png" alt="Variance ratio when there are three identical populations of people" width="100%" />
@@ -1401,8 +1401,8 @@ FIGURE 15.5: Variance ratio when there are three identical populations of people
 FIGURE 15.6: Next axes: variance ratio when there are three identical populations of people
 </p>
 </div>
-<p>Because the red line is so extreme, our <span class="math inline">\(p-value\)</span> is very low <span class="math inline">\(p&lt;.0001\)</span>. <strong>This is the probability of our data (or more extreme data), assuming the population means are all the same.</strong></p>
-<p>Consequently, we say the ANOVA is significant. We began by assuming the population means were all the same. Under this assumption, our study result is incredibly unlikely. Consequently, we reject the assumption, that the population means are all the same, and conclude the population means may be different.</p>
+<p>Because the red line is so extreme, the <span class="math inline">\(p-value\)</span> is very small <span class="math inline">\(p&lt;.0001\)</span>. <strong>This is the probability of our data (or more extreme data), assuming the population means are all the same.</strong></p>
+<p>Consequently, we say that the ANOVA is significant. We began by assuming the population means were all the same. Under this assumption, our study result is incredibly unlikely. Consequently, we reject the null hypothesis that the population means are equal and conclude that at least one population mean differs from the others.</p>
 </div>
 <div id="take-a-moment" class="section level2 hasAnchor" number="15.9">
 <h2><span class="header-section-number">15.9</span> Take a moment<a href="deeper-dive-sampling-and-anova.html#take-a-moment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1428,7 +1428,7 @@ FIGURE 15.6: Next axes: variance ratio when there are three identical population
 <tbody>
 <tr class="odd">
 <td align="center">Method 1: Observed Variance</td>
-<td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \frac{\sum_{i=1}^{K=\infty}{(\bar{x}_i - \mu_{\bar{x}})^2}}{K}\)</span></td>
+<td align="center"><span class="math inline">\(\sigma_{\bar{x}}^2 = \lim_{K \to \infty} \frac{\sum_{i=1}^{K} (\bar{x}_i - \mu_{\bar{x}})^2}{K}\)</span></td>
 <td align="center"><span class="math inline">\(s_{\bar{x}}^2 = \frac{\sum_{i=1}^{a}{(\bar{x}_i - \bar{\bar{x}})^2}}{a-1}\)</span></td>
 <td align="center">Sampling Error &amp; Variance of Population Means</td>
 </tr>
