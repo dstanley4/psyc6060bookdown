@@ -23,7 +23,7 @@
 <meta name="author" content="David J. Stanley" />
 
 
-<meta name="date" content="2025-08-08" />
+<meta name="date" content="2025-08-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -860,8 +860,8 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 15</span> Deeper dive: Sampling and ANOVA<a href="deeper-dive-sampling-and-anova.html#deeper-dive-sampling-and-anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="now-different-population-means" class="section level2 hasAnchor" number="15.1">
 <h2><span class="header-section-number">15.1</span> Now: Different Population Means<a href="deeper-dive-sampling-and-anova.html#now-different-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] were estimates of the <strong>same</strong> quantity.</p>
-<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population means and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of <strong>different</strong> quantities.</p>
+<p>In the last chapter, we examined a scenario with multiple populations where the <strong>population means were identical</strong>. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] each estimate the same underlying variance in sample means; because when population means are identical, variability arises solely from sampling error.</p>
+<p><strong>In this chapter</strong>, we examine a scenario with multiple populations where the <strong>population means are different</strong>. Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population means and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] estimate different parameters: the former reflects both sampling error and variability in population means, while the latter reflects only sampling error.</p>
 </div>
 <div id="theory-sample-mean-variance" class="section level2 hasAnchor" number="15.2">
 <h2><span class="header-section-number">15.2</span> Theory sample mean variance<a href="deeper-dive-sampling-and-anova.html#theory-sample-mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -878,7 +878,7 @@ div.csl-indent {
 </div>
 <div id="multiple-populations-theory" class="section level3 hasAnchor" number="15.2.2">
 <h3><span class="header-section-number">15.2.2</span> Multiple populations (theory)<a href="deeper-dive-sampling-and-anova.html#multiple-populations-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we assume the various populations have equal variances (homoscedasticity). In this example, we know this assumption is true because we generate the populations ourselves with identical variances.</p>
+<p>When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because all the populations have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we assume the various populations have equal variances (homoscedasticity). In this example, we know this assumption is true because we generate the populations ourselves with identical variances.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{variance due to sampling error} &amp;= \frac{\sigma_{people}^2}{\text{sample size}}\\
@@ -903,7 +903,7 @@ div.csl-indent {
 &amp;= \frac{\sigma_{people}^2}{n} + \sigma_{\mu_A}^2\\
 \end{aligned}
 \]</span></p>
-<p>Importantly, if the populations all have the same mean then <span class="math inline">\(\sigma_{\mu_A}^2=0\)</span>. When this happens, sample means differ only due to sampling error.</p>
+<p>Importantly, if all populations have the same mean, then <span class="math inline">\(\sigma_{\mu_A}^2=0\)</span>. When this happens, sample means differ only due to sampling error.</p>
 <table>
 <colgroup>
 <col width="23%" />
@@ -936,7 +936,7 @@ div.csl-indent {
 </table>
 <p>The table above summarizes the different estimate goals of the two formulas. Consider the “Expected value” (or Expected Mean Square) column. When the populations means are the same then <span class="math inline">\(\sigma_{A}^2  = 0\)</span>. When the population means are different, then <span class="math inline">\(\sigma_{A}^2&gt;0\)</span>.</p>
 <p>Note that when the population mean are the same, and <span class="math inline">\(\sigma_{A}^2\)</span> becomes <span class="math inline">\(0\)</span>, the “Expected value” is becomes the same for both formulas. That is, they are both estimates of the same quantity, namely, <span class="math inline">\(\frac{\sigma_{people}^2}{n}\)</span>. We examined that scenario in the last chapter.</p>
-<p>In this chapter, our final goal is to examine the multiple population scenario where <span class="math inline">\(\sigma_{A}^2&gt;0\)</span>. That is, that situation where the two formulas are estimates of different quantities. But we begin with a review of the single population scenario.</p>
+<p>In this chapter, our final goal is to examine the multiple population scenario where <span class="math inline">\(\sigma_{A}^2&gt;0\)</span>. That is, the situation where the two formulas estimate different quantities because population mean differences contribute additional variance. But we begin with a review of the single population scenario.</p>
 </div>
 </div>
 <div id="practice-sample-mean-variance" class="section level2 hasAnchor" number="15.3">
@@ -951,7 +951,7 @@ div.csl-indent {
 &amp;= 31.26472\\
 \end{aligned}
 \]</span></p>
-<p>Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The variance in the sample means will be 31.26472.</p>
+<p>Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The theoretical variance of the sample means, based solely on sampling error, is 31.26472.</p>
 <p>We can confirm this with the R code below. We create a population and then take 9,000 sample means.</p>
 <div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="deeper-dive-sampling-and-anova.html#cb512-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb512-2"><a href="deeper-dive-sampling-and-anova.html#cb512-2" tabindex="-1"></a><span class="fu">library</span>(learnSampling)</span>

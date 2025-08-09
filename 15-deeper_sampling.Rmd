@@ -2,9 +2,9 @@
 
 ## Now: Different Population Means
 
-In the last chapter, we examined a scenario with multiple populations where the **population means were identical**. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] were estimates of the **same** quantity.
+In the last chapter, we examined a scenario with multiple populations where the **population means were identical**. Consequently, sample means differed for one reason: random sampling error. This meant the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] each estimate the same underlying variance in sample means; because when population means are identical, variability arises solely from sampling error.
 
-**In this chapter**, we examine a scenario with multiple populations where the **population means are different**.  Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population means and random sampling error.  This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] are estimates of **different** quantities.
+**In this chapter**, we examine a scenario with multiple populations where the **population means are different**.  Consequently, sample means will differ for two reasons. More specifically, sample means will differ due to differences among the population means and random sampling error. This means the formulas for a) total variance [observed variance] and b) random sampling variance [expected variance] estimate different parameters: the former reflects both sampling error and variability in population means, while the latter reflects only sampling error.
 
 ## Theory sample mean variance 
 
@@ -23,7 +23,7 @@ $$
 
 ### Multiple populations (theory)
 
-When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because the populations of people all of have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we assume the various populations have equal variances (homoscedasticity). In this example, we know this assumption is true because we generate the populations ourselves with identical variances.
+When there are multiple populations with identical variances, but different population means, that same formula applies for sampling error. That is, because all the populations have the same variance, we can use the old formula to calculate the variability in sample means due to sampling error. In ANOVA, we assume the various populations have equal variances (homoscedasticity). In this example, we know this assumption is true because we generate the populations ourselves with identical variances.
 
 $$
 \begin{aligned} 
@@ -60,7 +60,7 @@ $$
 $$
 
 
-Importantly, if the populations all have the same mean then  $\sigma_{\mu_A}^2=0$. When this happens, sample means differ only due to sampling error. 
+Importantly, if all populations have the same mean, then  $\sigma_{\mu_A}^2=0$. When this happens, sample means differ only due to sampling error. 
 
 
   Goal| Formula | Expected value | degrees of feedom |
@@ -72,7 +72,7 @@ The table above summarizes the different estimate goals of the two formulas. Con
 
 Note that when the population mean are the same, and $\sigma_{A}^2$ becomes $0$, the "Expected value" is becomes the same for both formulas. That is, they are both estimates of the same quantity, namely, $\frac{\sigma_{people}^2}{n}$. We examined that scenario in the last chapter.
 
-In this chapter, our final goal is to examine the multiple population scenario where $\sigma_{A}^2>0$. That is, that situation where the two formulas are estimates of different quantities. But we begin with a review of the single population scenario.
+In this chapter, our final goal is to examine the multiple population scenario where $\sigma_{A}^2>0$. That is, the situation where the two formulas estimate different quantities because population mean differences contribute additional variance. But we begin with a review of the single population scenario.
 
 ## Practice sample mean variance 
 
@@ -89,7 +89,7 @@ $$
 \end{aligned}
 $$
 
-Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The variance in the sample means will be 31.26472.
+Thus, where there is a single population (with variance 156.3236) and the sample size is n = 5, sample means will differ only due to sampling error. The theoretical variance of the sample means, based solely on sampling error, is 31.26472.
 
 
 We can confirm this with the R code below. We create a population and then take 9,000 sample means.
