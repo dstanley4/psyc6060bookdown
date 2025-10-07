@@ -375,15 +375,6 @@ data_exp %>%
                    .fns = \(x) mean(x, na.rm = TRUE)))
 ```
 
-If you want to get more sophisticated, you can also add this .names argument below which tells R to call label each output mean by the column name followed by "_mean".
-
-```{r}
-data_exp %>%
-  summarise(across(.cols = starts_with("t1"), 
-                   .fns = \(x) mean(x, na.rm = TRUE))) 
-```
-
-
 Often you want to calculate more than one statistic for each column. For example, you might want the mean, standard deviation, min, and max. These statistics can be calculated via the mean, sd, min, and max commands, respectively. However, you need to create a list with the statistics you desire.
 
 Below we create a list of the descriptive statistics we desire called desired_statistics, but you can use any name you want. This list only needs to be specified once, but we will repeat it in the examples below for clarity.
